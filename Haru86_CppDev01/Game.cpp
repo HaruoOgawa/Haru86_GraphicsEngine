@@ -8,12 +8,16 @@ Game::~Game() {
 	
 }
 
-void Game::Initialize() {
-
+bool Game::Initialize() {
+	bool test = true;
+	return test;
 }
 
 void Game::RunLoop() {
+	while (isRunning)
+	{
 
+	}
 }
 
 void Game::ShutDown() {

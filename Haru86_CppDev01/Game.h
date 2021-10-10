@@ -1,11 +1,16 @@
 #pragma once
+
+
+
 class Game
 {
 public:
 	Game();
 	~Game();
-	void Initialize();
+	bool Initialize();
 	void RunLoop();
 	void ShutDown();
+private :
+	bool isRunning = false;
 };
 
