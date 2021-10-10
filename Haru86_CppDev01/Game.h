@@ -1,6 +1,7 @@
 #pragma once
 
-
+#include "SDL.h"
+#include "./GameRenderer.h"
 
 class Game
 {
@@ -9,8 +10,13 @@ public:
 	~Game();
 	bool Initialize();
 	void RunLoop();
+	void UpdateGame();
+	void GenerateOutput();
 	void ShutDown();
 private :
-	bool isRunning = false;
+	void InputProcess();
+	class GameRenderer* gameRenderer;
+	bool isRunning;
+	
 };
 
