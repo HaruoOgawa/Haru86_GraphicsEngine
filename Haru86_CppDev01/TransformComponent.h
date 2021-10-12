@@ -1,11 +1,12 @@
 #pragma once
 #include "./Component.h"
-class Mesh :
+
+class TransformComponent :
     public Component
 {
 public:
-    Mesh(class GameObject* o);
-    ~Mesh();
+    TransformComponent(class Object* o);
+    ~TransformComponent();
     void Update() override;
 };
 

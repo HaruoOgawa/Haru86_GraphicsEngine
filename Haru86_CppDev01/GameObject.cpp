@@ -1,30 +1,17 @@
 #include "GameObject.h"
 
-#include "./Transform.h"
-#include "./Mesh.h"
-#include "./Material.h"
+#include "./TransformComponent.h"
+#include "./MeshRendererComponent.h"
 
 GameObject::GameObject(Game* g)
-	: game(g)
+	: Object(g)
 {
-	Transform* defaultTRS = new Transform(this);
-	Mesh* defaultMesh = new Mesh(this);
-	Material* defaultMaterial = new Material(this);
+	MeshRendererComponent* meshComp = new MeshRendererComponent(this);
+	Object::AddComponent(meshComp);
 }
 
 GameObject::~GameObject() {
-	for (auto comp : myComponent) {
-		RemoveComponent(comp.second);
-	}
+	
 }
 
-void GameObject::AddComponent(Component* component) {
-	myComponent.emplace(static_cast<std::string>(typeid(component).name()), component);
-}
-void GameObject::RemoveComponent(Component* component) {
-	delete  component;
-}
 
-/*Component* GameObject::GetComponent() {
-
-}*/

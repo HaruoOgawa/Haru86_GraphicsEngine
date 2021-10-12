@@ -1,14 +1,14 @@
 #pragma once
 
-#include "./GameObject.h"
+#include "./Object.h"
 
 class Component
 {
 public:
-	Component(class GameObject* o);
+	Component(class Object* o);
 	~Component();
 	virtual void Update();
 private:
-	class GameObject* owner;
+	class Object* owner;
 };
 

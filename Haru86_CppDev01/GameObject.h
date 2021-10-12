@@ -1,7 +1,8 @@
 #pragma once
 
 #include "./Game.h"
-#include "./Component.h"
+#include "./Object.h"
+
 #include <vector>
 #include <map>
 #include <string>
@@ -9,15 +10,12 @@
 #include <typeinfo>
 
 class GameObject
+	: public Object
 {
 public:
 	GameObject(Game* g);
 	~GameObject();
-	void AddComponent(class Component* component);
-	void RemoveComponent(class Component* component);
-	//class Component* GetComponent();
 private:
-	class Game* game;
-	std::map<std::string,class Component*> myComponent;
+	
 };
 

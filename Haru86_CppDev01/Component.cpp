@@ -1,6 +1,6 @@
 #include "Component.h"
 
-Component::Component(GameObject* o) 
+Component::Component(Object* o)
 	: owner(o)
 {
 
