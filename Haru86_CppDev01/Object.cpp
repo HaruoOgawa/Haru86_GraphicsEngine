@@ -1,11 +1,13 @@
 #include "Object.h"
 
 #include "./TransformComponent.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
 
 Object::Object(Game* g)
 	: game(g)
 {
-	TransformComponent* transform = new TransformComponent(this);
+	TransformComponent* transform = new TransformComponent(this, glm::vec3(0,0,0),glm::quat(glm::vec3(0,0,0)),glm::vec3(1,1,1));
 	Object::AddComponent(transform);
 }
 

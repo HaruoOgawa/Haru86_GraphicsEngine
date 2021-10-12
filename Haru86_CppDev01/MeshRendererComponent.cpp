@@ -3,7 +3,8 @@
 MeshRendererComponent::MeshRendererComponent(Object* o)
 	: Component(o)
 {
-
+	mesh =new VertexArray();
+	material = new Material();
 }
 
 MeshRendererComponent::~MeshRendererComponent() {
