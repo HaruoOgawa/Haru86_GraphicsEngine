@@ -8,7 +8,8 @@ MeshRendererComponent::MeshRendererComponent(Object* o)
 }
 
 MeshRendererComponent::~MeshRendererComponent() {
-
+	delete mesh;
+	delete material;
 }
 
 void MeshRendererComponent::Update() {

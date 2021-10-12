@@ -7,14 +7,14 @@ class TransformComponent :
     public Component
 {
 public:
-    TransformComponent(class Object* o, glm::vec3 pos, glm::quat rot, glm::vec3 s);
+    TransformComponent(Object* o, glm::vec3* pos, glm::quat* rot, glm::vec3* s);
     ~TransformComponent();
     void Update() override;
     void Translate();
     void Rotate();
-    glm::vec3 position;
-    glm::quat rotation;
-    glm::vec3 scale;
+    glm::vec3* position;
+    glm::quat* rotation;
+    glm::vec3* scale;
 private:
     
 };
