@@ -13,7 +13,7 @@ class GameObject
 	: public Object
 {
 public:
-	GameObject(Game* g);
+	GameObject(Game* g, std::string vertexShaderName, std::string fragmentShaderName);
 	~GameObject();
 private:
 	

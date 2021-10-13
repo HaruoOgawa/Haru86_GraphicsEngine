@@ -1,10 +1,10 @@
 #include "MeshRendererComponent.h"
 
-MeshRendererComponent::MeshRendererComponent(Object* o)
+MeshRendererComponent::MeshRendererComponent(Object* o, std::string vertexShaderName, std::string fragmentShaderName)
 	: Component(o)
 {
 	mesh =new VertexArray();
-	material = new Material();
+	material = new Material(vertexShaderName,fragmentShaderName);
 }
 
 MeshRendererComponent::~MeshRendererComponent() {

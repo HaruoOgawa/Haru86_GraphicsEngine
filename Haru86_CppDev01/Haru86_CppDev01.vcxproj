@@ -154,6 +154,7 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="MeshRendererComponent.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="VertexArray.h" />
   </ItemGroup>
@@ -181,7 +182,15 @@
     <None Include="C:\SDL2-2.0.16\lib\x86\SDL2.dll" />
     <None Include="C:\SDL2_image-2.0.5\lib\x86\libpng16-16.dll" />
     <None Include="C:\SDL2_image-2.0.5\lib\x86\SDL2_image.dll" />
+    <None Include="html1.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
     <None Include="packages.config" />
+    <None Include="Standard.frag" />
+    <None Include="Standard.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Haru86_CppDev01.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

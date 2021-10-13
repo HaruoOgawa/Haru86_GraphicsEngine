@@ -3,10 +3,10 @@
 #include "./TransformComponent.h"
 #include "./MeshRendererComponent.h"
 
-GameObject::GameObject(Game* g)
+GameObject::GameObject(Game* g, std::string vertexShaderName, std::string fragmentShaderName)
 	: Object(g)
 {
-	MeshRendererComponent* meshComp = new MeshRendererComponent(this);
+	MeshRendererComponent* meshComp = new MeshRendererComponent(this,vertexShaderName,fragmentShaderName);
 	Object::AddComponent(meshComp);
 }
 
