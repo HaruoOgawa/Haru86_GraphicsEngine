@@ -3,13 +3,14 @@
 #include <sstream>
 #include "./SDL.h"
 
+
 Material::Material(std::string vertexShaderName, std::string fragmentShaderName)
 {
 	LoadShader(vertexShaderName, fragmentShaderName);
 }
 
 Material::~Material() {
-
+	UnLoadData();
 }
 
 void Material::LoadShader(std::string vertName, std::string fragName) {
@@ -51,3 +52,17 @@ bool Material::CompileShader(std::string shadername, GLenum shaderType, GLuint& 
 	return true;
 }
 
+void Material::SetActive() {
+	glUseProgram(shaderPrg);
+}
+
+void Material::SetMatrixUniform(std::string uniformName, glm::mat4 matrix) {
+	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
+	//glUniformMatrix4fv(location, 1, GL_FALSE, matrix);
+}
+
+void Material::UnLoadData() {
+	glDeleteProgram(shaderPrg);
+	glDeleteShader(vertShaderData);
+	glDeleteShader(fragShaderData);
+}

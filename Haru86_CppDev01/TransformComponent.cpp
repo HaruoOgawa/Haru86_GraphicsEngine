@@ -23,3 +23,7 @@ void TransformComponent::Translate() {
 void TransformComponent::Rotate() {
 
 }
+
+void TransformComponent::CalMatrix() {
+
+}

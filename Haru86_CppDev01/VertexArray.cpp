@@ -7,7 +7,7 @@ VertexArray::VertexArray() {
 }
 
 VertexArray::~VertexArray() {
-
+	UnLoadData();
 }
 
 void VertexArray::CreateDefaultMesh() {
@@ -49,4 +49,14 @@ void VertexArray::CreateDefaultMesh() {
 		);
 
 
+}
+
+void VertexArray::SetActive() {
+	glBindVertexArray(mVertexArray);
+}
+
+void VertexArray::UnLoadData() {
+	glDeleteBuffers(1, &mVertexBuffer);
+	glDeleteBuffers(1,&mIndexBuffer);
+	glDeleteVertexArrays(1, &mVertexArray);
 }

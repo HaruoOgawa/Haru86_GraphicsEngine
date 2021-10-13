@@ -10,12 +10,16 @@ public:
     TransformComponent(Object* o, glm::vec3* pos, glm::quat* rot, glm::vec3* s);
     ~TransformComponent();
     void Update() override;
+    glm::mat4 GetMVPMatrix(){ return pMatrix * vMatrix * mMatrix; }
+    void CalMatrix();
     void Translate();
     void Rotate();
     glm::vec3* position;
     glm::quat* rotation;
     glm::vec3* scale;
 private:
-    
+    glm::mat4 mMatrix;
+    glm::mat4 vMatrix;
+    glm::mat4 pMatrix;
 };
 
