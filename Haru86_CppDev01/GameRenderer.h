@@ -11,6 +11,7 @@ public:
 	bool Initialize(float width, float height);
 	void ShutDown();
 	void Draw();
+	float deltaTime;
 private:
 	SDL_Window* sWindow;
 	float sWindowWidth;

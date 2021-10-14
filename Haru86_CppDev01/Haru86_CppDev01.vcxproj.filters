@@ -97,13 +97,16 @@
     <None Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmod64.dll" />
     <None Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmodL.dll" />
     <None Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmodL64.dll" />
-    <None Include="Standard.frag">
-      <Filter>Shader</Filter>
+    <None Include="html1.htm" />
+    <None Include="test.frag">
+      <Filter>ソース ファイル</Filter>
     </None>
     <None Include="Standard.vert">
-      <Filter>Shader</Filter>
+      <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="html1.htm" />
+    <None Include="Standard.frag">
+      <Filter>ソース ファイル</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Haru86_CppDev01.rc">

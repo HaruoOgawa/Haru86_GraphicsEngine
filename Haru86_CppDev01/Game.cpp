@@ -1,4 +1,6 @@
 #include "Game.h"
+#include <string>
+#include "./GameObject.h"
 
 Game::Game()
 	: gameRenderer(nullptr),
@@ -23,8 +25,15 @@ bool Game::Initialize() {
 		//delete gameRenderer;
 		return false;
 	}
+
+	LoadData();
 	
 	return true;
+}
+
+void Game::LoadData() {
+	GameObject* sampleQuad = new GameObject(this,"Standard.vert","Standard.frag");
+	gameObjectList.emplace_back(sampleQuad);
 }
 
 void Game::RunLoop() {
@@ -47,7 +56,7 @@ void Game::InputProcess() {
 			break;
 		default:
 			break;
-		}
+		} 
 	}
 }
 
@@ -58,7 +67,12 @@ void Game::GenerateOutput() {
 	gameRenderer->Draw();
 }
 
+
+
 void Game::ShutDown() {
 	gameRenderer->ShutDown();
 	delete gameRenderer;
+	for (auto obj : gameObjectList) {
+		delete obj;
+	}
 }

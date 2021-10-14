@@ -6,7 +6,7 @@
 GameObject::GameObject(Game* g, std::string vertexShaderName, std::string fragmentShaderName)
 	: Object(g)
 {
-	MeshRendererComponent* meshComp = new MeshRendererComponent(this,vertexShaderName,fragmentShaderName);
+	meshComp = new MeshRendererComponent(this,vertexShaderName,fragmentShaderName);
 	Object::AddComponent(meshComp);
 }
 

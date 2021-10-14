@@ -16,5 +16,6 @@ public:
 private:
     VertexArray* mesh;
     Material* material;
+    class Object* myowner;
 };
 

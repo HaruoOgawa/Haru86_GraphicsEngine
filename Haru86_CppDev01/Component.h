@@ -8,7 +8,7 @@ public:
 	Component(class Object* o);
 	~Component();
 	virtual void Update();
-private:
+protected:
 	class Object* owner;
 };
 

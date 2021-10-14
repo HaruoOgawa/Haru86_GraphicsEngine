@@ -1,11 +1,14 @@
 #include "GameRenderer.h"
 #include "GL/glew.h"
+#include "GameObject.h"
+#include "MeshRendererComponent.h"
 
 GameRenderer::GameRenderer(Game* game)
 	: mgame(game),
 	sWindow(nullptr),
 	sWindowWidth(0.0f),
-	sWindowHeight(0.0f)
+	sWindowHeight(0.0f),
+	deltaTime(0.0f)
 {
 
 }
@@ -61,10 +64,15 @@ bool GameRenderer::Initialize(float width,float height) {
 }
 
 void GameRenderer::Draw() {
-	glClearColor(0.5f, 0.0f,0.0f,1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(0.0f, 0.0f,0.5f,1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
 
+	for (auto obj : mgame->gameObjectList) {
+		obj->meshComp->Draw();
+	}
 
 	SDL_GL_SwapWindow(sWindow);
 }

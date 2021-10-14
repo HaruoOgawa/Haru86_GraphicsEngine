@@ -7,7 +7,7 @@
 Object::Object(Game* g)
 	: game(g)
 {
-	TransformComponent* transform = new TransformComponent(this,new glm::vec3(0,0,0), new glm::quat(glm::vec3(0,0,0)), new glm::vec3(1,1,1));
+	transform = new TransformComponent(this,new glm::vec3(0,0,0), new glm::quat(glm::vec3(0,0,0)), new glm::vec3(1.0f,1.0f,1.0f));
 	Object::AddComponent(transform);
 }
 
@@ -24,6 +24,7 @@ void Object::RemoveComponent(Component* component) {
 	delete  component;
 }
 
-/*Component* GameObject::GetComponent() {
-
-}*/
+Component* Object::GetComponent(std::string componentName) {
+	decltype(myComponent)::iterator item = myComponent.find(componentName);
+	return item->second;
+}
