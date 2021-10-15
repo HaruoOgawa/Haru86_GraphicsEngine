@@ -3,6 +3,23 @@
 #include "./GameObject.h"
 #include "./VertexArray.h"
 
+Game* Game::s_pInstance = nullptr;
+
+void Game::Create()
+{
+	if (!s_pInstance)
+	{
+		s_pInstance = new Game;
+	}
+}
+
+
+void Game::Destroy()
+{
+	delete s_pInstance;
+	s_pInstance = nullptr;
+}
+
 Game::Game()
 	: gameRenderer(nullptr),
 	isRunning(true),
@@ -10,7 +27,7 @@ Game::Game()
 	deltaTime(0.0f),
 	previousTime(0.0f)
 {
-	app = new App(this);
+	app = new App();
 }
 
 Game::~Game() {

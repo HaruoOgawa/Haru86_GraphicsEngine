@@ -12,7 +12,7 @@
 class Object
 {
 public:
-	Object(class Game* g);
+	Object();
 	~Object();
 	void AddComponent(class Component* component);
 	void RemoveComponent(class Component* component);

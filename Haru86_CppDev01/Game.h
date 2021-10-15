@@ -8,6 +8,14 @@
 class Game
 {
 public:
+	static Game* GetInstance()
+	{
+		return s_pInstance;
+	}
+
+	static void Create();
+	static void Destroy();
+
 	Game();
 	~Game();
 	bool Initialize();
@@ -27,5 +35,7 @@ private :
 	float previousTime;
 	std::vector<class GameObject*> gameObjectList;
 	class App* app;
+protected:
+	static Game* s_pInstance;
 };
 

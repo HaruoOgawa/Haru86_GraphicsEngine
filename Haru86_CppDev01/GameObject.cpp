@@ -3,19 +3,19 @@
 #include "./TransformComponent.h"
 #include "./MeshRendererComponent.h"
 
-GameObject::GameObject(Game* g, PrimitiveType primType) 
-	: Object(g)
+GameObject::GameObject(PrimitiveType primType) 
+	: Object()
 {
-	g->gameObjectList.emplace_back(this);
-	meshComp = new MeshRendererComponent(g,this, primType);
+	Game::GetInstance()->gameObjectList.emplace_back(this);
+	meshComp = new MeshRendererComponent(Game::GetInstance(),this, primType);
 	Object::AddComponent(meshComp);
 }
 
-GameObject::GameObject(Game* g, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
-	: Object(g)
+GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
+	: Object()
 {
-	g->gameObjectList.emplace_back(this);
-	meshComp = new MeshRendererComponent(g,this, primType,vertexShaderName,fragmentShaderName);
+	Game::GetInstance()->gameObjectList.emplace_back(this);
+	meshComp = new MeshRendererComponent(Game::GetInstance(),this, primType,vertexShaderName,fragmentShaderName);
 	Object::AddComponent(meshComp);
 }
 

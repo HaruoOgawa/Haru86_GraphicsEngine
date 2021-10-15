@@ -14,8 +14,8 @@ class GameObject
 	: public Object
 {
 public:
-	GameObject(Game* g, PrimitiveType primType);
-	GameObject(Game* g, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName);
+	GameObject(PrimitiveType primType);
+	GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName);
 	~GameObject();
 	friend class GameRenderer;
 private:
