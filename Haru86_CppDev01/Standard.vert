@@ -12,8 +12,6 @@ out vec2 uv;
 
 void main(){
 	vec4 pos=vec4(vertex,1.0);
-	pos.xy*=rot(2.0);
-	//MVPMatrix*
-	gl_Position=pos;
+	gl_Position=MVPMatrix*pos;
 	uv=texcoord;
 }

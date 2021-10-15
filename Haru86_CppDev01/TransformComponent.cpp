@@ -36,8 +36,7 @@ void TransformComponent::ComputeModelMatrix() {
 	//glm::mat4 rotationMatrix = glm::rotate(rotation, 1.0f, glm::vec3(0,0,0));
 	glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f),glm::vec3(scale->x, scale->y, scale->z));
 
-	//pMatrix = translationMatirx* scaleMatrix;
-	mMatrix = glm::mat4(1.0f);
+	mMatrix = translationMatirx* scaleMatrix;
 }
 
 void TransformComponent::ComputeViewMatrix() {

@@ -2,6 +2,7 @@
 #include "GL/glew.h"
 #include "GameObject.h"
 #include "MeshRendererComponent.h"
+#include "TransformComponent.h"
 
 GameRenderer::GameRenderer(Game* game)
 	: mgame(game),
@@ -64,13 +65,14 @@ bool GameRenderer::Initialize(float width,float height) {
 }
 
 void GameRenderer::Draw() {
-	glClearColor(0.0f, 0.0f,0.5f,1.0f);
+	glClearColor(0.0f, 0.0f,0.0f,1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
 
 	for (auto obj : mgame->gameObjectList) {
+		obj->transform->CalMatrix();
 		obj->meshComp->Draw();
 	}
 
