@@ -1,6 +1,5 @@
-﻿  Material.cpp
-  MeshRendererComponent.cpp
-  コードを生成中...
+﻿  Game.cpp
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\Game.cpp(72,29): warning C4244: '=': 'Uint32' から 'float' への変換です。データが失われる可能性があります。
   Haru86_CppDev01.vcxproj -> E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
   C:\SDL2-2.0.16\lib\x86\SDL2.dll
   1 個のファイルをコピーしました

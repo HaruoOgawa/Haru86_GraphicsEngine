@@ -32,9 +32,6 @@ void VertexArray::CreateMesh(PrimitiveType primType) {
 	case PrimitiveType::SPHERE:
 		Primitive::CreateSphere(&vertices,&indices);
 		break;
-	case PrimitiveType::TORUS:
-		Primitive::CreateTorus(&vertices,&indices);
-		break;
 	default:
 		Primitive::CreateBoard(&vertices, &indices);
 		break;

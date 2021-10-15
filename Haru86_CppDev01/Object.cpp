@@ -7,7 +7,7 @@
 Object::Object(Game* g)
 	: game(g)
 {
-	transform = new TransformComponent(g,this,new glm::vec3(0,0,0), new glm::quat(glm::vec3(0,0,0)), new glm::vec3(1.0f,1.0f,1.0f));
+	transform = new TransformComponent(g,this,new glm::vec3(0,0,3), new glm::quat(glm::vec3(0,0,0)), new glm::vec3(1.0f,1.0f,1.0f));
 	Object::AddComponent(transform);
 }
 

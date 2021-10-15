@@ -2,8 +2,7 @@
 enum class PrimitiveType {
 	BOARD,
 	CUBE,
-	SPHERE,
-	TORUS
+	SPHERE
 };
 
 class VertexArray
