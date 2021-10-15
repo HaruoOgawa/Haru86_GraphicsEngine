@@ -3,7 +3,7 @@
 #include "SDL.h"
 #include "./GameRenderer.h"
 #include <vector>
-//#include "./GameObject.h"
+#include "./App.h"
 
 class Game
 {
@@ -13,9 +13,10 @@ public:
 	bool Initialize();
 	void RunLoop();
 	void ShutDown();
-	std::vector<class GameObject*> gameObjectList;
 	float time;
 	float deltaTime;
+	friend class GameObject;
+	friend class GameRenderer;
 private :
 	void InputProcess();
 	void UpdateGame();
@@ -24,5 +25,7 @@ private :
 	class GameRenderer* gameRenderer;
 	bool isRunning;
 	float previousTime;
+	std::vector<class GameObject*> gameObjectList;
+	class App* app;
 };
 

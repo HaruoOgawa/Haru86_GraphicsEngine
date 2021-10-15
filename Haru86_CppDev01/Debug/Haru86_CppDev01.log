@@ -1,8 +1,11 @@
-﻿  Game.cpp
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\Game.cpp(72,29): warning C4244: '=': 'Uint32' から 'float' への変換です。データが失われる可能性があります。
+﻿  App.cpp
+  Component.cpp
+  Game.cpp
   GameObject.cpp
   GameRenderer.cpp
+  Main.cpp
   MeshRendererComponent.cpp
+  Object.cpp
   TransformComponent.cpp
   コードを生成中...
   Haru86_CppDev01.vcxproj -> E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\Haru86_CppDev01.exe

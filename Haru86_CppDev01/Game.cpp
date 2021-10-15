@@ -10,7 +10,7 @@ Game::Game()
 	deltaTime(0.0f),
 	previousTime(0.0f)
 {
-
+	app = new App(this);
 }
 
 Game::~Game() {
@@ -29,14 +29,17 @@ bool Game::Initialize() {
 		return false;
 	}
 
+
 	LoadData();
 	
 	return true;
 }
 
 void Game::LoadData() {
-	GameObject* sampleQuad = new GameObject(this,PrimitiveType::BOARD);
-	gameObjectList.emplace_back(sampleQuad);
+	/*GameObject* sampleQuad = new GameObject(this,PrimitiveType::BOARD);
+	sampleQuad->SetPosition(glm::vec3(1.0f, 1.0f, 0.0f));
+	sampleQuad->SetScale(glm::vec3(2.1f, 0.9f, 1.0f));*/
+	app->Start();
 }
 
 void Game::RunLoop() {
@@ -69,8 +72,10 @@ void Game::UpdateGame() {
 	if (deltaTime > 0.05f) {
 		deltaTime = 0.05f;
 	}
-	previousTime = SDL_GetTicks();
+	previousTime = static_cast<float>(SDL_GetTicks());
 	time = previousTime;
+
+	app->Update();
 }
 void Game::GenerateOutput() {
 	gameRenderer->Draw();
