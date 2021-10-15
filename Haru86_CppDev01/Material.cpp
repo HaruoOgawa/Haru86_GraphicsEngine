@@ -88,6 +88,11 @@ void Material::SetMatrixUniform(std::string uniformName, glm::mat4 matrix) {
 	glUniformMatrix4fv(location, 1, GL_FALSE, reinterpret_cast<const float*>(&matrix[0][0]));
 }
 
+void Material::SetFloatUniform(std::string uniformName, float val) {
+	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
+	glUniform1f(location, val);
+}
+
 void Material::UnLoadData() {
 	glDeleteProgram(shaderPrg);
 	glDeleteShader(vertShaderData);

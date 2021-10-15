@@ -33,7 +33,9 @@ void MeshRendererComponent::Update() {
 void MeshRendererComponent::Draw() {
 	material->SetActive();
 	material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix());
-	
+	material->SetFloatUniform("_time", game->time);
+	material->SetFloatUniform("_deltaTime", game->deltaTime);
+
 	/*glm::mat4 testMat = owner->transform->GetMVPMatrix();
 	printf("MVPMatrix_____________________________________________________ \n");
 	for (int i = 0; i < 4; i++) {
