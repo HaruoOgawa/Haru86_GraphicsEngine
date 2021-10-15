@@ -1,7 +1,8 @@
 #include "Component.h"
+#include "./Game.h"
 
-Component::Component(Game* g,Object* o)
-	: owner(o),game(g)
+Component::Component(Object* o)
+	: owner(o),game(Game::GetInstance())
 {
 
 }

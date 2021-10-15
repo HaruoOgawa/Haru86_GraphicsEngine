@@ -6,7 +6,7 @@
 class Component
 {
 public:
-	Component(class Game* g,class Object* o);
+	Component(class Object* o);
 	~Component();
 	virtual void Update();
 protected:

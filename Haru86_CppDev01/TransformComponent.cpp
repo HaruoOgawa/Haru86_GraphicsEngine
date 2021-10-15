@@ -4,8 +4,8 @@
 #include <glm/gtc/quaternion.hpp>
 #include "./Game.h"
 
-TransformComponent::TransformComponent(Game* g,Object* o, glm::vec3 pos,glm::quat rot,glm::vec3 s)
-	: Component(g,o),position(pos),rotation(rot),scale(s)
+TransformComponent::TransformComponent(Object* o, glm::vec3 pos,glm::quat rot,glm::vec3 s)
+	: Component(o),position(pos),rotation(rot),scale(s)
 {
 
 }

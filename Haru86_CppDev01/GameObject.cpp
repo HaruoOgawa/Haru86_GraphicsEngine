@@ -7,7 +7,7 @@ GameObject::GameObject(PrimitiveType primType)
 	: Object()
 {
 	Game::GetInstance()->gameObjectList.emplace_back(this);
-	meshComp = new MeshRendererComponent(Game::GetInstance(),this, primType);
+	meshComp = new MeshRendererComponent(this, primType);
 	Object::AddComponent(meshComp);
 }
 
@@ -15,7 +15,7 @@ GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std
 	: Object()
 {
 	Game::GetInstance()->gameObjectList.emplace_back(this);
-	meshComp = new MeshRendererComponent(Game::GetInstance(),this, primType,vertexShaderName,fragmentShaderName);
+	meshComp = new MeshRendererComponent(this, primType,vertexShaderName,fragmentShaderName);
 	Object::AddComponent(meshComp);
 }
 

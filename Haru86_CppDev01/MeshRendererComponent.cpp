@@ -5,15 +5,15 @@
 
 #include <iostream>
 
-MeshRendererComponent::MeshRendererComponent(Game* g,Object* o, PrimitiveType primType)
-	: Component(g,o), myowner(o)
+MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
+	: Component(o), myowner(o)
 {
 	mesh = new VertexArray(primType);
 	material = new Material();
 }
 
-MeshRendererComponent::MeshRendererComponent(Game* g,Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
-	: Component(g,o),myowner(o)
+MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
+	: Component(o),myowner(o)
 {
 	mesh =new VertexArray(primType);
 	material = new Material(vertexShaderName,fragmentShaderName);

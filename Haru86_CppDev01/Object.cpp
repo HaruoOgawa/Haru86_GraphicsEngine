@@ -9,7 +9,7 @@
 Object::Object()
 	: game(Game::GetInstance())
 {
-	transform = new TransformComponent(Game::GetInstance(),this, glm::vec3(0,0,0),  glm::quat(glm::vec3(0,0,0)),  glm::vec3(1.0f,1.0f,1.0f));
+	transform = new TransformComponent(this, glm::vec3(0,0,0),  glm::quat(glm::vec3(0,0,0)),  glm::vec3(1.0f,1.0f,1.0f));
 	Object::AddComponent(transform);
 }
 
