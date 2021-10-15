@@ -17,8 +17,8 @@ public:
 	GameObject(Game* g, PrimitiveType primType);
 	GameObject(Game* g, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName);
 	~GameObject();
-	class MeshRendererComponent* meshComp;
+	friend class GameRenderer;
 private:
-	
+	class MeshRendererComponent* meshComp;
 };
 

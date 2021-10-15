@@ -16,9 +16,10 @@ public:
 	void AddComponent(class Component* component);
 	void RemoveComponent(class Component* component);
 	class Component* GetComponent(std::string componentName);
-	
-	class TransformComponent* transform;
+	friend class MeshRendererComponent;
+	friend class GameRenderer;
 private:
+	class TransformComponent* transform;
 	class Game* game;
 	std::map<std::string, class Component*> myComponent;
 	
