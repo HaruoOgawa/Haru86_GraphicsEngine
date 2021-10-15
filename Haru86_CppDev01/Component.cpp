@@ -1,7 +1,7 @@
 #include "Component.h"
 
-Component::Component(Object* o)
-	: owner(o)
+Component::Component(Game* g,Object* o)
+	: owner(o),game(g)
 {
 
 }

@@ -6,14 +6,14 @@
 GameObject::GameObject(Game* g, PrimitiveType primType) 
 	: Object(g)
 {
-	meshComp = new MeshRendererComponent(this, primType);
+	meshComp = new MeshRendererComponent(g,this, primType);
 	Object::AddComponent(meshComp);
 }
 
 GameObject::GameObject(Game* g, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
 	: Object(g)
 {
-	meshComp = new MeshRendererComponent(this, primType,vertexShaderName,fragmentShaderName);
+	meshComp = new MeshRendererComponent(g,this, primType,vertexShaderName,fragmentShaderName);
 	Object::AddComponent(meshComp);
 }
 

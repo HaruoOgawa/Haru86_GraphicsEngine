@@ -14,6 +14,8 @@ public:
 	void RunLoop();
 	void ShutDown();
 	std::vector<class GameObject*> gameObjectList;
+	float time;
+	float deltaTime;
 private :
 	void InputProcess();
 	void UpdateGame();
@@ -21,6 +23,6 @@ private :
 	void LoadData();
 	class GameRenderer* gameRenderer;
 	bool isRunning;
-	
+	float previousTime;
 };
 

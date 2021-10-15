@@ -2,12 +2,13 @@
 #include "./Component.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include "./Game.h"
 
 class TransformComponent :
     public Component
 {
 public:
-    TransformComponent(class Object* o, glm::vec3* pos, glm::quat* rot, glm::vec3* s);
+    TransformComponent(class Game* g,class Object* o, glm::vec3* pos, glm::quat* rot, glm::vec3* s);
     ~TransformComponent();
     void Update() override;
     glm::mat4 GetMVPMatrix(){ return pMatrix * vMatrix * mMatrix; }

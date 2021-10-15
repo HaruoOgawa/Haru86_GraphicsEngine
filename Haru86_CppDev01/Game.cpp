@@ -5,7 +5,10 @@
 
 Game::Game()
 	: gameRenderer(nullptr),
-	isRunning(true)
+	isRunning(true),
+	time(0.0f),
+	deltaTime(0.0f),
+	previousTime(0.0f)
 {
 
 }
@@ -61,7 +64,13 @@ void Game::InputProcess() {
 }
 
 void Game::UpdateGame() {
-
+	while (!SDL_TICKS_PASSED(SDL_GetTicks(), previousTime + 16.0f));
+	deltaTime = (SDL_GetTicks() - previousTime) / 1000.0f;
+	if (deltaTime > 0.05f) {
+		deltaTime = 0.05f;
+	}
+	previousTime = SDL_GetTicks();
+	time = previousTime;
 }
 void Game::GenerateOutput() {
 	gameRenderer->Draw();
