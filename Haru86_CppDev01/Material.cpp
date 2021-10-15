@@ -4,6 +4,11 @@
 #include "./SDL.h"
 #include <iostream>
 
+Material::Material() {
+	std::cout << "Create Material" << std::endl;
+	LoadShader("Standard.vert", "Standard.frag");
+}
+
 Material::Material(std::string vertexShaderName, std::string fragmentShaderName)
 {
 	std::cout << "Create Material" << std::endl;

@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <string>
 #include "./GameObject.h"
+#include "./VertexArray.h"
 
 Game::Game()
 	: gameRenderer(nullptr),
@@ -22,7 +23,6 @@ bool Game::Initialize() {
 	gameRenderer = new GameRenderer(this);
 	if (!gameRenderer->Initialize(500,500)) {
 		SDL_Log("Can not Initialize");
-		//delete gameRenderer;
 		return false;
 	}
 
@@ -32,7 +32,7 @@ bool Game::Initialize() {
 }
 
 void Game::LoadData() {
-	GameObject* sampleQuad = new GameObject(this,"Standard.vert","Standard.frag");
+	GameObject* sampleQuad = new GameObject(this,PrimitiveType::BOARD);
 	gameObjectList.emplace_back(sampleQuad);
 }
 

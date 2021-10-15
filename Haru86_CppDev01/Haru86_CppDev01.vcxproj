@@ -154,6 +154,7 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="MeshRendererComponent.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Primitive.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="VertexArray.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MeshRendererComponent.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
     <ClCompile Include="VertexArray.cpp" />
   </ItemGroup>

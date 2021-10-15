@@ -1,41 +1,58 @@
 #include "VertexArray.h"
 #include <GL/glew.h>
+#include <GL/glut.h>
+#include "./Primitive.h"
+#include <vector>
 
 //default VertexArray
 VertexArray::VertexArray() {
-	CreateDefaultMesh();
+	CreateMesh(PrimitiveType::BOARD);
+}
+
+VertexArray::VertexArray(PrimitiveType primType) {
+	CreateMesh(primType);
 }
 
 VertexArray::~VertexArray() {
 	UnLoadData();
 }
 
-void VertexArray::CreateDefaultMesh() {
-	float vertices[] = {
-		-0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 0.f, // top left
-		0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 1.f, 0.f, // top right
-		0.5f,-0.5f, 0.f, 0.f, 0.f, 0.0f, 1.f, 1.f, // bottom right
-		-0.5f,-0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 1.f  // bottom left
-	};
+void VertexArray::CreateMesh(PrimitiveType primType) {
+	std::vector<float> vertices;
+	std::vector<int> indices;
 
-	unsigned int indices[] = {
-		0, 1, 2,
-		2, 3, 0
-	};
-
-	mNumVerts = 4;
-	mNumIndices = 6;
+	switch (primType)
+	{
+	case PrimitiveType::BOARD:
+		Primitive::CreateBoard(&vertices, &indices);
+		break;
+	case PrimitiveType::CUBE:
+		Primitive::CreateCube(&vertices, &indices);
+		break;
+	case PrimitiveType::SPHERE:
+		Primitive::CreateSphere(&vertices,&indices);
+		break;
+	case PrimitiveType::TORUS:
+		Primitive::CreateTorus(&vertices,&indices);
+		break;
+	default:
+		Primitive::CreateBoard(&vertices, &indices);
+		break;
+	}
+	
+	mNumVerts = vertices.size()/5;
+	mNumIndices = indices.size();
 
 	glGenVertexArrays(1, &mVertexArray);
 	glBindVertexArray(mVertexArray);
 
 	glGenBuffers(1, &mVertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, mVertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, mNumVerts * 8 * sizeof(float), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, mNumVerts * 8 * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 
 	glGenBuffers(1, &mIndexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mNumIndices * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mNumIndices * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT,GL_FALSE, 8 * sizeof(float), 0);

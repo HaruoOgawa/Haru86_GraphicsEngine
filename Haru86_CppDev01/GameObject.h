@@ -2,7 +2,7 @@
 
 #include "./Game.h"
 #include "./Object.h"
-//#include "./MeshRendererComponent.h"
+#include "./VertexArray.h"
 
 #include <vector>
 #include <map>
@@ -14,7 +14,8 @@ class GameObject
 	: public Object
 {
 public:
-	GameObject(Game* g, std::string vertexShaderName, std::string fragmentShaderName);
+	GameObject(Game* g, PrimitiveType primType);
+	GameObject(Game* g, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName);
 	~GameObject();
 	class MeshRendererComponent* meshComp;
 private:

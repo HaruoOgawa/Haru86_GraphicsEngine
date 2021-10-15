@@ -7,6 +7,7 @@
 class Material 
 {
 public:
+    Material();
     Material(std::string vertexShaderName, std::string fragmentShaderName);
     ~Material();
     void LoadShader(std::string vertName,std::string fragName);

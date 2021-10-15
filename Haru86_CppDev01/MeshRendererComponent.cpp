@@ -5,12 +5,21 @@
 
 #include <iostream>
 
-MeshRendererComponent::MeshRendererComponent(Object* o, std::string vertexShaderName, std::string fragmentShaderName)
+MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
+	: Component(o), myowner(o)
+{
+	mesh = new VertexArray(primType);
+	material = new Material();
+}
+
+MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
 	: Component(o),myowner(o)
 {
-	mesh =new VertexArray();
+	mesh =new VertexArray(primType);
 	material = new Material(vertexShaderName,fragmentShaderName);
 }
+
+
 
 MeshRendererComponent::~MeshRendererComponent() {
 	delete mesh;
