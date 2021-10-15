@@ -1,6 +1,11 @@
 #include "Game.h"
+#include <string>
+#include "./GameObject.h"
 
-Game::Game() {
+Game::Game()
+	: gameRenderer(nullptr),
+	isRunning(true)
+{
 
 }
 
@@ -9,17 +14,65 @@ Game::~Game() {
 }
 
 bool Game::Initialize() {
-	bool test = true;
-	return test;
+	if (SDL_Init(SDL_INIT_VIDEO||SDL_INIT_AUDIO)!=0) {
+		SDL_Log("SDL Init is failure: %s", SDL_GetError());
+		return false;
+	}
+
+	gameRenderer = new GameRenderer(this);
+	if (!gameRenderer->Initialize(500,500)) {
+		SDL_Log("Can not Initialize");
+		//delete gameRenderer;
+		return false;
+	}
+
+	LoadData();
+	
+	return true;
+}
+
+void Game::LoadData() {
+	GameObject* sampleQuad = new GameObject(this,"Standard.vert","Standard.frag");
+	gameObjectList.emplace_back(sampleQuad);
 }
 
 void Game::RunLoop() {
 	while (isRunning)
 	{
-
+		InputProcess();
+		UpdateGame();
+		GenerateOutput();
 	}
 }
 
-void Game::ShutDown() {
+void Game::InputProcess() {
+	SDL_Event e;
+	while (SDL_PollEvent(&e))
+	{
+		switch (e.type)
+		{
+		case SDL_QUIT:
+			isRunning = false;
+			break;
+		default:
+			break;
+		} 
+	}
+}
 
+void Game::UpdateGame() {
+
+}
+void Game::GenerateOutput() {
+	gameRenderer->Draw();
+}
+
+
+
+void Game::ShutDown() {
+	gameRenderer->ShutDown();
+	delete gameRenderer;
+	for (auto obj : gameObjectList) {
+		delete obj;
+	}
 }

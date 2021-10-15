@@ -1,6 +1,9 @@
 #pragma once
 
-
+#include "SDL.h"
+#include "./GameRenderer.h"
+#include <vector>
+//#include "./GameObject.h"
 
 class Game
 {
@@ -10,7 +13,14 @@ public:
 	bool Initialize();
 	void RunLoop();
 	void ShutDown();
+	std::vector<class GameObject*> gameObjectList;
 private :
-	bool isRunning = false;
+	void InputProcess();
+	void UpdateGame();
+	void GenerateOutput();
+	void LoadData();
+	class GameRenderer* gameRenderer;
+	bool isRunning;
+	
 };
 
