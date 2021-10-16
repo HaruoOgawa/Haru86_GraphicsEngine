@@ -1,6 +1,7 @@
 #pragma once
 
 #include "./Object.h"
+#include "./Game.h"
 
 class Component
 {
@@ -10,5 +11,6 @@ public:
 	virtual void Update();
 protected:
 	class Object* owner;
+	class Game* game;
 };
 

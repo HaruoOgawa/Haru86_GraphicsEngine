@@ -3,13 +3,15 @@
 #include "./Game.h"
 
 int main(int argc, char** argv) {
-	
-	Game game;
-	if (game.Initialize()) {
+	Game::Create();
+	//Game game;
+	if (Game::GetInstance()->Initialize()) {
 		std::cout << "Open Game" << std::endl;
-		game.RunLoop();
+		Game::GetInstance()->RunLoop();
 	}
-	game.ShutDown();
+
+	Game::GetInstance()->ShutDown();
+	Game::Destroy();
 
 	return 0;
 }

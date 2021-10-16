@@ -4,10 +4,12 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 
-Object::Object(Game* g)
-	: game(g)
+#include "./Game.h"
+
+Object::Object()
+	: game(Game::GetInstance())
 {
-	transform = new TransformComponent(this,new glm::vec3(0,0,0), new glm::quat(glm::vec3(0,0,0)), new glm::vec3(1.0f,1.0f,1.0f));
+	transform = new TransformComponent(this, glm::vec3(0,0,0),  glm::quat(glm::vec3(0,0,0)),  glm::vec3(1.0f,1.0f,1.0f));
 	Object::AddComponent(transform);
 }
 
@@ -27,4 +29,34 @@ void Object::RemoveComponent(Component* component) {
 Component* Object::GetComponent(std::string componentName) {
 	decltype(myComponent)::iterator item = myComponent.find(componentName);
 	return item->second;
+}
+
+void Object::SetTransform(glm::vec3 pos, glm::quat rot, glm::vec3 s)
+{ 
+	transform->position = pos;
+	transform->rotation = rot; 
+	transform->scale = s; 
+}
+
+void Object::SetPosition(glm::vec3 pos) {
+	transform->position = pos;
+}
+
+void Object::SetRotation(glm::quat rot) {
+	transform->rotation;
+}
+void Object::SetScale(glm::vec3 s) {
+	transform->scale = s;
+}
+
+glm::vec3 Object::GetPosition() {
+	return transform->position;
+}
+
+glm::quat Object::GetRotation() {
+	return transform->rotation;
+}
+
+glm::vec3 Object::GetScale() {
+	return transform->scale;
 }

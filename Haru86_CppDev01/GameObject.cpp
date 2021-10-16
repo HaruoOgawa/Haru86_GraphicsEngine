@@ -1,12 +1,21 @@
 #include "GameObject.h"
-
+#include "./Game.h"
 #include "./TransformComponent.h"
 #include "./MeshRendererComponent.h"
 
-GameObject::GameObject(Game* g, std::string vertexShaderName, std::string fragmentShaderName)
-	: Object(g)
+GameObject::GameObject(PrimitiveType primType) 
+	: Object()
 {
-	meshComp = new MeshRendererComponent(this,vertexShaderName,fragmentShaderName);
+	Game::GetInstance()->gameObjectList.emplace_back(this);
+	meshComp = new MeshRendererComponent(this, primType);
+	Object::AddComponent(meshComp);
+}
+
+GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
+	: Object()
+{
+	Game::GetInstance()->gameObjectList.emplace_back(this);
+	meshComp = new MeshRendererComponent(this, primType,vertexShaderName,fragmentShaderName);
 	Object::AddComponent(meshComp);
 }
 

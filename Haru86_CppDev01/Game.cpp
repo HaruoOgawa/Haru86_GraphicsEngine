@@ -1,12 +1,33 @@
 #include "Game.h"
 #include <string>
 #include "./GameObject.h"
+#include "./VertexArray.h"
+
+Game* Game::s_pInstance = nullptr;
+
+void Game::Create()
+{
+	if (!s_pInstance)
+	{
+		s_pInstance = new Game;
+	}
+}
+
+
+void Game::Destroy()
+{
+	delete s_pInstance;
+	s_pInstance = nullptr;
+}
 
 Game::Game()
 	: gameRenderer(nullptr),
-	isRunning(true)
+	isRunning(true),
+	time(0.0f),
+	deltaTime(0.0f),
+	previousTime(0.0f)
 {
-
+	app = new App();
 }
 
 Game::~Game() {
@@ -22,9 +43,9 @@ bool Game::Initialize() {
 	gameRenderer = new GameRenderer(this);
 	if (!gameRenderer->Initialize(500,500)) {
 		SDL_Log("Can not Initialize");
-		//delete gameRenderer;
 		return false;
 	}
+
 
 	LoadData();
 	
@@ -32,8 +53,10 @@ bool Game::Initialize() {
 }
 
 void Game::LoadData() {
-	GameObject* sampleQuad = new GameObject(this,"Standard.vert","Standard.frag");
-	gameObjectList.emplace_back(sampleQuad);
+	/*GameObject* sampleQuad = new GameObject(this,PrimitiveType::BOARD);
+	sampleQuad->SetPosition(glm::vec3(1.0f, 1.0f, 0.0f));
+	sampleQuad->SetScale(glm::vec3(2.1f, 0.9f, 1.0f));*/
+	app->Start();
 }
 
 void Game::RunLoop() {
@@ -61,7 +84,15 @@ void Game::InputProcess() {
 }
 
 void Game::UpdateGame() {
+	while (!SDL_TICKS_PASSED(SDL_GetTicks(), previousTime + 16.0f));
+	deltaTime = (SDL_GetTicks() - previousTime) / 1000.0f;
+	if (deltaTime > 0.05f) {
+		deltaTime = 0.05f;
+	}
+	previousTime = static_cast<float>(SDL_GetTicks());
+	time = previousTime;
 
+	app->Update();
 }
 void Game::GenerateOutput() {
 	gameRenderer->Draw();

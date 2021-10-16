@@ -3,17 +3,28 @@
 #include "SDL.h"
 #include "./GameRenderer.h"
 #include <vector>
-//#include "./GameObject.h"
+#include "./App.h"
 
 class Game
 {
 public:
+	static Game* GetInstance()
+	{
+		return s_pInstance;
+	}
+
+	static void Create();
+	static void Destroy();
+
 	Game();
 	~Game();
 	bool Initialize();
 	void RunLoop();
 	void ShutDown();
-	std::vector<class GameObject*> gameObjectList;
+	float time;
+	float deltaTime;
+	friend class GameObject;
+	friend class GameRenderer;
 private :
 	void InputProcess();
 	void UpdateGame();
@@ -21,6 +32,10 @@ private :
 	void LoadData();
 	class GameRenderer* gameRenderer;
 	bool isRunning;
-	
+	float previousTime;
+	std::vector<class GameObject*> gameObjectList;
+	class App* app;
+protected:
+	static Game* s_pInstance;
 };
 

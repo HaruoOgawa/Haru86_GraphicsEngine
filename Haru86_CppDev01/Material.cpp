@@ -4,6 +4,11 @@
 #include "./SDL.h"
 #include <iostream>
 
+Material::Material() {
+	std::cout << "Create Material" << std::endl;
+	LoadShader("Standard.vert", "Standard.frag");
+}
+
 Material::Material(std::string vertexShaderName, std::string fragmentShaderName)
 {
 	std::cout << "Create Material" << std::endl;
@@ -81,6 +86,11 @@ void Material::SetActive() {
 void Material::SetMatrixUniform(std::string uniformName, glm::mat4 matrix) {
 	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
 	glUniformMatrix4fv(location, 1, GL_FALSE, reinterpret_cast<const float*>(&matrix[0][0]));
+}
+
+void Material::SetFloatUniform(std::string uniformName, float val) {
+	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
+	glUniform1f(location, val);
 }
 
 void Material::UnLoadData() {

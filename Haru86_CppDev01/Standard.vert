@@ -1,6 +1,8 @@
 #version 330
 
 uniform mat4 MVPMatrix;
+uniform float _time;
+uniform float _deltaTime;
 
 layout(location=0)in vec3 vertex;
 layout(location=1)in vec3 normal;
@@ -12,6 +14,9 @@ out vec2 uv;
 
 void main(){
 	vec4 pos=vec4(vertex,1.0);
+	pos.xz*=rot(_time*0.005);
+	pos.xy*=rot(_time*0.005);
+	
 	gl_Position=MVPMatrix*pos;
 	uv=texcoord;
 }
