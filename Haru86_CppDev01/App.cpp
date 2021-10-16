@@ -29,6 +29,7 @@ void App::Start() const {
 	GameObject* cube = new GameObject(PrimitiveType::CUBE);
 	cube->SetPosition(glm::vec3(0.1f, 0.2f, 0.0f));
 	cube->SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
+
 	
 }
 void App::Update() const {
