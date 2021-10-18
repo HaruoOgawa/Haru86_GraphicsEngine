@@ -2,6 +2,7 @@
 #include <string>
 #include "./GameObject.h"
 #include "./VertexArray.h"
+#include "./AudioObject.h"
 
 Game* Game::s_pInstance = nullptr;
 
@@ -53,9 +54,11 @@ bool Game::Initialize() {
 }
 
 void Game::LoadData() {
-	/*GameObject* sampleQuad = new GameObject(this,PrimitiveType::BOARD);
-	sampleQuad->SetPosition(glm::vec3(1.0f, 1.0f, 0.0f));
-	sampleQuad->SetScale(glm::vec3(2.1f, 0.9f, 1.0f));*/
+	audioObj = new AudioObject();
+	if (audioObj->Initialize()) {
+		audioObj->PlayAudio();
+	}
+
 	app->Start();
 }
 
@@ -103,6 +106,7 @@ void Game::GenerateOutput() {
 void Game::ShutDown() {
 	gameRenderer->ShutDown();
 	delete gameRenderer;
+	delete audioObj;
 	for (auto obj : gameObjectList) {
 		delete obj;
 	}
