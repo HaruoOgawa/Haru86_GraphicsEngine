@@ -1,6 +1,9 @@
 #pragma once
 #include "Component.h"
 #include "./Object.h"
+#include <string>
+#include <unordered_map>
+
 namespace FMOD
 {
 	class System;
@@ -22,9 +25,15 @@ public:
     AudioSourceComponent(class Object* o);
     ~AudioSourceComponent();
     bool Initialize();
+	void Update() override;
 private :
-    FMOD::Studio::System* mSystem;
-    FMOD::System* lowLevelSystem;
     void Shutdown();
+	void LoadBank(std::string fileName);
+	void UnLoadBask(std::string fileName);
+	void UnLoadAllBank();
+	FMOD::Studio::System* mSystem;
+	FMOD::System* lowLevelSystem;
+	std::unordered_map<std::string, FMOD::Studio::Bank*> banksMap;
+	std::unordered_map<std::string, FMOD::Studio::EventDescription*> eventMap;
 };
 

@@ -1,6 +1,7 @@
 #include "AudioSourceComponent.h"
 #include <fmod_studio.hpp>
 #include <fmod_errors.h>
+#include <vector>
 
 AudioSourceComponent::AudioSourceComponent(class Object* o)
 	: Component(o)
@@ -37,13 +38,93 @@ bool AudioSourceComponent::Initialize() {
 		return false;
 	}
 
-	//mSystem->getLowLevelSystem(&lowLevelSystem);
 	mSystem->getLowLevelSystem(&lowLevelSystem);
+
+	LoadBank("Assets/Master Bank.strings.bank");
+	LoadBank("Assets/Master Bank.bank");
 
 	return true;
 }
 
+void AudioSourceComponent::LoadBank(std::string fileName) {
+	if (banksMap.find(fileName) != banksMap.end()) {
+		return;
+	}
+
+	FMOD::Studio::Bank* bank = nullptr;
+	FMOD_RESULT result = mSystem->loadBankFile(
+		fileName.c_str(),
+		FMOD_STUDIO_LOAD_BANK_NORMAL,
+		&bank
+	);
+
+	const int maxPathLength = 512;
+
+	if (result==FMOD_OK) {
+		banksMap.emplace(fileName, bank);
+		bank->loadSampleData();
+		int numEvents = 0;
+		bank->getEventCount(&numEvents);
+		if (numEvents > 0) {
+			std::vector<FMOD::Studio::EventDescription*> events(numEvents);
+			bank->getEventList(events.data(), numEvents, &numEvents);
+
+			char eventName[maxPathLength];
+			for (int i = 0; i < numEvents; i++) {
+				FMOD::Studio::EventDescription* e = events[i];
+				e->getPath(eventName, maxPathLength, nullptr);
+				eventMap.emplace(eventName, e);
+			}
+
+		}
+	}
+
+}
+void AudioSourceComponent::UnLoadBask(std::string fileName) {
+	auto item = banksMap.find(fileName);
+	if (item == banksMap.end()) {
+		return;
+	}
+
+	FMOD::Studio::Bank* bank = item->second;
+	int numEvents = 0;
+	bank->getEventCount(&numEvents);
+	if (numEvents > 0) {
+		std::vector<FMOD::Studio::EventDescription*> events(numEvents);
+		bank->getEventList(events.data(), numEvents, &numEvents);
+		char eventName[512];
+		for (int i = 0; i < numEvents; i++) {
+			FMOD::Studio::EventDescription* e = events[i];
+			e->getPath(eventName, 512, nullptr);
+			auto eventi = eventMap.find(eventName);
+			if (eventi != eventMap.end()) {
+				eventMap.erase(eventi);
+			}
+		}
+	}
+
+	bank->unloadSampleData();
+	bank->unload();
+	banksMap.erase(item);
+}
+
+void AudioSourceComponent::UnLoadAllBank() {
+	for (auto& item : banksMap) {
+		item.second->unloadSampleData();
+		item.second->unload();
+	}
+	banksMap.clear();
+	eventMap.clear();
+}
+
+void AudioSourceComponent::Update() {
+
+}
+
 void AudioSourceComponent::Shutdown() {
+	
+	UnLoadAllBank();
+
 	if (mSystem) {
 		mSystem->release();
 	}

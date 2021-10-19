@@ -3,6 +3,7 @@
 #include "./GameObject.h"
 #include "./VertexArray.h"
 #include "./AudioObject.h"
+#include "./AudioSourceComponent.h"
 
 Game* Game::s_pInstance = nullptr;
 
@@ -96,6 +97,8 @@ void Game::UpdateGame() {
 	time = previousTime;
 
 	app->Update();
+	static_cast<AudioSourceComponent*>(audioObj->audioSource)->Update();
+	
 }
 void Game::GenerateOutput() {
 	gameRenderer->Draw();

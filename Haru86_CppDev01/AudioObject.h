@@ -8,6 +8,7 @@ public:
     ~AudioObject();
     bool Initialize();
     void PlayAudio();
+    friend Game;
 private :
     class AudioSourceComponent* audioSource;
 };
