@@ -2,11 +2,16 @@
 #include <fmod_studio.hpp>
 #include <fmod_errors.h>
 #include <vector>
+#include "./SDL.h"
+#include <iostream>
+
+FMOD::Sound* sound;
 
 AudioSourceComponent::AudioSourceComponent(class Object* o)
 	: Component(o)
 {
-
+	std::cout << "Create  Constructor" << std::endl;
+	Initialize();
 }
 
 AudioSourceComponent::~AudioSourceComponent() {
@@ -42,6 +47,10 @@ bool AudioSourceComponent::Initialize() {
 
 	LoadBank("Assets/Master Bank.strings.bank");
 	LoadBank("Assets/Master Bank.bank");
+
+	std::cout << "Hello" << std::endl;
+
+	CreateSound("E:/C++Dev/Haru86_CppDev01/Haru86_CppDev01/Music/lug00ber-vold.mp3");
 
 	return true;
 }
@@ -117,13 +126,39 @@ void AudioSourceComponent::UnLoadAllBank() {
 	eventMap.clear();
 }
 
+void AudioSourceComponent::CreateSound(std::string name) {
+	FMOD_RESULT result;
+	result = lowLevelSystem->createStream(name.c_str(), FMOD_DEFAULT, 0, &sound);
+	
+	if (result == FMOD_OK) {
+		std::cout << "Sound is Loaded" << std::endl;
+		FMOD::Channel* channel;
+		result = lowLevelSystem->playSound( sound, nullptr,false, &channel);
+		if (result != FMOD_OK) {
+			SDL_Log("Cannnot Play Sound: (%d) %s", result, FMOD_ErrorString(result));
+			delete sound;
+		}
+	}
+	else {
+		char a[] = "a";
+		SDL_Log("Cannnot Load Sound: (%d) %s",result,FMOD_ErrorString(result));
+		delete sound;
+	}
+}
 void AudioSourceComponent::Update() {
 
+}
+
+void AudioSourceComponent::UnLoadSound() {
+	if (sound != nullptr) {
+		delete sound;
+	}
 }
 
 void AudioSourceComponent::Shutdown() {
 	
 	UnLoadAllBank();
+	UnLoadSound();
 
 	if (mSystem) {
 		mSystem->release();

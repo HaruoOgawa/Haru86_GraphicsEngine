@@ -1,4 +1,5 @@
 #pragma once
+
 class BaseApp
 {
 	virtual void Start() const = 0;

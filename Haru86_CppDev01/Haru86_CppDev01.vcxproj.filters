@@ -66,6 +66,9 @@
     <ClInclude Include="AudioSourceComponent.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\Haruo Ogawa\Desktop\includeTest.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">

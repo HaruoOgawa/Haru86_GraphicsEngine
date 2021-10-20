@@ -1,9 +1,12 @@
 #include "AudioObject.h"
 #include "./AudioSourceComponent.h"
+#include <iostream>
 
 AudioObject::AudioObject() 
 	: Object()
 {
+	
+
 	audioSource = new AudioSourceComponent(this);
 	AddComponent(audioSource);
 }

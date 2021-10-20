@@ -31,6 +31,8 @@ private :
 	void LoadBank(std::string fileName);
 	void UnLoadBask(std::string fileName);
 	void UnLoadAllBank();
+	void CreateSound(std::string name);
+	void UnLoadSound();
 	FMOD::Studio::System* mSystem;
 	FMOD::System* lowLevelSystem;
 	std::unordered_map<std::string, FMOD::Studio::Bank*> banksMap;

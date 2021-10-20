@@ -154,6 +154,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studi
     <ClInclude Include="AudioObject.h" />
     <ClInclude Include="AudioSourceComponent.h" />
     <ClInclude Include="BaseApp.h" />
+    <ClInclude Include="C:\Users\Haruo Ogawa\Desktop\includeTest.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />

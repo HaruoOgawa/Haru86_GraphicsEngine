@@ -4,6 +4,7 @@
 #include "./VertexArray.h"
 #include "./AudioObject.h"
 #include "./AudioSourceComponent.h"
+#include <iostream>
 
 Game* Game::s_pInstance = nullptr;
 
