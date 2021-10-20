@@ -35,6 +35,7 @@ private :
 	float previousTime;
 	std::vector<class GameObject*> gameObjectList;
 	class App* app;
+	class AudioObject* audioObj;
 protected:
 	static Game* s_pInstance;
 };
