@@ -4,6 +4,8 @@
 #include "./VertexArray.h"
 #include "./AudioObject.h"
 #include "./AudioSourceComponent.h"
+#include "./TimelineObject.h"
+#include "./TimelineComponent.h"
 #include <iostream>
 
 Game* Game::s_pInstance = nullptr;
@@ -62,6 +64,10 @@ void Game::LoadData() {
 	}
 
 	app->Start();
+	
+	timelineObj = new TimelineObject();
+
+	app->Timeline(timelineObj);
 }
 
 void Game::RunLoop() {
@@ -99,6 +105,7 @@ void Game::UpdateGame() {
 
 	app->Update();
 	static_cast<AudioSourceComponent*>(audioObj->audioSource)->Update();
+	static_cast<TimelineComponent*>(timelineObj->timelineComponent)->Update();
 	
 }
 void Game::GenerateOutput() {
@@ -111,6 +118,7 @@ void Game::ShutDown() {
 	gameRenderer->ShutDown();
 	delete gameRenderer;
 	delete audioObj;
+	delete timelineObj;
 	for (auto obj : gameObjectList) {
 		delete obj;
 	}

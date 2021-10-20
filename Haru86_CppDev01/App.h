@@ -11,6 +11,7 @@ public:
 	~App();
 	void Start() const override;
 	void Update() const override;
+	void Timeline(class TimelineObject* timelineObj) const override;
 private:
 };
 

@@ -36,6 +36,7 @@ private :
 	std::vector<class GameObject*> gameObjectList;
 	class App* app;
 	class AudioObject* audioObj;
+	class TimelineObject* timelineObj;
 protected:
 	static Game* s_pInstance;
 };
