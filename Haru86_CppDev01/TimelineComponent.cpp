@@ -20,13 +20,11 @@ void TimelineComponent::Update() {
 
 void TimelineComponent::Initialize() {
 	InitializeActivationTrack();
-	InitializeAnimationTrack();
+	InitializeCustomTrack();
 }
 
 void TimelineComponent::InitializeActivationTrack() {
-	printf("Hello Timeline Initializer \n");
 	for (auto clip : waittingActiovationClip) {
-		printf("Hello Timeline Initializer for \n");
 		auto iter = std::find(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), clip->gameObject);
 		if (iter!= game->GetInstance()->gameObjectList.end()) {
 			game->GetInstance()->gameObjectList.erase(game->GetInstance()->gameObjectList.begin()
@@ -34,34 +32,46 @@ void TimelineComponent::InitializeActivationTrack() {
 		}
 	}
 }
-void TimelineComponent::InitializeAnimationTrack() {
-
+void TimelineComponent::InitializeCustomTrack() {
+	for (auto clip : waittingCustomClip) {
+		auto iter = std::find(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), clip->gameObject);
+		if (iter != game->GetInstance()->gameObjectList.end()) {
+			game->GetInstance()->gameObjectList.erase(game->GetInstance()->gameObjectList.begin()
+				+ std::distance(game->GetInstance()->gameObjectList.begin(), iter));
+		}
+	}
 }
 
 void TimelineComponent::ComputeTimeline(float time) {
 	ComputeActivationTrack(time);
-	ComputeAnimationTrack(time);
+	ComputeCustomTrack(time);
 }
 
 void TimelineComponent::ComputeActivationTrack(float time) {
-	printf("Confirm timeVal in Activation Track : %d \n", static_cast<int>(time));
 	for (auto clip : waittingActiovationClip) {
 		if (clip->startTime<time&&clip->endTime>=time) {
 			game->GetInstance()->gameObjectList.emplace_back(clip->gameObject);
 			runningActiovationClip.emplace_back(clip);
+
+			auto waittingIter = std::find(waittingActiovationClip.begin(), waittingActiovationClip.end(), clip);
+			if (waittingIter != waittingActiovationClip.end()) {
+				waittingActiovationClip.erase(waittingActiovationClip.begin()
+					+ std::distance(waittingActiovationClip.begin(), waittingIter)
+				);
+			}
 		}
 	}
 
 	for (auto clip : runningActiovationClip) {
 		if (time>clip->endTime) {
 			auto iter = std::find(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), clip->gameObject);
-			if (*(iter)) {
+			if (iter != game->GetInstance()->gameObjectList.end()) {
 				game->GetInstance()->gameObjectList.erase(game->GetInstance()->gameObjectList.begin()
 					+ std::distance(game->GetInstance()->gameObjectList.begin(), iter));
 			}
 
 			auto runningIter = std::find(runningActiovationClip.begin(), runningActiovationClip.end(), clip);
-			if (*(runningIter)) {
+			if (runningIter!= runningActiovationClip.end()) {
 				runningActiovationClip.erase(runningActiovationClip.begin()
 					+ std::distance(runningActiovationClip.begin(), runningIter)
 				);
@@ -72,26 +82,86 @@ void TimelineComponent::ComputeActivationTrack(float time) {
 		}
 	}
 }
-void TimelineComponent::ComputeAnimationTrack(float time) {
+void TimelineComponent::ComputeCustomTrack(float time) {
+	for (auto clip : waittingCustomClip) {
+		if (clip->startTime < time && clip->endTime >= time) {
+			clip->callback();
+			game->GetInstance()->gameObjectList.emplace_back(clip->gameObject);
+			runningCustomClip.emplace_back(clip);
 
+			auto waittingIter = std::find(waittingCustomClip.begin(), waittingCustomClip.end(), clip);
+			if (waittingIter != waittingCustomClip.end()) {
+				waittingCustomClip.erase(waittingCustomClip.begin()
+					+ std::distance(waittingCustomClip.begin(), waittingIter)
+				);
+			}
+		}
+	}
+
+	for (auto clip : runningCustomClip) {
+		if (time > clip->endTime) {
+			auto iter = std::find(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), clip->gameObject);
+			if (iter!=game->GetInstance()->gameObjectList.end()) {
+				game->GetInstance()->gameObjectList.erase(game->GetInstance()->gameObjectList.begin()
+					+ std::distance(game->GetInstance()->gameObjectList.begin(), iter));
+			}
+
+			auto runningIter = std::find(runningCustomClip.begin(), runningCustomClip.end(), clip);
+			if (runningIter!= runningCustomClip.end()) {
+				runningCustomClip.erase(runningCustomClip.begin()
+					+ std::distance(runningCustomClip.begin(), runningIter)
+				);
+			}
+
+			waittingCustomClip.emplace_back(clip);
+
+		}
+	}
 }
 
 void TimelineComponent::ClearTimeline() {
 	for (auto clip : waittingActiovationClip) {
-		delete clip->gameObject;
-		delete clip;
+		if (clip->gameObject != nullptr) {
+			delete clip->gameObject;
+		}
+		
+		if (clip != nullptr) {
+			delete clip;
+		}
 	}
 	waittingActiovationClip.clear();
 	
 	for (auto clip : runningActiovationClip) {
-		delete clip->gameObject;
-		delete clip;
+		if (clip->gameObject != nullptr) {
+			delete clip->gameObject;
+		}
+
+		if (clip != nullptr) {
+			delete clip;
+		}
 	}
 	runningActiovationClip.clear();
+	
+	for (auto clip : waittingCustomClip) {
+		if (clip->gameObject != nullptr) {
+			delete clip->gameObject;
+		}
 
-	for (auto clip : endActiovationClip) {
-		delete clip->gameObject;
-		delete clip;
+		if (clip != nullptr) {
+			delete clip;
+		}
 	}
-	endActiovationClip.clear();
+	waittingCustomClip.clear();
+	
+	for (auto clip : runningCustomClip) {
+		if (clip->gameObject != nullptr) {
+			delete clip->gameObject;
+		}
+
+		if (clip != nullptr) {
+			delete clip;
+		}
+	}
+	runningCustomClip.clear();
+
 }
