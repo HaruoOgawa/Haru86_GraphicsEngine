@@ -45,5 +45,10 @@ void App::Update() const {
 
 void App::Timeline(TimelineObject* timeline) const {
 	timeline->AddActivationClip(sampleSphere, 5.0f, 10.0f);
+	timeline->AddActivationClip(sampleQuad, 1.0f, 7.5f);
+	timeline->AddActivationClip(sampleQuad2, 8.0f, 13.0f);
+	timeline->AddActivationClip(sampleCube, 15.0f, 20.0f);
+	timeline->AddActivationClip(cube, 3.0f, 18.0f);
+	timeline->AddActivationClip(sampleSphere, 20.0f, 25.0f);
 }
 

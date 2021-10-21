@@ -10,7 +10,7 @@ TimelineObject::~TimelineObject() {
 }
 
 void TimelineObject::AddActivationClip(GameObject* obj, float startTime, float endTime) {
-	timelineComponent->waittingActiovationClip.emplace_back(new TimelineActivationClip(obj, startTime, endTime));
+	timelineComponent->waittingActiovationClip.emplace_back(new TimelineActivationClip(obj, startTime*1000.0f, endTime*1000.0f));
 }
 
 void TimelineObject::AddAnimationClip(class GameObject* obj, float startTime, float endTime) {
