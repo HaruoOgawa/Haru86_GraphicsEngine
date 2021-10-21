@@ -25,6 +25,7 @@ public:
 	float deltaTime;
 	friend class GameObject;
 	friend class GameRenderer;
+	friend class TimelineComponent;
 private :
 	void InputProcess();
 	void UpdateGame();

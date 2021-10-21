@@ -11,5 +11,6 @@ public:
     friend Game;
 private:
     class TimelineComponent* timelineComponent;
+    void Initialize();
 };
 

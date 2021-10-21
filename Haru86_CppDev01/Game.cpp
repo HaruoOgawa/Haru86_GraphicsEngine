@@ -68,6 +68,7 @@ void Game::LoadData() {
 	timelineObj = new TimelineObject();
 
 	app->Timeline(timelineObj);
+	timelineObj->Initialize();
 }
 
 void Game::RunLoop() {

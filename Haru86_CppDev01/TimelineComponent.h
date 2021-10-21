@@ -22,14 +22,14 @@ public:
     ~TimelineComponent();
     void Update() override;
     void Initialize();
-    void ComputeTimeline();
+    void ComputeTimeline(float time);
     friend TimelineObject;
     float timeVal;
 private:
     void InitializeActivationTrack();
     void InitializeAnimationTrack();
-    void ComputeActivationTrack();
-    void ComputeAnimationTrack();
+    void ComputeActivationTrack(float time);
+    void ComputeAnimationTrack(float time);
     void ClearTimeline();
     std::vector<TimelineActivationClip*> waittingActiovationClip;
     std::vector<TimelineActivationClip*> runningActiovationClip;

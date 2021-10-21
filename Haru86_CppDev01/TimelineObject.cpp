@@ -16,3 +16,7 @@ void TimelineObject::AddActivationClip(GameObject* obj, float startTime, float e
 void TimelineObject::AddAnimationClip(class GameObject* obj, float startTime, float endTime) {
 
 }
+
+void TimelineObject::Initialize() {
+	timelineComponent->Initialize();
+}
