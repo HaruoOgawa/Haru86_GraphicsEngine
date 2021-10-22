@@ -1,18 +1,4 @@
-﻿  App.cpp
-  AudioObject.cpp
-  AudioSourceComponent.cpp
-  Component.cpp
-  Game.cpp
-  GameObject.cpp
-  GameRenderer.cpp
-  Main.cpp
-  MeshRendererComponent.cpp
-  Object.cpp
-  TimelineComponent.cpp
-  TimelineObject.cpp
-  TransformComponent.cpp
-  UIComponent.cpp
-  コードを生成中...
+﻿  RectTransformComponent.cpp
   Haru86_CppDev01.vcxproj -> E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
   ファイルが見つかりません - *.dll
   0 個のファイルをコピーしました

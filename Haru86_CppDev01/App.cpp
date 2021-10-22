@@ -2,6 +2,7 @@
 #include "./GameObject.h"
 #include "./TimelineObject.h"
 #include "./UIComponent.h"
+#include "./RectTransformComponent.h"
 
 GameObject* Haru86_Hexagon;
 GameObject* Haru86_RaymarchHole;
@@ -26,7 +27,9 @@ void App::Start() const {
 	Haru86_Ray = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/Haru86_Ray.frag");
 	Haru86_PartyHole = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/Haru86_PartyHole.frag");
 
-	
+	GameObject* uiButton = new GameObject(PrimitiveType::BOARD,"./Shader/UIStandard.vert","./Shader/UIStandard.frag");
+	uiButton->AddComponent(new UIComponent(uiButton));
+	uiButton->AddComponent(new RectTransformComponent(uiButton,4.0f/5.0f, 4.0f / 5.0f));
 }
 void App::Update() const {
 

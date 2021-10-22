@@ -99,7 +99,7 @@ void Game::InputProcess() {
 	{
 		switch (e.type)
 		{
-		case SDLK_ESCAPE:
+		case SDL_QUIT:
 			isRunning = false;
 			break;
 		default:

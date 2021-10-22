@@ -25,9 +25,10 @@ public:
     glm::vec3 position;
     glm::quat rotation;
     glm::vec3 scale;
-private:
     glm::mat4 mMatrix;
     glm::mat4 vMatrix;
     glm::mat4 pMatrix;
+private:
+   
 };
 

@@ -28,6 +28,7 @@ public:
 	friend class MeshRendererComponent;
 	friend class GameRenderer;
 	friend class UIComponent;
+	friend class RectTransformComponent;
 private:
 	class TransformComponent* transform;
 	class Game* game;

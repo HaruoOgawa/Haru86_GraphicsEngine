@@ -164,6 +164,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studi
     <ClInclude Include="MeshRendererComponent.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Primitive.h" />
+    <ClInclude Include="RectTransformComponent.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="TimelineComponent.h" />
     <ClInclude Include="TimelineObject.h" />
@@ -184,6 +185,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studi
     <ClCompile Include="MeshRendererComponent.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Primitive.cpp" />
+    <ClCompile Include="RectTransformComponent.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="TimelineComponent.cpp" />
     <ClCompile Include="TimelineObject.cpp" />
