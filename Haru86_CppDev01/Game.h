@@ -35,6 +35,7 @@ private :
 	bool isRunning;
 	float previousTime;
 	std::vector<class GameObject*> gameObjectList;
+	std::vector<int> uiObjectList;
 	class App* app;
 	class AudioObject* audioObj;
 	class TimelineObject* timelineObj;

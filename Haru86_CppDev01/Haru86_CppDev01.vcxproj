@@ -168,6 +168,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studi
     <ClInclude Include="TimelineComponent.h" />
     <ClInclude Include="TimelineObject.h" />
     <ClInclude Include="TransformComponent.h" />
+    <ClInclude Include="UIObject.h" />
     <ClInclude Include="VertexArray.h" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +188,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studi
     <ClCompile Include="TimelineComponent.cpp" />
     <ClCompile Include="TimelineObject.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
+    <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +196,12 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studi
     <None Include="C:\SDL2_image-2.0.5\lib\x86\libpng16-16.dll" />
     <None Include="C:\SDL2_image-2.0.5\lib\x86\SDL2_image.dll" />
     <None Include="html1.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="UIStandard.frag">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="UIStandard.vert">
       <DeploymentContent>true</DeploymentContent>
     </None>
     <None Include="packages.config" />

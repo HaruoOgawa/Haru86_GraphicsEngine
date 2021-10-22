@@ -12,6 +12,9 @@ public:
     ~TransformComponent();
     void Update() override;
     glm::mat4 GetMVPMatrix(){ return pMatrix * vMatrix * mMatrix; }
+    glm::mat4 GetMMatrix(){ return mMatrix; }
+    glm::mat4 GetVMatrix() { return vMatrix; }
+    glm::mat4 GetPMatrix(){ return pMatrix; }
     void CalMatrix();
     void Translate();
     void Rotate();

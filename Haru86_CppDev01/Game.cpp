@@ -7,6 +7,8 @@
 #include "./TimelineObject.h"
 #include "./TimelineComponent.h"
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 Game* Game::s_pInstance = nullptr;
 
@@ -69,6 +71,11 @@ void Game::LoadData() {
 
 	app->Timeline(timelineObj);
 	timelineObj->Initialize();
+
+	GameObject* uiTest = new GameObject(PrimitiveType::BOARD,"./UIStandard.vert","./UIStandard.frag");
+	uiTest->UseZTest(false);
+	uiTest->SetRenderOlder(1000);
+	
 }
 
 void Game::RunLoop() {
@@ -108,6 +115,9 @@ void Game::UpdateGame() {
 	static_cast<AudioSourceComponent*>(audioObj->audioSource)->Update();
 	static_cast<TimelineComponent*>(timelineObj->timelineComponent)->Update();
 	
+	std::sort(gameObjectList.begin(), gameObjectList.end(), [](GameObject* a, GameObject* b) {
+		return a->renderOrder < b->renderOrder;
+	});
 }
 void Game::GenerateOutput() {
 	gameRenderer->Draw();

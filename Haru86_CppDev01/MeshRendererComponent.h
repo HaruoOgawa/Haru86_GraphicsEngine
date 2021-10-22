@@ -16,6 +16,7 @@ public:
     ~MeshRendererComponent();
     void Update() override;
     void Draw();
+    bool useZTest;
 private:
     VertexArray* mesh;
     Material* material;

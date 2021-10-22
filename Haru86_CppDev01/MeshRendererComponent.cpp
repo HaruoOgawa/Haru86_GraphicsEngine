@@ -8,6 +8,7 @@
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 	: Component(o), myowner(o)
 {
+	useZTest = true;
 	mesh = new VertexArray(primType);
 	material = new Material();
 }
@@ -15,6 +16,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
 	: Component(o),myowner(o)
 {
+	useZTest = true;
 	mesh =new VertexArray(primType);
 	material = new Material(vertexShaderName,fragmentShaderName);
 }
@@ -31,8 +33,19 @@ void MeshRendererComponent::Update() {
 }
 
 void MeshRendererComponent::Draw() {
+	if (useZTest == true) {
+		glEnable(GL_DEPTH_TEST);
+	}
+	else if(useZTest==false){
+		glDisable(GL_DEPTH_TEST);
+	}
+	
 	material->SetActive();
 	material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix());
+	material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
+	material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
+	material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
+
 	material->SetFloatUniform("_time", game->time);
 	material->SetFloatUniform("_deltaTime", game->deltaTime);
 
