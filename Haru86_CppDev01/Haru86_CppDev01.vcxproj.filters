@@ -144,27 +144,32 @@
     <None Include="C:\SDL2_image-2.0.5\lib\x86\libpng16-16.dll" />
     <None Include="C:\SDL2_image-2.0.5\lib\x86\SDL2_image.dll" />
     <None Include="html1.htm" />
-    <None Include="test.frag">
+    <None Include="Shader\demo.vert">
       <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="Standard.vert">
+    <None Include="Shader\Haru86_Hexagon.frag">
       <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="Standard.frag">
+    <None Include="Shader\UIStandard.vert">
       <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="UIStandard.vert">
+    <None Include="Shader\UIStandard.frag">
       <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="UIStandard.frag">
+    <None Include="Shader\Standard.vert">
       <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="demo.vert">
+    <None Include="Shader\Standard.frag">
       <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="Haru86_Hexagon.frag">
-      <Filter>ソース ファイル</Filter>
-    </None>
+    <None Include="Shader\Haru86_RaymarchHole.frag" />
+    <None Include="Shader\Haru86_Triangle.frag" />
+    <None Include="Shader\Haru86_MengerSponge.frag" />
+    <None Include="Shader\Haru86_Quaternion_Juria.frag" />
+    <None Include="Shader\Raymarching_domainID_samp.frag" />
+    <None Include="Shader\Haru86_polar_coordinate.frag" />
+    <None Include="Shader\Haru86_Ray.frag" />
+    <None Include="Shader\Haru86_PartyHole.frag" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Haru86_CppDev01.rc">

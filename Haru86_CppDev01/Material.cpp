@@ -6,7 +6,7 @@
 
 Material::Material() {
 	//std::cout << "Create Material" << std::endl;
-	LoadShader("Standard.vert", "Standard.frag");
+	LoadShader("./Shader/Standard.vert", "./Shader/Standard.frag");
 }
 
 Material::Material(std::string vertexShaderName, std::string fragmentShaderName)
