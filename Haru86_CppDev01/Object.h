@@ -27,6 +27,7 @@ public:
 	//void GetTransform(glm::vec3& pos, glm::quat& rot, glm::vec3& s) { pos = transform->position; rot = transform->rotation; s = transform->scale; }
 	friend class MeshRendererComponent;
 	friend class GameRenderer;
+	friend class UIComponent;
 private:
 	class TransformComponent* transform;
 	class Game* game;

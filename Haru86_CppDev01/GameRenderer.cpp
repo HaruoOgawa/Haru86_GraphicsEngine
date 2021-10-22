@@ -3,12 +3,26 @@
 #include "GameObject.h"
 #include "MeshRendererComponent.h"
 #include "TransformComponent.h"
+#include "./Game.h"
+
+GameRenderer* GameRenderer::renderer_instance = nullptr;
+
+void GameRenderer::Create() {
+	if (!renderer_instance) {
+		renderer_instance = new GameRenderer(Game::GetInstance());
+	}
+}
+
+void GameRenderer::Destroy() {
+	delete renderer_instance;
+	renderer_instance = nullptr;
+}
 
 GameRenderer::GameRenderer(Game* game)
 	: mgame(game),
 	sWindow(nullptr),
-	sWindowWidth(0.0f),
-	sWindowHeight(0.0f),
+	sWindowWidth(0),
+	sWindowHeight(0),
 	deltaTime(0.0f)
 {
 
@@ -19,8 +33,8 @@ GameRenderer::~GameRenderer() {
 }
 
 bool GameRenderer::Initialize(float width,float height) {
-	sWindowWidth = width;
-	sWindowHeight = height;
+	//sWindowWidth = width;
+	//sWindowHeight = height;
 
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -50,6 +64,8 @@ bool GameRenderer::Initialize(float width,float height) {
 		SDL_Log("Full Screeen Error: %s", SDL_GetError());
 	}
 
+	SDL_GetWindowSize(sWindow, &sWindowWidth, &sWindowHeight);
+
 	context = SDL_GL_CreateContext(sWindow);
 
 	glewExperimental = GL_TRUE;
@@ -62,6 +78,10 @@ bool GameRenderer::Initialize(float width,float height) {
 
 
 	return true;
+}
+
+glm::ivec2 GameRenderer::GetScreenSize() {
+	return glm::ivec2(sWindowWidth, sWindowHeight);
 }
 
 void GameRenderer::Draw() {

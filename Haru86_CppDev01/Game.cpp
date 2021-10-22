@@ -47,8 +47,9 @@ bool Game::Initialize() {
 		return false;
 	}
 
-	gameRenderer = new GameRenderer(this);
-	if (!gameRenderer->Initialize(500,500)) {
+	//gameRenderer = new GameRenderer(this);
+	GameRenderer::Create();
+	if (!GameRenderer::GetInstance()->Initialize(500,500)) {
 		SDL_Log("Can not Initialize");
 		return false;
 	}
@@ -131,14 +132,15 @@ void Game::UpdateGame() {
 	
 }
 void Game::GenerateOutput() {
-	gameRenderer->Draw();
+	GameRenderer::GetInstance()->Draw();
 }
 
 
 
 void Game::ShutDown() {
-	gameRenderer->ShutDown();
-	delete gameRenderer;
+	GameRenderer::GetInstance()->ShutDown();
+	//delete gameRenderer;
+	GameRenderer::Destroy();
 	delete audioObj;
 	delete timelineObj;
 	for (auto obj : gameObjectList) {

@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include "./Game.h"
+#include "./GameRenderer.h"
 
 TransformComponent::TransformComponent(Object* o, glm::vec3 pos,glm::quat rot,glm::vec3 s)
 	: Component(o),position(pos),rotation(rot),scale(s)
@@ -50,9 +51,12 @@ void TransformComponent::ComputeViewMatrix() {
 }
 
 void TransformComponent::ComputePerspectiveMatrix() {
+	float width = static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().x);
+	float height = static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().y);
+	
 	pMatrix = glm::perspective(
 		glm::radians(60.0f),
-		4.0f/3.0f,
+		width/height,
 		0.1f,
 		100.0f
 	);
