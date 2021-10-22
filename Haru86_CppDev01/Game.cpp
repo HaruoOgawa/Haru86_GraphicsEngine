@@ -141,6 +141,7 @@ void Game::ShutDown() {
 	GameRenderer::GetInstance()->ShutDown();
 	//delete gameRenderer;
 	GameRenderer::Destroy();
+	delete app;
 	delete audioObj;
 	delete timelineObj;
 	for (auto obj : gameObjectList) {

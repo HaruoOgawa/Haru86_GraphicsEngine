@@ -2,6 +2,7 @@
 #include "./Game.h"
 #include "./BaseApp.h"
 #include "./VertexArray.h"
+#include <vector>
 
 class App
 	: public BaseApp
