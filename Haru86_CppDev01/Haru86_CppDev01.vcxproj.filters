@@ -16,6 +16,9 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{d0b0a0de-601b-4780-a18f-f848981f241e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Shader">
+      <UniqueIdentifier>{6c3af43a-bd1e-4791-b060-41867b2a29fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -154,6 +157,12 @@
       <Filter>ソース ファイル</Filter>
     </None>
     <None Include="UIStandard.frag">
+      <Filter>ソース ファイル</Filter>
+    </None>
+    <None Include="demo.vert">
+      <Filter>ソース ファイル</Filter>
+    </None>
+    <None Include="Haru86_Hexagon.frag">
       <Filter>ソース ファイル</Filter>
     </None>
   </ItemGroup>

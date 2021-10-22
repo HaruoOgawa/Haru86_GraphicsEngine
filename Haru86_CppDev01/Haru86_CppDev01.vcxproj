@@ -195,9 +195,11 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studi
     <None Include="C:\SDL2-2.0.16\lib\x86\SDL2.dll" />
     <None Include="C:\SDL2_image-2.0.5\lib\x86\libpng16-16.dll" />
     <None Include="C:\SDL2_image-2.0.5\lib\x86\SDL2_image.dll" />
+    <None Include="demo.vert" />
     <None Include="html1.htm">
       <DeploymentContent>true</DeploymentContent>
     </None>
+    <None Include="Haru86_Hexagon.frag" />
     <None Include="UIStandard.frag">
       <DeploymentContent>true</DeploymentContent>
     </None>
