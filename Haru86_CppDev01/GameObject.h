@@ -10,6 +10,14 @@
 
 #include <typeinfo>
 
+enum RenderQueue
+{
+	Background=1000,
+	Geometry=3000,
+	Transparent=4000,
+	UI=5000
+};
+
 class GameObject
 	: public Object
 {
@@ -19,6 +27,7 @@ public:
 	~GameObject();
 	void UseZTest(bool use);
 	void SetRenderOlder(int order);
+	void ProcessInput(const Uint8* state);
 	friend class GameRenderer;
 	int renderOrder;
 private:

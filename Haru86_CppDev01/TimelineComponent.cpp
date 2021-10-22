@@ -1,6 +1,7 @@
 #include "TimelineComponent.h"
 #include "./Object.h"
 #include "./Game.h"
+#include "./GameObject.h"
 #include <iostream>
 #include <vector>
 
@@ -163,5 +164,9 @@ void TimelineComponent::ClearTimeline() {
 		}
 	}
 	runningCustomClip.clear();
+
+}
+
+void TimelineComponent::ProcessInput(const Uint8* state)const {
 
 }

@@ -72,19 +72,24 @@ void Game::LoadData() {
 	app->Timeline(timelineObj);
 	timelineObj->Initialize();
 
-	GameObject* uiTest = new GameObject(PrimitiveType::BOARD,"./UIStandard.vert","./UIStandard.frag");
-	uiTest->UseZTest(false);
-	uiTest->SetRenderOlder(1000);
-	
 }
 
 void Game::RunLoop() {
 	while (isRunning)
 	{
+		UpdateTimeline();
 		InputProcess();
 		UpdateGame();
 		GenerateOutput();
 	}
+}
+
+void Game::UpdateTimeline() {
+	static_cast<TimelineComponent*>(timelineObj->timelineComponent)->Update();
+
+	std::sort(gameObjectList.begin(), gameObjectList.end(), [](GameObject* a, GameObject* b) {
+		return a->renderOrder < b->renderOrder;
+	});
 }
 
 void Game::InputProcess() {
@@ -93,13 +98,23 @@ void Game::InputProcess() {
 	{
 		switch (e.type)
 		{
-		case SDL_QUIT:
+		case SDLK_ESCAPE:
 			isRunning = false;
 			break;
 		default:
 			break;
 		} 
 	}
+
+	const Uint8* state = SDL_GetKeyboardState(NULL);
+
+	
+	for (auto obj : gameObjectList) {
+		//printf("Call Input");
+		obj->ProcessInput(state);
+	}
+
+
 }
 
 void Game::UpdateGame() {
@@ -113,11 +128,7 @@ void Game::UpdateGame() {
 
 	app->Update();
 	static_cast<AudioSourceComponent*>(audioObj->audioSource)->Update();
-	static_cast<TimelineComponent*>(timelineObj->timelineComponent)->Update();
 	
-	std::sort(gameObjectList.begin(), gameObjectList.end(), [](GameObject* a, GameObject* b) {
-		return a->renderOrder < b->renderOrder;
-	});
 }
 void Game::GenerateOutput() {
 	gameRenderer->Draw();
@@ -133,4 +144,7 @@ void Game::ShutDown() {
 	for (auto obj : gameObjectList) {
 		delete obj;
 	}
+
+	gameObjectList.clear();
+	uiObjectList.clear();
 }

@@ -9,6 +9,7 @@ public:
 	Component(class Object* o);
 	~Component();
 	virtual void Update();
+	virtual void ProcessInput(const Uint8* state)const = 0;
 protected:
 	class Object* owner;
 	class Game* game;

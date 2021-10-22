@@ -21,6 +21,7 @@ public:
     void ComputeModelMatrix();
     void ComputeViewMatrix();
     void ComputePerspectiveMatrix();
+    void ProcessInput(const Uint8* state)const override;
     glm::vec3 position;
     glm::quat rotation;
     glm::vec3 scale;

@@ -16,7 +16,7 @@ public:
 	~Object();
 	void AddComponent(class Component* component);
 	void RemoveComponent(class Component* component);
-	class Component* GetComponent(std::string componentName);
+	//class Component* GetComponent(std::string componentName);
 	void SetTransform(glm::vec3 pos, glm::quat rot, glm::vec3 s);
 	void SetPosition(glm::vec3 pos);
 	void SetRotation(glm::quat rot);
@@ -30,7 +30,9 @@ public:
 private:
 	class TransformComponent* transform;
 	class Game* game;
-	std::map<std::string, class Component*> myComponent;
+protected:
+	//std::map<std::string, class Component*> myComponent;
+	std::vector<class Component*> myComponent;
 };
 
 

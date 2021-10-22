@@ -50,7 +50,7 @@ bool AudioSourceComponent::Initialize() {
 
 	std::cout << "Hello" << std::endl;
 
-	CreateSound("E:/C++Dev/Haru86_CppDev01/Haru86_CppDev01/Music/lug00ber-vold.mp3");
+	//CreateSound("E:/C++Dev/Haru86_CppDev01/Haru86_CppDev01/Music/lug00ber-vold.mp3");
 
 	return true;
 }
@@ -163,4 +163,8 @@ void AudioSourceComponent::Shutdown() {
 	if (mSystem) {
 		mSystem->release();
 	}
+}
+
+void AudioSourceComponent::ProcessInput(const Uint8* state)const {
+
 }

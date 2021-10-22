@@ -58,3 +58,7 @@ void MeshRendererComponent::Draw() {
 	mesh->SetActive();
 	glDrawElements(GL_TRIANGLES, mesh->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
 }
+
+void MeshRendererComponent::ProcessInput(const Uint8* state)const {
+
+}

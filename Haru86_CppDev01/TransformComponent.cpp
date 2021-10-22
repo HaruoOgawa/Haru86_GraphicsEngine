@@ -57,3 +57,7 @@ void TransformComponent::ComputePerspectiveMatrix() {
 		100.0f
 	);
 }
+
+void TransformComponent::ProcessInput(const Uint8* state)const {
+
+}

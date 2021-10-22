@@ -24,9 +24,11 @@ public:
 	float time;
 	float deltaTime;
 	friend class GameObject;
+	friend class UIObject;
 	friend class GameRenderer;
 	friend class TimelineComponent;
 private :
+	void UpdateTimeline();
 	void InputProcess();
 	void UpdateGame();
 	void GenerateOutput();
@@ -35,7 +37,7 @@ private :
 	bool isRunning;
 	float previousTime;
 	std::vector<class GameObject*> gameObjectList;
-	std::vector<int> uiObjectList;
+	std::vector<class UIObject*> uiObjectList;
 	class App* app;
 	class AudioObject* audioObj;
 	class TimelineObject* timelineObj;

@@ -1,6 +1,7 @@
 #include "App.h"
 #include "./GameObject.h"
 #include "./TimelineObject.h"
+#include "./UIComponent.h"
 
 GameObject* sampleQuad;
 GameObject* sampleQuad2;
@@ -37,7 +38,8 @@ void App::Start() const {
 	cube->SetPosition(glm::vec3(0.1f, 0.2f, 0.0f));
 	cube->SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
 
-	
+	GameObject* uiButton = new GameObject(PrimitiveType::BOARD, "./UIStandard.vert", "./UIStandard.frag");
+	uiButton->AddComponent(new UIComponent(uiButton));
 }
 void App::Update() const {
 

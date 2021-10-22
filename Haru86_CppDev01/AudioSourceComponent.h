@@ -26,6 +26,7 @@ public:
     ~AudioSourceComponent();
     bool Initialize();
 	void Update() override;
+	void ProcessInput(const Uint8* state)const override;
 private :
     void Shutdown();
 	void LoadBank(std::string fileName);

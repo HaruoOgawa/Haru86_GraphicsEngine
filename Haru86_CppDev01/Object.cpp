@@ -15,21 +15,22 @@ Object::Object()
 
 Object::~Object() {
 	for (auto comp : myComponent) {
-		RemoveComponent(comp.second);
+		RemoveComponent(comp);
 	}
 }
 
 void Object::AddComponent(Component* component) {
-	myComponent.emplace(static_cast<std::string>(typeid(component).name()), component);
+	myComponent.emplace_back(component);
 }
 void Object::RemoveComponent(Component* component) {
 	delete  component;
 }
 
+/*
 Component* Object::GetComponent(std::string componentName) {
 	decltype(myComponent)::iterator item = myComponent.find(componentName);
 	return item->second;
-}
+}*/
 
 void Object::SetTransform(glm::vec3 pos, glm::quat rot, glm::vec3 s)
 { 

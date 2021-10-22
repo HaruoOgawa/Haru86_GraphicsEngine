@@ -4,7 +4,7 @@
 #include "./MeshRendererComponent.h"
 
 GameObject::GameObject(PrimitiveType primType) 
-	: Object(), renderOrder(0)
+	: Object(), renderOrder(RenderQueue::Geometry)
 {
 	Game::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = new MeshRendererComponent(this, primType);
@@ -12,7 +12,7 @@ GameObject::GameObject(PrimitiveType primType)
 }
 
 GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
-	: Object(), renderOrder(0)
+	: Object(), renderOrder(RenderQueue::Geometry)
 {
 	Game::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = new MeshRendererComponent(this, primType,vertexShaderName,fragmentShaderName);
@@ -29,4 +29,11 @@ void GameObject::UseZTest(bool use) {
 
 void GameObject::SetRenderOlder(int order) {
 	renderOrder = order;
+}
+
+void GameObject::ProcessInput(const Uint8* state) {
+	for (auto comp : myComponent) {
+		comp->ProcessInput(state);
+	}
+
 }

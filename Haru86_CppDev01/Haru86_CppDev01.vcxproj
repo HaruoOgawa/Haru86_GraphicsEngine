@@ -168,7 +168,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studi
     <ClInclude Include="TimelineComponent.h" />
     <ClInclude Include="TimelineObject.h" />
     <ClInclude Include="TransformComponent.h" />
-    <ClInclude Include="UIObject.h" />
+    <ClInclude Include="UIComponent.h" />
     <ClInclude Include="VertexArray.h" />
   </ItemGroup>
   <ItemGroup>
@@ -188,7 +188,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studi
     <ClCompile Include="TimelineComponent.cpp" />
     <ClCompile Include="TimelineObject.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
-    <ClCompile Include="UIObject.cpp" />
+    <ClCompile Include="UIComponent.cpp" />
     <ClCompile Include="VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>

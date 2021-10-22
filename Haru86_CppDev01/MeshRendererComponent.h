@@ -16,6 +16,7 @@ public:
     ~MeshRendererComponent();
     void Update() override;
     void Draw();
+    void ProcessInput(const Uint8* state)const override;
     bool useZTest;
 private:
     VertexArray* mesh;
