@@ -38,8 +38,10 @@ public:
     void Update() override;
     void Initialize();
     void ComputeTimeline(float time);
+    void ResetTimeline();
     void ProcessInput(const Uint8* state)const override;
-    friend TimelineObject;
+    friend class TimelineObject;
+    friend class UIComponent;
     float timeVal;
 private:
     void InitializeActivationTrack();

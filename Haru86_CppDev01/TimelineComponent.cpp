@@ -4,6 +4,7 @@
 #include "./GameObject.h"
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 TimelineComponent::TimelineComponent(Object* o)
 	:Component(o, static_cast<std::string>(typeid(TimelineComponent).name()).substr(6))
@@ -118,6 +119,34 @@ void TimelineComponent::ComputeCustomTrack(float time) {
 
 		}
 	}
+}
+
+void TimelineComponent::ResetTimeline() {
+	for (auto clip : runningActiovationClip) {
+		auto iter = std::find(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), clip->gameObject);
+		if (iter != game->GetInstance()->gameObjectList.end()) {
+			game->GetInstance()->gameObjectList.erase(game->GetInstance()->gameObjectList.begin()
+				+ std::distance(game->GetInstance()->gameObjectList.begin(), iter));
+		}
+
+		waittingActiovationClip.emplace_back(clip);
+	}
+	runningActiovationClip.clear();
+	
+	for (auto clip : runningCustomClip) {
+		auto iter = std::find(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), clip->gameObject);
+		if (iter != game->GetInstance()->gameObjectList.end()) {
+			game->GetInstance()->gameObjectList.erase(game->GetInstance()->gameObjectList.begin()
+				+ std::distance(game->GetInstance()->gameObjectList.begin(), iter));
+		}
+
+		waittingCustomClip.emplace_back(clip);
+	}
+	runningCustomClip.clear();
+
+	/*std::sort(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), [](GameObject* a, GameObject* b) {
+		return a->renderOrder < b->renderOrder;
+	});*/
 }
 
 void TimelineComponent::ClearTimeline() {

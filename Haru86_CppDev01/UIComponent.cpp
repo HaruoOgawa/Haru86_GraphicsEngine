@@ -7,6 +7,9 @@
 #include "./TransformComponent.h"
 #include "./RectTransformComponent.h"
 #include "./Time.h"
+#include "./TimelineObject.h"
+#include "./TimelineComponent.h"
+#include <algorithm>
 
 UIComponent::UIComponent(GameObject* o)
 	: Component(o, static_cast<std::string>(typeid(UIComponent).name()).substr(6))
@@ -77,6 +80,12 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 		owner->SetPosition(glm::vec3(pos.x, owner->transform->position.y, owner->transform->position.z));
 		static_cast<RectTransformComponent*>(owner->
 			GetComponent(static_cast<std::string>(typeid(RectTransformComponent).name())))->rectPosition.x = fx;
+
+		Game::GetInstance()->timelineObj->timelineComponent->ResetTimeline();
+		Game::GetInstance()->timelineObj->timelineComponent->ComputeTimeline(t);
+		std::sort(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), [](GameObject* a, GameObject* b) {
+			return a->renderOrder < b->renderOrder;
+		});
 	}
 }
 
@@ -99,5 +108,5 @@ bool UIComponent::CheckInnnerBox( float x,  float y)const {
 }
 
 void UIComponent::Update() {
-	printf("Game::GetInstance()->timeObj->time: %f \n", Game::GetInstance()->timeObj->time);
+	//printf("Game::GetInstance()->timeObj->time: %f \n", Game::GetInstance()->timeObj->time);
 }
