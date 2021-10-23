@@ -8,7 +8,7 @@
 TransformComponent::TransformComponent(Object* o, glm::vec3 pos,glm::quat rot,glm::vec3 s)
 	: Component(o, static_cast<std::string>(typeid(TransformComponent).name()).substr(6)),position(pos),rotation(rot),scale(s)
 {
-
+	CalMatrix();
 }
 
 TransformComponent::~TransformComponent() {

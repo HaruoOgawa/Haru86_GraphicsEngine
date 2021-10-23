@@ -33,7 +33,7 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 	//const float fy = (static_cast<float>(y) / static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().y)) * 2.0f - 1.0f;
 	
 	const float fx = static_cast<float>(x) - static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().x) * 0.5f;
-	const float fy = static_cast<float>(x) - static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().x) * 0.5f;
+	const float fy = static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().y) * 0.5f- static_cast<float>(y);
 
 
 	/*if (CheckInnnerBox(fx,fy)) {
@@ -43,12 +43,15 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 
 
 	//printf("x: %d ,y: %d \n",x,y);
-	//printf("fx : %f , fy : %f \n",fx,fy);
+	printf("fx : %f , fy : %f \n",fx,fy);
 
 	glm::vec2 rectPosition =static_cast<RectTransformComponent*>(owner->
 		GetComponent(static_cast<std::string>(typeid(RectTransformComponent).name())))->rectPosition;
 	printf("rectPosition: %f , %f \n", rectPosition.x, rectPosition.y);
 
+	glm::vec2 rectScale = static_cast<RectTransformComponent*>(owner->
+		GetComponent(static_cast<std::string>(typeid(RectTransformComponent).name())))->rectScale;
+	printf("rectScale: %f , %f \n", rectScale.x, rectScale.y);
 }
 
 bool UIComponent::CheckInnnerBox( float x,  float y)const {

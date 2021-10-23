@@ -31,7 +31,6 @@ void Object::RemoveComponent(Component* component) {
 
 
 Component* Object::GetComponent(std::string componentName) {
-	printf("componentName.substr(6) in GetComponent: %s \n", componentName.substr(6).c_str());
 	auto item = myComponent.find(componentName.substr(6));
 	return item->second;
 }
@@ -41,17 +40,25 @@ void Object::SetTransform(glm::vec3 pos, glm::quat rot, glm::vec3 s)
 	transform->position = pos;
 	transform->rotation = rot; 
 	transform->scale = s; 
+
+	transform->CalMatrix();
 }
 
 void Object::SetPosition(glm::vec3 pos) {
 	transform->position = pos;
+
+	transform->CalMatrix();
 }
 
 void Object::SetRotation(glm::quat rot) {
 	transform->rotation;
+
+	transform->CalMatrix();
 }
 void Object::SetScale(glm::vec3 s) {
 	transform->scale = s;
+
+	transform->CalMatrix();
 }
 
 glm::vec3 Object::GetPosition() {
