@@ -27,9 +27,9 @@ void App::Start() const {
 	Haru86_Ray = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/Haru86_Ray.frag");
 	Haru86_PartyHole = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/Haru86_PartyHole.frag");
 
-	/*GameObject* uiButton = new GameObject(PrimitiveType::BOARD,"./Shader/UIStandard.vert","./Shader/UIStandard.frag");
+	GameObject* uiButton = new GameObject(PrimitiveType::BOARD,"./Shader/UIStandard.vert","./Shader/UIStandard.frag");
 	uiButton->AddComponent(new UIComponent(uiButton));
-	uiButton->AddComponent(new RectTransformComponent(uiButton,4.0f/5.0f, 4.0f / 5.0f));*/
+	uiButton->AddComponent(new RectTransformComponent(uiButton,0.1f,0.1f));
 }
 void App::Update() const {
 

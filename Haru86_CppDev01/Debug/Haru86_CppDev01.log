@@ -1,9 +1,23 @@
 ﻿  App.cpp
+  AudioObject.cpp
+  AudioSourceComponent.cpp
+  Component.cpp
+  Game.cpp
+  GameObject.cpp
+  GameRenderer.cpp
+  MeshRendererComponent.cpp
+  Object.cpp
+  RectTransformComponent.cpp
+  TimelineComponent.cpp
+  TimelineObject.cpp
+  TransformComponent.cpp
+  UIComponent.cpp
+  コードを生成中...
   Haru86_CppDev01.vcxproj -> E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
   0 個のファイルをコピーしました
   ファイルが見つかりません - *.dll
-  0 個のファイルをコピーしました
   ファイルが見つかりません - *.dll
+  0 個のファイルをコピーしました
   C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmod.dll
   C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmod64.dll
   C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmodL.dll

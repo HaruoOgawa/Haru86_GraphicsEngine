@@ -8,7 +8,7 @@
 FMOD::Sound* sound;
 
 AudioSourceComponent::AudioSourceComponent(class Object* o)
-	: Component(o)
+	: Component(o, static_cast<std::string>(typeid(AudioSourceComponent).name()).substr(6))
 {
 	std::cout << "Create  Constructor" << std::endl;
 	Initialize();

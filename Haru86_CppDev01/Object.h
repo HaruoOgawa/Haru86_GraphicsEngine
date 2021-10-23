@@ -3,7 +3,7 @@
 #include "./Game.h"
 #include "./Component.h"
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <typeinfo>
 #include <glm/glm.hpp>
@@ -16,7 +16,7 @@ public:
 	~Object();
 	void AddComponent(class Component* component);
 	void RemoveComponent(class Component* component);
-	//class Component* GetComponent(std::string componentName);
+	class Component* GetComponent(std::string componentName);
 	void SetTransform(glm::vec3 pos, glm::quat rot, glm::vec3 s);
 	void SetPosition(glm::vec3 pos);
 	void SetRotation(glm::quat rot);
@@ -33,8 +33,8 @@ private:
 	class TransformComponent* transform;
 	class Game* game;
 protected:
-	//std::map<std::string, class Component*> myComponent;
-	std::vector<class Component*> myComponent;
+	std::unordered_map<std::string, class Component*> myComponent;
+	//std::vector<class Component*> myComponent;
 };
 
 

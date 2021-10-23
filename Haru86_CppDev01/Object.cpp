@@ -15,22 +15,26 @@ Object::Object()
 
 Object::~Object() {
 	for (auto comp : myComponent) {
-		RemoveComponent(comp);
+		RemoveComponent(comp.second);
 	}
+	myComponent.clear();
 }
 
 void Object::AddComponent(Component* component) {
-	myComponent.emplace_back(component);
+	myComponent.insert({ component->superClassName,component });
 }
+
+
 void Object::RemoveComponent(Component* component) {
 	delete  component;
 }
 
-/*
+
 Component* Object::GetComponent(std::string componentName) {
-	decltype(myComponent)::iterator item = myComponent.find(componentName);
+	printf("componentName.substr(6) in GetComponent: %s \n", componentName.substr(6).c_str());
+	auto item = myComponent.find(componentName.substr(6));
 	return item->second;
-}*/
+}
 
 void Object::SetTransform(glm::vec3 pos, glm::quat rot, glm::vec3 s)
 { 

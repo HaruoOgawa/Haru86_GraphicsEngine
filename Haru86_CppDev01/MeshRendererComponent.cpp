@@ -2,11 +2,11 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include "./TransformComponent.h"
-
+#include <string>
 #include <iostream>
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
-	: Component(o), myowner(o)
+	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o)
 {
 	useZTest = true;
 	mesh = new VertexArray(primType);
@@ -14,7 +14,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
-	: Component(o),myowner(o)
+	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o)
 {
 	useZTest = true;
 	mesh =new VertexArray(primType);

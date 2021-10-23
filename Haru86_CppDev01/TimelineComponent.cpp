@@ -6,7 +6,7 @@
 #include <vector>
 
 TimelineComponent::TimelineComponent(Object* o)
-	:Component(o)
+	:Component(o, static_cast<std::string>(typeid(TimelineComponent).name()).substr(6))
 {
 	timeVal = game->time;
 }

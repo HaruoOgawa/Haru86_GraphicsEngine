@@ -32,8 +32,11 @@ void GameObject::SetRenderOlder(int order) {
 }
 
 void GameObject::ProcessInput(const Uint8* state) {
+	//printf("------------------------------------------------------------------------ \n");
 	for (auto comp : myComponent) {
-		comp->ProcessInput(state);
-	}
+		comp.second->ProcessInput(state);
+		//printf("comp.first: %s \n",comp.first.c_str());
 
+	}
+	//printf("myComponent.size(): %d \n", myComponent.size());
 }

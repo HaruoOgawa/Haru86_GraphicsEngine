@@ -2,25 +2,26 @@
 #include "./GameObject.h"
 #include "./GameRenderer.h"
 #include "./TransformComponent.h"
+#include <iostream>
+#include <string>
+
 
 RectTransformComponent::RectTransformComponent(GameObject* o, float wRate, float hRate)
-	:Component(o)
+	:Component(o, static_cast<std::string>(typeid(RectTransformComponent).name()).substr(6))
 {
+	printf("superClassName: %s \n", superClassName.c_str());
+	
 	glm::vec2 size = static_cast<glm::vec2>(GameRenderer::GetInstance()->GetScreenSize());
+	//rate -1.0 ~ 1.0
  	glm::vec2 pos = glm::vec2((size.x * 0.5) * wRate, (size.y * 0.5) * hRate);
 	rectPosition = pos;
 
 	printf("size: %f , %f \n", size.x, size.y);
 	printf("rectPosition: %f , %f \n", rectPosition.x, rectPosition.y);
-	/*owner->transform->position = */
-	glm::vec4 trsPos=
-		//glm::inverse(owner->transform->GetMMatrix())*
-		//glm::inverse(owner->transform->GetVMatrix())*
-		glm::inverse(owner->transform->vMatrix)*
-		glm::vec4(0.0,0.0,0.0f,1.0f);
-	printf("trsPos : %f , %f ,%f , %f \n", trsPos.x, trsPos.y, trsPos.z, trsPos.w);
-	//pos / (size * 0.5f)
-	owner->transform->position = glm::vec3(pos, 0.0f);
+	
+	pos = pos / (size * 0.5f);
+	printf("normalize pos: %f , %f \n", pos.x, pos.y);
+	owner->transform->position = glm::vec3(pos.x,pos.y, owner->transform->position.z);
 }
 
 RectTransformComponent::~RectTransformComponent() {
