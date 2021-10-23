@@ -111,7 +111,6 @@ void Game::InputProcess() {
 
 	
 	for (auto obj : gameObjectList) {
-		//printf("Call Input");
 		obj->ProcessInput(state);
 	}
 

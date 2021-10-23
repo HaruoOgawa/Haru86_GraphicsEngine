@@ -22,12 +22,44 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 	int x, y;
 	SDL_GetMouseState(&x, &y);
 
-	const float fx = static_cast<float>(x) - static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().x) * 0.5f;
-	const float fy = static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().y) * 0.5f- static_cast<float>(y);
+	float fx = static_cast<float>(x) - static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().x) * 0.5f;
+	float fy = static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().y) * 0.5f- static_cast<float>(y);
 	
+	
+
+	SDL_Event event;
+	
+	while (SDL_PollEvent(&event)) // check to see if an event has happened
+	{
+		switch (event.type)
+		{
+		case SDL_QUIT:
+			break;
+		case SDL_MOUSEBUTTONDOWN: // if the event is mouse click
+			printf("Click");
+		}
+	}
+
 	if (CheckInnnerBox(fx,fy)) {
+		float maxLeftPointX = static_cast<RectTransformComponent*>(owner->
+			GetComponent(static_cast<std::string>(typeid(RectTransformComponent).name())))->maxLeftPointX;
+		float maxRightPointX = static_cast<RectTransformComponent*>(owner->
+			GetComponent(static_cast<std::string>(typeid(RectTransformComponent).name())))->maxRightPointX;
+
+		if (fx < maxLeftPointX) {
+			fx = maxLeftPointX;
+		}
+		else if (fx>maxRightPointX) {
+			fx = maxRightPointX;
+		}
+
+		float t = (maxLeftPointX-fx) / (maxLeftPointX-maxRightPointX);
+		t = (t < 0.0f) ? 0.0f : t;
+		printf("t : %f \n", t);
+		
 		float xval = fx / (static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().x) * 0.5f);
 		float yval = fy / (static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().y) * 0.5f);
+		
 		glm::vec2 pos = glm::vec2(xval, yval);
 		glm::vec4 modelPos =
 			glm::inverse(owner->transform->GetPMatrix() * owner->transform->GetVMatrix())

@@ -26,6 +26,10 @@ RectTransformComponent::RectTransformComponent(GameObject* o, float wRate, float
 
 	glm::vec4 uiScreenScale =  owner->transform->GetVMatrix() * glm::vec4(owner->transform->scale, 1.0f);
 	rectScale = glm::vec2(glm::abs(uiScreenScale.x)*size.x*0.5, glm::abs(uiScreenScale.y) * size.y*0.5);
+
+	float val = 0.05f;
+	maxLeftPointX = -size.x * 0.5 + size.x * val;
+	maxRightPointX = size.x * 0.5 -size.x* val;
 }
 
 RectTransformComponent::~RectTransformComponent() {

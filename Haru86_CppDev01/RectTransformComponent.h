@@ -11,5 +11,7 @@ public:
     void ProcessInput(const Uint8* state)const override;
     glm::vec2 rectPosition;
     glm::vec2 rectScale;
+    float maxLeftPointX;
+    float maxRightPointX;
 };
 
