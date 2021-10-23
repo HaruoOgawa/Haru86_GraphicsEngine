@@ -34,11 +34,25 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 	
 	const float fx = static_cast<float>(x) - static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().x) * 0.5f;
 	const float fy = static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().y) * 0.5f- static_cast<float>(y);
-
+	
+	//float xval = fx / (static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().x) * 0.5f);
+	//printf("xval: %f \n", xval);
 
 	if (CheckInnnerBox(fx,fy)) {
 		printf("Mouse enter ui box \n");
-		//owner->transform->position = glm::vec3(-fx, owner->transform->position.y,owner->transform->position.z);
+		float xval = fx / (static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().x) * 0.5f);
+		float yval = fy / (static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().y) * 0.5f);
+		printf("xval: %f \n", xval);
+		glm::vec2 pos = glm::vec2(xval, yval);
+		glm::vec4 modelPos =
+			glm::inverse(owner->transform->GetPMatrix() * owner->transform->GetVMatrix())
+			* glm::vec4(pos.x, pos.y, 0.0f, 1.0f);
+		pos = glm::vec2(modelPos.x / modelPos.w, modelPos.y / modelPos.w);
+
+		//owner->transform->position = glm::vec3(pos.x, owner->transform->position.y,owner->transform->position.z);
+		owner->SetPosition(glm::vec3(pos.x, owner->transform->position.y, owner->transform->position.z));
+		static_cast<RectTransformComponent*>(owner->
+			GetComponent(static_cast<std::string>(typeid(RectTransformComponent).name())))->rectPosition.x = fx;
 	}
 
 
