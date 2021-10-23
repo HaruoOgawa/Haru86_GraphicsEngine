@@ -36,42 +36,47 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 	const float fy = static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().y) * 0.5f- static_cast<float>(y);
 
 
-	/*if (CheckInnnerBox(fx,fy)) {
+	if (CheckInnnerBox(fx,fy)) {
 		printf("Mouse enter ui box \n");
-		owner->transform->position = glm::vec3(-fx, owner->transform->position.y,owner->transform->position.z);
-	}*/
+		//owner->transform->position = glm::vec3(-fx, owner->transform->position.y,owner->transform->position.z);
+	}
 
 
 	//printf("x: %d ,y: %d \n",x,y);
-	printf("fx : %f , fy : %f \n",fx,fy);
+	//printf("fx : %f , fy : %f \n",fx,fy);
 
-	glm::vec2 rectPosition =static_cast<RectTransformComponent*>(owner->
+	/*glm::vec2 rectPosition =static_cast<RectTransformComponent*>(owner->
 		GetComponent(static_cast<std::string>(typeid(RectTransformComponent).name())))->rectPosition;
 	printf("rectPosition: %f , %f \n", rectPosition.x, rectPosition.y);
 
 	glm::vec2 rectScale = static_cast<RectTransformComponent*>(owner->
 		GetComponent(static_cast<std::string>(typeid(RectTransformComponent).name())))->rectScale;
-	printf("rectScale: %f , %f \n", rectScale.x, rectScale.y);
+	printf("rectScale: %f , %f \n", rectScale.x, rectScale.y);*/
 }
 
 bool UIComponent::CheckInnnerBox( float x,  float y)const {
-	glm::vec3 scale = owner->transform->scale;
+	glm::vec2 rectScale = static_cast<RectTransformComponent*>(owner->
+		GetComponent(static_cast<std::string>(typeid(RectTransformComponent).name())))->rectScale;
+	//rectScale = glm::vec2(10.0f, 10.0f);
 
-	glm::vec3 pos = owner->transform->position-glm::vec3(scale.x*2.0f, scale.y * 2.0f,0.0f);
-	glm::vec4 minPos = owner->transform->GetVMatrix() * owner->transform->GetMMatrix()
-		* glm::vec4(pos.x, pos.y, pos.z, 1.0f);
-	
-	pos = owner->transform->position + glm::vec3(scale.x * 2.0f, scale.y * 2.0f, 0.0f);
-	glm::vec4 maxPos = owner->transform->GetVMatrix() * owner->transform->GetMMatrix()
-		* glm::vec4(pos.x, pos.y, pos.z, 1.0f);
+	glm::vec2 rectPosition = static_cast<RectTransformComponent*>(owner->
+		GetComponent(static_cast<std::string>(typeid(RectTransformComponent).name())))->rectPosition;
 
-	bool isInner = x> minPos.x ||
+	glm::vec2 minPos = rectPosition - rectScale;
+	glm::vec2 maxPos = rectPosition + rectScale;
+
+	/*printf("rectPosition: %f , %f \n", rectPosition.x, rectPosition.y);
+	printf("rectScale: %f , %f \n", rectScale.x, rectScale.y);
+	printf("fx fy: %f , %f \n", x,y);*/
+
+
+	bool isInner = x< minPos.x ||
 		y< minPos.y ||
-		x<maxPos.x ||
+		x>maxPos.x ||
 		y>maxPos.y;
 
-	printf("minPos: %f,%f,%f \n", minPos.x, minPos.y, minPos.z);
-	printf("maxPos: %f,%f,%f \n", maxPos.x, maxPos.y, maxPos.z);
+	//printf("minPos: %f,%f \n", minPos.x, minPos.y);
+	//printf("maxPos: %f,%f \n", maxPos.x, maxPos.y);
 
 	return !isInner;
 }
