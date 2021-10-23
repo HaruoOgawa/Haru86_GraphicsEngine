@@ -23,10 +23,12 @@ public:
 	void ShutDown();
 	float time;
 	float deltaTime;
+	class Time* timeObj;
 	friend class GameObject;
 	friend class UIObject;
 	friend class GameRenderer;
 	friend class TimelineComponent;
+	friend class UIComponent;
 private :
 	void UpdateTimeline();
 	void InputProcess();

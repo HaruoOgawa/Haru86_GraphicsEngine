@@ -6,6 +6,7 @@
 #include "./AudioSourceComponent.h"
 #include "./TimelineObject.h"
 #include "./TimelineComponent.h"
+#include "./Time.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -35,6 +36,7 @@ Game::Game()
 	previousTime(0.0f)
 {
 	app = new App();
+	timeObj = new Time(60.0f);
 }
 
 Game::~Game() {
@@ -118,14 +120,18 @@ void Game::InputProcess() {
 }
 
 void Game::UpdateGame() {
-	while (!SDL_TICKS_PASSED(SDL_GetTicks(), previousTime + 16.0f));
-	deltaTime = (SDL_GetTicks() - previousTime) / 1000.0f;
+	//while (!SDL_TICKS_PASSED(SDL_GetTicks(), previousTime + 16.0f));
+	while (!(timeObj->GetTime() > previousTime + 16.0f)) { timeObj->UpdateTime(); };
+	deltaTime = (timeObj->GetTime() - previousTime) / 1000.0f;
 	if (deltaTime > 0.05f) {
 		deltaTime = 0.05f;
 	}
-	previousTime = static_cast<float>(SDL_GetTicks());
+	previousTime = static_cast<float>(timeObj->GetTime());
 	time = previousTime;
 
+	for (auto obj : gameObjectList) {
+		obj->Update();
+	}
 	app->Update();
 	static_cast<AudioSourceComponent*>(audioObj->audioSource)->Update();
 	

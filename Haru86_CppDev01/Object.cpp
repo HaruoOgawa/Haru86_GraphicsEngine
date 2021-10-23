@@ -35,6 +35,12 @@ Component* Object::GetComponent(std::string componentName) {
 	return item->second;
 }
 
+void Object::Update() {
+	for (auto comp : myComponent) {
+		comp.second->Update();
+	}
+}
+
 void Object::SetTransform(glm::vec3 pos, glm::quat rot, glm::vec3 s)
 { 
 	transform->position = pos;

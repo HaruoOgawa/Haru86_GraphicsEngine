@@ -166,6 +166,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studi
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="RectTransformComponent.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Time.h" />
     <ClInclude Include="TimelineComponent.h" />
     <ClInclude Include="TimelineObject.h" />
     <ClInclude Include="TransformComponent.h" />
@@ -187,6 +188,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studi
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="RectTransformComponent.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="Time.cpp" />
     <ClCompile Include="TimelineComponent.cpp" />
     <ClCompile Include="TimelineObject.cpp" />
     <ClCompile Include="TransformComponent.cpp" />

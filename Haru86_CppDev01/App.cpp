@@ -33,7 +33,7 @@ void App::Start() const {
 	uiButton->AddComponent(new RectTransformComponent(uiButton,0.1f,0.1f));
 }
 void App::Update() const {
-
+	
 }
 
 void App::Timeline(TimelineObject* timeline) const {

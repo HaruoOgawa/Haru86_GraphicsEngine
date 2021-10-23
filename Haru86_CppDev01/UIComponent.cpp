@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 #include "./TransformComponent.h"
 #include "./RectTransformComponent.h"
+#include "./Time.h"
 
 UIComponent::UIComponent(GameObject* o)
 	: Component(o, static_cast<std::string>(typeid(UIComponent).name()).substr(6))
@@ -55,7 +56,14 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 
 		float t = (maxLeftPointX-fx) / (maxLeftPointX-maxRightPointX);
 		t = (t < 0.0f) ? 0.0f : t;
+		// sample music time
+		float musicTime = 120000.0f;
+		t *= musicTime;
 		printf("t : %f \n", t);
+
+		Game::GetInstance()->timeObj->time = t;
+		Game::GetInstance()->previousTime = t;
+		Game::GetInstance()->time = t;
 		
 		float xval = fx / (static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().x) * 0.5f);
 		float yval = fy / (static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().y) * 0.5f);
@@ -88,4 +96,8 @@ bool UIComponent::CheckInnnerBox( float x,  float y)const {
 		y>maxPos.y;
 
 	return !isInner;
+}
+
+void UIComponent::Update() {
+	printf("Game::GetInstance()->timeObj->time: %f \n", Game::GetInstance()->timeObj->time);
 }

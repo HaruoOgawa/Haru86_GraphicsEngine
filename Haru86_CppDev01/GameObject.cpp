@@ -23,6 +23,7 @@ GameObject::~GameObject() {
 	
 }
 
+
 void GameObject::UseZTest(bool use) {
 	meshComp->useZTest = use; 
 }
