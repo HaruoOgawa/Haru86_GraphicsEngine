@@ -65,8 +65,8 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 		float audioLength = static_cast<float>(Game::GetInstance()->audioObj->audioSource->GetAudioLength());
 		t *= audioLength;
 		
-		//printf("t : %f \n", t);
-		//printf("audioLength : %f \n", audioLength);
+		printf("t : %f \n", t);
+		printf("audioLength : %f \n", audioLength);
 		
 		Game::GetInstance()->audioObj->audioSource->SkipAudio(t);
 

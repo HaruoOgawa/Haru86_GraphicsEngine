@@ -31,7 +31,7 @@ public:
 	void ProcessInput(const Uint8* state)const override;
 	int GetAudioLength();
 	void SkipAudio(float startTime);
-	void StopAudioCheck();
+	bool StopAudioCheck(float startTime);
 private :
     void Shutdown();
 	void LoadBank(std::string fileName);

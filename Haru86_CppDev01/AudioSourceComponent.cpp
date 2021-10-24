@@ -149,20 +149,7 @@ void AudioSourceComponent::CreateSound(std::string name) {
 
 }
 void AudioSourceComponent::Update() {
-	//StopAudioCheck();
-	if (sound!=nullptr) {
-		printf("Sound is NOT null \n");
-	}
-	else {
-		printf("sound is null...... \n");
-	}
 	
-	if (channel !=nullptr) {
-		printf("channel is NOT null \n");
-	}
-	else {
-		printf("channel is null...... \n");
-	}
 }
 
 int AudioSourceComponent::GetAudioLength() {
@@ -177,18 +164,26 @@ int AudioSourceComponent::GetAudioLength() {
 
 void AudioSourceComponent::SkipAudio(float startTime) {
 	if (channel!=nullptr) {
-		channel->setPosition(static_cast<unsigned int>(startTime), FMOD_TIMEUNIT_MS);
-		//StopAudioCheck();
+		if (!StopAudioCheck(startTime)) {
+			channel->setPosition(static_cast<unsigned int>(startTime), FMOD_TIMEUNIT_MS);
+		}
+		else {
+			channel->setPosition(static_cast<unsigned int>(GetAudioLength() - 2000), FMOD_TIMEUNIT_MS);
+		}
+		
+		
 	}
 }
 
-void AudioSourceComponent::StopAudioCheck() {
+bool AudioSourceComponent::StopAudioCheck(float startTime) {
 	if (channel!=nullptr) {
 		unsigned int pos;
 		channel->getPosition(&pos, FMOD_TIMEUNIT_MS);
-		if (static_cast<int>(pos)>GetAudioLength()-10) {
-			printf("pos: %d \n",static_cast<int>(pos));
-			//channel->setPosition(static_cast<unsigned int>(GetAudioLength() - 100), FMOD_TIMEUNIT_MS);
+		if (startTime >GetAudioLength()-2000) {
+			return true;
+		}
+		else {
+			return false;
 		}
 		
 	}
