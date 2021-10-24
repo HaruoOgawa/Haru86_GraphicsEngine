@@ -9,6 +9,8 @@
 #include "./Time.h"
 #include "./TimelineObject.h"
 #include "./TimelineComponent.h"
+#include "./AudioObject.h"
+#include "./AudioSourceComponent.h"
 #include <algorithm>
 
 UIComponent::UIComponent(GameObject* o)
@@ -60,9 +62,14 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 		float t = (maxLeftPointX-fx) / (maxLeftPointX-maxRightPointX);
 		t = (t < 0.0f) ? 0.0f : t;
 		// sample music time
-		float musicTime = 120000.0f;
-		t *= musicTime;
-		printf("t : %f \n", t);
+		float audioLength = static_cast<float>(Game::GetInstance()->audioObj->audioSource->GetAudioLength());
+		t *= audioLength;
+		
+		//printf("t : %f \n", t);
+		//printf("audioLength : %f \n", audioLength);
+		
+		Game::GetInstance()->audioObj->audioSource->SkipAudio(t);
+
 
 		Game::GetInstance()->timeObj->time = t;
 		Game::GetInstance()->previousTime = t;
