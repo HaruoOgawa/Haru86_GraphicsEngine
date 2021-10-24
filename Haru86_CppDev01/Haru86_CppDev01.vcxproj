@@ -164,8 +164,13 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studi
     <ClInclude Include="MeshRendererComponent.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Primitive.h" />
+    <ClInclude Include="RectTransformComponent.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Time.h" />
+    <ClInclude Include="TimelineComponent.h" />
+    <ClInclude Include="TimelineObject.h" />
     <ClInclude Include="TransformComponent.h" />
+    <ClInclude Include="UIComponent.h" />
     <ClInclude Include="VertexArray.h" />
   </ItemGroup>
   <ItemGroup>
@@ -181,21 +186,41 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studi
     <ClCompile Include="MeshRendererComponent.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Primitive.cpp" />
+    <ClCompile Include="RectTransformComponent.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="TimelineComponent.cpp" />
+    <ClCompile Include="TimelineObject.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
+    <ClCompile Include="UIComponent.cpp" />
     <ClCompile Include="VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="C:\SDL2-2.0.16\lib\x86\SDL2.dll" />
     <None Include="C:\SDL2_image-2.0.5\lib\x86\libpng16-16.dll" />
     <None Include="C:\SDL2_image-2.0.5\lib\x86\SDL2_image.dll" />
+    <None Include="Shader\demo.vert" />
     <None Include="html1.htm">
       <DeploymentContent>true</DeploymentContent>
     </None>
+    <None Include="Shader\Haru86_Hexagon.frag" />
+    <None Include="Shader\Haru86_MengerSponge.frag" />
+    <None Include="Shader\Haru86_PartyHole.frag" />
+    <None Include="Shader\Haru86_polar_coordinate.frag" />
+    <None Include="Shader\Haru86_Quaternion_Juria.frag" />
+    <None Include="Shader\Haru86_Ray.frag" />
+    <None Include="Shader\Haru86_RaymarchHole.frag" />
+    <None Include="Shader\Haru86_Triangle.frag" />
+    <None Include="Shader\Raymarching_domainID_samp.frag" />
+    <None Include="Shader\UIStandard.frag">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="Shader\UIStandard.vert">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
     <None Include="packages.config" />
-    <None Include="Standard.frag" />
-    <None Include="Standard.vert" />
-    <None Include="test.frag" />
+    <None Include="Shader\Standard.frag" />
+    <None Include="Shader\Standard.vert" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Haru86_CppDev01.rc" />

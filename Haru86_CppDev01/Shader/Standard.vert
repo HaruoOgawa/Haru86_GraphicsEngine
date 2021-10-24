@@ -1,6 +1,9 @@
 #version 330
 
 uniform mat4 MVPMatrix;
+uniform mat4 MMatrix;
+uniform mat4 VMatrix;
+uniform mat4 PMatrix;
 uniform float _time;
 uniform float _deltaTime;
 

@@ -9,6 +9,12 @@
     <ContentFile>
       <FullPath>E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\html1.htm</FullPath>
     </ContentFile>
+    <ContentFile>
+      <FullPath>E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\Shader\UIStandard.frag</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\Shader\UIStandard.vert</FullPath>
+    </ContentFile>
   </ContentFiles>
   <SatelliteDlls />
   <NonRecipeFileRefs />

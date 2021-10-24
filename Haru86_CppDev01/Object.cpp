@@ -17,18 +17,28 @@ Object::~Object() {
 	for (auto comp : myComponent) {
 		RemoveComponent(comp.second);
 	}
+	myComponent.clear();
 }
 
 void Object::AddComponent(Component* component) {
-	myComponent.emplace(static_cast<std::string>(typeid(component).name()), component);
+	myComponent.insert({ component->superClassName,component });
 }
+
+
 void Object::RemoveComponent(Component* component) {
 	delete  component;
 }
 
+
 Component* Object::GetComponent(std::string componentName) {
-	decltype(myComponent)::iterator item = myComponent.find(componentName);
+	auto item = myComponent.find(componentName.substr(6));
 	return item->second;
+}
+
+void Object::Update() {
+	for (auto comp : myComponent) {
+		comp.second->Update();
+	}
 }
 
 void Object::SetTransform(glm::vec3 pos, glm::quat rot, glm::vec3 s)
@@ -36,17 +46,25 @@ void Object::SetTransform(glm::vec3 pos, glm::quat rot, glm::vec3 s)
 	transform->position = pos;
 	transform->rotation = rot; 
 	transform->scale = s; 
+
+	transform->CalMatrix();
 }
 
 void Object::SetPosition(glm::vec3 pos) {
 	transform->position = pos;
+
+	transform->CalMatrix();
 }
 
 void Object::SetRotation(glm::quat rot) {
 	transform->rotation;
+
+	transform->CalMatrix();
 }
 void Object::SetScale(glm::vec3 s) {
 	transform->scale = s;
+
+	transform->CalMatrix();
 }
 
 glm::vec3 Object::GetPosition() {

@@ -16,6 +16,9 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{d0b0a0de-601b-4780-a18f-f848981f241e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Shader">
+      <UniqueIdentifier>{6c3af43a-bd1e-4791-b060-41867b2a29fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -69,6 +72,21 @@
     <ClInclude Include="C:\Users\Haruo Ogawa\Desktop\includeTest.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="TimelineObject.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="TimelineComponent.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="UIComponent.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="RectTransformComponent.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -116,6 +134,21 @@
     <ClCompile Include="test.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="TimelineObject.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="TimelineComponent.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="UIComponent.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="RectTransformComponent.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -123,15 +156,32 @@
     <None Include="C:\SDL2_image-2.0.5\lib\x86\libpng16-16.dll" />
     <None Include="C:\SDL2_image-2.0.5\lib\x86\SDL2_image.dll" />
     <None Include="html1.htm" />
-    <None Include="test.frag">
+    <None Include="Shader\demo.vert">
       <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="Standard.vert">
+    <None Include="Shader\Haru86_Hexagon.frag">
       <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="Standard.frag">
+    <None Include="Shader\UIStandard.vert">
       <Filter>ソース ファイル</Filter>
     </None>
+    <None Include="Shader\UIStandard.frag">
+      <Filter>ソース ファイル</Filter>
+    </None>
+    <None Include="Shader\Standard.vert">
+      <Filter>ソース ファイル</Filter>
+    </None>
+    <None Include="Shader\Standard.frag">
+      <Filter>ソース ファイル</Filter>
+    </None>
+    <None Include="Shader\Haru86_RaymarchHole.frag" />
+    <None Include="Shader\Haru86_Triangle.frag" />
+    <None Include="Shader\Haru86_MengerSponge.frag" />
+    <None Include="Shader\Haru86_Quaternion_Juria.frag" />
+    <None Include="Shader\Raymarching_domainID_samp.frag" />
+    <None Include="Shader\Haru86_polar_coordinate.frag" />
+    <None Include="Shader\Haru86_Ray.frag" />
+    <None Include="Shader\Haru86_PartyHole.frag" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Haru86_CppDev01.rc">

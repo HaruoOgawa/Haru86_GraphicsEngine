@@ -2,6 +2,7 @@
 #include "./Game.h"
 #include "./BaseApp.h"
 #include "./VertexArray.h"
+#include <vector>
 
 class App
 	: public BaseApp
@@ -11,6 +12,7 @@ public:
 	~App();
 	void Start() const override;
 	void Update() const override;
+	void Timeline(class TimelineObject* timelineObj) const override;
 private:
 };
 

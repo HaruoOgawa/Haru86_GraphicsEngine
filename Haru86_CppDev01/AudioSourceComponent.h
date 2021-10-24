@@ -7,6 +7,8 @@
 namespace FMOD
 {
 	class System;
+	class Channel;
+	class Event;
 	namespace Studio
 	{
 		class Bank;
@@ -26,6 +28,10 @@ public:
     ~AudioSourceComponent();
     bool Initialize();
 	void Update() override;
+	void ProcessInput(const Uint8* state)const override;
+	int GetAudioLength();
+	void SkipAudio(float startTime);
+	bool StopAudioCheck(float startTime);
 private :
     void Shutdown();
 	void LoadBank(std::string fileName);
@@ -37,5 +43,6 @@ private :
 	FMOD::System* lowLevelSystem;
 	std::unordered_map<std::string, FMOD::Studio::Bank*> banksMap;
 	std::unordered_map<std::string, FMOD::Studio::EventDescription*> eventMap;
+	FMOD::Channel* channel;
 };
 

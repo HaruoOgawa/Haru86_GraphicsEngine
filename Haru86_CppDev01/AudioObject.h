@@ -9,6 +9,7 @@ public:
     bool Initialize();
     void PlayAudio();
     friend Game;
+    friend UIComponent;
 private :
     class AudioSourceComponent* audioSource;
 };

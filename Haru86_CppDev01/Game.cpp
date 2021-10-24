@@ -4,7 +4,12 @@
 #include "./VertexArray.h"
 #include "./AudioObject.h"
 #include "./AudioSourceComponent.h"
+#include "./TimelineObject.h"
+#include "./TimelineComponent.h"
+#include "./Time.h"
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 Game* Game::s_pInstance = nullptr;
 
@@ -28,9 +33,11 @@ Game::Game()
 	isRunning(true),
 	time(0.0f),
 	deltaTime(0.0f),
-	previousTime(0.0f)
+	previousTime(0.0f),
+	mouseStateBool(false)
 {
 	app = new App();
+	timeObj = new Time(60.0f);
 }
 
 Game::~Game() {
@@ -43,8 +50,8 @@ bool Game::Initialize() {
 		return false;
 	}
 
-	gameRenderer = new GameRenderer(this);
-	if (!gameRenderer->Initialize(500,500)) {
+	GameRenderer::Create();
+	if (!GameRenderer::GetInstance()->Initialize(500,500)) {
 		SDL_Log("Can not Initialize");
 		return false;
 	}
@@ -62,15 +69,30 @@ void Game::LoadData() {
 	}
 
 	app->Start();
+	
+	timelineObj = new TimelineObject();
+
+	app->Timeline(timelineObj);
+	timelineObj->Initialize();
+
 }
 
 void Game::RunLoop() {
 	while (isRunning)
 	{
+		UpdateTimeline();
 		InputProcess();
 		UpdateGame();
 		GenerateOutput();
 	}
+}
+
+void Game::UpdateTimeline() {
+	static_cast<TimelineComponent*>(timelineObj->timelineComponent)->Update();
+
+	std::sort(gameObjectList.begin(), gameObjectList.end(), [](GameObject* a, GameObject* b) {
+		return a->renderOrder < b->renderOrder;
+	});
 }
 
 void Game::InputProcess() {
@@ -82,36 +104,60 @@ void Game::InputProcess() {
 		case SDL_QUIT:
 			isRunning = false;
 			break;
+		case SDL_MOUSEBUTTONDOWN:
+			mouseStateBool = true;
+			break;
+		case SDL_MOUSEBUTTONUP:
+			mouseStateBool = false;
+			break;
 		default:
 			break;
 		} 
 	}
+
+	const Uint8* state = SDL_GetKeyboardState(NULL);
+
+	
+	for (auto obj : gameObjectList) {
+		obj->ProcessInput(state);
+	}
+
+
 }
 
 void Game::UpdateGame() {
-	while (!SDL_TICKS_PASSED(SDL_GetTicks(), previousTime + 16.0f));
-	deltaTime = (SDL_GetTicks() - previousTime) / 1000.0f;
+	while (!(timeObj->GetTime() > previousTime + 16.0f)) { timeObj->UpdateTime(); };
+	deltaTime = (timeObj->GetTime() - previousTime) / 1000.0f;
 	if (deltaTime > 0.05f) {
 		deltaTime = 0.05f;
 	}
-	previousTime = static_cast<float>(SDL_GetTicks());
+	previousTime = static_cast<float>(timeObj->GetTime());
 	time = previousTime;
 
+	for (auto obj : gameObjectList) {
+		obj->Update();
+	}
 	app->Update();
 	static_cast<AudioSourceComponent*>(audioObj->audioSource)->Update();
 	
 }
 void Game::GenerateOutput() {
-	gameRenderer->Draw();
+	GameRenderer::GetInstance()->Draw();
 }
 
 
 
 void Game::ShutDown() {
-	gameRenderer->ShutDown();
-	delete gameRenderer;
+	GameRenderer::GetInstance()->ShutDown();
+	//delete gameRenderer;
+	GameRenderer::Destroy();
+	delete app;
 	delete audioObj;
+	delete timelineObj;
 	for (auto obj : gameObjectList) {
 		delete obj;
 	}
+
+	gameObjectList.clear();
+	uiObjectList.clear();
 }

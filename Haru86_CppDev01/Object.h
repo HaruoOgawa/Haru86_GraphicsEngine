@@ -3,7 +3,7 @@
 #include "./Game.h"
 #include "./Component.h"
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <typeinfo>
 #include <glm/glm.hpp>
@@ -21,16 +21,19 @@ public:
 	void SetPosition(glm::vec3 pos);
 	void SetRotation(glm::quat rot);
 	void SetScale(glm::vec3 s);
+	virtual void Update();
 	glm::vec3 GetPosition();
 	glm::quat GetRotation();
 	glm::vec3 GetScale();
-	//void GetTransform(glm::vec3& pos, glm::quat& rot, glm::vec3& s) { pos = transform->position; rot = transform->rotation; s = transform->scale; }
 	friend class MeshRendererComponent;
 	friend class GameRenderer;
+	friend class UIComponent;
+	friend class RectTransformComponent;
 private:
 	class TransformComponent* transform;
 	class Game* game;
-	std::map<std::string, class Component*> myComponent;
+protected:
+	std::unordered_map<std::string, class Component*> myComponent;
 };
 
 
