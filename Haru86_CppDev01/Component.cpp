@@ -15,6 +15,3 @@ void Component::Update() {
 
 }
 
-/*void Component::ProcessInput(const Uint8* state) {
-	
-}*/

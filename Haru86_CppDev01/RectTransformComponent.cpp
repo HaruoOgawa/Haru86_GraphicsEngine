@@ -9,7 +9,6 @@
 RectTransformComponent::RectTransformComponent(GameObject* o, float wRate, float hRate)
 	:Component(o, static_cast<std::string>(typeid(RectTransformComponent).name()).substr(6))
 {
-	printf("superClassName: %s \n", superClassName.c_str());
 	
 	glm::vec2 size = static_cast<glm::vec2>(GameRenderer::GetInstance()->GetScreenSize());
 	//rate 0.0 ~ 1.0

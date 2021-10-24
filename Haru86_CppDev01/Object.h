@@ -25,7 +25,6 @@ public:
 	glm::vec3 GetPosition();
 	glm::quat GetRotation();
 	glm::vec3 GetScale();
-	//void GetTransform(glm::vec3& pos, glm::quat& rot, glm::vec3& s) { pos = transform->position; rot = transform->rotation; s = transform->scale; }
 	friend class MeshRendererComponent;
 	friend class GameRenderer;
 	friend class UIComponent;
@@ -35,7 +34,6 @@ private:
 	class Game* game;
 protected:
 	std::unordered_map<std::string, class Component*> myComponent;
-	//std::vector<class Component*> myComponent;
 };
 
 

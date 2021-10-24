@@ -144,9 +144,6 @@ void TimelineComponent::ResetTimeline() {
 	}
 	runningCustomClip.clear();
 
-	/*std::sort(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), [](GameObject* a, GameObject* b) {
-		return a->renderOrder < b->renderOrder;
-	});*/
 }
 
 void TimelineComponent::ClearTimeline() {

@@ -1,9 +1,30 @@
-﻿  Game.cpp
+﻿  App.cpp
+  AudioObject.cpp
+  AudioSourceComponent.cpp
+  Component.cpp
+  Game.cpp
+  GameObject.cpp
+  GameRenderer.cpp
+  Main.cpp
+  Material.cpp
+  MeshRendererComponent.cpp
+  Object.cpp
+  Primitive.cpp
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\Primitive.cpp(87,10): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  RectTransformComponent.cpp
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\RectTransformComponent.cpp(30,32): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\RectTransformComponent.cpp(31,32): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  TimelineComponent.cpp
+  TimelineObject.cpp
+  TransformComponent.cpp
+  UIComponent.cpp
+  コードを生成中...
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\AudioSourceComponent.cpp(190): warning C4715: 'AudioSourceComponent::StopAudioCheck': 値を返さないコントロール パスがあります。
   Haru86_CppDev01.vcxproj -> E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
   ファイルが見つかりません - *.dll
   0 個のファイルをコピーしました
-  ファイルが見つかりません - *.dll
   0 個のファイルをコピーしました
+  ファイルが見つかりません - *.dll
   C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmod.dll
   C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmod64.dll
   C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmodL.dll

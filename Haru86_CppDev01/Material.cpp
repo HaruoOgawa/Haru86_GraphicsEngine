@@ -5,13 +5,11 @@
 #include <iostream>
 
 Material::Material() {
-	//std::cout << "Create Material" << std::endl;
 	LoadShader("./Shader/Standard.vert", "./Shader/Standard.frag");
 }
 
 Material::Material(std::string vertexShaderName, std::string fragmentShaderName)
 {
-	//std::cout << "Create Material" << std::endl;
 	LoadShader(vertexShaderName, fragmentShaderName);
 }
 
@@ -45,11 +43,9 @@ void Material::LoadShader(std::string vertName, std::string fragName) {
 }
 
 bool Material::CompileShader(std::string shadername, GLenum shaderType, GLuint& outShader) {
-	//SDL_Log(shadername.c_str());
-
+	
 	std::ifstream shaderFile(shadername);
 	if (shaderFile.is_open()) {
-		//SDL_Log("Success!! opened shader file.");
 		
 		std::stringstream sstream;
 		sstream << shaderFile.rdbuf();

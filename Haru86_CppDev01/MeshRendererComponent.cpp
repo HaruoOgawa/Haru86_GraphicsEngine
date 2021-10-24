@@ -49,12 +49,6 @@ void MeshRendererComponent::Draw() {
 	material->SetFloatUniform("_time", game->time);
 	material->SetFloatUniform("_deltaTime", game->deltaTime);
 
-	/*glm::mat4 testMat = owner->transform->GetMVPMatrix();
-	printf("MVPMatrix_____________________________________________________ \n");
-	for (int i = 0; i < 4; i++) {
-		printf("%p: %p,%p,%p,%p \n", i,testMat[i][0], testMat[i][1], testMat[i][2], testMat[i][3]);
-	}*/
-
 	mesh->SetActive();
 	glDrawElements(GL_TRIANGLES, mesh->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
 }

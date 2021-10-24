@@ -50,7 +50,6 @@ bool Game::Initialize() {
 		return false;
 	}
 
-	//gameRenderer = new GameRenderer(this);
 	GameRenderer::Create();
 	if (!GameRenderer::GetInstance()->Initialize(500,500)) {
 		SDL_Log("Can not Initialize");
@@ -127,7 +126,6 @@ void Game::InputProcess() {
 }
 
 void Game::UpdateGame() {
-	//while (!SDL_TICKS_PASSED(SDL_GetTicks(), previousTime + 16.0f));
 	while (!(timeObj->GetTime() > previousTime + 16.0f)) { timeObj->UpdateTime(); };
 	deltaTime = (timeObj->GetTime() - previousTime) / 1000.0f;
 	if (deltaTime > 0.05f) {
