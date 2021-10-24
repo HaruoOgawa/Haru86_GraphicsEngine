@@ -33,7 +33,8 @@ Game::Game()
 	isRunning(true),
 	time(0.0f),
 	deltaTime(0.0f),
-	previousTime(0.0f)
+	previousTime(0.0f),
+	mouseStateBool(false)
 {
 	app = new App();
 	timeObj = new Time(60.0f);
@@ -103,6 +104,12 @@ void Game::InputProcess() {
 		{
 		case SDL_QUIT:
 			isRunning = false;
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			mouseStateBool = true;
+			break;
+		case SDL_MOUSEBUTTONUP:
+			mouseStateBool = false;
 			break;
 		default:
 			break;

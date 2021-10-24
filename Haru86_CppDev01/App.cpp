@@ -28,7 +28,7 @@ void App::Start() const {
 	Haru86_PartyHole = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/Haru86_PartyHole.frag");
 
 	GameObject* uiButton = new GameObject(PrimitiveType::BOARD,"./Shader/UIStandard.vert","./Shader/UIStandard.frag");
-	uiButton->SetScale(glm::vec3(0.1f,0.05f,1.0f));
+	uiButton->SetScale(glm::vec3(0.1f,0.05f,1.0f)*0.5f);
 	uiButton->AddComponent(new UIComponent(uiButton));
 	uiButton->AddComponent(new RectTransformComponent(uiButton,0.1f,0.1f));
 }

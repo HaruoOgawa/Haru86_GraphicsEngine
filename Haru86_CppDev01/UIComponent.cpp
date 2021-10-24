@@ -30,23 +30,8 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 
 	float fx = static_cast<float>(x) - static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().x) * 0.5f;
 	float fy = static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().y) * 0.5f- static_cast<float>(y);
-	
-	
 
-	SDL_Event event;
-	
-	while (SDL_PollEvent(&event)) // check to see if an event has happened
-	{
-		switch (event.type)
-		{
-		case SDL_QUIT:
-			break;
-		case SDL_MOUSEBUTTONDOWN: // if the event is mouse click
-			printf("Click");
-		}
-	}
-
-	if (CheckInnnerBox(fx,fy)) {
+	if (CheckInnnerBox(fx,fy)&& Game::GetInstance()->mouseStateBool) {
 		float maxLeftPointX = static_cast<RectTransformComponent*>(owner->
 			GetComponent(static_cast<std::string>(typeid(RectTransformComponent).name())))->maxLeftPointX;
 		float maxRightPointX = static_cast<RectTransformComponent*>(owner->
@@ -65,8 +50,8 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 		float audioLength = static_cast<float>(Game::GetInstance()->audioObj->audioSource->GetAudioLength());
 		t *= audioLength;
 		
-		printf("t : %f \n", t);
-		printf("audioLength : %f \n", audioLength);
+		//printf("t : %f \n", t);
+		//printf("audioLength : %f \n", audioLength);
 		
 		Game::GetInstance()->audioObj->audioSource->SkipAudio(t);
 
@@ -115,5 +100,5 @@ bool UIComponent::CheckInnnerBox( float x,  float y)const {
 }
 
 void UIComponent::Update() {
-	//printf("Game::GetInstance()->timeObj->time: %f \n", Game::GetInstance()->timeObj->time);
+
 }

@@ -5,6 +5,7 @@
 #include <vector>
 #include "./App.h"
 
+
 class Game
 {
 public:
@@ -43,6 +44,7 @@ private :
 	class App* app;
 	class AudioObject* audioObj;
 	class TimelineObject* timelineObj;
+	bool mouseStateBool;
 protected:
 	static Game* s_pInstance;
 };
