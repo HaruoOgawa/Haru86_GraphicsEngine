@@ -16,6 +16,7 @@ public:
     void UnLoadData();
     void SetMatrixUniform(std::string uniformName,glm::mat4 matrix);
     void SetFloatUniform(std::string uniformName,float val);
+    void SetVec2Uniform(std::string uniformName, glm::vec2 val);
 private :
     GLuint vertShaderData;
     GLuint fragShaderData;

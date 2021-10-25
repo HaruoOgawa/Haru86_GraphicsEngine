@@ -4,6 +4,7 @@
 #include "./TransformComponent.h"
 #include <string>
 #include <iostream>
+#include "./GameRenderer.h"
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o)
@@ -45,9 +46,9 @@ void MeshRendererComponent::Draw() {
 	material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
 	material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
 	material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
-
 	material->SetFloatUniform("_time", game->time);
 	material->SetFloatUniform("_deltaTime", game->deltaTime);
+	material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
 
 	mesh->SetActive();
 	glDrawElements(GL_TRIANGLES, mesh->GetNumIndices(), GL_UNSIGNED_INT, nullptr);

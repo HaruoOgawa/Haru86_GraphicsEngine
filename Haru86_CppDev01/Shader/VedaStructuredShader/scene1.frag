@@ -1,7 +1,12 @@
 precision mediump float;
+/*
 uniform float time;
-uniform vec2 mouse;
 uniform vec2 resolution;
+uniform vec2 uv;
+*/
+in vec2 uv;
+in float time;
+in vec2 resolution;
 
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
 
@@ -133,40 +138,26 @@ float speed=-.25;
  vec3 cSide=cross(cDir,vec3(0.,-1.,0.));
  vec3 cUp=cross(cDir,cSide);
  float depth=1.;
- vec3 rd=vec3(st.x*cSide+st.y*cUp+cDir*depth);
+ vec3 rd=normalize(vec3(st.x*cSide+st.y*cUp+cDir*depth));
 
   DBuffer d;
   float t,acc=0.0;
-  for(int i=0;i<160;i++){
+  for(int i=0;i<128;i++){
     d=map(ro+rd*t);
-    if(d.mainD<0.001||t>1000.0)break;
-    t+=d.mainD*0.85;
+    if(d.d1<0.001||d.d2<0.001||d.d3<0.001||t>1000.0)break;
+    t+=d.mainD;
     acc+=exp(-1.0*d.mainD);
   }
 
   vec3 n=gn(ro+rd*t);
 
   if(d.d1<0.001){
-    col+=vec3(exp(-.5*t))*vec3(0.45,0.25,0.16)*acc*0.05;
+    col+=vec3(exp(-.15*t))*vec3(0.45,0.25,0.16)*acc*0.05;
   }
 
-  if(d.d2<0.001){
-    /*vec3 refro=ro+rd*t;
-    vec3 n=gn(refro);
-    rd=reflect(rd,n);
-    t=0.1;
-    ro=refro;
-    float acc2=0.0;
+  if(d.d2<0.01){
 
-    for(int i=0;i<64;i++){
-      d=map(ro+rd*t);
-      if(d.mainD<0.001)break;
-      t+=d.mainD;
-      acc2+=exp(-3.0*d.mainD);
-    }*/
-
-
-    col+=vec3(0.5,0.25,0.25)*acc*0.01;
+    col+=vec3(0.5,0.25,0.25)*acc*0.025;
   }
 
   col*=(1.0-length(st)+0.5);
