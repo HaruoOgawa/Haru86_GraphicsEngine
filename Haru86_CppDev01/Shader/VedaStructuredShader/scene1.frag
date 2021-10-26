@@ -165,7 +165,7 @@ float d3(vec3 p){
   float d=length(p)-1.*scale;
 
 //p.x+=1.5;
-/*  p.xy*=rot(time);
+  p.xy*=rot(time);
   p.xz*=rot(time);
   p.yz*=rot(time);
   for(int i=0;i<3;i++){
@@ -179,7 +179,7 @@ float d3(vec3 p){
     p.yz*=rot(0.25);
 }
 
-d=min(d,Cube(p,vec3(.15*scale,.2*scale,.15*scale)));*/
+d=min(d,Cube(p,vec3(.15*scale,.2*scale,.15*scale)));
 
   return d;
 }
@@ -271,7 +271,7 @@ float speed=-.25;
     vec3 pos=ro+rd*t;
     float flash=1.0-abs(sin(pos.z*.5+time*4.0));
     flash+=.1;
-    float H = mod(time*0.5, 1.5);
+    float H = mod(0.25, 1.5);
 
     col+=acc*.5*flash*hsv2rgb2(vec3(H,1.0,1.0),2.2);
   }

@@ -25,7 +25,7 @@ GameRenderer::GameRenderer(Game* game)
 	sWindowWidth(500),
 	sWindowHeight(500),
 	deltaTime(0.0f),
-	frameResolusion(0.5)
+	frameResolusion(0.85)
 {
 
 }
@@ -35,9 +35,7 @@ GameRenderer::~GameRenderer() {
 }
 
 bool GameRenderer::Initialize(float width,float height) {
-	//sWindowWidth = width;
-	//sWindowHeight = height;
-
+	
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
@@ -112,7 +110,6 @@ bool GameRenderer::CreateFrameBuffer() {
 }
 
 void GameRenderer::Draw() {
-	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
 	glViewport(0, 0, static_cast<int>(GetScreenSize().x* frameResolusion), static_cast<int>(GetScreenSize().y* frameResolusion));
 	
@@ -126,8 +123,6 @@ void GameRenderer::Draw() {
 		obj->transform->CalMatrix();
 		obj->meshComp->Draw();
 	}
-
-	//glFlush();
 
 	//pass2////////////////////////////////////////////////
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -144,11 +139,8 @@ void GameRenderer::Draw() {
 		obj->transform->CalMatrix();
 		frameTexture->SetActive(0);
 		obj->meshComp->material->SetTexUniform("frameTex", 0);
-		//obj->meshComp->material->SetFloatUniform("_frameResolusion", frameResolusion);
 		obj->meshComp->DrawBoard();
 	}
-
-	//glFlush();
 
 	SDL_GL_SwapWindow(sWindow);
 }

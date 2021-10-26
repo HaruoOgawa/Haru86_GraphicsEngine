@@ -1,4 +1,5 @@
 ﻿  GameRenderer.cpp
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\GameRenderer.cpp(29,1): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
   Haru86_CppDev01.vcxproj -> E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
   ファイルが見つかりません - *.dll
   0 個のファイルをコピーしました
