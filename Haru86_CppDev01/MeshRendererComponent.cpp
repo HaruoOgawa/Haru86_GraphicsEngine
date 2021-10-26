@@ -70,7 +70,7 @@ void MeshRendererComponent::DrawBoard() {
 	material->SetFloatUniform("_time", game->time);
 	material->SetFloatUniform("_deltaTime", game->deltaTime);
 	material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
-
+	material->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
 
 	mesh->SetActive();
 	glDrawElements(GL_TRIANGLES, mesh->GetNumIndices(), GL_UNSIGNED_INT, nullptr);

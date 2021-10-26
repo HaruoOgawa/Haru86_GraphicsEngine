@@ -4,7 +4,7 @@
 #include "./MeshRendererComponent.h"
 
 GameObject::GameObject(PrimitiveType primType) 
-	: Object(), renderOrder(RenderQueue::Geometry)
+	: Object(), renderOrder(RenderQueue::Geometry),dummy(RenderType::Test)
 {
 	Game::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = new MeshRendererComponent(this, primType);
@@ -12,14 +12,16 @@ GameObject::GameObject(PrimitiveType primType)
 }
 
 GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
-	: Object(), renderOrder(RenderQueue::Geometry)
+	: Object(), renderOrder(RenderQueue::Geometry), dummy(RenderType::Test)
 {
 	Game::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = new MeshRendererComponent(this, primType,vertexShaderName,fragmentShaderName);
 	Object::AddComponent(meshComp);
 }
 
-GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, RenderType renderType) {
+GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, RenderType renderType)
+	:Object(), renderOrder(RenderQueue::UI),dummy(renderType)
+{
 	Game::GetInstance()->boardGameObjectList.emplace_back(this);
 	meshComp = new MeshRendererComponent(this, primType, vertexShaderName, fragmentShaderName);
 	Object::AddComponent(meshComp);

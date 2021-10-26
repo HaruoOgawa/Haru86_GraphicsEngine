@@ -18,9 +18,11 @@ enum RenderQueue
 	UI=5000
 };
 
-enum RenderType {
+enum class RenderType {
 	FrameBuffer,
-	DefaultBuffer
+	DefaultBuffer,
+	Test,
+	Obj
 };
 
 class GameObject
@@ -38,5 +40,6 @@ public:
 	int renderOrder;
 private:
 	class MeshRendererComponent* meshComp;
+	RenderType dummy;
 };
 

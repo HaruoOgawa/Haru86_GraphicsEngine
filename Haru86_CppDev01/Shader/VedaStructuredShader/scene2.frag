@@ -189,7 +189,10 @@ vec3 hsv2rgb2(vec3 c, float k) {
 }
 
 void main(void) {
-  vec2 st = (gl_FragCoord.xy*2.0-resolution.xy) / min(resolution.x,resolution.y);
+  //vec2 st = (gl_FragCoord.xy*2.0-resolution.xy) / min(resolution.x,resolution.y);
+  vec2 st=uv*2.0-1.0;
+  st.x*=(resolution.x/resolution.y);
+
   vec3 col=vec3((st.y+1.0)*0.5*0.25);
   float radius=15.;
 float speed=-.25;

@@ -24,7 +24,8 @@ GameRenderer::GameRenderer(Game* game)
 	sWindow(nullptr),
 	sWindowWidth(500),
 	sWindowHeight(500),
-	deltaTime(0.0f)
+	deltaTime(0.0f),
+	frameResolusion(0.5)
 {
 
 }
@@ -89,35 +90,23 @@ glm::ivec2 GameRenderer::GetScreenSize() {
 }
 
 bool GameRenderer::CreateFrameBuffer() {
-	int width = static_cast<int>(GetScreenSize().x*0.5) ;
-	int height = static_cast<int>(GetScreenSize().y*0.5) ;
-	frameTexture =new Texture();
-
+	int width = static_cast<int>(GetScreenSize().x) ;
+	int height = static_cast<int>(GetScreenSize().y );
+	
 	glGenFramebuffers(1, &frameBuffer);
-	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
-
-	frameTexture = new Texture();
-	frameTexture->CreateForRendering(width, height, GL_RGB);
-
 	GLuint depthBuffer;
 	glGenRenderbuffers(1, &depthBuffer);
+
+	frameTexture = new Texture();
+	frameTexture->CreateForRendering(width, height, GL_RGBA);
+	
 	glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, frameTexture->GetTextureID(), 0);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);
 
-	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, frameTexture->GetTextureID(), 0);
-
-	GLenum drawBuffers[] = { GL_COLOR_ATTACHMENT0 };
-	glDrawBuffers(1, drawBuffers);
-
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-	{
-		glDeleteFramebuffers(1, &frameBuffer);
-		frameTexture->Unload();
-		delete frameTexture;
-		frameTexture = nullptr;
-		return false;
-	}
 	return true;
 
 }
@@ -125,7 +114,7 @@ bool GameRenderer::CreateFrameBuffer() {
 void GameRenderer::Draw() {
 	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
-	glViewport(0, 0, GetScreenSize().x, GetScreenSize().y);
+	glViewport(0, 0, static_cast<int>(GetScreenSize().x* frameResolusion), static_cast<int>(GetScreenSize().y* frameResolusion));
 	
 	glClearColor(0.0f, 0.0f,0.0f,1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -138,7 +127,7 @@ void GameRenderer::Draw() {
 		obj->meshComp->Draw();
 	}
 
-	glFlush();
+	//glFlush();
 
 	//pass2////////////////////////////////////////////////
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -155,10 +144,11 @@ void GameRenderer::Draw() {
 		obj->transform->CalMatrix();
 		frameTexture->SetActive(0);
 		obj->meshComp->material->SetTexUniform("frameTex", 0);
+		//obj->meshComp->material->SetFloatUniform("_frameResolusion", frameResolusion);
 		obj->meshComp->DrawBoard();
 	}
 
-	glFlush();
+	//glFlush();
 
 	SDL_GL_SwapWindow(sWindow);
 }

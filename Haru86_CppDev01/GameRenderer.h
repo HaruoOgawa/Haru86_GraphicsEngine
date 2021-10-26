@@ -21,6 +21,7 @@ public:
 	bool CreateFrameBuffer();
 	glm::ivec2 GetScreenSize();
 	float deltaTime;
+	float frameResolusion;
 private:
 	SDL_Window* sWindow;
 	int sWindowWidth;
@@ -29,6 +30,7 @@ private:
 	SDL_GLContext context;
 	class Texture* frameTexture;
 	unsigned int frameBuffer;
+	
 protected:
 	static GameRenderer* renderer_instance;
 };
