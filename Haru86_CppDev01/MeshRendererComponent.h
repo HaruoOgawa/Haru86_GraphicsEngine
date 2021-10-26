@@ -16,8 +16,10 @@ public:
     ~MeshRendererComponent();
     void Update() override;
     void Draw();
+    void DrawBoard();
     void ProcessInput(const Uint8* state)const override;
     bool useZTest;
+    friend class GameRenderer;
 private:
     VertexArray* mesh;
     Material* material;

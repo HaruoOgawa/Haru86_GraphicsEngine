@@ -87,6 +87,9 @@
     <ClInclude Include="Time.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -149,6 +152,9 @@
     <ClCompile Include="Time.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -182,6 +188,8 @@
     <None Include="Shader\Haru86_polar_coordinate.frag" />
     <None Include="Shader\Haru86_Ray.frag" />
     <None Include="Shader\Haru86_PartyHole.frag" />
+    <None Include="Shader\VedaStructuredShader\BoardRender.vert" />
+    <None Include="Shader\VedaStructuredShader\BoardRender.frag" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Haru86_CppDev01.rc">

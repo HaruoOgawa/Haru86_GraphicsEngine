@@ -166,6 +166,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studi
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="RectTransformComponent.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="TimelineComponent.h" />
     <ClInclude Include="TimelineObject.h" />
@@ -188,6 +189,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studi
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="RectTransformComponent.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="TimelineComponent.cpp" />
     <ClCompile Include="TimelineObject.cpp" />
@@ -221,6 +223,8 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studi
     <None Include="packages.config" />
     <None Include="Shader\Standard.frag" />
     <None Include="Shader\Standard.vert" />
+    <None Include="Shader\VedaStructuredShader\BoardRender.frag" />
+    <None Include="Shader\VedaStructuredShader\BoardRender.vert" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Haru86_CppDev01.rc" />

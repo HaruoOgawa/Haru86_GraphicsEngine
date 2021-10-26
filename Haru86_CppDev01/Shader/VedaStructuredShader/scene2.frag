@@ -115,9 +115,8 @@ float d1(vec3 p){
 float speed=10.0;
   p.z-=time*speed;
   float k=12.0;
-  p.xy=mod(p.xy,k)-k*0.5;
-  k=15.0;
-  p.z=mod(p.z,k)-k*0.5;
+  p=mod(p,k)-k*0.5;
+  
   p=abs(p);
   float s=1.;
   float ts=0.05;
@@ -130,8 +129,8 @@ float speed=10.0;
     p.yz=fmod(p.yz,6.);
     p.xy*=rot(0.25);
 
-  /* p.x=abs(p.x)-0.5;
-    p.z=abs(p.z)-.015;*/
+   p.x=abs(p.x)-0.5;
+    p.z=abs(p.z)-.015;
   }
 
   p.xy=fmod(p.xy,36.);

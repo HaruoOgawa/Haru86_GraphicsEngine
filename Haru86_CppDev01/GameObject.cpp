@@ -19,6 +19,12 @@ GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std
 	Object::AddComponent(meshComp);
 }
 
+GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, RenderType renderType) {
+	Game::GetInstance()->boardGameObjectList.emplace_back(this);
+	meshComp = new MeshRendererComponent(this, primType, vertexShaderName, fragmentShaderName);
+	Object::AddComponent(meshComp);
+}
+
 GameObject::~GameObject() {
 	
 }

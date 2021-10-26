@@ -25,6 +25,8 @@ void App::Start() const {
 	uiButton->SetScale(glm::vec3(0.1f,0.05f,1.0f)*0.5f);
 	uiButton->AddComponent(new UIComponent(uiButton));
 	uiButton->AddComponent(new RectTransformComponent(uiButton,0.1f,0.1f));
+
+	GameObject* renderBoard = new GameObject(PrimitiveType::BOARD, "./Shader/VedaStructuredShader/BoardRender.vert", "./Shader/VedaStructuredShader/BoardRender.frag",RenderType::DefaultBuffer);
 }
 void App::Update() const {
 	

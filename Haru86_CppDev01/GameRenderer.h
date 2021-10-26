@@ -18,6 +18,7 @@ public:
 	bool Initialize(float width, float height);
 	void ShutDown();
 	void Draw();
+	bool CreateFrameBuffer();
 	glm::ivec2 GetScreenSize();
 	float deltaTime;
 private:
@@ -26,6 +27,8 @@ private:
 	int sWindowHeight;
 	class Game* mgame;
 	SDL_GLContext context;
+	class Texture* frameTexture;
+	unsigned int frameBuffer;
 protected:
 	static GameRenderer* renderer_instance;
 };
