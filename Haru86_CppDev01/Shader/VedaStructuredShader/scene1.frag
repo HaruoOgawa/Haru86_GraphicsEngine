@@ -9,6 +9,7 @@ in float time;
 in vec2 resolution;
 
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
+#define PI 3.14159265
 
 struct DBuffer{
   float d1;
@@ -16,6 +17,22 @@ struct DBuffer{
   float d3;
   float mainD;
 };
+
+vec2 fmod(vec2 p,float r){
+  float a=atan(p.x,p.y)+PI/r;
+  float n=(2.*PI)/r;
+  a=floor(a/n)*n;
+  return rot(a)*p;
+}
+
+float sm(float d1,float d2,float k){
+  float h=exp(-k*d1)+exp(-k*d2);
+  return -log(h)/k;
+}
+
+float Cube(vec3 p,vec3 s){
+  return length(max(abs(p)-s,0.0));
+}
 
 vec2 random2(vec2 seeds)
 {
@@ -51,7 +68,7 @@ return mix(v00v10, v01v11, p.y) * 0.5 + 0.5;
 }
 
 float Plane(vec3 p){
-p.z-=time;
+//p.z-=time;
 p.y+=perlinNoise(p.xz)*1.5+perlinNoise(p.zx*3.)*.5+perlinNoise(p.zx*12.)*.2;
   return p.y;
 }
@@ -105,24 +122,97 @@ float d2(vec3 p){
   return d;
 }
 
-DBuffer map(vec3 p){
+float d1_1(vec3 p){
+  p.xz*=rot(PI/.15);
+  p.yz*=rot(PI/4.0);
+
+  p.z+=0.75;
+
+
+  float scale=.85;
+
+//  p=abs(p)-.1;
+  for(int i=0;i<3;i++){
+    if(p.x<p.y)p.xy=p.yx;
+    if(p.y<p.z)p.yz=p.yz;
+    if(p.x<p.z)p.xz=p.zx;
+    p.yz*=rot(0.75);
+    p.x=abs(p.x)-.12;
+    p.z=abs(p.z)-.12;
+    //p.xy*=rot(0.15);
+  }
+p.z=abs(p.z);
+
+
+
+float d=Cube(p,vec3(.35,.2,.1));
+  for(int i=0;i<3;i++){
+    p.xy*=rot(0.15);
+    p.xz*=rot(0.01);
+    p.yz*=rot(0.5);
+    p.xy-=0.25;
+    p.xz-=0.25;
+    scale*=.9;
+    d=sm(d,Cube(p,vec3(.35,.2,.1)*scale),6.0);
+  }
+
+  return d;
+}
+
+float d3(vec3 p){
+  float scale=0.5;
+
+  float d=length(p)-1.*scale;
+
+//p.x+=1.5;
+/*  p.xy*=rot(time);
+  p.xz*=rot(time);
+  p.yz*=rot(time);
+  for(int i=0;i<3;i++){
+    p=abs(p)-.3;
+    if(p.x<p.y)p.xy=p.yx;
+    if(p.x<p.z)p.xz=p.zx;
+    if(p.y<p.z)p.yz=p.zy;
+
+    p.xy*=rot(0.5);
+    p.xz*=rot(0.15);
+    p.yz*=rot(0.25);
+}
+
+d=min(d,Cube(p,vec3(.15*scale,.2*scale,.15*scale)));*/
+
+  return d;
+}
+
+DBuffer map(vec3 p,vec3 ro){
   DBuffer d;
   d.d1=d1(p);
   d.d2=d2(p);
-  d.d3=2000.0;
+  //d.d1=2000.0;
+  //d.d2=2000.0;
+float radius=-12.;
+float speed=-.25;
+  float tval=-0.;
+  //r*ro.x,-1.,r*ro.z
+  d.d3=d3(p+vec3(cos(time*speed)*radius,-1.0,sin(time*speed)*radius));
   d.mainD=min(min(d.d1,d.d2),d.d3);
   return d;
 }
 
-vec3 gn(vec3 p){
+vec3 gn(vec3 p,vec3 ro){
   vec2 e=vec2(0.001,0.);
   return normalize(
     vec3(
-      map(p+e.xyy).mainD-map(p-e.xyy).mainD,
-      map(p+e.yxy).mainD-map(p-e.yxy).mainD,
-      map(p+e.yyx).mainD-map(p-e.yyx).mainD
+      map(p+e.xyy,ro).mainD-map(p-e.xyy,ro).mainD,
+      map(p+e.yxy,ro).mainD-map(p-e.yxy,ro).mainD,
+      map(p+e.yyx,ro).mainD-map(p-e.yyx,ro).mainD
       )
     );
+}
+
+vec3 hsv2rgb2(vec3 c, float k) {
+    return smoothstep(0. + k, 1. - k,
+        .5 + .5 * cos((vec3(c.x, c.x, c.x) + vec3(3., 2., 1.) / 3.) * radians(360.)));
 }
 
 void main(void) {
@@ -132,7 +222,6 @@ void main(void) {
 float speed=-.25;
  vec3 ta=vec3(0.);
  vec3 ro=vec3(cos(time*speed)*radius,0.0,sin(time*speed)*radius);
- //sin(iTime*0.5)*0.25
  //vec3 ro=vec3(0.,0.,15.0);
  vec3 cDir=normalize(ta-ro);
  vec3 cSide=cross(cDir,vec3(0.,-1.,0.));
@@ -143,13 +232,13 @@ float speed=-.25;
   DBuffer d;
   float t,acc=0.0;
   for(int i=0;i<128;i++){
-    d=map(ro+rd*t);
+    d=map(ro+rd*t,ro);
     if(d.d1<0.001||d.d2<0.001||d.d3<0.001||t>1000.0)break;
     t+=d.mainD;
     acc+=exp(-1.0*d.mainD);
   }
 
-  vec3 n=gn(ro+rd*t);
+  vec3 n=gn(ro+rd*t,ro);
 
   if(d.d1<0.001){
     col+=vec3(exp(-.15*t))*vec3(0.45,0.25,0.16)*acc*0.05;
@@ -158,6 +247,30 @@ float speed=-.25;
   if(d.d2<0.01){
 
     col+=vec3(0.5,0.25,0.25)*acc*0.025;
+  }
+
+  if(d.d3<0.001){
+    vec3 refro=ro+rd*t;
+    vec3 n=gn(refro,refro);
+    rd=refract(rd,n,1.);
+    ro=refro;
+    t=0.1;
+    float acc2;
+
+    for(int i=0;i<33;i++){
+      d=map(ro+rd*t,refro);
+      if(d.d1<0.001||d.d2<0.001)break;
+      t+=d.mainD;
+      float H = mod(time*0.5, 1.0);
+      acc2+=exp(-3.*d.mainD);
+    }
+
+    vec3 pos=ro+rd*t;
+    float flash=1.0-abs(sin(pos.z*.5+time*4.0));
+    flash+=.1;
+    float H = mod(time*0.5, 1.5);
+
+    col+=acc*.5*flash*hsv2rgb2(vec3(H,1.0,1.0),2.2);
   }
 
   col*=(1.0-length(st)+0.5);

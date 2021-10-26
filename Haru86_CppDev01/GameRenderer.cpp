@@ -88,6 +88,8 @@ void GameRenderer::Draw() {
 	glClearColor(0.0f, 0.0f,0.0f,1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	glPointSize(1.0f);
+
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
 
@@ -95,6 +97,8 @@ void GameRenderer::Draw() {
 		obj->transform->CalMatrix();
 		obj->meshComp->Draw();
 	}
+
+	glFlush();
 
 	SDL_GL_SwapWindow(sWindow);
 }

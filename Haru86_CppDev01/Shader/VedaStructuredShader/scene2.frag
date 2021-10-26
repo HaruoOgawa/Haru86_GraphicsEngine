@@ -111,12 +111,17 @@ float d1(vec3 p){
 /*  p.xy*=rot(time);
   p.xz*=rot(time);
   p.yz*=rot(time);*/
-float speed=3.0;
+
+float speed=10.0;
   p.z-=time*speed;
   float k=12.0;
-  p=mod(p,k)-k*0.5;
+  p.xy=mod(p.xy,k)-k*0.5;
+  k=15.0;
+  p.z=mod(p.z,k)-k*0.5;
   p=abs(p);
   float s=1.;
+  float ts=0.05;
+  float dt=floor(time)+pow(fract(time),0.5);
   for(int i=0;i<2;i++){
     p.xy=fmod(p.xy,12.);
     p.xz*=rot(0.25);
@@ -125,8 +130,8 @@ float speed=3.0;
     p.yz=fmod(p.yz,6.);
     p.xy*=rot(0.25);
 
-    p.x=abs(p.x)-0.5;
-    p.z=abs(p.z)-.015;
+  /* p.x=abs(p.x)-0.5;
+    p.z=abs(p.z)-.015;*/
   }
 
   p.xy=fmod(p.xy,36.);
@@ -138,12 +143,31 @@ float speed=3.0;
 }
 
 float d2(vec3 p){
-  return 2000.0;
+  float d=length(p)-1.;
+
+//p.x+=1.5;
+  p.xy*=rot(time);
+  p.xz*=rot(time);
+  p.yz*=rot(time);
+  for(int i=0;i<3;i++){
+    p=abs(p)-.6;
+    if(p.x<p.y)p.xy=p.yx;
+    if(p.x<p.z)p.xz=p.zx;
+    if(p.y<p.z)p.yz=p.zy;
+
+    p.xy*=rot(0.5);
+    p.xz*=rot(0.15);
+    p.yz*=rot(0.25);
+}
+
+d=min(d,Cube(p,vec3(.2,.2,.2)));
+
+  return d;
 }
 DBuffer map(vec3 p){
   DBuffer d;
   d.d1=d1(p);
-  d.d2=2000.0;
+  d.d2=d2(p-vec3(0.,0.,9.));
   d.d3=2000.0;
   d.mainD=min(min(d.d1,d.d2),d.d3);
   return d;
@@ -160,6 +184,11 @@ vec3 gn(vec3 p){
     );
 }
 
+vec3 hsv2rgb2(vec3 c, float k) {
+    return smoothstep(0. + k, 1. - k,
+        .5 + .5 * cos((vec3(c.x, c.x, c.x) + vec3(3., 2., 1.) / 3.) * radians(360.)));
+}
+
 void main(void) {
   vec2 st = (gl_FragCoord.xy*2.0-resolution.xy) / min(resolution.x,resolution.y);
   vec3 col=vec3((st.y+1.0)*0.5*0.25);
@@ -167,7 +196,7 @@ void main(void) {
 float speed=-.25;
  vec3 ta=vec3(0.);
 // vec3 ta=vec3(cos(time),0.,sin(time));
- vec3 ro=vec3(0.,0.,13.25);
+ vec3 ro=vec3(0.,0.,14.);
 // vec3 ro=vec3(0.,0.,0.);
  vec3 cDir=normalize(ta-ro);
  vec3 cSide=cross(cDir,vec3(0.,-1.,0.));
@@ -189,12 +218,37 @@ float speed=-.25;
   }
 
   if(d.d1<0.01||t<1.0){
-    vec3 n=gn(ro+rd*t);
-    //col+=vec3(0.,0.,1.)*acc.acc1*0.01;
     vec3 pos=ro+rd*t;
     float flash=1.0-abs(sin(pos.z*.5+time*4.0));
-    col+=vec3(0.5,0.25,0.25)*vec3(exp(-.2*t))*pow((1.0-abs(dot(n,rd))),.5)*acc.acc1*0.5*flash;
-    //col+=vec3(exp(-.25*t));
+    flash+=.1;
+    float rim=pow(min(d.d1,2.0),.5);
+    float H = mod(time*0.5, 1.0);
+    col+=vec3(exp(-.1*t))*rim*acc.acc1*.75*flash*hsv2rgb2(vec3(H,1.0,1.0),2.2);
+    //*pow((1.0-abs(dot(n,rd))),.5)
+    ;
+  }
+
+  if(d.d2<0.001){
+    vec3 refro=ro+rd*t;
+    vec3 n=gn(refro);
+    rd=reflect(rd,n);
+    ro=refro;
+    t=0.1;
+    float acc2;
+
+    for(int i=0;i<33;i++){
+      d=map(ro+rd*t);
+      if(d.mainD<0.001)break;
+      t+=d.mainD;
+      float H = mod(time*0.5, 1.0);
+      acc2+=exp(-3.*d.mainD);
+    }
+
+    vec3 pos=ro+rd*t;
+    float flash=1.0-abs(sin(pos.z*.5+time*4.0));
+    flash+=.1;
+    float H = mod(time*0.5, 1.0);
+    col+=vec3(exp(-.1*t))*acc.acc2*.75*flash*hsv2rgb2(vec3(H,1.0,1.0),2.2);
   }
 
   gl_FragColor = vec4(col, 1.0);
