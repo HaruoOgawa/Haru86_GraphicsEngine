@@ -125,6 +125,11 @@ void GameRenderer::Draw() {
 	}
 
 	//pass2////////////////////////////////////////////////
+	/*for (auto postProcess : postProcessList) {
+		//ここでPostProcessを切り替える
+	}*/
+	
+	//pass3////////////////////////////////////////////////
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glViewport(0, 0, GetScreenSize().x , GetScreenSize().y);
 
@@ -136,6 +141,7 @@ void GameRenderer::Draw() {
 
 	
 	for (auto obj : mgame->boardGameObjectList) {
+		//PostProcessTextureのセット メンバ変数のPOstProcessIDを参照するとか？？
 		obj->transform->CalMatrix();
 		frameTexture->SetActive(0);
 		obj->meshComp->material->SetTexUniform("frameTex", 0);

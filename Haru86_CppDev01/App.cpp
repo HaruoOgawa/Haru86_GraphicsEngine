@@ -71,8 +71,8 @@ void App::Timeline(TimelineObject* timeline)  {
 			gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime;
 			Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 3);
 			Scene1_Frag->meshComp->material->SetFloatUniform("_cameraMoveVal", gamept->GetInstance()->animTime/6.0f);
-			printf(" gamept->GetInstance()->animTime/6.0f: %f \n", gamept->GetInstance()->animTime / 6.0f);
-			printf(" gamept->GetInstance()->time: %f \n", gamept->GetInstance()->time);
+			//printf(" gamept->GetInstance()->animTime/6.0f: %f \n", gamept->GetInstance()->animTime / 6.0f);
+			//printf(" gamept->GetInstance()->time: %f \n", gamept->GetInstance()->time);
 
 	});
 
