@@ -35,5 +35,8 @@ void App::Update() const {
 void App::Timeline(TimelineObject* timeline) const {
 	timeline->AddActivationClip(Scene1_Frag,0.0f,43.0f);
 	timeline->AddActivationClip(Scene2_Frag, 43.0f, 65.0f);
+
+	timeline->AddAnimationClip(Scene1_Frag, 0.0f, 43.0f, [] {printf("Hello Scene1 Callback \n"); });
+	timeline->AddAnimationClip(Scene2_Frag, 43.0f, 65.0f, [] {printf("Hello Scene222222 Callback \n"); });
 }
 

@@ -29,6 +29,20 @@ struct TimelineCustomClip
     }
 };
 
+struct TimelineAnimationClip
+{
+    class GameObject* gameObject;
+    float startTime;
+    float endTime;
+    std::function<void(void)> callback;
+    TimelineAnimationClip(class GameObject* obj,float s,float e,std::function<void(void)> func) {
+        this->gameObject = obj;
+        this->startTime = s;
+        this->endTime = e;
+        this->callback = func;
+    }
+};
+
 class TimelineComponent :
     public Component
 {
@@ -46,12 +60,16 @@ public:
 private:
     void InitializeActivationTrack();
     void InitializeCustomTrack();
+    void InitializeAnimationTrack();
     void ComputeActivationTrack(float time);
     void ComputeCustomTrack(float time);
+    void ComputeAnimationTrack(float time);
     void ClearTimeline();
     std::vector<TimelineActivationClip*> waittingActiovationClip;
     std::vector<TimelineActivationClip*> runningActiovationClip;
     std::vector<TimelineCustomClip*> waittingCustomClip;
     std::vector<TimelineCustomClip*> runningCustomClip;
+    std::vector<TimelineAnimationClip*> waittingAnimationClip;
+    std::vector<TimelineAnimationClip*> runningAnimationClip;
 };
 

@@ -1,5 +1,8 @@
-﻿  GameRenderer.cpp
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\GameRenderer.cpp(29,1): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+﻿  App.cpp
+  MeshRendererComponent.cpp
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\TimelineComponent.h(33,1): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'class' として使われていましたが 'struct' として使われています。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\TimelineComponent.h(32): message : 'TimelineAnimationClip' の宣言を確認してください
+  コードを生成中...
   Haru86_CppDev01.vcxproj -> E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
   ファイルが見つかりません - *.dll
   0 個のファイルをコピーしました

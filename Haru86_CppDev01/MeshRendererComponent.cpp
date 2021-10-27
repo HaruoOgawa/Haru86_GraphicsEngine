@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include "./GameRenderer.h"
+#include "./TimelineComponent.h"
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o)
@@ -49,6 +50,11 @@ void MeshRendererComponent::Draw() {
 	material->SetFloatUniform("_time", game->time);
 	material->SetFloatUniform("_deltaTime", game->deltaTime);
 	material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
+
+	printf("Call MeshRenderer CallbackS !! \n");
+	for (auto clip : animationClips) {
+		clip->callback();
+	}
 
 	mesh->SetActive();
 	glDrawElements(GL_TRIANGLES, mesh->GetNumIndices(), GL_UNSIGNED_INT, nullptr);

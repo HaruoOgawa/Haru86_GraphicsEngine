@@ -6,6 +6,7 @@
 #include <string>
 #include "./Primitive.h"
 #include "./Game.h"
+#include <functional>
 
 class MeshRendererComponent :
     public Component
@@ -19,6 +20,7 @@ public:
     void DrawBoard();
     void ProcessInput(const Uint8* state)const override;
     bool useZTest;
+    std::vector<class TimelineAnimationClip*> animationClips;
     friend class GameRenderer;
 private:
     VertexArray* mesh;

@@ -25,6 +25,7 @@ public:
 	float time;
 	float deltaTime;
 	class Time* timeObj;
+	class TimelineObject* timelineObj;
 	friend class GameObject;
 	friend class UIObject;
 	friend class GameRenderer;
@@ -44,7 +45,7 @@ private :
 	std::vector<class UIObject*> uiObjectList;
 	class App* app;
 	class AudioObject* audioObj;
-	class TimelineObject* timelineObj;
+	
 	bool mouseStateBool;
 protected:
 	static Game* s_pInstance;

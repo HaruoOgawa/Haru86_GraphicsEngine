@@ -23,6 +23,11 @@ void TimelineObject::AddCustomClip(class GameObject* obj, float startTime, float
 	
 }
 
+void TimelineObject::AddAnimationClip(class GameObject* obj, float startTime, float endTime, std::function<void(void)> callback) {
+	timelineComponent->waittingAnimationClip.emplace_back(new TimelineAnimationClip(obj,startTime*1000.0f,endTime*1000.0f,callback));
+	
+}
+
 void TimelineObject::Initialize() {
 	timelineComponent->Initialize();
 }

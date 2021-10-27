@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include "./MeshRendererComponent.h"
 
 TimelineComponent::TimelineComponent(Object* o)
 	:Component(o, static_cast<std::string>(typeid(TimelineComponent).name()).substr(6))
@@ -23,6 +24,7 @@ void TimelineComponent::Update() {
 void TimelineComponent::Initialize() {
 	InitializeActivationTrack();
 	InitializeCustomTrack();
+	InitializeAnimationTrack();
 }
 
 void TimelineComponent::InitializeActivationTrack() {
@@ -44,9 +46,14 @@ void TimelineComponent::InitializeCustomTrack() {
 	}
 }
 
+void TimelineComponent::InitializeAnimationTrack() {
+	
+}
+
 void TimelineComponent::ComputeTimeline(float time) {
 	ComputeActivationTrack(time);
 	ComputeCustomTrack(time);
+	ComputeAnimationTrack(time);
 }
 
 void TimelineComponent::ComputeActivationTrack(float time) {
@@ -121,6 +128,42 @@ void TimelineComponent::ComputeCustomTrack(float time) {
 	}
 }
 
+void TimelineComponent::ComputeAnimationTrack(float time) {
+	for (auto clip : waittingAnimationClip) {
+		if (clip->startTime < time && clip->endTime >= time) {
+			clip->gameObject->meshComp->animationClips.emplace_back(clip);
+			runningAnimationClip.emplace_back(clip);
+
+			auto waittingIter = std::find(waittingAnimationClip.begin(), waittingAnimationClip.end(), clip);
+			if (waittingIter != waittingAnimationClip.end()) {
+				waittingAnimationClip.erase(waittingAnimationClip.begin()
+					+ std::distance(waittingAnimationClip.begin(), waittingIter)
+				);
+			}
+		}
+	}
+
+	for (auto clip : runningAnimationClip) {
+		if (time > clip->endTime) {
+			auto iter = std::find(clip->gameObject->meshComp->animationClips.begin(), clip->gameObject->meshComp->animationClips.end(), clip);
+			if (iter!= clip->gameObject->meshComp->animationClips.end()) {
+				clip->gameObject->meshComp->animationClips.erase(clip->gameObject->meshComp->animationClips.begin()
+					+ std::distance(clip->gameObject->meshComp->animationClips.begin(), iter));
+			}
+
+			auto runningIter = std::find(runningAnimationClip.begin(), runningAnimationClip.end(), clip);
+			if (runningIter!= runningAnimationClip.end()) {
+				runningAnimationClip.erase(runningAnimationClip.begin()
+					+ std::distance(runningAnimationClip.begin(), runningIter)
+				);
+			}
+
+			waittingAnimationClip.emplace_back(clip);
+
+		}
+	}
+}
+
 void TimelineComponent::ResetTimeline() {
 	for (auto clip : runningActiovationClip) {
 		auto iter = std::find(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), clip->gameObject);
@@ -143,10 +186,22 @@ void TimelineComponent::ResetTimeline() {
 		waittingCustomClip.emplace_back(clip);
 	}
 	runningCustomClip.clear();
+	
+	for (auto clip : runningAnimationClip) {
+		auto iter = std::find(clip->gameObject->meshComp->animationClips.begin(), clip->gameObject->meshComp->animationClips.end(), clip);
+		if (iter != clip->gameObject->meshComp->animationClips.end()) {
+			clip->gameObject->meshComp->animationClips.erase(clip->gameObject->meshComp->animationClips.begin()
+				+ std::distance(clip->gameObject->meshComp->animationClips.begin(), iter));
+		}
+
+		waittingAnimationClip.emplace_back(clip);
+	}
+	runningAnimationClip.clear();
 
 }
 
 void TimelineComponent::ClearTimeline() {
+	//activation//////////////////
 	for (auto clip : waittingActiovationClip) {
 		if (clip->gameObject != nullptr) {
 			delete clip->gameObject;
@@ -169,6 +224,7 @@ void TimelineComponent::ClearTimeline() {
 	}
 	runningActiovationClip.clear();
 	
+	//Custom Activation////////////////
 	for (auto clip : waittingCustomClip) {
 		if (clip->gameObject != nullptr) {
 			delete clip->gameObject;
@@ -190,6 +246,29 @@ void TimelineComponent::ClearTimeline() {
 		}
 	}
 	runningCustomClip.clear();
+	
+	//Animation////////////////
+	for (auto clip : waittingAnimationClip) {
+		if (clip->gameObject != nullptr) {
+			delete clip->gameObject;
+		}
+
+		if (clip != nullptr) {
+			delete clip;
+		}
+	}
+	waittingAnimationClip.clear();
+	
+	for (auto clip : runningAnimationClip) {
+		if (clip->gameObject != nullptr) {
+			delete clip->gameObject;
+		}
+
+		if (clip != nullptr) {
+			delete clip;
+		}
+	}
+	runningAnimationClip.clear();
 
 }
 

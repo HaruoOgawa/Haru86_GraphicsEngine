@@ -37,6 +37,7 @@ public:
 	void SetRenderOlder(int order);
 	void ProcessInput(const Uint8* state);
 	friend class GameRenderer;
+	friend class TimelineComponent;
 	int renderOrder;
 private:
 	class MeshRendererComponent* meshComp;
