@@ -47,11 +47,11 @@ void App::Timeline(TimelineObject* timeline)  {
 
 	Game* gamept = Game::GetInstance();
 
-	for (int i = 0; i < (44 + 1) / 3;i++) {
+	for (int i = 0; i < (38 + 1) / 3;i++) {
 		int val = i % 3;
 		switch (val) {
 		case 0:
-			timeline->AddAnimationClip(Scene1_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [gamept]() {gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime; Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 0); printf("gmpt->time in ramda: %f \n", gamept->animTime);  });
+			timeline->AddAnimationClip(Scene1_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [gamept]() {gamept->GetInstance()->animTime = 0.0f; Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 0); });
 			break;
 		case 1:
 			timeline->AddAnimationClip(Scene1_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [gamept]() {gamept->GetInstance()->animTime = 0.0f; Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 1); });
@@ -65,6 +65,16 @@ void App::Timeline(TimelineObject* timeline)  {
 		}
 		
 	}
+
+	timeline->AddAnimationClip(Scene1_Frag, 39.0,45.0, 
+		[gamept]() {
+			gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime;
+			Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 3);
+			Scene1_Frag->meshComp->material->SetFloatUniform("_cameraMoveVal", gamept->GetInstance()->animTime/6.0f);
+			printf(" gamept->GetInstance()->animTime/6.0f: %f \n", gamept->GetInstance()->animTime / 6.0f);
+			printf(" gamept->GetInstance()->time: %f \n", gamept->GetInstance()->time);
+
+	});
 
 	for (int i = 0; i < 21;i++) {
 		int val = i % 3;
