@@ -51,7 +51,6 @@ void MeshRendererComponent::Draw() {
 	material->SetFloatUniform("_deltaTime", game->deltaTime);
 	material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
 
-	printf("Call MeshRenderer CallbackS !! \n");
 	for (auto clip : animationClips) {
 		clip->callback();
 	}

@@ -25,7 +25,7 @@ GameRenderer::GameRenderer(Game* game)
 	sWindowWidth(500),
 	sWindowHeight(500),
 	deltaTime(0.0f),
-	frameResolusion(0.85)
+	frameResolusion(0.7)
 {
 
 }

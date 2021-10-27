@@ -1,6 +1,7 @@
 #include "App.h"
 #include "./GameObject.h"
 #include "./TimelineObject.h"
+#include "./TimelineComponent.h"
 #include "./UIComponent.h"
 #include "./RectTransformComponent.h"
 #include "./MeshRendererComponent.h"
@@ -9,15 +10,17 @@
 GameObject* Scene1_Frag;
 GameObject* Scene2_Frag;
 
+//float animTime = 0.0f;
+
 App::App()
 {
-	
+
 }
 
 App::~App() {
 
 }
-void App::Start() const {
+void App::Start()  {
 	Scene1_Frag = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/VedaStructuredShader/scene1.frag");
 	Scene2_Frag = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/VedaStructuredShader/scene2.frag");
 
@@ -29,19 +32,58 @@ void App::Start() const {
 
 	GameObject* renderBoard = new GameObject(PrimitiveType::BOARD, "./Shader/VedaStructuredShader/BoardRender.vert", "./Shader/VedaStructuredShader/BoardRender.frag",RenderType::DefaultBuffer);
 }
-void App::Update() const {
-	
+void App::Update()  {
+
 }
 
-void App::Timeline(TimelineObject* timeline) const {
-	timeline->AddActivationClip(Scene1_Frag,0.0f,43.0f);
-	timeline->AddActivationClip(Scene2_Frag, 43.0f, 65.0f);
+void App::Timeline(TimelineObject* timeline)  {
+	timeline->AddActivationClip(Scene1_Frag,0.0f,44.0f);
+	timeline->AddActivationClip(Scene2_Frag, 44.0f, 65.0f);
 
-	timeline->AddAnimationClip(Scene1_Frag, 0.0f, 43.0f, [] {printf("Hello Scene1 Callback \n"); });
-	timeline->AddAnimationClip(Scene1_Frag, 5.0f, 10.0f, [] {Scene1_Frag->meshComp->material->SetFloatUniform("_TestVal",1); });
-	timeline->AddAnimationClip(Scene1_Frag, 10.0f, 15.0f, [] {Scene1_Frag->meshComp->material->SetFloatUniform("_TestVal",0); });
-	timeline->AddAnimationClip(Scene1_Frag, 15.0f, 20.0f, [] {Scene1_Frag->meshComp->material->SetFloatUniform("_TestVal",2); });
-	timeline->AddAnimationClip(Scene1_Frag, 20.0f, 43.0f, [] {Scene1_Frag->meshComp->material->SetFloatUniform("_TestVal",0); });
-	timeline->AddAnimationClip(Scene2_Frag, 43.0f, 65.0f, [] {printf("Hello Scene222222 Callback \n"); });
+	float startTime = 0.0f;
+	float timeVal = 3.0f;
+	float endTime = 0.0f;
+	endTime += timeVal;
+
+	Game* gamept = Game::GetInstance();
+
+	for (int i = 0; i < (44 + 1) / 3;i++) {
+		int val = i % 3;
+		switch (val) {
+		case 0:
+			timeline->AddAnimationClip(Scene1_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [gamept]() {gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime; Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 0); printf("gmpt->time in ramda: %f \n", gamept->animTime);  });
+			break;
+		case 1:
+			timeline->AddAnimationClip(Scene1_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [gamept]() {gamept->GetInstance()->animTime = 0.0f; Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 1); });
+			break;
+		case 2:
+			timeline->AddAnimationClip(Scene1_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [gamept]() {gamept->GetInstance()->animTime = 0.0f; Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 2); });
+			break;
+		default:
+			break;
+
+		}
+		
+	}
+
+	for (int i = 0; i < 21;i++) {
+		int val = i % 3;
+		switch (val) {
+		case 0:
+			timeline->AddAnimationClip(Scene2_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [] {Scene2_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 0); });
+			break;
+		case 1:
+			timeline->AddAnimationClip(Scene2_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [] {Scene2_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 1); });
+			break;
+		case 2:
+			timeline->AddAnimationClip(Scene2_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [] {Scene2_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 2); });
+			break;
+		default:
+			break;
+
+		}
+	}
+
+	
 }
 

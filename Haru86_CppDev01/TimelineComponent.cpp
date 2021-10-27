@@ -11,6 +11,7 @@ TimelineComponent::TimelineComponent(Object* o)
 	:Component(o, static_cast<std::string>(typeid(TimelineComponent).name()).substr(6))
 {
 	timeVal = game->time;
+	animTime = 0.0f;
 }
 TimelineComponent::~TimelineComponent() {
 	ClearTimeline();

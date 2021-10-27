@@ -57,6 +57,7 @@ public:
     friend class TimelineObject;
     friend class UIComponent;
     float timeVal;
+    float animTime;
 private:
     void InitializeActivationTrack();
     void InitializeCustomTrack();

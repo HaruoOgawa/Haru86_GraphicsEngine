@@ -8,7 +8,7 @@ in vec2 uv;
 in float time;
 in vec2 resolution;
 
-uniform float _TestVal;
+uniform float _cameraPositionIndex;
 
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
 #define PI 3.14159265
@@ -226,7 +226,23 @@ void main(void) {
   float radius=15.;
 float speed=-.25;
  vec3 ta=vec3(0.);
+
  vec3 ro=vec3(cos(time*speed)*radius,0.0,sin(time*speed)*radius);
+ if(_cameraPositionIndex==0){
+    ta=vec3(0.);
+    ro=vec3(cos(time*speed)*radius,0.0,sin(time*speed)*radius);
+ }else if(_cameraPositionIndex==1){
+    ta=vec3(cos(time*speed)*radius*0.95,0.0,sin(time*speed)*radius*0.95);
+    ro=vec3(cos(time*speed+0.1)*radius,-0.5,sin(time*speed+0.1)*radius);
+ }else if(_cameraPositionIndex==2){
+    ta=vec3(cos(time*speed)*radius*0.5,0.0,sin(time*speed)*radius*0.5);
+    ro=vec3(cos(time*speed-0.5)*radius*0.75,6.0,sin(time*speed-0.5)*radius*0.75);
+ }else if(_cameraPositionIndex==3){
+    ta=vec3(0.);
+    ro=vec3(cos(time*speed-0.5)*radius*0.75,6.0,sin(time*speed-0.5)*radius*0.75);
+ }
+
+
  //vec3 ro=vec3(0.,0.,15.0);
  vec3 cDir=normalize(ta-ro);
  vec3 cSide=cross(cDir,vec3(0.,-1.,0.));
@@ -280,15 +296,7 @@ float speed=-.25;
 
   col*=(1.0-length(st)+0.5);
 
-  if(_TestVal==1){
-    col=vec3(st,0.0);
-  }
   
-  if(_TestVal==2){
-    col=vec3(st,1.0);
-  }
-  
-
 
   gl_FragColor = vec4(col, 1.0);
 }

@@ -26,6 +26,7 @@ public:
 	float deltaTime;
 	class Time* timeObj;
 	class TimelineObject* timelineObj;
+	float animTime;
 	friend class GameObject;
 	friend class UIObject;
 	friend class GameRenderer;

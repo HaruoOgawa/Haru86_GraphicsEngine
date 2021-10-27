@@ -8,6 +8,8 @@ in vec2 uv;
 in float time;
 in vec2 resolution;
 
+uniform float _cameraPositionIndex;
+
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
 #define PI 3.14159265
 struct DBuffer{
@@ -108,6 +110,8 @@ float Cube(vec3 p,vec3 s){
 }
 
 float d1(vec3 p){
+     p*=.5;
+
 /*  p.xy*=rot(time);
   p.xz*=rot(time);
   p.yz*=rot(time);*/
@@ -142,6 +146,8 @@ float speed=10.0;
 }
 
 float d2(vec3 p){
+   
+
   float d=length(p)-1.;
 
 //p.x+=1.5;
@@ -199,6 +205,22 @@ float speed=-.25;
  vec3 ta=vec3(0.);
 // vec3 ta=vec3(cos(time),0.,sin(time));
  vec3 ro=vec3(0.,0.,14.);
+
+ float adjustAcc=0.5;
+ if(_cameraPositionIndex==0){
+ adjustAcc=0.5;
+    ro=vec3(0.,0.,15.);
+ }else if(_cameraPositionIndex==1){
+    adjustAcc=0.5;
+    float radius=1.0*(perlinNoise(vec2(0.123,time*5.0))+1.0)*2.25;
+    ta=vec3(0.,0.,9.);
+    ro=vec3(cos(time)*radius,sin(time)*radius,sin(time)*radius);
+ }else if(_cameraPositionIndex==2){
+    adjustAcc=0.25;
+    st*=rot(time);
+    ro=vec3(22.,-1.,-0.);
+ }
+
 // vec3 ro=vec3(0.,0.,0.);
  vec3 cDir=normalize(ta-ro);
  vec3 cSide=cross(cDir,vec3(0.,-1.,0.));
@@ -225,7 +247,7 @@ float speed=-.25;
     flash+=.1;
     float rim=pow(min(d.d1,2.0),.5);
     float H = mod(time*0.5, 1.0);
-    col+=vec3(exp(-.1*t))*rim*acc.acc1*.75*flash*hsv2rgb2(vec3(H,1.0,1.0),2.2);
+    col+=vec3(exp(-.1*t))*rim*acc.acc1*.75*flash*hsv2rgb2(vec3(H,1.0,1.0),2.2)*(1.0/(adjustAcc*2.0));
     //*pow((1.0-abs(dot(n,rd))),.5)
     ;
   }
@@ -250,7 +272,7 @@ float speed=-.25;
     float flash=1.0-abs(sin(pos.z*.5+time*4.0));
     flash+=.1;
     float H = mod(time*0.5, 1.0);
-    col+=vec3(exp(-.1*t))*acc.acc2*.75*flash*hsv2rgb2(vec3(H,1.0,1.0),2.2);
+    col+=vec3(exp(-.1*t))*acc.acc2*.75*flash*hsv2rgb2(vec3(H,1.0,1.0),2.2)*adjustAcc;
   }
 
   gl_FragColor = vec4(col, 1.0);
