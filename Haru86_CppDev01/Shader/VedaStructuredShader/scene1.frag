@@ -8,6 +8,8 @@ in vec2 uv;
 in float time;
 in vec2 resolution;
 
+uniform float _TestVal;
+
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
 #define PI 3.14159265
 
@@ -278,7 +280,15 @@ float speed=-.25;
 
   col*=(1.0-length(st)+0.5);
 
- // col=vec3(st,0.0);
+  if(_TestVal==1){
+    col=vec3(st,0.0);
+  }
+  
+  if(_TestVal==2){
+    col=vec3(st,1.0);
+  }
+  
+
 
   gl_FragColor = vec4(col, 1.0);
 }

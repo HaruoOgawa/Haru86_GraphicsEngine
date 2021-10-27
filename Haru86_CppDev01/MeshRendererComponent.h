@@ -21,10 +21,11 @@ public:
     void ProcessInput(const Uint8* state)const override;
     bool useZTest;
     std::vector<class TimelineAnimationClip*> animationClips;
+    Material* material;
     friend class GameRenderer;
 private:
     VertexArray* mesh;
-    Material* material;
+   
     class Object* myowner;
 };
 

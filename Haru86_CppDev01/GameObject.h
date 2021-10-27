@@ -36,11 +36,12 @@ public:
 	void UseZTest(bool use);
 	void SetRenderOlder(int order);
 	void ProcessInput(const Uint8* state);
+	class MeshRendererComponent* meshComp;
 	friend class GameRenderer;
 	friend class TimelineComponent;
 	int renderOrder;
 private:
-	class MeshRendererComponent* meshComp;
+	
 	RenderType dummy;
 };
 

@@ -3,7 +3,8 @@
 #include "./TimelineObject.h"
 #include "./UIComponent.h"
 #include "./RectTransformComponent.h"
-
+#include "./MeshRendererComponent.h"
+#include "./Material.h"
 
 GameObject* Scene1_Frag;
 GameObject* Scene2_Frag;
@@ -37,6 +38,10 @@ void App::Timeline(TimelineObject* timeline) const {
 	timeline->AddActivationClip(Scene2_Frag, 43.0f, 65.0f);
 
 	timeline->AddAnimationClip(Scene1_Frag, 0.0f, 43.0f, [] {printf("Hello Scene1 Callback \n"); });
+	timeline->AddAnimationClip(Scene1_Frag, 5.0f, 10.0f, [] {Scene1_Frag->meshComp->material->SetFloatUniform("_TestVal",1); });
+	timeline->AddAnimationClip(Scene1_Frag, 10.0f, 15.0f, [] {Scene1_Frag->meshComp->material->SetFloatUniform("_TestVal",0); });
+	timeline->AddAnimationClip(Scene1_Frag, 15.0f, 20.0f, [] {Scene1_Frag->meshComp->material->SetFloatUniform("_TestVal",2); });
+	timeline->AddAnimationClip(Scene1_Frag, 20.0f, 43.0f, [] {Scene1_Frag->meshComp->material->SetFloatUniform("_TestVal",0); });
 	timeline->AddAnimationClip(Scene2_Frag, 43.0f, 65.0f, [] {printf("Hello Scene222222 Callback \n"); });
 }
 
