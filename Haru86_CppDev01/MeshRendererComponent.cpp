@@ -32,8 +32,18 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 	mesh =new VertexArray(primType);
 	material = new Material(vertexShaderName,fragmentShaderName);
 	if (GameRenderer::GetInstance()->font!=nullptr) {
-		primTex = GameRenderer::GetInstance()->font->GetFontTexture(textureString,glm::vec3(1.0,1.0,1.0), 44);
+		primTex = GameRenderer::GetInstance()->font->GetFontTexture(textureString,glm::vec3(1.0,1.0,1.0), 30);
 	}
+	/*primTex =new Texture();
+	if (!primTex->Load("C:/Users/Haruo Ogawa/Pictures/noise.png")) {
+		delete primTex;
+		primTex = nullptr;
+		printf("Cannot LoadTex");
+	}
+	else {
+		printf("Tex is Loaded !!");
+		printf("primTex: %p \n",primTex);
+	}*/
 	
 }
 
@@ -52,6 +62,14 @@ void MeshRendererComponent::Update() {
 }
 
 void MeshRendererComponent::Draw() {
+	
+	if (primTex != nullptr) {
+		//glEnable(GL_BLEND);
+		//glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		primTex->SetActive();
+		material->SetTexUniform("_fontTexture", primTex->GetTextureID());
+	}
+
 	if (useZTest == true) {
 		glEnable(GL_DEPTH_TEST);
 	}
@@ -72,11 +90,9 @@ void MeshRendererComponent::Draw() {
 		clip->callback();
 	}
 
-	if (primTex != nullptr) {
-		primTex->SetActive();
-		material->SetTexUniform("_fontTexture",primTex->GetTextureID());
-	}
-
+	
+	
+	
 	mesh->SetActive();
 	glDrawElements(GL_TRIANGLES, mesh->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
 }

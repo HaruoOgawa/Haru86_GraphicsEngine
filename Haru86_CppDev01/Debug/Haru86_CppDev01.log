@@ -1,12 +1,7 @@
-﻿  GameRenderer.cpp
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\GameRenderer.cpp(31,1): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-  MeshRendererComponent.cpp
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\TimelineComponent.h(33,1): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'class' として使われていましたが 'struct' として使われています。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\TimelineComponent.h(32): message : 'TimelineAnimationClip' の宣言を確認してください
-  コードを生成中...
+﻿  Font.cpp
   Haru86_CppDev01.vcxproj -> E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
-  0 個のファイルをコピーしました
   ファイルが見つかりません - *.dll
+  0 個のファイルをコピーしました
   ファイルが見つかりません - *.dll
   0 個のファイルをコピーしました
   C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmod.dll

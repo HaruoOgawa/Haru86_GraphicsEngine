@@ -29,11 +29,7 @@ GameRenderer::GameRenderer(Game* game)
 	frameResolusion(0.7),
 	font(nullptr)
 {
-	font = new Font();
-	if (!(font->Load("E:/C++Dev/Haru86_CppDev01/Haru86_CppDev01/Haru86_CppDev01/Resources/FRSCRIPT.TTF"))) {
-		delete font;
-		font=nullptr;
-	}
+	
 }
 
 GameRenderer::~GameRenderer() {
@@ -84,6 +80,12 @@ bool GameRenderer::Initialize(float width,float height) {
 
 	if (!CreateFrameBuffer()) {
 		SDL_Log("Can not create frame buffer");
+	}
+
+	font = new Font();
+	if (!(font->Load("C:/Windows/Fonts/FRSCRIPT.TTF"))) {
+		delete font;
+		font = nullptr;
 	}
 
 	return true;

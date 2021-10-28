@@ -9,6 +9,7 @@ public:
 	~Texture();
 	void CreateForRendering(int width, int height, unsigned int format);
 	void CreateTrueTypeFontTexture(SDL_Surface* surf);
+	bool Load(const std::string& fileName);
 	unsigned int GetTextureID() const { return mTextureID; }
 	void SetActive();
 	void Unload();

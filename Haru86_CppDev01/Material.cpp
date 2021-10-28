@@ -96,7 +96,7 @@ void Material::SetVec2Uniform(std::string uniformName, glm::vec2 val) {
 
 void Material::SetTexUniform(std::string uniformName, unsigned int val) {
 	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
-	glUniform1i(location, val);
+	glUniform1i(location, static_cast<GLuint>(val-1));
 }
 
 void Material::UnLoadData() {

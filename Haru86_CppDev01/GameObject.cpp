@@ -25,6 +25,8 @@ GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std
 	Game::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = new MeshRendererComponent(this, primType,vertexShaderName,fragmentShaderName, textureString);
 	Object::AddComponent(meshComp);
+	UseZTest(false);
+	SetRenderOlder(RenderQueue::UI);
 }
 
 GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, RenderType renderType)
