@@ -5,6 +5,7 @@
 #include "TransformComponent.h"
 #include "./Game.h"
 #include "./Texture.h"
+#include "./Font.h"
 
 GameRenderer* GameRenderer::renderer_instance = nullptr;
 
@@ -25,9 +26,14 @@ GameRenderer::GameRenderer(Game* game)
 	sWindowWidth(500),
 	sWindowHeight(500),
 	deltaTime(0.0f),
-	frameResolusion(0.7)
+	frameResolusion(0.7),
+	font(nullptr)
 {
-
+	font = new Font();
+	if (!(font->Load("E:/C++Dev/Haru86_CppDev01/Haru86_CppDev01/Haru86_CppDev01/Resources/FRSCRIPT.TTF"))) {
+		delete font;
+		font=nullptr;
+	}
 }
 
 GameRenderer::~GameRenderer() {
@@ -143,8 +149,8 @@ void GameRenderer::Draw() {
 	for (auto obj : mgame->boardGameObjectList) {
 		//PostProcessTextureのセット メンバ変数のPOstProcessIDを参照するとか？？
 		obj->transform->CalMatrix();
-		frameTexture->SetActive(0);
-		obj->meshComp->material->SetTexUniform("frameTex", 0);
+		frameTexture->SetActive();
+		obj->meshComp->material->SetTexUniform("frameTex", frameTexture->GetTextureID());
 		obj->meshComp->DrawBoard();
 	}
 

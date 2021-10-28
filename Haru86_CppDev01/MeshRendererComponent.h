@@ -14,6 +14,7 @@ class MeshRendererComponent :
 public:
     MeshRendererComponent(class Object* o,PrimitiveType primType);
     MeshRendererComponent(class Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName);
+    MeshRendererComponent(class Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, std::string textureString);
     ~MeshRendererComponent();
     void Update() override;
     void Draw();
@@ -25,7 +26,7 @@ public:
     friend class GameRenderer;
 private:
     VertexArray* mesh;
-   
+    class Texture* primTex;
     class Object* myowner;
 };
 

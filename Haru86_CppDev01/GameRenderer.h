@@ -22,6 +22,7 @@ public:
 	glm::ivec2 GetScreenSize();
 	float deltaTime;
 	float frameResolusion;
+	class Font* font;
 private:
 	SDL_Window* sWindow;
 	int sWindowWidth;
