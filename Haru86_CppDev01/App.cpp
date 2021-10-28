@@ -10,6 +10,12 @@
 GameObject* Scene1_Frag;
 GameObject* Scene2_Frag;
 
+//font
+GameObject* DemoText;
+GameObject* MusicText;
+GameObject* MyCreditText;
+GameObject* TitleText;
+
 //float animTime = 0.0f;
 
 App::App()
@@ -32,7 +38,10 @@ void App::Start()  {
 
 	GameObject* renderBoard = new GameObject(PrimitiveType::BOARD, "./Shader/VedaStructuredShader/BoardRender.vert", "./Shader/VedaStructuredShader/BoardRender.frag",RenderType::DefaultBuffer);
 
-	GameObject* sampleFontTexture = new GameObject(PrimitiveType::BOARD, "./Shader/FontText.vert", "./Shader/FontText.frag","Demo Scene");
+	DemoText = new GameObject(PrimitiveType::BOARD, "./Shader/FontText.vert", "./Shader/FontText.frag","Demo Scene");
+	MusicText = new GameObject(PrimitiveType::BOARD, "./Shader/FontText.vert", "./Shader/FontText.frag","Music: lug00ber");
+	MyCreditText = new GameObject(PrimitiveType::BOARD, "./Shader/FontText.vert", "./Shader/FontText.frag","Mouvie: Haru86_");
+	TitleText = new GameObject(PrimitiveType::BOARD, "./Shader/FontText.vert", "./Shader/FontText.frag","Labyrinth");
 
 }
 void App::Update()  {
@@ -97,6 +106,16 @@ void App::Timeline(TimelineObject* timeline)  {
 		}
 	}
 
+
+	timeline->AddActivationClip(DemoText, 2.0f, 12.0f);
+	timeline->AddActivationClip(MusicText, 12.0f, 22.0f);
+	timeline->AddActivationClip(MyCreditText, 22.0f, 32.0f);
+	timeline->AddActivationClip(TitleText, 32.0f, 42.0f);
+	
+	timeline->AddAnimationClip(DemoText, 2.0f, 12.0f, []() {printf("Hello Tex2"); });
+	timeline->AddAnimationClip(MusicText, 12.0f, 22.0f, []() {printf("Hello Tex3"); });
+	timeline->AddAnimationClip(MyCreditText, 22.0f, 32.0f, []() {printf("Hello Tex4"); });
+	timeline->AddAnimationClip(TitleText, 32.0f, 42.0f, []() {printf("Hello Tex5"); });
 	
 }
 

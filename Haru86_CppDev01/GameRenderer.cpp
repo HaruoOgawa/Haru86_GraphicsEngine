@@ -83,7 +83,7 @@ bool GameRenderer::Initialize(float width,float height) {
 	}
 
 	font = new Font();
-	if (!(font->Load("C:/Windows/Fonts/FRSCRIPT.TTF"))) {
+	if (!(font->Load("C:/Windows/Fonts/HGRMB.TTC"))) {
 		delete font;
 		font = nullptr;
 	}
@@ -127,6 +127,7 @@ void GameRenderer::Draw() {
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
 
+	printf("mgame->gameObjectList.size(): %d \n",mgame->gameObjectList.size());
 	for (auto obj : mgame->gameObjectList) {
 		obj->transform->CalMatrix();
 		obj->meshComp->Draw();

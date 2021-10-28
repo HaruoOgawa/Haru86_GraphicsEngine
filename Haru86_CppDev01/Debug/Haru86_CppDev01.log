@@ -1,8 +1,6 @@
-﻿  Font.cpp
-soil.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_DXT.obj)' で、または 'E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-soil.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_helper.obj)' で、または 'E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-soil.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(SOIL.obj)' で、または 'E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(stb_image_aug.obj)' で、または 'E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+﻿  App.cpp
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\MeshRendererComponent.h(24,44): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\TimelineComponent.h(32): message : 'TimelineAnimationClip' の宣言を確認してください
   Haru86_CppDev01.vcxproj -> E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
   ファイルが見つかりません - *.dll
   0 個のファイルをコピーしました

@@ -68,6 +68,7 @@ void MeshRendererComponent::Draw() {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		primTex->SetActive();
 		material->SetTexUniform("_fontTexture", primTex->GetTextureID());
+		//printf("primTex->GetTextureID(): %d \n",primTex->GetTextureID());
 	}
 
 	if (useZTest == true) {
