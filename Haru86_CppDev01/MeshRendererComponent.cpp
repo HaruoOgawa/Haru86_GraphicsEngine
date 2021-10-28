@@ -64,8 +64,8 @@ void MeshRendererComponent::Update() {
 void MeshRendererComponent::Draw() {
 	
 	if (primTex != nullptr) {
-		//glEnable(GL_BLEND);
-		//glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		primTex->SetActive();
 		material->SetTexUniform("_fontTexture", primTex->GetTextureID());
 	}

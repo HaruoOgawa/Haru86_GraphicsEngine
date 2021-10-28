@@ -33,7 +33,6 @@ void App::Start()  {
 	GameObject* renderBoard = new GameObject(PrimitiveType::BOARD, "./Shader/VedaStructuredShader/BoardRender.vert", "./Shader/VedaStructuredShader/BoardRender.frag",RenderType::DefaultBuffer);
 
 	GameObject* sampleFontTexture = new GameObject(PrimitiveType::BOARD, "./Shader/FontText.vert", "./Shader/FontText.frag","Demo Scene");
-	sampleFontTexture->SetScale(glm::vec3(2.0, 2.0, 2.0));
 
 }
 void App::Update()  {

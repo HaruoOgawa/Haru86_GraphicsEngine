@@ -54,10 +54,10 @@ Texture* Font::GetFontTexture(const std::string fontText, const glm::vec3 color,
 	
 
 	SDL_Color sdlColor;
-	sdlColor.r = static_cast<Uint8>(color.x * 255);
+	sdlColor.r = static_cast<Uint8>(color.x * 0);
 	sdlColor.g = static_cast<Uint8>(color.y * 0);
 	sdlColor.b = static_cast<Uint8>(color.z * 0);
-	sdlColor.a = static_cast<Uint8>(255);
+	sdlColor.a = 255;
 
 	printf("sdlColor r:%d , g:%d , b:%d a:%d \n",static_cast<int>(sdlColor.r), static_cast<int>(sdlColor.g), static_cast<int>(sdlColor.b), static_cast<int>(sdlColor.a));
 	
@@ -67,7 +67,7 @@ Texture* Font::GetFontTexture(const std::string fontText, const glm::vec3 color,
 
 		printf("fontText.c_str(): %s \n", fontText.c_str());
 
-		SDL_Surface* surf = TTF_RenderUTF8_Blended(static_cast<TTF_Font*>(font), fontText.c_str(), sdlColor);
+		SDL_Surface* surf = TTF_RenderUTF8_Blended(font, fontText.c_str(), sdlColor);
 		
 		if (surf != nullptr) {
 			texture = new Texture();

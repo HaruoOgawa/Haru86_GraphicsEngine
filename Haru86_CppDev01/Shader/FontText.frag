@@ -10,6 +10,6 @@ uniform sampler2D _fontTexture;
 
 void main(){
 	vec4 col=vec4(uv.x,uv.y,0.0,1.0);
-	col=texture(_fontTexture,uv);
+	col=texture(_fontTexture,1.0-uv);
 	gl_FragColor=col;
 }
