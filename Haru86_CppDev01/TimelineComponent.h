@@ -34,12 +34,16 @@ struct TimelineAnimationClip
     class GameObject* gameObject;
     float startTime;
     float endTime;
-    std::function<void(void)> callback;
-    TimelineAnimationClip(class GameObject* obj,float s,float e,std::function<void(void)> func) {
+    float lifeTime;
+    float lifeTimeRate;
+    std::function<void(float)> callback;
+    TimelineAnimationClip(class GameObject* obj,float s,float e,std::function<void(float)> func) {
         this->gameObject = obj;
         this->startTime = s;
         this->endTime = e;
         this->callback = func;
+        this->lifeTime = 0.0f;
+        this->lifeTimeRate = 0.0f;
     }
 };
 

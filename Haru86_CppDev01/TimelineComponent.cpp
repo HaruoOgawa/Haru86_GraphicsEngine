@@ -145,6 +145,8 @@ void TimelineComponent::ComputeAnimationTrack(float time) {
 	}
 
 	for (auto clip : runningAnimationClip) {
+		clip->lifeTime += Game::GetInstance()->deltaTime;
+		clip->lifeTimeRate = clip->lifeTime / (clip->endTime*0.001f - clip->startTime * 0.001f);
 		if (time > clip->endTime) {
 			auto iter = std::find(clip->gameObject->meshComp->animationClips.begin(), clip->gameObject->meshComp->animationClips.end(), clip);
 			if (iter!= clip->gameObject->meshComp->animationClips.end()) {

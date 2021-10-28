@@ -127,7 +127,6 @@ void GameRenderer::Draw() {
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
 
-	printf("mgame->gameObjectList.size(): %d \n",mgame->gameObjectList.size());
 	for (auto obj : mgame->gameObjectList) {
 		obj->transform->CalMatrix();
 		obj->meshComp->Draw();

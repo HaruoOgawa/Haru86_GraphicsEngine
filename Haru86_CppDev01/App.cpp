@@ -7,6 +7,7 @@
 #include "./MeshRendererComponent.h"
 #include "./Material.h"
 
+//ray
 GameObject* Scene1_Frag;
 GameObject* Scene2_Frag;
 
@@ -16,7 +17,6 @@ GameObject* MusicText;
 GameObject* MyCreditText;
 GameObject* TitleText;
 
-//float animTime = 0.0f;
 
 App::App()
 {
@@ -63,13 +63,13 @@ void App::Timeline(TimelineObject* timeline)  {
 		int val = i % 3;
 		switch (val) {
 		case 0:
-			timeline->AddAnimationClip(Scene1_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [gamept]() {gamept->GetInstance()->animTime = 0.0f; Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 0); });
+			timeline->AddAnimationClip(Scene1_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [gamept](float val) {gamept->GetInstance()->animTime = 0.0f; Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 0); });
 			break;
 		case 1:
-			timeline->AddAnimationClip(Scene1_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [gamept]() {gamept->GetInstance()->animTime = 0.0f; Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 1); });
+			timeline->AddAnimationClip(Scene1_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [gamept](float val) {gamept->GetInstance()->animTime = 0.0f; Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 1); });
 			break;
 		case 2:
-			timeline->AddAnimationClip(Scene1_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [gamept]() {gamept->GetInstance()->animTime = 0.0f; Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 2); });
+			timeline->AddAnimationClip(Scene1_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [gamept](float val) {gamept->GetInstance()->animTime = 0.0f; Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 2); });
 			break;
 		default:
 			break;
@@ -79,7 +79,7 @@ void App::Timeline(TimelineObject* timeline)  {
 	}
 
 	timeline->AddAnimationClip(Scene1_Frag, 39.0,45.0, 
-		[gamept]() {
+		[gamept](float val) {
 			gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime;
 			Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 3);
 			Scene1_Frag->meshComp->material->SetFloatUniform("_cameraMoveVal", gamept->GetInstance()->animTime/6.0f);
@@ -92,13 +92,13 @@ void App::Timeline(TimelineObject* timeline)  {
 		int val = i % 3;
 		switch (val) {
 		case 0:
-			timeline->AddAnimationClip(Scene2_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [] {Scene2_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 0); });
+			timeline->AddAnimationClip(Scene2_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [](float val) {Scene2_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 0); });
 			break;
 		case 1:
-			timeline->AddAnimationClip(Scene2_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [] {Scene2_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 1); });
+			timeline->AddAnimationClip(Scene2_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [] (float val){Scene2_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 1); });
 			break;
 		case 2:
-			timeline->AddAnimationClip(Scene2_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [] {Scene2_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 2); });
+			timeline->AddAnimationClip(Scene2_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [](float val) {Scene2_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 2); });
 			break;
 		default:
 			break;
@@ -112,10 +112,10 @@ void App::Timeline(TimelineObject* timeline)  {
 	timeline->AddActivationClip(MyCreditText, 22.0f, 32.0f);
 	timeline->AddActivationClip(TitleText, 32.0f, 42.0f);
 	
-	timeline->AddAnimationClip(DemoText, 2.0f, 12.0f, []() {printf("Hello Tex2"); });
-	timeline->AddAnimationClip(MusicText, 12.0f, 22.0f, []() {printf("Hello Tex3"); });
-	timeline->AddAnimationClip(MyCreditText, 22.0f, 32.0f, []() {printf("Hello Tex4"); });
-	timeline->AddAnimationClip(TitleText, 32.0f, 42.0f, []() {printf("Hello Tex5"); });
+	timeline->AddAnimationClip(DemoText, 2.0f, 12.0f, [](float val) {printf("val: %f \n", val);  });
+	timeline->AddAnimationClip(MusicText, 12.0f, 22.0f, [](float val) { });
+	timeline->AddAnimationClip(MyCreditText, 22.0f, 32.0f, [](float val) { });
+	timeline->AddAnimationClip(TitleText, 32.0f, 42.0f, [](float val) { });
 	
 }
 
