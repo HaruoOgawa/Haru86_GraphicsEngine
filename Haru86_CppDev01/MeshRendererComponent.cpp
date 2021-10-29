@@ -91,7 +91,7 @@ void MeshRendererComponent::Draw() {
 	}
 
 	
-	printf("animationClips.size(): %d \n",animationClips.size());
+	//printf("animationClips.size(): %d \n",animationClips.size());
 	
 	mesh->SetActive();
 	glDrawElements(GL_TRIANGLES, mesh->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
@@ -114,6 +114,10 @@ void MeshRendererComponent::DrawBoard() {
 	material->SetFloatUniform("_deltaTime", game->deltaTime);
 	material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
 	material->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+
+	for (auto clip : animationClips) {
+		clip->callback(clip->lifeTimeRate);
+	}
 
 	mesh->SetActive();
 	glDrawElements(GL_TRIANGLES, mesh->GetNumIndices(), GL_UNSIGNED_INT, nullptr);

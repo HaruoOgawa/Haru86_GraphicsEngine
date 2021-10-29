@@ -201,6 +201,7 @@
     <None Include="Shader\VedaStructuredShader\BoardRender.frag" />
     <None Include="Shader\FontText.vert" />
     <None Include="Shader\FontText.frag" />
+    <None Include="Shader\VedaStructuredShader\PostProcess.frag" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Haru86_CppDev01.rc">

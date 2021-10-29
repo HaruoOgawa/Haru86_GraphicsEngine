@@ -27,7 +27,9 @@ GameRenderer::GameRenderer(Game* game)
 	sWindowHeight(500),
 	deltaTime(0.0f),
 	frameResolusion(0.7),
-	font(nullptr)
+	font(nullptr),
+	frameTexture(new Texture()),
+	postProcessTexture(nullptr)
 {
 	
 }
@@ -78,9 +80,14 @@ bool GameRenderer::Initialize(float width,float height) {
 	}
 	glGetError();
 
-	if (!CreateFrameBuffer()) {
+
+	if (!CreateFrameBuffer(frameTexture,frameBuffer)) {
 		SDL_Log("Can not create frame buffer");
 	}
+	
+	/*if (!CreateFrameBuffer(postProcessTexture, postProcessBuffer)) {
+		SDL_Log("Can not create frame buffer");
+	}*/
 
 	font = new Font();
 	if (!(font->Load("C:/Windows/Fonts/HGRMB.TTC"))) {
@@ -95,22 +102,21 @@ glm::ivec2 GameRenderer::GetScreenSize() {
 	return glm::ivec2(sWindowWidth, sWindowHeight);
 }
 
-bool GameRenderer::CreateFrameBuffer() {
+bool GameRenderer::CreateFrameBuffer(class Texture* fTex, unsigned int& fBuffer) {
 	int width = static_cast<int>(GetScreenSize().x) ;
 	int height = static_cast<int>(GetScreenSize().y );
 	
-	glGenFramebuffers(1, &frameBuffer);
+	glGenFramebuffers(1, &fBuffer);
 	GLuint depthBuffer;
 	glGenRenderbuffers(1, &depthBuffer);
 
-	frameTexture = new Texture();
-	frameTexture->CreateForRendering(width, height, GL_RGBA);
+	fTex->CreateForRendering(width, height, GL_RGBA);
 	
 	glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer);
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
 
-	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, frameTexture->GetTextureID(), 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, fBuffer);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fTex->GetTextureID(), 0);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);
 
 	return true;
@@ -133,9 +139,6 @@ void GameRenderer::Draw() {
 	}
 
 	//pass2////////////////////////////////////////////////
-	/*for (auto postProcess : postProcessList) {
-		//‚±‚±‚ÅPostProcess‚ðØ‚è‘Ö‚¦‚é
-	}*/
 	
 	//pass3////////////////////////////////////////////////
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -157,14 +160,18 @@ void GameRenderer::Draw() {
 	}
 
 	SDL_GL_SwapWindow(sWindow);
+
 }
 
 void GameRenderer::ShutDown() {
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(sWindow);
 
-	glDeleteFramebuffers(1, &frameBuffer);
-	frameTexture->Unload();
-	delete frameTexture;
-	frameTexture = nullptr;
+	
+	if (frameTexture!=nullptr) {
+		glDeleteFramebuffers(1, &frameBuffer);
+		frameTexture->Unload();
+		delete frameTexture;
+		frameTexture = nullptr;
+	}
 }

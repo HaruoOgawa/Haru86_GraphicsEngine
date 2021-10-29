@@ -6,8 +6,14 @@ in vec2 resolution;
 
 uniform sampler2D frameTex;
 uniform float _frameResolusion;
+uniform float _postProcessFlag;
 
 void main(void){
-	gl_FragColor=texture(frameTex,uv*_frameResolusion);
-	//gl_FragColor=vec4(uv,0.,1.);
+	vec4 col=texture(frameTex,uv*_frameResolusion);
+	
+	if(_postProcessFlag==1){
+		col.rgb=1.0-col.rgb;
+	}
+	
+	gl_FragColor=col;
 }

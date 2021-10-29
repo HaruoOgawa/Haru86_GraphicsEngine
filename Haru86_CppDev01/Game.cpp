@@ -159,6 +159,21 @@ void Game::ShutDown() {
 		delete obj;
 	}
 
+	for (auto obj : boardGameObjectList) {
+		delete obj;
+	}
+
+	for (auto obj : postProcessGameObjectList) {
+		delete obj;
+	}
+
+	for (auto obj : uiObjectList) {
+		delete obj;
+	}
+
 	gameObjectList.clear();
+	boardGameObjectList.clear();
+	postProcessGameObjectList.clear();
 	uiObjectList.clear();
+
 }

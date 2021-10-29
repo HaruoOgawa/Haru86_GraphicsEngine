@@ -19,10 +19,9 @@ enum RenderQueue
 };
 
 enum class RenderType {
-	FrameBuffer,
 	DefaultBuffer,
-	Test,
-	Obj
+	FrameBuffer,
+	PostProcess
 };
 
 class GameObject
@@ -44,6 +43,6 @@ public:
 	int renderOrder;
 private:
 	
-	RenderType dummy;
+	RenderType renderType;
 };
 

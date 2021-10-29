@@ -17,6 +17,8 @@ GameObject* MusicText;
 GameObject* MyCreditText;
 GameObject* TitleText;
 
+//frame board
+GameObject* renderBoard;
 
 App::App()
 {
@@ -36,7 +38,7 @@ void App::Start()  {
 	uiButton->AddComponent(new UIComponent(uiButton));
 	uiButton->AddComponent(new RectTransformComponent(uiButton,0.1f,0.1f));
 
-	GameObject* renderBoard = new GameObject(PrimitiveType::BOARD, "./Shader/VedaStructuredShader/BoardRender.vert", "./Shader/VedaStructuredShader/BoardRender.frag",RenderType::DefaultBuffer);
+	renderBoard = new GameObject(PrimitiveType::BOARD, "./Shader/VedaStructuredShader/BoardRender.vert", "./Shader/VedaStructuredShader/BoardRender.frag",RenderType::FrameBuffer);
 
 	DemoText = new GameObject(PrimitiveType::BOARD, "./Shader/FontText.vert", "./Shader/FontText.frag","Demo Scene");
 	MusicText = new GameObject(PrimitiveType::BOARD, "./Shader/FontText.vert", "./Shader/FontText.frag","Music: lug00ber");
@@ -114,7 +116,7 @@ void App::Timeline(TimelineObject* timeline)  {
 	
 	timeline->AddAnimationClip(DemoText, 2.0f, 12.0f, [](float val) {
 		
-	printf("val: %f \n", val);
+	//printf("val: %f \n", val);
 	
 	float delayVal = 0.2f;
 	if (val<= delayVal) {
@@ -131,7 +133,7 @@ void App::Timeline(TimelineObject* timeline)  {
 
 	timeline->AddAnimationClip(MusicText, 12.0f, 22.0f, [](float val) {
 		
-		printf("val: %f \n", val);
+		//printf("val: %f \n", val);
 
 		float delayVal = 0.2f;
 		if (val <= delayVal) {
@@ -147,7 +149,7 @@ void App::Timeline(TimelineObject* timeline)  {
 	});
 	timeline->AddAnimationClip(MyCreditText, 22.0f, 32.0f, [](float val) {
 		
-		printf("val: %f \n", val);
+		//printf("val: %f \n", val);
 
 		float delayVal = 0.2f;
 		if (val <= delayVal) {
@@ -163,7 +165,7 @@ void App::Timeline(TimelineObject* timeline)  {
 	});
 	timeline->AddAnimationClip(TitleText, 32.0f, 42.0f, [](float val) {
 		
-		printf("val: %f \n", val);
+		//printf("val: %f \n", val);
 
 		float delayVal = 0.2f;
 		if (val <= delayVal) {
@@ -177,6 +179,11 @@ void App::Timeline(TimelineObject* timeline)  {
 		}
 
 	});
+
+	//frame board
+	timeline->AddAnimationClip(renderBoard, 0.0f, 2.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(renderBoard, 2.0f, 6.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",1); });
+	timeline->AddAnimationClip(renderBoard, 6.0f, 8.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
 	
 }
 
