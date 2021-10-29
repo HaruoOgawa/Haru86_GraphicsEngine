@@ -181,9 +181,13 @@ void App::Timeline(TimelineObject* timeline)  {
 	});
 
 	//frame board
-	timeline->AddAnimationClip(renderBoard, 0.0f, 2.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
-	timeline->AddAnimationClip(renderBoard, 2.0f, 6.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",1); });
-	timeline->AddAnimationClip(renderBoard, 6.0f, 8.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(renderBoard, 0.0f, 39.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(renderBoard, 39.0f, 45.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",1); });
+	timeline->AddAnimationClip(renderBoard, 45.0f, 45.5f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
 	
+	timeline->AddAnimationClip(renderBoard, 45.5f, 50.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(renderBoard, 50.0f, 55.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",2); });
+	timeline->AddAnimationClip(renderBoard, 55.0f, 65.5f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+		
 }
 
