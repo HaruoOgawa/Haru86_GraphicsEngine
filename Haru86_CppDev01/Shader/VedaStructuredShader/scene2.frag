@@ -217,8 +217,8 @@ float speed=-.25;
     ro=vec3(cos(time)*radius,sin(time)*radius,sin(time)*radius);
  }else if(_cameraPositionIndex==2){
     adjustAcc=0.25;
-    st*=rot(time);
-    ro=vec3(22.,-1.,-0.);
+    //st*=rot(time);
+    ro=vec3(-2.,-1.,20.);
  }
 
 // vec3 ro=vec3(0.,0.,0.);

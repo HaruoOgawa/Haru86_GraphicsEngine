@@ -236,6 +236,9 @@ xcopy "C:\SDL2_ttf-2.0.15\lib\x86\SDL2_ttf.dll" "$(OutDir)" /i /s /y
     <None Include="Shader\VedaStructuredShader\BoardRender.frag" />
     <None Include="Shader\VedaStructuredShader\BoardRender.vert" />
     <None Include="Shader\VedaStructuredShader\PostProcess.frag" />
+    <None Include="Shader\VedaStructuredShader\save.frag" />
+    <None Include="Shader\VedaStructuredShader\scene1.frag" />
+    <None Include="Shader\VedaStructuredShader\scene2.frag" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Haru86_CppDev01.rc" />

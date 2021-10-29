@@ -303,7 +303,8 @@ float speed=-.25;
   col*=(1.0-length(st)+0.5);
 
   if(_cameraPositionIndex==3){
-    col+=(_cameraMoveVal>0.5)? vec3(1.0)*_cameraMoveVal:vec3(0.0);
+  float startVal=0.5;
+    col+=(_cameraMoveVal>startVal)? vec3(1.0)*(1.0-(1.0-min(_cameraMoveVal,1.0))/(1.0-startVal)):vec3(0.0);
   }
 
   gl_FragColor = vec4(col, 1.0);

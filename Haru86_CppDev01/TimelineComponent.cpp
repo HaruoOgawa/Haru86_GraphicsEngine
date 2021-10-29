@@ -130,7 +130,6 @@ void TimelineComponent::ComputeCustomTrack(float time) {
 }
 
 void TimelineComponent::ComputeAnimationTrack(float time) {
-	//printf("waittingActiovationClip.size(): %d \n",waittingActiovationClip.size());
 	for (auto clip : waittingAnimationClip) {
 		if (clip->startTime < time && clip->endTime >= time) {
 			clip->lifeTime = 0.0f;
@@ -203,7 +202,6 @@ void TimelineComponent::ResetTimeline() {
 		}*/
 
 		clip->gameObject->meshComp->animationClips.clear();
-		printf("clip->gameObject->meshComp->animationClips After Clear: %d \n", clip->gameObject->meshComp->animationClips.size());
 		waittingAnimationClip.emplace_back(clip);
 	}
 	runningAnimationClip.clear();
