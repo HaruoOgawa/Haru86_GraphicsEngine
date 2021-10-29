@@ -130,8 +130,11 @@ void TimelineComponent::ComputeCustomTrack(float time) {
 }
 
 void TimelineComponent::ComputeAnimationTrack(float time) {
+	//printf("waittingActiovationClip.size(): %d \n",waittingActiovationClip.size());
 	for (auto clip : waittingAnimationClip) {
 		if (clip->startTime < time && clip->endTime >= time) {
+			clip->lifeTime = 0.0f;
+			clip->lifeTimeRate = 0.0f;
 			clip->gameObject->meshComp->animationClips.emplace_back(clip);
 			runningAnimationClip.emplace_back(clip);
 
@@ -191,12 +194,16 @@ void TimelineComponent::ResetTimeline() {
 	runningCustomClip.clear();
 	
 	for (auto clip : runningAnimationClip) {
-		auto iter = std::find(clip->gameObject->meshComp->animationClips.begin(), clip->gameObject->meshComp->animationClips.end(), clip);
+		clip->lifeTime = 0.0f;
+		clip->lifeTimeRate = 0.0f;
+		/*auto iter = std::find(clip->gameObject->meshComp->animationClips.begin(), clip->gameObject->meshComp->animationClips.end(), clip);
 		if (iter != clip->gameObject->meshComp->animationClips.end()) {
 			clip->gameObject->meshComp->animationClips.erase(clip->gameObject->meshComp->animationClips.begin()
 				+ std::distance(clip->gameObject->meshComp->animationClips.begin(), iter));
-		}
+		}*/
 
+		clip->gameObject->meshComp->animationClips.clear();
+		printf("clip->gameObject->meshComp->animationClips After Clear: %d \n", clip->gameObject->meshComp->animationClips.size());
 		waittingAnimationClip.emplace_back(clip);
 	}
 	runningAnimationClip.clear();

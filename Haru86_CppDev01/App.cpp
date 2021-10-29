@@ -45,7 +45,7 @@ void App::Start()  {
 
 }
 void App::Update()  {
-
+	//printf("Game::GetInstance()->deltaTime: %f \n",Game::GetInstance()->deltaTime);
 }
 
 void App::Timeline(TimelineObject* timeline)  {
@@ -112,10 +112,71 @@ void App::Timeline(TimelineObject* timeline)  {
 	timeline->AddActivationClip(MyCreditText, 22.0f, 32.0f);
 	timeline->AddActivationClip(TitleText, 32.0f, 42.0f);
 	
-	timeline->AddAnimationClip(DemoText, 2.0f, 12.0f, [](float val) {printf("val: %f \n", val);  });
-	timeline->AddAnimationClip(MusicText, 12.0f, 22.0f, [](float val) { });
-	timeline->AddAnimationClip(MyCreditText, 22.0f, 32.0f, [](float val) { });
-	timeline->AddAnimationClip(TitleText, 32.0f, 42.0f, [](float val) { });
+	timeline->AddAnimationClip(DemoText, 2.0f, 12.0f, [](float val) {
+		
+	printf("val: %f \n", val);
+	
+	float delayVal = 0.2f;
+	if (val<= delayVal) {
+		DemoText->meshComp->material->SetFloatUniform("_alpha", val/ delayVal);
+	}
+	else if (val > delayVal && val < 1.0f- delayVal) {
+		DemoText->meshComp->material->SetFloatUniform("_alpha", 1.0f);
+	}
+	else if (val>=1.0f- delayVal) {
+		DemoText->meshComp->material->SetFloatUniform("_alpha", (1.0f - val)/delayVal);
+	}
+
+	});
+
+	timeline->AddAnimationClip(MusicText, 12.0f, 22.0f, [](float val) {
+		
+		printf("val: %f \n", val);
+
+		float delayVal = 0.2f;
+		if (val <= delayVal) {
+			MusicText->meshComp->material->SetFloatUniform("_alpha", val / delayVal);
+		}
+		else if (val > delayVal && val < 1.0f - delayVal) {
+			MusicText->meshComp->material->SetFloatUniform("_alpha", 1.0f);
+		}
+		else if (val >= 1.0f - delayVal) {
+			MusicText->meshComp->material->SetFloatUniform("_alpha", (1.0f - val) / delayVal);
+		}
+
+	});
+	timeline->AddAnimationClip(MyCreditText, 22.0f, 32.0f, [](float val) {
+		
+		printf("val: %f \n", val);
+
+		float delayVal = 0.2f;
+		if (val <= delayVal) {
+			MyCreditText->meshComp->material->SetFloatUniform("_alpha", val / delayVal);
+		}
+		else if (val > delayVal && val < 1.0f - delayVal) {
+			MyCreditText->meshComp->material->SetFloatUniform("_alpha", 1.0f);
+		}
+		else if (val >= 1.0f - delayVal) {
+			MyCreditText->meshComp->material->SetFloatUniform("_alpha", (1.0f - val) / delayVal);
+		}
+
+	});
+	timeline->AddAnimationClip(TitleText, 32.0f, 42.0f, [](float val) {
+		
+		printf("val: %f \n", val);
+
+		float delayVal = 0.2f;
+		if (val <= delayVal) {
+			TitleText->meshComp->material->SetFloatUniform("_alpha", val / delayVal);
+		}
+		else if (val > delayVal && val < 1.0f - delayVal) {
+			TitleText->meshComp->material->SetFloatUniform("_alpha", 1.0f);
+		}
+		else if (val >= 1.0f - delayVal) {
+			TitleText->meshComp->material->SetFloatUniform("_alpha", (1.0f - val) / delayVal);
+		}
+
+	});
 	
 }
 

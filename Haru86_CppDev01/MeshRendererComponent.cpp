@@ -91,7 +91,7 @@ void MeshRendererComponent::Draw() {
 	}
 
 	
-	
+	printf("animationClips.size(): %d \n",animationClips.size());
 	
 	mesh->SetActive();
 	glDrawElements(GL_TRIANGLES, mesh->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
