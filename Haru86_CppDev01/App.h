@@ -10,9 +10,10 @@ class App
 public:
 	App();
 	~App();
-	void Start() const override;
-	void Update() const override;
-	void Timeline(class TimelineObject* timelineObj) const override;
+	void Start()  override;
+	void Update()  override;
+	void Timeline(class TimelineObject* timelineObj)  override;
 private:
+	
 };
 

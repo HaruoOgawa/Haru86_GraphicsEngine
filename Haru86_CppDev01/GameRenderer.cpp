@@ -4,6 +4,8 @@
 #include "MeshRendererComponent.h"
 #include "TransformComponent.h"
 #include "./Game.h"
+#include "./Texture.h"
+#include "./Font.h"
 
 GameRenderer* GameRenderer::renderer_instance = nullptr;
 
@@ -21,11 +23,15 @@ void GameRenderer::Destroy() {
 GameRenderer::GameRenderer(Game* game)
 	: mgame(game),
 	sWindow(nullptr),
-	sWindowWidth(0),
-	sWindowHeight(0),
-	deltaTime(0.0f)
+	sWindowWidth(500),
+	sWindowHeight(500),
+	deltaTime(0.0f),
+	frameResolusion(0.7),
+	font(nullptr),
+	frameTexture(new Texture()),
+	postProcessTexture(nullptr)
 {
-
+	
 }
 
 GameRenderer::~GameRenderer() {
@@ -33,9 +39,7 @@ GameRenderer::~GameRenderer() {
 }
 
 bool GameRenderer::Initialize(float width,float height) {
-	//sWindowWidth = width;
-	//sWindowHeight = height;
-
+	
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
@@ -59,13 +63,13 @@ bool GameRenderer::Initialize(float width,float height) {
 		SDL_Log("Failure! Can not initialize SDL_OpenGL Window: %s", SDL_GetError());
 		return false;
 	}
-
+	
 	if (SDL_SetWindowFullscreen(sWindow, SDL_WINDOW_FULLSCREEN_DESKTOP)!=0) {
 		SDL_Log("Full Screeen Error: %s", SDL_GetError());
 	}
 
 	SDL_GetWindowSize(sWindow, &sWindowWidth, &sWindowHeight);
-
+	
 	context = SDL_GL_CreateContext(sWindow);
 
 	glewExperimental = GL_TRUE;
@@ -77,6 +81,20 @@ bool GameRenderer::Initialize(float width,float height) {
 	glGetError();
 
 
+	if (!CreateFrameBuffer(frameTexture,frameBuffer)) {
+		SDL_Log("Can not create frame buffer");
+	}
+	
+	/*if (!CreateFrameBuffer(postProcessTexture, postProcessBuffer)) {
+		SDL_Log("Can not create frame buffer");
+	}*/
+
+	font = new Font();
+	if (!(font->Load("C:/Windows/Fonts/HGRMB.TTC"))) {
+		delete font;
+		font = nullptr;
+	}
+
 	return true;
 }
 
@@ -84,10 +102,34 @@ glm::ivec2 GameRenderer::GetScreenSize() {
 	return glm::ivec2(sWindowWidth, sWindowHeight);
 }
 
+bool GameRenderer::CreateFrameBuffer(class Texture* fTex, unsigned int& fBuffer) {
+	int width = static_cast<int>(GetScreenSize().x) ;
+	int height = static_cast<int>(GetScreenSize().y );
+	
+	glGenFramebuffers(1, &fBuffer);
+	GLuint depthBuffer;
+	glGenRenderbuffers(1, &depthBuffer);
+
+	fTex->CreateForRendering(width, height, GL_RGBA);
+	
+	glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, fBuffer);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fTex->GetTextureID(), 0);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);
+
+	return true;
+
+}
+
 void GameRenderer::Draw() {
+	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+	glViewport(0, 0, static_cast<int>(GetScreenSize().x* frameResolusion), static_cast<int>(GetScreenSize().y* frameResolusion));
+	
 	glClearColor(0.0f, 0.0f,0.0f,1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
 
@@ -96,10 +138,40 @@ void GameRenderer::Draw() {
 		obj->meshComp->Draw();
 	}
 
+	//pass2////////////////////////////////////////////////
+	
+	//pass3////////////////////////////////////////////////
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glViewport(0, 0, GetScreenSize().x , GetScreenSize().y);
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
+
+	
+	for (auto obj : mgame->boardGameObjectList) {
+		//PostProcessTextureのセット メンバ変数のPOstProcessIDを参照するとか？？
+		obj->transform->CalMatrix();
+		frameTexture->SetActive();
+		obj->meshComp->material->SetTexUniform("frameTex", frameTexture->GetTextureID());
+		obj->meshComp->DrawBoard();
+	}
+
 	SDL_GL_SwapWindow(sWindow);
+
 }
 
 void GameRenderer::ShutDown() {
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(sWindow);
+
+	
+	if (frameTexture!=nullptr) {
+		glDeleteFramebuffers(1, &frameBuffer);
+		frameTexture->Unload();
+		delete frameTexture;
+		frameTexture = nullptr;
+	}
 }

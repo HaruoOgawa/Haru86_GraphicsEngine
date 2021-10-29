@@ -29,6 +29,24 @@ struct TimelineCustomClip
     }
 };
 
+struct TimelineAnimationClip
+{
+    class GameObject* gameObject;
+    float startTime;
+    float endTime;
+    float lifeTime;
+    float lifeTimeRate;
+    std::function<void(float)> callback;
+    TimelineAnimationClip(class GameObject* obj,float s,float e,std::function<void(float)> func) {
+        this->gameObject = obj;
+        this->startTime = s;
+        this->endTime = e;
+        this->callback = func;
+        this->lifeTime = 0.0f;
+        this->lifeTimeRate = 0.0f;
+    }
+};
+
 class TimelineComponent :
     public Component
 {
@@ -43,15 +61,20 @@ public:
     friend class TimelineObject;
     friend class UIComponent;
     float timeVal;
+    float animTime;
 private:
     void InitializeActivationTrack();
     void InitializeCustomTrack();
+    void InitializeAnimationTrack();
     void ComputeActivationTrack(float time);
     void ComputeCustomTrack(float time);
+    void ComputeAnimationTrack(float time);
     void ClearTimeline();
     std::vector<TimelineActivationClip*> waittingActiovationClip;
     std::vector<TimelineActivationClip*> runningActiovationClip;
     std::vector<TimelineCustomClip*> waittingCustomClip;
     std::vector<TimelineCustomClip*> runningCustomClip;
+    std::vector<TimelineAnimationClip*> waittingAnimationClip;
+    std::vector<TimelineAnimationClip*> runningAnimationClip;
 };
 

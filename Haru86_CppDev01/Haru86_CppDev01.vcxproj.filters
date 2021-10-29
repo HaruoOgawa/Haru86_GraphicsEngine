@@ -87,6 +87,15 @@
     <ClInclude Include="Time.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\SDL2_ttf-2.0.15\include\SDL_ttf.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -149,6 +158,12 @@
     <ClCompile Include="Time.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -182,10 +197,21 @@
     <None Include="Shader\Haru86_polar_coordinate.frag" />
     <None Include="Shader\Haru86_Ray.frag" />
     <None Include="Shader\Haru86_PartyHole.frag" />
+    <None Include="Shader\VedaStructuredShader\BoardRender.vert" />
+    <None Include="Shader\VedaStructuredShader\BoardRender.frag" />
+    <None Include="Shader\FontText.vert" />
+    <None Include="Shader\FontText.frag" />
+    <None Include="Shader\VedaStructuredShader\PostProcess.frag" />
+    <None Include="Shader\VedaStructuredShader\scene2.frag" />
+    <None Include="Shader\VedaStructuredShader\scene1.frag" />
+    <None Include="Shader\VedaStructuredShader\save.frag" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Haru86_CppDev01.rc">
       <Filter>リソース ファイル</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="C:\WINDOWS\Fonts\FRSCRIPT.TTF" />
   </ItemGroup>
 </Project>
