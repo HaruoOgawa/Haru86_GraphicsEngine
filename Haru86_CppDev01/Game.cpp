@@ -57,6 +57,8 @@ bool Game::Initialize() {
 		return false;
 	}
 
+	//capture wait time
+	//while (SDL_GetTicks()<5000.0) {}
 
 	LoadData();
 	

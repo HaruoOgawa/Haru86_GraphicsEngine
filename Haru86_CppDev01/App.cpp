@@ -54,7 +54,7 @@ void App::Timeline(TimelineObject* timeline)  {
 	timeline->AddActivationClip(Scene1_Frag,0.0f,42.0f);
 	timeline->AddActivationClip(Scene2_Frag, 42.0f, 64.0f);
 
-	float startTime = 0.0f;
+	float startTime = 0.0f;	
 	float timeVal = 3.0f;
 	float endTime = 0.0f;
 	endTime += timeVal;
