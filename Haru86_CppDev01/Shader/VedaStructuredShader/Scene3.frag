@@ -1,17 +1,18 @@
 precision mediump float;
-/*
+
 uniform float time;
 uniform vec2 resolution;
 uniform vec2 uv;
-*/
+/*
 in vec2 uv;
 in float time;
 in vec2 resolution;
-
+*/
 uniform float _cameraPositionIndex;
 
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
 #define PI 3.14159265
+
 struct DBuffer{
   float d1;
   float d2;
@@ -24,6 +25,10 @@ struct AccBuffer{
   float acc2;
   float acc3;
 };
+
+float rand(vec2 seeds){
+  return fract(sin(dot(seeds, vec2(12.9898,78.233))) * 43758.5453);
+}
 
 vec2 random2(vec2 seeds)
 {
@@ -65,42 +70,6 @@ vec2 fmod(vec2 p,float r){
   return rot(a)*p;
 }
 
-
-#define foldingLimit 1.0
-vec3 boxFold(vec3 z, float dz) {
-    return clamp(z, -foldingLimit, foldingLimit) * 2.0 - z;
-}
-
-void sphereFold(inout vec3 z, inout float dz, float minRadius, float fixedRadius) {
-    float m2 = minRadius * minRadius;
-    float f2 = fixedRadius * fixedRadius;
-    float r2 = dot(z, z);
-    if (r2 < m2) {
-        float temp = (f2 / m2);
-        z *= temp;
-        dz *= temp;
-    } else if (r2 < f2) {
-        float temp = (f2 / r2);
-        z *= temp;
-        dz *= temp;
-    }
-}
-
-// ref: http://blog.hvidtfeldts.net/index.php/2011/11/distance-estimated-3d-fractals-vi-the-mandelbox/
-#define ITERATIONS 12
-float deMandelbox(vec3 p, float scale, float minRadius, float fixedRadius) {
-    vec3 z = p;
-    float dr = 1.;
-    for (int i = 0; i < ITERATIONS; i++) {
-        z = boxFold(z, dr);
-        sphereFold(z, dr, minRadius, fixedRadius);
-        z = scale * z + p;
-        dr = dr * abs(scale) + 1.;
-    }
-    float r = length(z);
-    return r / abs(dr);
-}
-
 float Plane(vec3 p){
   return p.y;
 }
@@ -110,69 +79,42 @@ float Cube(vec3 p,vec3 s){
 }
 
 float d1(vec3 p){
-     p*=.5;
+  p.z-=time;
+  vec3 pos=p;
+   float modNum=0.6;
+   //get axis random id
+   float xid=floor(pos.x/modNum);
+   float yid=floor(pos.y/modNum);
+   float zid=floor(pos.z/modNum);
 
-/*  p.xy*=rot(time);
-  p.xz*=rot(time);
-  p.yz*=rot(time);*/
-
-float speed=10.0;
-  p.z-=time*speed;
-  float k=12.0;
-  p=mod(p,k)-k*0.5;
-  
-  p=abs(p);
-  float s=1.;
-  float ts=0.05;
-  float dt=floor(time)+pow(fract(time),0.5);
-  for(int i=0;i<2;i++){
-    p.xy=fmod(p.xy,12.);
-    p.xz*=rot(0.25);
-    p.xz=fmod(p.xz,6.);
-    p.yz*=rot(0.25);
-    p.yz=fmod(p.yz,6.);
-    p.xy*=rot(0.25);
-
-   p.x=abs(p.x)-0.5;
-    p.z=abs(p.z)-.015;
-  }
-
-  p.xy=fmod(p.xy,36.);
-
-  float val=sin(.15);
-  float d=deMandelbox(p, 2.0, .05+val, 1.+val*0.05);
-  return d;
-  //return length(p)-0.5;
+   pos.xz=mod(pos.xz,modNum)-0.5*modNum;
+  float d=Cube(pos,vec3(0.25,rand(vec2((xid+zid)*10.0))*0.25+0.25,0.25));
+      return d;
 }
 
 float d2(vec3 p){
-   
-
-  float d=length(p)-1.;
-
-//p.x+=1.5;
-  p.xy*=rot(time);
-  p.xz*=rot(time);
-  p.yz*=rot(time);
-  for(int i=0;i<3;i++){
-    p=abs(p)-.6;
-    if(p.x<p.y)p.xy=p.yx;
-    if(p.x<p.z)p.xz=p.zx;
-    if(p.y<p.z)p.yz=p.zy;
-
-    p.xy*=rot(0.5);
-    p.xz*=rot(0.15);
-    p.yz*=rot(0.25);
-}
-
-d=min(d,Cube(p,vec3(.2,.2,.2)));
+  vec3 pos0=p;
+  pos0=abs(pos0);
+  //pos0.z-=time;
+  float k=2.0;
+  vec3 id=floor(pos0/k);
+  pos0=mod(pos0,k)-k*0.5;
+  pos0.xz+=vec2(cos(
+    sign((rand(vec2(id.x+id.y,id.z))-0.5))
+    *time),sin(
+      sign((rand(vec2(id.x+id.y,id.z))-0.5))
+      *time));
+  vec3 offset=vec3(0.,0.,0.);
+//offset=
+  float d=Cube(pos0+offset,vec3(0.1,0.1,0.5));
 
   return d;
 }
 DBuffer map(vec3 p){
   DBuffer d;
-  d.d1=d1(p);
-  d.d2=d2(p-vec3(0.,0.,9.));
+  //d.d1=d1(p);
+  d.d1=2000.0;
+  d.d2=d2(p);
   d.d3=2000.0;
   d.mainD=min(min(d.d1,d.d2),d.d3);
   return d;
@@ -195,33 +137,18 @@ vec3 hsv2rgb2(vec3 c, float k) {
 }
 
 void main(void) {
-  //vec2 st = (gl_FragCoord.xy*2.0-resolution.xy) / min(resolution.x,resolution.y);
-  vec2 st=uv*2.0-1.0;
-  st.x*=(resolution.x/resolution.y);
+  vec2 st = (gl_FragCoord.xy*2.0-resolution.xy) / min(resolution.x,resolution.y);
+  //vec2 st=uv*2.0-1.0;
+  //st.x*=(resolution.x/resolution.y);
 
   vec3 col=vec3((st.y+1.0)*0.5*0.25);
   float radius=15.;
 float speed=-.25;
  vec3 ta=vec3(0.);
-// vec3 ta=vec3(cos(time),0.,sin(time));
- vec3 ro=vec3(0.,0.,14.);
+ vec3 ro=vec3(0.,0.,2.);
 
  float adjustAcc=0.5;
- if(_cameraPositionIndex==0){
- adjustAcc=0.5;
-    ro=vec3(0.,0.,15.);
- }else if(_cameraPositionIndex==1){
-    adjustAcc=0.5;
-    float radius=1.0*(perlinNoise(vec2(0.123,time*5.0))+1.0)*2.25;
-    ta=vec3(0.,0.,9.);
-    ro=vec3(cos(time)*radius,sin(time)*radius,sin(time)*radius);
- }else if(_cameraPositionIndex==2){
-    adjustAcc=0.25;
-    //st*=rot(time);
-    ro=vec3(-2.,-1.,20.);
- }
 
-// vec3 ro=vec3(0.,0.,0.);
  vec3 cDir=normalize(ta-ro);
  vec3 cSide=cross(cDir,vec3(0.,-1.,0.));
  vec3 cUp=cross(cDir,cSide);
@@ -231,49 +158,24 @@ float speed=-.25;
   DBuffer d;
   AccBuffer acc;
   float t=0.0;
-  for(int i=0;i<128;i++){
+  for(int i=0;i<64;i++){
     d=map(ro+rd*t);
-    if(d.d1<0.01||d.d2<0.001||d.d3<0.001||t>1000.0)break;
+    if(d.d1<0.0001||d.d2<0.0001||d.d3<0.001||t>1000.0)break;
     t+=d.mainD;
 
     acc.acc1+=exp(-6.0*(d.mainD));
-    acc.acc2+=exp(-1.0*d.mainD);
+    acc.acc2+=exp(-6.0*d.d2);
     acc.acc3+=exp(-1.0*d.mainD);
   }
 
-  if(d.d1<0.01||t<1.0){
-    vec3 pos=ro+rd*t;
-    float flash=1.0-abs(sin(pos.z*.5+time*4.0));
-    flash+=.1;
-    float rim=pow(min(d.d1,2.0),.5);
-    float H = mod(time*0.5, 1.0);
-    col+=vec3(exp(-.1*t))*rim*acc.acc1*.75*flash*hsv2rgb2(vec3(H,1.0,1.0),2.2)*(1.0/(adjustAcc*2.0));
-    //*pow((1.0-abs(dot(n,rd))),.5)
-    ;
-  }
-
-  if(d.d2<0.001){
-    vec3 refro=ro+rd*t;
-    vec3 n=gn(refro);
-    rd=reflect(rd,n);
-    ro=refro;
-    t=0.1;
-    float acc2;
-
-    for(int i=0;i<33;i++){
-      d=map(ro+rd*t);
-      if(d.mainD<0.001)break;
-      t+=d.mainD;
-      float H = mod(time*0.5, 1.0);
-      acc2+=exp(-3.*d.mainD);
+    if(d.d1<0.0001){
+      col+=vec3(exp(-.25*t));
     }
 
-    vec3 pos=ro+rd*t;
-    float flash=1.0-abs(sin(pos.z*.5+time*4.0));
-    flash+=.1;
-    float H = mod(time*0.5, 1.0);
-    col+=vec3(exp(-.1*t))*acc.acc2*.75*flash*hsv2rgb2(vec3(H,1.0,1.0),2.2)*adjustAcc;
-  }
+    if(d.d2<0.0001){
+      col+=vec3(exp(-.1*t))*vec3(0.,0.25,1.0)*acc.acc2*0.05;
+    }
+
 
   gl_FragColor = vec4(col, 1.0);
 }
