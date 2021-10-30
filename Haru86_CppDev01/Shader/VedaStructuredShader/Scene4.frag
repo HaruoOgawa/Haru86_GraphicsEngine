@@ -71,9 +71,44 @@ vec2 fmod(vec2 p,float r){
   return rot(a)*p;
 }
 
+#define foldingLimit 1.0
+vec3 boxFold(vec3 z, float dz) {
+    return clamp(z, -foldingLimit, foldingLimit) * 2.0 - z;
+}
+
+void sphereFold(inout vec3 z, inout float dz, float minRadius, float fixedRadius) {
+    float m2 = minRadius * minRadius;
+    float f2 = fixedRadius * fixedRadius;
+    float r2 = dot(z, z);
+    if (r2 < m2) {
+        float temp = (f2 / m2);
+        z *= temp;
+        dz *= temp;
+    } else if (r2 < f2) {
+        float temp = (f2 / r2);
+        z *= temp;
+        dz *= temp;
+    }
+}
+
+// ref: http://blog.hvidtfeldts.net/index.php/2011/11/distance-estimated-3d-fractals-vi-the-mandelbox/
+#define ITERATIONS 12
+float deMandelbox(vec3 p, float scale, float minRadius, float fixedRadius) {
+    vec3 z = p;
+    float dr = 1.;
+    for (int i = 0; i < ITERATIONS; i++) {
+        z = boxFold(z, dr);
+        sphereFold(z, dr, minRadius, fixedRadius);
+        z = scale * z + p;
+        dr = dr * abs(scale) + 1.;
+    }
+    float r = length(z);
+    return r / abs(dr);
+}
+
 float Plane(vec3 p){
-  float d=-p.y+1.0;
-  d=min(d,p.y+1.0);
+  //float d=-p.y+1.0;
+  float d=p.y+1.0;
 
   return d;
 }
@@ -83,26 +118,33 @@ float Cube(vec3 p,vec3 s){
 }
 
 float d1(vec3 p){
-  p.z-=time;
-  p.y+=perlinNoise(vec2(p.x,p.z))+perlinNoise(vec2(p.x,p.z)*5.0)*0.5+perlinNoise(vec2(p.x,p.z)*10.0)*0.35;
-  p.y*=0.6;
-  p.y=p.y*2.0-1.0;
   float d=Plane(p);
       return d;
 }
 
 float d2(vec3 p){
-p.z-=time;
 //p.xy*=rot(time);
-//p.xz*=rot(time);
+//p.xz*=rot(time*0.01);
 //p.yz*=rot(time);
   vec3 pos0=p;
-  float r=perlinNoise(vec2(pos0.x,pos0.z))+perlinNoise(vec2(pos0.x,pos0.y)*5.0)*0.5+perlinNoise(vec2(pos0.y,pos0.z)*10.0)*0.35;
-float k=2.1;
-pos0=mod(pos0,k)-k*0.5;
+  pos0.y=abs(pos0.y);
 
-  //float d=Cube(pos0,vec3(0.5,0.5,0.5));
-  float d=length(pos0)-r;
+  float k=7.0;
+  pos0.xyz=mod(pos0.xyz,k)-k*.5;
+pos0.xz=fmod(pos0.xz,12.);
+  pos0.xy=fmod(pos0.xy,16.);
+
+  for(int i=0;i<3;i++){
+    pos0=abs(pos0)-.4;
+    pos0.xy*=rot(1.5);
+    pos0.xy*=rot(1.75);
+  }
+
+  pos0.z=abs(pos0.z)-.15;
+  pos0.z-=0.075;
+  pos0.z=abs(pos0.z)-.15;
+  float val=sin(.15);
+  float d=deMandelbox(pos0+vec3(0.,0.,0.), 2.5, .1+val, 1.+val*0.5);
 
   return d;
 }
@@ -111,7 +153,7 @@ DBuffer map(vec3 p){
   d.d1=d1(p);
   //d.d1=2000.0;
   d.d2=d2(p);
-  //d.d2=d2(p);
+  //d.d2=2000.0;
   d.d3=2000.0;
   d.mainD=min(min(d.d1,d.d2),d.d3);
   return d;
@@ -142,7 +184,7 @@ void main(void) {
   float radius=15.;
 float speed=-.25;
  vec3 ta=vec3(0.);
- vec3 ro=vec3(0.,0.,2.);
+ vec3 ro=vec3(0.,0.,3.);
  float adjustAcc=0.5;
 //vec3 ro=vec3(cos(time),0.0,sin(time));
 
@@ -160,20 +202,21 @@ float speed=-.25;
     if(d.d1<0.001||d.d2<0.001||d.d3<0.001||t>1000.0)break;
     t+=d.mainD*.5;
 
-    acc.acc1+=exp(-6.0*(d.d2));
+    acc.acc1+=exp(-10.0*(d.d1));
     acc.acc2+=exp(-6.0*d.d2);
     acc.acc3+=exp(-1.0*d.mainD);
   }
 
-    if(d.d1<0.001){
+    if(d.d1<0.01){
 
-    col+=vec3(exp(-.1*t))*vec3(0.,0.25,1.0)*acc.acc1*0.025;
+    col+=vec3(exp(-.5*t));
     }
 
     if(d.d2<0.001){
-      col+=vec3(exp(-.25*t))*vec3(0.,0.25,1.0)*acc.acc2*0.025;
+      col+=vec3(exp(-.5*t))*vec3(0.5,0.25,0.25)*acc.acc2*0.02;
     }
 
+    //col=vec3(1.);
 
   gl_FragColor = vec4(col, 1.0);
 }
