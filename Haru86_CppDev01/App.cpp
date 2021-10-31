@@ -63,9 +63,9 @@ void App::Timeline(TimelineObject* timeline)  {
 	timeline->AddActivationClip(Scene2_Frag, 42.0f, 64.0f);
 	timeline->AddActivationClip(Scene3_Frag, 64.0f, 85.0f);
 	//-14.0f
-	timeline->AddActivationClip(Scene4_Frag, 85.0f, 127.5f - 12.0f);
-	timeline->AddActivationClip(Scene5_Frag, 127.5f - 12.0f, 151.5f - 5.0f);
-	timeline->AddActivationClip(Scene1_Frag, 151.5f - 5.0f, 179.5f - 5.0f);
+	timeline->AddActivationClip(Scene4_Frag, 85.0f, 128.0f - 12.0f);
+	timeline->AddActivationClip(Scene5_Frag, 128.0f - 12.0f, 146.0f-20.0f);
+	timeline->AddActivationClip(Scene1_Frag, 146.0f - 20.0f, 179.0f - 22.0f);
 
 	float startTime = 0.0f;	
 	float timeVal = 3.0f;
@@ -94,12 +94,19 @@ void App::Timeline(TimelineObject* timeline)  {
 	}
 
 	timeline->AddAnimationClip(Scene1_Frag, 38.0f, 42.0f,
-		[gamept](float val) {
-			gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime;
+		[](float val) {
+			//gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime;
 			Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 3);
 			Scene1_Frag->meshComp->material->SetFloatUniform("_cameraMoveVal", val);
 			
 
+	});
+	
+	timeline->AddAnimationClip(Scene1_Frag, 42.0f, 42.5f,
+		[](float val) {
+			//gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime;
+			Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 0);
+			Scene1_Frag->meshComp->material->SetFloatUniform("_cameraMoveVal", val);
 	});
 
 	startTime = 42.0f;
@@ -143,12 +150,54 @@ void App::Timeline(TimelineObject* timeline)  {
 
 		}
 	}
+	
+	startTime = 85.0f;
+	endTime = startTime + 3.0;
+
+	for (int i = 0; i < 11;i++) {
+		int val = i % 3;
+		switch (val) {
+		case 0:
+			timeline->AddAnimationClip(Scene4_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [](float val) {Scene4_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 0.0); });
+			break;
+		case 1:
+			timeline->AddAnimationClip(Scene4_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [] (float val){Scene4_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 1.0); });
+			break;
+		case 2:
+			timeline->AddAnimationClip(Scene4_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [](float val) {Scene4_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 2.0); });
+			break;
+		default:
+			break;
+
+		}
+	}
+	
+	startTime = 128.0f - 12.0f;
+	endTime = startTime + 3.0;
+
+	for (int i = 0; i < 5;i++) {
+		int val = i % 3;
+		switch (val) {
+		case 0:
+			timeline->AddAnimationClip(Scene5_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [](float val) {Scene5_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 0.0); });
+			break;
+		case 1:
+			timeline->AddAnimationClip(Scene5_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [] (float val){Scene5_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 1.0); });
+			break;
+		case 2:
+			timeline->AddAnimationClip(Scene5_Frag, static_cast<float>(startTime + 3.0 * i), static_cast<float>(endTime + 3.0 * i), [](float val) {Scene5_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 2.0); });
+			break;
+		default:
+			break;
+
+		}
+	}
 
 
 	timeline->AddAnimationClip(Scene2_Frag, static_cast<float>(57), static_cast<float>(64.0), [](float val) {Scene2_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 0);  });
 
 	timeline->AddAnimationClip(Scene4_Frag, 85.0, 106.5 - 1.0f, [](float val) {Scene4_Frag->meshComp->material->SetFloatUniform("isTransform",0.0f); });
-	timeline->AddAnimationClip(Scene4_Frag, 106.5 - 1.0f, 127.5f - 12.0f, [](float val) {Scene4_Frag->meshComp->material->SetFloatUniform("isTransform",1.0f); });
+	timeline->AddAnimationClip(Scene4_Frag, 106.5 - 1.0f, 128.0f - 12.0f, [](float val) {Scene4_Frag->meshComp->material->SetFloatUniform("isTransform",1.0f); });
 
 	//font/////////////////////////////////
 
@@ -235,6 +284,10 @@ void App::Timeline(TimelineObject* timeline)  {
 	timeline->AddAnimationClip(renderBoard, 84.0f, 84.5f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
 	timeline->AddAnimationClip(renderBoard, 84.5f,85.5f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",2); });
 	timeline->AddAnimationClip(renderBoard, 85.5f, 86.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	
+	timeline->AddAnimationClip(renderBoard, 85.0, 106.5 - 1.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(renderBoard, 106.5 - 1.0f, 128.0f - 12.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",4); });
+	timeline->AddAnimationClip(renderBoard, 128.0f - 12.0f, 128.5f - 12.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
 	
 	timeline->AddAnimationClip(renderBoard, 151.5f, 151.5f - 3.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
 	timeline->AddAnimationClip(renderBoard, 151.5f - 8.0f, 179.5f - 19.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",3); });

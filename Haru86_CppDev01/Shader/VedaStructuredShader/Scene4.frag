@@ -298,9 +298,33 @@ float speed=-.25;
 
  float adjustAcc=0.5;
 float radius=.3;
-//vec3 ro=vec3(cos(time)*radius,-0.8,sin(time)*radius);
-radius=.25;
+ radius=.25;
  vec3 ro=vec3(-radius,-0.8,-radius);
+
+ if(isTransform==0.0){
+    if(_cameraPositionIndex==0.0){
+        radius=.3;
+        ro=vec3(cos(time)*radius,-0.8,sin(time)*radius);
+    }else if(_cameraPositionIndex==1.0){
+        ta=vec3(0.,-.9,0.);
+        ro=vec3(0.,0.,0.)+vec3(cos(time),-0.8,sin(time));
+    }else if(_cameraPositionIndex==2.0){
+        radius=.3;
+        ro=vec3(cos(time)*radius,-0.2,sin(time)*radius);
+    }
+ }else if(isTransform==1.0){
+     if(_cameraPositionIndex==0.0){
+        radius=.25;
+        ro=vec3(-radius,-0.8,-radius);
+    }else if(_cameraPositionIndex==1.0){
+        radius=.25;
+        ro=vec3(-radius,-0.8,0.);
+    }else if(_cameraPositionIndex==2.0){
+        radius=.25;
+        ro=vec3(-radius,-0.4,-radius);
+    }
+ }
+
  vec3 cDir=normalize(ta-ro);
  vec3 cSide=normalize(cross(cDir,vec3(0.,-1.,0.)));
  vec3 cUp=normalize(cross(cDir,cSide));
