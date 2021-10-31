@@ -120,9 +120,9 @@ float particle(vec3 p,float k,vec3 offset){
   vec3 id=floor(pos0/k);
   pos0.y+=sin(pos0.z*2.+time*sign(sin(time+pos0.z)))*0.5;
   pos0.xy*=rot(pos0.z);
-
   pos0=mod(pos0,k)-k*0.5;
   float d=Cube(pos0,vec3(0.005,0.005,2.));
+
   return d;
 }
 

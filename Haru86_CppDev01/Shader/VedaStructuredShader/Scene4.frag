@@ -19,6 +19,7 @@ struct DBuffer{
   float d2;
   float d3;
   float d4;
+  float d5;
   float mainD;
 };
 
@@ -27,6 +28,7 @@ struct AccBuffer{
   float acc2;
   float acc3;
   float acc4;
+  float acc5;
 };
 
 float rand(vec2 seeds){
@@ -221,6 +223,31 @@ float d4(vec3 p){
     return d;
 }
 
+float Lighting(vec3 p,float timeOffset,float randRot){
+  p.xz*=rot(randRot*2.0*PI);
+  p.x+=perlinNoise(vec2(p.y*15.,p.y*10.)*5.)*0.05;
+  float d=Cube(p,vec3(.0001,.5,.0001))*((p.y>mod(time*4.0+timeOffset,0.95*1.))? 1.0:2000.0);
+  return d;
+}
+
+float d5(vec3 p){
+  p+=vec3(0.,1.1,0.);
+
+  float d=Lighting(p,0.0,0.0);
+  for(int i=0;i<30;i++){
+    vec3 pos=p;
+    float r=rand(vec2(float(i),0.456));
+    r=r*0.5+0.25;
+    pos.xz+=vec2(
+      r*cos(2.0*PI*rand(vec2(float(i),0.123))),
+      r*sin(2.0*PI*rand(vec2(float(i),0.456)))
+      );
+    d=min(d,Lighting(pos,rand(vec2(0.963,float(i))),rand(vec2(0.741,float(i)))));
+  }
+
+  return d;
+}
+
 DBuffer map(vec3 p){
   DBuffer d;
   d.d1=d1(p);
@@ -230,7 +257,10 @@ DBuffer map(vec3 p){
   d.d3=d3(p);
   //d.d3=2000.0;
   d.d4=d4(p);
-  d.mainD=min(min(d.d1,d.d2),min(d.d3,d.d4));
+  //d.d4=2000.0;
+  d.d5=d5(p);
+  //d.d5=2000.0;
+  d.mainD=min(min(min(d.d1,d.d2),min(d.d3,d.d4)),d.d5);
   return d;
 }
 
@@ -262,9 +292,9 @@ float speed=-.25;
 
  float adjustAcc=0.5;
 float radius=.3;
-//vec3 ro=vec3(cos(time)*radius,-0.8,sin(time)*radius);
+vec3 ro=vec3(cos(time)*radius,-0.8,sin(time)*radius);
 radius=.25;
- vec3 ro=vec3(-radius,-0.8,-radius);
+// vec3 ro=vec3(-radius,-0.8,-radius);
  vec3 cDir=normalize(ta-ro);
  vec3 cSide=normalize(cross(cDir,vec3(0.,-1.,0.)));
  vec3 cUp=normalize(cross(cDir,cSide));
@@ -276,13 +306,14 @@ radius=.25;
   float t=0.0;
   for(int i=0;i<128;i++){
     d=map(ro+rd*t);
-    if(d.d1<0.001||d.d2<0.001||d.d3<0.001||d.d4<0.001||d.mainD<0.001||t>1000.0)break;
+    if(d.d1<0.001||d.d2<0.001||d.d3<0.001||d.d4<0.001||d.d5<0.001||d.mainD<0.001||t>1000.0)break;
     t+=d.mainD*.5;
 
     acc.acc1+=exp(-10.0*(d.d1));
     acc.acc2+=exp(-6.0*d.d2);
     acc.acc3+=exp(-50.0*d.d3);
     acc.acc4+=exp(-50.0*d.d4);
+    acc.acc5+=exp(-3.0*d.d5);
   }
 
     if(d.d1<0.01){
@@ -328,6 +359,13 @@ radius=.25;
     if(d.d4<0.01){
       col+=exp(-.025*t)*acc.acc4*0.2*vec3(0.5,0.25,1.0);
     }
+
+    if(d.d5<0.01){
+      //col+=vec3(-.1*t)*acc.acc5*0.075;
+      col+=vec3(1.)*acc.acc5*0.05*vec3(0.5,0.5,1.);
+    }
+
+    //col=vec3(0.);
 
   gl_FragColor = vec4(col, 1.0);
 }
