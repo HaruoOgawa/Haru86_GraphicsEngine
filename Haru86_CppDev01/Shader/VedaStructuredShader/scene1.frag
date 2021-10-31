@@ -246,6 +246,9 @@ float speed=-.25;
  }else if(_cameraPositionIndex==3){
     ta=vec3(0.);
     ro=vec3(0.,2.,26.0-_cameraMoveVal*24.0*1.5);
+ }else if(_cameraPositionIndex==4){
+    ta=vec3(0.);
+    ro=vec3(0.,2.,0.0-_cameraMoveVal*24.0*1.5-2.0);
  }
 
 

@@ -93,7 +93,7 @@ void App::Timeline(TimelineObject* timeline)  {
 		
 	}
 
-	timeline->AddAnimationClip(Scene1_Frag, 38.0f, 42.0f,
+	timeline->AddAnimationClip(Scene1_Frag, 38.0f, 41.9f,
 		[](float val) {
 			//gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime;
 			Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 3);
@@ -102,7 +102,7 @@ void App::Timeline(TimelineObject* timeline)  {
 
 	});
 	
-	timeline->AddAnimationClip(Scene1_Frag, 42.0f, 42.5f,
+	timeline->AddAnimationClip(Scene1_Frag, 41.9f, 42.0f,
 		[](float val) {
 			//gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime;
 			Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 0);
@@ -199,8 +199,17 @@ void App::Timeline(TimelineObject* timeline)  {
 	timeline->AddAnimationClip(Scene4_Frag, 85.0, 106.5 - 1.0f, [](float val) {Scene4_Frag->meshComp->material->SetFloatUniform("isTransform",0.0f); });
 	timeline->AddAnimationClip(Scene4_Frag, 106.5 - 1.0f, 128.0f - 12.0f, [](float val) {Scene4_Frag->meshComp->material->SetFloatUniform("isTransform",1.0f); });
 
+
+	timeline->AddAnimationClip(Scene1_Frag, 146.0f - 20.0f, 179.0f - 22.0f,
+		[](float val) {
+		//gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime;
+		Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 4);
+		Scene1_Frag->meshComp->material->SetFloatUniform("_cameraMoveVal", val);
+	});
+
 	//font/////////////////////////////////
 
+	//FirstText
 	timeline->AddActivationClip(DemoText, 0.0f, 10.0f);
 	timeline->AddActivationClip(MusicText, 10.0f, 20.0f);
 	timeline->AddActivationClip(MyCreditText, 20.0f, 30.0f);
@@ -271,6 +280,28 @@ void App::Timeline(TimelineObject* timeline)  {
 		}
 
 	});
+	
+	//finalText
+	// 106.5 - 1.0f=105.5, 128.0f - 12.0f=116
+	timeline->AddActivationClip(MyCreditText, 105.5f, 116.0f);
+	
+	timeline->AddAnimationClip(MyCreditText, 105.5f, 116.0f, [](float val) {
+		
+		//printf("val: %f \n", val);
+
+		float delayVal = 0.2f;
+		if (val <= delayVal) {
+			MyCreditText->meshComp->material->SetFloatUniform("_alpha", val / delayVal);
+		}
+		else if (val > delayVal && val < 1.0f - delayVal) {
+			MyCreditText->meshComp->material->SetFloatUniform("_alpha", 1.0f);
+		}
+		else if (val >= 1.0f - delayVal) {
+			MyCreditText->meshComp->material->SetFloatUniform("_alpha", (1.0f - val) / delayVal);
+		}
+
+	});
+	
 
 	//PostProcess
 	timeline->AddAnimationClip(renderBoard, 0.0f, 38.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });

@@ -236,7 +236,7 @@ vec3 ro=vec3(cos(time)*radius,0.0,sin(time)*radius);
 if(_cameraPositionIndex==0.0){
     ro=vec3(cos(time)*radius,0.0,sin(time)*radius);
 }else if(_cameraPositionIndex==1.0){
-    ro=vec3(0.,0.,-2.);
+    ro=vec3(-2.,0.,-2.)*3.0;
 }else if(_cameraPositionIndex==2.0){
     float radius=1.0*(perlinNoise(vec2(0.123,time*5.0))+1.0)*2.25;
     ro=vec3(cos(time)*radius,sin(time)*radius*0.1,sin(time)*radius);

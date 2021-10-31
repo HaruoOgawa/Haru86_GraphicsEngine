@@ -306,8 +306,9 @@ float radius=.3;
         radius=.3;
         ro=vec3(cos(time)*radius,-0.8,sin(time)*radius);
     }else if(_cameraPositionIndex==1.0){
-        ta=vec3(0.,-.9,0.);
-        ro=vec3(0.,0.,0.)+vec3(cos(time),-0.8,sin(time));
+        ta=vec3(0.,-.9,1.);
+        radius=.3;
+        ro=ta+vec3(cos(time)*radius,0.0,sin(time)*radius);
     }else if(_cameraPositionIndex==2.0){
         radius=.3;
         ro=vec3(cos(time)*radius,-0.2,sin(time)*radius);

@@ -49,7 +49,7 @@ void main(void){
 
 				vec4 _GapOffsetX=vec4(1.0,0.5,0.25,0.0);
 				vec4 _GapOffsetY=vec4(0.02,0.03,0.03,0.0)*6.0;
-				float _gapOffsetPower=0.08;
+				float _gapOffsetPower=0.08*(sin(time*0.5)+1.0)*0.5;
 				
 				vec2 vecFromCenter=vec2(0.0,0.0)-(uv-vec2(0.5,0.5))*2.0;
 
