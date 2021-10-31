@@ -59,9 +59,10 @@ void App::Update()  {
 void App::Timeline(TimelineObject* timeline)  {
 	timeline->AddActivationClip(Scene1_Frag,0.0f,42.0f);
 	timeline->AddActivationClip(Scene2_Frag, 42.0f, 64.0f);
-	timeline->AddActivationClip(Scene3_Frag, 64.0f, 92.0f);
-	timeline->AddActivationClip(Scene4_Frag, 92.0f, 114.0f);
-	timeline->AddActivationClip(Scene5_Frag, 114.0f, 160.0f);
+	timeline->AddActivationClip(Scene3_Frag, 64.0f, 86.0f);
+	timeline->AddActivationClip(Scene4_Frag, 86.0f, 108.0f);
+	timeline->AddActivationClip(Scene5_Frag, 108.0f, 154.0f);
+	timeline->AddActivationClip(Scene1_Frag, 154.0f, 181.0f);
 
 	float startTime = 0.0f;	
 	float timeVal = 3.0f;

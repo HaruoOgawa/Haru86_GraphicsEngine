@@ -66,10 +66,7 @@ bool Game::Initialize() {
 }
 
 void Game::LoadData() {
-	audioObj = new AudioObject();
-	if (audioObj->Initialize()) {
-		audioObj->PlayAudio();
-	}
+	
 
 	app->Start();
 	
@@ -77,6 +74,11 @@ void Game::LoadData() {
 
 	app->Timeline(timelineObj);
 	timelineObj->Initialize();
+
+	audioObj = new AudioObject();
+	if (audioObj->Initialize()) {
+		audioObj->PlayAudio();
+	}
 
 }
 
