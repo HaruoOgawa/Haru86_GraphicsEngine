@@ -18,6 +18,7 @@ struct DBuffer{
   float d1;
   float d2;
   float d3;
+  float d4;
   float mainD;
 };
 
@@ -25,6 +26,7 @@ struct AccBuffer{
   float acc1;
   float acc2;
   float acc3;
+  float acc4;
 };
 
 float rand(vec2 seeds){
@@ -92,7 +94,7 @@ float d1(vec3 p){
 }
 
 float d2(vec3 p){
-p.z-=time;
+p.z-=time*2.;
   vec3 pos0=p;
   float r=perlinNoise(vec2(pos0.x,pos0.z))+perlinNoise(vec2(pos0.x,pos0.y)*5.0)*0.5+perlinNoise(vec2(pos0.y,pos0.z)*10.0)*0.35;
 float k=2.1;
@@ -131,16 +133,29 @@ d=min(d,Cube(p,vec3(.2,.2,.2)*.2));
   return d;
 }
 
-/*
-p=abs(p)-.6;
-if(p.x<p.y)p.xy=p.yx;
-if(p.x<p.z)p.xz=p.zx;
-if(p.y<p.z)p.yz=p.zy;
+float d4(vec3 p){
 
-p.xy*=rot(0.5);
-p.xz*=rot(0.15);
-p.yz*=rot(0.25);
-*/
+    p+=vec3(0.,0.,-1.);
+    p.xz*=rot(time);
+
+    p*=0.5;
+    for(int i=0;i<3;i++){
+      p=abs(p)-.02;
+      if(p.x<p.y)p.xy=p.yx;
+      if(p.x<p.z)p.xz=p.zx;
+      if(p.y<p.z)p.yz=p.zy;
+
+      p.xy*=rot(length(p)-2.5);
+      p.xz*=rot(0.2);
+      p.yz*=rot(length(p)-2.25);
+    }
+    float h=1.2;
+    p.x-=clamp(p.x,-h,h);
+
+
+float d=Cube(p,vec3(.1,.1,.1)*0.1);
+  return d;
+}
 
 DBuffer map(vec3 p){
   DBuffer d;
@@ -148,9 +163,11 @@ DBuffer map(vec3 p){
   //d.d1=2000.0;
   d.d2=d2(p);
   //d.d2=d2(p);
-  //d.d3=2000.0;
+//  d.d3=2000.0;
 d.d3=d3(p);
-  d.mainD=min(min(d.d1,d.d2),d.d3);
+d.d4=d4(p);
+//d.d4=2000.0;
+  d.mainD=min(min(d.d1,d.d2),min(d.d3,d.d4));
   return d;
 }
 
@@ -176,12 +193,12 @@ void main(void) {
   //st.x*=(resolution.x/resolution.y);
 //st*=rot(time);
   vec3 col=vec3((st.y+1.0)*0.5*0.25);
-  float radius=15.;
+  float radius=2.5;
 float speed=-.25;
  vec3 ta=vec3(0.);
  float adjustAcc=0.5;
- vec3 ro=vec3(0.,0.,1.);
-//vec3 ro=vec3(cos(time),0.0,sin(time));
+ vec3 ro=vec3(-1.5,0.,1.5);
+//vec3 ro=vec3(cos(time)*radius,0.0,sin(time)*radius);
 
  vec3 cDir=normalize(ta-ro);
  vec3 cSide=normalize(cross(cDir,vec3(0.,-1.,0.)));
@@ -194,12 +211,13 @@ float speed=-.25;
   float t=0.0;
   for(int i=0;i<128;i++){
     d=map(ro+rd*t);
-    if(d.d1<0.001||d.d2<0.001||d.d3<0.001||t>1000.0)break;
+    if(d.d1<0.001||d.d2<0.001||d.d3<0.001||d.d4<0.001||t>1000.0)break;
     t+=d.mainD*.5;
 
     acc.acc1+=exp(-50.0*(d.d1));
     acc.acc2+=exp(-50.0*d.d2);
     acc.acc3+=exp(-50.0*d.d3);
+    acc.acc4+=exp(-50.0*d.d4);
   }
 
     if(d.d1<0.001){
@@ -218,6 +236,29 @@ float speed=-.25;
 
     if(d.d3<0.001){
         col+=exp(-.025*t)*acc.acc3*0.02*vec3(0.5,0.25,1.0);
+    }
+
+    if(d.d4<0.001){
+      vec3 refro=ro+rd*t;
+      vec3 n=gn(refro);
+      rd=refract(rd,n,0.786);
+      ro=refro;
+      t=0.1;
+      float acc2=0.0;
+
+      for(int i=0;i<33;i++){
+        d=map(ro+rd*t);
+        if(d.d1<0.001||d.d2<0.001||d.d3<0.001||d.d4<0.001||t>1000.0)break;
+        t+=d.mainD;
+        acc2+=exp(-3.*d.mainD);
+      }
+
+
+      vec3 pos=ro+rd*t;
+      float flash=1.0-abs(sin(pos.z*.5+time*4.0));
+      flash+=.1;
+      float H = mod(time*0.5, 1.0);
+      col+=vec3(exp(-.1*t))*acc2*.25*flash*hsv2rgb2(vec3(H,1.0,1.0),2.2)*adjustAcc;
     }
 
 
