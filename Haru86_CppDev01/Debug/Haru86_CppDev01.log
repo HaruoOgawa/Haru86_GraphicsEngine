@@ -1,9 +1,11 @@
-﻿  Game.cpp
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\Game.cpp(175,13): warning C4150: 'UIObject' 型を削除するため delete 演算子が呼び出されましたが、定義がありません。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\Game.h(31): message : 'UIObject' の宣言を確認してください
+﻿  App.cpp
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\MeshRendererComponent.h(24,44): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\TimelineComponent.h(32): message : 'TimelineAnimationClip' の宣言を確認してください
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(106,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(127,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
   Haru86_CppDev01.vcxproj -> E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
-  ファイルが見つかりません - *.dll
   0 個のファイルをコピーしました
+  ファイルが見つかりません - *.dll
   ファイルが見つかりません - *.dll
   0 個のファイルをコピーしました
   C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmod.dll

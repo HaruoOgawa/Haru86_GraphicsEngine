@@ -43,6 +43,9 @@ void main(void){
                 col.r+=texture(frameTex,st_R*_frameResolusion);
                 col.g+=texture(frameTex,st_G*_frameResolusion);
                 col.b+=texture(frameTex,st_B*_frameResolusion);
+	}else if(_postProcessFlag==3){
+		col.rgb=texture(frameTex,uv*_frameResolusion);
+		col.rgb=1.0-col.rgb;
 	}
 	
 	gl_FragColor=col;

@@ -10,6 +10,7 @@ in float time;
 in vec2 resolution;
 
 uniform float _cameraPositionIndex;
+uniform float isTransform;
 
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
 #define PI 3.14159265
@@ -162,7 +163,7 @@ float d2(vec3 p){
 }
 
 float d3(vec3 p){
-  float isTransform=1.0;
+  //float isTransform=1.0;
 
   if(isTransform==0.0){
     p+=vec3(0.,.9,0.);
@@ -258,8 +259,13 @@ DBuffer map(vec3 p){
   //d.d3=2000.0;
   d.d4=d4(p);
   //d.d4=2000.0;
-  d.d5=d5(p);
-  //d.d5=2000.0;
+
+  if(isTransform==0.0){
+   d.d5=2000.0;
+  }else if(isTransform==1.0){
+      d.d5=d5(p);
+  }
+
   d.mainD=min(min(min(d.d1,d.d2),min(d.d3,d.d4)),d.d5);
   return d;
 }
