@@ -1,14 +1,14 @@
 
 precision mediump float;
-/*
+
 uniform float time;
 uniform vec2 resolution;
 uniform vec2 uv;
-*/
+/*
 in vec2 uv;
 in float time;
 in vec2 resolution;
-
+*/
 uniform float _cameraPositionIndex;
 
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
@@ -132,19 +132,27 @@ float d2(vec3 p){
   float k=7.0;
   pos0.xyz=mod(pos0.xyz,k)-k*.5;
 pos0.xz=fmod(pos0.xz,12.);
-  pos0.xy=fmod(pos0.xy,16.);
+  pos0.xy=fmod(pos0.xy,12.);
 
   for(int i=0;i<3;i++){
     pos0=abs(pos0)-.4;
-    pos0.xy*=rot(1.5);
+    pos0.z=abs(pos0.z)-.5;
+    pos0.z-=0.5;
     pos0.xy*=rot(1.75);
+    pos0.xy*=rot(1.75);
+    pos0.x=abs(pos0.x)-.25;
+    pos0.x-=0.21;
   }
 
   pos0.z=abs(pos0.z)-.15;
   pos0.z-=0.075;
   pos0.z=abs(pos0.z)-.15;
-  float val=sin(.15);
-  float d=deMandelbox(pos0+vec3(0.,0.,0.), 2.5, .1+val, 1.+val*0.5);
+  pos0.z-=0.1;
+  pos0.z=abs(pos0.z)-0.05;
+  pos0.xz=fmod(pos0.xz,24.);
+
+  float val=sin(.11);
+  float d=deMandelbox(pos0+vec3(0.,0.,0.), 2.5, .65+val, 1.+val*0.75);
 
   return d;
 }
@@ -176,17 +184,18 @@ vec3 hsv2rgb2(vec3 c, float k) {
 }
 
 void main(void) {
-  //vec2 st = (gl_FragCoord.xy*2.0-resolution.xy) / min(resolution.x,resolution.y);
-  vec2 st=uv*2.0-1.0;
-  st.x*=(resolution.x/resolution.y);
+  vec2 st = (gl_FragCoord.xy*2.0-resolution.xy) / min(resolution.x,resolution.y);
+  //vec2 st=uv*2.0-1.0;
+  //st.x*=(resolution.x/resolution.y);
 
   vec3 col=vec3((st.y+1.0)*0.5*0.25);
-  float radius=15.;
+
 float speed=-.25;
- vec3 ta=vec3(0.);
- vec3 ro=vec3(0.,0.,3.);
+ vec3 ta=vec3(0.,-0.75,0.);
+// vec3 ro=vec3(0.,0.,2.);
  float adjustAcc=0.5;
-//vec3 ro=vec3(cos(time),0.0,sin(time));
+float radius=.25;
+vec3 ro=vec3(cos(time)*radius,-0.75,sin(time)*radius);
 
  vec3 cDir=normalize(ta-ro);
  vec3 cSide=normalize(cross(cDir,vec3(0.,-1.,0.)));
@@ -208,8 +217,14 @@ float speed=-.25;
   }
 
     if(d.d1<0.01){
-
-    col+=vec3(exp(-.5*t));
+      vec3 pos=ro+rd*t;
+    float xid=floor(pos.x*20.0);
+    float zid=floor(pos.z*20.0);
+    col+=vec3(exp(-.5*t))*(
+      (
+        fract((xid+zid)/2.0)==0.0
+        )? vec3(1.):vec3(0.25)
+      )*vec3(0.5,0.25,0.25);
     }
 
     if(d.d2<0.001){

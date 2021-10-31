@@ -1,13 +1,13 @@
 precision mediump float;
-/*
+
 uniform float time;
 uniform vec2 resolution;
 uniform vec2 uv;
-*/
+/*
 in vec2 uv;
 in float time;
 in vec2 resolution;
-
+*/
 uniform float _cameraPositionIndex;
 
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
@@ -114,21 +114,25 @@ float d1_edge(vec3 p){
   return d;
 }
 
-float d2(vec3 p){
+float particle(vec3 p,float k,vec3 offset){
   vec3 pos0=p;
-  pos0=abs(pos0);
-  //pos0.z-=time;
-  float k=2.0;
+  pos0+=offset;
   vec3 id=floor(pos0/k);
+  pos0.y+=sin(pos0.z*2.+time*sign(sin(time+pos0.z)))*0.5;
+  pos0.xy*=rot(pos0.z);
+
   pos0=mod(pos0,k)-k*0.5;
-  pos0.xz+=vec2(cos(
-    sign((rand(vec2(id.x+id.y,id.z))-0.5))
-    *time),sin(
-      sign((rand(vec2(id.x+id.y,id.z))-0.5))
-      *time));
-  vec3 offset=vec3(0.,0.,0.);
-//offset=
-  float d=Cube(pos0+offset,vec3(0.1,0.1,0.5));
+  float d=Cube(pos0,vec3(0.005,0.005,2.));
+  return d;
+}
+
+float d2(vec3 p){
+  p.z-=time;
+  float d=particle(p,1.5,vec3(0.));
+  float d1=particle(p,1.,vec3(-1.));
+  d=min(d,d1);
+  float d2=particle(p,1.,vec3(1.,-1.,1.));
+  d=min(d,d2);
 
   return d;
 }
@@ -165,8 +169,8 @@ DBuffer map(vec3 p){
   d.d1=d1_edge(p);
   //d.d2=d1(p*1.1);
   //d.d1=2000.0;
-  //d.d2=d2(p);
-  d.d2=2000.0;
+  d.d2=d2(p);
+  //d.d2=2000.0;
   d.d3=d3(p+vec3(0.,-1.5,0.));
   //d.d3=2000.0;
   d.mainD=min(min(d.d1,d.d2),d.d3);
@@ -190,16 +194,16 @@ vec3 hsv2rgb2(vec3 c, float k) {
 }
 
 void main(void) {
-  //vec2 st = (gl_FragCoord.xy*2.0-resolution.xy) / min(resolution.x,resolution.y);
-  vec2 st=uv*2.0-1.0;
-  st.x*=(resolution.x/resolution.y);
+  vec2 st = (gl_FragCoord.xy*2.0-resolution.xy) / min(resolution.x,resolution.y);
+  //vec2 st=uv*2.0-1.0;
+  //st.x*=(resolution.x/resolution.y);
 
   vec3 col=vec3((st.y+1.0)*0.5*0.25);
   float radius=15.;
 float speed=-.25;
  vec3 ta=vec3(0.,1.,0.);
- vec3 ro=vec3(0.,2.,2.);
-//vec3 ro=vec3(cos(time),1.,sin(time));
+ //vec3 ro=vec3(0.,2.,2.);
+vec3 ro=vec3(cos(time),1.,sin(time));
 
  float adjustAcc=0.5;
 
@@ -212,10 +216,10 @@ float speed=-.25;
   DBuffer d;
   AccBuffer acc;
   float t=0.0;
-  for(int i=0;i<128;i++){
+  for(int i=0;i<100;i++){
     d=map(ro+rd*t);
     //d.d3=min(d.d3*0.,.1);
-    if(abs(d.d1)<0.001||d.d2<0.001||d.d3<0.0001||t>1000.0)break;
+    if(abs(d.d1)<0.001||d.d2<0.001||d.d3<0.001||t>1000.0)break;
 
     //if(d.mainD<2.){
     //  t+=d.mainD*.25;
@@ -224,24 +228,39 @@ float speed=-.25;
     //}
 
     acc.acc1+=exp(-50.0*(d.d1));
-    acc.acc2+=exp(-6.0*d.d2);
-    acc.acc3+=exp(-1.0*d.mainD);
+    acc.acc2+=exp(-50.0*d.d2);
+    acc.acc3+=exp(-50.0*d.d3);
   }
 
     if(d.d1<0.001){
+      vec3 refro=ro+rd*t;
+      vec3 n=gn(refro);
+      rd=reflect(rd,n);
+      ro=refro;
+      t=0.1;
+      float acc2;
+
+      for(int i=0;i<11;i++){
+        d=map(ro+rd*t);
+        if(d.mainD<0.001)break;
+        t+=d.mainD;
+        float H = mod(time*0.5, 1.0);
+        acc2+=exp(-3.*d.mainD);
+      }
+
       vec3 pos=ro+rd*t;
-      float flash=1.0-abs(sin(pos.z*.05+time*4.0));
-      flash+=.25;
-        col+=vec3(exp(-.01*t))*vec3(0.,0.25,1.0)*acc.acc1*0.01*flash;//*((d.d2>=0.001)? 1.0:0.0);
-        //col+=(d.d2<0.001)
+      float flash=1.0-abs(sin(pos.z*.5+time*4.0));
+      flash+=.1;
+      float H = mod(time*0.5, 1.0);
+      col+=vec3(exp(-.1*t))*acc.acc1*.05*flash*adjustAcc*vec3(0.,0.25,1.0);
     }
 
-    /*if(d.d2<0.001){
-      col+=vec3(exp(-.1*t))*vec3(0.,0.25,1.0)*acc.acc2*0.05;
-    }*/
+    if(d.d2<0.001){
+      col+=vec3(exp(-.01*t))*vec3(0.,0.25,1.0)*acc.acc2*0.05;
+    }
 
     if(d.d3<0.001){
-      col+=vec3(exp(-1.*t))*acc.acc3*0.025*vec3(0.7,0.2,1.);
+      col+=vec3(exp(-1.*t))*acc.acc3*0.05*vec3(0.,0.25,1.0);
     }
 
 
