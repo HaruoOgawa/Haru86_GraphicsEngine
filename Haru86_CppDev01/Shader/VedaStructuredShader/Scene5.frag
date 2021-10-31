@@ -1,14 +1,14 @@
 
 precision mediump float;
-
+/*
 uniform float time;
 uniform vec2 resolution;
 uniform vec2 uv;
-/*
+*/
 in vec2 uv;
 in float time;
 in vec2 resolution;
-*/
+
 uniform float _cameraPositionIndex;
 
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
@@ -171,9 +171,9 @@ vec3 hsv2rgb2(vec3 c, float k) {
 }
 
 void main(void) {
-  vec2 st = (gl_FragCoord.xy*2.0-resolution.xy) / min(resolution.x,resolution.y);
-  //vec2 st=uv*2.0-1.0;
-  //st.x*=(resolution.x/resolution.y);
+  //vec2 st = (gl_FragCoord.xy*2.0-resolution.xy) / min(resolution.x,resolution.y);
+  vec2 st=uv*2.0-1.0;
+  st.x*=(resolution.x/resolution.y);
 //st*=rot(time);
   vec3 col=vec3((st.y+1.0)*0.5*0.25);
   float radius=15.;

@@ -10,6 +10,9 @@
 //ray
 GameObject* Scene1_Frag;
 GameObject* Scene2_Frag;
+GameObject* Scene3_Frag;
+GameObject* Scene4_Frag;
+GameObject* Scene5_Frag;
 
 //font
 GameObject* DemoText;
@@ -31,12 +34,15 @@ App::~App() {
 void App::Start()  {
 	Scene1_Frag = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/VedaStructuredShader/scene1.frag");
 	Scene2_Frag = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/VedaStructuredShader/scene2.frag");
+	Scene3_Frag = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/VedaStructuredShader/scene3.frag");
+	Scene4_Frag = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/VedaStructuredShader/scene4.frag");
+	Scene5_Frag = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/VedaStructuredShader/scene5.frag");
 
 
-	/*GameObject* uiButton = new GameObject(PrimitiveType::BOARD,"./Shader/UIStandard.vert","./Shader/UIStandard.frag");
+	GameObject* uiButton = new GameObject(PrimitiveType::BOARD,"./Shader/UIStandard.vert","./Shader/UIStandard.frag");
 	uiButton->SetScale(glm::vec3(0.1f,0.05f,1.0f)*0.5f);
 	uiButton->AddComponent(new UIComponent(uiButton));
-	uiButton->AddComponent(new RectTransformComponent(uiButton,0.1f,0.1f));*/
+	uiButton->AddComponent(new RectTransformComponent(uiButton,0.1f,0.1f));
 
 	renderBoard = new GameObject(PrimitiveType::BOARD, "./Shader/VedaStructuredShader/BoardRender.vert", "./Shader/VedaStructuredShader/BoardRender.frag",RenderType::FrameBuffer);
 
@@ -53,6 +59,9 @@ void App::Update()  {
 void App::Timeline(TimelineObject* timeline)  {
 	timeline->AddActivationClip(Scene1_Frag,0.0f,42.0f);
 	timeline->AddActivationClip(Scene2_Frag, 42.0f, 64.0f);
+	timeline->AddActivationClip(Scene3_Frag, 64.0f, 92.0f);
+	timeline->AddActivationClip(Scene4_Frag, 92.0f, 114.0f);
+	timeline->AddActivationClip(Scene5_Frag, 114.0f, 160.0f);
 
 	float startTime = 0.0f;	
 	float timeVal = 3.0f;

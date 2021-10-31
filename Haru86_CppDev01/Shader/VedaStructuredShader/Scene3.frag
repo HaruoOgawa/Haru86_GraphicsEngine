@@ -1,13 +1,13 @@
 precision mediump float;
-
+/*
 uniform float time;
 uniform vec2 resolution;
 uniform vec2 uv;
-/*
+*/
 in vec2 uv;
 in float time;
 in vec2 resolution;
-*/
+
 uniform float _cameraPositionIndex;
 
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
@@ -70,26 +70,48 @@ vec2 fmod(vec2 p,float r){
   return rot(a)*p;
 }
 
+
 float Plane(vec3 p){
   return p.y;
 }
 
 float Cube(vec3 p,vec3 s){
-  return length(max(abs(p)-s,0.0));
+  return length(max(abs(p)-s,0.));
+}
+
+float CubeTerrain(vec3 p,vec3 offset,float k,vec3 scale,float A,float startVal){
+   vec3 pos=p;
+   pos+=offset;
+   float xid=floor(pos.x/k);
+   float yid=floor(pos.y/k);
+   float zid=floor(pos.z/k);
+
+   pos.xz=mod(pos.xz,k)-0.5*k;
+  float d=Cube(pos,scale+vec3(0.,min(rand(vec2((xid+zid)*A))*startVal+startVal,k)*exp(abs(xid)*0.5)*0.5,0.));
+  return d;
 }
 
 float d1(vec3 p){
-  p.z-=time;
-  vec3 pos=p;
-   float modNum=0.6;
-   //get axis random id
-   float xid=floor(pos.x/modNum);
-   float yid=floor(pos.y/modNum);
-   float zid=floor(pos.z/modNum);
+  p.z-=time*2.;
+  float d0=CubeTerrain(p,vec3(0.,0.,0.),.8,vec3(0.25,0.25,0.25),10.0,0.25);
+  float d1=CubeTerrain(p,vec3(1.,0.,1.),.8,vec3(0.25,0.25,0.25),20.0,0.2);
+  d0=min(d0,d1);
+  float d2=CubeTerrain(p,vec3(-1.,-.0,-1.),.8,vec3(0.2,0.2,0.2),40.0,0.2);
+  d0=min(d0,d2);
+  float d3=CubeTerrain(p,vec3(-.5,-.0,-.5),1.2,vec3(0.2,0.2,0.2),20.0,0.5);
+  d0=min(d0,d3);
 
-   pos.xz=mod(pos.xz,modNum)-0.5*modNum;
-  float d=Cube(pos,vec3(0.25,rand(vec2((xid+zid)*10.0))*0.25+0.25,0.25));
-      return d;
+  /*float k=.75;
+  p=mod(p,k)-k*.5;
+  float d0=Cube(p,vec3(.25,.25,.25));*/
+
+      return d0;
+}
+
+float d1_edge(vec3 p){
+  float d=d1(p);
+  d=max(d,d1(p*1.1));
+  return d;
 }
 
 float d2(vec3 p){
@@ -110,12 +132,43 @@ float d2(vec3 p){
 
   return d;
 }
+
+float d3(vec3 p){
+//p*=7.;
+
+  float d=length(p)-.2;
+//p.xyz*=7.;
+//p.x+=1.5;
+
+  p.xy*=rot(time);
+  p.xz*=rot(time);
+  p.yz*=rot(time);
+  for(int i=0;i<3;i++){
+    p=abs(p)-.075;
+    if(p.x<p.y)p.xy=p.yx;
+    if(p.x<p.z)p.xz=p.zx;
+    if(p.y<p.z)p.yz=p.zy;
+
+    p.xy*=rot(1.2);
+    p.xz*=rot(.25);
+    p.yz*=rot(.25);
+
+}
+
+d=min(d,Cube(p,vec3(.2,.2,.2)*.2));
+
+  return d;
+}
+
 DBuffer map(vec3 p){
   DBuffer d;
-  //d.d1=d1(p);
-  d.d1=2000.0;
-  d.d2=d2(p);
-  d.d3=2000.0;
+  d.d1=d1_edge(p);
+  //d.d2=d1(p*1.1);
+  //d.d1=2000.0;
+  //d.d2=d2(p);
+  d.d2=2000.0;
+  d.d3=d3(p+vec3(0.,-1.5,0.));
+  //d.d3=2000.0;
   d.mainD=min(min(d.d1,d.d2),d.d3);
   return d;
 }
@@ -137,15 +190,16 @@ vec3 hsv2rgb2(vec3 c, float k) {
 }
 
 void main(void) {
-  vec2 st = (gl_FragCoord.xy*2.0-resolution.xy) / min(resolution.x,resolution.y);
-  //vec2 st=uv*2.0-1.0;
-  //st.x*=(resolution.x/resolution.y);
+  //vec2 st = (gl_FragCoord.xy*2.0-resolution.xy) / min(resolution.x,resolution.y);
+  vec2 st=uv*2.0-1.0;
+  st.x*=(resolution.x/resolution.y);
 
   vec3 col=vec3((st.y+1.0)*0.5*0.25);
   float radius=15.;
 float speed=-.25;
- vec3 ta=vec3(0.);
- vec3 ro=vec3(0.,0.,2.);
+ vec3 ta=vec3(0.,1.,0.);
+ vec3 ro=vec3(0.,2.,2.);
+//vec3 ro=vec3(cos(time),1.,sin(time));
 
  float adjustAcc=0.5;
 
@@ -158,22 +212,36 @@ float speed=-.25;
   DBuffer d;
   AccBuffer acc;
   float t=0.0;
-  for(int i=0;i<64;i++){
+  for(int i=0;i<128;i++){
     d=map(ro+rd*t);
-    if(d.d1<0.0001||d.d2<0.0001||d.d3<0.001||t>1000.0)break;
-    t+=d.mainD;
+    //d.d3=min(d.d3*0.,.1);
+    if(abs(d.d1)<0.001||d.d2<0.001||d.d3<0.0001||t>1000.0)break;
 
-    acc.acc1+=exp(-6.0*(d.mainD));
+    //if(d.mainD<2.){
+    //  t+=d.mainD*.25;
+    //}else{
+      t+=d.mainD*.5;
+    //}
+
+    acc.acc1+=exp(-50.0*(d.d1));
     acc.acc2+=exp(-6.0*d.d2);
     acc.acc3+=exp(-1.0*d.mainD);
   }
 
-    if(d.d1<0.0001){
-      col+=vec3(exp(-.25*t));
+    if(d.d1<0.001){
+      vec3 pos=ro+rd*t;
+      float flash=1.0-abs(sin(pos.z*.05+time*4.0));
+      flash+=.25;
+        col+=vec3(exp(-.01*t))*vec3(0.,0.25,1.0)*acc.acc1*0.01*flash;//*((d.d2>=0.001)? 1.0:0.0);
+        //col+=(d.d2<0.001)
     }
 
-    if(d.d2<0.0001){
+    /*if(d.d2<0.001){
       col+=vec3(exp(-.1*t))*vec3(0.,0.25,1.0)*acc.acc2*0.05;
+    }*/
+
+    if(d.d3<0.001){
+      col+=vec3(exp(-1.*t))*acc.acc3*0.025*vec3(0.7,0.2,1.);
     }
 
 
