@@ -18,6 +18,7 @@ struct DBuffer{
   float d1;
   float d2;
   float d3;
+  float d4;
   float mainD;
 };
 
@@ -25,6 +26,7 @@ struct AccBuffer{
   float acc1;
   float acc2;
   float acc3;
+  float acc4;
 };
 
 float rand(vec2 seeds){
@@ -71,41 +73,6 @@ vec2 fmod(vec2 p,float r){
   return rot(a)*p;
 }
 
-#define foldingLimit 1.0
-vec3 boxFold(vec3 z, float dz) {
-    return clamp(z, -foldingLimit, foldingLimit) * 2.0 - z;
-}
-
-void sphereFold(inout vec3 z, inout float dz, float minRadius, float fixedRadius) {
-    float m2 = minRadius * minRadius;
-    float f2 = fixedRadius * fixedRadius;
-    float r2 = dot(z, z);
-    if (r2 < m2) {
-        float temp = (f2 / m2);
-        z *= temp;
-        dz *= temp;
-    } else if (r2 < f2) {
-        float temp = (f2 / r2);
-        z *= temp;
-        dz *= temp;
-    }
-}
-
-// ref: http://blog.hvidtfeldts.net/index.php/2011/11/distance-estimated-3d-fractals-vi-the-mandelbox/
-#define ITERATIONS 12
-float deMandelbox(vec3 p, float scale, float minRadius, float fixedRadius) {
-    vec3 z = p;
-    float dr = 1.;
-    for (int i = 0; i < ITERATIONS; i++) {
-        z = boxFold(z, dr);
-        sphereFold(z, dr, minRadius, fixedRadius);
-        z = scale * z + p;
-        dr = dr * abs(scale) + 1.;
-    }
-    float r = length(z);
-    return r / abs(dr);
-}
-
 float Plane(vec3 p){
   //float d=-p.y+1.0;
   float d=p.y+1.0;
@@ -117,53 +84,153 @@ float Cube(vec3 p,vec3 s){
   return length(max(abs(p)-s,0.0));
 }
 
+vec2 pmod(vec2 p, float n)
+{
+float a = atan(p.x, p.y) + PI / n;
+float th = 2.0 * PI / n;
+a = floor(a / th) * th;
+return rot(a)* p;
+}
+
+float Cube(vec3 p, float s)
+{
+p = abs(p);
+return length(max(p - vec3(s, s, s), 0.0));
+}
+
+float sdCross(vec3 p, float scale)
+{
+p = abs(p);
+float dxy = max(p.x, p.y);
+float dyz = max(p.y, p.z);
+float dzx = max(p.z, p.x);
+return min(dxy, min(dyz, dzx)) - scale;
+}
+
+
+float menger(vec3 p)
+{
+    float k = 1.;
+    p.z = mod(p.z, k) - 0.5 * k;
+
+    //
+    float s = .8;
+    p = abs(p);
+    float d = Cube(p, s);
+    //
+    float scale = 4.;
+    //
+    float h = 1.5;
+    for (int i = 0; i < 4; i++)
+    {
+
+        p = mod(p, h) - h * 0.5;
+        s *= scale;
+        p = 1.0 - scale * abs(p);
+        //
+        d = max(d, sdCross(p, .825) / s);
+
+    }
+
+    return d;
+}
+
+
 float d1(vec3 p){
   float d=Plane(p);
       return d;
 }
 
 float d2(vec3 p){
-//p.xy*=rot(time);
-//p.xz*=rot(time*0.01);
-//p.yz*=rot(time);
-  vec3 pos0=p;
-  pos0.y=abs(pos0.y);
+  vec3 pos = p;
+   pos.yz*=rot(PI/2.0);
+  pos=abs(pos)-0.5;
+  pos.z-=0.5;
+  pos.z-=0.2;
+  pos.z-=0.5;
+  pos.z-=0.1;
 
-  float k=7.0;
-  pos0.xyz=mod(pos0.xyz,k)-k*.5;
-pos0.xz=fmod(pos0.xz,12.);
-  pos0.xy=fmod(pos0.xy,12.);
+  pos.xy = pmod(pos.xy, 10.0);
+  float k=1.2;
+  pos=mod(pos,k)-k*0.5;
+  float d = menger(pos);
 
-  for(int i=0;i<3;i++){
-    pos0=abs(pos0)-.4;
-    pos0.z=abs(pos0.z)-.5;
-    pos0.z-=0.5;
-    pos0.xy*=rot(1.75);
-    pos0.xy*=rot(1.75);
-    pos0.x=abs(pos0.x)-.25;
-    pos0.x-=0.21;
-  }
-
-  pos0.z=abs(pos0.z)-.15;
-  pos0.z-=0.075;
-  pos0.z=abs(pos0.z)-.15;
-  pos0.z-=0.1;
-  pos0.z=abs(pos0.z)-0.05;
-  pos0.xz=fmod(pos0.xz,24.);
-
-  float val=sin(.11);
-  float d=deMandelbox(pos0+vec3(0.,0.,0.), 2.5, .65+val, 1.+val*0.75);
 
   return d;
 }
+
+float d3(vec3 p){
+  float isTransform=1.0;
+
+  if(isTransform==0.0){
+    p+=vec3(0.,.9,0.);
+    p.xz*=rot(time);
+    p.xy*=rot(time);
+    p.yz*=rot(time);
+  }else if(isTransform==1.0){
+      p+=vec3(-.15,.75,-.15);
+      p.xz*=rot(time);
+  }
+
+  if(isTransform==1.0){
+    p*=0.75;
+    for(int i=0;i<3;i++){
+      p=abs(p)-.02;
+      if(p.x<p.y)p.xy=p.yx;
+      if(p.x<p.z)p.xz=p.zx;
+      if(p.y<p.z)p.yz=p.zy;
+
+      p.xy*=rot(length(p)-2.5);
+      p.xz*=rot(0.2);
+      p.yz*=rot(length(p)-2.25);
+    }
+    float h=1.2;
+    p.x-=clamp(p.x,-h,h);
+  }
+
+float d=Cube(p,vec3(.1,.1,.1)*0.1);
+  return d;
+}
+
+
+float d4(vec3 p){
+  p*=7.5;
+
+    p+=vec3(1.,7.,1.);
+    float d=length(p)-.2;
+  //p.xyz*=7.;
+  //p.x+=1.5;
+
+    p.xy*=rot(time);
+    p.xz*=rot(time);
+    p.yz*=rot(time);
+    for(int i=0;i<3;i++){
+      p=abs(p)-.075;
+      if(p.x<p.y)p.xy=p.yx;
+      if(p.x<p.z)p.xz=p.zx;
+      if(p.y<p.z)p.yz=p.zy;
+
+      p.xy*=rot(1.2);
+      p.xz*=rot(.25);
+      p.yz*=rot(.25);
+
+  }
+
+  d=min(d,Cube(p,vec3(.2,.2,.2)*.2));
+
+    return d;
+}
+
 DBuffer map(vec3 p){
   DBuffer d;
   d.d1=d1(p);
   //d.d1=2000.0;
   d.d2=d2(p);
   //d.d2=2000.0;
-  d.d3=2000.0;
-  d.mainD=min(min(d.d1,d.d2),d.d3);
+  d.d3=d3(p);
+  //d.d3=2000.0;
+  d.d4=d4(p);
+  d.mainD=min(min(d.d1,d.d2),min(d.d3,d.d4));
   return d;
 }
 
@@ -191,12 +258,13 @@ void main(void) {
   vec3 col=vec3((st.y+1.0)*0.5*0.25);
 
 float speed=-.25;
- vec3 ta=vec3(0.,-0.75,0.);
-// vec3 ro=vec3(0.,0.,2.);
- float adjustAcc=0.5;
-float radius=.25;
-vec3 ro=vec3(cos(time)*radius,-0.75,sin(time)*radius);
+ vec3 ta=vec3(0.,-0.95,0.);
 
+ float adjustAcc=0.5;
+float radius=.3;
+//vec3 ro=vec3(cos(time)*radius,-0.8,sin(time)*radius);
+radius=.25;
+ vec3 ro=vec3(-radius,-0.8,-radius);
  vec3 cDir=normalize(ta-ro);
  vec3 cSide=normalize(cross(cDir,vec3(0.,-1.,0.)));
  vec3 cUp=normalize(cross(cDir,cSide));
@@ -208,12 +276,13 @@ vec3 ro=vec3(cos(time)*radius,-0.75,sin(time)*radius);
   float t=0.0;
   for(int i=0;i<128;i++){
     d=map(ro+rd*t);
-    if(d.d1<0.001||d.d2<0.001||d.d3<0.001||t>1000.0)break;
+    if(d.d1<0.001||d.d2<0.001||d.d3<0.001||d.d4<0.001||d.mainD<0.001||t>1000.0)break;
     t+=d.mainD*.5;
 
     acc.acc1+=exp(-10.0*(d.d1));
     acc.acc2+=exp(-6.0*d.d2);
-    acc.acc3+=exp(-1.0*d.mainD);
+    acc.acc3+=exp(-50.0*d.d3);
+    acc.acc4+=exp(-50.0*d.d4);
   }
 
     if(d.d1<0.01){
@@ -232,6 +301,33 @@ vec3 ro=vec3(cos(time)*radius,-0.75,sin(time)*radius);
     }
 
     //col=vec3(1.);
+
+    if(d.d3<0.001){
+      vec3 refro=ro+rd*t;
+      vec3 n=gn(refro);
+      rd=refract(rd,n,0.786);
+      ro=refro;
+      t=0.1;
+      float acc2=0.0;
+
+      for(int i=0;i<33;i++){
+        d=map(ro+rd*t);
+        if(d.d1<0.001||d.d2<0.001||d.d3<0.001||t>1000.0)break;
+        t+=d.mainD;
+        acc2+=exp(-3.*d.mainD);
+      }
+
+
+      vec3 pos=ro+rd*t;
+      float flash=1.0-abs(sin(pos.z*.5+time*4.0));
+      flash+=.1;
+      float H = mod(time*0.5, 1.0);
+      col+=vec3(exp(-.1*t))*acc2*.25*flash*hsv2rgb2(vec3(H,1.0,1.0),2.2)*adjustAcc;
+    }
+
+    if(d.d4<0.01){
+      col+=exp(-.025*t)*acc.acc4*0.2*vec3(0.5,0.25,1.0);
+    }
 
   gl_FragColor = vec4(col, 1.0);
 }
