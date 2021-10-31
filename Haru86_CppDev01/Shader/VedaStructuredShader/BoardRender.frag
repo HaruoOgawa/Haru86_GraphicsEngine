@@ -44,12 +44,14 @@ void main(void){
                 col.g+=texture(frameTex,st_G*_frameResolusion);
                 col.b+=texture(frameTex,st_B*_frameResolusion);
 	}else if(_postProcessFlag==4){
-				uv.y+=0.05*sin(time*100.0);
-				uv.x+=0.01*sin(time*50.0);
+				float val=(sin(time*2.0)+1.0)*0.5+0.1;
+				
+				uv.y+=0.05*sin(time*100.0)*val;
+				uv.x+=0.01*sin(time*50.0)*val;
 
 				vec4 _GapOffsetX=vec4(1.0,0.5,0.25,0.0);
 				vec4 _GapOffsetY=vec4(0.02,0.03,0.03,0.0)*6.0;
-				float _gapOffsetPower=0.08*(sin(time*0.5)+1.0)*0.5;
+				float _gapOffsetPower=0.08*val;
 				
 				vec2 vecFromCenter=vec2(0.0,0.0)-(uv-vec2(0.5,0.5))*2.0;
 

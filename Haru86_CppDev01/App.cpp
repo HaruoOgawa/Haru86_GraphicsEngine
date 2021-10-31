@@ -39,10 +39,10 @@ void App::Start()  {
 	Scene5_Frag = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/VedaStructuredShader/scene5.frag");
 
 
-	GameObject* uiButton = new GameObject(PrimitiveType::BOARD,"./Shader/UIStandard.vert","./Shader/UIStandard.frag");
+	/*GameObject* uiButton = new GameObject(PrimitiveType::BOARD,"./Shader/UIStandard.vert","./Shader/UIStandard.frag");
 	uiButton->SetScale(glm::vec3(0.1f,0.05f,1.0f)*0.5f);
 	uiButton->AddComponent(new UIComponent(uiButton));
-	uiButton->AddComponent(new RectTransformComponent(uiButton,0.1f,0.1f));
+	uiButton->AddComponent(new RectTransformComponent(uiButton,0.1f,0.1f));*/
 
 	renderBoard = new GameObject(PrimitiveType::BOARD, "./Shader/VedaStructuredShader/BoardRender.vert", "./Shader/VedaStructuredShader/BoardRender.frag",RenderType::FrameBuffer);
 
@@ -65,9 +65,10 @@ void App::Timeline(TimelineObject* timeline)  {
 	//-14.0f
 	timeline->AddActivationClip(Scene4_Frag, 85.0f, 128.0f - 12.0f);
 	timeline->AddActivationClip(Scene5_Frag, 128.0f - 12.0f, 146.0f-20.0f);
-	timeline->AddActivationClip(Scene1_Frag, 146.0f - 20.0f, 179.0f - 22.0f);
-
-	float startTime = 0.0f;	
+	timeline->AddActivationClip(Scene1_Frag, 126.0f, 157.0f);
+	//146.0f - 20.0f=126.0f, 179.0f - 22.0f=157.0f
+	
+		float startTime = 0.0f;	
 	float timeVal = 3.0f;
 	float endTime = 0.0f;
 	endTime += timeVal;
@@ -93,7 +94,7 @@ void App::Timeline(TimelineObject* timeline)  {
 		
 	}
 
-	timeline->AddAnimationClip(Scene1_Frag, 38.0f, 41.9f,
+	timeline->AddAnimationClip(Scene1_Frag, 38.0f, 42.0f,
 		[](float val) {
 			//gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime;
 			Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 3);
@@ -102,7 +103,7 @@ void App::Timeline(TimelineObject* timeline)  {
 
 	});
 	
-	timeline->AddAnimationClip(Scene1_Frag, 41.9f, 42.0f,
+	timeline->AddAnimationClip(Scene1_Frag, 42.0f, 42.5f,
 		[](float val) {
 			//gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime;
 			Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 0);
@@ -199,13 +200,21 @@ void App::Timeline(TimelineObject* timeline)  {
 	timeline->AddAnimationClip(Scene4_Frag, 85.0, 106.5 - 1.0f, [](float val) {Scene4_Frag->meshComp->material->SetFloatUniform("isTransform",0.0f); });
 	timeline->AddAnimationClip(Scene4_Frag, 106.5 - 1.0f, 128.0f - 12.0f, [](float val) {Scene4_Frag->meshComp->material->SetFloatUniform("isTransform",1.0f); });
 
+	timeline->AddAnimationClip(Scene1_Frag, 146.0f - 20.0f, 146.2f - 20.0f,
+		[](float val) {
+		//gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime;
+		Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 0);
+		Scene1_Frag->meshComp->material->SetFloatUniform("_cameraMoveVal", val);
+	});
 
-	timeline->AddAnimationClip(Scene1_Frag, 146.0f - 20.0f, 179.0f - 22.0f,
+	timeline->AddAnimationClip(Scene1_Frag, 146.2f - 20.0f, 179.0f - 22.0f,
 		[](float val) {
 		//gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime;
 		Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 4);
 		Scene1_Frag->meshComp->material->SetFloatUniform("_cameraMoveVal", val);
 	});
+
+
 
 	//font/////////////////////////////////
 
@@ -282,11 +291,46 @@ void App::Timeline(TimelineObject* timeline)  {
 	});
 	
 	//finalText
-	// 106.5 - 1.0f=105.5, 128.0f - 12.0f=116
-	timeline->AddActivationClip(MyCreditText, 105.5f, 116.0f);
+	//  126.0f, 157.0f
+	timeline->AddActivationClip(DemoText, 126.0f, 126.0f+10.0);
+	timeline->AddActivationClip(MusicText, 126.0f + 10.0, 126.0f + 20.0);
+	timeline->AddActivationClip(MyCreditText, 126.0f + 20.0, 126.0f + 30.0);
 	
-	timeline->AddAnimationClip(MyCreditText, 105.5f, 116.0f, [](float val) {
-		
+	timeline->AddAnimationClip(DemoText, 126.0f, 126.0f + 10.0, [](float val) {
+
+		//printf("val: %f \n", val);
+
+		float delayVal = 0.2f;
+		if (val <= delayVal) {
+			DemoText->meshComp->material->SetFloatUniform("_alpha", val / delayVal);
+		}
+		else if (val > delayVal && val < 1.0f - delayVal) {
+			DemoText->meshComp->material->SetFloatUniform("_alpha", 1.0f);
+		}
+		else if (val >= 1.0f - delayVal) {
+			DemoText->meshComp->material->SetFloatUniform("_alpha", (1.0f - val) / delayVal);
+		}
+
+	});
+
+	timeline->AddAnimationClip(MusicText, 126.0f + 10.0, 126.0f + 20.0, [](float val) {
+
+		//printf("val: %f \n", val);
+
+		float delayVal = 0.2f;
+		if (val <= delayVal) {
+			MusicText->meshComp->material->SetFloatUniform("_alpha", val / delayVal);
+		}
+		else if (val > delayVal && val < 1.0f - delayVal) {
+			MusicText->meshComp->material->SetFloatUniform("_alpha", 1.0f);
+		}
+		else if (val >= 1.0f - delayVal) {
+			MusicText->meshComp->material->SetFloatUniform("_alpha", (1.0f - val) / delayVal);
+		}
+
+	});
+	timeline->AddAnimationClip(MyCreditText, 126.0f + 20.0, 126.0f + 30.0, [](float val) {
+
 		//printf("val: %f \n", val);
 
 		float delayVal = 0.2f;

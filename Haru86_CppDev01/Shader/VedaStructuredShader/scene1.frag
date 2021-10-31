@@ -247,8 +247,13 @@ float speed=-.25;
     ta=vec3(0.);
     ro=vec3(0.,2.,26.0-_cameraMoveVal*24.0*1.5);
  }else if(_cameraPositionIndex==4){
-    ta=vec3(0.);
-    ro=vec3(0.,2.,0.0-_cameraMoveVal*24.0*1.5-2.0);
+    ta=vec3(0.,0.,
+    -0.25*pow(-1.0*(_cameraMoveVal+0.1),2.0)
+    );
+    //ro=vec3(0.,2.,0.0-_cameraMoveVal*24.0*1.5-2.0);
+    ro=vec3(0.,2.,
+    -0.25*pow(-1.0*_cameraMoveVal,2.0)
+    );
  }
 
 
