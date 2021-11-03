@@ -96,7 +96,7 @@ float d1(vec3 p){
 }
 
 float d2(vec3 p){
-p.z-=time*2.;
+p.z-=time*10.;
   vec3 pos0=p;
   float r=perlinNoise(vec2(pos0.x,pos0.z))+perlinNoise(vec2(pos0.x,pos0.y)*5.0)*0.5+perlinNoise(vec2(pos0.y,pos0.z)*10.0)*0.35;
 float k=2.1;

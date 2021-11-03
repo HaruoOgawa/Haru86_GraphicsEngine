@@ -5,6 +5,10 @@ E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(114,22): warni
 E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(135,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(156,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(177,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+soil.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_DXT.obj)' で、または 'E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+soil.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_helper.obj)' で、または 'E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+soil.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(SOIL.obj)' で、または 'E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(stb_image_aug.obj)' で、または 'E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
   Haru86_CppDev01.vcxproj -> E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
   ファイルが見つかりません - *.dll
   0 個のファイルをコピーしました

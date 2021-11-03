@@ -139,6 +139,10 @@ void AudioSourceComponent::CreateSound(std::string name) {
 			delete sound;
 			delete channel;
 		}
+		/*else {
+			channel->setVolume(0.0f);
+		}*/
+		
 	}
 	else {
 		char a[] = "a";

@@ -207,7 +207,7 @@ void App::Timeline(TimelineObject* timeline)  {
 		Scene1_Frag->meshComp->material->SetFloatUniform("_cameraMoveVal", val);
 	});
 
-	timeline->AddAnimationClip(Scene1_Frag, 146.2f - 20.0f, 179.0f - 22.0f,
+	timeline->AddAnimationClip(Scene1_Frag, 126.0f, 157.0f,
 		[](float val) {
 		//gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime;
 		Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 4);
@@ -299,6 +299,7 @@ void App::Timeline(TimelineObject* timeline)  {
 	timeline->AddAnimationClip(DemoText, 126.0f, 126.0f + 10.0, [](float val) {
 
 		//printf("val: %f \n", val);
+		DemoText->meshComp->material->SetFloatUniform("_ColorIndex", 1.0f);
 
 		float delayVal = 0.2f;
 		if (val <= delayVal) {
@@ -316,6 +317,7 @@ void App::Timeline(TimelineObject* timeline)  {
 	timeline->AddAnimationClip(MusicText, 126.0f + 10.0, 126.0f + 20.0, [](float val) {
 
 		//printf("val: %f \n", val);
+		DemoText->meshComp->material->SetFloatUniform("_ColorIndex", 1.0f);
 
 		float delayVal = 0.2f;
 		if (val <= delayVal) {
@@ -332,6 +334,7 @@ void App::Timeline(TimelineObject* timeline)  {
 	timeline->AddAnimationClip(MyCreditText, 126.0f + 20.0, 126.0f + 30.0, [](float val) {
 
 		//printf("val: %f \n", val);
+		DemoText->meshComp->material->SetFloatUniform("_ColorIndex", 1.0f);
 
 		float delayVal = 0.2f;
 		if (val <= delayVal) {
@@ -360,13 +363,17 @@ void App::Timeline(TimelineObject* timeline)  {
 	timeline->AddAnimationClip(renderBoard, 84.5f,85.5f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",2); });
 	timeline->AddAnimationClip(renderBoard, 85.5f, 86.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
 	
-	timeline->AddAnimationClip(renderBoard, 85.0, 106.5 - 1.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(renderBoard, 102.0, 102.5, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
+	timeline->AddAnimationClip(renderBoard, 102.5, 104.5, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 5); });
+	timeline->AddAnimationClip(renderBoard, 104.5, 105.5, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
+
+	//timeline->AddAnimationClip(renderBoard, 85.0, 106.5 - 1.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
 	timeline->AddAnimationClip(renderBoard, 106.5 - 1.0f, 128.0f - 12.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",4); });
 	timeline->AddAnimationClip(renderBoard, 128.0f - 12.0f, 128.5f - 12.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
 	
-	timeline->AddAnimationClip(renderBoard, 151.5f, 151.5f - 3.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
-	timeline->AddAnimationClip(renderBoard, 151.5f - 8.0f, 179.5f - 19.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",3); });
-	timeline->AddAnimationClip(renderBoard, 179.5f - 19.0f, 180.f - 19.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(renderBoard, 125.5f, 126.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(renderBoard, 126.0f, 157.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",3); });
+	timeline->AddAnimationClip(renderBoard, 157.0f, 157.5f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
 		
 }
 

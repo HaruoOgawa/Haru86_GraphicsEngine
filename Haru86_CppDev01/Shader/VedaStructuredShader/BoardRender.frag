@@ -8,6 +8,10 @@ uniform sampler2D frameTex;
 uniform float _frameResolusion;
 uniform float _postProcessFlag;
 
+float rand(vec2 seeds){
+  return fract(sin(dot(seeds, vec2(12.9898,78.233))) * 43758.5453);
+}
+
 void main(void){
 	vec4 col=vec4(0.,0.,0.,1.);
 	
@@ -66,6 +70,15 @@ void main(void){
 	}else if(_postProcessFlag==3){
 		col.rgb=texture(frameTex,uv*_frameResolusion);
 		col.rgb=1.0-col.rgb;
+	}else if(_postProcessFlag==5){
+		float glitchY=rand(vec2(0.123,floor(time*20.0)));
+		float glitchWidth=0.25;
+
+		if(uv.y>=glitchY&&uv.y<glitchY+glitchWidth){
+			uv.x+=sin(time*10.0)*0.5;
+		}
+
+		col.rgb=texture(frameTex,uv*_frameResolusion);
 	}
 	
 	gl_FragColor=col;

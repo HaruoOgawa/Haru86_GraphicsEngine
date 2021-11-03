@@ -227,7 +227,7 @@ float d4(vec3 p){
 float Lighting(vec3 p,float timeOffset,float randRot){
   p.xz*=rot(randRot*2.0*PI);
   p.x+=perlinNoise(vec2(p.y*15.,p.y*10.)*5.)*0.05;
-  float d=Cube(p,vec3(.0001,.5,.0001))*((p.y>mod(time*4.0+timeOffset,0.95*1.))? 1.0:2000.0);
+  float d=Cube(p,vec3(.00005,.5,.00005))*((p.y>mod(time*4.0+timeOffset,0.95*1.))? 1.0:2000.0);
   return d;
 }
 
@@ -240,8 +240,8 @@ float d5(vec3 p){
     float r=rand(vec2(float(i),0.456));
     r=r*0.5+0.25;
     pos.xz+=vec2(
-      r*cos(2.0*PI*rand(vec2(float(i),0.123))),
-      r*sin(2.0*PI*rand(vec2(float(i),0.456)))
+      r*cos(2.0*PI*rand(vec2(float(i),floor(time*2.0)))),
+      r*sin(2.0*PI*rand(vec2(float(i),floor(time*2.0))))
       );
     d=min(d,Lighting(pos,rand(vec2(0.963,float(i))),rand(vec2(0.741,float(i)))));
   }
@@ -301,17 +301,18 @@ float radius=.3;
  radius=.25;
  vec3 ro=vec3(-radius,-0.8,-radius);
 
+    float adjustSpeed=0.25;
  if(isTransform==0.0){
     if(_cameraPositionIndex==0.0){
         radius=.3;
-        ro=vec3(cos(time)*radius,-0.8,sin(time)*radius);
+        ro=vec3(cos(time*adjustSpeed)*radius,-0.8,sin(time*adjustSpeed)*radius);
     }else if(_cameraPositionIndex==1.0){
         ta=vec3(0.,-.9,0.);
         radius=.025;
-        ro=ta+vec3(cos(time)*radius,0.0,sin(time)*radius);
+        ro=ta+vec3(cos(time*adjustSpeed)*radius,0.0,sin(time*adjustSpeed)*radius);
     }else if(_cameraPositionIndex==2.0){
         radius=.3;
-        ro=vec3(cos(time)*radius,-0.3,sin(time)*radius);
+        ro=vec3(cos(time*adjustSpeed)*radius,-0.3,sin(time*adjustSpeed)*radius);
     }
  }else if(isTransform==1.0){
      if(_cameraPositionIndex==0.0){
