@@ -92,12 +92,10 @@ void main(void){
 		col.rgb*=(uv.x<0.0||uv.x>1.0)? 0.0 : 1.0;
 
 		//noise
-		col.rgb=texture(frameTex,uv*_frameResolusion);
+		//col.rgb=texture(frameTex,uv*_frameResolusion);
 		col.rgb=col.rgb*abs(cos(PI*_postProcessVal))+
 			vec3(rand(uv+vec2(time,-1.0*time)))*abs(sin(PI*_postProcessVal));
 
-
-		//_postProcessVal
 	}else if(_postProcessFlag==6){
 				float val=0.2;
 				
