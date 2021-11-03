@@ -7,6 +7,9 @@ in vec2 resolution;
 uniform sampler2D frameTex;
 uniform float _frameResolusion;
 uniform float _postProcessFlag;
+uniform float _postProcessVal;
+
+#define PI 3.14159265
 
 float rand(vec2 seeds){
   return fract(sin(dot(seeds, vec2(12.9898,78.233))) * 43758.5453);
@@ -78,14 +81,51 @@ void main(void){
 		col.rgb=texture(frameTex,uv*_frameResolusion);
 		col.rgb=1.0-col.rgb;
 	}else if(_postProcessFlag==5){
-		float glitchY=rand(vec2(0.123,floor(time*20.0)));
-		float glitchWidth=0.25;
+		float glitchY=rand(vec2(0.123,floor(time*25.0)));
+		float glitchWidth=0.05;
 
 		if(uv.y>=glitchY&&uv.y<glitchY+glitchWidth){
-			uv.x+=sin(time*10.0)*0.5;
+			uv.x+=sin(time*5.0)*2.0;
 		}
 
 		col.rgb=texture(frameTex,uv*_frameResolusion);
+		col.rgb*=(uv.x<0.0||uv.x>1.0)? 0.0 : 1.0;
+
+		//noise
+		col.rgb=texture(frameTex,uv*_frameResolusion);
+		col.rgb=col.rgb*abs(cos(PI*_postProcessVal))+
+			vec3(rand(uv+vec2(time,-1.0*time)))*abs(sin(PI*_postProcessVal));
+
+
+		//_postProcessVal
+	}else if(_postProcessFlag==6){
+				float val=0.2;
+				
+				vec2 st=uv;
+
+				uv.y+=0.05*sin(time*100.0)*val;
+				uv.x+=0.01*sin(time*50.0)*val;
+
+				vec4 _GapOffsetX=vec4(1.0,0.5,0.25,0.0);
+				vec4 _GapOffsetY=vec4(0.02,0.03,0.03,0.0)*6.0;
+				float _gapOffsetPower=0.08*val;
+				
+				vec2 vecFromCenter=vec2(0.0,0.0)-(uv-vec2(0.5,0.5))*2.0;
+
+                vec2 st_R=uv+vecFromCenter*_gapOffsetPower*_GapOffsetX.r;
+                vec2 st_G=uv+vecFromCenter*_gapOffsetPower*_GapOffsetX.g;
+                vec2 st_B=uv+vecFromCenter*_gapOffsetPower*_GapOffsetX.b;
+
+                col.rgb=texture(frameTex,uv*_frameResolusion);
+                col.r+=texture(frameTex,st_R*_frameResolusion);
+                col.g+=texture(frameTex,st_G*_frameResolusion);
+                col.b+=texture(frameTex,st_B*_frameResolusion);
+
+				col.rgb*=0.5;
+				st=2.0*st-1.0;
+				float width=0.2;
+				col.rgb*=(abs(st.y)>1.0-width)? 0.0:1.0;
+
 	}
 	
 	gl_FragColor=col;
