@@ -57,6 +57,8 @@ bool Game::Initialize() {
 		return false;
 	}
 
+	//capture wait time
+	//while (SDL_GetTicks()<5000.0) {}
 
 	LoadData();
 	
@@ -64,10 +66,7 @@ bool Game::Initialize() {
 }
 
 void Game::LoadData() {
-	audioObj = new AudioObject();
-	if (audioObj->Initialize()) {
-		audioObj->PlayAudio();
-	}
+	
 
 	app->Start();
 	
@@ -75,6 +74,11 @@ void Game::LoadData() {
 
 	app->Timeline(timelineObj);
 	timelineObj->Initialize();
+
+	audioObj = new AudioObject();
+	if (audioObj->Initialize()) {
+		audioObj->PlayAudio();
+	}
 
 }
 

@@ -11,6 +11,11 @@ in vec2 resolution;
 uniform float _cameraPositionIndex;
 uniform float _cameraMoveVal;
 
+uniform float _isWhiteOut;
+uniform float _whiteOutVal;
+uniform float _isBlackOut;
+uniform float _blackOutVal;
+
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
 #define PI 3.14159265
 
@@ -199,6 +204,9 @@ float speed=-.25;
   //r*ro.x,-1.,r*ro.z
   if(_cameraPositionIndex==3){
     d.d3=d3(p+vec3(0.,-2.,-15.0+_cameraMoveVal*18.0));
+  }else if(_cameraPositionIndex==4){
+    d.d3=d3(p+vec3(0.,-2.,2.0+_cameraMoveVal*104.0));
+    //ro=vec3(0.,-2.,2.0+_cameraMoveVal*104.0);
   }else{
     d.d3=d3(p+vec3(cos(time*speed)*radius,-1.0,sin(time*speed)*radius));
   }
@@ -246,6 +254,11 @@ float speed=-.25;
  }else if(_cameraPositionIndex==3){
     ta=vec3(0.);
     ro=vec3(0.,2.,26.0-_cameraMoveVal*24.0*1.5);
+ }else if(_cameraPositionIndex==4){
+     ta=vec3(0.);
+    //ta=vec3(0., -0.1*pow(_cameraMoveVal+0.1,2.0)+0.65,2.0+_cameraMoveVal*27.0);
+    //ro=vec3(0.,2.,0.0-_cameraMoveVal*24.0*1.5-2.0);
+    ro=vec3(0.,2.,4.0+_cameraMoveVal*104.0);
  }
 
 
@@ -305,6 +318,14 @@ float speed=-.25;
   if(_cameraPositionIndex==3){
   float startVal=0.5;
     col+=(_cameraMoveVal>startVal)? vec3(1.0)*(1.0-(1.0-min(_cameraMoveVal,1.0))/(1.0-startVal)):vec3(0.0);
+  }
+
+  if(_isWhiteOut==1.0){
+    col+=_whiteOutVal*vec3(1.0);
+  }
+  
+  if(_isBlackOut==1.0){
+    col*=max((_blackOutVal-0.2),0.0);
   }
 
   gl_FragColor = vec4(col, 1.0);
