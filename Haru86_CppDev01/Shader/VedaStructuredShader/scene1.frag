@@ -11,6 +11,11 @@ in vec2 resolution;
 uniform float _cameraPositionIndex;
 uniform float _cameraMoveVal;
 
+uniform float _isWhiteOut;
+uniform float _whiteOutVal;
+uniform float _isBlackOut;
+uniform float _blackOutVal;
+
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
 #define PI 3.14159265
 
@@ -313,6 +318,14 @@ float speed=-.25;
   if(_cameraPositionIndex==3){
   float startVal=0.5;
     col+=(_cameraMoveVal>startVal)? vec3(1.0)*(1.0-(1.0-min(_cameraMoveVal,1.0))/(1.0-startVal)):vec3(0.0);
+  }
+
+  if(_isWhiteOut==1.0){
+    col+=_whiteOutVal*vec3(1.0);
+  }
+  
+  if(_isBlackOut==1.0){
+    col*=max((_blackOutVal-0.2),0.0);
   }
 
   gl_FragColor = vec4(col, 1.0);

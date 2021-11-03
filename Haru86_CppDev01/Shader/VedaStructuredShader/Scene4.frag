@@ -131,7 +131,7 @@ float menger(vec3 p)
         s *= scale;
         p = 1.0 - scale * abs(p);
         //
-        d = max(d, sdCross(p, .825) / s);
+        d = max(d, sdCross(p, .79) / s);
 
     }
 

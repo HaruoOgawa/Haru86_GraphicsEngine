@@ -49,7 +49,8 @@ void main(void){
                 col.b+=texture(frameTex,st_B*_frameResolusion);
 	}else if(_postProcessFlag==4){
 				float val=(sin(time*2.0)+1.0)*0.5+0.1;
-				
+				vec2 st=uv;
+
 				uv.y+=0.05*sin(time*100.0)*val;
 				uv.x+=0.01*sin(time*50.0)*val;
 
@@ -67,6 +68,12 @@ void main(void){
                 col.r+=texture(frameTex,st_R*_frameResolusion);
                 col.g+=texture(frameTex,st_G*_frameResolusion);
                 col.b+=texture(frameTex,st_B*_frameResolusion);
+
+				col.rgb*=0.5;
+				st=2.0*st-1.0;
+				float width=0.2;
+				col.rgb*=(abs(st.y)>1.0-width)? 0.0:1.0;
+
 	}else if(_postProcessFlag==3){
 		col.rgb=texture(frameTex,uv*_frameResolusion);
 		col.rgb=1.0-col.rgb;
