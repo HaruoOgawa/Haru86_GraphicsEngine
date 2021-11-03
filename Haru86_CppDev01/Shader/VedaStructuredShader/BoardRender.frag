@@ -115,14 +115,25 @@ void main(void){
                 vec2 st_B=uv+vecFromCenter*_gapOffsetPower*_GapOffsetX.b;
 
                 col.rgb=texture(frameTex,uv*_frameResolusion);
-                col.r+=texture(frameTex,st_R*_frameResolusion);
+				col.r+=texture(frameTex,st_R*_frameResolusion);
                 col.g+=texture(frameTex,st_G*_frameResolusion);
                 col.b+=texture(frameTex,st_B*_frameResolusion);
 
 				col.rgb*=0.5;
+				vec4 baseColor=col;
+
 				st=2.0*st-1.0;
+
 				float width=0.2;
+
+				float fadeOutVal=0.2;
+				if(_postProcessVal>1.0-fadeOutVal){
+					//col.rgb+=max(vec3(0.0),min(vec3(1.0),vec3(1.0)*(1.0-(1.0-_postProcessVal)/fadeOutVal)));
+					width=(1.0-_postProcessVal);
+				}	
 				col.rgb*=(abs(st.y)>1.0-width)? 0.0:1.0;
+
+				
 
 	}
 	
