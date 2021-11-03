@@ -10,27 +10,34 @@ E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(209,56): warni
 E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(210,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(210,56): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(216,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(310,87): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(311,97): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(311,62): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(312,100): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(312,65): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(314,74): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(332,82): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(332,54): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(349,85): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(349,57): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(382,68): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(382,48): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(383,68): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(383,48): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(384,68): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(384,48): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(385,68): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(385,48): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(386,68): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(386,48): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(389,61): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(302,87): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(303,97): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(303,62): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(304,100): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(304,65): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(306,74): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(324,82): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(324,54): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(341,85): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(341,57): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(374,68): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(374,48): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(375,68): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(375,48): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(376,68): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(376,48): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(377,68): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(377,48): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(378,68): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(378,48): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(381,61): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+  AudioSourceComponent.cpp
+  コードを生成中...
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\AudioSourceComponent.cpp(193): warning C4715: 'AudioSourceComponent::StopAudioCheck': 値を返さないコントロール パスがあります。
+soil.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_DXT.obj)' で、または 'E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+soil.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_helper.obj)' で、または 'E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+soil.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(SOIL.obj)' で、または 'E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(stb_image_aug.obj)' で、または 'E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
   Haru86_CppDev01.vcxproj -> E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
   ファイルが見つかりません - *.dll
   0 個のファイルをコピーしました

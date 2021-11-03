@@ -215,16 +215,8 @@ void App::Timeline(TimelineObject* timeline)  {
 	timeline->AddAnimationClip(Scene4_Frag, 85.0, 104.0f- adjustTime, [](float val) {Scene4_Frag->meshComp->material->SetFloatUniform("isTransform",0.0f); });
 	timeline->AddAnimationClip(Scene4_Frag, 104.0f - adjustTime, 105.5 - adjustTime , [](float val) {Scene4_Frag->meshComp->material->SetFloatUniform("isTransform",1.0f); });
 
-	timeline->AddAnimationClip(Scene1_Frag, 146.0f - 20.0f, 146.2f - 20.0f,
+	timeline->AddAnimationClip(Scene1_Frag, 126.0f + 1.0f - adjustTime, 157.0f - adjustTime,
 		[](float val) {
-		//gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime;
-		Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 0);
-		Scene1_Frag->meshComp->material->SetFloatUniform("_cameraMoveVal", val);
-	});
-
-	timeline->AddAnimationClip(Scene1_Frag, 126.0f, 157.0f,
-		[](float val) {
-		//gamept->GetInstance()->animTime += gamept->GetInstance()->deltaTime;
 		Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 4);
 		Scene1_Frag->meshComp->material->SetFloatUniform("_cameraMoveVal", val);
 	});

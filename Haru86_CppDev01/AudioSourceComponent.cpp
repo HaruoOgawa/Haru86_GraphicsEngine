@@ -140,7 +140,7 @@ void AudioSourceComponent::CreateSound(std::string name) {
 			delete channel;
 		}
 		/*else {
-			channel->setVolume(0.0f);
+			channel->setVolume(0.1f);
 		}*/
 		
 	}
