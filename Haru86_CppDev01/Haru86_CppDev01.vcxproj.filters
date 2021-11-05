@@ -96,6 +96,9 @@
     <ClInclude Include="Font.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="include\SDL_ttf.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -208,6 +211,9 @@
     <None Include="Shader\VedaStructuredShader\Scene3.frag" />
     <None Include="Shader\VedaStructuredShader\Scene4.frag" />
     <None Include="Shader\VedaStructuredShader\Scene5.frag" />
+    <None Include="bin\libfreetype-6.dll" />
+    <None Include="bin\SDL2_ttf.dll" />
+    <None Include="bin\zlib1.dll" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Haru86_CppDev01.rc">
@@ -216,5 +222,8 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="C:\WINDOWS\Fonts\FRSCRIPT.TTF" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\SDL2_ttf.lib" />
   </ItemGroup>
 </Project>

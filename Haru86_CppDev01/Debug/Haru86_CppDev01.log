@@ -31,6 +31,41 @@ E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(378,48): warni
 E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(379,68): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(379,48): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\App.cpp(382,61): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+  AudioObject.cpp
+  AudioSourceComponent.cpp
+  Component.cpp
+  Font.cpp
+  Game.cpp
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\Game.cpp(175,13): warning C4150: 'UIObject' 型を削除するため delete 演算子が呼び出されましたが、定義がありません。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\Game.h(31): message : 'UIObject' の宣言を確認してください
+  GameObject.cpp
+  GameRenderer.cpp
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\GameRenderer.cpp(33,1): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+  Main.cpp
+  Material.cpp
+  MeshRendererComponent.cpp
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\TimelineComponent.h(33,1): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'class' として使われていましたが 'struct' として使われています。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\TimelineComponent.h(32): message : 'TimelineAnimationClip' の宣言を確認してください
+  Object.cpp
+  Primitive.cpp
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\Primitive.cpp(87,10): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  RectTransformComponent.cpp
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\RectTransformComponent.cpp(30,32): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\RectTransformComponent.cpp(31,32): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  test.cpp
+  Texture.cpp
+  Time.cpp
+  TimelineComponent.cpp
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\MeshRendererComponent.h(24,44): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\TimelineComponent.h(32): message : 'TimelineAnimationClip' の宣言を確認してください
+  TimelineObject.cpp
+  TransformComponent.cpp
+  コードを生成中...
+E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\AudioSourceComponent.cpp(193): warning C4715: 'AudioSourceComponent::StopAudioCheck': 値を返さないコントロール パスがあります。
+  コンパイル中...
+  UIComponent.cpp
+  VertexArray.cpp
+  コードを生成中...
 soil.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_DXT.obj)' で、または 'E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 soil.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_helper.obj)' で、または 'E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 soil.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(SOIL.obj)' で、または 'E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
@@ -52,3 +87,29 @@ soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(stb_
   4 個のファイルをコピーしました
   C:\SDL2_ttf-2.0.15\lib\x86\SDL2_ttf.dll
   1 個のファイルをコピーしました
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\demo.vert
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\FontText.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\FontText.vert
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\Haru86_Hexagon.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\Haru86_MengerSponge.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\Haru86_PartyHole.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\Haru86_polar_coordinate.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\Haru86_Quaternion_Juria.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\Haru86_Ray.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\Haru86_RaymarchHole.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\Haru86_Triangle.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\Raymarching_domainID_samp.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\Standard.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\Standard.vert
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\Shader\UIStandard.frag を上書きしますか (Yes/No/All)? ?   ・  B荒碁ﾇ}ﾔ ・Phﾘ・X・ﾈﾁHｿHﾁ・P・ｨ・s<ﾔ H・Pﾈﾀ､亟                ・ｳ・ﾔ       ・ｳ扇      HPP               ﾌﾐｳE : \ C + + D e v \ H a r u 8 6 _ C p p D e v 0 1 \ H a r u 8 6 _ C p p D e v 0 1 \ H a r u 8 6 _ C p p D e v 0 1 \ S h a d e r \ U I S t a n d a r d . f r a g                                                                                                                                                                                                                                                                                                                                                                         ・ｳ・P     @      >         
+          \ H a ﾌﾐｳE : \ C + + D e v \ H a r u 8 6 _ C p p D e v 0 1 \ H a r u 8 6 _ C p p D e v 0 1 \ D e b u g \ S h a d e r \ U I S t a n d a r d . f r a g                                                                                                                     
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Debug\Shader\UIStandard.frag を上書きしますか (Yes/No/All)? E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\BoardRender.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\BoardRender.vert
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\PostProcess.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\save.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\scene1.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\scene2.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\Scene3.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\Scene4.frag
+  E:\C++Dev\Haru86_CppDev01\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\Scene5.frag
+  9 個のファイルをコピーしました
