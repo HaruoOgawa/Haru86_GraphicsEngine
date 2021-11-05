@@ -114,7 +114,7 @@ float d3(vec3 p){
 //p*=7.;
   p+=vec3(0.,0.,1.);
 
-  float d=length(p)-.2;
+  float d=length(p)-.1;
 //p.xyz*=7.;
 //p.x+=1.5;
 
@@ -122,7 +122,7 @@ float d3(vec3 p){
   p.xz*=rot(time);
   p.yz*=rot(time);
   for(int i=0;i<3;i++){
-    p=abs(p)-.075;
+    p=abs(p)-.035;
     if(p.x<p.y)p.xy=p.yx;
     if(p.x<p.z)p.xz=p.zx;
     if(p.y<p.z)p.yz=p.zy;
@@ -133,7 +133,7 @@ float d3(vec3 p){
 
 }
 
-d=min(d,Cube(p,vec3(.2,.2,.2)*.2));
+d=min(d,Cube(p,vec3(.2,.2,.2)*.1));
 
   return d;
 }
