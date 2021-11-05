@@ -55,6 +55,7 @@ void App::Start()  {
 void App::Update()  {
 	//printf("Game::GetInstance()->deltaTime: %f \n",Game::GetInstance()->deltaTime);
 }
+	
 
 void App::Timeline(TimelineObject* timeline)  {
 	//Ray Activation
@@ -381,9 +382,12 @@ void App::Timeline(TimelineObject* timeline)  {
 	timeline->AddAnimationClip(renderBoard, 106.5 - adjustTime - 1.0f, 128.0f - 12.0f - adjustTime, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",4); });
 	//timeline->AddAnimationClip(renderBoard, 128.0f - 12.0f, 128.5f - 12.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
 	
-	timeline->AddAnimationClip(renderBoard, 128.0f - 12.0f - adjustTime, 125.5f + 1.0f - adjustTime, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 6); });
-
-	timeline->AddAnimationClip(renderBoard, 125.5f + 1.0f - adjustTime, 126.0f + 1.0f - adjustTime, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(renderBoard, 128.0f - 12.0f - adjustTime, 126.0f + 1.0f - adjustTime, [](float val) {
+		renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 6); 
+		renderBoard->meshComp->material->SetFloatUniform("_postProcessVal", val); 
+	});
+	// 128.0f - 12.0f - adjustTime, 146.0f-20.0f + 1.0f - adjustTime
+	//timeline->AddAnimationClip(renderBoard, 126.0f + 1.0f - adjustTime, 126.5f + 1.0f - adjustTime, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
 	timeline->AddAnimationClip(renderBoard, 126.0f + 1.0f - adjustTime, 157.0f + 1.0f - adjustTime, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",3); });
 	timeline->AddAnimationClip(renderBoard, 157.0f + 1.0f - adjustTime, 157.5f + 1.0f - adjustTime, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
 		
