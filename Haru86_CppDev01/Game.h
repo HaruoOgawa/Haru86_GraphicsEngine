@@ -5,7 +5,6 @@
 #include <vector>
 #include "./App.h"
 
-
 class Game
 {
 public:

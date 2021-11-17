@@ -80,9 +80,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)/bin</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)/bin</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -133,10 +135,13 @@ xcopy "$(ProjectDir)\Shader\VedaStructuredShader" "$(OutDir)\Shader\VedaStructur
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_image.lib;SDL2_ttf.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -147,26 +152,29 @@ xcopy "$(ProjectDir)\Shader\VedaStructuredShader" "$(OutDir)\Shader\VedaStructur
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_image.lib;SDL2_ttf.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\CppLib\SDL2_image-2.0.5\include\SDL_image.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="AudioObject.h" />
     <ClInclude Include="AudioSourceComponent.h" />
     <ClInclude Include="BaseApp.h" />
-    <ClInclude Include="C:\SDL2_ttf-2.0.15\include\SDL_ttf.h" />
-    <ClInclude Include="C:\Users\Haruo Ogawa\Desktop\includeTest.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameRenderer.h" />
+    <ClInclude Include="include\SDL_image.h" />
     <ClInclude Include="include\SDL_ttf.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Material.h" />
@@ -208,12 +216,16 @@ xcopy "$(ProjectDir)\Shader\VedaStructuredShader" "$(OutDir)\Shader\VedaStructur
     <ClCompile Include="VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\CppLib\SDL\SDL2.dll" />
     <None Include="bin\libfreetype-6.dll" />
+    <None Include="bin\libjpeg-9.dll" />
+    <None Include="bin\libpng16-16.dll" />
+    <None Include="bin\libtiff-5.dll" />
+    <None Include="bin\libwebp-7.dll" />
+    <None Include="bin\SDL2.dll" />
+    <None Include="bin\SDL2_image.dll" />
     <None Include="bin\SDL2_ttf.dll" />
     <None Include="bin\zlib1.dll" />
-    <None Include="C:\SDL2-2.0.16\lib\x86\SDL2.dll" />
-    <None Include="C:\SDL2_image-2.0.5\lib\x86\libpng16-16.dll" />
-    <None Include="C:\SDL2_image-2.0.5\lib\x86\SDL2_image.dll" />
     <None Include="Shader\demo.vert" />
     <None Include="html1.htm">
       <DeploymentContent>true</DeploymentContent>
@@ -255,6 +267,7 @@ xcopy "$(ProjectDir)\Shader\VedaStructuredShader" "$(OutDir)\Shader\VedaStructur
     <Font Include="C:\WINDOWS\Fonts\FRSCRIPT.TTF" />
   </ItemGroup>
   <ItemGroup>
+    <Library Include="lib\SDL2_image.lib" />
     <Library Include="lib\SDL2_ttf.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
