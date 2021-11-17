@@ -141,7 +141,7 @@ xcopy "$(ProjectDir)\Shader\VedaStructuredShader" "$(OutDir)\Shader\VedaStructur
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2_image.lib;SDL2_ttf.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2_image.lib;SDL2_ttf.lib;SDL2.lib;SDL2main.lib;fmodstudio.dll;fmodstudioL.dll;fmodL.dll;fmod.dll;fmod64.dll;fmodL64.dll;fmodstudio64.dll;fmodstudioL64.dll;SDL2_ttf.dll;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -160,7 +160,7 @@ xcopy "$(ProjectDir)\Shader\VedaStructuredShader" "$(OutDir)\Shader\VedaStructur
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2_image.lib;SDL2_ttf.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2_image.lib;SDL2_ttf.lib;SDL2.lib;SDL2main.lib;fmodstudio.dll;fmodstudioL.dll;fmodL.dll;fmod.dll;fmod64.dll;fmodL64.dll;fmodstudio64.dll;fmodstudioL64.dll;SDL2_ttf.dll;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
