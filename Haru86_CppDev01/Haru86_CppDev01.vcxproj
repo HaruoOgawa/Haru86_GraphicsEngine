@@ -201,7 +201,8 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameRenderer.h" />
     <ClInclude Include="include\SDL_ttf.h" />
-    <ClInclude Include="Main.h" />
+    <ClInclude Include="App\BaseApp\Main.h" />
+    <ClInclude Include="App\KuraArtApp\KuraArtApp.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MeshRendererComponent.h" />
     <ClInclude Include="Object.h" />
@@ -225,7 +226,8 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameRenderer.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="App\BaseApp\Main.cpp" />
+    <ClCompile Include="App\KuraArtApp\KuraArtApp.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MeshRendererComponent.cpp" />
     <ClCompile Include="Object.cpp" />
