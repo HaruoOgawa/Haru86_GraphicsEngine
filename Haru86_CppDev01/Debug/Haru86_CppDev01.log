@@ -66,34 +66,61 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\AudioSourceComponent.cpp(193): warning
   UIComponent.cpp
   VertexArray.cpp
   コードを生成中...
-soil.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_DXT.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+soil.lib(image_DXT.obj) : warning LNK4099: PDB '' が 'soil.lib(image_DXT.obj)' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 soil.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_helper.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-soil.lib(SOIL.obj) : warning LNK4099: PDB '' が 'soil.lib(SOIL.obj)' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+soil.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(SOIL.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(stb_image_aug.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
   Haru86_CppDev01.vcxproj -> E:\CppDev\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
-  ファイルが見つかりません - *.dll
-  0 個のファイルをコピーしました
-  ファイルが見つかりません - *.dll
-  0 個のファイルをコピーしました
-  C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmod.dll
-  C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmod64.dll
-  C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmodL.dll
-  C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmodL64.dll
-  4 個のファイルをコピーしました
+  C:\SDL2-2.0.16\lib\x86\SDL2.dll
+  1 個のファイルをコピーしました
+  C:\SDL2_ttf-2.0.15\lib\x86\libfreetype-6.dll
+  C:\SDL2_ttf-2.0.15\lib\x86\SDL2_ttf.dll
+  C:\SDL2_ttf-2.0.15\lib\x86\zlib1.dll
+  3 個のファイルをコピーしました
+  C:\SDL2_image-2.0.5\lib\x86\libjpeg-9.dll
+  C:\SDL2_image-2.0.5\lib\x86\libpng16-16.dll
+  C:\SDL2_image-2.0.5\lib\x86\libtiff-5.dll
+  C:\SDL2_image-2.0.5\lib\x86\libwebp-7.dll
+  C:\SDL2_image-2.0.5\lib\x86\SDL2_image.dll
+  C:\SDL2_image-2.0.5\lib\x86\zlib1.dll
+  6 個のファイルをコピーしました
   C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib\fmodstudio.dll
   C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib\fmodstudio64.dll
   C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib\fmodstudioL.dll
   C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib\fmodstudioL64.dll
   4 個のファイルをコピーしました
-  C:\SDL2_ttf-2.0.15\lib\x86\SDL2_ttf.dll
-  1 個のファイルをコピーしました
-  E:\CppDev\Haru86_CppDev01\Debug\\Shader は受け側のファイル名ですか、
-  またはディレクトリ名ですか
-  (F= ファイル、D= ディレクトリ)? ?   ・  ｴV・ｸ・・・#ﾗw            熨ShSxfS#ﾗwﾀ・Ua・ﾐ輯       ｬ・l・・・ﾀﾗwｰ彝                ﾀﾗwｰ彝                d・l・    ｬ・        ﾐ輯靉R ・ﾗw靉R  S・ﾈ亡ﾈ亡ﾏRｨcS靜R    ﾈaS   d   P	N        ・#・#ｧoﾗw頤#ｭhﾗw  R    ｨcSpoﾗw・・    ｬ・・・    ・ﾗwｰ彝ｨcS          ﾈ亡 担・ﾗw靉RE : \   w s \ G l o b a l i z a t i o n \ S o r t i n g \ s o r t d e f a u l t . n l s                                                             VPｯw[壓
-  @yS      R                                ・ ・      L6Nvｨ5Nv        ﾔ・｡   ・凧{?ｰw       ・ｰw  R       ｣   莚R              @yS    ・R   ・         ｣           ・  ﾐ輯        ・ﾗwXﾌR､ﾗwXﾌR0・                                   ﾗw靉R・ﾗw靉R  Nv#      ｨ・        ﾈ・ﾌ・{?ｰw・  ・  ・ｰw                                        ・ﾗwXﾌRﾈ・                                      ・ﾗw靉RE : \                                                                                                             R
-  E:\CppDev\Haru86_CppDev01\Debug\\Shader は受け側のファイル名ですか、
-  またはディレクトリ名ですか
-  (F= ファイル、D= ディレクトリ)? E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\BoardRender.frag
+  C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmod.dll
+  C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmod64.dll
+  C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmodL.dll
+  C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmodL64.dll
+  4 個のファイルをコピーしました
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\demo.vert
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\FontText.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\FontText.vert
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\Haru86_Hexagon.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\Haru86_MengerSponge.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\Haru86_PartyHole.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\Haru86_polar_coordinate.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\Haru86_Quaternion_Juria.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\Haru86_Ray.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\Haru86_RaymarchHole.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\Haru86_Triangle.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\Raymarching_domainID_samp.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\Standard.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\Standard.vert
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\UIStandard.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\UIStandard.vert
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\BoardRender.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\BoardRender.vert
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\PostProcess.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\save.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\scene1.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\scene2.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\Scene3.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\Scene4.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\Scene5.frag
+  25 個のファイルをコピーしました
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\BoardRender.frag
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\BoardRender.vert
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\PostProcess.frag
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\save.frag
