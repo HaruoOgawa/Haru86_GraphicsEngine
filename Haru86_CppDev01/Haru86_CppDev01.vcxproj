@@ -282,10 +282,10 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ResourceCompile Include="Haru86_CppDev01.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="C:\WINDOWS\Fonts\FRSCRIPT.TTF" />
+    <Library Include="lib\SDL2_ttf.lib" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="lib\SDL2_ttf.lib" />
+    <Font Include="Resources\FontData\FRSCRIPT.TTF" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

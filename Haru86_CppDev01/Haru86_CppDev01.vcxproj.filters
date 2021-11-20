@@ -218,9 +218,9 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="C:\WINDOWS\Fonts\FRSCRIPT.TTF" />
+    <Library Include="lib\SDL2_ttf.lib" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="lib\SDL2_ttf.lib" />
+    <Font Include="Resources\FontData\FRSCRIPT.TTF" />
   </ItemGroup>
 </Project>

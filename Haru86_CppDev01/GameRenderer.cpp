@@ -90,7 +90,7 @@ bool GameRenderer::Initialize(float width,float height) {
 	}*/
 
 	font = new Font();
-	if (!(font->Load("C:/Windows/Fonts/HGRMB.TTC"))) {
+	if (!(font->Load("E:/CppDev/Haru86_CppDev01/Haru86_CppDev01/Resources/FontData/FRSCRIPT.TTF"))) {
 		delete font;
 		font = nullptr;
 	}
