@@ -96,22 +96,23 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\SDL2-2.0.16\include;E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\SDL2_image-2.0.5\include;C:\rapidjson\include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\inc;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\inc;E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\SDL2_ttf-2.0.15\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\SDL2-2.0.16\include;E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\SDL2_image-2.0.5\include;E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\FMOD_API\studio\inc;E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\FMOD_API\lowlevel\inc;E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\SDL2_ttf-2.0.15\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;fmodL_vc.lib;fmodstudioL_vc.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\SDL2-2.0.16\lib\x86;E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\SDL2_image-2.0.5\lib\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib;E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\SDL2_ttf-2.0.15\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\SDL2-2.0.16\lib\x86;E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\SDL2_image-2.0.5\lib\x86;E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\FMOD_API\studio\lib;E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\FMOD_API\lowlevel\lib;E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\SDL2_ttf-2.0.15\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\SDL2-2.0.16\lib\x86\*.dll" "$(OutDir)" /i /s /y
 xcopy "E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\SDL2_image-2.0.5\lib\x86\*.dll" "$(OutDir)" /i /s /y
 xcopy "E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\SDL2_ttf-2.0.15\lib\x86\*.dll" "$(OutDir)" /i /s /y
-xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib\*.dll" "$(OutDir)" /i /s /y
-xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\*.dll" "$(OutDir)" /i /s /y
+xcopy "E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\FMOD_API\studio\lib\*.dll" "$(OutDir)" /i /s /y
+xcopy "E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\FMOD_API\lowlevel\lib\*.dll" "$(OutDir)" /i /s /y
 xcopy "$(ProjectDir)\Shader" "$(OutDir)\Shader" /i /s /y
 xcopy "$(ProjectDir)\Shader\VedaStructuredShader" "$(OutDir)\Shader\VedaStructuredShader"  /i /s /y
+
 
 
 
