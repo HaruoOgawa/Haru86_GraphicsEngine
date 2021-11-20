@@ -1,11 +1,11 @@
 #include "App.h"
-#include "./GameObject.h"
-#include "./TimelineObject.h"
-#include "./TimelineComponent.h"
-#include "./UIComponent.h"
-#include "./RectTransformComponent.h"
-#include "./MeshRendererComponent.h"
-#include "./Material.h"
+#include "../../GameObject.h"
+#include "../../TimelineObject.h"
+#include "../../TimelineComponent.h"
+#include "../../UIComponent.h"
+#include "../../RectTransformComponent.h"
+#include "../../MeshRendererComponent.h"
+#include "../../Material.h"
 
 //ray
 GameObject* Scene1_Frag;

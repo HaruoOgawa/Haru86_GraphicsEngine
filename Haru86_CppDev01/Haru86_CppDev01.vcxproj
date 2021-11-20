@@ -189,10 +189,10 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="App.h" />
+    <ClInclude Include="App\DemoSceneApp\App.h" />
     <ClInclude Include="AudioObject.h" />
     <ClInclude Include="AudioSourceComponent.h" />
-    <ClInclude Include="BaseApp.h" />
+    <ClInclude Include="App\BaseApp\BaseApp.h" />
     <ClInclude Include="C:\SDL2_ttf-2.0.15\include\SDL_ttf.h" />
     <ClInclude Include="C:\Users\Haruo Ogawa\Desktop\includeTest.h" />
     <ClInclude Include="Component.h" />
@@ -217,7 +217,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="VertexArray.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="App.cpp" />
+    <ClCompile Include="App\DemoSceneApp\App.cpp" />
     <ClCompile Include="AudioObject.cpp" />
     <ClCompile Include="AudioSourceComponent.cpp" />
     <ClCompile Include="Component.cpp" />

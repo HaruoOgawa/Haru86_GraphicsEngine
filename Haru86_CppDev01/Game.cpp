@@ -37,7 +37,7 @@ Game::Game()
 	mouseStateBool(false),
 	animTime(0.0f)
 {
-	app = new App();
+	//app = new App();
 	timeObj = new Time(60.0f);
 }
 

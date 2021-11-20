@@ -57,10 +57,10 @@
     <ClInclude Include="Primitive.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="App.h">
+    <ClInclude Include="App\DemoSceneApp\App.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="BaseApp.h">
+    <ClInclude Include="App\BaseApp\BaseApp.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="AudioObject.h">
@@ -134,7 +134,7 @@
     <ClCompile Include="Primitive.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="App.cpp">
+    <ClCompile Include="App\DemoSceneApp\App.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="AudioObject.cpp">
