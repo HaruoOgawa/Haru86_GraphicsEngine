@@ -37,7 +37,7 @@ Game::Game()
 	mouseStateBool(false),
 	animTime(0.0f)
 {
-	app = new App();
+	//app = new App();
 	timeObj = new Time(60.0f);
 }
 
@@ -58,7 +58,7 @@ bool Game::Initialize() {
 	}
 
 	//capture wait time
-	while (SDL_GetTicks()<5000.0) {}
+	//while (SDL_GetTicks()<5000.0) {}
 
 	LoadData();
 	

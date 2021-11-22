@@ -3,7 +3,7 @@
 #include "SDL.h"
 #include "./GameRenderer.h"
 #include <vector>
-#include "./App.h"
+#include "./App/BaseApp/BaseApp.h"
 
 
 class Game
@@ -27,6 +27,9 @@ public:
 	class Time* timeObj;
 	class TimelineObject* timelineObj;
 	float animTime;
+
+	class BaseApp* app;
+	friend class Main;
 	friend class GameObject;
 	friend class UIObject;
 	friend class GameRenderer;
@@ -45,7 +48,7 @@ private :
 	std::vector<class GameObject*> boardGameObjectList;
 	std::vector<class GameObject*> postProcessGameObjectList;
 	std::vector<class UIObject*> uiObjectList;
-	class App* app;
+	
 	class AudioObject* audioObj;
 	
 	bool mouseStateBool;
