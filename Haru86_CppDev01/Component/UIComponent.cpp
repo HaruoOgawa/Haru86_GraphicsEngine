@@ -1,16 +1,16 @@
 #include "UIComponent.h"
-#include "./GameObject.h"
-#include "./Game.h"
+#include "../Object/GameObject.h"
+#include "../Game/Game.h"
 #include <SDL.h>
-#include "./GameRenderer.h"
+#include "../Graphics/GameRenderer.h"
 #include <glm/glm.hpp>
 #include "./TransformComponent.h"
 #include "./RectTransformComponent.h"
-#include "./Time.h"
-#include "./TimelineObject.h"
+#include "../Game/Time.h"
+#include "../Object/TimelineObject.h"
 #include "./TimelineComponent.h"
-#include "./AudioObject.h"
-#include "./AudioSourceComponent.h"
+#include "../Object/AudioObject.h"
+#include "../Component/AudioSourceComponent.h"
 #include <algorithm>
 
 UIComponent::UIComponent(GameObject* o)
@@ -51,7 +51,6 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 		t *= audioLength;
 		
 		Game::GetInstance()->audioObj->audioSource->SkipAudio(t);
-
 
 		Game::GetInstance()->timeObj->time = t;
 		Game::GetInstance()->previousTime = t;

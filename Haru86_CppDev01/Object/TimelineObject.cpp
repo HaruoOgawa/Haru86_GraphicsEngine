@@ -1,5 +1,5 @@
 #include "TimelineObject.h"
-#include "./TimelineComponent.h"
+#include "../Component/TimelineComponent.h"
 
 TimelineObject::TimelineObject() {
 	timelineComponent = new TimelineComponent(this);

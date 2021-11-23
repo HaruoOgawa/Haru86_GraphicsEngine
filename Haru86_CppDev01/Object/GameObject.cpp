@@ -1,7 +1,7 @@
-#include "GameObject.h"
-#include "./Game.h"
-#include "./TransformComponent.h"
-#include "./MeshRendererComponent.h"
+#include "../Object/GameObject.h"
+#include "../Game/Game.h"
+#include "../Component/TransformComponent.h"
+#include "../Component/MeshRendererComponent.h"
 
 GameObject::GameObject(PrimitiveType primType) 
 	: Object(), renderOrder(RenderQueue::Geometry), renderType(RenderType::DefaultBuffer), animTime(0.0f)

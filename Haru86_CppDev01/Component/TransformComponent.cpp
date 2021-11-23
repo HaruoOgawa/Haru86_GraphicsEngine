@@ -2,8 +2,8 @@
 //#include <glm/glm.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
-#include "./Game.h"
-#include "./GameRenderer.h"
+#include "../Game/Game.h"
+#include "../Graphics/GameRenderer.h"
 
 TransformComponent::TransformComponent(Object* o, glm::vec3 pos,glm::quat rot,glm::vec3 s)
 	: Component(o, static_cast<std::string>(typeid(TransformComponent).name()).substr(6)),position(pos),rotation(rot),scale(s)

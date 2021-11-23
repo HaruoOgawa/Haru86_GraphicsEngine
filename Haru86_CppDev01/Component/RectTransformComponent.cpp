@@ -1,6 +1,6 @@
 #include "RectTransformComponent.h"
-#include "./GameObject.h"
-#include "./GameRenderer.h"
+#include "../Object/GameObject.h"
+#include "../Graphics/GameRenderer.h"
 #include "./TransformComponent.h"
 #include <iostream>
 #include <string>

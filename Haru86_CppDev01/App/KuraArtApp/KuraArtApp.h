@@ -1,6 +1,6 @@
 #pragma once
 #include "../BaseApp/BaseApp.h"
-#include "../../VertexArray.h"
+#include "../../Graphics/VertexArray.h"
 #include <vector>
 class KuraArtApp :
     public BaseApp

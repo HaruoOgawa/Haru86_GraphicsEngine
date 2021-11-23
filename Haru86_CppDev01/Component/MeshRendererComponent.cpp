@@ -4,10 +4,10 @@
 #include "./TransformComponent.h"
 #include <string>
 #include <iostream>
-#include "./GameRenderer.h"
+#include "../Graphics/GameRenderer.h"
 #include "./TimelineComponent.h"
-#include "./Texture.h"
-#include "./Font.h"
+#include "../Graphics/Texture.h"
+#include "../Graphics/Font.h"
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)

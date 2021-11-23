@@ -1,9 +1,9 @@
 #include "GameRenderer.h"
 #include "GL/glew.h"
-#include "GameObject.h"
-#include "MeshRendererComponent.h"
-#include "TransformComponent.h"
-#include "./Game.h"
+#include "../Object/GameObject.h"
+#include "../Component/MeshRendererComponent.h"
+#include "../Component/TransformComponent.h"
+#include "../Game/Game.h"
 #include "./Texture.h"
 #include "./Font.h"
 

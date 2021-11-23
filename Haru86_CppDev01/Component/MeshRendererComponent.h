@@ -1,11 +1,11 @@
 #pragma once
-#include "./Component.h"
-#include "./Object.h"
-#include "./VertexArray.h"
-#include "./Material.h"
+#include "../Component/Component.h"
+#include "../Object/Object.h"
+#include "../Graphics/VertexArray.h"
+#include "../Graphics/Material.h"
 #include <string>
-#include "./Primitive.h"
-#include "./Game.h"
+#include "../Graphics/Primitive.h"
+#include "../Game/Game.h"
 #include <functional>
 
 class MeshRendererComponent :

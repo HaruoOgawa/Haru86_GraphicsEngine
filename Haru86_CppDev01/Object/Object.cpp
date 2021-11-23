@@ -1,10 +1,10 @@
 #include "Object.h"
 
-#include "./TransformComponent.h"
+#include "../Component/TransformComponent.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 
-#include "./Game.h"
+#include "../Game/Game.h"
 
 Object::Object()
 	: game(Game::GetInstance())

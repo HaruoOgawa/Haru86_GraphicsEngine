@@ -1,7 +1,7 @@
 #pragma once
 
-#include "./Game.h"
-#include "./Component.h"
+#include "../Game/Game.h"
+#include "../Component/Component.h"
 #include <vector>
 #include <unordered_map>
 #include <string>

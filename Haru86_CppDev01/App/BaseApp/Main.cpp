@@ -1,6 +1,6 @@
 #include "Main.h"
 #include <iostream>
-#include "../../Game.h"
+#include "../../Game/Game.h"
 #include "../KuraArtApp/KuraArtApp.h"
 
 int main(int argc, char** argv) {
