@@ -243,9 +243,6 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <None Include="bin\SDL2_ttf.dll" />
     <None Include="bin\zlib1.dll" />
     <None Include="Shader\demo.vert" />
-    <None Include="html1.htm">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
     <None Include="Shader\FontText.frag" />
     <None Include="Shader\FontText.vert" />
     <None Include="Shader\Haru86_Hexagon.frag" />
@@ -275,9 +272,6 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <None Include="Shader\VedaStructuredShader\Scene3.frag" />
     <None Include="Shader\VedaStructuredShader\Scene4.frag" />
     <None Include="Shader\VedaStructuredShader\Scene5.frag" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Haru86_CppDev01.rc" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\FontData\FRSCRIPT.TTF" />

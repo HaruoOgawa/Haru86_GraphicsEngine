@@ -164,7 +164,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="html1.htm" />
     <None Include="Shader\demo.vert">
       <Filter>ソース ファイル</Filter>
     </None>
@@ -205,11 +204,6 @@
     <None Include="bin\libfreetype-6.dll" />
     <None Include="bin\SDL2_ttf.dll" />
     <None Include="bin\zlib1.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Haru86_CppDev01.rc">
-      <Filter>リソース ファイル</Filter>
-    </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\FontData\FRSCRIPT.TTF" />
