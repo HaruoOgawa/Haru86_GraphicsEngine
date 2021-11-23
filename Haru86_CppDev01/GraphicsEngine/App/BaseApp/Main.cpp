@@ -1,7 +1,7 @@
 #include "Main.h"
 #include <iostream>
 #include "../../Game/Game.h"
-#include "../KuraArtApp/KuraArtApp.h"
+#include "../../../Assets/App/KuraArtApp/KuraArtApp.h"
 
 int main(int argc, char** argv) {
 	Game::Create();

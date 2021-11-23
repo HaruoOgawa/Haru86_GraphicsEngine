@@ -11,6 +11,13 @@ AudioObject::AudioObject()
 	AddComponent(audioSource);
 }
 
+AudioObject::AudioObject(std::string audioSourcePath)
+	: Object()
+{
+	audioSource = new AudioSourceComponent(this, audioSourcePath);
+	AddComponent(audioSource);
+}
+
 AudioObject::~AudioObject() {
 
 }

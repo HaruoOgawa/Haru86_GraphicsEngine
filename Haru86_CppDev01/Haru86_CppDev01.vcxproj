@@ -74,6 +74,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -96,23 +97,23 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Library\SDL2-2.0.16\include;$(ProjectDir)Library\SDL2_image-2.0.5\include;$(ProjectDir)Library\FMOD_API\studio\inc;$(ProjectDir)Library\FMOD_API\lowlevel\inc;$(ProjectDir)Library\SDL2_ttf-2.0.15\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)GraphicsEngine\Library\SDL2-2.0.16\include;$(ProjectDir)GraphicsEngine\Library\SDL2_image-2.0.5\include;$(ProjectDir)GraphicsEngine\Library\FMOD_API\studio\inc;$(ProjectDir)GraphicsEngine\Library\FMOD_API\lowlevel\inc;$(ProjectDir)GraphicsEngine\Library\SDL2_ttf-2.0.15\include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;fmodL_vc.lib;fmodstudioL_vc.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)Library\SDL2-2.0.16\lib\x86;$(ProjectDir)Library\SDL2_image-2.0.5\lib\x86;$(ProjectDir)Library\FMOD_API\studio\lib;$(ProjectDir)Library\FMOD_API\lowlevel\lib;$(ProjectDir)Library\SDL2_ttf-2.0.15\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\SDL2-2.0.16\lib\x86;$(ProjectDir)GraphicsEngine\Library\SDL2_image-2.0.5\lib\x86;$(ProjectDir)GraphicsEngine\Library\FMOD_API\studio\lib;$(ProjectDir)GraphicsEngine\Library\FMOD_API\lowlevel\lib;$(ProjectDir)GraphicsEngine\Library\SDL2_ttf-2.0.15\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)Library\SDL2-2.0.16\lib\x86\*.dll" "$(OutDir)" /i /s /y
-xcopy "$(ProjectDir)Library\SDL2_image-2.0.5\lib\x86\*.dll" "$(OutDir)" /i /s /y
-xcopy "$(ProjectDir)Library\SDL2_ttf-2.0.15\lib\x86\*.dll" "$(OutDir)" /i /s /y
-xcopy "$(ProjectDir)Library\FMOD_API\studio\lib\*.dll" "$(OutDir)" /i /s /y
-xcopy "$(ProjectDir)Library\FMOD_API\lowlevel\lib\*.dll" "$(OutDir)" /i /s /y
-xcopy "$(ProjectDir)\Shader" "$(OutDir)\Shader" /i /s /y
-xcopy "$(ProjectDir)\Shader\VedaStructuredShader" "$(OutDir)\Shader\VedaStructuredShader"  /i /s /y
-xcopy "$(ProjectDir)Resources" "$(OutDir)Resources" /i /s /y
+      <Command>xcopy "$(ProjectDir)GraphicsEngine\Library\SDL2-2.0.16\lib\x86\*.dll" "$(OutDir)" /i /s /y
+xcopy "$(ProjectDir)GraphicsEngine\Library\SDL2_image-2.0.5\lib\x86\*.dll" "$(OutDir)" /i /s /y
+xcopy "$(ProjectDir)GraphicsEngine\Library\SDL2_ttf-2.0.15\lib\x86\*.dll" "$(OutDir)" /i /s /y
+xcopy "$(ProjectDir)GraphicsEngine\Library\FMOD_API\studio\lib\*.dll" "$(OutDir)" /i /s /y
+xcopy "$(ProjectDir)GraphicsEngine\Library\FMOD_API\lowlevel\lib\*.dll" "$(OutDir)" /i /s /y
+xcopy "$(ProjectDir)Assets\Shader" "$(OutDir)Assets\Shader" /i /s /y
+xcopy "$(ProjectDir)Assets\Shader\VedaStructuredShader" "$(OutDir)Assets\Shader\VedaStructuredShader"  /i /s /y
+xcopy "$(ProjectDir)Assets\Resources" "$(OutDir)Assets\Resources" /i /s /y
 
 
 
@@ -189,92 +190,92 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="App\DemoSceneApp\App.h" />
-    <ClInclude Include="Object\AudioObject.h" />
-    <ClInclude Include="Component\AudioSourceComponent.h" />
-    <ClInclude Include="App\BaseApp\BaseApp.h" />
-    <ClInclude Include="Component\Component.h" />
-    <ClInclude Include="Graphics\Font.h" />
-    <ClInclude Include="Game\Game.h" />
-    <ClInclude Include="Object\GameObject.h" />
-    <ClInclude Include="Graphics\GameRenderer.h" />
-    <ClInclude Include="App\BaseApp\Main.h" />
-    <ClInclude Include="App\KuraArtApp\KuraArtApp.h" />
-    <ClInclude Include="Graphics\Material.h" />
-    <ClInclude Include="Component\MeshRendererComponent.h" />
-    <ClInclude Include="Object\Object.h" />
-    <ClInclude Include="Graphics\Primitive.h" />
-    <ClInclude Include="Component\RectTransformComponent.h" />
+    <ClInclude Include="Assets\App\DemoSceneApp\App.h" />
+    <ClInclude Include="GraphicsEngine\Object\AudioObject.h" />
+    <ClInclude Include="GraphicsEngine\Component\AudioSourceComponent.h" />
+    <ClInclude Include="GraphicsEngine\App\BaseApp\BaseApp.h" />
+    <ClInclude Include="GraphicsEngine\Component\Component.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\Font.h" />
+    <ClInclude Include="GraphicsEngine\Game\Game.h" />
+    <ClInclude Include="GraphicsEngine\Object\GameObject.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\GameRenderer.h" />
+    <ClInclude Include="GraphicsEngine\App\BaseApp\Main.h" />
+    <ClInclude Include="Assets\App\KuraArtApp\KuraArtApp.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\Material.h" />
+    <ClInclude Include="GraphicsEngine\Component\MeshRendererComponent.h" />
+    <ClInclude Include="GraphicsEngine\Object\Object.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\Primitive.h" />
+    <ClInclude Include="GraphicsEngine\Component\RectTransformComponent.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Graphics\Texture.h" />
-    <ClInclude Include="Game\Time.h" />
-    <ClInclude Include="Component\TimelineComponent.h" />
-    <ClInclude Include="Object\TimelineObject.h" />
-    <ClInclude Include="Component\TransformComponent.h" />
-    <ClInclude Include="Component\UIComponent.h" />
-    <ClInclude Include="Graphics\VertexArray.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\Texture.h" />
+    <ClInclude Include="GraphicsEngine\Game\Time.h" />
+    <ClInclude Include="GraphicsEngine\Component\TimelineComponent.h" />
+    <ClInclude Include="GraphicsEngine\Object\TimelineObject.h" />
+    <ClInclude Include="GraphicsEngine\Component\TransformComponent.h" />
+    <ClInclude Include="GraphicsEngine\Component\UIComponent.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\VertexArray.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="App\DemoSceneApp\App.cpp" />
-    <ClCompile Include="Object\AudioObject.cpp" />
-    <ClCompile Include="Component\AudioSourceComponent.cpp" />
-    <ClCompile Include="Component\Component.cpp" />
-    <ClCompile Include="Graphics\Font.cpp" />
-    <ClCompile Include="Game\Game.cpp" />
-    <ClCompile Include="Object\GameObject.cpp" />
-    <ClCompile Include="Graphics\GameRenderer.cpp" />
-    <ClCompile Include="App\BaseApp\Main.cpp" />
-    <ClCompile Include="App\KuraArtApp\KuraArtApp.cpp" />
-    <ClCompile Include="Graphics\Material.cpp" />
-    <ClCompile Include="Component\MeshRendererComponent.cpp" />
-    <ClCompile Include="Object\Object.cpp" />
-    <ClCompile Include="Graphics\Primitive.cpp" />
-    <ClCompile Include="Component\RectTransformComponent.cpp" />
-    <ClCompile Include="Graphics\Texture.cpp" />
-    <ClCompile Include="Game\Time.cpp" />
-    <ClCompile Include="Component\TimelineComponent.cpp" />
-    <ClCompile Include="Object\TimelineObject.cpp" />
-    <ClCompile Include="Component\TransformComponent.cpp" />
-    <ClCompile Include="Component\UIComponent.cpp" />
-    <ClCompile Include="Graphics\VertexArray.cpp" />
+    <ClCompile Include="Assets\App\DemoSceneApp\App.cpp" />
+    <ClCompile Include="GraphicsEngine\Object\AudioObject.cpp" />
+    <ClCompile Include="GraphicsEngine\Component\AudioSourceComponent.cpp" />
+    <ClCompile Include="GraphicsEngine\Component\Component.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\Font.cpp" />
+    <ClCompile Include="GraphicsEngine\Game\Game.cpp" />
+    <ClCompile Include="GraphicsEngine\Object\GameObject.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\GameRenderer.cpp" />
+    <ClCompile Include="GraphicsEngine\App\BaseApp\Main.cpp" />
+    <ClCompile Include="Assets\App\KuraArtApp\KuraArtApp.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\Material.cpp" />
+    <ClCompile Include="GraphicsEngine\Component\MeshRendererComponent.cpp" />
+    <ClCompile Include="GraphicsEngine\Object\Object.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\Primitive.cpp" />
+    <ClCompile Include="GraphicsEngine\Component\RectTransformComponent.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\Texture.cpp" />
+    <ClCompile Include="GraphicsEngine\Game\Time.cpp" />
+    <ClCompile Include="GraphicsEngine\Component\TimelineComponent.cpp" />
+    <ClCompile Include="GraphicsEngine\Object\TimelineObject.cpp" />
+    <ClCompile Include="GraphicsEngine\Component\TransformComponent.cpp" />
+    <ClCompile Include="GraphicsEngine\Component\UIComponent.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\libfreetype-6.dll" />
     <None Include="bin\SDL2_ttf.dll" />
     <None Include="bin\zlib1.dll" />
-    <None Include="Shader\demo.vert" />
-    <None Include="Shader\FontText.frag" />
-    <None Include="Shader\FontText.vert" />
-    <None Include="Shader\Haru86_Hexagon.frag" />
-    <None Include="Shader\Haru86_MengerSponge.frag" />
-    <None Include="Shader\Haru86_PartyHole.frag" />
-    <None Include="Shader\Haru86_polar_coordinate.frag" />
-    <None Include="Shader\Haru86_Quaternion_Juria.frag" />
-    <None Include="Shader\Haru86_Ray.frag" />
-    <None Include="Shader\Haru86_RaymarchHole.frag" />
-    <None Include="Shader\Haru86_Triangle.frag" />
-    <None Include="Shader\Raymarching_domainID_samp.frag" />
-    <None Include="Shader\UIStandard.frag">
+    <None Include="Assets\Shader\demo.vert" />
+    <None Include="Assets\Shader\FontText.frag" />
+    <None Include="Assets\Shader\FontText.vert" />
+    <None Include="Assets\Shader\Haru86_Hexagon.frag" />
+    <None Include="Assets\Shader\Haru86_MengerSponge.frag" />
+    <None Include="Assets\Shader\Haru86_PartyHole.frag" />
+    <None Include="Assets\Shader\Haru86_polar_coordinate.frag" />
+    <None Include="Assets\Shader\Haru86_Quaternion_Juria.frag" />
+    <None Include="Assets\Shader\Haru86_Ray.frag" />
+    <None Include="Assets\Shader\Haru86_RaymarchHole.frag" />
+    <None Include="Assets\Shader\Haru86_Triangle.frag" />
+    <None Include="Assets\Shader\Raymarching_domainID_samp.frag" />
+    <None Include="Assets\Shader\UIStandard.frag">
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="Shader\UIStandard.vert">
+    <None Include="Assets\Shader\UIStandard.vert">
       <DeploymentContent>true</DeploymentContent>
     </None>
     <None Include="packages.config" />
-    <None Include="Shader\Standard.frag" />
-    <None Include="Shader\Standard.vert" />
-    <None Include="Shader\VedaStructuredShader\BoardRender.frag" />
-    <None Include="Shader\VedaStructuredShader\BoardRender.vert" />
-    <None Include="Shader\VedaStructuredShader\PostProcess.frag" />
-    <None Include="Shader\VedaStructuredShader\save.frag" />
-    <None Include="Shader\VedaStructuredShader\scene1.frag" />
-    <None Include="Shader\VedaStructuredShader\scene2.frag" />
-    <None Include="Shader\VedaStructuredShader\Scene3.frag" />
-    <None Include="Shader\VedaStructuredShader\Scene4.frag" />
-    <None Include="Shader\VedaStructuredShader\Scene5.frag" />
+    <None Include="Assets\Shader\Standard.frag" />
+    <None Include="Assets\Shader\Standard.vert" />
+    <None Include="Assets\Shader\VedaStructuredShader\BoardRender.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\BoardRender.vert" />
+    <None Include="Assets\Shader\VedaStructuredShader\PostProcess.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\save.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\scene1.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\scene2.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\Scene3.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\Scene4.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\Scene5.frag" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="Resources\FontData\FRSCRIPT.TTF" />
+    <Font Include="Assets\Resources\FontData\FRSCRIPT.TTF" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

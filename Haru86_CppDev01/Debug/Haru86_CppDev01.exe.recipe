@@ -7,10 +7,10 @@
   </ProjectOutputs>
   <ContentFiles>
     <ContentFile>
-      <FullPath>E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Shader\UIStandard.frag</FullPath>
+      <FullPath>E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\UIStandard.frag</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Shader\UIStandard.vert</FullPath>
+      <FullPath>E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\UIStandard.vert</FullPath>
     </ContentFile>
   </ContentFiles>
   <SatelliteDlls />

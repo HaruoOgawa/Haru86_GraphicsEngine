@@ -2,7 +2,6 @@
 #include <string>
 #include "../Object/GameObject.h"
 #include "../Graphics/VertexArray.h"
-#include "../Object/AudioObject.h"
 #include "../Component/AudioSourceComponent.h"
 #include "../Object/TimelineObject.h"
 #include "../Component/TimelineComponent.h"
@@ -75,11 +74,6 @@ void Game::LoadData() {
 	app->Timeline(timelineObj);
 	timelineObj->Initialize();
 
-	audioObj = new AudioObject();
-	if (audioObj->Initialize()) {
-		audioObj->PlayAudio();
-	}
-
 }
 
 void Game::RunLoop() {
@@ -143,7 +137,6 @@ void Game::UpdateGame() {
 		obj->Update();
 	}
 	app->Update();
-	static_cast<AudioSourceComponent*>(audioObj->audioSource)->Update();
 	
 }
 void Game::GenerateOutput() {
@@ -157,7 +150,6 @@ void Game::ShutDown() {
 	//delete gameRenderer;
 	GameRenderer::Destroy();
 	delete app;
-	delete audioObj;
 	delete timelineObj;
 	for (auto obj : gameObjectList) {
 		delete obj;

@@ -25,6 +25,7 @@ class AudioSourceComponent :
 {
 public:
     AudioSourceComponent(class Object* o);
+    AudioSourceComponent(class Object* o, std::string audioSourcePath);
     ~AudioSourceComponent();
     bool Initialize();
 	void Update() override;
@@ -44,5 +45,6 @@ private :
 	std::unordered_map<std::string, FMOD::Studio::Bank*> banksMap;
 	std::unordered_map<std::string, FMOD::Studio::EventDescription*> eventMap;
 	FMOD::Channel* channel;
+	std::string m_audioSourcePath;
 };
 
