@@ -11,6 +11,15 @@ AudioSourceComponent::AudioSourceComponent(class Object* o)
 	: Component(o, static_cast<std::string>(typeid(AudioSourceComponent).name()).substr(6))
 {
 	std::cout << "Create  Constructor" << std::endl;
+	m_audioSourcePath = "./Assets/Resources/MusicData/lug00ber_they_are_feeding.mp3";
+	Initialize();
+}
+
+AudioSourceComponent::AudioSourceComponent(class Object* o, std::string audioSourcePath)
+	: Component(o, static_cast<std::string>(typeid(AudioSourceComponent).name()).substr(6))
+{
+	std::cout << "Create  Constructor" << std::endl;
+	m_audioSourcePath = audioSourcePath;
 	Initialize();
 }
 
@@ -50,7 +59,7 @@ bool AudioSourceComponent::Initialize() {
 
 	std::cout << "Hello" << std::endl;
 
-	CreateSound("./Assets/Resources/MusicData/lug00ber_they_are_feeding.mp3");
+	CreateSound(m_audioSourcePath);
 
 	return true;
 }

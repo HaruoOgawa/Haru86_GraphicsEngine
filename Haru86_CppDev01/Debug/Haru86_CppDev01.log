@@ -36,7 +36,7 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoSceneApp\App.cpp(382,61
   Component.cpp
   Font.cpp
   Game.cpp
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.cpp(175,13): warning C4150: 'UIObject' 型を削除するため delete 演算子が呼び出されましたが、定義がありません。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.cpp(167,13): warning C4150: 'UIObject' 型を削除するため delete 演算子が呼び出されましたが、定義がありません。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.h(34): message : 'UIObject' の宣言を確認してください
   GameObject.cpp
   GameRenderer.cpp
@@ -63,7 +63,7 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineCompo
   TimelineObject.cpp
   TransformComponent.cpp
   コードを生成中...
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\AudioSourceComponent.cpp(193): warning C4715: 'AudioSourceComponent::StopAudioCheck': 値を返さないコントロール パスがあります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\AudioSourceComponent.cpp(202): warning C4715: 'AudioSourceComponent::StopAudioCheck': 値を返さないコントロール パスがあります。
   コンパイル中...
   UIComponent.cpp
   VertexArray.cpp
@@ -134,4 +134,5 @@ soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(stb_
   9 個のファイルをコピーしました
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\FontData\FRSCRIPT.TTF
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\MusicData\lug00ber_they_are_feeding.mp3
-  2 個のファイルをコピーしました
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\MusicData\n111.mp3
+  3 個のファイルをコピーしました
