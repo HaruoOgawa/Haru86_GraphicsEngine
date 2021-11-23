@@ -31,6 +31,8 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoSceneApp\App.cpp(378,48
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoSceneApp\App.cpp(379,68): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoSceneApp\App.cpp(379,48): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoSceneApp\App.cpp(382,61): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+  Graphics.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.h(10,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'Graphics' の左辺を無視します。
   AudioObject.cpp
   AudioSourceComponent.cpp
   Component.cpp
@@ -61,12 +63,12 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\RectTransform
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(24,44): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(32): message : 'TimelineAnimationClip' の宣言を確認してください
   TimelineObject.cpp
-  TransformComponent.cpp
   コードを生成中...
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\AudioSourceComponent.cpp(202): warning C4715: 'AudioSourceComponent::StopAudioCheck': 値を返さないコントロール パスがあります。
   コンパイル中...
+  TransformComponent.cpp
   UIComponent.cpp
-  VertexArray.cpp
+  Mesh.cpp
   コードを生成中...
 soil.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_DXT.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 soil.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_helper.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。

@@ -45,7 +45,7 @@
     <ClInclude Include="GraphicsEngine\Component\TransformComponent.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsEngine\Graphics\VertexArray.h">
+    <ClInclude Include="GraphicsEngine\Graphics\Mesh.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsEngine\Object\Object.h">
@@ -93,6 +93,9 @@
     <ClInclude Include="Assets\App\KuraArtApp\KuraArtApp.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="GraphicsEngine\Graphics\Graphics.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine\App\BaseApp\Main.cpp">
@@ -119,7 +122,7 @@
     <ClCompile Include="GraphicsEngine\Component\TransformComponent.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicsEngine\Graphics\VertexArray.cpp">
+    <ClCompile Include="GraphicsEngine\Graphics\Mesh.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsEngine\Object\Object.cpp">
@@ -159,6 +162,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Assets\App\KuraArtApp\KuraArtApp.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Graphics\Graphics.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

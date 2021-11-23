@@ -191,6 +191,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Assets\App\DemoSceneApp\App.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\Graphics.h" />
     <ClInclude Include="GraphicsEngine\Object\AudioObject.h" />
     <ClInclude Include="GraphicsEngine\Component\AudioSourceComponent.h" />
     <ClInclude Include="GraphicsEngine\App\BaseApp\BaseApp.h" />
@@ -213,10 +214,11 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Object\TimelineObject.h" />
     <ClInclude Include="GraphicsEngine\Component\TransformComponent.h" />
     <ClInclude Include="GraphicsEngine\Component\UIComponent.h" />
-    <ClInclude Include="GraphicsEngine\Graphics\VertexArray.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\Mesh.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets\App\DemoSceneApp\App.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\Graphics.cpp" />
     <ClCompile Include="GraphicsEngine\Object\AudioObject.cpp" />
     <ClCompile Include="GraphicsEngine\Component\AudioSourceComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Component\Component.cpp" />
@@ -237,7 +239,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Object\TimelineObject.cpp" />
     <ClCompile Include="GraphicsEngine\Component\TransformComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Component\UIComponent.cpp" />
-    <ClCompile Include="GraphicsEngine\Graphics\VertexArray.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\Mesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\libfreetype-6.dll" />

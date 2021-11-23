@@ -1,7 +1,7 @@
 #include "Game.h"
 #include <string>
 #include "../Object/GameObject.h"
-#include "../Graphics/VertexArray.h"
+#include "../Graphics/Mesh.h"
 #include "../Component/AudioSourceComponent.h"
 #include "../Object/TimelineObject.h"
 #include "../Component/TimelineComponent.h"

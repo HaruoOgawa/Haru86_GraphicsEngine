@@ -1,7 +1,7 @@
 #pragma once
 #include "../Component/Component.h"
 #include "../Object/Object.h"
-#include "../Graphics/VertexArray.h"
+#include "../Graphics/Mesh.h"
 #include "../Graphics/Material.h"
 #include <string>
 #include "../Graphics/Primitive.h"
@@ -25,7 +25,7 @@ public:
     Material* material;
     friend class GameRenderer;
 private:
-    VertexArray* mesh;
+    Mesh* mesh;
     class Texture* primTex;
     class Object* myowner;
 };
