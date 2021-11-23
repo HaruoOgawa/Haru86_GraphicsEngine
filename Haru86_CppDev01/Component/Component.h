@@ -1,7 +1,7 @@
 #pragma once
 
-#include "./Object.h"
-#include "./Game.h"
+#include "../Object/Object.h"
+#include "../Game/Game.h"
 #include <string>
 
 class Component

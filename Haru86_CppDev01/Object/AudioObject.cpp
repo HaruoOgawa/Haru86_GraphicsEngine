@@ -1,5 +1,5 @@
-#include "AudioObject.h"
-#include "./AudioSourceComponent.h"
+#include "../Object/AudioObject.h"
+#include "../Component/AudioSourceComponent.h"
 #include <iostream>
 
 AudioObject::AudioObject() 

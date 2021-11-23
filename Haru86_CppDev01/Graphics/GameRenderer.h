@@ -1,7 +1,7 @@
 #pragma once
 //#include "GL/glew.h"
 #include "SDL.h"
-#include "./Game.h"
+#include "../Game/Game.h"
 #include <glm/glm.hpp>
 
 class GameRenderer

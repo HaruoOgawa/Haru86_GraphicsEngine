@@ -1,7 +1,7 @@
 #include "TimelineComponent.h"
-#include "./Object.h"
-#include "./Game.h"
-#include "./GameObject.h"
+#include "../Object/Object.h"
+#include "../Game/Game.h"
+#include "../Object/GameObject.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>

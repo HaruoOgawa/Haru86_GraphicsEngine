@@ -1,9 +1,9 @@
 #pragma once
 
 #include "SDL.h"
-#include "./GameRenderer.h"
+#include "../Graphics/GameRenderer.h"
 #include <vector>
-#include "./App/BaseApp/BaseApp.h"
+#include "../App/BaseApp/BaseApp.h"
 
 
 class Game

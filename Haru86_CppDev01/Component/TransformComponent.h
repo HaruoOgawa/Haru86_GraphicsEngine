@@ -2,7 +2,7 @@
 #include "./Component.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
-#include "./Game.h"
+#include "../Game/Game.h"
 
 class TransformComponent :
     public Component

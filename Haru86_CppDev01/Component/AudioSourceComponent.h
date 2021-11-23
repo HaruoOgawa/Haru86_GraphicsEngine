@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-#include "./Object.h"
+#include "../Object/Object.h"
 #include <string>
 #include <unordered_map>
 
