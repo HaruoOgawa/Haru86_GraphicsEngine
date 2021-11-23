@@ -21,191 +21,191 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="App\BaseApp\Main.h">
+    <ClInclude Include="GraphicsEngine\App\BaseApp\Main.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Game.h">
+    <ClInclude Include="GraphicsEngine\Game\Game.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\GameRenderer.h">
+    <ClInclude Include="GraphicsEngine\Graphics\GameRenderer.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Object\GameObject.h">
+    <ClInclude Include="GraphicsEngine\Object\GameObject.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Component.h">
+    <ClInclude Include="GraphicsEngine\Component\Component.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Material.h">
+    <ClInclude Include="GraphicsEngine\Graphics\Material.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Component\MeshRendererComponent.h">
+    <ClInclude Include="GraphicsEngine\Component\MeshRendererComponent.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Component\TransformComponent.h">
+    <ClInclude Include="GraphicsEngine\Component\TransformComponent.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\VertexArray.h">
+    <ClInclude Include="GraphicsEngine\Graphics\VertexArray.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Object.h">
+    <ClInclude Include="GraphicsEngine\Object\Object.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Primitive.h">
+    <ClInclude Include="GraphicsEngine\Graphics\Primitive.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="App\DemoSceneApp\App.h">
+    <ClInclude Include="Assets\App\DemoSceneApp\App.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="App\BaseApp\BaseApp.h">
+    <ClInclude Include="GraphicsEngine\App\BaseApp\BaseApp.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Object\AudioObject.h">
+    <ClInclude Include="GraphicsEngine\Object\AudioObject.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Component\AudioSourceComponent.h">
+    <ClInclude Include="GraphicsEngine\Component\AudioSourceComponent.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Object\TimelineObject.h">
+    <ClInclude Include="GraphicsEngine\Object\TimelineObject.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Component\TimelineComponent.h">
+    <ClInclude Include="GraphicsEngine\Component\TimelineComponent.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Component\UIComponent.h">
+    <ClInclude Include="GraphicsEngine\Component\UIComponent.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Component\RectTransformComponent.h">
+    <ClInclude Include="GraphicsEngine\Component\RectTransformComponent.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Time.h">
+    <ClInclude Include="GraphicsEngine\Game\Time.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Texture.h">
+    <ClInclude Include="GraphicsEngine\Graphics\Texture.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Font.h">
+    <ClInclude Include="GraphicsEngine\Graphics\Font.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="App\KuraArtApp\KuraArtApp.h">
+    <ClInclude Include="Assets\App\KuraArtApp\KuraArtApp.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="App\BaseApp\Main.cpp">
+    <ClCompile Include="GraphicsEngine\App\BaseApp\Main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Game.cpp">
+    <ClCompile Include="GraphicsEngine\Game\Game.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\GameRenderer.cpp">
+    <ClCompile Include="GraphicsEngine\Graphics\GameRenderer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Object\GameObject.cpp">
+    <ClCompile Include="GraphicsEngine\Object\GameObject.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Component.cpp">
+    <ClCompile Include="GraphicsEngine\Component\Component.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Material.cpp">
+    <ClCompile Include="GraphicsEngine\Graphics\Material.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Component\MeshRendererComponent.cpp">
+    <ClCompile Include="GraphicsEngine\Component\MeshRendererComponent.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Component\TransformComponent.cpp">
+    <ClCompile Include="GraphicsEngine\Component\TransformComponent.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\VertexArray.cpp">
+    <ClCompile Include="GraphicsEngine\Graphics\VertexArray.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Object.cpp">
+    <ClCompile Include="GraphicsEngine\Object\Object.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Primitive.cpp">
+    <ClCompile Include="GraphicsEngine\Graphics\Primitive.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="App\DemoSceneApp\App.cpp">
+    <ClCompile Include="Assets\App\DemoSceneApp\App.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Object\AudioObject.cpp">
+    <ClCompile Include="GraphicsEngine\Object\AudioObject.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Component\AudioSourceComponent.cpp">
+    <ClCompile Include="GraphicsEngine\Component\AudioSourceComponent.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Object\TimelineObject.cpp">
+    <ClCompile Include="GraphicsEngine\Object\TimelineObject.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Component\TimelineComponent.cpp">
+    <ClCompile Include="GraphicsEngine\Component\TimelineComponent.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Component\UIComponent.cpp">
+    <ClCompile Include="GraphicsEngine\Component\UIComponent.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Component\RectTransformComponent.cpp">
+    <ClCompile Include="GraphicsEngine\Component\RectTransformComponent.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Time.cpp">
+    <ClCompile Include="GraphicsEngine\Game\Time.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Texture.cpp">
+    <ClCompile Include="GraphicsEngine\Graphics\Texture.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Font.cpp">
+    <ClCompile Include="GraphicsEngine\Graphics\Font.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="App\KuraArtApp\KuraArtApp.cpp">
+    <ClCompile Include="Assets\App\KuraArtApp\KuraArtApp.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Shader\demo.vert">
+    <None Include="Assets\Shader\demo.vert">
       <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="Shader\Haru86_Hexagon.frag">
+    <None Include="Assets\Shader\Haru86_Hexagon.frag">
       <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="Shader\UIStandard.vert">
+    <None Include="Assets\Shader\UIStandard.vert">
       <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="Shader\UIStandard.frag">
+    <None Include="Assets\Shader\UIStandard.frag">
       <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="Shader\Standard.vert">
+    <None Include="Assets\Shader\Standard.vert">
       <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="Shader\Standard.frag">
+    <None Include="Assets\Shader\Standard.frag">
       <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="Shader\Haru86_RaymarchHole.frag" />
-    <None Include="Shader\Haru86_Triangle.frag" />
-    <None Include="Shader\Haru86_MengerSponge.frag" />
-    <None Include="Shader\Haru86_Quaternion_Juria.frag" />
-    <None Include="Shader\Raymarching_domainID_samp.frag" />
-    <None Include="Shader\Haru86_polar_coordinate.frag" />
-    <None Include="Shader\Haru86_Ray.frag" />
-    <None Include="Shader\Haru86_PartyHole.frag" />
-    <None Include="Shader\VedaStructuredShader\BoardRender.vert" />
-    <None Include="Shader\VedaStructuredShader\BoardRender.frag" />
-    <None Include="Shader\FontText.vert" />
-    <None Include="Shader\FontText.frag" />
-    <None Include="Shader\VedaStructuredShader\PostProcess.frag" />
-    <None Include="Shader\VedaStructuredShader\scene2.frag" />
-    <None Include="Shader\VedaStructuredShader\scene1.frag" />
-    <None Include="Shader\VedaStructuredShader\save.frag" />
-    <None Include="Shader\VedaStructuredShader\Scene3.frag" />
-    <None Include="Shader\VedaStructuredShader\Scene4.frag" />
-    <None Include="Shader\VedaStructuredShader\Scene5.frag" />
+    <None Include="Assets\Shader\Haru86_RaymarchHole.frag" />
+    <None Include="Assets\Shader\Haru86_Triangle.frag" />
+    <None Include="Assets\Shader\Haru86_MengerSponge.frag" />
+    <None Include="Assets\Shader\Haru86_Quaternion_Juria.frag" />
+    <None Include="Assets\Shader\Raymarching_domainID_samp.frag" />
+    <None Include="Assets\Shader\Haru86_polar_coordinate.frag" />
+    <None Include="Assets\Shader\Haru86_Ray.frag" />
+    <None Include="Assets\Shader\Haru86_PartyHole.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\BoardRender.vert" />
+    <None Include="Assets\Shader\VedaStructuredShader\BoardRender.frag" />
+    <None Include="Assets\Shader\FontText.vert" />
+    <None Include="Assets\Shader\FontText.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\PostProcess.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\scene2.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\scene1.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\save.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\Scene3.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\Scene4.frag" />
+    <None Include="Assets\Shader\VedaStructuredShader\Scene5.frag" />
     <None Include="bin\libfreetype-6.dll" />
     <None Include="bin\SDL2_ttf.dll" />
     <None Include="bin\zlib1.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="Resources\FontData\FRSCRIPT.TTF" />
+    <Font Include="Assets\Resources\FontData\FRSCRIPT.TTF" />
   </ItemGroup>
 </Project>

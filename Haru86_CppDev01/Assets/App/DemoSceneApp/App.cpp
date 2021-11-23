@@ -1,11 +1,11 @@
 #include "App.h"
-#include "../../Object/GameObject.h"
-#include "../../Object/TimelineObject.h"
-#include "../../Component/TimelineComponent.h"
-#include "../../Component/UIComponent.h"
-#include "../../Component/RectTransformComponent.h"
-#include "../../Component/MeshRendererComponent.h"
-#include "../../Graphics/Material.h"
+#include "../../../GraphicsEngine/Object/GameObject.h"
+#include "../../../GraphicsEngine/Object/TimelineObject.h"
+#include "../../../GraphicsEngine/Component/TimelineComponent.h"
+#include "../../../GraphicsEngine/Component/UIComponent.h"
+#include "../../../GraphicsEngine/Component/RectTransformComponent.h"
+#include "../../../GraphicsEngine/Component/MeshRendererComponent.h"
+#include "../../../GraphicsEngine/Graphics/Material.h"
 
 //ray
 GameObject* Scene1_Frag;
@@ -32,24 +32,24 @@ App::~App() {
 
 }
 void App::Start()  {
-	Scene1_Frag = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/VedaStructuredShader/scene1.frag");
-	Scene2_Frag = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/VedaStructuredShader/scene2.frag");
-	Scene3_Frag = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/VedaStructuredShader/scene3.frag");
-	Scene4_Frag = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/VedaStructuredShader/scene4.frag");
-	Scene5_Frag = new GameObject(PrimitiveType::BOARD, "./Shader/demo.vert", "./Shader/VedaStructuredShader/scene5.frag");
+	Scene1_Frag = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/demo.vert", "./Assets/Shader/VedaStructuredShader/scene1.frag");
+	Scene2_Frag = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/demo.vert", "./Assets/Shader/VedaStructuredShader/scene2.frag");
+	Scene3_Frag = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/demo.vert", "./Assets/Shader/VedaStructuredShader/scene3.frag");
+	Scene4_Frag = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/demo.vert", "./Assets/Shader/VedaStructuredShader/scene4.frag");
+	Scene5_Frag = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/demo.vert", "./Assets/Shader/VedaStructuredShader/scene5.frag");
 
 
-	/*GameObject* uiButton = new GameObject(PrimitiveType::BOARD,"./Shader/UIStandard.vert","./Shader/UIStandard.frag");
+	/*GameObject* uiButton = new GameObject(PrimitiveType::BOARD,"./Assets/Shader/UIStandard.vert","./Assets/Shader/UIStandard.frag");
 	uiButton->SetScale(glm::vec3(0.1f,0.05f,1.0f)*0.5f);
 	uiButton->AddComponent(new UIComponent(uiButton));
 	uiButton->AddComponent(new RectTransformComponent(uiButton,0.1f,0.1f));*/
 
-	renderBoard = new GameObject(PrimitiveType::BOARD, "./Shader/VedaStructuredShader/BoardRender.vert", "./Shader/VedaStructuredShader/BoardRender.frag",RenderType::FrameBuffer);
+	renderBoard = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/VedaStructuredShader/BoardRender.frag",RenderType::FrameBuffer);
 
-	DemoText = new GameObject(PrimitiveType::BOARD, "./Shader/FontText.vert", "./Shader/FontText.frag","Demo Scene");
-	MusicText = new GameObject(PrimitiveType::BOARD, "./Shader/FontText.vert", "./Shader/FontText.frag","Music: lug00ber");
-	MyCreditText = new GameObject(PrimitiveType::BOARD, "./Shader/FontText.vert", "./Shader/FontText.frag","Mouvie: Haru86_");
-	TitleText = new GameObject(PrimitiveType::BOARD, "./Shader/FontText.vert", "./Shader/FontText.frag","Labyrinth");
+	DemoText = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Demo Scene");
+	MusicText = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Music: lug00ber");
+	MyCreditText = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Mouvie: Haru86_");
+	TitleText = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Labyrinth");
 
 }
 void App::Update()  {

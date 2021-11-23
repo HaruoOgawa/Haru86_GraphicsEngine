@@ -1,7 +1,7 @@
 #pragma once
-#include "../../Game/Game.h"
-#include "../BaseApp/BaseApp.h"
-#include "../../Graphics/VertexArray.h"
+#include "../../../GraphicsEngine/Game/Game.h"
+#include "../../../GraphicsEngine/App/BaseApp/BaseApp.h"
+#include "../../../GraphicsEngine/Graphics/VertexArray.h"
 #include <vector>
 
 class App

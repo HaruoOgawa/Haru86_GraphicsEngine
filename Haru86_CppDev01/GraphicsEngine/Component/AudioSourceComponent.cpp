@@ -50,7 +50,7 @@ bool AudioSourceComponent::Initialize() {
 
 	std::cout << "Hello" << std::endl;
 
-	CreateSound("./Resources/MusicData/lug00ber_they_are_feeding.mp3");
+	CreateSound("./Assets/Resources/MusicData/lug00ber_they_are_feeding.mp3");
 
 	return true;
 }
