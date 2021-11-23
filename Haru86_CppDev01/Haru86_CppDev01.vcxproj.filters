@@ -57,7 +57,7 @@
     <ClInclude Include="GraphicsEngine\Graphics\Primitive.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Assets\App\DemoSceneApp\App.h">
+    <ClInclude Include="Assets\App\DemoSceneApp\DemoApp.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsEngine\App\BaseApp\BaseApp.h">
@@ -96,6 +96,9 @@
     <ClInclude Include="GraphicsEngine\Graphics\Graphics.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Assets\App\KuraArtApp\Script\GPGPUSample.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine\App\BaseApp\Main.cpp">
@@ -131,7 +134,7 @@
     <ClCompile Include="GraphicsEngine\Graphics\Primitive.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Assets\App\DemoSceneApp\App.cpp">
+    <ClCompile Include="Assets\App\DemoSceneApp\DemoApp.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsEngine\Object\AudioObject.cpp">
@@ -167,13 +170,13 @@
     <ClCompile Include="GraphicsEngine\Graphics\Graphics.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Assets\App\KuraArtApp\Script\GPGPUSample.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Assets\Shader\demo.vert">
-      <Filter>ソース ファイル</Filter>
-    </None>
-    <None Include="Assets\Shader\Haru86_Hexagon.frag">
       <Filter>ソース ファイル</Filter>
     </None>
     <None Include="Assets\Shader\UIStandard.vert">
@@ -188,14 +191,6 @@
     <None Include="Assets\Shader\Standard.frag">
       <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="Assets\Shader\Haru86_RaymarchHole.frag" />
-    <None Include="Assets\Shader\Haru86_Triangle.frag" />
-    <None Include="Assets\Shader\Haru86_MengerSponge.frag" />
-    <None Include="Assets\Shader\Haru86_Quaternion_Juria.frag" />
-    <None Include="Assets\Shader\Raymarching_domainID_samp.frag" />
-    <None Include="Assets\Shader\Haru86_polar_coordinate.frag" />
-    <None Include="Assets\Shader\Haru86_Ray.frag" />
-    <None Include="Assets\Shader\Haru86_PartyHole.frag" />
     <None Include="Assets\Shader\VedaStructuredShader\BoardRender.vert" />
     <None Include="Assets\Shader\VedaStructuredShader\BoardRender.frag" />
     <None Include="Assets\Shader\FontText.vert" />

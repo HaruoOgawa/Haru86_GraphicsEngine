@@ -190,7 +190,8 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Assets\App\DemoSceneApp\App.h" />
+    <ClInclude Include="Assets\App\DemoSceneApp\DemoApp.h" />
+    <ClInclude Include="Assets\App\KuraArtApp\Script\GPGPUSample.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Graphics.h" />
     <ClInclude Include="GraphicsEngine\Object\AudioObject.h" />
     <ClInclude Include="GraphicsEngine\Component\AudioSourceComponent.h" />
@@ -217,7 +218,8 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Graphics\Mesh.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Assets\App\DemoSceneApp\App.cpp" />
+    <ClCompile Include="Assets\App\DemoSceneApp\DemoApp.cpp" />
+    <ClCompile Include="Assets\App\KuraArtApp\Script\GPGPUSample.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\Graphics.cpp" />
     <ClCompile Include="GraphicsEngine\Object\AudioObject.cpp" />
     <ClCompile Include="GraphicsEngine\Component\AudioSourceComponent.cpp" />
@@ -248,15 +250,6 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <None Include="Assets\Shader\demo.vert" />
     <None Include="Assets\Shader\FontText.frag" />
     <None Include="Assets\Shader\FontText.vert" />
-    <None Include="Assets\Shader\Haru86_Hexagon.frag" />
-    <None Include="Assets\Shader\Haru86_MengerSponge.frag" />
-    <None Include="Assets\Shader\Haru86_PartyHole.frag" />
-    <None Include="Assets\Shader\Haru86_polar_coordinate.frag" />
-    <None Include="Assets\Shader\Haru86_Quaternion_Juria.frag" />
-    <None Include="Assets\Shader\Haru86_Ray.frag" />
-    <None Include="Assets\Shader\Haru86_RaymarchHole.frag" />
-    <None Include="Assets\Shader\Haru86_Triangle.frag" />
-    <None Include="Assets\Shader\Raymarching_domainID_samp.frag" />
     <None Include="Assets\Shader\UIStandard.frag">
       <DeploymentContent>true</DeploymentContent>
     </None>

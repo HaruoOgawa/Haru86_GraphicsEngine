@@ -4,12 +4,12 @@
 #include "../../../GraphicsEngine/Graphics/Mesh.h"
 #include <vector>
 
-class App
+class DemoApp
 	: public BaseApp
 {
 public:
-	App();
-	~App();
+	DemoApp();
+	~DemoApp();
 	void Start()  override;
 	void Update()  override;
 	void Timeline(class TimelineObject* timelineObj)  override;

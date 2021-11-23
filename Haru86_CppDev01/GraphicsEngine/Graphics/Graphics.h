@@ -5,7 +5,7 @@
 static class Graphics
 {
 public:
-	static void DrawInstanced();
+	static void DrawInstancedWithMesh(class Mesh* mesh,int count);
 	static void Dispatch();
 };
 
