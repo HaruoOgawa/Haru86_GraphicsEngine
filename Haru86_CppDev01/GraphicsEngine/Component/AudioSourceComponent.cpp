@@ -57,8 +57,7 @@ bool AudioSourceComponent::Initialize() {
 	LoadBank("Assets/Master Bank.strings.bank");
 	LoadBank("Assets/Master Bank.bank");
 
-	std::cout << "Hello" << std::endl;
-
+	
 	CreateSound(m_audioSourcePath);
 
 	return true;

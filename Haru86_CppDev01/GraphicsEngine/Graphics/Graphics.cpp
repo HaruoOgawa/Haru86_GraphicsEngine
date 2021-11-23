@@ -1,5 +1,6 @@
 #include "Graphics.h"
 #include "./Mesh.h"
+#include <iostream>
 
 void Graphics::DrawInstancedWithMesh(Mesh* mesh, int count) {
 	mesh->SetActive();

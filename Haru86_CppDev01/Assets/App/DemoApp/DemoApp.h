@@ -12,6 +12,7 @@ public:
 	~DemoApp();
 	void Start()  override;
 	void Update()  override;
+	void Draw() override;
 	void Timeline(class TimelineObject* timelineObj)  override;
 private:
 	

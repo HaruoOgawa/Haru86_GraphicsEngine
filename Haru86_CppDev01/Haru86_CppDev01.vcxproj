@@ -112,7 +112,6 @@ xcopy "$(ProjectDir)GraphicsEngine\Library\SDL2_ttf-2.0.15\lib\x86\*.dll" "$(Out
 xcopy "$(ProjectDir)GraphicsEngine\Library\FMOD_API\studio\lib\*.dll" "$(OutDir)" /i /s /y
 xcopy "$(ProjectDir)GraphicsEngine\Library\FMOD_API\lowlevel\lib\*.dll" "$(OutDir)" /i /s /y
 xcopy "$(ProjectDir)Assets\Shader" "$(OutDir)Assets\Shader" /i /s /y
-xcopy "$(ProjectDir)Assets\Shader\VedaStructuredShader" "$(OutDir)Assets\Shader\VedaStructuredShader"  /i /s /y
 xcopy "$(ProjectDir)Assets\Resources" "$(OutDir)Assets\Resources" /i /s /y
 
 
@@ -190,7 +189,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Assets\App\DemoSceneApp\DemoApp.h" />
+    <ClInclude Include="Assets\App\DemoApp\DemoApp.h" />
     <ClInclude Include="Assets\App\KuraArtApp\Script\GPGPUSample.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Graphics.h" />
     <ClInclude Include="GraphicsEngine\Object\AudioObject.h" />
@@ -218,7 +217,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Graphics\Mesh.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Assets\App\DemoSceneApp\DemoApp.cpp" />
+    <ClCompile Include="Assets\App\DemoApp\DemoApp.cpp" />
     <ClCompile Include="Assets\App\KuraArtApp\Script\GPGPUSample.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\Graphics.cpp" />
     <ClCompile Include="GraphicsEngine\Object\AudioObject.cpp" />
@@ -244,6 +243,8 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Graphics\Mesh.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shader\KuraShader\GPGPUTest.frag" />
+    <None Include="Assets\Shader\KuraShader\GPGPUTest.vert" />
     <None Include="bin\libfreetype-6.dll" />
     <None Include="bin\SDL2_ttf.dll" />
     <None Include="bin\zlib1.dll" />

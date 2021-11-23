@@ -3,12 +3,18 @@
 #include "GraphicsEngine/Graphics/Material.h"
 #include "GraphicsEngine/Graphics/Mesh.h"
 #include "GraphicsEngine/Graphics/Graphics.h"
+#include "GraphicsEngine/Object/Object.h"
+#include "GraphicsEngine/Component/TransformComponent.h"
+#include "GraphicsEngine/Game/Game.h"
+#include "../KuraArtApp.h"
 
 GPGPUSample::GPGPUSample(Object* o)
 	: Component(o, static_cast<std::string>(typeid(GPGPUSample).name()).substr(6))
 {
 	m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
-	m_material = std::make_unique<Material>();
+	m_material = std::make_unique<Material>(
+		"./Assets/Shader/KuraShader/GPGPUTest.vert",
+		"./Assets/Shader/KuraShader/GPGPUTest.frag");
 
 	Start();
 }
@@ -18,14 +24,24 @@ GPGPUSample::~GPGPUSample() {
 }
 
 void GPGPUSample::Start() {
-	m_material->SetActive();
-	//後でUniformをセットする
-
-	Graphics::DrawInstancedWithMesh(m_mesh.get(), 1000);
+	
 }
 
 void GPGPUSample::Update() {
+	
+}
 
+void GPGPUSample::Draw() {
+	m_material->SetActive();
+	//後でUniformをセットする
+	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix());
+	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
+	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
+	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
+	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
+	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
+
+	Graphics::DrawInstancedWithMesh(m_mesh.get(), 1000);
 }
 
 void GPGPUSample::ProcessInput(const Uint8* state)const {

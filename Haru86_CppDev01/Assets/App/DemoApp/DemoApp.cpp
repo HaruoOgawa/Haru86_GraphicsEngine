@@ -55,6 +55,9 @@ void DemoApp::Update()  {
 	//printf("Game::GetInstance()->deltaTime: %f \n",Game::GetInstance()->deltaTime);
 }
 	
+void DemoApp::Draw() {
+
+}
 
 void DemoApp::Timeline(TimelineObject* timeline)  {
 	//Ray Activation

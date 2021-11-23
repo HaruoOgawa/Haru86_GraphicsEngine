@@ -42,8 +42,13 @@ void KuraArtApp::Start() {
 }
 void KuraArtApp::Update() {
 	static_cast<AudioSourceComponent*>(Kura::audioObj->audioSource)->Update();
+	Kura::gpgpu_obj->Update();
 }
 
+void KuraArtApp::Draw() {
+	
+	static_cast<GPGPUSample*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(GPGPUSample).name())))->Draw();
+}
 
 void KuraArtApp::Timeline(TimelineObject* timeline) {
 	

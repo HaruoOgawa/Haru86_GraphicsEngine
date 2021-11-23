@@ -11,6 +11,8 @@ public:
     void Start() override;
     void Update() override;
     void ProcessInput(const Uint8* state)const override;
+    void Draw();
+    friend class KuraArtApp;
 private:
     std::unique_ptr<class Material> m_material;
     std::unique_ptr<class Mesh> m_mesh;
