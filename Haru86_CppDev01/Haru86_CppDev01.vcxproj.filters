@@ -69,9 +69,6 @@
     <ClInclude Include="Component\AudioSourceComponent.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Haruo Ogawa\Desktop\includeTest.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Object\TimelineObject.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -90,13 +87,7 @@
     <ClInclude Include="Graphics\Texture.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="C:\SDL2_ttf-2.0.15\include\SDL_ttf.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics\Font.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SDL_ttf.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="App\KuraArtApp\KuraArtApp.h">
@@ -144,9 +135,6 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Component\AudioSourceComponent.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="test.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Object\TimelineObject.cpp">
@@ -222,9 +210,6 @@
     <ResourceCompile Include="Haru86_CppDev01.rc">
       <Filter>リソース ファイル</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="lib\SDL2_ttf.lib" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\FontData\FRSCRIPT.TTF" />

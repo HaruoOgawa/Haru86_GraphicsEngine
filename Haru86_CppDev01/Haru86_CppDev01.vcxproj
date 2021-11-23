@@ -193,14 +193,11 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="Object\AudioObject.h" />
     <ClInclude Include="Component\AudioSourceComponent.h" />
     <ClInclude Include="App\BaseApp\BaseApp.h" />
-    <ClInclude Include="C:\SDL2_ttf-2.0.15\include\SDL_ttf.h" />
-    <ClInclude Include="C:\Users\Haruo Ogawa\Desktop\includeTest.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Graphics\Font.h" />
     <ClInclude Include="Game\Game.h" />
     <ClInclude Include="Object\GameObject.h" />
     <ClInclude Include="Graphics\GameRenderer.h" />
-    <ClInclude Include="include\SDL_ttf.h" />
     <ClInclude Include="App\BaseApp\Main.h" />
     <ClInclude Include="App\KuraArtApp\KuraArtApp.h" />
     <ClInclude Include="Graphics\Material.h" />
@@ -233,7 +230,6 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="Object\Object.cpp" />
     <ClCompile Include="Graphics\Primitive.cpp" />
     <ClCompile Include="Component\RectTransformComponent.cpp" />
-    <ClCompile Include="test.cpp" />
     <ClCompile Include="Graphics\Texture.cpp" />
     <ClCompile Include="Game\Time.cpp" />
     <ClCompile Include="Component\TimelineComponent.cpp" />
@@ -282,9 +278,6 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Haru86_CppDev01.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="lib\SDL2_ttf.lib" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\FontData\FRSCRIPT.TTF" />

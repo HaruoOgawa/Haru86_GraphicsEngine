@@ -55,17 +55,16 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Graphics\Primitive.cpp(87,10): warning
   RectTransformComponent.cpp
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Component\RectTransformComponent.cpp(30,32): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Component\RectTransformComponent.cpp(31,32): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-  test.cpp
   Texture.cpp
   Time.cpp
   TimelineComponent.cpp
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Component\MeshRendererComponent.h(24,44): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Component\TimelineComponent.h(32): message : 'TimelineAnimationClip' の宣言を確認してください
   TimelineObject.cpp
+  TransformComponent.cpp
   コードを生成中...
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Component\AudioSourceComponent.cpp(193): warning C4715: 'AudioSourceComponent::StopAudioCheck': 値を返さないコントロール パスがあります。
   コンパイル中...
-  TransformComponent.cpp
   UIComponent.cpp
   VertexArray.cpp
   コードを生成中...
