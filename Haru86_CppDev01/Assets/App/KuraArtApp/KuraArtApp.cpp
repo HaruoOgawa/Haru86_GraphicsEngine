@@ -1,11 +1,11 @@
 #include "KuraArtApp.h"
-#include "../../../GraphicsEngine/Object/GameObject.h"
-#include "../../../GraphicsEngine/Object/TimelineObject.h"
-#include "../../../GraphicsEngine/Component/TimelineComponent.h"
-#include "../../../GraphicsEngine/Component/UIComponent.h"
-#include "../../../GraphicsEngine/Component/RectTransformComponent.h"
-#include "../../../GraphicsEngine/Component/MeshRendererComponent.h"
-#include "../../../GraphicsEngine/Graphics/Material.h"
+#include "GraphicsEngine/Object/GameObject.h"
+#include "GraphicsEngine/Object/TimelineObject.h"
+#include "GraphicsEngine/Component/TimelineComponent.h"
+#include "GraphicsEngine/Component/UIComponent.h"
+#include "GraphicsEngine/Component/MeshRendererComponent.h"
+#include "GraphicsEngine/Component/RectTransformComponent.h"
+#include "GraphicsEngine/Graphics/Material.h"
 
 namespace Kura{
 	GameObject* Scene3_Frag;
