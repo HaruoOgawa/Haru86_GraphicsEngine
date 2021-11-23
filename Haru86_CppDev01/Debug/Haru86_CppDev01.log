@@ -68,10 +68,10 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Component\AudioSourceComponent.cpp(193
   UIComponent.cpp
   VertexArray.cpp
   コードを生成中...
-soil.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_DXT.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+soil.lib(image_DXT.obj) : warning LNK4099: PDB '' が 'soil.lib(image_DXT.obj)' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 soil.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_helper.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 soil.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(SOIL.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(stb_image_aug.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+soil.lib(stb_image_aug.obj) : warning LNK4099: PDB '' が 'soil.lib(stb_image_aug.obj)' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
   Haru86_CppDev01.vcxproj -> E:\CppDev\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Library\SDL2-2.0.16\lib\x86\SDL2.dll
   1 個のファイルをコピーしました
@@ -132,3 +132,6 @@ soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(stb_
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\Scene4.frag
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\\Shader\VedaStructuredShader\Scene5.frag
   9 個のファイルをコピーしました
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Resources\FontData\FRSCRIPT.TTF
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Resources\MusicData\lug00ber_they_are_feeding.mp3
+  2 個のファイルをコピーしました

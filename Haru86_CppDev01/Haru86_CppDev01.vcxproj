@@ -112,7 +112,7 @@ xcopy "$(ProjectDir)Library\FMOD_API\studio\lib\*.dll" "$(OutDir)" /i /s /y
 xcopy "$(ProjectDir)Library\FMOD_API\lowlevel\lib\*.dll" "$(OutDir)" /i /s /y
 xcopy "$(ProjectDir)\Shader" "$(OutDir)\Shader" /i /s /y
 xcopy "$(ProjectDir)\Shader\VedaStructuredShader" "$(OutDir)\Shader\VedaStructuredShader"  /i /s /y
-
+xcopy "$(ProjectDir)Resources" "$(OutDir)Resources" /i /s /y
 
 
 
