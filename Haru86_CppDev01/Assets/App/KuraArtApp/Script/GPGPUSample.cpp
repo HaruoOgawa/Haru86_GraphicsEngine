@@ -35,14 +35,22 @@ void GPGPUSample::Start() {
 	m_computeShader = std::make_unique<ComputeShader>("./Assets/Shader/KuraShader/GPGPUTest.comp");
 	m_computeShader->SetBuffer(m_computeBuffer.get());
 
+	sampleData.clear();
 }
 
 void GPGPUSample::Update() {
 	m_computeShader->Dispatch(num/256,1,1);
+	
+	std::unique_ptr<AttribData> sampleData=std::make_unique<AttribData>();
+	m_computeBuffer->GetBufferData<AttribData>(sampleData.get(),0);
+	printf("BufferNum is x:%f,y:%f,z:%f,w:%f \n",sampleData.get()->velocity[0], sampleData.get()->velocity[1], sampleData.get()->velocity[2], sampleData.get()->velocity[3]);
+
 }
 
 void GPGPUSample::Draw() {
-	m_computeShader->BindComputeBuffer();
+	glMemoryBarrier(GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT);
+
+	m_computeShader->BindComputeBuffer(CorrectionType::ARRAY);
 
 	m_material->SetActive();
 	//Œã‚ÅUniform‚ðƒZƒbƒg‚·‚é
@@ -53,9 +61,9 @@ void GPGPUSample::Draw() {
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 
-	Graphics::DrawInstancedWithMesh(m_mesh.get(), 1000);
+	Graphics::DrawInstancedWithMesh(m_mesh.get(), 1024);
 
-	m_computeShader->DisBindComputeBuffer();
+	m_computeShader->DisBindComputeBuffer(CorrectionType::ARRAY);
 }
 
 void GPGPUSample::ProcessInput(const Uint8* state)const {

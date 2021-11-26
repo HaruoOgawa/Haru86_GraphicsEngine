@@ -15,6 +15,14 @@ public:
 		glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(data.data()), data.data(), GL_DYNAMIC_DRAW);
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 	}
+
+	template<typename T>
+	void GetBufferData(T *data,int offset) {
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
+		glGetBufferSubData(GL_SHADER_STORAGE_BUFFER, offset, sizeof(data),data);
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
+	}
+
 	friend class ComputeShader;
 private:
 	void CreateBuffer(GLsizeiptr size);

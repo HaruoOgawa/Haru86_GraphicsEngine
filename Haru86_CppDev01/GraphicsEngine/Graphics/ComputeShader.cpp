@@ -37,11 +37,11 @@ void ComputeShader::SetMatrix4x4() {
 void ComputeShader::Dispatch(int xGroupNum, int yGroupNum, int zGroupNum) {
 	glUseProgram(shaderPrg);
 
-	BindComputeBuffer();
+	BindComputeBuffer(CorrectionType::COMPUTEBUFFER);
 
 	glDispatchCompute(xGroupNum, yGroupNum, zGroupNum);
 
-	DisBindComputeBuffer();
+	DisBindComputeBuffer(CorrectionType::COMPUTEBUFFER);
 }
 
 
@@ -97,14 +97,28 @@ bool ComputeShader::CompileShader(std::string shadername, GLuint& outShader) {
 	return true;
 }
 
-void ComputeShader::BindComputeBuffer() {
-	for (int i = 0; i < m_buffers.size(); i++) {
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, i, m_buffers[i]->ssbo);
+void ComputeShader::BindComputeBuffer(CorrectionType correctionType) {
+	if (correctionType == CorrectionType::COMPUTEBUFFER) {
+		for (int i = 0; i < m_buffers.size(); i++) {
+			glBindBufferBase(GL_SHADER_STORAGE_BUFFER, i, m_buffers[i]->ssbo);
+		}
+	}
+	else if(correctionType == CorrectionType::ARRAY) {
+		for (int i = 0; i < m_buffers.size(); i++) {
+			glBindBuffer(GL_ARRAY_BUFFER, m_buffers[i]->ssbo);
+		}
 	}
 }
 
-void ComputeShader::DisBindComputeBuffer() {
-	for (int i = 0; i < m_buffers.size(); i++) {
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, i, 0);
+void ComputeShader::DisBindComputeBuffer(CorrectionType correctionType) {
+	if (correctionType == CorrectionType::COMPUTEBUFFER) {
+		for (int i = 0; i < m_buffers.size(); i++) {
+			glBindBufferBase(GL_SHADER_STORAGE_BUFFER, i,0);
+		}
+	}
+	else if(correctionType == CorrectionType::ARRAY) {
+		for (int i = 0; i < m_buffers.size(); i++) {
+			glBindBuffer(GL_ARRAY_BUFFER,0);
+		}
 	}
 }

@@ -5,6 +5,11 @@
 #include <vector>
 #include <memory>
 
+enum CorrectionType {
+	COMPUTEBUFFER,
+	ARRAY
+};
+
 class ComputeShader
 {
 public:
@@ -16,8 +21,8 @@ public:
 	void Dispatch(int xGroupNum, int yGroupNum, int zGroupNum);
 	void LoadComputeShader(std::string computeShaderPath);
 	bool CompileShader(std::string shadername, GLuint& outShader);
-	void BindComputeBuffer();
-	void DisBindComputeBuffer();
+	void BindComputeBuffer(CorrectionType correctionType);
+	void DisBindComputeBuffer(CorrectionType correctionType);
 private:
 	GLuint shaderPrg;
 	GLuint computeShaderData;
