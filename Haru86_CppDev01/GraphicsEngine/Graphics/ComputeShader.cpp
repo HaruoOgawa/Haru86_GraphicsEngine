@@ -14,8 +14,14 @@ ComputeShader::~ComputeShader() {
 
 }
 
-void ComputeShader::SetBuffer() {
+void ComputeShader::SetBuffer(ComputeBuffer* buffer) {
+	if (m_buffers.size() < 4) {
+		//ここでBufferをセットする。スマートポインタの所有権を譲渡する必要がありそう
 
+	}
+	else {
+		return;
+	}
 }
 
 void ComputeShader::SetFloat() {
@@ -26,10 +32,18 @@ void ComputeShader::SetMatrix4x4() {
 
 }
 
-void ComputeShader::Dispatch(ComputeBuffer buffer, int xGroupNum, int yGroupNum, int zGroupNum) {
+void ComputeShader::Dispatch(int xGroupNum, int yGroupNum, int zGroupNum) {
 	glUseProgram(shaderPrg);
 
+	for (int i = 0; i < m_buffers.size();i++) {
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER,i ,m_buffers[i]->ssbo);
+	}
+
 	glDispatchCompute(xGroupNum, yGroupNum, zGroupNum);
+
+	for (int i = 0; i < m_buffers.size(); i++) {
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER,i ,0 );
+	}
 }
 
 

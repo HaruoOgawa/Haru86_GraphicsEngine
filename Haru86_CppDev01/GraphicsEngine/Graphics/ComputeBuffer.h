@@ -10,6 +10,7 @@ public:
 	~ComputeBuffer();
 	template<typename T>
 	void SetData(T data);
+	friend class ComputeShader;
 private:
 	void CreateBuffer(GLsizeiptr size);
 	GLuint ssbo;
