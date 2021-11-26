@@ -42,6 +42,8 @@ void GPGPUSample::Update() {
 }
 
 void GPGPUSample::Draw() {
+	m_computeShader->BindComputeBuffer();
+
 	m_material->SetActive();
 	//Œã‚ÅUniform‚ðƒZƒbƒg‚·‚é
 	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix());
@@ -52,6 +54,8 @@ void GPGPUSample::Draw() {
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 
 	Graphics::DrawInstancedWithMesh(m_mesh.get(), 1000);
+
+	m_computeShader->DisBindComputeBuffer();
 }
 
 void GPGPUSample::ProcessInput(const Uint8* state)const {

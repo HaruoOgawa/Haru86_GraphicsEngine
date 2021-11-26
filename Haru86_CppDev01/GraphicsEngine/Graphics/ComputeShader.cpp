@@ -32,18 +32,16 @@ void ComputeShader::SetMatrix4x4() {
 
 }
 
+
+
 void ComputeShader::Dispatch(int xGroupNum, int yGroupNum, int zGroupNum) {
 	glUseProgram(shaderPrg);
 
-	for (int i = 0; i < m_buffers.size();i++) {
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER,i ,m_buffers[i]->ssbo);
-	}
+	BindComputeBuffer();
 
 	glDispatchCompute(xGroupNum, yGroupNum, zGroupNum);
 
-	for (int i = 0; i < m_buffers.size(); i++) {
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER,i ,0 );
-	}
+	DisBindComputeBuffer();
 }
 
 
@@ -97,4 +95,16 @@ bool ComputeShader::CompileShader(std::string shadername, GLuint& outShader) {
 	}
 
 	return true;
+}
+
+void ComputeShader::BindComputeBuffer() {
+	for (int i = 0; i < m_buffers.size(); i++) {
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, i, m_buffers[i]->ssbo);
+	}
+}
+
+void ComputeShader::DisBindComputeBuffer() {
+	for (int i = 0; i < m_buffers.size(); i++) {
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, i, 0);
+	}
 }

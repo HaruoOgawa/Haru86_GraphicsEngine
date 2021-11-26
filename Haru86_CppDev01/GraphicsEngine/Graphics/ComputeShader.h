@@ -16,7 +16,8 @@ public:
 	void Dispatch(int xGroupNum, int yGroupNum, int zGroupNum);
 	void LoadComputeShader(std::string computeShaderPath);
 	bool CompileShader(std::string shadername, GLuint& outShader);
-	std::string computeShaderPath;
+	void BindComputeBuffer();
+	void DisBindComputeBuffer();
 private:
 	GLuint shaderPrg;
 	GLuint computeShaderData;

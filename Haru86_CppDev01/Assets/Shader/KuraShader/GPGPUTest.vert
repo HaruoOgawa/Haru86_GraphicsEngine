@@ -4,6 +4,14 @@ layout(location=0)in vec3 vertex;
 layout(location=1)in vec3 normal;
 layout(location=2)in vec2 texcoord;
 
+struct AttribData{
+	vec4 velocity;
+};
+
+layout(std430,binding=0) buffer destBuffer{
+	AttribData data[];
+};
+
 uniform mat4 MVPMatrix;
 uniform mat4 MMatrix;
 uniform mat4 VMatrix;
@@ -20,6 +28,7 @@ uniform float _deltaTime;
 }
 
 out vec2 uv;
+out vec4 velocity;
 
 void main(){
 	vec3 pos=vec3(rand(vec2(gl_InstanceID,0.123))*2.0-1.0,
@@ -30,5 +39,6 @@ void main(){
 	pos=(MMatrix*vec4(vertex,1.0)).xyz+pos;
 
 	gl_Position=PMatrix*VMatrix*vec4(pos,1.0);
+	velocity=data[gl_InstanceID].velocity;
 	uv=texcoord;
 }
