@@ -2,6 +2,7 @@
 #include <vector>
 #include <GL/glew.h>
 #include <GL/glut.h>
+#include <vector>
 
 class ComputeBuffer
 {
@@ -9,7 +10,11 @@ public:
 	ComputeBuffer(GLsizeiptr size);
 	~ComputeBuffer();
 	template<typename T>
-	void SetData(T data);
+	void SetData(T data) {
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
+		glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(data.data()), data.data(), GL_DYNAMIC_DRAW);
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
+	}
 	friend class ComputeShader;
 private:
 	void CreateBuffer(GLsizeiptr size);

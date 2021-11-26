@@ -29,8 +29,8 @@ GPGPUSample::~GPGPUSample() {
 
 void GPGPUSample::Start() {
 	m_computeBuffer = std::make_unique<ComputeBuffer>(sizeof(float) * num);
-	std::vector<float> sampleData(num, 0);
-	m_computeBuffer->SetData(sampleData);
+	std::vector<AttribData> sampleData(num, AttribData());
+	m_computeBuffer->SetData<std::vector<AttribData>>(sampleData);
 
 	m_computeShader = std::make_unique<ComputeShader>("./Shader/KuraShader/GPGPUTest.comp");
 	m_computeShader->SetBuffer(m_computeBuffer.get());

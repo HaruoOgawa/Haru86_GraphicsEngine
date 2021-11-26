@@ -35,6 +35,8 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(384,82)
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.h(10,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'Graphics' の左辺を無視します。
   ComputeBuffer.cpp
   ComputeShader.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\ComputeShader.cpp(101,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\ComputeShader.cpp(107,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
   Graphics.cpp
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.h(10,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'Graphics' の左辺を無視します。
   AudioObject.cpp
@@ -109,6 +111,7 @@ soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(stb_
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\Standard.vert
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\UIStandard.frag
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\UIStandard.vert
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPGPUTest.comp
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPGPUTest.frag
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPGPUTest.vert
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\BoardRender.frag
@@ -120,7 +123,7 @@ soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(stb_
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene3.frag
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene4.frag
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene5.frag
-  18 個のファイルをコピーしました
+  19 個のファイルをコピーしました
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\FontData\FRSCRIPT.TTF
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\MusicData\lug00ber_they_are_feeding.mp3
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\MusicData\n111.mp3

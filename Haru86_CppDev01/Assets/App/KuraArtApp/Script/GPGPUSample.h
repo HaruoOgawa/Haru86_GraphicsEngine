@@ -2,6 +2,16 @@
 #include "GraphicsEngine/Component/Component.h"
 #include <memory>
 
+struct AttribData {
+    float velocity[4];
+    AttribData() {
+        velocity[0] = 0.0f;
+        velocity[1] = 0.0f;
+        velocity[2] = 0.0f;
+        velocity[3] = 0.0f;
+    }
+};
+
 class GPGPUSample :
     public Component
 {
