@@ -18,10 +18,12 @@ float rand(vec2 st)
 
 void main(){
 	uint uid=gl_GlobalInvocationID.x;
-	outBuffer.data[uid].velocity=vec4(
+	/*outBuffer.data[uid].velocity=vec4(
 		rand(vec2(uid,0.123)),
 		rand(vec2(uid,0.456)),
 		rand(vec2(uid,0.789)),
 		1.0
-	);
+	);*/
+	
+	outBuffer.data[uid].velocity=vec4(1.0);
 }

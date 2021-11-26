@@ -10,7 +10,7 @@ struct AttribData{
 
 layout(std430,binding=0) buffer destBuffer{
 	AttribData data[];
-};
+} outBuffer;
 
 uniform mat4 MVPMatrix;
 uniform mat4 MMatrix;
@@ -39,6 +39,6 @@ void main(){
 	pos=(MMatrix*vec4(vertex,1.0)).xyz+pos;
 
 	gl_Position=PMatrix*VMatrix*vec4(pos,1.0);
-	velocity=data[gl_InstanceID].velocity;
+	velocity=outBuffer.data[gl_InstanceID].velocity;
 	uv=texcoord;
 }
