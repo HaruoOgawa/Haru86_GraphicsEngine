@@ -17,6 +17,7 @@ private:
     std::unique_ptr<class Material> m_material;
     std::unique_ptr<class Mesh> m_mesh;
     std::unique_ptr<class ComputeBuffer> m_computeBuffer;
+    std::unique_ptr<class ComputeShader> m_computeShader;
     int num;
 };
 

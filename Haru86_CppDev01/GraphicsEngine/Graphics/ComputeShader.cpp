@@ -11,13 +11,13 @@ ComputeShader::ComputeShader(std::string shaderPath) {
 }
 
 ComputeShader::~ComputeShader() {
-
+	m_buffers.clear();
 }
 
 void ComputeShader::SetBuffer(ComputeBuffer* buffer) {
 	if (m_buffers.size() < 4) {
 		//ここでBufferをセットする。スマートポインタの所有権を譲渡する必要がありそう
-
+		m_buffers.push_back(buffer);
 	}
 	else {
 		return;

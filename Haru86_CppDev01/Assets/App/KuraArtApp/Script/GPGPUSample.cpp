@@ -8,11 +8,12 @@
 #include "GraphicsEngine/Game/Game.h"
 #include "../KuraArtApp.h"
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
+#include "GraphicsEngine/Graphics/ComputeShader.h"
 #include <vector>
 
 GPGPUSample::GPGPUSample(Object* o)
 	: Component(o, static_cast<std::string>(typeid(GPGPUSample).name()).substr(6)),
-	num(1000)
+	num(1024)
 {
 	m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
 	m_material = std::make_unique<Material>(
@@ -30,10 +31,14 @@ void GPGPUSample::Start() {
 	m_computeBuffer = std::make_unique<ComputeBuffer>(sizeof(float) * num);
 	std::vector<float> sampleData(num, 0);
 	m_computeBuffer->SetData(sampleData);
+
+	m_computeShader = std::make_unique<ComputeShader>("./Shader/KuraShader/GPGPUTest.comp");
+	m_computeShader->SetBuffer(m_computeBuffer.get());
+
 }
 
 void GPGPUSample::Update() {
-	
+	m_computeShader->Dispatch(num/256,1,1);
 }
 
 void GPGPUSample::Draw() {
