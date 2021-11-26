@@ -7,9 +7,12 @@
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/Game/Game.h"
 #include "../KuraArtApp.h"
+#include "GraphicsEngine/Graphics/ComputeBuffer.h"
+#include <vector>
 
 GPGPUSample::GPGPUSample(Object* o)
-	: Component(o, static_cast<std::string>(typeid(GPGPUSample).name()).substr(6))
+	: Component(o, static_cast<std::string>(typeid(GPGPUSample).name()).substr(6)),
+	num(1000)
 {
 	m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
 	m_material = std::make_unique<Material>(
@@ -24,7 +27,9 @@ GPGPUSample::~GPGPUSample() {
 }
 
 void GPGPUSample::Start() {
-	
+	m_computeBuffer = std::make_unique<ComputeBuffer>(sizeof(float) * num);
+	std::vector<float> sampleData(num, 0);
+	m_computeBuffer->SetData(sampleData);
 }
 
 void GPGPUSample::Update() {

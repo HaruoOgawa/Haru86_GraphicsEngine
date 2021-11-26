@@ -8,7 +8,8 @@ class ComputeBuffer
 public:
 	ComputeBuffer(GLsizeiptr size);
 	~ComputeBuffer();
-	void SetData();
+	template<typename T>
+	void SetData(T data);
 private:
 	void CreateBuffer(GLsizeiptr size);
 	GLuint ssbo;

@@ -219,6 +219,7 @@
     <None Include="bin\zlib1.dll" />
     <None Include="Assets\Shader\KuraShader\GPGPUTest.vert" />
     <None Include="Assets\Shader\KuraShader\GPGPUTest.frag" />
+    <None Include="Assets\Shader\KuraShader\GPGPUTest.comp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\Resources\FontData\FRSCRIPT.TTF" />

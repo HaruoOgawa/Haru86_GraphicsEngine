@@ -13,10 +13,11 @@ void ComputeBuffer::CreateBuffer(GLsizeiptr size) {
 	bufferSize = size;
 }
 
-void ComputeBuffer::SetData() {
+template<typename T>
+void ComputeBuffer::SetData(T data) {
 	glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
 	//ここでデータをセット
-
-	glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 3, ssbo);
+	glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(data), data, GL_DYNAMIC_DRAW);
+	//glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 3, ssbo);
 	glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 }
