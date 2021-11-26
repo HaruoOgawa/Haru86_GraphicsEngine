@@ -1,4 +1,4 @@
-#version 330
+#version 430
 
 in vec2 uv;
 in vec4 velocity;

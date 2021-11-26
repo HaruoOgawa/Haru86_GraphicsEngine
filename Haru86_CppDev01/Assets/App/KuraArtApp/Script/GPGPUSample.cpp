@@ -32,7 +32,7 @@ void GPGPUSample::Start() {
 	std::vector<AttribData> sampleData(num, AttribData());
 	m_computeBuffer->SetData<std::vector<AttribData>>(sampleData);
 
-	m_computeShader = std::make_unique<ComputeShader>("./Shader/KuraShader/GPGPUTest.comp");
+	m_computeShader = std::make_unique<ComputeShader>("./Assets/Shader/KuraShader/GPGPUTest.comp");
 	m_computeShader->SetBuffer(m_computeBuffer.get());
 
 }
