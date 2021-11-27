@@ -9,8 +9,10 @@ class Material
 public:
     Material();
     Material(std::string vertexShaderName, std::string fragmentShaderName);
+    Material(std::string vertexShaderName, std::string geometryShaderName, std::string fragmentShaderName);
     ~Material();
     void LoadShader(std::string vertName,std::string fragName);
+    void LoadShader(std::string vertName,std::string geomName,std::string fragName);
     bool CompileShader(std::string shadername,GLenum shaderType,GLuint& outShader);
     void SetActive();
     void UnLoadData();
@@ -21,6 +23,7 @@ public:
     void SetBuffer(class ComputeBuffer* buffer, int bufferIndex);
 private :
     GLuint vertShaderData;
+    GLuint geometryShaderData;
     GLuint fragShaderData;
     GLuint shaderPrg;
 };

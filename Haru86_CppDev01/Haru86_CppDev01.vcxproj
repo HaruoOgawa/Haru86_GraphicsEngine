@@ -249,6 +249,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   <ItemGroup>
     <None Include="Assets\Shader\KuraShader\GPGPUTest.comp" />
     <None Include="Assets\Shader\KuraShader\GPGPUTest.frag" />
+    <None Include="Assets\Shader\KuraShader\GPGPUTest.geom" />
     <None Include="Assets\Shader\KuraShader\GPGPUTest.vert" />
     <None Include="bin\libfreetype-6.dll" />
     <None Include="bin\SDL2_ttf.dll" />

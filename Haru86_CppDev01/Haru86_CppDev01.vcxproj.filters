@@ -220,6 +220,7 @@
     <None Include="Assets\Shader\KuraShader\GPGPUTest.vert" />
     <None Include="Assets\Shader\KuraShader\GPGPUTest.frag" />
     <None Include="Assets\Shader\KuraShader\GPGPUTest.comp" />
+    <None Include="Assets\Shader\KuraShader\GPGPUTest.geom" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\Resources\FontData\FRSCRIPT.TTF" />

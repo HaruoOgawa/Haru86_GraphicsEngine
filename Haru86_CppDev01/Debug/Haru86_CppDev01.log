@@ -1,4 +1,37 @@
-﻿  GPGPUSample.cpp
+﻿  DemoApp.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(24,44): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(32): message : 'TimelineAnimationClip' の宣言を確認してください
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(122,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(143,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(164,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(185,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(212,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(212,56): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(213,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(213,56): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(219,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(305,87): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(306,97): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(306,62): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(307,100): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(307,65): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(309,74): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(327,82): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(327,54): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(344,85): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(344,57): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(377,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(377,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(378,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(378,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(379,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(379,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(380,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(380,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(381,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(381,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(384,82): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+  GPGPUSample.cpp
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.h(10,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'Graphics' の左辺を無視します。
   ComputeBuffer.cpp
   ComputeShader.cpp
@@ -6,10 +39,47 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\ComputeShader.
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\ComputeShader.cpp(107,21): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\ComputeShader.cpp(116,21): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\ComputeShader.cpp(121,21): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+  Graphics.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.h(10,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'Graphics' の左辺を無視します。
+  AudioObject.cpp
+  AudioSourceComponent.cpp
+  Component.cpp
+  Font.cpp
+  Game.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.cpp(167,13): warning C4150: 'UIObject' 型を削除するため delete 演算子が呼び出されましたが、定義がありません。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.h(37): message : 'UIObject' の宣言を確認してください
+  GameObject.cpp
+  GameRenderer.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\GameRenderer.cpp(34,1): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+  Main.cpp
+  KuraArtApp.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(24,44): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(32): message : 'TimelineAnimationClip' の宣言を確認してください
   Material.cpp
+  MeshRendererComponent.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(33,1): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'class' として使われていましたが 'struct' として使われています。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(32): message : 'TimelineAnimationClip' の宣言を確認してください
+  Object.cpp
+  Primitive.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Primitive.cpp(87,10): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  RectTransformComponent.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\RectTransformComponent.cpp(30,32): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\RectTransformComponent.cpp(31,32): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  Texture.cpp
+  コードを生成中...
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\AudioSourceComponent.cpp(201): warning C4715: 'AudioSourceComponent::StopAudioCheck': 値を返さないコントロール パスがあります。
+  コンパイル中...
+  Time.cpp
+  TimelineComponent.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(24,44): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(32): message : 'TimelineAnimationClip' の宣言を確認してください
+  TimelineObject.cpp
+  TransformComponent.cpp
+  UIComponent.cpp
+  Mesh.cpp
   コードを生成中...
 soil.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_DXT.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-soil.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_helper.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+soil.lib(image_helper.obj) : warning LNK4099: PDB '' が 'soil.lib(image_helper.obj)' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 soil.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(SOIL.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(stb_image_aug.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
   Haru86_CppDev01.vcxproj -> E:\CppDev\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
@@ -45,6 +115,7 @@ soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(stb_
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\UIStandard.vert
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPGPUTest.comp
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPGPUTest.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPGPUTest.geom
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPGPUTest.vert
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\BoardRender.frag
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\BoardRender.vert
@@ -55,7 +126,7 @@ soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(stb_
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene3.frag
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene4.frag
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene5.frag
-  19 個のファイルをコピーしました
+  20 個のファイルをコピーしました
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\FontData\FRSCRIPT.TTF
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\MusicData\lug00ber_they_are_feeding.mp3
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\MusicData\n111.mp3

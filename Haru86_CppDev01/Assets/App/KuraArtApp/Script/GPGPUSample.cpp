@@ -23,6 +23,7 @@ GPGPUSample::GPGPUSample(Object* o)
 	m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
 	m_material = std::make_unique<Material>(
 		"./Assets/Shader/KuraShader/GPGPUTest.vert",
+		"./Assets/Shader/KuraShader/GPGPUTest.geom",
 		"./Assets/Shader/KuraShader/GPGPUTest.frag");
 
 	Start();
@@ -45,11 +46,6 @@ void GPGPUSample::Start() {
 
 void GPGPUSample::Update() {
 	m_computeShader->Dispatch(num/256,1,1);
-	
-	std::unique_ptr<AttribData> debugData=std::make_unique<AttribData>();
-	m_computeBuffer->GetBufferData<AttribData>(debugData.get(),1000);
-	printf("BufferNum is x:%f,y:%f,z:%f,w:%f \n", debugData.get()->velocity[0], debugData.get()->velocity[1], debugData.get()->velocity[2], debugData.get()->velocity[3]);
-
 }
 
 void GPGPUSample::Draw() {
