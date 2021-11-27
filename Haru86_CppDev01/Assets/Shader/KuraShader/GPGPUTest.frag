@@ -12,6 +12,7 @@ void main(){
 
 	col.rgb=g2f_velocity.xyz;
 
+	col=vec4(g2f_uv,0.0,1.0);
+
 	gl_FragColor=col;
-	//gl_FragColor=g2f_velocity;
 }

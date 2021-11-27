@@ -20,7 +20,7 @@ GPGPUSample::GPGPUSample(Object* o)
 	: Component(o, static_cast<std::string>(typeid(GPGPUSample).name()).substr(6)),
 	num(8192)
 {
-	m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
+	m_mesh = std::make_unique<Mesh>(PrimitiveType::SPHERE);
 	m_material = std::make_unique<Material>(
 		"./Assets/Shader/KuraShader/GPGPUTest.vert",
 		"./Assets/Shader/KuraShader/GPGPUTest.geom",
