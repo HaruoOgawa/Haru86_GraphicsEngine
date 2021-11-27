@@ -6,6 +6,7 @@
 #include "../Game/Game.h"
 #include "./Texture.h"
 #include "./Font.h"
+#include "GraphicsEngine/App/BaseApp/BaseApp.h"
 
 GameRenderer* GameRenderer::renderer_instance = nullptr;
 
@@ -137,6 +138,8 @@ void GameRenderer::Draw() {
 		obj->transform->CalMatrix();
 		obj->meshComp->Draw();
 	}
+
+	mgame->app->Draw();
 
 	//pass2////////////////////////////////////////////////
 	

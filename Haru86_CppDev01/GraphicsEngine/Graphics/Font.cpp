@@ -35,7 +35,7 @@ bool Font::Load(std::string fontPass) {
 		fontData.emplace(size, font);
 	}
 
-	printf("fontData.size: %d \n",fontData.size());
+	//printf("fontData.size: %d \n",fontData.size());
 
 	return true;
 }

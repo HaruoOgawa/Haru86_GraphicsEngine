@@ -1,4 +1,4 @@
-#include "App.h"
+#include "DemoApp.h"
 #include "../../../GraphicsEngine/Object/GameObject.h"
 #include "../../../GraphicsEngine/Object/TimelineObject.h"
 #include "../../../GraphicsEngine/Component/TimelineComponent.h"
@@ -6,6 +6,7 @@
 #include "../../../GraphicsEngine/Component/RectTransformComponent.h"
 #include "../../../GraphicsEngine/Component/MeshRendererComponent.h"
 #include "../../../GraphicsEngine/Graphics/Material.h"
+#include "GraphicsEngine/Game/Game.h"
 
 //ray
 GameObject* Scene1_Frag;
@@ -20,18 +21,17 @@ GameObject* MusicText;
 GameObject* MyCreditText;
 GameObject* TitleText;
 
-//frame board
-GameObject* renderBoard;
 
-App::App()
+
+DemoApp::DemoApp()
 {
 
 }
 
-App::~App() {
+DemoApp::~DemoApp() {
 
 }
-void App::Start()  {
+void DemoApp::Start()  {
 	Scene1_Frag = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/demo.vert", "./Assets/Shader/VedaStructuredShader/scene1.frag");
 	Scene2_Frag = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/demo.vert", "./Assets/Shader/VedaStructuredShader/scene2.frag");
 	Scene3_Frag = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/demo.vert", "./Assets/Shader/VedaStructuredShader/scene3.frag");
@@ -44,20 +44,22 @@ void App::Start()  {
 	uiButton->AddComponent(new UIComponent(uiButton));
 	uiButton->AddComponent(new RectTransformComponent(uiButton,0.1f,0.1f));*/
 
-	renderBoard = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/VedaStructuredShader/BoardRender.frag",RenderType::FrameBuffer);
-
+	
 	DemoText = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Demo Scene");
 	MusicText = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Music: lug00ber");
 	MyCreditText = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Mouvie: Haru86_");
 	TitleText = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Labyrinth");
 
 }
-void App::Update()  {
+void DemoApp::Update()  {
 	//printf("Game::GetInstance()->deltaTime: %f \n",Game::GetInstance()->deltaTime);
 }
 	
+void DemoApp::Draw() {
 
-void App::Timeline(TimelineObject* timeline)  {
+}
+
+void DemoApp::Timeline(TimelineObject* timeline)  {
 	//Ray Activation
 	
 	timeline->AddActivationClip(Scene1_Frag,0.0f,42.0f);
@@ -359,37 +361,37 @@ void App::Timeline(TimelineObject* timeline)  {
 	
 
 	//PostProcess
-	timeline->AddAnimationClip(renderBoard, 0.0f, 38.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
-	timeline->AddAnimationClip(renderBoard, 38.0, 42.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",1); });
-	timeline->AddAnimationClip(renderBoard, 42.0f, 42.3f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 0.0f, 38.0f, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 38.0, 42.0f, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",1); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 42.0f, 42.3f, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
 	
-	timeline->AddAnimationClip(renderBoard, 42.0f, 62.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
-	timeline->AddAnimationClip(renderBoard, 62.0f,65.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",2); });
-	timeline->AddAnimationClip(renderBoard, 65.0f, 66.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 42.0f, 62.0f, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 62.0f,65.0f, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",2); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 65.0f, 66.0f, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
 	
-	timeline->AddAnimationClip(renderBoard, 84.0f, 84.5f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
-	timeline->AddAnimationClip(renderBoard, 84.5f,85.5f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",2); });
-	timeline->AddAnimationClip(renderBoard, 85.5f, 86.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 84.0f, 84.5f, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 84.5f,85.5f, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",2); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 85.5f, 86.0f, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
 	
 	float adjustGlitch = 0.25f;
-	timeline->AddAnimationClip(renderBoard, 102.0 - adjustTime, 102.5 - adjustTime, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
-	timeline->AddAnimationClip(renderBoard, 102.0 - adjustTime, 102.5 - adjustTime, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessVal", 0.0); });
-	timeline->AddAnimationClip(renderBoard, 102.5 - adjustTime, 105.5 - adjustTime, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 5); });
-	timeline->AddAnimationClip(renderBoard, 102.5 - adjustTime, 105.5 - adjustTime, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessVal", val); });
-	timeline->AddAnimationClip(renderBoard, 105.5 - adjustTime, 106.5 - adjustTime, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 102.0 - adjustTime, 102.5 - adjustTime, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 102.0 - adjustTime, 102.5 - adjustTime, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessVal", 0.0); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 102.5 - adjustTime, 105.5 - adjustTime, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 5); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 102.5 - adjustTime, 105.5 - adjustTime, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessVal", val); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 105.5 - adjustTime, 106.5 - adjustTime, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
 
 	//timeline->AddAnimationClip(renderBoard, 85.0, 106.5 - 1.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
-	timeline->AddAnimationClip(renderBoard, 106.5 - adjustTime - 1.0f, 128.0f - 12.0f - adjustTime, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",4); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 106.5 - adjustTime - 1.0f, 128.0f - 12.0f - adjustTime, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",4); });
 	//timeline->AddAnimationClip(renderBoard, 128.0f - 12.0f, 128.5f - 12.0f, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
 	
-	timeline->AddAnimationClip(renderBoard, 128.0f - 12.0f - adjustTime, 126.0f + 1.0f - adjustTime, [](float val) {
-		renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 6); 
-		renderBoard->meshComp->material->SetFloatUniform("_postProcessVal", val); 
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 128.0f - 12.0f - adjustTime, 126.0f + 1.0f - adjustTime, [](float val) {
+		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 6);
+		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessVal", val);
 	});
 	// 128.0f - 12.0f - adjustTime, 146.0f-20.0f + 1.0f - adjustTime
 	//timeline->AddAnimationClip(renderBoard, 126.0f + 1.0f - adjustTime, 126.5f + 1.0f - adjustTime, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
-	timeline->AddAnimationClip(renderBoard, 126.0f + 1.0f - adjustTime, 157.0f + 1.0f - adjustTime, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",3); });
-	timeline->AddAnimationClip(renderBoard, 157.0f + 1.0f - adjustTime, 157.5f + 1.0f - adjustTime, [](float val) {renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 126.0f + 1.0f - adjustTime, 157.0f + 1.0f - adjustTime, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",3); });
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard, 157.0f + 1.0f - adjustTime, 157.5f + 1.0f - adjustTime, [](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
 		
 }
 

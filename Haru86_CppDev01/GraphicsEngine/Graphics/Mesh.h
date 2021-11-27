@@ -5,12 +5,12 @@ enum class PrimitiveType {
 	SPHERE
 };
 
-class VertexArray
+class Mesh
 {
 public:
-	VertexArray();
-	VertexArray(PrimitiveType primType);
-	~VertexArray();
+	Mesh();
+	Mesh(PrimitiveType primType);
+	~Mesh();
 	unsigned int GetNumIndices() { return mNumIndices; }
 	void SetActive();
 	void UnLoadData();

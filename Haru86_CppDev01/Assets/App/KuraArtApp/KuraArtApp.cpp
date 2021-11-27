@@ -10,11 +10,12 @@
 #include "GraphicsEngine/Component/AudioSourceComponent.h"
 #include <memory>
 #include <string>
+#include "GraphicsEngine/Object/Object.h"
+#include "./Assets/App/KuraArtApp/Script/GPGPUSample.h"
 
 namespace Kura{
-	GameObject* Scene3_Frag;
-	GameObject* renderBoard;
 	std::unique_ptr<AudioObject> audioObj;
+	std::unique_ptr<Object> gpgpu_obj;
 }
 
 KuraArtApp::KuraArtApp()
@@ -25,20 +26,29 @@ KuraArtApp::KuraArtApp()
 KuraArtApp::~KuraArtApp() {
 
 }
+
+//ƒJƒƒ‰‚Ìæ‚èˆµ‚¢‚É‚Â‚¢‚Ä‹­‰»‚·‚é•K—v‚ª‚ ‚é
+
 void KuraArtApp::Start() {
 	Kura::audioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
 	if (Kura::audioObj->Initialize()) {
 		Kura::audioObj->PlayAudio();
 	}
 
-	Kura::Scene3_Frag = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/demo.vert", "./Assets/Shader/VedaStructuredShader/scene3.frag");
-	Kura::renderBoard = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/VedaStructuredShader/BoardRender.frag", RenderType::FrameBuffer);
+	Kura::gpgpu_obj = std::make_unique<Object>();
+	Kura::gpgpu_obj->AddComponent(new GPGPUSample(Kura::gpgpu_obj.get()));
+
 
 }
 void KuraArtApp::Update() {
 	static_cast<AudioSourceComponent*>(Kura::audioObj->audioSource)->Update();
+	Kura::gpgpu_obj->Update();
 }
 
+void KuraArtApp::Draw() {
+	
+	static_cast<GPGPUSample*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(GPGPUSample).name())))->Draw();
+}
 
 void KuraArtApp::Timeline(TimelineObject* timeline) {
 	

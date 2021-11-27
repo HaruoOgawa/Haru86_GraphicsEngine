@@ -112,7 +112,6 @@ xcopy "$(ProjectDir)GraphicsEngine\Library\SDL2_ttf-2.0.15\lib\x86\*.dll" "$(Out
 xcopy "$(ProjectDir)GraphicsEngine\Library\FMOD_API\studio\lib\*.dll" "$(OutDir)" /i /s /y
 xcopy "$(ProjectDir)GraphicsEngine\Library\FMOD_API\lowlevel\lib\*.dll" "$(OutDir)" /i /s /y
 xcopy "$(ProjectDir)Assets\Shader" "$(OutDir)Assets\Shader" /i /s /y
-xcopy "$(ProjectDir)Assets\Shader\VedaStructuredShader" "$(OutDir)Assets\Shader\VedaStructuredShader"  /i /s /y
 xcopy "$(ProjectDir)Assets\Resources" "$(OutDir)Assets\Resources" /i /s /y
 
 
@@ -190,7 +189,11 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Assets\App\DemoSceneApp\App.h" />
+    <ClInclude Include="Assets\App\DemoApp\DemoApp.h" />
+    <ClInclude Include="Assets\App\KuraArtApp\Script\GPGPUSample.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\ComputeBuffer.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\ComputeShader.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\Graphics.h" />
     <ClInclude Include="GraphicsEngine\Object\AudioObject.h" />
     <ClInclude Include="GraphicsEngine\Component\AudioSourceComponent.h" />
     <ClInclude Include="GraphicsEngine\App\BaseApp\BaseApp.h" />
@@ -213,10 +216,14 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Object\TimelineObject.h" />
     <ClInclude Include="GraphicsEngine\Component\TransformComponent.h" />
     <ClInclude Include="GraphicsEngine\Component\UIComponent.h" />
-    <ClInclude Include="GraphicsEngine\Graphics\VertexArray.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\Mesh.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Assets\App\DemoSceneApp\App.cpp" />
+    <ClCompile Include="Assets\App\DemoApp\DemoApp.cpp" />
+    <ClCompile Include="Assets\App\KuraArtApp\Script\GPGPUSample.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\ComputeBuffer.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\ComputeShader.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\Graphics.cpp" />
     <ClCompile Include="GraphicsEngine\Object\AudioObject.cpp" />
     <ClCompile Include="GraphicsEngine\Component\AudioSourceComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Component\Component.cpp" />
@@ -237,24 +244,19 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Object\TimelineObject.cpp" />
     <ClCompile Include="GraphicsEngine\Component\TransformComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Component\UIComponent.cpp" />
-    <ClCompile Include="GraphicsEngine\Graphics\VertexArray.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\Mesh.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shader\KuraShader\GPGPUTest.comp" />
+    <None Include="Assets\Shader\KuraShader\GPGPUTest.frag" />
+    <None Include="Assets\Shader\KuraShader\GPGPUTest.geom" />
+    <None Include="Assets\Shader\KuraShader\GPGPUTest.vert" />
     <None Include="bin\libfreetype-6.dll" />
     <None Include="bin\SDL2_ttf.dll" />
     <None Include="bin\zlib1.dll" />
     <None Include="Assets\Shader\demo.vert" />
     <None Include="Assets\Shader\FontText.frag" />
     <None Include="Assets\Shader\FontText.vert" />
-    <None Include="Assets\Shader\Haru86_Hexagon.frag" />
-    <None Include="Assets\Shader\Haru86_MengerSponge.frag" />
-    <None Include="Assets\Shader\Haru86_PartyHole.frag" />
-    <None Include="Assets\Shader\Haru86_polar_coordinate.frag" />
-    <None Include="Assets\Shader\Haru86_Quaternion_Juria.frag" />
-    <None Include="Assets\Shader\Haru86_Ray.frag" />
-    <None Include="Assets\Shader\Haru86_RaymarchHole.frag" />
-    <None Include="Assets\Shader\Haru86_Triangle.frag" />
-    <None Include="Assets\Shader\Raymarching_domainID_samp.frag" />
     <None Include="Assets\Shader\UIStandard.frag">
       <DeploymentContent>true</DeploymentContent>
     </None>

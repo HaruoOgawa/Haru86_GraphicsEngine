@@ -2,7 +2,7 @@
 
 #include "../Game/Game.h"
 #include "./Object.h"
-#include "../Graphics/VertexArray.h"
+#include "../Graphics/Mesh.h"
 
 #include <vector>
 #include <map>

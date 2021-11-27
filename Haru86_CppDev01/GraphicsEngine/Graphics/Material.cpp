@@ -3,6 +3,7 @@
 #include <sstream>
 #include "./SDL.h"
 #include <iostream>
+#include "GraphicsEngine/Graphics/ComputeBuffer.h"
 
 Material::Material() {
 	LoadShader("./Shader/Standard.vert", "./Shader/Standard.frag");
@@ -11,6 +12,11 @@ Material::Material() {
 Material::Material(std::string vertexShaderName, std::string fragmentShaderName)
 {
 	LoadShader(vertexShaderName, fragmentShaderName);
+}
+
+Material::Material(std::string vertexShaderName, std::string geometryShaderName, std::string fragmentShaderName)
+{
+	LoadShader(vertexShaderName, geometryShaderName, fragmentShaderName);
 }
 
 Material::~Material() {
@@ -23,6 +29,33 @@ void Material::LoadShader(std::string vertName, std::string fragName) {
 		
 		shaderPrg = glCreateProgram();
 		glAttachShader(shaderPrg, vertShaderData);
+		glAttachShader(shaderPrg, fragShaderData);
+		glLinkProgram(shaderPrg);
+
+		GLint status;
+		glGetProgramiv(shaderPrg, GL_LINK_STATUS, &status);
+		if (status != GL_TRUE) {
+			SDL_Log("Cannot Load Program Data");
+			char buffer[512];
+			memset(buffer, 0, 512);
+			glGetProgramInfoLog(shaderPrg, 511, nullptr, buffer);
+			SDL_Log("GLSL Link Status:\n%s", buffer);
+		}
+		else
+		{
+			//SDL_Log("Success!! Loaded All Shader file");
+		}
+	}
+}
+
+void Material::LoadShader(std::string vertName, std::string geomName, std::string fragName) {
+	if (CompileShader(vertName,GL_VERTEX_SHADER,vertShaderData)&&
+		CompileShader(geomName,GL_GEOMETRY_SHADER, geometryShaderData)&&
+		CompileShader(fragName,GL_FRAGMENT_SHADER,fragShaderData)) {
+		
+		shaderPrg = glCreateProgram();
+		glAttachShader(shaderPrg, vertShaderData);
+		glAttachShader(shaderPrg, geometryShaderData);
 		glAttachShader(shaderPrg, fragShaderData);
 		glLinkProgram(shaderPrg);
 
@@ -97,6 +130,11 @@ void Material::SetVec2Uniform(std::string uniformName, glm::vec2 val) {
 void Material::SetTexUniform(std::string uniformName, unsigned int val) {
 	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
 	glUniform1i(location, static_cast<GLuint>(val-1));
+}
+
+void Material::SetBuffer(ComputeBuffer* buffer,int bufferIndex) {
+	SetActive();
+	glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bufferIndex, buffer->ssbo);
 }
 
 void Material::UnLoadData() {

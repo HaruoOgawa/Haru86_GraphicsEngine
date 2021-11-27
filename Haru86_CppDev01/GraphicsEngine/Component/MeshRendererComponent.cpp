@@ -13,7 +13,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)
 {
 	useZTest = true;
-	mesh = new VertexArray(primType);
+	mesh = new Mesh(primType);
 	material = new Material();
 }
 
@@ -21,7 +21,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
-	mesh =new VertexArray(primType);
+	mesh =new Mesh(primType);
 	material = new Material(vertexShaderName,fragmentShaderName);
 }
 
@@ -29,7 +29,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
-	mesh =new VertexArray(primType);
+	mesh =new Mesh(primType);
 	material = new Material(vertexShaderName,fragmentShaderName);
 	if (GameRenderer::GetInstance()->font!=nullptr) {
 		primTex = GameRenderer::GetInstance()->font->GetFontTexture(textureString,glm::vec3(1.0,1.0,1.0), 30);

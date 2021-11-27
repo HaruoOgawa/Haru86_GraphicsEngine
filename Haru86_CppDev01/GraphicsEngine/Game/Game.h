@@ -29,6 +29,9 @@ public:
 	float animTime;
 
 	class BaseApp* app;
+	//frame board
+	class GameObject* renderBoard;
+
 	friend class Main;
 	friend class GameObject;
 	friend class UIObject;
@@ -52,6 +55,7 @@ private :
 	class AudioObject* audioObj;
 	
 	bool mouseStateBool;
+	
 protected:
 	static Game* s_pInstance;
 };

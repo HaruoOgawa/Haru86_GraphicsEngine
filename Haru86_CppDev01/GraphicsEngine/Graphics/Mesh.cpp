@@ -1,23 +1,23 @@
-#include "VertexArray.h"
+#include "Mesh.h"
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include "./Primitive.h"
 #include <vector>
 
-//default VertexArray
-VertexArray::VertexArray() {
+//default Mesh
+Mesh::Mesh() {
 	CreateMesh(PrimitiveType::BOARD);
 }
 
-VertexArray::VertexArray(PrimitiveType primType) {
+Mesh::Mesh(PrimitiveType primType) {
 	CreateMesh(primType);
 }
 
-VertexArray::~VertexArray() {
+Mesh::~Mesh() {
 	UnLoadData();
 }
 
-void VertexArray::CreateMesh(PrimitiveType primType) {
+void Mesh::CreateMesh(PrimitiveType primType) {
 	std::vector<float> vertices;
 	std::vector<int> indices;
 
@@ -65,11 +65,11 @@ void VertexArray::CreateMesh(PrimitiveType primType) {
 
 }
 
-void VertexArray::SetActive() {
+void Mesh::SetActive() {
 	glBindVertexArray(mVertexArray);
 }
 
-void VertexArray::UnLoadData() {
+void Mesh::UnLoadData() {
 	glDeleteBuffers(1, &mVertexBuffer);
 	glDeleteBuffers(1,&mIndexBuffer);
 	glDeleteVertexArrays(1, &mVertexArray);

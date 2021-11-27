@@ -25,12 +25,13 @@ public:
 	glm::vec3 GetPosition();
 	glm::quat GetRotation();
 	glm::vec3 GetScale();
+	class TransformComponent* transform;
 	friend class MeshRendererComponent;
 	friend class GameRenderer;
 	friend class UIComponent;
 	friend class RectTransformComponent;
 private:
-	class TransformComponent* transform;
+	
 	class Game* game;
 protected:
 	std::unordered_map<std::string, class Component*> myComponent;
