@@ -11,19 +11,25 @@ layout(std430,binding=0) buffer destBuffer
 
 layout(local_size_x=256,local_size_y=1,local_size_z=1) in;
 
+uniform float _time;
+
 float rand(vec2 st)
 {
     return fract(sin(dot(st, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
+vec3 hsv2rgb2(vec3 c, float k) {
+    return smoothstep(0. + k, 1. - k,
+        .5 + .5 * cos((vec3(c.x, c.x, c.x) + vec3(3., 2., 1.) / 3.) * radians(360.)));
+}
+
 void main(){
 	uint uid=gl_GlobalInvocationID.x;
-	/*outBuffer.data[uid].velocity=vec4(
-		rand(vec2(uid,0.123)),
-		rand(vec2(uid,0.456)),
-		rand(vec2(uid,0.789)),
+	float H = mod(_time*0.0001, 1.0);
+	outBuffer.data[uid].velocity=vec4(
+		hsv2rgb2(vec3(H,1.0,1.0),2.2),
 		1.0
-	);*/
+	);
 	
-	outBuffer.data[uid].velocity=vec4(0.0,0.0,1.0,1.0);
+	//outBuffer.data[uid].velocity=vec4(0.0,0.0,1.0,1.0);
 }

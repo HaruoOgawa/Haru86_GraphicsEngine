@@ -45,6 +45,8 @@ void GPGPUSample::Start() {
 }
 
 void GPGPUSample::Update() {
+	m_computeShader->SetActive();
+	m_computeShader->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_computeShader->Dispatch(num/256,1,1);
 }
 

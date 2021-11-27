@@ -29,18 +29,31 @@ void ComputeShader::SetBuffer(ComputeBuffer* buffer, Material* material) {
 	}
 }
 
-void ComputeShader::SetFloat() {
 
+void ComputeShader::SetMatrixUniform(std::string uniformName, glm::mat4 matrix) {
+	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
+	glUniformMatrix4fv(location, 1, GL_FALSE, reinterpret_cast<const float*>(&matrix[0][0]));
 }
 
-void ComputeShader::SetMatrix4x4() {
+void ComputeShader::SetFloatUniform(std::string uniformName, float val) {
+	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
+	glUniform1f(location, val);
+}
 
+void ComputeShader::SetVec2Uniform(std::string uniformName, glm::vec2 val) {
+	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
+	glUniform2fv(location, 1, reinterpret_cast<GLfloat*>(&val));
+}
+
+void ComputeShader::SetTexUniform(std::string uniformName, unsigned int val) {
+	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
+	glUniform1i(location, static_cast<GLuint>(val - 1));
 }
 
 
 
 void ComputeShader::Dispatch(int xGroupNum, int yGroupNum, int zGroupNum) {
-	glUseProgram(shaderPrg);
+	//glUseProgram(shaderPrg);
 	glDispatchCompute(xGroupNum, yGroupNum, zGroupNum);
 }
 
