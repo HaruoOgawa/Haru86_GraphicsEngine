@@ -5,10 +5,10 @@
 struct AttribData {
     float velocity[4];
     AttribData() {
-        velocity[0] = 0.0f;
-        velocity[1] = 0.0f;
-        velocity[2] = 0.0f;
-        velocity[3] = 0.0f;
+        velocity[0] = 1.0f;
+        velocity[1] = 1.0f;
+        velocity[2] = 1.0f;
+        velocity[3] = 1.0f;
     }
 };
 

@@ -18,6 +18,7 @@ public:
     void SetFloatUniform(std::string uniformName,float val);
     void SetVec2Uniform(std::string uniformName, glm::vec2 val);
     void SetTexUniform(std::string uniformName, unsigned int val);
+    void SetBuffer(class ComputeBuffer* buffer, int bufferIndex);
 private :
     GLuint vertShaderData;
     GLuint fragShaderData;

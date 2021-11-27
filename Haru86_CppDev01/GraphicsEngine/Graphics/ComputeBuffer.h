@@ -24,6 +24,8 @@ public:
 	}
 
 	friend class ComputeShader;
+	friend class Material;
+
 private:
 	void CreateBuffer(GLsizeiptr size);
 	GLuint ssbo;

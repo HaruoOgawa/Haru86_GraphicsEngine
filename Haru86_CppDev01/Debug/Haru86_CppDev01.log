@@ -1,5 +1,11 @@
 ﻿  GPGPUSample.cpp
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.h(10,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'Graphics' の左辺を無視します。
+  ComputeShader.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\ComputeShader.cpp(102,21): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\ComputeShader.cpp(107,21): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\ComputeShader.cpp(116,21): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\ComputeShader.cpp(121,21): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+  コードを生成中...
   Haru86_CppDev01.vcxproj -> E:\CppDev\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2-2.0.16\lib\x86\SDL2.dll
   1 個のファイルをコピーしました

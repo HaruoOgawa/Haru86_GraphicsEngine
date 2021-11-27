@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
+#include "GraphicsEngine/Graphics/Material.h"
 
 ComputeShader::ComputeShader(std::string shaderPath) {
 	LoadComputeShader(shaderPath);
@@ -14,10 +15,14 @@ ComputeShader::~ComputeShader() {
 	m_buffers.clear();
 }
 
-void ComputeShader::SetBuffer(ComputeBuffer* buffer) {
+void ComputeShader::SetBuffer(ComputeBuffer* buffer, Material* material) {
 	if (m_buffers.size() < 4) {
-		//ここでBufferをセットする。スマートポインタの所有権を譲渡する必要がありそう
 		m_buffers.push_back(buffer);
+		//それぞれのShaderにBufferをセット
+		material->SetBuffer(buffer, m_buffers.size() - 1);
+		SetActive();
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, m_buffers.size() - 1, buffer->ssbo);
+		
 	}
 	else {
 		return;
@@ -36,12 +41,7 @@ void ComputeShader::SetMatrix4x4() {
 
 void ComputeShader::Dispatch(int xGroupNum, int yGroupNum, int zGroupNum) {
 	glUseProgram(shaderPrg);
-
-	BindComputeBuffer(CorrectionType::COMPUTEBUFFER);
-
 	glDispatchCompute(xGroupNum, yGroupNum, zGroupNum);
-
-	DisBindComputeBuffer(CorrectionType::COMPUTEBUFFER);
 }
 
 
@@ -108,6 +108,7 @@ void ComputeShader::BindComputeBuffer(CorrectionType correctionType) {
 			glBindBuffer(GL_ARRAY_BUFFER, m_buffers[i]->ssbo);
 		}
 	}
+	printf("m_buffers.size():%d \n",m_buffers.size());
 }
 
 void ComputeShader::DisBindComputeBuffer(CorrectionType correctionType) {
@@ -121,4 +122,8 @@ void ComputeShader::DisBindComputeBuffer(CorrectionType correctionType) {
 			glBindBuffer(GL_ARRAY_BUFFER,0);
 		}
 	}
+}
+
+void ComputeShader::SetActive() {
+	glUseProgram(shaderPrg);
 }

@@ -9,6 +9,9 @@ void main(){
 	col=vec4(exp(-10.0*length(uv*2.0-1.0)));
 	col.a=(col.a<0.5)? 0.0 : col.a;
 	col.rgb*=randCol;
+
+	col.rgb=velocity.xyz;
+
 	gl_FragColor=col;
 	//gl_FragColor=velocity;
 }

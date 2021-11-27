@@ -3,6 +3,7 @@
 #include <sstream>
 #include "./SDL.h"
 #include <iostream>
+#include "GraphicsEngine/Graphics/ComputeBuffer.h"
 
 Material::Material() {
 	LoadShader("./Shader/Standard.vert", "./Shader/Standard.frag");
@@ -97,6 +98,11 @@ void Material::SetVec2Uniform(std::string uniformName, glm::vec2 val) {
 void Material::SetTexUniform(std::string uniformName, unsigned int val) {
 	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
 	glUniform1i(location, static_cast<GLuint>(val-1));
+}
+
+void Material::SetBuffer(ComputeBuffer* buffer,int bufferIndex) {
+	SetActive();
+	glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bufferIndex, buffer->ssbo);
 }
 
 void Material::UnLoadData() {
