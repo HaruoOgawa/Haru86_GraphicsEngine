@@ -18,7 +18,7 @@
 
 GPGPUSample::GPGPUSample(Object* o)
 	: Component(o, static_cast<std::string>(typeid(GPGPUSample).name()).substr(6)),
-	num(131072)
+	num(8192)
 {
 	m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
 	m_material = std::make_unique<Material>(
@@ -33,7 +33,7 @@ GPGPUSample::~GPGPUSample() {
 }
 
 void GPGPUSample::Start() {
-	m_computeBuffer = std::make_unique<ComputeBuffer>(sizeof(float) * num);
+	m_computeBuffer = std::make_unique<ComputeBuffer>(sizeof(AttribData) * num);
 	std::vector<AttribData> sampleData(num, AttribData());
 	m_computeBuffer->SetData<std::vector<AttribData>>(sampleData);
 
@@ -68,7 +68,7 @@ void GPGPUSample::Draw() {
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 
-	Graphics::DrawInstancedWithMesh(m_mesh.get(), 131072);
+	Graphics::DrawInstancedWithMesh(m_mesh.get(), 8192);
 
 }
 
