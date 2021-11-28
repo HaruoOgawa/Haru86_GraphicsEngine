@@ -19,9 +19,9 @@
 
 GPGPUSample::GPGPUSample(Object* o)
 	: Component(o, static_cast<std::string>(typeid(GPGPUSample).name()).substr(6)),
-	num(8192)
+	num(1024)
 {
-	m_mesh = std::make_unique<Mesh>(PrimitiveType::SPHERE);
+	m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
 	m_material = std::make_unique<Material>(
 		"./Assets/Shader/KuraShader/GPGPUTest.vert",
 		"./Assets/Shader/KuraShader/GPGPUTest.geom",
@@ -69,7 +69,7 @@ void GPGPUSample::Draw() {
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 
-	Graphics::DrawInstancedWithMesh(m_mesh.get(), 8192);
+	Graphics::DrawInstancedWithMesh(m_mesh.get(), 1024);
 
 }
 

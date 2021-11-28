@@ -15,19 +15,19 @@ out vec3 g2f_randCol;
 uniform float _time;
 
 void main(){
-	gl_Position=gl_in[0].gl_Position+vec4(v2g_normal[0]*(sin(_time*0.001+gl_PrimitiveIDIn*100.0)+1.0)*0.5,0.0);
+	gl_Position=gl_in[0].gl_Position;
 	g2f_uv=uv[0];
 	g2f_velocity=velocity[0];
 	g2f_randCol=randCol[0];
 	EmitVertex();
 	
-	gl_Position=gl_in[1].gl_Position+vec4(v2g_normal[1]*(sin(_time*0.001+gl_PrimitiveIDIn*100.0)+1.0)*0.5,0.0);
+	gl_Position=gl_in[1].gl_Position;
 	g2f_uv=uv[1];
 	g2f_velocity=velocity[1];
 	g2f_randCol=randCol[1];
 	EmitVertex();
 	
-	gl_Position=gl_in[2].gl_Position+vec4(v2g_normal[2]*(sin(_time*0.001+gl_PrimitiveIDIn*100.0)+1.0)*0.5,0.0);
+	gl_Position=gl_in[2].gl_Position;
 	g2f_uv=uv[2];
 	g2f_velocity=velocity[2];
 	g2f_randCol=randCol[2];

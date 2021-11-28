@@ -6,7 +6,7 @@
 
 //default Mesh
 Mesh::Mesh() {
-	CreateMesh(PrimitiveType::BOARD);
+
 }
 
 Mesh::Mesh(PrimitiveType primType) {
