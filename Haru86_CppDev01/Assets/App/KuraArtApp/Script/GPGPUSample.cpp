@@ -29,7 +29,7 @@ GPGPUSample::GPGPUSample(Object* o)
 
 	Start();
 
-	//std::unique_ptr<Mesh> test_gltf_mesh = glTFLoader::Load("");
+	std::unique_ptr<Mesh> test_gltf_mesh = glTFLoader::Load("test");
 }
 
 GPGPUSample::~GPGPUSample() {

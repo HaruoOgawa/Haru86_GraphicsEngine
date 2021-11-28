@@ -1,12 +1,14 @@
 #include "glTFLoader.h"
 #include "GraphicsEngine/Graphics/Mesh.h"
+
 #define TINYGLTF_IMPLEMENTATION
+#define TINYGLTF_USE_CPP14
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_IMPLEMENTATION
-
-#include <tiny_gltf.h>
+#include "tiny_gltf.h"
 
 std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
+
 	tinygltf::TinyGLTF loader;
 	tinygltf::Model model;
 	std::string err;
