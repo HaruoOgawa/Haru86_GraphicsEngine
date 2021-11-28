@@ -28,6 +28,10 @@ std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 	}
 	else {
 		printf("Success!! Load glTF\n");
+		//model.meshes 1ŒÂ
+		//model.meshes[0].primitives 3ŒÂ
+		//model.meshes[0].primitives[0].attributes; 
+		//model.meshes[0].primitives[0].indices;
 	}
 
 	std::unique_ptr<Mesh> m_mesh=std::make_unique<Mesh>();

@@ -1,4 +1,7 @@
 #pragma once
+#include <vector>
+#include <memory>
+
 enum class PrimitiveType {
 	BOARD,
 	CUBE,
@@ -9,18 +12,13 @@ class Mesh
 {
 public:
 	Mesh();
-	//Mesh(unsigned int );
 	Mesh(PrimitiveType primType);
 	~Mesh();
-	unsigned int GetNumIndices() { return mNumIndices; }
-	void SetActive();
 	void UnLoadData();
+	void Draw();
+	friend class Graphics;
 private:
 	void CreateMesh(PrimitiveType primType);
-	unsigned int mNumVerts;
-	unsigned int mNumIndices;
-	unsigned int mVertexBuffer;
-	unsigned int mIndexBuffer;
-	unsigned int mVertexArray;
+	std::vector<std::unique_ptr<class Primitive>> m_primitives;
 };
 

@@ -100,11 +100,7 @@ void MeshRendererComponent::Draw() {
 		clip->callback(clip->lifeTimeRate);
 	}
 
-	
-	//printf("animationClips.size(): %d \n",animationClips.size());
-	
-	mesh->SetActive();
-	glDrawElements(GL_TRIANGLES, mesh->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
+	mesh->Draw();
 }
 
 void MeshRendererComponent::DrawBoard() {
@@ -129,8 +125,7 @@ void MeshRendererComponent::DrawBoard() {
 		clip->callback(clip->lifeTimeRate);
 	}
 
-	mesh->SetActive();
-	glDrawElements(GL_TRIANGLES, mesh->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
+	mesh->Draw();
 }
 
 
