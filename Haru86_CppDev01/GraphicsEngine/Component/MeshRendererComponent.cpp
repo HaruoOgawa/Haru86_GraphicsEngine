@@ -8,6 +8,7 @@
 #include "./TimelineComponent.h"
 #include "../Graphics/Texture.h"
 #include "../Graphics/Font.h"
+#include "GraphicsEngine/Graphics/glTFLoader.h"
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)
@@ -45,6 +46,15 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 		printf("primTex: %p \n",primTex);
 	}*/
 	
+}
+
+
+MeshRendererComponent::MeshRendererComponent(class Object* o, std::string modelDataPath, std::string vertexShaderName, std::string fragmentShaderName)
+	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
+{
+	useZTest = true;
+	mesh = glTFLoader::Load(modelDataPath);
+	material = new Material(vertexShaderName,fragmentShaderName);
 }
 
 

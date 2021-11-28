@@ -15,6 +15,7 @@ public:
     MeshRendererComponent(class Object* o,PrimitiveType primType);
     MeshRendererComponent(class Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName);
     MeshRendererComponent(class Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, std::string textureString);
+    MeshRendererComponent(class Object* o,std::string modelDataPath, std::string vertexShaderName, std::string fragmentShaderName);
     ~MeshRendererComponent();
     void Update() override;
     void Draw();

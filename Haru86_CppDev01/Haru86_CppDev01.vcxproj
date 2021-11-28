@@ -191,9 +191,14 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   <ItemGroup>
     <ClInclude Include="Assets\App\DemoApp\DemoApp.h" />
     <ClInclude Include="Assets\App\KuraArtApp\Script\GPGPUSample.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\glTFLoader.h" />
     <ClInclude Include="GraphicsEngine\Graphics\ComputeBuffer.h" />
     <ClInclude Include="GraphicsEngine\Graphics\ComputeShader.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Graphics.h" />
+    <ClInclude Include="GraphicsEngine\Library\tinygltf\json.hpp" />
+    <ClInclude Include="GraphicsEngine\Library\tinygltf\stb_image.h" />
+    <ClInclude Include="GraphicsEngine\Library\tinygltf\stb_image_write.h" />
+    <ClInclude Include="GraphicsEngine\Library\tinygltf\tiny_gltf.h" />
     <ClInclude Include="GraphicsEngine\Object\AudioObject.h" />
     <ClInclude Include="GraphicsEngine\Component\AudioSourceComponent.h" />
     <ClInclude Include="GraphicsEngine\App\BaseApp\BaseApp.h" />
@@ -221,6 +226,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   <ItemGroup>
     <ClCompile Include="Assets\App\DemoApp\DemoApp.cpp" />
     <ClCompile Include="Assets\App\KuraArtApp\Script\GPGPUSample.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\glTFLoader.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\ComputeBuffer.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\ComputeShader.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\Graphics.cpp" />
