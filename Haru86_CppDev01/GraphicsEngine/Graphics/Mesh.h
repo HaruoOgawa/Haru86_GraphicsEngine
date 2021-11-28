@@ -9,6 +9,7 @@ class Mesh
 {
 public:
 	Mesh();
+	//Mesh(unsigned int );
 	Mesh(PrimitiveType primType);
 	~Mesh();
 	unsigned int GetNumIndices() { return mNumIndices; }

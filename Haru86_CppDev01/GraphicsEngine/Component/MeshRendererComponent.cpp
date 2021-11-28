@@ -53,7 +53,7 @@ MeshRendererComponent::MeshRendererComponent(class Object* o, std::string modelD
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
-	mesh = glTFLoader::Load(modelDataPath);
+	mesh = glTFLoader::Load(modelDataPath).get();
 	material = new Material(vertexShaderName,fragmentShaderName);
 }
 

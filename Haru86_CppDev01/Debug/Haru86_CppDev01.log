@@ -1,51 +1,25 @@
-﻿  GPGPUSample.cpp
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.h(10,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'Graphics' の左辺を無視します。
-  Haru86_CppDev01.vcxproj -> E:\CppDev\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2-2.0.16\lib\x86\SDL2.dll
-  1 個のファイルをコピーしました
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_image-2.0.5\lib\x86\libjpeg-9.dll
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_image-2.0.5\lib\x86\libpng16-16.dll
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_image-2.0.5\lib\x86\libtiff-5.dll
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_image-2.0.5\lib\x86\libwebp-7.dll
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_image-2.0.5\lib\x86\SDL2_image.dll
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_image-2.0.5\lib\x86\zlib1.dll
-  6 個のファイルをコピーしました
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_ttf-2.0.15\lib\x86\libfreetype-6.dll
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_ttf-2.0.15\lib\x86\SDL2_ttf.dll
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_ttf-2.0.15\lib\x86\zlib1.dll
-  3 個のファイルをコピーしました
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\FMOD_API\studio\lib\fmodstudio.dll
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\FMOD_API\studio\lib\fmodstudio64.dll
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\FMOD_API\studio\lib\fmodstudioL.dll
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\FMOD_API\studio\lib\fmodstudioL64.dll
-  4 個のファイルをコピーしました
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\FMOD_API\lowlevel\lib\fmod.dll
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\FMOD_API\lowlevel\lib\fmod64.dll
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\FMOD_API\lowlevel\lib\fmodL.dll
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\FMOD_API\lowlevel\lib\fmodL64.dll
-  4 個のファイルをコピーしました
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\demo.vert
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\FontText.frag
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\FontText.vert
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\Standard.frag
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\Standard.vert
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\UIStandard.frag
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\UIStandard.vert
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPGPUTest.comp
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPGPUTest.frag
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPGPUTest.geom
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPGPUTest.vert
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\BoardRender.frag
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\BoardRender.vert
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\PostProcess.frag
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\save.frag
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\scene1.frag
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\scene2.frag
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene3.frag
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene4.frag
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene5.frag
-  20 個のファイルをコピーしました
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\FontData\FRSCRIPT.TTF
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\MusicData\lug00ber_they_are_feeding.mp3
-  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\MusicData\n111.mp3
-  3 個のファイルをコピーしました
+﻿  glTFLoader.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\glTFLoader.h(9,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'glTFLoader' の左辺を無視します。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_failure_reason は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_hdr_to_ldr_gamma は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_hdr_to_ldr_scale は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_image_free は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_is_hdr は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_is_hdr_from_file は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_is_hdr_from_memory は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_ldr_to_hdr_gamma は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_ldr_to_hdr_scale は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_load は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_load_from_file は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_load_from_memory は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_loadf は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_loadf_from_file は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_loadf_from_memory は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_write_bmp は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_write_tga は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_zlib_decode_buffer は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_zlib_decode_malloc は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_zlib_decode_malloc_guesssize は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_zlib_decode_noheader_buffer は既に glTFLoader.obj で定義されています。
+soil.lib(stb_image_aug.obj) : error LNK2005: _stbi_zlib_decode_noheader_malloc は既に glTFLoader.obj で定義されています。
+E:\CppDev\Haru86_CppDev01\Debug\Haru86_CppDev01.exe : fatal error LNK1169: 1 つ以上の複数回定義されているシンボルが見つかりました。

@@ -10,6 +10,7 @@
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
 #include "GraphicsEngine/Graphics/ComputeShader.h"
 #include <vector>
+#include "GraphicsEngine/Graphics/glTFLoader.h"
 
 #include <GL/glew.h>
 #include <GL/glut.h>
@@ -27,6 +28,8 @@ GPGPUSample::GPGPUSample(Object* o)
 		"./Assets/Shader/KuraShader/GPGPUTest.frag");
 
 	Start();
+
+	//std::unique_ptr<Mesh> test_gltf_mesh = glTFLoader::Load("");
 }
 
 GPGPUSample::~GPGPUSample() {

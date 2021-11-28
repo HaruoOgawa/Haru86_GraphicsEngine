@@ -1,9 +1,34 @@
 #include "glTFLoader.h"
 #include "GraphicsEngine/Graphics/Mesh.h"
+#define TINYGLTF_IMPLEMENTATION
+#define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+
 #include <tiny_gltf.h>
 
-Mesh* glTFLoader::Load(std::string gltfDataPath) {
-	Mesh* m_mesh;
+std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
+	tinygltf::TinyGLTF loader;
+	tinygltf::Model model;
+	std::string err;
+	std::string warn;
+	bool result = loader.LoadASCIIFromFile(&model, &err, &warn, gltfDataPath);
 
-	return m_mesh;
+	if (!warn.empty()) {
+		printf("warn:%s \n", warn.c_str());
+	}
+
+	if (!err.empty()) {
+		printf("err:%s \n",err.c_str());
+	}
+
+	if (!result) {
+		printf("glTF Load Error...");
+	}
+	else {
+		printf("Success!! Load glTF");
+	}
+
+	std::unique_ptr<Mesh> m_mesh=std::make_unique<Mesh>();
+
+	return std::move(m_mesh);
 }
