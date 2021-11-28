@@ -27,10 +27,11 @@ std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 		printf("glTF Load Error...");
 	}
 	else {
-		printf("Success!! Load glTF");
+		printf("Success!! Load glTF\n");
 	}
 
 	std::unique_ptr<Mesh> m_mesh=std::make_unique<Mesh>();
+
 
 	return std::move(m_mesh);
 }
