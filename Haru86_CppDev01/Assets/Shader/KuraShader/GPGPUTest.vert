@@ -72,13 +72,13 @@ void main(){
 
 	//pos.y+=sin(_time*0.001);
 	float k=10.0;
-	//pos.y=mod(pos.y-gl_InstanceID-_time*0.0025,k)-k*0.5;
+	pos.y=mod(pos.y-gl_InstanceID-_time*0.0025,k)-k*0.5;
 
-	/*pos=pos+vec3(
+	pos=pos+vec3(
 		(perlinNoise(vec2(_time*0.0001,gl_InstanceID))*2.0-1.0)*k*0.75,
 		(perlinNoise(vec2(gl_InstanceID,_time*0.0001))*2.0-1.0)*k*0.25,
 		(perlinNoise(vec2(gl_InstanceID,_time*0.0001))*2.0-1.0)*k*0.75
-	);*/
+	);
 
 	pos=(MMatrix*vec4(vertex*2.0,1.0)).xyz+pos;
 

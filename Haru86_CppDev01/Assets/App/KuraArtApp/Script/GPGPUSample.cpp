@@ -16,20 +16,25 @@
 #include <GL/glut.h>
 
 #include <iostream>
+#include <glm/glm.hpp>
 
 GPGPUSample::GPGPUSample(Object* o)
 	: Component(o, static_cast<std::string>(typeid(GPGPUSample).name()).substr(6)),
 	num(1024)
 {
-	m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
+	//m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
+	m_mesh = glTFLoader::Load("./Assets/Resources/glTFData/Phoenix/Phoenix/Phoenix.gltf");
+	printf("Create Mesh ptr: %p \n", m_mesh.get());
+
 	m_material = std::make_unique<Material>(
 		"./Assets/Shader/KuraShader/GPGPUTest.vert",
 		"./Assets/Shader/KuraShader/GPGPUTest.geom",
 		"./Assets/Shader/KuraShader/GPGPUTest.frag");
 
+	owner->transform->scale = glm::vec3(100,100,100);
+
 	Start();
 
-	std::unique_ptr<Mesh> test_gltf_mesh = glTFLoader::Load("./Assets/Resources/glTFData/Phoenix/Phoenix/Phoenix.gltf");
 }
 
 GPGPUSample::~GPGPUSample() {

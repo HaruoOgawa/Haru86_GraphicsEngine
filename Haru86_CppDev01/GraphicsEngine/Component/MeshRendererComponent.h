@@ -7,12 +7,14 @@
 #include "../Graphics/Primitive.h"
 #include "../Game/Game.h"
 #include <functional>
+#include <memory>
 
 class MeshRendererComponent :
     public Component
 {
 public:
     MeshRendererComponent(class Object* o,PrimitiveType primType);
+    MeshRendererComponent(class Object* o, std::string objPath);
     MeshRendererComponent(class Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName);
     MeshRendererComponent(class Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, std::string textureString);
     MeshRendererComponent(class Object* o,std::string modelDataPath, std::string vertexShaderName, std::string fragmentShaderName);
@@ -26,7 +28,7 @@ public:
     Material* material;
     friend class GameRenderer;
 private:
-    Mesh* mesh;
+    std::unique_ptr<Mesh> mesh;
     class Texture* primTex;
     class Object* myowner;
 };

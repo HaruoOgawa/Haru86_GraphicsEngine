@@ -49,7 +49,7 @@ void Primitive::CreatePrimitive(std::vector<float> vertices, std::vector<int> in
 }
 
 void Primitive::CreatePrimitive(std::vector<std::vector<float>> vertices, std::vector<int> dimention, std::vector<int> indices) {
-	printf("Start Remaked CreatePrimitive \n");
+	
 
 	unsigned int mVertexBuffer;
 	unsigned int mIndexBuffer;
@@ -57,6 +57,9 @@ void Primitive::CreatePrimitive(std::vector<std::vector<float>> vertices, std::v
 
 	glGenVertexArrays(1, &mVertexArray);
 	glBindVertexArray(mVertexArray);
+
+	printf("_________________________________________________________________________\n");
+	printf("Start Remaked CreatePrimitive \n");
 
 	for (int i=0;i<vertices.size();i++)
 	{
@@ -69,15 +72,21 @@ void Primitive::CreatePrimitive(std::vector<std::vector<float>> vertices, std::v
 
 		glEnableVertexAttribArray(i);
 		glVertexAttribPointer(i, dim, GL_FLOAT, GL_FALSE, dim * sizeof(float), 0);
+
+		printf("vert x:%f,y%f,z%f \n", vert[0], vert[1], vert[2]);
+		printf("dim: %d \n", dim);
+		printf("vert.size():%d \n",static_cast<int>(vert.size()));
+
 	}
 
 	glGenBuffers(1, &mIndexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mNumIndices * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
 
-	//glBindBuffer(GL_ARRAY_BUFFER, 0);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	printf("end Remaked CreatePrimitive \n");
+	printf("indices.size():%d \n",static_cast<int>(indices.size()));
+
+	printf("End Remaked CreatePrimitive \n");
+	
 }
 
 void Primitive::Draw() {

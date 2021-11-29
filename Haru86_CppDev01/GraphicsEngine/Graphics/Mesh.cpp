@@ -11,6 +11,7 @@ Mesh::Mesh() {
 
 Mesh::Mesh(PrimitiveType primType) {
 	CreateMesh(primType);
+	printf("Create Mesh ptr: %p \n", this);
 }
 
 Mesh::~Mesh() {
@@ -52,6 +53,8 @@ void Mesh::Draw() {
 	for (int i = 0; i < m_primitives.size();i++) {
 		m_primitives[i]->Draw();
 	}
+
+	printf("m_primitives.size() (%p):%d \n",this,static_cast<int>(m_primitives.size()));
 }
 
 void Mesh::UnLoadData() {

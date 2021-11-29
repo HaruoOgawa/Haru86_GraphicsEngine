@@ -6,7 +6,7 @@
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
 
 Material::Material() {
-	LoadShader("./Shader/Standard.vert", "./Shader/Standard.frag");
+	LoadShader("./Assets/Shader/Standard.vert", "./Assets/Shader/Standard.frag");
 }
 
 Material::Material(std::string vertexShaderName, std::string fragmentShaderName)

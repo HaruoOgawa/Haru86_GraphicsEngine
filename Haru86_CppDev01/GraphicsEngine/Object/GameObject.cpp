@@ -11,6 +11,15 @@ GameObject::GameObject(PrimitiveType primType)
 	Object::AddComponent(meshComp);
 }
 
+
+GameObject::GameObject(std::string objPath)
+	: Object(), renderOrder(RenderQueue::Geometry), renderType(RenderType::DefaultBuffer), animTime(0.0f)
+{
+	Game::GetInstance()->gameObjectList.emplace_back(this);
+	meshComp = new MeshRendererComponent(this, objPath);
+	Object::AddComponent(meshComp);
+}
+
 GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
 	: Object(), renderOrder(RenderQueue::Geometry), renderType(RenderType::DefaultBuffer), animTime(0.0f)
 {
