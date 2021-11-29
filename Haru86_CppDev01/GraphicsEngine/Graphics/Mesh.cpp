@@ -21,10 +21,15 @@ void Mesh::CreateMesh(PrimitiveType primType) {
 	std::vector<float> vertices;
 	std::vector<int> indices;
 
+	std::vector<std::vector<float>> vertices2D;
+	std::vector<int> dimention;
+	std::vector<int> indices2D;
+
 	switch (primType)
 	{
 	case PrimitiveType::BOARD:
-		Primitive::CreateBoard(&vertices, &indices);
+		//Primitive::CreateBoard(&vertices, &indices);
+		Primitive::CreateBoard(&vertices2D, &dimention,&indices2D);
 		break;
 	case PrimitiveType::CUBE:
 		Primitive::CreateCube(&vertices, &indices);
@@ -37,7 +42,8 @@ void Mesh::CreateMesh(PrimitiveType primType) {
 		break;
 	}
 	
-	std::unique_ptr<Primitive> prim = std::make_unique<Primitive>(vertices,indices);
+	//std::unique_ptr<Primitive> prim = std::make_unique<Primitive>(vertices,indices);
+	std::unique_ptr<Primitive> prim = std::make_unique<Primitive>(vertices2D, dimention, indices2D);
 	m_primitives.push_back(std::move(prim));
 
 }

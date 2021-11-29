@@ -51,14 +51,15 @@ std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 				printf("prim.attributes[WEIGHTS_0]:%d \n", static_cast<int>(prim.attributes["WEIGHTS_0"]));
 				printf("_________________________________________________________________________\n");
 				
-				float pos[22836];
+				/*float pos[22836];
 				std::vector<unsigned char> subData(22836,0);
 				std::copy(
 					model.buffers[0].data.begin() + 22836*index, 
 					model.buffers[0].data.begin() +22836 * (index+1)-1,
 					subData.begin()
 				);
-				std::memcpy(&pos, subData.data(), sizeof(pos));
+				std::memcpy(&pos, subData.data(), sizeof(pos));*/
+
 				index++;
 			}
 			
