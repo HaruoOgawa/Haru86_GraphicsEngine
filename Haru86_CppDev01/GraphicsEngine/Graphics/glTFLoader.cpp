@@ -10,6 +10,8 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "tiny_gltf.h"
 
+#include "GraphicsEngine/Graphics/glTFBinaryReader.h"
+
 
 std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 
@@ -51,28 +53,74 @@ std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 				printf("prim.attributes[WEIGHTS_0]:%d \n", static_cast<int>(prim.attributes["WEIGHTS_0"]));
 				printf("_________________________________________________________________________\n");
 				
-				/*float pos[22836];
-				std::vector<unsigned char> subData(22836,0);
+				std::unique_ptr<glTFBinaryReader> reader = std::make_unique<glTFBinaryReader>();
+				//////////////////////////////////////////////////////////////////////////
+				reader->vertex = std::vector<float>(22836, 0.0);
+				reader->subDataVertex = std::vector<unsigned char>(22836, 0);
+
 				std::copy(
 					model.buffers[0].data.begin() + 22836*index, 
 					model.buffers[0].data.begin() +22836 * (index+1)-1,
-					subData.begin()
+					reader->subDataVertex.begin()
 				);
-				std::memcpy(&pos, subData.data(), sizeof(pos));*/
+				std::memcpy(reader->vertex.data(), reader->subDataVertex.data(), sizeof(reader->vertex));
+				reader->subDataVertex.clear();
+
+				//////////////////////////////////////////////////////////////////////////
+				reader->normal=std::vector<float>(22836, 0.0f);
+				reader->subDataNormal =std::vector<unsigned char>(22836, 0);
+				std::copy(
+					model.buffers[0].data.begin() + 22836 * index+ 68508,
+					model.buffers[0].data.begin() + 22836 * (index + 1) - 1+ 68508,
+					reader->subDataNormal.begin()
+				);
+				std::memcpy(reader->normal.data(), reader->subDataNormal.data(), sizeof(reader->normal));
+
+				reader->subDataNormal.clear();
+
+				//////////////////////////////////////////////////////////////////////////
+				reader->texcoord =std::vector<float>(15224, 0.0f);
+				reader->subDataTexcoord =std::vector<unsigned char>(15224, 0);
+				std::copy(
+					model.buffers[0].data.begin() + 15224 * index+ 137016,
+					model.buffers[0].data.begin() + 15224 * (index + 1) - 1+ 137016,
+					reader->subDataTexcoord.begin()
+				);
+				std::memcpy(reader->texcoord.data(), reader->subDataTexcoord.data(), sizeof(reader->texcoord));
+
+				reader->subDataTexcoord.clear();
+
+				//////////////////////////////////////////////////////////////////////////
+				
+				std::vector<std::vector<float>> vertices;
+				vertices.push_back(reader->vertex);
+				reader->vertex.clear();
+				vertices.push_back(reader->normal);
+				reader->normal.clear();
+				vertices.push_back(reader->texcoord);
+				reader->texcoord.clear();
+
+				std::vector<int> dimention;
+				dimention.push_back(3);
+				dimention.push_back(3);
+				dimention.push_back(2);
+
+				//std::vector<int> indices = model.meshes[0].primitives[index].indices;
+				printf("model.meshes[0].primitives[index].indices: %d \n", static_cast<int>(model.meshes[0].primitives[index].indices));
+			
+				//‚±‚Ì•Ó‚ÅPrimitive‚Éƒf[ƒ^‚ğ“n‚·
+
+				//‚·‚×‚Ä‚Ìƒƒ‚ƒŠ‚ğˆê‰‰ğ•ú
+				vertices.clear();
+				dimention.clear();
+				//indices.clear();
 
 				index++;
 			}
 			
 		}
 		
-
-		printf("model.buffers[0].data.size():%d \n", model.buffers[0].data.size());
-		printf("model.buffers[0].data[0]:%u \n", model.buffers[0].data[0]);
-
 	}
-
-	
-
 
 	return std::move(m_mesh);
 }

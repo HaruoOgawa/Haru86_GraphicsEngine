@@ -191,6 +191,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   <ItemGroup>
     <ClInclude Include="Assets\App\DemoApp\DemoApp.h" />
     <ClInclude Include="Assets\App\KuraArtApp\Script\GPGPUSample.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\glTFBinaryReader.h" />
     <ClInclude Include="GraphicsEngine\Graphics\glTFLoader.h" />
     <ClInclude Include="GraphicsEngine\Graphics\ComputeBuffer.h" />
     <ClInclude Include="GraphicsEngine\Graphics\ComputeShader.h" />
@@ -226,6 +227,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   <ItemGroup>
     <ClCompile Include="Assets\App\DemoApp\DemoApp.cpp" />
     <ClCompile Include="Assets\App\KuraArtApp\Script\GPGPUSample.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\glTFBinaryReader.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\glTFLoader.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\ComputeBuffer.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\ComputeShader.cpp" />

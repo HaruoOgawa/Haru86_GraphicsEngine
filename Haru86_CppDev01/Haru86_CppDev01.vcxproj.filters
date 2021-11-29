@@ -120,6 +120,9 @@
     <ClInclude Include="GraphicsEngine\Library\tinygltf\tiny_gltf.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="GraphicsEngine\Graphics\glTFBinaryReader.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine\App\BaseApp\Main.cpp">
@@ -201,6 +204,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsEngine\Graphics\glTFLoader.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine\Graphics\glTFBinaryReader.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
