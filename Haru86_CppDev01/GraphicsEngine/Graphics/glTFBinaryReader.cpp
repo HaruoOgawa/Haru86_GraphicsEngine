@@ -11,4 +11,7 @@ glTFBinaryReader::~glTFBinaryReader() {
 	subDataNormal.clear();
 	texcoord.clear();
 	subDataTexcoord.clear();
+
+	indices.clear();
+	subDataIndices.clear();
 }
