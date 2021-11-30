@@ -58,9 +58,7 @@ void Primitive::CreatePrimitive(std::vector<std::vector<float>> vertices, std::v
 	glGenVertexArrays(1, &mVertexArray);
 	glBindVertexArray(mVertexArray);
 
-	printf("_________________________________________________________________________\n");
-	printf("Start Remaked CreatePrimitive \n");
-
+	
 	for (int i=0;i<vertices.size();i++)
 	{
 		auto vert = vertices[i];
@@ -73,20 +71,14 @@ void Primitive::CreatePrimitive(std::vector<std::vector<float>> vertices, std::v
 		glEnableVertexAttribArray(i);
 		glVertexAttribPointer(i, dim, GL_FLOAT, GL_FALSE, dim * sizeof(float), 0);
 
-		printf("vert x:%f,y%f,z%f \n", vert[0], vert[1], vert[2]);
-		printf("dim: %d \n", dim);
-		printf("vert.size():%d \n",static_cast<int>(vert.size()));
-
+		
 	}
 
 	glGenBuffers(1, &mIndexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mNumIndices * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
 
-	printf("indices.size():%d \n",static_cast<int>(indices.size()));
-
-	printf("End Remaked CreatePrimitive \n");
-	
+	printf("vertex in prim x:%f , y:%f , z%f \n", vertices[0][0], vertices[0][1], vertices[0][2]);
 }
 
 void Primitive::Draw() {
@@ -99,8 +91,6 @@ void Primitive::SetActive() {
 }
 
 void Primitive::UnLoadData() {
-	//glDeleteBuffers(1, &mVertexBuffer);
-	//glDeleteBuffers(1, &mIndexBuffer);
 	glDeleteVertexArrays(1, &mVertexArray);
 }
 
@@ -238,3 +228,4 @@ void Primitive::CreateSphere(std::vector<float>* vertices, std::vector<int>* ind
 		}
 	}
 }
+

@@ -9,5 +9,4 @@ void Graphics::DrawInstancedWithMesh(Mesh* mesh, int count) {
 		mesh->m_primitives[i]->SetActive();
 		glDrawElementsInstanced(GL_TRIANGLES, mesh->m_primitives[i]->GetNumIndices(), GL_UNSIGNED_INT, nullptr, count);
 	}
-	printf("m_primitives.size() (%p):%d \n", mesh, static_cast<int>(mesh->m_primitives.size()));
 }

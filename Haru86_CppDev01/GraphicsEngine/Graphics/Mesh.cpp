@@ -54,7 +54,6 @@ void Mesh::Draw() {
 		m_primitives[i]->Draw();
 	}
 
-	printf("m_primitives.size() (%p):%d \n",this,static_cast<int>(m_primitives.size()));
 }
 
 void Mesh::UnLoadData() {

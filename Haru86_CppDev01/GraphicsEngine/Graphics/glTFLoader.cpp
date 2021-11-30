@@ -54,6 +54,24 @@ std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 					reader->subDataVertex.begin()
 				);
 				std::memcpy(reader->vertex.data(), reader->subDataVertex.data(), sizeof(float)* reader->vertex.size());
+				
+				for (int p = 0; p < 1; p++) {
+					printf("_________________________________________________________________________\n");
+					printf("vertex x: %f , y: %f , z: %f \n", reader->vertex[0 + 3 * p], reader->vertex[1 + 3 * p], reader->vertex[2 + 3 * p]);
+					for (int i = 0; i < 12; i += 4) {
+						unsigned char buffer[4];
+
+						buffer[0] = reader->subDataVertex[i + 0 + 12 * p];
+						buffer[1] = reader->subDataVertex[i + 1 + 12 * p];
+						buffer[2] = reader->subDataVertex[i + 2 + 12 * p];
+						buffer[3] = reader->subDataVertex[i + 3 + 12 * p];
+
+						float val = (*(float*)buffer);
+
+						printf("subDataVertex float val:%f \n", val);
+					}
+				}
+				
 				reader->subDataVertex.clear();
 
 				//normal
@@ -94,14 +112,19 @@ std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 				dimention.push_back(3);
 				dimention.push_back(2);
 
-				//std::vector<int> indices = model.meshes[0].primitives[index].indices;
 				////get indices
-				reader->indices = std::vector<int>(192, 0);
-				reader->subDataIndices = std::vector<unsigned char>(768, 0);
+				
+				auto indicesAccessorsIndex = prim.indices;
+				auto indicesBufferViewIndex = model.accessors[indicesAccessorsIndex].bufferView;
+				auto byteLength = model.bufferViews[indicesBufferViewIndex].byteLength;
+				auto byteOffset = model.bufferViews[indicesBufferViewIndex].byteOffset;
+				
+				reader->indices = std::vector<int>(byteLength/4, 0);
+				reader->subDataIndices = std::vector<unsigned char>(byteLength, 0);
 
 				std::copy(
-					model.buffers[0].data.begin() + 768 * index+ 344292,
-					model.buffers[0].data.begin() + 768 * (index + 1) - 1+ 344292,
+					model.buffers[0].data.begin() + byteLength * 0+ byteOffset,
+					model.buffers[0].data.begin() + byteLength * 1 - 1+ byteOffset,
 					reader->subDataIndices.begin()
 				);
 				std::memcpy(reader->indices.data(), reader->subDataIndices.data(), sizeof(int)* reader->indices.size());
