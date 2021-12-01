@@ -7,7 +7,7 @@ Primitive::Primitive(std::vector<float> vertices, std::vector<int> indices) {
 	CreatePrimitive(vertices, indices);
 }
 
-Primitive::Primitive(std::vector<std::vector<float>> vertices, std::vector<int> dimention, std::vector<int> indices) {
+Primitive::Primitive(std::vector<std::vector<float>> vertices, std::vector<int> dimention, std::vector<unsigned short> indices) {
 	CreatePrimitive(vertices,dimention, indices);
 }
 Primitive::~Primitive() {
@@ -48,7 +48,7 @@ void Primitive::CreatePrimitive(std::vector<float> vertices, std::vector<int> in
 
 }
 
-void Primitive::CreatePrimitive(std::vector<std::vector<float>> vertices, std::vector<int> dimention, std::vector<int> indices) {
+void Primitive::CreatePrimitive(std::vector<std::vector<float>> vertices, std::vector<int> dimention, std::vector<unsigned short> indices) {
 	
 
 	unsigned int mVertexBuffer;
@@ -83,7 +83,7 @@ void Primitive::CreatePrimitive(std::vector<std::vector<float>> vertices, std::v
 
 void Primitive::Draw() {
 	SetActive();
-	glDrawElements(GL_TRIANGLES, GetNumIndices(), GL_UNSIGNED_INT, nullptr);
+	glDrawElements(GL_TRIANGLES, GetNumIndices(), GL_UNSIGNED_SHORT, nullptr);
 }
 
 void Primitive::SetActive() {
@@ -115,7 +115,7 @@ void Primitive::CreateBoard(std::vector<float>* vertices, std::vector<int>* indi
 	}
 }
 
-void Primitive::CreateBoard(std::vector<std::vector<float>>* vertices, std::vector<int>* dimention, std::vector<int>* indices) {
+void Primitive::CreateBoard(std::vector<std::vector<float>>* vertices, std::vector<int>* dimention, std::vector<unsigned short>* indices) {
 	std::vector<float> vertex= {
 		-0.5f, 0.5f, 0.f,  // top left
 		0.5f, 0.5f, 0.f, // top right
@@ -137,7 +137,7 @@ void Primitive::CreateBoard(std::vector<std::vector<float>>* vertices, std::vect
 		 0.f, 0.f
 	};
 
-	std::vector<int> i= {
+	std::vector<unsigned int> i= {
 		0, 1, 2,
 		2, 3, 0
 	};

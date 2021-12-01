@@ -15,7 +15,7 @@
 
 namespace Kura{
 	std::unique_ptr<AudioObject> audioObj;
-	std::unique_ptr<GameObject> testObj;
+	//std::unique_ptr<GameObject> testObj;
 	std::unique_ptr<Object> gpgpu_obj;
 }
 
@@ -36,7 +36,8 @@ void KuraArtApp::Start() {
 		Kura::audioObj->PlayAudio();
 	}
 
-	Kura::testObj = std::make_unique<GameObject>(PrimitiveType::BOARD);
+	//Kura::testObj = std::make_unique<GameObject>(PrimitiveType::BOARD);
+	//Kura::testObj = std::make_unique<GameObject>("./Assets/Resources/glTFData/Phoenix_Blender/Phoenix.gltf");
 
 	Kura::gpgpu_obj = std::make_unique<Object>();
 	Kura::gpgpu_obj->AddComponent(new GPGPUSample(Kura::gpgpu_obj.get()));
@@ -46,13 +47,13 @@ void KuraArtApp::Start() {
 void KuraArtApp::Update() {
 	static_cast<AudioSourceComponent*>(Kura::audioObj->audioSource)->Update();
 	Kura::gpgpu_obj->Update();
-	Kura::testObj->Update();
+	//Kura::testObj->Update();
 }
 
 void KuraArtApp::Draw() {
 	
 	static_cast<GPGPUSample*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(GPGPUSample).name())))->Draw();
-	Kura::testObj->meshComp->Draw();
+	//Kura::testObj->meshComp->Draw();
 }
 
 void KuraArtApp::Timeline(TimelineObject* timeline) {

@@ -6,6 +6,7 @@
 
 //default Mesh
 Mesh::Mesh() {
+	localMatrix = glm::mat4(1.0);
 
 }
 
@@ -24,7 +25,7 @@ void Mesh::CreateMesh(PrimitiveType primType) {
 
 	std::vector<std::vector<float>> vertices2D;
 	std::vector<int> dimention;
-	std::vector<int> indices2D;
+	std::vector<unsigned short> indices2D;
 
 	switch (primType)
 	{

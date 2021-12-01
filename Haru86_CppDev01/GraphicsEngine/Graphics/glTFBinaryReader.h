@@ -13,7 +13,7 @@ public:
 	std::vector<float> texcoord;
 	std::vector<unsigned char> subDataTexcoord;
 
-	std::vector<int> indices;
+	std::vector<unsigned short> indices;
 	std::vector<unsigned char> subDataIndices;
 };
 

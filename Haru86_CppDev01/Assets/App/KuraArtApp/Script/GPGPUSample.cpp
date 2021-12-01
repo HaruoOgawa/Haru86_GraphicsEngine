@@ -17,13 +17,14 @@
 
 #include <iostream>
 #include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
 
 GPGPUSample::GPGPUSample(Object* o)
 	: Component(o, static_cast<std::string>(typeid(GPGPUSample).name()).substr(6)),
 	num(1024)
 {
 	//m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
-	m_mesh = glTFLoader::Load("./Assets/Resources/glTFData/Phoenix/Phoenix/Phoenix.gltf");
+	m_mesh = glTFLoader::Load("./Assets/Resources/glTFData/Phoenix_Blender/Phoenix.gltf");
 	printf("Create Mesh ptr: %p \n", m_mesh.get());
 
 	m_material = std::make_unique<Material>(
@@ -42,7 +43,7 @@ GPGPUSample::~GPGPUSample() {
 }
 
 void GPGPUSample::Start() {
-	m_computeBuffer = std::make_unique<ComputeBuffer>(sizeof(AttribData) * num);
+	m_computeBuffer = std::make_unique<ComputeBuffer>(sizeof(AttribData));
 	std::vector<AttribData> sampleData(num, AttribData());
 	m_computeBuffer->SetData<std::vector<AttribData>>(sampleData);
 
@@ -67,7 +68,7 @@ void GPGPUSample::Draw() {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDisable(GL_DEPTH_TEST);
 
-	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix());
+	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix() * m_mesh->localMatrix); //
 	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
 	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());

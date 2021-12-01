@@ -3,6 +3,8 @@
 #include "GraphicsEngine/Graphics/Primitive.h"
 #include <memory>
 #include <cstring>
+#include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
 
 #define TINYGLTF_IMPLEMENTATION
 #define TINYGLTF_USE_CPP14
@@ -20,7 +22,14 @@ std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 	std::string err;
 	std::string warn;
 	bool result = loader.LoadASCIIFromFile(&model, &err, &warn, gltfDataPath);
+	
 	std::unique_ptr<Mesh> m_mesh = std::make_unique<Mesh>();
+	glm::mat4 translationMatirx = glm::translate(glm::mat4(1.0f), glm::vec3(-2.5335649919168424e-14,
+		1.102462761082279e-7,
+		-7.312606697951196e-8));
+	//glm::mat4 rotationMatrix = glm::mat4_cast(glm::quat(glm::vec4(-2.15842363e-7, -0.758994639, 0.6510969, -4.371139e-8)));
+	//glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(4941.836, 4941.83838, 4941.83838));
+	m_mesh->localMatrix = translationMatirx; // *rotationMatrix* scaleMatrix;
 
 	if (!warn.empty()) {
 		printf("warn:%s \n", warn.c_str());
@@ -45,16 +54,22 @@ std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 				std::unique_ptr<glTFBinaryReader> reader = std::make_unique<glTFBinaryReader>();
 				
 				//vertex
-				reader->vertex = std::vector<float>(5709, 0.0);
-				reader->subDataVertex = std::vector<unsigned char>(22836, 0);
+				auto AccessorsIndex = prim.attributes["POSITION"];
+				auto BufferViewIndex = model.accessors[AccessorsIndex].bufferView;
+				auto ByteLength = model.bufferViews[BufferViewIndex].byteLength;
+				auto ByteOffset = model.bufferViews[BufferViewIndex].byteOffset;
+
+				reader->vertex = std::vector<float>(ByteLength /4, 0.0);
+				reader->subDataVertex = std::vector<unsigned char>(ByteLength, 0);
 
 				std::copy(
-					model.buffers[0].data.begin() + 22836*index, 
-					model.buffers[0].data.begin() +22836 * (index+1)-1,
+					model.buffers[0].data.begin() + ByteLength *0+ ByteOffset,
+					model.buffers[0].data.begin() + ByteLength * 1-1+ ByteOffset,
 					reader->subDataVertex.begin()
 				);
 				std::memcpy(reader->vertex.data(), reader->subDataVertex.data(), sizeof(float)* reader->vertex.size());
 				
+				glm::vec4 pos = glm::vec4(1.0);
 				for (int p = 0; p < 1; p++) {
 					printf("_________________________________________________________________________\n");
 					printf("vertex x: %f , y: %f , z: %f \n", reader->vertex[0 + 3 * p], reader->vertex[1 + 3 * p], reader->vertex[2 + 3 * p]);
@@ -69,17 +84,37 @@ std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 						float val = (*(float*)buffer);
 
 						printf("subDataVertex float val:%f \n", val);
+						
+						switch (i/4)
+						{
+						case 0:
+							pos.x = val;
+							break;
+						case 1:
+							pos.y = val;
+							break;
+						case 2:
+							pos.z = val;
+							break;
+						default:
+							break;
+						}
 					}
 				}
-				
+
 				reader->subDataVertex.clear();
 
 				//normal
-				reader->normal=std::vector<float>(5709, 0.0f);
-				reader->subDataNormal =std::vector<unsigned char>(22836, 0);
+				AccessorsIndex = prim.attributes["NORMAL"];
+				BufferViewIndex = model.accessors[AccessorsIndex].bufferView;
+				ByteLength = model.bufferViews[BufferViewIndex].byteLength;
+				ByteOffset = model.bufferViews[BufferViewIndex].byteOffset;
+
+				reader->normal=std::vector<float>(ByteLength/4, 0.0f);
+				reader->subDataNormal =std::vector<unsigned char>(ByteLength, 0);
 				std::copy(
-					model.buffers[0].data.begin() + 22836 * index+ 68508,
-					model.buffers[0].data.begin() + 22836 * (index + 1) - 1+ 68508,
+					model.buffers[0].data.begin() + ByteLength * 0+ ByteOffset,
+					model.buffers[0].data.begin() + ByteLength * 1 - 1+ ByteOffset,
 					reader->subDataNormal.begin()
 				);
 				std::memcpy(reader->normal.data(), reader->subDataNormal.data(), sizeof(float)* reader->normal.size());
@@ -87,11 +122,16 @@ std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 				reader->subDataNormal.clear();
 
 				//texcoord
-				reader->texcoord =std::vector<float>(3806, 0.0f);
-				reader->subDataTexcoord =std::vector<unsigned char>(15224, 0);
+				AccessorsIndex = prim.attributes["TEXCOORD_0"];
+				BufferViewIndex = model.accessors[AccessorsIndex].bufferView;
+				ByteLength = model.bufferViews[BufferViewIndex].byteLength;
+				ByteOffset = model.bufferViews[BufferViewIndex].byteOffset;
+
+				reader->texcoord =std::vector<float>(ByteLength/4, 0.0f);
+				reader->subDataTexcoord =std::vector<unsigned char>(ByteLength, 0);
 				std::copy(
-					model.buffers[0].data.begin() + 15224 * index+ 137016,
-					model.buffers[0].data.begin() + 15224 * (index + 1) - 1+ 137016,
+					model.buffers[0].data.begin() + ByteLength * 0+ ByteOffset,
+					model.buffers[0].data.begin() + ByteLength * 1 - 1+ ByteOffset,
 					reader->subDataTexcoord.begin()
 				);
 				std::memcpy(reader->texcoord.data(), reader->subDataTexcoord.data(), sizeof(float)* reader->texcoord.size());
@@ -112,27 +152,39 @@ std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 				dimention.push_back(3);
 				dimention.push_back(2);
 
-				////get indices
+				////get indices///////////////////////////////////
+				printf("prim.attributes[POSITION]:%d \n", static_cast<int>(prim.attributes["POSITION"]));
+
+				AccessorsIndex = prim.indices;
+				BufferViewIndex = model.accessors[AccessorsIndex].bufferView;
+				ByteLength = model.bufferViews[BufferViewIndex].byteLength;
+				ByteOffset = model.bufferViews[BufferViewIndex].byteOffset;
+
+				printf("AccessorsIndex:%d \n", AccessorsIndex);
+				printf("BufferViewIndex:%d \n", BufferViewIndex);
+				printf("ByteLength:%d \n", ByteLength);
+				printf("ByteOffset:%d \n", ByteOffset);
 				
-				auto indicesAccessorsIndex = prim.indices;
-				auto indicesBufferViewIndex = model.accessors[indicesAccessorsIndex].bufferView;
-				auto byteLength = model.bufferViews[indicesBufferViewIndex].byteLength;
-				auto byteOffset = model.bufferViews[indicesBufferViewIndex].byteOffset;
-				
-				reader->indices = std::vector<int>(byteLength/4, 0);
-				reader->subDataIndices = std::vector<unsigned char>(byteLength, 0);
+				reader->indices = std::vector<unsigned short>(ByteLength /16, 0);
+				reader->subDataIndices = std::vector<unsigned char>(ByteLength, 0);
 
 				std::copy(
-					model.buffers[0].data.begin() + byteLength * 0+ byteOffset,
-					model.buffers[0].data.begin() + byteLength * 1 - 1+ byteOffset,
+					model.buffers[0].data.begin() + ByteLength * 0+ ByteOffset,
+					model.buffers[0].data.begin() + ByteLength * 1 - 1+ ByteOffset,
 					reader->subDataIndices.begin()
 				);
-				std::memcpy(reader->indices.data(), reader->subDataIndices.data(), sizeof(int)* reader->indices.size());
+				std::memcpy(reader->indices.data(), reader->subDataIndices.data(), sizeof(unsigned short)* reader->indices.size());
 				reader->subDataIndices.clear();
+
+				for (auto i = 0; i < 50; i++) {
+					printf("reader->indices:%d \n", static_cast<unsigned short>(reader->indices.data()[i]));
+				}
 
 				//‚±‚Ì•Ó‚ÅPrimitive‚Éƒf[ƒ^‚ğ“n‚·
 				std::unique_ptr<Primitive> m_prim = std::make_unique<Primitive>(vertices,dimention,reader->indices);
 				m_mesh->m_primitives.push_back(std::move(m_prim));
+
+				
 
 				//‚·‚×‚Ä‚Ìƒƒ‚ƒŠ‚ğˆê‰‰ğ•ú
 				vertices.clear();
