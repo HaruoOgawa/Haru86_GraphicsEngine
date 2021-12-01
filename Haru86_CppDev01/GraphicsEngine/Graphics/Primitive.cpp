@@ -76,9 +76,10 @@ void Primitive::CreatePrimitive(std::vector<std::vector<float>> vertices, std::v
 
 	glGenBuffers(1, &mIndexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mNumIndices * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mNumIndices * sizeof(unsigned short), indices.data(), GL_STATIC_DRAW);
 
-	printf("vertex in prim x:%f , y:%f , z%f \n", vertices[0][0], vertices[0][1], vertices[0][2]);
+
+	//printf("vertex in prim x:%f , y:%f , z%f \n", vertices[0][0], vertices[0][1], vertices[0][2]);
 }
 
 void Primitive::Draw() {

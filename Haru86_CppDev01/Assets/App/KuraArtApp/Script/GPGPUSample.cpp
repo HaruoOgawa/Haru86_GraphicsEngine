@@ -32,7 +32,7 @@ GPGPUSample::GPGPUSample(Object* o)
 		"./Assets/Shader/KuraShader/GPGPUTest.geom",
 		"./Assets/Shader/KuraShader/GPGPUTest.frag");
 
-	owner->transform->scale = glm::vec3(100,100,100);
+	//owner->transform->scale = glm::vec3(100,100,100);
 
 	Start();
 
