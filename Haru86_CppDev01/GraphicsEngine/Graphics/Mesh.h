@@ -1,4 +1,9 @@
 #pragma once
+#include <vector>
+#include <memory>
+#include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
+
 enum class PrimitiveType {
 	BOARD,
 	CUBE,
@@ -11,15 +16,14 @@ public:
 	Mesh();
 	Mesh(PrimitiveType primType);
 	~Mesh();
-	unsigned int GetNumIndices() { return mNumIndices; }
-	void SetActive();
 	void UnLoadData();
+	void Draw();
+	friend class Graphics;
+	friend class glTFLoader;
+	glm::mat4 localMatrix;
+	
 private:
 	void CreateMesh(PrimitiveType primType);
-	unsigned int mNumVerts;
-	unsigned int mNumIndices;
-	unsigned int mVertexBuffer;
-	unsigned int mIndexBuffer;
-	unsigned int mVertexArray;
+	std::vector<std::unique_ptr<class Primitive>> m_primitives;
 };
 

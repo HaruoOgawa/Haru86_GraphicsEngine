@@ -68,21 +68,19 @@ void main(){
 	vec3 pos=vec3(rand(vec2(gl_InstanceID,0.123))*2.0-1.0,
 		rand(vec2(gl_InstanceID,0.456))*2.0-1.0,
 		rand(vec2(gl_InstanceID,0.789))-0.1
-	)*10.0;
+	)*50.0;
 
-	//pos.y+=sin(_time*0.001);
-	float k=10.0;
-	//pos.y=mod(pos.y-gl_InstanceID-_time*0.0025,k)-k*0.5;
-
-	/*pos=pos+vec3(
-		(perlinNoise(vec2(_time*0.0001,gl_InstanceID))*2.0-1.0)*k*0.75,
-		(perlinNoise(vec2(gl_InstanceID,_time*0.0001))*2.0-1.0)*k*0.25,
-		(perlinNoise(vec2(gl_InstanceID,_time*0.0001))*2.0-1.0)*k*0.75
-	);*/
-
-	pos=(MMatrix*vec4(vertex*2.0,1.0)).xyz+pos;
+	pos=(MMatrix*vec4(vertex*0.25,1.0)).xyz+pos;
 
 	gl_Position=PMatrix*VMatrix*vec4(pos,1.0);
+	
+	/*vec3 testPos=vertex.xyz;
+	testPos*=0.25;
+	//testPos.xz*=rot(_time*0.005);
+	//testPos.xy*=rot(_time*0.005);
+	gl_Position=MVPMatrix*vec4(testPos,1.0);
+	*/
+	
 	velocity=outBuffer.data[gl_InstanceID].velocity;
 	uv=texcoord;
 	randCol=vec3(rand(vec2(gl_InstanceID*100.0,0.987)),

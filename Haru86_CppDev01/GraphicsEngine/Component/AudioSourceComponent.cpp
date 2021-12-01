@@ -10,7 +10,6 @@ FMOD::Sound* sound;
 AudioSourceComponent::AudioSourceComponent(class Object* o)
 	: Component(o, static_cast<std::string>(typeid(AudioSourceComponent).name()).substr(6))
 {
-	std::cout << "Create  Constructor" << std::endl;
 	m_audioSourcePath = "./Assets/Resources/MusicData/lug00ber_they_are_feeding.mp3";
 	Initialize();
 }
@@ -18,7 +17,6 @@ AudioSourceComponent::AudioSourceComponent(class Object* o)
 AudioSourceComponent::AudioSourceComponent(class Object* o, std::string audioSourcePath)
 	: Component(o, static_cast<std::string>(typeid(AudioSourceComponent).name()).substr(6))
 {
-	std::cout << "Create  Constructor" << std::endl;
 	m_audioSourcePath = audioSourcePath;
 	Initialize();
 }
@@ -139,7 +137,6 @@ void AudioSourceComponent::CreateSound(std::string name) {
 	result = lowLevelSystem->createStream(name.c_str(), FMOD_DEFAULT, 0, &sound);
 	
 	if (result == FMOD_OK) {
-		std::cout << "Sound is Loaded" << std::endl;
 		//FMOD::Channel* channel;
 		result = lowLevelSystem->playSound( sound, nullptr,false, &channel);
 		if (result != FMOD_OK) {

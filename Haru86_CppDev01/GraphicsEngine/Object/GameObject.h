@@ -29,6 +29,7 @@ class GameObject
 {
 public:
 	GameObject(PrimitiveType primType);
+	GameObject(std::string objPath);
 	GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName);
 	GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName,RenderType renderType);
 	GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName,std::string textureString);

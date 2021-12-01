@@ -1,5 +1,99 @@
 #include "Primitive.h"
 #include <glm/glm.hpp>
+#include <GL/glew.h>
+#include <GL/glut.h>
+
+Primitive::Primitive(std::vector<float> vertices, std::vector<int> indices) {
+	CreatePrimitive(vertices, indices);
+}
+
+Primitive::Primitive(std::vector<std::vector<float>> vertices, std::vector<int> dimention, std::vector<unsigned short> indices) {
+	CreatePrimitive(vertices,dimention, indices);
+}
+Primitive::~Primitive() {
+	UnLoadData();
+}
+
+void Primitive::CreatePrimitive(std::vector<float> vertices, std::vector<int> indices) {
+	unsigned int mVertexBuffer;
+	unsigned int mIndexBuffer;
+	
+	unsigned int mNumVerts = vertices.size() / 5;
+	mNumIndices = indices.size();
+
+	glGenVertexArrays(1, &mVertexArray);
+	glBindVertexArray(mVertexArray);
+
+	glGenBuffers(1, &mVertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, mVertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, mNumVerts * 8 * sizeof(float), vertices.data(), GL_STATIC_DRAW);
+
+	glGenBuffers(1, &mIndexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mNumIndices * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
+
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), 0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
+		reinterpret_cast<void*>(sizeof(float) * 3)
+	);
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
+		reinterpret_cast<void*>(sizeof(float) * 6)
+	);
+
+	//glBindBuffer(GL_ARRAY_BUFFER, 0);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+}
+
+void Primitive::CreatePrimitive(std::vector<std::vector<float>> vertices, std::vector<int> dimention, std::vector<unsigned short> indices) {
+	
+
+	unsigned int mVertexBuffer;
+	unsigned int mIndexBuffer;
+	mNumIndices = indices.size();
+
+	glGenVertexArrays(1, &mVertexArray);
+	glBindVertexArray(mVertexArray);
+
+	
+	for (int i=0;i<vertices.size();i++)
+	{
+		auto vert = vertices[i];
+		auto dim = dimention[i];
+
+		glGenBuffers(1, &mVertexBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, mVertexBuffer);
+		glBufferData(GL_ARRAY_BUFFER, vert.size() * sizeof(float), vert.data(), GL_STATIC_DRAW);
+
+		glEnableVertexAttribArray(i);
+		glVertexAttribPointer(i, dim, GL_FLOAT, GL_FALSE, dim * sizeof(float), 0);
+
+		
+	}
+
+	glGenBuffers(1, &mIndexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mNumIndices * sizeof(unsigned short), indices.data(), GL_STATIC_DRAW);
+
+
+	//printf("vertex in prim x:%f , y:%f , z%f \n", vertices[0][0], vertices[0][1], vertices[0][2]);
+}
+
+void Primitive::Draw() {
+	SetActive();
+	glDrawElements(GL_TRIANGLES, GetNumIndices(), GL_UNSIGNED_SHORT, nullptr);
+}
+
+void Primitive::SetActive() {
+	glBindVertexArray(mVertexArray);
+}
+
+void Primitive::UnLoadData() {
+	glDeleteVertexArrays(1, &mVertexArray);
+}
 
 void Primitive::CreateBoard(std::vector<float>* vertices, std::vector<int>* indices) {
 	std::vector<float> v= {
@@ -16,6 +110,46 @@ void Primitive::CreateBoard(std::vector<float>* vertices, std::vector<int>* indi
 	for (auto data : v) {
 		vertices->emplace_back(data);
 	}
+
+	for (auto data : i) {
+		indices->emplace_back(data);
+	}
+}
+
+void Primitive::CreateBoard(std::vector<std::vector<float>>* vertices, std::vector<int>* dimention, std::vector<unsigned short>* indices) {
+	std::vector<float> vertex= {
+		-0.5f, 0.5f, 0.f,  // top left
+		0.5f, 0.5f, 0.f, // top right
+		0.5f,-0.5f, 0.f,// bottom right
+		-0.5f,-0.5f, 0.f,    // bottom left
+	};
+
+	std::vector<float> normal = {
+		0.f, 0.f, 0.0f,
+		0.f, 0.f, 0.0f,
+		0.f, 0.f, 0.0f,
+		0.f, 0.f, 0.0f,
+	};
+	
+	std::vector<float> texcoord = {
+		 0.f, 1.f,
+		 1.f, 1.f,
+		 1.f, 0.f,
+		 0.f, 0.f
+	};
+
+	std::vector<unsigned int> i= {
+		0, 1, 2,
+		2, 3, 0
+	};
+
+	vertices->push_back(vertex);
+	vertices->push_back(normal);
+	vertices->push_back(texcoord);
+
+	dimention->push_back(3);
+	dimention->push_back(3);
+	dimention->push_back(2);
 
 	for (auto data : i) {
 		indices->emplace_back(data);
@@ -95,3 +229,4 @@ void Primitive::CreateSphere(std::vector<float>* vertices, std::vector<int>* ind
 		}
 	}
 }
+

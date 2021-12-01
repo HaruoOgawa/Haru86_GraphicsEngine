@@ -10,23 +10,46 @@
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
 #include "GraphicsEngine/Graphics/ComputeShader.h"
 #include <vector>
+#include "GraphicsEngine/Graphics/glTFLoader.h"
 
 #include <GL/glew.h>
 #include <GL/glut.h>
 
 #include <iostream>
+#include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include "GraphicsEngine/Graphics/Texture.h"
 
 GPGPUSample::GPGPUSample(Object* o)
 	: Component(o, static_cast<std::string>(typeid(GPGPUSample).name()).substr(6)),
-	num(8192)
+	num(1024)
 {
-	m_mesh = std::make_unique<Mesh>(PrimitiveType::SPHERE);
+	//m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
+	m_mesh = glTFLoader::Load("./Assets/Resources/glTFData/Phoenix_Blender/Phoenix.gltf");
+	
 	m_material = std::make_unique<Material>(
 		"./Assets/Shader/KuraShader/GPGPUTest.vert",
 		"./Assets/Shader/KuraShader/GPGPUTest.geom",
 		"./Assets/Shader/KuraShader/GPGPUTest.frag");
 
+	m_mainTex = std::make_unique<Texture>();
+	m_posTex = std::make_unique<Texture>();
+	m_normalTex = std::make_unique<Texture>();
+
+	/*if (!m_mainTex->Load("./Assets/Resources/glTFData/Phoenix_Blender/MainTex.png")) {
+		printf("Cannot Load MainTex\n");
+	}
+
+	if (!m_posTex->Load("./Assets/Resources/glTFData/Phoenix_Blender/PosTex.png")) {
+		printf("Cannot Load PosTex\n");
+	}
+
+	if (!m_normalTex->Load("./Assets/Resources/glTFData/Phoenix_Blender/NormalTex.png")) {
+		printf("Cannot Load NormalTex\n");
+	}*/
+
 	Start();
+
 }
 
 GPGPUSample::~GPGPUSample() {
@@ -34,7 +57,7 @@ GPGPUSample::~GPGPUSample() {
 }
 
 void GPGPUSample::Start() {
-	m_computeBuffer = std::make_unique<ComputeBuffer>(sizeof(AttribData) * num);
+	m_computeBuffer = std::make_unique<ComputeBuffer>(sizeof(AttribData));
 	std::vector<AttribData> sampleData(num, AttribData());
 	m_computeBuffer->SetData<std::vector<AttribData>>(sampleData);
 
@@ -59,14 +82,23 @@ void GPGPUSample::Draw() {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDisable(GL_DEPTH_TEST);
 
-	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix());
+	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix() * m_mesh->localMatrix); //
 	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
 	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
+	
+	m_mainTex->SetActive();
+	m_material->SetTexUniform("_MainTex", m_mainTex->GetTextureID());
+	
+	m_posTex->SetActive();
+	m_material->SetTexUniform("_PosTex", m_posTex->GetTextureID());
+	
+	m_normalTex->SetActive();
+	m_material->SetTexUniform("_NormalTex", m_normalTex->GetTextureID());
 
-	Graphics::DrawInstancedWithMesh(m_mesh.get(), 8192);
+	Graphics::DrawInstancedWithMesh(m_mesh.get(), 1024);
 
 }
 

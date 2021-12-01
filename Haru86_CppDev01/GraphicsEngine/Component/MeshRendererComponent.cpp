@@ -8,12 +8,22 @@
 #include "./TimelineComponent.h"
 #include "../Graphics/Texture.h"
 #include "../Graphics/Font.h"
+#include "GraphicsEngine/Graphics/glTFLoader.h"
+#include "GraphicsEngine/Graphics/glTFLoader.h"
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)
 {
 	useZTest = true;
-	mesh = new Mesh(primType);
+	mesh = std::make_unique<Mesh>((primType));
+	material = new Material();
+}
+
+MeshRendererComponent::MeshRendererComponent(class Object* o, std::string objPath)
+	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)
+{
+	useZTest = true;
+	mesh = glTFLoader::Load(objPath);
 	material = new Material();
 }
 
@@ -21,7 +31,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
-	mesh =new Mesh(primType);
+	mesh = std::make_unique<Mesh>((primType));
 	material = new Material(vertexShaderName,fragmentShaderName);
 }
 
@@ -29,7 +39,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
-	mesh =new Mesh(primType);
+	mesh = std::make_unique<Mesh>((primType));
 	material = new Material(vertexShaderName,fragmentShaderName);
 	if (GameRenderer::GetInstance()->font!=nullptr) {
 		primTex = GameRenderer::GetInstance()->font->GetFontTexture(textureString,glm::vec3(1.0,1.0,1.0), 30);
@@ -48,9 +58,17 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 }
 
 
+MeshRendererComponent::MeshRendererComponent(class Object* o, std::string modelDataPath, std::string vertexShaderName, std::string fragmentShaderName)
+	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
+{
+	useZTest = true;
+	mesh = glTFLoader::Load(modelDataPath);
+	material = new Material(vertexShaderName,fragmentShaderName);
+}
+
+
 
 MeshRendererComponent::~MeshRendererComponent() {
-	delete mesh;
 	delete material;
 	if (primTex != nullptr) {
 		delete primTex;
@@ -90,11 +108,7 @@ void MeshRendererComponent::Draw() {
 		clip->callback(clip->lifeTimeRate);
 	}
 
-	
-	//printf("animationClips.size(): %d \n",animationClips.size());
-	
-	mesh->SetActive();
-	glDrawElements(GL_TRIANGLES, mesh->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
+	mesh->Draw();
 }
 
 void MeshRendererComponent::DrawBoard() {
@@ -119,8 +133,7 @@ void MeshRendererComponent::DrawBoard() {
 		clip->callback(clip->lifeTimeRate);
 	}
 
-	mesh->SetActive();
-	glDrawElements(GL_TRIANGLES, mesh->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
+	mesh->Draw();
 }
 
 
