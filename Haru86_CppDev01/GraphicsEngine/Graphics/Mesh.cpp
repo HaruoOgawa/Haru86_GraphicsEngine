@@ -12,7 +12,6 @@ Mesh::Mesh() {
 
 Mesh::Mesh(PrimitiveType primType) {
 	CreateMesh(primType);
-	printf("Create Mesh ptr: %p \n", this);
 }
 
 Mesh::~Mesh() {

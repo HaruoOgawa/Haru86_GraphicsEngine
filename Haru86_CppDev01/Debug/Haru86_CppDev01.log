@@ -70,7 +70,7 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\glTFLoader.h(9
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Primitive.cpp(62,16): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Primitive.cpp(221,10): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
   コードを生成中...
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\AudioSourceComponent.cpp(201): warning C4715: 'AudioSourceComponent::StopAudioCheck': 値を返さないコントロール パスがあります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\AudioSourceComponent.cpp(198): warning C4715: 'AudioSourceComponent::StopAudioCheck': 値を返さないコントロール パスがあります。
   コンパイル中...
   RectTransformComponent.cpp
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\RectTransformComponent.cpp(30,32): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
@@ -84,10 +84,10 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineCompo
   TransformComponent.cpp
   UIComponent.cpp
   Mesh.cpp
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Mesh.cpp(54,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Mesh.cpp(53,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
   コードを生成中...
 soil.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_DXT.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-soil.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_helper.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+soil.lib(image_helper.obj) : warning LNK4099: PDB '' が 'soil.lib(image_helper.obj)' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 soil.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(SOIL.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(stb_image_aug.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
   Haru86_CppDev01.vcxproj -> E:\CppDev\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
@@ -140,9 +140,12 @@ soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(stb_
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix\Phoenix\Phoenix.gltf
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix\Phoenix\Phoenix_data.bin
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix\Phoenix\Phoenix_img0.png
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix_Blender\MainTex.png
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix_Blender\NormalTex.png
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix_Blender\Phoenix.gltf
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix_Blender\Phoenix_Data.bin
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix_Blender\PosTex.png
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix_Blender\untitled.glb
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\MusicData\lug00ber_they_are_feeding.mp3
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\MusicData\n111.mp3
-  10 個のファイルをコピーしました
+  13 個のファイルをコピーしました
