@@ -36,7 +36,7 @@ GPGPUSample::GPGPUSample(Object* o)
 	m_posTex = std::make_unique<Texture>();
 	m_normalTex = std::make_unique<Texture>();
 
-	/*if (!m_mainTex->Load("./Assets/Resources/glTFData/Phoenix_Blender/MainTex.png")) {
+	if (!m_mainTex->Load("./Assets/Resources/glTFData/Phoenix_Blender/MainTex.png")) {
 		printf("Cannot Load MainTex\n");
 	}
 
@@ -46,7 +46,7 @@ GPGPUSample::GPGPUSample(Object* o)
 
 	if (!m_normalTex->Load("./Assets/Resources/glTFData/Phoenix_Blender/NormalTex.png")) {
 		printf("Cannot Load NormalTex\n");
-	}*/
+	}
 
 	Start();
 
