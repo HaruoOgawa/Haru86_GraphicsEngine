@@ -29,7 +29,7 @@ private:
     std::unique_ptr<class ComputeBuffer> m_computeBuffer;
     std::unique_ptr<class ComputeShader> m_computeShader;
     int num;
-    std::unique_ptr<class Texture> m_mainTex;
+    //std::unique_ptr<class Texture> m_mainTex;
     std::unique_ptr<class Texture> m_posTex;
     std::unique_ptr<class Texture> m_normalTex;
 };

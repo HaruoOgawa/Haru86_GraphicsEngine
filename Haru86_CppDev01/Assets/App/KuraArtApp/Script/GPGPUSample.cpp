@@ -32,13 +32,13 @@ GPGPUSample::GPGPUSample(Object* o)
 		"./Assets/Shader/KuraShader/GPGPUTest.geom",
 		"./Assets/Shader/KuraShader/GPGPUTest.frag");
 
-	m_mainTex = std::make_unique<Texture>();
+	//m_mainTex = std::make_unique<Texture>();
 	m_posTex = std::make_unique<Texture>();
 	m_normalTex = std::make_unique<Texture>();
 
-	if (!m_mainTex->Load("./Assets/Resources/glTFData/Phoenix_Blender/MainTex.png")) {
+	/*if (!m_mainTex->Load("./Assets/Resources/glTFData/Phoenix_Blender/MainTex.png")) {
 		printf("Cannot Load MainTex\n");
-	}
+	}*/
 
 	if (!m_posTex->Load("./Assets/Resources/glTFData/Phoenix_Blender/PosTex.png")) {
 		printf("Cannot Load PosTex\n");
@@ -89,8 +89,8 @@ void GPGPUSample::Draw() {
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 	
-	m_mainTex->SetActive();
-	m_material->SetTexUniform("_MainTex", m_mainTex->GetTextureID());
+	//m_mainTex->SetActive();
+	//m_material->SetTexUniform("_MainTex", m_mainTex->GetTextureID());
 	
 	m_posTex->SetActive();
 	m_material->SetTexUniform("_PosTex", m_posTex->GetTextureID());
