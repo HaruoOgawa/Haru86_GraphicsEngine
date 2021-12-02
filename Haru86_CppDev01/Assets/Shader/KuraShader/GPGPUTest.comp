@@ -1,7 +1,7 @@
 #version 430
 
 struct AttribData{
-	vec4 velocity;
+	vec3 next_position;
 };
 
 layout(std430,binding=0) buffer destBuffer
@@ -12,21 +12,23 @@ layout(std430,binding=0) buffer destBuffer
 layout(local_size_x=256,local_size_y=1,local_size_z=1) in;
 
 uniform float _time;
+uniform float _deltaTime;
+
+#define BoundingSize vec3(100.0,100.0,100.0)
 
 float rand(vec2 st)
 {
     return fract(sin(dot(st, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
-vec3 hsv2rgb2(vec3 c, float k) {
-    return smoothstep(0. + k, 1. - k,
-        .5 + .5 * cos((vec3(c.x, c.x, c.x) + vec3(3., 2., 1.) / 3.) * radians(360.)));
-}
-
 void main(){
 	uint uid=gl_GlobalInvocationID.x;
-	float H = mod(_time*0.0001, 1.0);
-	outBuffer.data[uid].velocity=vec4(1.0);
 	
-	//outBuffer.data[uid].velocity=vec4(0.0,0.0,1.0,1.0);
+	/*outBuffer.data[uid].next_position=vec3(
+		(25.0*rand(vec2(uid,0.123))+25.0)*cos(_time*0.001*(3.5*rand(vec2(0.987,uid)+0.5)+6.2831853*rand(vec2(uid,0.741))),
+		(25.0*rand(vec2(uid,0.456))+25.0)*sin(_time*0.001*(3.5*rand(vec2(0.654,uid)+0.5)+6.2831853*rand(vec2(uid,0.852))),
+		(25.0*rand(vec2(uid,0.789))+25.0)*sin(_time*0.001*(3.5*rand(vec2(0.321,uid)+0.5)+6.2831853*rand(vec2(uid,0.963)))
+	);*/
+	outBuffer.data[uid].next_position=vec3(0.0);
+	
 }

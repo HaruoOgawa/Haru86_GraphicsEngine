@@ -4,7 +4,6 @@ layout(triangles) in;
 layout(triangle_strip,max_vertices=3) out;
 
 in vec2 uv[];
-in vec4 velocity[];
 in vec3 randCol[];
 in vec3 v2g_normal[];
 
