@@ -25,6 +25,8 @@ GPGPUSample::GPGPUSample(Object* o)
 	num(1024)
 {
 	//m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
+	//owner->SetScale(glm::vec3(10.0, 10.0, 10.0));
+
 	m_mesh = glTFLoader::Load("./Assets/Resources/glTFData/Phoenix_Blender/Phoenix.gltf");
 	
 	m_material = std::make_unique<Material>(
@@ -77,6 +79,12 @@ void GPGPUSample::Update() {
 void GPGPUSample::Draw() {
 	glMemoryBarrier(GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT);
 
+	m_posTex->SetActive();
+	m_material->SetTexUniform("_PosTex", m_posTex->GetTextureID());
+
+	m_normalTex->SetActive();
+	m_material->SetTexUniform("_NormalTex", m_normalTex->GetTextureID());
+
 	m_material->SetActive();
 	
 	glEnable(GL_BLEND);
@@ -90,14 +98,7 @@ void GPGPUSample::Draw() {
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 	
-	//m_mainTex->SetActive();
-	//m_material->SetTexUniform("_MainTex", m_mainTex->GetTextureID());
 	
-	m_posTex->SetActive();
-	m_material->SetTexUniform("_PosTex", m_posTex->GetTextureID());
-	
-	m_normalTex->SetActive();
-	m_material->SetTexUniform("_NormalTex", m_normalTex->GetTextureID());
 
 	Graphics::DrawInstancedWithMesh(m_mesh.get(), 1024);
 
