@@ -100,7 +100,7 @@ void GPGPUSample::Draw() {
 	
 	
 
-	Graphics::DrawInstancedWithMesh(m_mesh.get(), 1024);
+	Graphics::DrawInstancedWithMesh(m_mesh.get(), 1024,m_material.get());
 
 }
 

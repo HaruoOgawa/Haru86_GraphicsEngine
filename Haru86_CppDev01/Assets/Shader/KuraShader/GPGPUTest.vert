@@ -87,24 +87,25 @@ void main(){
 	);
 
 	float t=mod(_time*0.0001,1.0);
-	float x=float(gl_VertexID)/_vertexNum;  
+	float x=float(gl_VertexID+_vertexNum)/_allVertexNum;  
 	float y=t;
 	vec3 vat_pos=texture(_PosTex,vec2(x,y)).xyz;
 	vec3 vat_normal=texture(_NormalTex,vec2(x,y)).xyz;
 	vat_normal=(MMatrix*vec4(vat_normal,1.0)).xyz;
 
-	vec3 vert=vertex;
-	//vert=vat_pos;
+	vec3 vert=vertex+vat_pos*1.0;
+	vert*=0.25;
+	//vert+=vat_pos*0.25;
 
-	/*vec3 npos=normalize(now_position);
+	vec3 npos=normalize(now_position);
 	float rotx=atan(npos.z,npos.y);
 	float roty=atan(npos.z,npos.x);
 	float rotz=atan(npos.y,npos.z);
 	vert.xz*=rot(roty);
 	vert.xy*=rot(rotz);
-	vert.yz*=rot(rotx);*/
+	vert.yz*=rot(rotx);
 
-	pos=(MMatrix*vec4(vert*0.25,1.0)).xyz+pos;//+now_position;
+	pos=(MMatrix*vec4(vert,1.0)).xyz+pos+now_position;
 
 	gl_Position=PMatrix*VMatrix*vec4(pos,1.0);
 	

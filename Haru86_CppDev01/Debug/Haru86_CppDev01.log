@@ -45,7 +45,10 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\ComputeShader.
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\ComputeShader.cpp(134,21): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
   Graphics.cpp
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.h(10,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'Graphics' の左辺を無視します。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.cpp(10,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.cpp(14,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.cpp(18,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.cpp(20,40): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.cpp(21,44): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
   AudioObject.cpp
   AudioSourceComponent.cpp
   Component.cpp
@@ -67,8 +70,8 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineCompo
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\glTFLoader.h(9,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'glTFLoader' の左辺を無視します。
   Object.cpp
   Primitive.cpp
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Primitive.cpp(62,16): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Primitive.cpp(221,10): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Primitive.cpp(63,16): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Primitive.cpp(222,10): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
   コードを生成中...
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\AudioSourceComponent.cpp(198): warning C4715: 'AudioSourceComponent::StopAudioCheck': 値を返さないコントロール パスがあります。
   コンパイル中...

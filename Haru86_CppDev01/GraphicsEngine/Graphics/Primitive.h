@@ -8,6 +8,7 @@ public:
 	Primitive(std::vector<std::vector<float>> vertices, std::vector<int> dimention, std::vector<unsigned short> indices);
 	~Primitive();
 	unsigned int GetNumIndices() { return mNumIndices; }
+	int GetVertNum() { return vertNum; }
 	void CreatePrimitive(std::vector<float> vertices, std::vector<int> indices);
 	void CreatePrimitive(std::vector<std::vector<float>> vertices,std::vector<int> dimention, std::vector<unsigned short> indices);
 	void Draw();
@@ -21,6 +22,6 @@ public:
 private:
 	unsigned int mNumIndices;
 	unsigned int mVertexArray;
-	
+	int vertNum;
 };
 
