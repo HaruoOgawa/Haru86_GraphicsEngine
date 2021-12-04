@@ -19,11 +19,6 @@ uniform mat4 PMatrix;
 uniform float _time;
 uniform float _deltaTime;
 
-uniform sampler2D _PosTex;
-uniform sampler2D _NormalTex;
-uniform float _vertexNum;
-uniform float _allVertexNum;
-
 #define PI 3.14159265
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
 
@@ -86,16 +81,11 @@ void main(){
 		sin(_time*0.001*at*(3.5*rand(vec2(0.321,gl_InstanceID*100))+0.5)+6.2831853*rand(vec2(gl_InstanceID*100,0.963)))
 	);
 
-	float t=mod(_time*0.0001,1.0);
-	float x=float(gl_VertexID+_vertexNum)/_allVertexNum;  
-	float y=t;
-	vec3 vat_pos=texture(_PosTex,vec2(x,y)).xyz;
-	vec3 vat_normal=texture(_NormalTex,vec2(x,y)).xyz;
-	vat_normal=(MMatrix*vec4(vat_normal,1.0)).xyz;
+	vec3 vert=vertex;
+	vert.z+=sin(_time*0.015+gl_InstanceID*100)*pow(length(vert.x),2.0)*1000.0;
+	vert.yz*=rot(0.0);
 
-	vec3 vert=vertex*10000.0+vat_pos*1.0;
-	vert*=0.25;
-	//vert+=vat_pos*0.25;
+	vert*=2000.0;
 
 	vec3 npos=normalize(now_position);
 	float rotx=atan(npos.z,npos.y);

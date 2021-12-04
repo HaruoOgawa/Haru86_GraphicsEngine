@@ -28,27 +28,11 @@ GPGPUSample::GPGPUSample(Object* o)
 	//owner->SetScale(glm::vec3(10.0, 10.0, 10.0));
 
 	m_mesh = glTFLoader::Load("./Assets/Resources/glTFData/PhoenixWithVAT/Phoenix.gltf");
-	
+
 	m_material = std::make_unique<Material>(
 		"./Assets/Shader/KuraShader/GPGPUTest.vert",
 		"./Assets/Shader/KuraShader/GPGPUTest.geom",
 		"./Assets/Shader/KuraShader/GPGPUTest.frag");
-
-	//m_mainTex = std::make_unique<Texture>();
-	m_posTex = std::make_unique<Texture>();
-	m_normalTex = std::make_unique<Texture>();
-
-	/*if (!m_mainTex->Load("./Assets/Resources/glTFData/PhoenixWithVAT/MainTex.png")) {
-		printf("Cannot Load MainTex\n");
-	}*/
-
-	if (!m_posTex->Load("./Assets/Resources/glTFData/PhoenixWithVAT/PosTex.png")) {
-		printf("Cannot Load PosTex\n");
-	}
-
-	if (!m_normalTex->Load("./Assets/Resources/glTFData/PhoenixWithVAT/NormalTex.png")) {
-		printf("Cannot Load NormalTex\n");
-	}
 
 	Start();
 
@@ -78,12 +62,6 @@ void GPGPUSample::Update() {
 
 void GPGPUSample::Draw() {
 	glMemoryBarrier(GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT);
-
-	m_posTex->SetActive();
-	m_material->SetTexUniform("_PosTex", m_posTex->GetTextureID());
-
-	m_normalTex->SetActive();
-	m_material->SetTexUniform("_NormalTex", m_normalTex->GetTextureID());
 
 	m_material->SetActive();
 	
