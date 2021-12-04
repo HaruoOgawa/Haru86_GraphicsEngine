@@ -4,18 +4,29 @@ layout(location=0)in vec3 vertex;
 layout(location=1)in vec3 normal;
 layout(location=2)in vec2 texcoord;
 
-struct AttribData{
-	vec3 next_position;
+
+struct BoidsForce{
+	vec3 force;
 };
 
-layout(std430,binding=0) buffer destBuffer{
-	AttribData data[];
-} outBuffer;
-
-layout(std430,binding=1) buffer destBufferrForce
+layout(std430,binding=0) buffer destBufferBoidsForce
 {
-	AttribData data[];
-} outBufferForce;
+	BoidsForce boidsForce[];
+} outBufferBoidsForce;
+
+//outBufferBoidsForce.boidsForce[]
+
+struct BoidsData {
+    vec3 position;
+    vec3 velocity;
+};
+
+layout(std430,binding=1) buffer destBufferBoidsData
+{
+	BoidsData boidsData[];
+} outBufferBoidsData;
+
+//outBufferBoidsData.boidsData[]
 
 uniform mat4 MVPMatrix;
 uniform mat4 MMatrix;
@@ -74,7 +85,7 @@ void main(){
 		rand(vec2(gl_InstanceID,0.789))-0.1
 	)*50.0;
 
-	vec3 now_position=outBuffer.data[gl_InstanceID].next_position;
+	vec3 now_position=outBufferBoidsData.boidsData[gl_InstanceID].position;
 
 	vec3 vert=vertex;
 	//animation VAT
@@ -89,7 +100,7 @@ void main(){
 	vert.xy*=rot(rotz);
 	vert.yz*=rot(rotx);
 
-	pos=(MMatrix*vec4(vert,1.0)).xyz+pos+now_position;
+	pos=(MMatrix*vec4(vert,1.0)).xyz+pos;//+now_position;
 
 	gl_Position=PMatrix*VMatrix*vec4(pos,1.0);
 	

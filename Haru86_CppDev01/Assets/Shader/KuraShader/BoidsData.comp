@@ -9,6 +9,8 @@ layout(std430,binding=0) buffer destBufferBoidsForce
 	BoidsForce boidsForce[];
 } outBufferBoidsForce;
 
+//outBufferBoidsForce.boidsForce[]
+
 struct BoidsData {
     vec3 position;
     vec3 velocity;
@@ -19,28 +21,121 @@ layout(std430,binding=1) buffer destBufferBoidsData
 	BoidsData boidsData[];
 } outBufferBoidsData;
 
+//outBufferBoidsData.boidsData[]
+
 layout(local_size_x=256,local_size_y=1,local_size_z=1) in;
+
+
 
 uniform float _time;
 uniform float _deltaTime;
 
 #define BoundingSize vec3(100.0,100.0,100.0)
 
+//Boids Func////////////////////////////////////////////////////////////////////////////
+
+#define NUMTHREADS_X_NUM 256
+
+uniform int _boids_count;
+uniform float _maxBoidsDist;
+uniform float _maxBoidsField;
+uniform float _centerPosPower;
+uniform float _NoiseValue;
+
+uniform float _joinPower;
+uniform float _separatePower;
+uniform float _alignmentPower;
+
+uniform float _joinDisMin;
+uniform float _separateDistMin;
+uniform float _alignmentDistMin;
+
+shared BoidsData shared_BoidsData[NUMTHREADS_X_NUM];
+
+vec3 Turn(vec3 pos,vec3 vel,vec3 uid){
+    vec3 turnVel=vec3(0,0,0);
+     
+    float seed=2.5;
+    
+    if(pos.x<-1.0*_maxBoidsField){
+        vel.x+=seed*abs(vel.x);
+    }
+     if(pos.x>_maxBoidsField){
+        vel.x-=seed*abs(vel.x);
+    }
+    
+    if(pos.y<-1.0*_maxBoidsField){
+        vel.y+=seed*abs(vel.y);
+    }
+     if(pos.y>_maxBoidsField){
+        vel.y-=seed*abs(vel.y);
+    }
+
+    if(pos.z<-1.0*_maxBoidsField){
+        vel.z+=seed*abs(vel.z);
+    }
+     if(pos.z>_maxBoidsField){
+        vel.z-=seed*abs(vel.z);
+    }
+
+    return vel;
+}
+
 float rand(vec2 st)
 {
     return fract(sin(dot(st, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
-void main(){
-	uint uid=gl_GlobalInvocationID.x;
-	
-	/*outBuffer.data[uid].next_position=vec3(
-		(25.0*rand(vec2(uid,0.123))+25.0)*cos(_time*0.001*(3.5*rand(vec2(0.987,uid)+0.5)+6.2831853*rand(vec2(uid,0.741))),
-		(25.0*rand(vec2(uid,0.456))+25.0)*sin(_time*0.001*(3.5*rand(vec2(0.654,uid)+0.5)+6.2831853*rand(vec2(uid,0.852))),
-		(25.0*rand(vec2(uid,0.789))+25.0)*sin(_time*0.001*(3.5*rand(vec2(0.321,uid)+0.5)+6.2831853*rand(vec2(uid,0.963)))
-	);*/
+float perlinNoise(vec2 seeds)
+{
+    vec2 i = floor(seeds);
+    vec2 f = frac (seeds);
+    vec2 i00 = i + vec2(0, 0);
+    vec2 i10 = i + vec2(1, 0);
+    vec2 i01 = i + vec2(0, 1);
+    vec2 i11 = i + vec2(1, 1);
+    vec2 f00 = f - vec2(0, 0);
+    vec2 f10 = f - vec2(1, 0);
+    vec2 f01 = f - vec2(0, 1);
+    vec2 f11 = f - vec2(1, 1);
+    vec2 g00 = normalize(-1 + 2 * rand(i00));
+    vec2 g10 = normalize(-1 + 2 * rand(i10));
+    vec2 g01 = normalize(-1 + 2 * rand(i01));
+    vec2 g11 = normalize(-1 + 2 * rand(i11));
+    vec2 v00 = dot(g00, f00);
+    vec2 v10 = dot(g10, f10);
+    vec2 v01 = dot(g01, f01);
+    vec2 v11 = dot(g11, f11);
+    vec2 p = smoothstep(0, 1, f);
+    float v00v10 = lerp(v00, v10, p.x);
+    float v01v11 = lerp(v01, v11, p.x);
+    return lerp(v00v10, v01v11, p.y) * 0.5 + 0.5;
+}
 
-	float at=0.25;
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+void main(){
+	uint DID=gl_GlobalInvocationID.x;
+	
+
+    BoidsData boids_data=outBufferBoidsData.boidsData[DID];
+    vec3 now_pos=boids_data.position;
+    vec3 now_vel=boids_data.velocity;
+
+    vec3 force=outBufferBoidsForce.boidsForce[DID];
+    
+    vec3 nex_vel=force;
+    vec3 next_pos=now_pos+normalize(nex_vel)*_deltaTime*50.0;
+   
+    boids_data.position=next_pos;
+    boids_data.velocity=nex_vel;
+
+   outBufferBoidsData.boidsData[DID]=boids_data;
+
+    /////////////////////////
+	/*float at=0.25;
 	outBuffer.data[uid].next_position=vec3(
 		(25.0*rand(vec2(uid*100,0.123))+25.0)*
 		cos(_time*0.001*at*(3.5*rand(vec2(0.987,uid*100))+0.5)+6.2831853*rand(vec2(uid*100,0.741))),
@@ -50,6 +145,6 @@ void main(){
 
 		(25.0*rand(vec2(uid*100,0.789))+25.0)*
 		sin(_time*0.001*at*(3.5*rand(vec2(0.321,uid*100))+0.5)+6.2831853*rand(vec2(uid*100,0.963)))
-	);
+	);*/
 	
 }

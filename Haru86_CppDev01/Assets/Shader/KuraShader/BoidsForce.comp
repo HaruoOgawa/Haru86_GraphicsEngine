@@ -239,7 +239,7 @@ void main(){
     
    
     /////////////////////////////////////
-	float at=0.25;
+	/*float at=0.25;
 	outBufferForce.data[uid].next_position=vec3(
 		(25.0*rand(vec2(uid*100,0.123))+25.0)*
 		cos(_time*0.001*at*(3.5*rand(vec2(0.987,uid*100))+0.5)+6.2831853*rand(vec2(uid*100,0.741))),
@@ -249,6 +249,6 @@ void main(){
 
 		(25.0*rand(vec2(uid*100,0.789))+25.0)*
 		sin(_time*0.001*at*(3.5*rand(vec2(0.321,uid*100))+0.5)+6.2831853*rand(vec2(uid*100,0.963)))
-	);
+	);*/
 	
 }

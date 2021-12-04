@@ -19,6 +19,7 @@ public:
 	void SetBuffer(class ComputeBuffer* buffer,int bufferindex,class Material* material);
 	void SetMatrixUniform(std::string uniformName, glm::mat4 matrix);
 	void SetFloatUniform(std::string uniformName, float val);
+	void SetIntUniform(std::string uniformName, int val);
 	void SetVec2Uniform(std::string uniformName, glm::vec2 val);
 	void SetTexUniform(std::string uniformName, unsigned int val);
 	void Dispatch(int xGroupNum, int yGroupNum, int zGroupNum);

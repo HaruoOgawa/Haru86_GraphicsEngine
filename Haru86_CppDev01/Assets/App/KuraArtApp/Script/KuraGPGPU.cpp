@@ -76,12 +76,36 @@ void KuraGPGPU::Update() {
 	m_computeShader_force->SetActive();
 	m_computeShader_force->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_computeShader_force->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
+	//boid uniform
+	m_computeShader_force->SetIntUniform("_boids_count", num);
+	m_computeShader_force->SetFloatUniform("_maxBoidsDist", 50);
+	m_computeShader_force->SetFloatUniform("_maxBoidsField",400);
+	m_computeShader_force->SetFloatUniform("_centerPosPower", 1000000.0);
+	m_computeShader_force->SetFloatUniform("_NoiseValue", 0.1);
+	m_computeShader_force->SetFloatUniform("_joinPower", 10);
+	m_computeShader_force->SetFloatUniform("_separatePower", 10);
+	m_computeShader_force->SetFloatUniform("_alignmentPower", 10);
+	m_computeShader_force->SetFloatUniform("_joinDisMin", 100);
+	m_computeShader_force->SetFloatUniform("_separateDistMin", 10);
+	m_computeShader_force->SetFloatUniform("_alignmentDistMin", 250);
 	m_computeShader_force->Dispatch(num / 256, 1, 1);
 
 	//Dispatch Result
 	m_computeShader_data->SetActive();
 	m_computeShader_data->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_computeShader_data->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
+	//boid uniform
+	m_computeShader_force->SetIntUniform("_boids_count", num);
+	m_computeShader_force->SetFloatUniform("_maxBoidsDist", 50);
+	m_computeShader_force->SetFloatUniform("_maxBoidsField", 400);
+	m_computeShader_force->SetFloatUniform("_centerPosPower", 1000000.0);
+	m_computeShader_force->SetFloatUniform("_NoiseValue", 0.1);
+	m_computeShader_force->SetFloatUniform("_joinPower", 10);
+	m_computeShader_force->SetFloatUniform("_separatePower", 10);
+	m_computeShader_force->SetFloatUniform("_alignmentPower", 10);
+	m_computeShader_force->SetFloatUniform("_joinDisMin", 100);
+	m_computeShader_force->SetFloatUniform("_separateDistMin", 10);
+	m_computeShader_force->SetFloatUniform("_alignmentDistMin", 250);
 	m_computeShader_data->Dispatch(num/256,1,1);
 }
 
@@ -101,6 +125,9 @@ void KuraGPGPU::Draw() {
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 	
+	
+
+
 	Graphics::DrawInstancedWithMesh(m_mesh.get(), 4096,m_material.get());
 
 }
