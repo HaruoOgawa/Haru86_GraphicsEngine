@@ -11,7 +11,7 @@
 #include <memory>
 #include <string>
 #include "GraphicsEngine/Object/Object.h"
-#include "./Assets/App/KuraArtApp/Script/GPGPUSample.h"
+#include "./Assets/App/KuraArtApp/Script/KuraGPGPU.h"
 
 namespace Kura{
 	//std::unique_ptr<AudioObject> audioObj;
@@ -40,7 +40,7 @@ void KuraArtApp::Start() {
 	//Kura::testObj = std::make_unique<GameObject>("./Assets/Resources/glTFData/Phoenix_Blender/Phoenix.gltf");
 
 	Kura::gpgpu_obj = std::make_unique<Object>();
-	Kura::gpgpu_obj->AddComponent(new GPGPUSample(Kura::gpgpu_obj.get()));
+	Kura::gpgpu_obj->AddComponent(new KuraGPGPU(Kura::gpgpu_obj.get()));
 
 
 }
@@ -52,7 +52,7 @@ void KuraArtApp::Update() {
 
 void KuraArtApp::Draw() {
 	
-	static_cast<GPGPUSample*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(GPGPUSample).name())))->Draw();
+	static_cast<KuraGPGPU*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))->Draw();
 	//Kura::testObj->meshComp->Draw();
 }
 

@@ -1,4 +1,4 @@
-#include "GPGPUSample.h"
+#include "KuraGPGPU.h"
 #include <string>
 #include "GraphicsEngine/Graphics/Material.h"
 #include "GraphicsEngine/Graphics/Mesh.h"
@@ -20,8 +20,8 @@
 #include <glm/gtc/quaternion.hpp>
 #include "GraphicsEngine/Graphics/Texture.h"
 
-GPGPUSample::GPGPUSample(Object* o)
-	: Component(o, static_cast<std::string>(typeid(GPGPUSample).name()).substr(6)),
+KuraGPGPU::KuraGPGPU(Object* o)
+	: Component(o, static_cast<std::string>(typeid(KuraGPGPU).name()).substr(6)),
 	num(4096)
 {
 	//m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
@@ -30,37 +30,37 @@ GPGPUSample::GPGPUSample(Object* o)
 	m_mesh = glTFLoader::Load("./Assets/Resources/glTFData/PhoenixWithVAT/Phoenix.gltf");
 
 	m_material = std::make_unique<Material>(
-		"./Assets/Shader/KuraShader/GPGPUTest.vert",
-		"./Assets/Shader/KuraShader/GPGPUTest.geom",
-		"./Assets/Shader/KuraShader/GPGPUTest.frag");
+		"./Assets/Shader/KuraShader/BoidsResult.vert",
+		"./Assets/Shader/KuraShader/BoidsResult.geom",
+		"./Assets/Shader/KuraShader/BoidsResult.frag");
 
 	Start();
 
 }
 
-GPGPUSample::~GPGPUSample() {
+KuraGPGPU::~KuraGPGPU() {
 
 }
 
-void GPGPUSample::Start() {
+void KuraGPGPU::Start() {
 	m_computeBuffer = std::make_unique<ComputeBuffer>(sizeof(AttribData) * num);
 	std::vector<AttribData> sampleData(num, AttribData());
 	m_computeBuffer->SetData<std::vector<AttribData>>(sampleData);
 
-	m_computeShader = std::make_unique<ComputeShader>("./Assets/Shader/KuraShader/GPGPUTest.comp");
+	m_computeShader = std::make_unique<ComputeShader>("./Assets/Shader/KuraShader/BoidsResult.comp");
 	m_computeShader->SetBuffer(m_computeBuffer.get(),m_material.get());
 
 	sampleData.clear();
 }
 
-void GPGPUSample::Update() {
+void KuraGPGPU::Update() {
 	m_computeShader->SetActive();
 	m_computeShader->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_computeShader->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 	m_computeShader->Dispatch(num/256,1,1);
 }
 
-void GPGPUSample::Draw() {
+void KuraGPGPU::Draw() {
 	glMemoryBarrier(GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT);
 
 	m_material->SetActive();
@@ -82,6 +82,6 @@ void GPGPUSample::Draw() {
 
 }
 
-void GPGPUSample::ProcessInput(const Uint8* state)const {
+void KuraGPGPU::ProcessInput(const Uint8* state)const {
 
 }

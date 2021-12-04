@@ -190,7 +190,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Assets\App\DemoApp\DemoApp.h" />
-    <ClInclude Include="Assets\App\KuraArtApp\Script\GPGPUSample.h" />
+    <ClInclude Include="Assets\App\KuraArtApp\Script\KuraGPGPU.h" />
     <ClInclude Include="GraphicsEngine\Graphics\glTFBinaryReader.h" />
     <ClInclude Include="GraphicsEngine\Graphics\glTFLoader.h" />
     <ClInclude Include="GraphicsEngine\Graphics\ComputeBuffer.h" />
@@ -226,7 +226,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets\App\DemoApp\DemoApp.cpp" />
-    <ClCompile Include="Assets\App\KuraArtApp\Script\GPGPUSample.cpp" />
+    <ClCompile Include="Assets\App\KuraArtApp\Script\KuraGPGPU.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\glTFBinaryReader.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\glTFLoader.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\ComputeBuffer.cpp" />
@@ -255,10 +255,10 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Graphics\Mesh.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shader\KuraShader\GPGPUTest.comp" />
-    <None Include="Assets\Shader\KuraShader\GPGPUTest.frag" />
-    <None Include="Assets\Shader\KuraShader\GPGPUTest.geom" />
-    <None Include="Assets\Shader\KuraShader\GPGPUTest.vert" />
+    <None Include="Assets\Shader\KuraShader\BoidsResult.comp" />
+    <None Include="Assets\Shader\KuraShader\BoidsResult.frag" />
+    <None Include="Assets\Shader\KuraShader\BoidsResult.geom" />
+    <None Include="Assets\Shader\KuraShader\BoidsResult.vert" />
     <None Include="bin\libfreetype-6.dll" />
     <None Include="bin\SDL2_ttf.dll" />
     <None Include="bin\zlib1.dll" />

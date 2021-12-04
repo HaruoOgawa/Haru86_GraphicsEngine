@@ -96,7 +96,7 @@
     <ClInclude Include="GraphicsEngine\Graphics\Graphics.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Assets\App\KuraArtApp\Script\GPGPUSample.h">
+    <ClInclude Include="Assets\App\KuraArtApp\Script\KuraGPGPU.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsEngine\Graphics\ComputeShader.h">
@@ -194,7 +194,7 @@
     <ClCompile Include="GraphicsEngine\Graphics\Graphics.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Assets\App\KuraArtApp\Script\GPGPUSample.cpp">
+    <ClCompile Include="Assets\App\KuraArtApp\Script\KuraGPGPU.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsEngine\Graphics\ComputeShader.cpp">
@@ -241,10 +241,10 @@
     <None Include="bin\libfreetype-6.dll" />
     <None Include="bin\SDL2_ttf.dll" />
     <None Include="bin\zlib1.dll" />
-    <None Include="Assets\Shader\KuraShader\GPGPUTest.vert" />
-    <None Include="Assets\Shader\KuraShader\GPGPUTest.frag" />
-    <None Include="Assets\Shader\KuraShader\GPGPUTest.comp" />
-    <None Include="Assets\Shader\KuraShader\GPGPUTest.geom" />
+    <None Include="Assets\Shader\KuraShader\BoidsResult.vert" />
+    <None Include="Assets\Shader\KuraShader\BoidsResult.frag" />
+    <None Include="Assets\Shader\KuraShader\BoidsResult.comp" />
+    <None Include="Assets\Shader\KuraShader\BoidsResult.geom" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\Resources\FontData\FRSCRIPT.TTF" />

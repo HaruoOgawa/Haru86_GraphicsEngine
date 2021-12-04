@@ -12,12 +12,12 @@ struct AttribData {
     }
 };
 
-class GPGPUSample :
+class KuraGPGPU :
     public Component
 {
 public:
-    GPGPUSample(class Object* o);
-    ~GPGPUSample();
+    KuraGPGPU(class Object* o);
+    ~KuraGPGPU();
     void Start() override;
     void Update() override;
     void ProcessInput(const Uint8* state)const override;
