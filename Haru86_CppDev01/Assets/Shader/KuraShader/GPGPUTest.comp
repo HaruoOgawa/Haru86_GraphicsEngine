@@ -29,6 +29,7 @@ void main(){
 		(25.0*rand(vec2(uid,0.456))+25.0)*sin(_time*0.001*(3.5*rand(vec2(0.654,uid)+0.5)+6.2831853*rand(vec2(uid,0.852))),
 		(25.0*rand(vec2(uid,0.789))+25.0)*sin(_time*0.001*(3.5*rand(vec2(0.321,uid)+0.5)+6.2831853*rand(vec2(uid,0.963)))
 	);*/
-	outBuffer.data[uid].next_position=vec3(0.0);
+
+	outBuffer.data[uid].next_position=vec3(abs(sin(_time*0.001)));
 	
 }

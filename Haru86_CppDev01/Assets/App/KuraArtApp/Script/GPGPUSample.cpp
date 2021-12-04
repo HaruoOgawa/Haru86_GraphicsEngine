@@ -43,7 +43,7 @@ GPGPUSample::~GPGPUSample() {
 }
 
 void GPGPUSample::Start() {
-	m_computeBuffer = std::make_unique<ComputeBuffer>(sizeof(AttribData));
+	m_computeBuffer = std::make_unique<ComputeBuffer>(sizeof(AttribData) * num);
 	std::vector<AttribData> sampleData(num, AttribData());
 	m_computeBuffer->SetData<std::vector<AttribData>>(sampleData);
 
