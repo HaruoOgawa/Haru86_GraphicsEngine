@@ -22,12 +22,12 @@
 
 GPGPUSample::GPGPUSample(Object* o)
 	: Component(o, static_cast<std::string>(typeid(GPGPUSample).name()).substr(6)),
-	num(1024)
+	num(4096)
 {
 	//m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
 	//owner->SetScale(glm::vec3(10.0, 10.0, 10.0));
 
-	m_mesh = glTFLoader::Load("./Assets/Resources/glTFData/Phoenix_Blender/Phoenix.gltf");
+	m_mesh = glTFLoader::Load("./Assets/Resources/glTFData/PhoenixWithVAT/Phoenix.gltf");
 	
 	m_material = std::make_unique<Material>(
 		"./Assets/Shader/KuraShader/GPGPUTest.vert",
@@ -38,15 +38,15 @@ GPGPUSample::GPGPUSample(Object* o)
 	m_posTex = std::make_unique<Texture>();
 	m_normalTex = std::make_unique<Texture>();
 
-	/*if (!m_mainTex->Load("./Assets/Resources/glTFData/Phoenix_Blender/MainTex.png")) {
+	/*if (!m_mainTex->Load("./Assets/Resources/glTFData/PhoenixWithVAT/MainTex.png")) {
 		printf("Cannot Load MainTex\n");
 	}*/
 
-	if (!m_posTex->Load("./Assets/Resources/glTFData/Phoenix_Blender/PosTex.png")) {
+	if (!m_posTex->Load("./Assets/Resources/glTFData/PhoenixWithVAT/PosTex.png")) {
 		printf("Cannot Load PosTex\n");
 	}
 
-	if (!m_normalTex->Load("./Assets/Resources/glTFData/Phoenix_Blender/NormalTex.png")) {
+	if (!m_normalTex->Load("./Assets/Resources/glTFData/PhoenixWithVAT/NormalTex.png")) {
 		printf("Cannot Load NormalTex\n");
 	}
 
@@ -100,7 +100,7 @@ void GPGPUSample::Draw() {
 	
 	
 
-	Graphics::DrawInstancedWithMesh(m_mesh.get(), 1024,m_material.get());
+	Graphics::DrawInstancedWithMesh(m_mesh.get(), 4096,m_material.get());
 
 }
 

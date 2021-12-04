@@ -93,7 +93,7 @@ void main(){
 	vec3 vat_normal=texture(_NormalTex,vec2(x,y)).xyz;
 	vat_normal=(MMatrix*vec4(vat_normal,1.0)).xyz;
 
-	vec3 vert=vertex+vat_pos*1.0;
+	vec3 vert=vertex*10000.0+vat_pos*1.0;
 	vert*=0.25;
 	//vert+=vat_pos*0.25;
 
