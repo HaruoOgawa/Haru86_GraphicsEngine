@@ -69,33 +69,20 @@ void main(){
 		rand(vec2(gl_InstanceID,0.789))-0.1
 	)*50.0;
 
-	float at=0.25;
-	vec3 now_position=vec3(
-		(25.0*rand(vec2(gl_InstanceID*100,0.123))+25.0)*
-		cos(_time*0.001*at*(3.5*rand(vec2(0.987,gl_InstanceID*100))+0.5)+6.2831853*rand(vec2(gl_InstanceID*100,0.741))),
-
-		(25.0*rand(vec2(gl_InstanceID*100,0.456))+25.0)*
-		sin(_time*0.001*at*(3.5*rand(vec2(0.654,gl_InstanceID*100))+0.5)+6.2831853*rand(vec2(gl_InstanceID*100,0.852))),
-
-		(25.0*rand(vec2(gl_InstanceID*100,0.789))+25.0)*
-		sin(_time*0.001*at*(3.5*rand(vec2(0.321,gl_InstanceID*100))+0.5)+6.2831853*rand(vec2(gl_InstanceID*100,0.963)))
-	);
-
-	now_position=outBuffer.data[gl_InstanceID].next_position;
+	vec3 now_position=outBuffer.data[gl_InstanceID].next_position;
 
 	vec3 vert=vertex;
+	//animation VAT
 	vert.z+=sin(_time*0.015+gl_InstanceID*100)*pow(length(vert.x),2.0)*1000.0;
-	vert.yz*=rot(PI/2.0);
-
 	vert*=2000.0;
 
-	/*vec3 npos=normalize(now_position);
+	vec3 npos=normalize(now_position);
 	float rotx=atan(npos.z,npos.y);
 	float roty=atan(npos.z,npos.x);
 	float rotz=atan(npos.y,npos.z);
 	vert.xz*=rot(roty);
 	vert.xy*=rot(rotz);
-	vert.yz*=rot(rotx);*/
+	vert.yz*=rot(rotx);
 
 	pos=(MMatrix*vec4(vert,1.0)).xyz+pos+now_position;
 
@@ -106,7 +93,6 @@ void main(){
 		rand(vec2(gl_InstanceID *100.0,0.654)),
 		rand(vec2(gl_InstanceID *100.0,0.321))
 	);
-
 
 	v2g_normal=normal;
 }
