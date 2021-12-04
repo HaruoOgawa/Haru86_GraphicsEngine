@@ -16,7 +16,7 @@ class ComputeShader
 public:
 	ComputeShader(std::string shaderPath);
 	~ComputeShader();
-	void SetBuffer(class ComputeBuffer* buffer,class Material* material);
+	void SetBuffer(class ComputeBuffer* buffer,int bufferindex,class Material* material);
 	void SetMatrixUniform(std::string uniformName, glm::mat4 matrix);
 	void SetFloatUniform(std::string uniformName, float val);
 	void SetVec2Uniform(std::string uniformName, glm::vec2 val);

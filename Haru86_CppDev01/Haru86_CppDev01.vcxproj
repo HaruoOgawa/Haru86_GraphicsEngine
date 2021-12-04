@@ -255,6 +255,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Graphics\Mesh.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shader\KuraShader\BoidsForce.comp" />
     <None Include="Assets\Shader\KuraShader\BoidsResult.comp" />
     <None Include="Assets\Shader\KuraShader\BoidsResult.frag" />
     <None Include="Assets\Shader\KuraShader\BoidsResult.geom" />

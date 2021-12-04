@@ -12,6 +12,11 @@ layout(std430,binding=0) buffer destBuffer{
 	AttribData data[];
 } outBuffer;
 
+layout(std430,binding=1) buffer destBufferrForce
+{
+	AttribData data[];
+} outBufferForce;
+
 uniform mat4 MVPMatrix;
 uniform mat4 MMatrix;
 uniform mat4 VMatrix;

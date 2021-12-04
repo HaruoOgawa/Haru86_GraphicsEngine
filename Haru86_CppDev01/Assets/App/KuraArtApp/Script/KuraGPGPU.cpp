@@ -43,21 +43,43 @@ KuraGPGPU::~KuraGPGPU() {
 }
 
 void KuraGPGPU::Start() {
-	m_computeBuffer = std::make_unique<ComputeBuffer>(sizeof(AttribData) * num);
-	std::vector<AttribData> sampleData(num, AttribData());
-	m_computeBuffer->SetData<std::vector<AttribData>>(sampleData);
+	
+	//force////////////////////////////////////////////////////////////
+	//force buffer
+	m_computeBuffer_BoidsForce = std::make_unique<ComputeBuffer>(sizeof(BoidsResulrData) * num);
+	std::vector<BoidsForceData> forceData(num, BoidsForceData());
+	m_computeBuffer_BoidsForce->SetData<std::vector<BoidsForceData>>(forceData);
+	//force compute
+	m_computeShader_force = std::make_unique<ComputeShader>("./Assets/Shader/KuraShader/BoidsForce.comp");
+	m_computeShader_force->SetBuffer(m_computeBuffer_BoidsForce.get(), 1, m_material.get());
 
-	m_computeShader = std::make_unique<ComputeShader>("./Assets/Shader/KuraShader/BoidsResult.comp");
-	m_computeShader->SetBuffer(m_computeBuffer.get(),m_material.get());
+	//result//////////////////////////////////////////////////////////
+	//result buffer
+	m_computeBuffer_BoidsResult = std::make_unique<ComputeBuffer>(sizeof(BoidsResulrData) * num);
+	std::vector<BoidsResulrData> resultData(num, BoidsResulrData());
+	m_computeBuffer_BoidsResult->SetData<std::vector<BoidsResulrData>>(resultData);
+	//result compute
+	m_computeShader_result = std::make_unique<ComputeShader>("./Assets/Shader/KuraShader/BoidsResult.comp");
+	m_computeShader_result->SetBuffer(m_computeBuffer_BoidsResult.get(),0,m_material.get());
+	/////////////////////////////////////////////////////////////////
 
-	sampleData.clear();
+	//clear data
+	forceData.clear();
+	resultData.clear();
 }
 
 void KuraGPGPU::Update() {
-	m_computeShader->SetActive();
-	m_computeShader->SetFloatUniform("_time", Game::GetInstance()->time);
-	m_computeShader->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
-	m_computeShader->Dispatch(num/256,1,1);
+	//Dispatch force
+	m_computeShader_force->SetActive();
+	m_computeShader_force->SetFloatUniform("_time", Game::GetInstance()->time);
+	m_computeShader_force->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
+	m_computeShader_force->Dispatch(num / 256, 1, 1);
+
+	//Dispatch Result
+	m_computeShader_result->SetActive();
+	m_computeShader_result->SetFloatUniform("_time", Game::GetInstance()->time);
+	m_computeShader_result->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
+	m_computeShader_result->Dispatch(num/256,1,1);
 }
 
 void KuraGPGPU::Draw() {
@@ -76,8 +98,6 @@ void KuraGPGPU::Draw() {
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 	
-	
-
 	Graphics::DrawInstancedWithMesh(m_mesh.get(), 4096,m_material.get());
 
 }

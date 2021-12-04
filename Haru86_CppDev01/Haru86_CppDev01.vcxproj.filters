@@ -245,6 +245,7 @@
     <None Include="Assets\Shader\KuraShader\BoidsResult.frag" />
     <None Include="Assets\Shader\KuraShader\BoidsResult.comp" />
     <None Include="Assets\Shader\KuraShader\BoidsResult.geom" />
+    <None Include="Assets\Shader\KuraShader\BoidsForce.comp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\Resources\FontData\FRSCRIPT.TTF" />

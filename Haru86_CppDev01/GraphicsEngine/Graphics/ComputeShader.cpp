@@ -15,13 +15,13 @@ ComputeShader::~ComputeShader() {
 	m_buffers.clear();
 }
 
-void ComputeShader::SetBuffer(ComputeBuffer* buffer, Material* material) {
+void ComputeShader::SetBuffer(ComputeBuffer* buffer, int bufferindex, Material* material) {
 	if (m_buffers.size() < 4) {
 		m_buffers.push_back(buffer);
 		//‚»‚ê‚¼‚ê‚ÌShader‚ÉBuffer‚ðƒZƒbƒg
-		material->SetBuffer(buffer, m_buffers.size() - 1);
+		material->SetBuffer(buffer, bufferindex);
 		SetActive();
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, m_buffers.size() - 1, buffer->ssbo);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bufferindex, buffer->ssbo);
 		
 	}
 	else {
