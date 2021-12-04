@@ -243,7 +243,7 @@
     <None Include="bin\zlib1.dll" />
     <None Include="Assets\Shader\KuraShader\BoidsResult.vert" />
     <None Include="Assets\Shader\KuraShader\BoidsResult.frag" />
-    <None Include="Assets\Shader\KuraShader\BoidsResult.comp" />
+    <None Include="Assets\Shader\KuraShader\BoidsData.comp" />
     <None Include="Assets\Shader\KuraShader\BoidsResult.geom" />
     <None Include="Assets\Shader\KuraShader\BoidsForce.comp" />
   </ItemGroup>

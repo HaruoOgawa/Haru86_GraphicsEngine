@@ -1,13 +1,23 @@
 #version 430
 
-struct AttribData{
-	vec3 next_position;
+struct BoidsForce{
+	vec3 force;
 };
 
-layout(std430,binding=1) buffer destBufferForce
+layout(std430,binding=0) buffer destBufferBoidsForce
 {
-	AttribData data[];
-} outBufferForce;
+	BoidsForce boidsForce[];
+} outBufferBoidsForce;
+
+struct BoidsData {
+    vec3 position;
+    vec3 velocity;
+};
+
+layout(std430,binding=1) buffer destBufferBoidsData
+{
+	BoidsData boidsData[];
+} outBufferBoidsData;
 
 layout(local_size_x=256,local_size_y=1,local_size_z=1) in;
 
@@ -16,20 +26,219 @@ uniform float _deltaTime;
 
 #define BoundingSize vec3(100.0,100.0,100.0)
 
+//Boids Func////////////////////////////////////////////////////////////////////////////
+
+#define NUMTHREADS_X_NUM 256
+
+uniform int _boids_count;
+uniform float _maxBoidsDist;
+uniform float _maxBoidsField;
+uniform float _centerPosPower;
+uniform float _NoiseValue;
+
+uniform float _joinPower;
+uniform float _separatePower;
+uniform float _alignmentPower;
+
+uniform float _joinDisMin;
+uniform float _separateDistMin;
+uniform float _alignmentDistMin;
+
+shared BoidsData shared_BoidsData[NUMTHREADS_X_NUM];
+
+vec3 Turn(vec3 pos,vec3 vel,vec3 uid){
+    vec3 turnVel=vec3(0,0,0);
+     
+    float seed=2.5;
+    
+    if(pos.x<-1.0*_maxBoidsField){
+        vel.x+=seed*abs(vel.x);
+    }
+     if(pos.x>_maxBoidsField){
+        vel.x-=seed*abs(vel.x);
+    }
+    
+    if(pos.y<-1.0*_maxBoidsField){
+        vel.y+=seed*abs(vel.y);
+    }
+     if(pos.y>_maxBoidsField){
+        vel.y-=seed*abs(vel.y);
+    }
+
+    if(pos.z<-1.0*_maxBoidsField){
+        vel.z+=seed*abs(vel.z);
+    }
+     if(pos.z>_maxBoidsField){
+        vel.z-=seed*abs(vel.z);
+    }
+
+    return vel;
+}
+
 float rand(vec2 st)
 {
     return fract(sin(dot(st, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
-void main(){
-	uint uid=gl_GlobalInvocationID.x;
-	
-	/*outBufferForce.data[uid].next_position=vec3(
-		(25.0*rand(vec2(uid,0.123))+25.0)*cos(_time*0.001*(3.5*rand(vec2(0.987,uid)+0.5)+6.2831853*rand(vec2(uid,0.741))),
-		(25.0*rand(vec2(uid,0.456))+25.0)*sin(_time*0.001*(3.5*rand(vec2(0.654,uid)+0.5)+6.2831853*rand(vec2(uid,0.852))),
-		(25.0*rand(vec2(uid,0.789))+25.0)*sin(_time*0.001*(3.5*rand(vec2(0.321,uid)+0.5)+6.2831853*rand(vec2(uid,0.963)))
-	);*/
+float perlinNoise(vec2 seeds)
+{
+    vec2 i = floor(seeds);
+    vec2 f = frac (seeds);
+    vec2 i00 = i + vec2(0, 0);
+    vec2 i10 = i + vec2(1, 0);
+    vec2 i01 = i + vec2(0, 1);
+    vec2 i11 = i + vec2(1, 1);
+    vec2 f00 = f - vec2(0, 0);
+    vec2 f10 = f - vec2(1, 0);
+    vec2 f01 = f - vec2(0, 1);
+    vec2 f11 = f - vec2(1, 1);
+    vec2 g00 = normalize(-1 + 2 * rand(i00));
+    vec2 g10 = normalize(-1 + 2 * rand(i10));
+    vec2 g01 = normalize(-1 + 2 * rand(i01));
+    vec2 g11 = normalize(-1 + 2 * rand(i11));
+    vec2 v00 = dot(g00, f00);
+    vec2 v10 = dot(g10, f10);
+    vec2 v01 = dot(g01, f01);
+    vec2 v11 = dot(g11, f11);
+    vec2 p = smoothstep(0, 1, f);
+    float v00v10 = lerp(v00, v10, p.x);
+    float v01v11 = lerp(v01, v11, p.x);
+    return lerp(v00v10, v01v11, p.y) * 0.5 + 0.5;
+}
 
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+void main(){
+	uint DID=gl_GlobalInvocationID.x;
+    uint GID=gl_WorkGroupID.x;
+
+    ////Boids Main///////////////////////
+    
+     BoidsData my_boids_data=outBufferBoidsData.boidsData[DID];
+     vec3 my_position=my_boids_data.position;
+     vec3 my_velocity=my_boids_data.velocity;
+
+    vec3 joinVal=vec3(0,0,0);
+    vec3 separateVal=vec3(0,0,0);
+    vec3 alignmentVal=vec3(0,0,0);
+
+    float joinCount=0;
+    float separateCount=0;
+    float alignmentCount=0;
+
+    vec3 joinPosSum=vec3(0,0,0);
+    vec3 separateVectorSum=vec3(0,0,0);
+    vec3 alignmentVectorSum=vec3(0,0,0);
+
+    vec3 separateForce=vec3(0,0,0);
+    vec3 alignmentForce=vec3(0,0,0);
+
+    vec3 result_velocity=(vec3)my_velocity;
+
+     vec3 centerPos=vec3(0,0,0);
+     float smallT=0.1;
+    centerPos=vec3(cos(_time*smallT)*_centerPosPower,0.,sin(_time*smallT)*_centerPosPower);
+    centerPos=vec3(0,0,_time*_centerPosPower);
+
+    float disMin=100000000.0;
+    float disMax=-10000000.0;
+
+    float speed=0.005;
+    
+    for(int i=0;i<_boids_count;i+=255){
+        shared_BoidsData[GID]=outBufferBoidsData.boidsData[i+GID];
+        
+        groupMemoryBarrier();
+
+        for(int q=0;q<255;q++){
+            vec3 other_position=shared_BoidsData[q].position;
+            vec3 other_velocity=shared_BoidsData[q].velocity;
+
+            float dis=length(other_position-my_position);
+            dis=abs(dis);
+
+            //join
+            if(dis>0&&dis<=_joinDisMin){
+                vec3 dirPos=other_position;
+                joinPosSum+=dirPos*(1.0/dis);
+                joinCount++;
+            }
+            //separate
+            if(dis>0&&dis<=_separateDistMin){
+                vec3 dirVector=other_position-my_position;
+                separateVectorSum-=dirVector*(1.0/dis);
+                separateCount++;
+            }
+            //alignment
+            if(dis>0&&dis<=_alignmentDistMin){
+                alignmentVectorSum+=other_velocity*(1.0/dis);
+                alignmentCount++;
+            }
+            disMin=min(disMin,dis);
+            disMax=max(disMax,dis);
+            
+        }
+
+        GroupMemoryBarrierWithGroupSync();
+
+    }
+
+
+   
+
+     if(joinCount>0){
+        //joinForce
+        joinForce.x=joinPosSum.x/(float)joinCount;
+        joinForce.y=joinPosSum.y/(float)joinCount;
+        joinForce.z=joinPosSum.z/(float)joinCount;
+        joinForce=joinForce-my_position;
+        joinForce=normalize(joinForce)*speed;
+        
+        result_velocity+=(float3)joinForce*_joinPower;
+        
+       
+    }
+
+     if(separateCount>0){
+        //separateForce
+        separateForce.x=separateVectorSum.x/(float)separateVectorSum;
+        separateForce.y=separateVectorSum.y/(float)separateVectorSum;
+        separateForce.z=separateVectorSum.z/(float)separateVectorSum;
+        separateForce=separateForce-my_position;
+        separateForce=normalize(separateForce)*speed;
+
+      
+        result_velocity+=(vec3)separateForce*_separatePower;
+        
+        
+    }
+
+     if(alignmentCount>0){
+        //alignmentForce
+        alignmentForce.x=alignmentVectorSum.x/(float)alignmentCount;
+        alignmentForce.y=alignmentVectorSum.y/(float)alignmentCount;
+        alignmentForce.z=alignmentVectorSum.z/(float)alignmentCount;
+        alignmentForce=alignmentForce-my_position;
+        alignmentForce=normalize(alignmentForce)*speed;
+
+        result_velocity+=(vec3)alignmentForce*_alignmentPower;
+    
+    }
+    vec3 previous_result_velocity=result_velocity;
+    result_velocity+=vec3(rand(vec2((float)DID.x,0.123))*2.0-1.0,rand(vec2((float)DID,0.456))*2.0-1.0,rand(vec2((float)DID,0.789))*2.0-1.0)*_NoiseValue;
+    result_velocity=Turn(my_position,result_velocity,(float)DID.x);
+
+    vec3 noiseVector=normalize(cross(result_velocity,vec3(0.,0.,1.)));
+    noiseVector=noiseVector*perlinNoise(vec2(_deltaTime,(float)DID.x))*0.2;
+    result_velocity+=noiseVector;
+
+    outBufferBoidsForce.boidsForce[DID]=result_velocity;
+    
+   
+    /////////////////////////////////////
 	float at=0.25;
 	outBufferForce.data[uid].next_position=vec3(
 		(25.0*rand(vec2(uid*100,0.123))+25.0)*
