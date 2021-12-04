@@ -139,14 +139,6 @@ std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 
 				reader->mainDataIndices = std::vector<unsigned short>(reader->indices.begin(),reader->indices.end());
 
-				printf("reader->indices.size(): %d\n",reader->indices.size());
-				printf("reader->mainDataIndices.size(): %d\n",reader->mainDataIndices.size());
-				
-				printf("reader->indices[0]: %d\n",reader->indices[0]);
-				printf("reader->mainDataIndices[0]: %d\n",reader->mainDataIndices[0]);
-
-				printf("vertices[0].size(): %d\n",vertices[0].size());
-
 				//‚±‚Ì•Ó‚ÅPrimitive‚Éƒf[ƒ^‚ğ“n‚·
 				std::unique_ptr<Primitive> m_prim = std::make_unique<Primitive>(vertices,dimention,reader->mainDataIndices);
 				m_mesh->m_primitives.push_back(std::move(m_prim));

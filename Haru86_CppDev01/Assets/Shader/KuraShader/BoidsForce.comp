@@ -46,7 +46,7 @@ uniform float _alignmentDistMin;
 
 shared BoidsData shared_BoidsData[NUMTHREADS_X_NUM];
 
-vec3 Turn(vec3 pos,vec3 vel,vec3 uid){
+vec3 Turn(vec3 pos,vec3 vel,float uid){
     vec3 turnVel=vec3(0,0,0);
      
     float seed=2.5;
@@ -80,10 +80,17 @@ float rand(vec2 st)
     return fract(sin(dot(st, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
+vec2 random2(vec2 seeds)
+{
+     seeds = vec2(dot(seeds, vec2(127.1, 311.7)),
+     dot(seeds, vec2(269.5, 183.3)));
+     return fract(sin(seeds) * 43758.5453123);
+}
+
 float perlinNoise(vec2 seeds)
 {
     vec2 i = floor(seeds);
-    vec2 f = frac (seeds);
+    vec2 f = fract(seeds);
     vec2 i00 = i + vec2(0, 0);
     vec2 i10 = i + vec2(1, 0);
     vec2 i01 = i + vec2(0, 1);
@@ -92,18 +99,18 @@ float perlinNoise(vec2 seeds)
     vec2 f10 = f - vec2(1, 0);
     vec2 f01 = f - vec2(0, 1);
     vec2 f11 = f - vec2(1, 1);
-    vec2 g00 = normalize(-1 + 2 * rand(i00));
-    vec2 g10 = normalize(-1 + 2 * rand(i10));
-    vec2 g01 = normalize(-1 + 2 * rand(i01));
-    vec2 g11 = normalize(-1 + 2 * rand(i11));
-    vec2 v00 = dot(g00, f00);
-    vec2 v10 = dot(g10, f10);
-    vec2 v01 = dot(g01, f01);
-    vec2 v11 = dot(g11, f11);
+    vec2 g00 = normalize(-1 + 2 * random2(i00));
+    vec2 g10 = normalize(-1 + 2 * random2(i10));
+    vec2 g01 = normalize(-1 + 2 * random2(i01));
+    vec2 g11 = normalize(-1 + 2 * random2(i11));
+    float v00 = dot(g00, f00);
+    float v10 = dot(g10, f10);
+    float v01 = dot(g01, f01);
+    float v11 = dot(g11, f11);
     vec2 p = smoothstep(0, 1, f);
-    float v00v10 = lerp(v00, v10, p.x);
-    float v01v11 = lerp(v01, v11, p.x);
-    return lerp(v00v10, v01v11, p.y) * 0.5 + 0.5;
+    float v00v10 = mix(v00, v10, p.x);
+    float v01v11 = mix(v01, v11, p.x);
+    return mix(v00v10, v01v11, p.y) * 0.5 + 0.5;
 }
 
 
@@ -133,10 +140,11 @@ void main(){
     vec3 separateVectorSum=vec3(0,0,0);
     vec3 alignmentVectorSum=vec3(0,0,0);
 
+    vec3 joinForce=vec3(0,0,0);
     vec3 separateForce=vec3(0,0,0);
     vec3 alignmentForce=vec3(0,0,0);
 
-    vec3 result_velocity=(vec3)my_velocity;
+    vec3 result_velocity=vec3(my_velocity);
 
      vec3 centerPos=vec3(0,0,0);
      float smallT=0.1;
@@ -182,7 +190,7 @@ void main(){
             
         }
 
-        GroupMemoryBarrierWithGroupSync();
+         groupMemoryBarrier();
 
     }
 
@@ -191,51 +199,51 @@ void main(){
 
      if(joinCount>0){
         //joinForce
-        joinForce.x=joinPosSum.x/(float)joinCount;
-        joinForce.y=joinPosSum.y/(float)joinCount;
-        joinForce.z=joinPosSum.z/(float)joinCount;
+        joinForce.x=joinPosSum.x/float(joinCount);
+        joinForce.y=joinPosSum.y/float(joinCount);
+        joinForce.z=joinPosSum.z/float(joinCount);
         joinForce=joinForce-my_position;
         joinForce=normalize(joinForce)*speed;
         
-        result_velocity+=(float3)joinForce*_joinPower;
+        result_velocity+=vec3(joinForce*_joinPower);
         
        
     }
 
      if(separateCount>0){
         //separateForce
-        separateForce.x=separateVectorSum.x/(float)separateVectorSum;
-        separateForce.y=separateVectorSum.y/(float)separateVectorSum;
-        separateForce.z=separateVectorSum.z/(float)separateVectorSum;
+        separateForce.x=separateVectorSum.x/float(separateVectorSum);
+        separateForce.y=separateVectorSum.y/float(separateVectorSum);
+        separateForce.z=separateVectorSum.z/float(separateVectorSum);
         separateForce=separateForce-my_position;
         separateForce=normalize(separateForce)*speed;
 
       
-        result_velocity+=(vec3)separateForce*_separatePower;
+        result_velocity+=vec3(separateForce*_separatePower);
         
         
     }
 
      if(alignmentCount>0){
         //alignmentForce
-        alignmentForce.x=alignmentVectorSum.x/(float)alignmentCount;
-        alignmentForce.y=alignmentVectorSum.y/(float)alignmentCount;
-        alignmentForce.z=alignmentVectorSum.z/(float)alignmentCount;
+        alignmentForce.x=alignmentVectorSum.x/float(alignmentCount);
+        alignmentForce.y=alignmentVectorSum.y/float(alignmentCount);
+        alignmentForce.z=alignmentVectorSum.z/float(alignmentCount);
         alignmentForce=alignmentForce-my_position;
         alignmentForce=normalize(alignmentForce)*speed;
 
-        result_velocity+=(vec3)alignmentForce*_alignmentPower;
+        result_velocity+=vec3(alignmentForce*_alignmentPower);
     
     }
     vec3 previous_result_velocity=result_velocity;
-    result_velocity+=vec3(rand(vec2((float)DID.x,0.123))*2.0-1.0,rand(vec2((float)DID,0.456))*2.0-1.0,rand(vec2((float)DID,0.789))*2.0-1.0)*_NoiseValue;
-    result_velocity=Turn(my_position,result_velocity,(float)DID.x);
+    result_velocity+=vec3(rand(vec2(float(DID),0.123))*2.0-1.0,rand(vec2(float(DID),0.456))*2.0-1.0,rand(vec2(float(DID),0.789))*2.0-1.0)*_NoiseValue;
+    result_velocity=Turn(my_position,result_velocity,float(DID));
 
     vec3 noiseVector=normalize(cross(result_velocity,vec3(0.,0.,1.)));
-    noiseVector=noiseVector*perlinNoise(vec2(_deltaTime,(float)DID.x))*0.2;
+    noiseVector=noiseVector*perlinNoise(vec2(_deltaTime,float(DID)))*0.2;
     result_velocity+=noiseVector;
 
-    outBufferBoidsForce.boidsForce[DID]=result_velocity;
+    outBufferBoidsForce.boidsForce[DID].force=result_velocity;
     
    
     /////////////////////////////////////
