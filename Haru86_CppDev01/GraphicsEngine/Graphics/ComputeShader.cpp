@@ -16,17 +16,11 @@ ComputeShader::~ComputeShader() {
 }
 
 void ComputeShader::SetBuffer(ComputeBuffer* buffer, int bufferindex, Material* material) {
-	if (m_buffers.size() < 4) {
-		m_buffers.push_back(buffer);
-		//それぞれのShaderにBufferをセット
-		material->SetBuffer(buffer, bufferindex);
-		SetActive();
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bufferindex, buffer->ssbo);
-		
-	}
-	else {
-		return;
-	}
+	m_buffers.push_back(buffer);
+	//それぞれのShaderにBufferをセット
+	//material->SetBuffer(buffer, bufferindex);
+	SetActive();
+	glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bufferindex, buffer->ssbo);
 }
 
 

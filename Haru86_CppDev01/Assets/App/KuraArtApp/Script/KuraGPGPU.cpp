@@ -66,6 +66,10 @@ void KuraGPGPU::Start() {
 	m_computeShader_data->SetBuffer(m_computeBuffer_BoidsForce.get(),0,m_material.get());
 	m_computeShader_data->SetBuffer(m_computeBuffer_BoidsData.get(),1,m_material.get());
 	
+	//set buffer to material
+	m_material->SetBuffer(m_computeBuffer_BoidsForce.get(), 0);
+	m_material->SetBuffer(m_computeBuffer_BoidsData.get(), 1);
+
 	//clear data
 	forceData.clear();
 	resultData.clear();
