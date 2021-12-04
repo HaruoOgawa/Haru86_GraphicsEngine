@@ -23,6 +23,7 @@ layout(local_size_x=256,local_size_y=1,local_size_z=1) in;
 
 uniform float _time;
 uniform float _deltaTime;
+uniform float _adjustTime;
 
 #define BoundingSize vec3(100.0,100.0,100.0)
 
@@ -148,8 +149,8 @@ void main(){
 
      vec3 centerPos=vec3(0,0,0);
      float smallT=0.1;
-    centerPos=vec3(cos(_time*smallT)*_centerPosPower,0.,sin(_time*smallT)*_centerPosPower);
-    centerPos=vec3(0,0,_time*_centerPosPower);
+    centerPos=vec3(cos(_time*smallT*0.001)*_centerPosPower,0.,sin(_time*smallT*0.001)*_centerPosPower);
+    centerPos=vec3(0,0,_time*_centerPosPower*0.001);
 
     float disMin=100000000.0;
     float disMax=-10000000.0;
@@ -240,7 +241,7 @@ void main(){
     result_velocity=Turn(my_position,result_velocity,float(DID));
 
     vec3 noiseVector=normalize(cross(result_velocity,vec3(0.,0.,1.)));
-    noiseVector=noiseVector*perlinNoise(vec2(_deltaTime,float(DID)))*0.2;
+   // noiseVector=noiseVector*perlinNoise(vec2(_deltaTime,float(DID)))*0.2;
     result_velocity+=noiseVector;
 
     outBufferBoidsForce.boidsForce[DID].force=result_velocity;

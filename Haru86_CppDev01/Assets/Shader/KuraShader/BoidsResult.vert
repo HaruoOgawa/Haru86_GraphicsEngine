@@ -79,28 +79,55 @@ out vec2 uv;
 out vec3 randCol;
 out vec3 v2g_normal;
 
+mat4 GetRotMatrix(vec3 angle){
+               
+	float sfai=sin(angle.x); float stheta=sin(angle.y); float spusi=sin(angle.z);
+	float cfai=cos(angle.x); float ctheta=cos(angle.y); float cpusi=cos(angle.z);
+                
+	mat4 rotateMatrix=mat4(
+		vec4(ctheta*cpusi+stheta*sfai*spusi,-ctheta*spusi+stheta*sfai*spusi,stheta*cfai,0.0),
+		vec4(cfai*spusi,cfai*cpusi,-sfai,0.0),
+		vec4(-stheta*cpusi+ctheta*sfai*spusi,stheta*spusi+ctheta*sfai*cpusi,ctheta*cfai,0.0),
+		vec4(0.0,0.0,0.0,1.0)
+    );
+
+    return rotateMatrix;
+}
+
 void main(){
 	vec3 pos=vec3(rand(vec2(gl_InstanceID,0.123))*2.0-1.0,
 		rand(vec2(gl_InstanceID,0.456))*2.0-1.0,
 		rand(vec2(gl_InstanceID,0.789))-0.1
-	)*50.0;
+	)*300.0;
 
-	//vec3 now_position=outBufferBoidsData.boidsData[gl_InstanceID].position;
+	vec3 now_position=outBufferBoidsData.boidsData[gl_InstanceID].position;
 
 	vec3 vert=vertex;
 	//animation VAT
 	vert.z+=sin(_time*0.015+gl_InstanceID*100)*pow(length(vert.x),2.0)*1000.0;
 	vert*=2000.0;
 
-	/*vec3 npos=normalize(now_position);
+	vec3 npos=normalize(outBufferBoidsForce.boidsForce[gl_InstanceID].force);
 	float rotx=atan(npos.z,npos.y);
 	float roty=atan(npos.z,npos.x);
 	float rotz=atan(npos.y,npos.z);
-	vert.xz*=rot(roty);
-	vert.xy*=rot(rotz);
-	vert.yz*=rot(rotx);*/
+	//vert.xz*=rot(roty);
+	//vert.xy*=rot(rotz);
+	//vert.yz*=rot(rotx);
 
-	pos=(MMatrix*vec4(vert,1.0)).xyz+pos;//+now_position;
+	//vert.yz*=rot(_time);
+
+	//rotation
+    vec3 force=normalize(outBufferBoidsForce.boidsForce[gl_InstanceID].force)*2.0*PI-PI;
+    float theta_x=atan(force.y,force.z);
+    theta_x=2.0*PI-theta_x;
+    float theta_y=atan(force.x,force.z);
+                
+   mat4 rotMat=GetRotMatrix(vec3(theta_x,theta_y,0.0));
+  // vert*=rotMat;
+	
+
+	pos=(MMatrix*vec4(vert+pos+now_position,1.0)).xyz;
 
 	gl_Position=PMatrix*VMatrix*vec4(pos,1.0);
 	
