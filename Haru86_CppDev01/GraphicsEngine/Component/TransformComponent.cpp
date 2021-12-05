@@ -46,7 +46,6 @@ void TransformComponent::ComputeModelMatrix() {
 
 void TransformComponent::ComputeViewMatrix() {
 	if (Game::GetInstance()->game_camera_instance!=nullptr) {
-		printf("Game::GetInstance()->game_camera_instance->m_cameraType: %d\n", Game::GetInstance()->game_camera_instance->m_cameraType);
 		CameraObject* cam = Game::GetInstance()->game_camera_instance;
 		vMatrix = glm::lookAt(
 			cam->transform->position,
@@ -55,7 +54,6 @@ void TransformComponent::ComputeViewMatrix() {
 		);
 	}
 	else {
-		printf("Camera is null \n");
 		vMatrix = glm::lookAt(
 			glm::vec3(0.0f, 0.0f, -3.0f),
 			glm::vec3(0.0f, 0.0f, 0.0f),

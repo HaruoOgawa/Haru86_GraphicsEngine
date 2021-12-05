@@ -17,9 +17,9 @@ public:
 	}
 
 	template<typename T>
-	void GetBufferData(T *data,int offset) {
+	void GetBufferData(T *data,int offset,int num) {
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
-		glGetBufferSubData(GL_SHADER_STORAGE_BUFFER, offset, sizeof(data),data);
+		glGetBufferSubData(GL_SHADER_STORAGE_BUFFER, offset, sizeof(T)*num,data);
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 	}
 

@@ -35,8 +35,7 @@ KuraArtApp::~KuraArtApp() {
 void KuraArtApp::Start() {
 	Kura::camera_obj = std::make_unique<CameraObject>(CameraType::FIXED_CAMERA);
 	Kura::camera_obj->SetPosition(glm::vec3(0, 0, -3.0));
-	printf("Kura::camera_obj->m_cameraType: %d \n",Kura::camera_obj->m_cameraType);
-
+	
 	/*Kura::audioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
 	if (Kura::audioObj->Initialize()) {
 		Kura::audioObj->PlayAudio();

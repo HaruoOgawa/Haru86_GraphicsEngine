@@ -19,6 +19,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include "GraphicsEngine/Graphics/Texture.h"
+#include "GraphicsEngine/Object/CameraObject.h"
+#include "GraphicsEngine/Component/CameraComponent.h"
 
 KuraGPGPU::KuraGPGPU(Object* o)
 	: Component(o, static_cast<std::string>(typeid(KuraGPGPU).name()).substr(6)),
@@ -136,15 +138,37 @@ void KuraGPGPU::Update() {
 	m_computeShader_data->SetFloatUniform("_alignmentDistMin", 250);*/
 	m_computeShader_data->Dispatch(num/256,1,1);
 
-	/*std::vector<BoidsData> debugData = std::vector<BoidsData>(num, BoidsData());
-	m_computeBuffer_BoidsData->GetBufferData<BoidsData>(&debugData[0],10);
+	float initPos[3] = { 0,0,0 };
+	float initvel[3] = { 0,0,0 };
+	int targetIndex = 1000;
+	
+	std::vector<BoidsData> targerBoidsData = std::vector<BoidsData>(1, BoidsData(initPos,initvel));
+	m_computeBuffer_BoidsData->GetBufferData<BoidsData>(&targerBoidsData[0], targetIndex,1);
+	float radius = 0.0001;
+	
+	//camera postion
+	Game::GetInstance()->game_camera_instance->transform->position = glm::vec3(
+		targerBoidsData[0].position[0], targerBoidsData[0].position[1], targerBoidsData[0].position[2]
+	)+glm::vec3(glm::cos(Game::GetInstance()->time*0.0001)* radius,0.0, glm::sin(Game::GetInstance()->time * 0.0001)* radius);
 
-	debugData.clear();*/
+	//camera center
+	Game::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter = glm::vec3(
+		targerBoidsData[0].position[0], targerBoidsData[0].position[1], targerBoidsData[0].position[2]
+	);
+
+	printf("debugData position x:%f, y:%f, z:%f \n", 
+		targerBoidsData[0].position[0], 
+		targerBoidsData[0].position[1], 
+		targerBoidsData[0].position[2]
+	);
+
+	targerBoidsData.clear();
 }
 
 void KuraGPGPU::Draw() {
 	glMemoryBarrier(GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT);
 
+	owner->transform->CalMatrix();
 	m_material->SetActive();
 	
 	glEnable(GL_BLEND);
