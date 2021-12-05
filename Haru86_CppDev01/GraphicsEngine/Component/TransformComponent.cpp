@@ -4,6 +4,8 @@
 #include <glm/gtc/quaternion.hpp>
 #include "../Game/Game.h"
 #include "../Graphics/GameRenderer.h"
+#include "GraphicsEngine/Object/CameraObject.h"
+#include "GraphicsEngine/Component/CameraComponent.h"
 
 TransformComponent::TransformComponent(Object* o, glm::vec3 pos,glm::quat rot,glm::vec3 s)
 	: Component(o, static_cast<std::string>(typeid(TransformComponent).name()).substr(6)),position(pos),rotation(rot),scale(s)
@@ -43,11 +45,25 @@ void TransformComponent::ComputeModelMatrix() {
 }
 
 void TransformComponent::ComputeViewMatrix() {
-	vMatrix = glm::lookAt(
-		glm::vec3(0.0f, 0.0f, -3.0f),
-		glm::vec3(0.0f, 0.0f, 0.0f),
-		glm::vec3(0.0f,1.0f, 0.0f)
-	);
+	if (Game::GetInstance()->game_camera_instance!=nullptr) {
+		printf("Game::GetInstance()->game_camera_instance->m_cameraType: %d\n", Game::GetInstance()->game_camera_instance->m_cameraType);
+		CameraObject* cam = Game::GetInstance()->game_camera_instance;
+		vMatrix = glm::lookAt(
+			cam->transform->position,
+			cam->m_cameraComponent->cameraCenter,
+			cam->m_cameraComponent->cameraUp
+		);
+	}
+	else {
+		printf("Camera is null \n");
+		vMatrix = glm::lookAt(
+			glm::vec3(0.0f, 0.0f, -3.0f),
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(0.0f, 1.0f, 0.0f)
+		);
+	}
+	
+	
 }
 
 void TransformComponent::ComputePerspectiveMatrix() {

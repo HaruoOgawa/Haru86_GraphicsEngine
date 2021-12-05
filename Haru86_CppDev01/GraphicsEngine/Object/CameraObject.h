@@ -17,7 +17,8 @@ public:
     ~CameraObject();
     void Update() override;
     CameraType m_cameraType;
-private:
     class CameraComponent* m_cameraComponent;
+private:
+    
 };
 
