@@ -46,13 +46,12 @@ void KuraGPGPU::Start() {
 	//force=0 data=1
 	//force buffer
 	m_computeBuffer_BoidsForce = std::make_unique<ComputeBuffer>(sizeof(BoidsForce) * num);
-	std::vector<BoidsForce> forceData(num, BoidsForce());
-	m_computeBuffer_BoidsForce->SetData<std::vector<BoidsForce>>(forceData);
+	std::vector<BoidsForce> forceData;
 	
 	//data buffer
 	m_computeBuffer_BoidsData = std::make_unique<ComputeBuffer>(sizeof(BoidsData) * num);
-	
 	std::vector<BoidsData> resultData;
+	
 	for (int i = 0; i < num;i++) {
 		float size = 300.0;
 		float pos[3] = {
@@ -72,9 +71,17 @@ void KuraGPGPU::Start() {
 			v.z
 		};
 		
+		//force
+		forceData.push_back(BoidsForce(vel));
+		
+		//data
 		resultData.push_back(BoidsData(pos, vel));
 	}
 
+	//force attach
+	m_computeBuffer_BoidsForce->SetData<std::vector<BoidsForce>>(forceData);
+
+	//data attach
 	m_computeBuffer_BoidsData->SetData<std::vector<BoidsData>>(resultData);
 	
 	//SetBuffer//////////////

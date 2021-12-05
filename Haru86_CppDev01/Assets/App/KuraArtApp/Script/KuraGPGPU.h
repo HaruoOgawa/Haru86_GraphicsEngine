@@ -5,10 +5,10 @@
 
 struct BoidsForce {
     float velocity[3];
-    BoidsForce() {
-        velocity[0] = 1.0f;
-        velocity[1] = 1.0f;
-        velocity[2] = 1.0f;
+    BoidsForce(float v[3]) {
+        velocity[0] = v[0];
+        velocity[1] = v[1];
+        velocity[2] = v[2];
     }
 };
 
