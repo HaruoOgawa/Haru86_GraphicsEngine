@@ -1,0 +1,23 @@
+#include "CameraComponent.h"
+
+CameraComponent::CameraComponent(Object* o)
+	: Component(o, static_cast<std::string>(typeid(CameraComponent).name()).substr(6))
+{
+
+}
+
+CameraComponent::~CameraComponent() {
+
+}
+
+void CameraComponent::Start() {
+
+}
+
+void CameraComponent::Update() {
+
+}
+
+void CameraComponent::ProcessInput(const Uint8* state)const {
+
+}

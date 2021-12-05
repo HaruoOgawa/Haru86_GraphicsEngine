@@ -21,7 +21,7 @@ namespace Kura{
 
 KuraArtApp::KuraArtApp()
 {
-
+	
 }
 
 KuraArtApp::~KuraArtApp() {
