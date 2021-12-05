@@ -122,11 +122,9 @@ float perlinNoise(vec2 seeds)
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
-
 void main(){
 	uint DID=gl_GlobalInvocationID.x;
 	
-
     BoidsData boids_data=outBufferBoidsData.boidsData[DID];
     vec3 now_pos=boids_data.position;
     vec3 now_vel=boids_data.velocity;
@@ -141,17 +139,4 @@ void main(){
 
    outBufferBoidsData.boidsData[DID]=boids_data;
 
-    /////////////////////////
-	/*float at=0.25;
-	outBuffer.data[uid].next_position=vec3(
-		(25.0*rand(vec2(uid*100,0.123))+25.0)*
-		cos(_time*0.001*at*(3.5*rand(vec2(0.987,uid*100))+0.5)+6.2831853*rand(vec2(uid*100,0.741))),
-
-		(25.0*rand(vec2(uid*100,0.456))+25.0)*
-		sin(_time*0.001*at*(3.5*rand(vec2(0.654,uid*100))+0.5)+6.2831853*rand(vec2(uid*100,0.852))),
-
-		(25.0*rand(vec2(uid*100,0.789))+25.0)*
-		sin(_time*0.001*at*(3.5*rand(vec2(0.321,uid*100))+0.5)+6.2831853*rand(vec2(uid*100,0.963)))
-	);*/
-	
 }

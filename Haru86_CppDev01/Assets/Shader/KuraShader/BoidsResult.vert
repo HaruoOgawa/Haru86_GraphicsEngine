@@ -115,7 +115,7 @@ void main(){
 	//vert.xy*=rot(rotz);
 	//vert.yz*=rot(rotx);
 
-	//vert.yz*=rot(_time);
+	vert.yz*=rot(PI/2.0);
 
 	//rotation
     vec3 force=normalize(outBufferBoidsForce.boidsForce[gl_InstanceID].force)*2.0*PI-PI;

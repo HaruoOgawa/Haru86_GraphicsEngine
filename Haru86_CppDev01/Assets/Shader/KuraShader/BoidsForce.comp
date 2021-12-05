@@ -195,9 +195,6 @@ void main(){
 
     }
 
-
-   
-
      if(joinCount>0){
         //joinForce
         joinForce.x=joinPosSum.x/float(joinCount);
@@ -241,23 +238,9 @@ void main(){
     result_velocity=Turn(my_position,result_velocity,float(DID));
 
     vec3 noiseVector=normalize(cross(result_velocity,vec3(0.,0.,1.)));
-   // noiseVector=noiseVector*perlinNoise(vec2(_deltaTime,float(DID)))*0.2;
-    result_velocity+=noiseVector;
+    //noiseVector=noiseVector*perlinNoise(vec2(_deltaTime,float(DID)))*0.2;
+    //result_velocity+=noiseVector;
 
     outBufferBoidsForce.boidsForce[DID].force=result_velocity;
-    
-   
-    /////////////////////////////////////
-	/*float at=0.25;
-	outBufferForce.data[uid].next_position=vec3(
-		(25.0*rand(vec2(uid*100,0.123))+25.0)*
-		cos(_time*0.001*at*(3.5*rand(vec2(0.987,uid*100))+0.5)+6.2831853*rand(vec2(uid*100,0.741))),
 
-		(25.0*rand(vec2(uid*100,0.456))+25.0)*
-		sin(_time*0.001*at*(3.5*rand(vec2(0.654,uid*100))+0.5)+6.2831853*rand(vec2(uid*100,0.852))),
-
-		(25.0*rand(vec2(uid*100,0.789))+25.0)*
-		sin(_time*0.001*at*(3.5*rand(vec2(0.321,uid*100))+0.5)+6.2831853*rand(vec2(uid*100,0.963)))
-	);*/
-	
 }
