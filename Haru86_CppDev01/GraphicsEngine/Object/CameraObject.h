@@ -2,7 +2,7 @@
 #include "Object.h"
 #include <memory>
 
-enum CameraType
+enum class CameraType
 {
     FIXED_CAMERA,
     FPS_CAMERA,
@@ -16,6 +16,7 @@ public:
     CameraObject(CameraType cameraType);
     ~CameraObject();
     void Update() override;
+    CameraType m_cameraType;
 private:
     class CameraComponent* m_cameraComponent;
 };

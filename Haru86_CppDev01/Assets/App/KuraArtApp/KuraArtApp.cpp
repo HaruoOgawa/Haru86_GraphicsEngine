@@ -12,11 +12,13 @@
 #include <string>
 #include "GraphicsEngine/Object/Object.h"
 #include "./Assets/App/KuraArtApp/Script/KuraGPGPU.h"
+#include "GraphicsEngine/Object/CameraObject.h"
 
 namespace Kura{
 	//std::unique_ptr<AudioObject> audioObj;
 	//std::unique_ptr<GameObject> testObj;
 	std::unique_ptr<Object> gpgpu_obj;
+	std::unique_ptr<CameraObject> camera_obj;
 }
 
 KuraArtApp::KuraArtApp()
@@ -31,6 +33,8 @@ KuraArtApp::~KuraArtApp() {
 //ƒJƒƒ‰‚Ìæ‚èˆµ‚¢‚É‚Â‚¢‚Ä‹­‰»‚·‚é•K—v‚ª‚ ‚é
 
 void KuraArtApp::Start() {
+	Kura::camera_obj = std::make_unique<CameraObject>(CameraType::FIXED_CAMERA);
+
 	/*Kura::audioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
 	if (Kura::audioObj->Initialize()) {
 		Kura::audioObj->PlayAudio();
