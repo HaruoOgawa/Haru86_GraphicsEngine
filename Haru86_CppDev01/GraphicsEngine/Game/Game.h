@@ -4,7 +4,7 @@
 #include "../Graphics/GameRenderer.h"
 #include <vector>
 #include "../App/BaseApp/BaseApp.h"
-
+#include <memory>
 
 class Game
 {
@@ -31,6 +31,7 @@ public:
 	class BaseApp* app;
 	//frame board
 	class GameObject* renderBoard;
+	class CameraObject* game_camera_instance;
 
 	friend class Main;
 	friend class GameObject;

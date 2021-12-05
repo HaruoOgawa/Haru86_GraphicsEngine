@@ -122,6 +122,11 @@ void Material::SetFloatUniform(std::string uniformName, float val) {
 	glUniform1f(location, val);
 }
 
+void Material::SetIntUniform(std::string uniformName, int val) {
+	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
+	glUniform1i(location, val);
+}
+
 void Material::SetVec2Uniform(std::string uniformName, glm::vec2 val) {
 	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
 	glUniform2fv(location,1, reinterpret_cast<GLfloat*>(&val));

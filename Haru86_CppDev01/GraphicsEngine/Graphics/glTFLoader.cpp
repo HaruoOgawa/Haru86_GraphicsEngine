@@ -126,7 +126,7 @@ std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 				ByteLength = model.bufferViews[BufferViewIndex].byteLength;
 				ByteOffset = model.bufferViews[BufferViewIndex].byteOffset;
 
-				reader->indices = std::vector<unsigned short>(ByteLength /2, 0);
+				reader->indices = std::vector<unsigned int>(ByteLength /4, 0);
 				reader->subDataIndices = std::vector<unsigned char>(ByteLength, 0);
 
 				std::copy(
@@ -134,17 +134,20 @@ std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 					model.buffers[0].data.begin() + ByteLength * 1 - 1+ ByteOffset,
 					reader->subDataIndices.begin()
 				);
-				std::memcpy(reader->indices.data(), reader->subDataIndices.data(), sizeof(unsigned short)* reader->indices.size());
+				std::memcpy(reader->indices.data(), reader->subDataIndices.data(), sizeof(unsigned int)* reader->indices.size());
 				reader->subDataIndices.clear();
 
+				reader->mainDataIndices = std::vector<unsigned short>(reader->indices.begin(),reader->indices.end());
+
 				//‚±‚Ì•Ó‚ÅPrimitive‚Éƒf[ƒ^‚ğ“n‚·
-				std::unique_ptr<Primitive> m_prim = std::make_unique<Primitive>(vertices,dimention,reader->indices);
+				std::unique_ptr<Primitive> m_prim = std::make_unique<Primitive>(vertices,dimention,reader->mainDataIndices);
 				m_mesh->m_primitives.push_back(std::move(m_prim));
 
 				//‚·‚×‚Ä‚Ìƒƒ‚ƒŠ‚ğˆê‰‰ğ•ú
 				vertices.clear();
 				dimention.clear();
 				reader->indices.clear();
+				reader->mainDataIndices.clear();
 
 				index++;
 

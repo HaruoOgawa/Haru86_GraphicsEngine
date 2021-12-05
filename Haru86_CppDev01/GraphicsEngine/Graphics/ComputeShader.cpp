@@ -15,18 +15,12 @@ ComputeShader::~ComputeShader() {
 	m_buffers.clear();
 }
 
-void ComputeShader::SetBuffer(ComputeBuffer* buffer, Material* material) {
-	if (m_buffers.size() < 4) {
-		m_buffers.push_back(buffer);
-		//それぞれのShaderにBufferをセット
-		material->SetBuffer(buffer, m_buffers.size() - 1);
-		SetActive();
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, m_buffers.size() - 1, buffer->ssbo);
-		
-	}
-	else {
-		return;
-	}
+void ComputeShader::SetBuffer(ComputeBuffer* buffer, int bufferindex, Material* material) {
+	m_buffers.push_back(buffer);
+	//それぞれのShaderにBufferをセット
+	//material->SetBuffer(buffer, bufferindex);
+	SetActive();
+	glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bufferindex, buffer->ssbo);
 }
 
 
@@ -38,6 +32,11 @@ void ComputeShader::SetMatrixUniform(std::string uniformName, glm::mat4 matrix) 
 void ComputeShader::SetFloatUniform(std::string uniformName, float val) {
 	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
 	glUniform1f(location, val);
+}
+
+void ComputeShader::SetIntUniform(std::string uniformName, int val) {
+	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
+	glUniform1i(location, val);
 }
 
 void ComputeShader::SetVec2Uniform(std::string uniformName, glm::vec2 val) {

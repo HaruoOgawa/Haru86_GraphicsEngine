@@ -54,6 +54,7 @@ void Primitive::CreatePrimitive(std::vector<std::vector<float>> vertices, std::v
 	unsigned int mVertexBuffer;
 	unsigned int mIndexBuffer;
 	mNumIndices = indices.size();
+	vertNum = vertices[0].size();
 
 	glGenVertexArrays(1, &mVertexArray);
 	glBindVertexArray(mVertexArray);
