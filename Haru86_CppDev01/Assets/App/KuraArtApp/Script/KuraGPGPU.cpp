@@ -26,10 +26,8 @@ KuraGPGPU::KuraGPGPU(Object* o)
 	: Component(o, static_cast<std::string>(typeid(KuraGPGPU).name()).substr(6)),
 	num(4096)
 {
-	//m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
-	//owner->SetScale(glm::vec3(10.0, 10.0, 10.0));
-
 	m_mesh = glTFLoader::Load("./Assets/Resources/glTFData/PhoenixWithVAT/Phoenix.gltf");
+	//owner->SetScale(glm::vec3(10.0, 10.0, 10.0));
 
 	m_material = std::make_unique<Material>(
 		"./Assets/Shader/KuraShader/BoidsResult.vert",

@@ -34,6 +34,7 @@ uniform mat4 VMatrix;
 uniform mat4 PMatrix;
 uniform float _time;
 uniform float _deltaTime;
+uniform int _boids_count;
 
 #define PI 3.14159265
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
@@ -78,6 +79,7 @@ return mix(v00v10, v01v11, p.y) * 0.5 + 0.5;
 out vec2 uv;
 out vec3 randCol;
 out vec3 v2g_normal;
+out float v2g_flag;
 
 mat4 GetRotMatrix(vec3 angle){
                
@@ -100,14 +102,22 @@ void main(){
 		rand(vec2(gl_InstanceID,0.789))-0.1
 	)*300.0;
 
-	vec3 now_position=outBufferBoidsData.boidsData[gl_InstanceID].position;
+	int id=gl_InstanceID;
+	float flag=1.0;
+	if(id>_boids_count/2){
+		flag=0.0;
+	}else{
+		flag=1.0;
+	}
+
+	vec3 now_position=outBufferBoidsData.boidsData[id].position;
 
 	vec3 vert=vertex;
 	
 	//animation VAT
 	vert.z+=sin(_time*0.015+gl_InstanceID*100)*pow(length(vert.x),2.0)*1000.0;
 	vert*=2000.0;
-
+	
 	vert.yz*=rot(-PI/2.0);
 
 	//rotation
@@ -133,4 +143,5 @@ void main(){
 	);
 
 	v2g_normal=normal;
+	v2g_flag=flag;
 }
