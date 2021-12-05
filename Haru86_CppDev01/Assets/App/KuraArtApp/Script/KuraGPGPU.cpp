@@ -138,7 +138,7 @@ void KuraGPGPU::Update() {
 	m_computeShader_data->SetFloatUniform("_alignmentDistMin", 250);*/
 	m_computeShader_data->Dispatch(num/256,1,1);
 
-	float initPos[3] = { 0,0,0 };
+	/*float initPos[3] = { 0,0,0 };
 	float initvel[3] = { 0,0,0 };
 	int targetIndex = 1000;
 	
@@ -162,7 +162,7 @@ void KuraGPGPU::Update() {
 		targerBoidsData[0].position[2]
 	);
 
-	targerBoidsData.clear();
+	targerBoidsData.clear();*/
 }
 
 void KuraGPGPU::Draw() {
@@ -174,6 +174,7 @@ void KuraGPGPU::Draw() {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDisable(GL_DEPTH_TEST);
+	
 
 	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix() * m_mesh->localMatrix); //
 	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
@@ -181,7 +182,7 @@ void KuraGPGPU::Draw() {
 	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
-	
+	m_material->SetIntUniform("_boids_count", num);
 	Graphics::DrawInstancedWithMesh(m_mesh.get(), num,m_material.get());
 
 }
