@@ -34,6 +34,7 @@ uniform mat4 VMatrix;
 uniform mat4 PMatrix;
 uniform float _time;
 uniform float _deltaTime;
+uniform int _boids_count;
 
 #define PI 3.14159265
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
@@ -78,6 +79,7 @@ return mix(v00v10, v01v11, p.y) * 0.5 + 0.5;
 out vec2 uv;
 out vec3 randCol;
 out vec3 v2g_normal;
+out float v2g_flag;
 
 mat4 GetRotMatrix(vec3 angle){
                
@@ -100,34 +102,38 @@ void main(){
 		rand(vec2(gl_InstanceID,0.789))-0.1
 	)*300.0;
 
-	vec3 now_position=outBufferBoidsData.boidsData[gl_InstanceID].position;
+	int id=gl_InstanceID;
+	float flag=1.0;
+	if(id>_boids_count/2+1){
+		flag=0.0;
+	}else{
+		flag=1.0;
+	}
+
+	vec3 now_position=outBufferBoidsData.boidsData[id].position;
 
 	vec3 vert=vertex;
+	
 	//animation VAT
 	vert.z+=sin(_time*0.015+gl_InstanceID*100)*pow(length(vert.x),2.0)*1000.0;
-	vert*=2000.0;
-
-	vec3 npos=normalize(outBufferBoidsForce.boidsForce[gl_InstanceID].force);
-	float rotx=atan(npos.z,npos.y);
-	float roty=atan(npos.z,npos.x);
-	float rotz=atan(npos.y,npos.z);
-	//vert.xz*=rot(roty);
-	//vert.xy*=rot(rotz);
-	//vert.yz*=rot(rotx);
-
-	vert.yz*=rot(PI/2.0);
+	
+	
+	vert.yz*=rot(-PI/2.0);
 
 	//rotation
-    vec3 force=normalize(outBufferBoidsForce.boidsForce[gl_InstanceID].force)*2.0*PI-PI;
+    vec3 force=outBufferBoidsForce.boidsForce[gl_InstanceID].force;
+    force=(
+		(length(force)==0.0)? force : normalize(force)
+	)*2.0*PI-PI;
     float theta_x=atan(force.y,force.z);
     theta_x=2.0*PI-theta_x;
     float theta_y=atan(force.x,force.z);
                 
-   mat4 rotMat=GetRotMatrix(vec3(theta_x,theta_y,0.0));
-  // vert*=rotMat;
+    mat4 rotMat=GetRotMatrix(vec3(theta_x,theta_y,0.0));
+    vert=(rotMat*vec4(vert,1.0)).xyz;
 	
-
-	pos=(MMatrix*vec4(vert+now_position,1.0)).xyz; //+pos
+	vert*=2000.0;
+	pos=(MMatrix*vec4(vert+now_position,1.0)).xyz;
 
 	gl_Position=PMatrix*VMatrix*vec4(pos,1.0);
 	
@@ -138,4 +144,5 @@ void main(){
 	);
 
 	v2g_normal=normal;
+	v2g_flag=flag;
 }

@@ -15,7 +15,7 @@
 #include "GraphicsEngine/Object/CameraObject.h"
 
 namespace Kura{
-	//std::unique_ptr<AudioObject> audioObj;
+	std::unique_ptr<AudioObject> audioObj;
 	//std::unique_ptr<GameObject> testObj;
 	std::unique_ptr<Object> gpgpu_obj;
 	std::unique_ptr<CameraObject> camera_obj;
@@ -36,10 +36,10 @@ void KuraArtApp::Start() {
 	Kura::camera_obj = std::make_unique<CameraObject>(CameraType::FIXED_CAMERA);
 	Kura::camera_obj->SetPosition(glm::vec3(0, 0, -3.0));
 	
-	/*Kura::audioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
+	Kura::audioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
 	if (Kura::audioObj->Initialize()) {
 		Kura::audioObj->PlayAudio();
-	}*/
+	}
 
 	//Kura::testObj = std::make_unique<GameObject>(PrimitiveType::BOARD);
 	//Kura::testObj = std::make_unique<GameObject>("./Assets/Resources/glTFData/Phoenix_Blender/Phoenix.gltf");
@@ -50,7 +50,7 @@ void KuraArtApp::Start() {
 
 }
 void KuraArtApp::Update() {
-	//static_cast<AudioSourceComponent*>(Kura::audioObj->audioSource)->Update();
+	static_cast<AudioSourceComponent*>(Kura::audioObj->audioSource)->Update();
 	Kura::gpgpu_obj->Update();
 	//Kura::testObj->Update();
 }

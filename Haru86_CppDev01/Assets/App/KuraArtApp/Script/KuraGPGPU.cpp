@@ -26,10 +26,8 @@ KuraGPGPU::KuraGPGPU(Object* o)
 	: Component(o, static_cast<std::string>(typeid(KuraGPGPU).name()).substr(6)),
 	num(4096)
 {
-	//m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
-	//owner->SetScale(glm::vec3(10.0, 10.0, 10.0));
-
 	m_mesh = glTFLoader::Load("./Assets/Resources/glTFData/PhoenixWithVAT/Phoenix.gltf");
+	//owner->SetScale(glm::vec3(10.0, 10.0, 10.0));
 
 	m_material = std::make_unique<Material>(
 		"./Assets/Shader/KuraShader/BoidsResult.vert",
@@ -48,13 +46,12 @@ void KuraGPGPU::Start() {
 	//force=0 data=1
 	//force buffer
 	m_computeBuffer_BoidsForce = std::make_unique<ComputeBuffer>(sizeof(BoidsForce) * num);
-	std::vector<BoidsForce> forceData(num, BoidsForce());
-	m_computeBuffer_BoidsForce->SetData<std::vector<BoidsForce>>(forceData);
+	std::vector<BoidsForce> forceData;
 	
 	//data buffer
 	m_computeBuffer_BoidsData = std::make_unique<ComputeBuffer>(sizeof(BoidsData) * num);
-	
 	std::vector<BoidsData> resultData;
+	
 	for (int i = 0; i < num;i++) {
 		float size = 300.0;
 		float pos[3] = {
@@ -74,9 +71,17 @@ void KuraGPGPU::Start() {
 			v.z
 		};
 		
+		//force
+		forceData.push_back(BoidsForce(vel));
+		
+		//data
 		resultData.push_back(BoidsData(pos, vel));
 	}
 
+	//force attach
+	m_computeBuffer_BoidsForce->SetData<std::vector<BoidsForce>>(forceData);
+
+	//data attach
 	m_computeBuffer_BoidsData->SetData<std::vector<BoidsData>>(resultData);
 	
 	//SetBuffer//////////////
@@ -138,31 +143,26 @@ void KuraGPGPU::Update() {
 	m_computeShader_data->SetFloatUniform("_alignmentDistMin", 250);*/
 	m_computeShader_data->Dispatch(num/256,1,1);
 
+	//Camera/////////////////////
 	float initPos[3] = { 0,0,0 };
 	float initvel[3] = { 0,0,0 };
-	int targetIndex = 1000;
+	int targetIndex = num/4;
 	
 	std::vector<BoidsData> targerBoidsData = std::vector<BoidsData>(1, BoidsData(initPos,initvel));
 	m_computeBuffer_BoidsData->GetBufferData<BoidsData>(&targerBoidsData[0], targetIndex,1);
 	float radius = 0.0001;
 	
-	//camera postion
-	Game::GetInstance()->game_camera_instance->transform->position = glm::vec3(
-		targerBoidsData[0].position[0], targerBoidsData[0].position[1], targerBoidsData[0].position[2]
-	)+glm::vec3(glm::cos(Game::GetInstance()->time*0.0001)* radius,0.0, glm::sin(Game::GetInstance()->time * 0.0001)* radius);
-
 	//camera center
 	Game::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter = glm::vec3(
 		targerBoidsData[0].position[0], targerBoidsData[0].position[1], targerBoidsData[0].position[2]
 	);
-
-	printf("debugData position x:%f, y:%f, z:%f \n", 
-		targerBoidsData[0].position[0], 
-		targerBoidsData[0].position[1], 
-		targerBoidsData[0].position[2]
-	);
+	//camera postion
+	Game::GetInstance()->game_camera_instance->transform->position =
+		Game::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter
+		+ glm::vec3(0.0,1.0,1.0);
 
 	targerBoidsData.clear();
+
 }
 
 void KuraGPGPU::Draw() {
@@ -174,6 +174,7 @@ void KuraGPGPU::Draw() {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDisable(GL_DEPTH_TEST);
+	
 
 	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix() * m_mesh->localMatrix); //
 	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
@@ -181,7 +182,7 @@ void KuraGPGPU::Draw() {
 	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
-	
+	m_material->SetIntUniform("_boids_count", num);
 	Graphics::DrawInstancedWithMesh(m_mesh.get(), num,m_material.get());
 
 }
