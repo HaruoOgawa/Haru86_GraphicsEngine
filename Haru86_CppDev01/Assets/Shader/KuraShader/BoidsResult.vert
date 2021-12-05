@@ -104,7 +104,7 @@ void main(){
 
 	int id=gl_InstanceID;
 	float flag=1.0;
-	if(id>_boids_count/2){
+	if(id>_boids_count/2+1){
 		flag=0.0;
 	}else{
 		flag=1.0;
@@ -116,7 +116,7 @@ void main(){
 	
 	//animation VAT
 	vert.z+=sin(_time*0.015+gl_InstanceID*100)*pow(length(vert.x),2.0)*1000.0;
-	vert*=2000.0;
+	
 	
 	vert.yz*=rot(-PI/2.0);
 
@@ -132,6 +132,7 @@ void main(){
     mat4 rotMat=GetRotMatrix(vec3(theta_x,theta_y,0.0));
     vert=(rotMat*vec4(vert,1.0)).xyz;
 	
+	vert*=2000.0;
 	pos=(MMatrix*vec4(vert+now_position,1.0)).xyz;
 
 	gl_Position=PMatrix*VMatrix*vec4(pos,1.0);
