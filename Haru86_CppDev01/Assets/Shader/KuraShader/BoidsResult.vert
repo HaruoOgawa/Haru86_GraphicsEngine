@@ -127,7 +127,7 @@ void main(){
   // vert*=rotMat;
 	
 
-	pos=(MMatrix*vec4(vert+pos+now_position,1.0)).xyz;
+	pos=(MMatrix*vec4(vert+now_position,1.0)).xyz; //+pos
 
 	gl_Position=PMatrix*VMatrix*vec4(pos,1.0);
 	

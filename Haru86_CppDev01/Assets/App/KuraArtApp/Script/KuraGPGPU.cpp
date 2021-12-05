@@ -44,7 +44,6 @@ KuraGPGPU::~KuraGPGPU() {
 
 void KuraGPGPU::Start() {
 	//force=0 data=1
-
 	//force buffer
 	m_computeBuffer_BoidsForce = std::make_unique<ComputeBuffer>(sizeof(BoidsForce) * num);
 	std::vector<BoidsForce> forceData(num, BoidsForce());
@@ -52,7 +51,30 @@ void KuraGPGPU::Start() {
 	
 	//data buffer
 	m_computeBuffer_BoidsData = std::make_unique<ComputeBuffer>(sizeof(BoidsData) * num);
-	std::vector<BoidsData> resultData(num, BoidsData());
+	
+	std::vector<BoidsData> resultData;
+	for (int i = 0; i < num;i++) {
+		float size = 300.0;
+		float pos[3] = {
+			(rand(glm::vec2(i,0.951))*2.0-1.0)* size,
+			(rand(glm::vec2(i,0.456))*2.0-1.0)* size,
+			(rand(glm::vec2(i,0.753))*2.0-1.0)* size
+		};
+		
+		glm::vec3 v = glm::normalize(glm::vec3(
+			(rand(glm::vec2(0.321, i)) * 2.0 - 1.0),
+			(rand(glm::vec2(0.654, i)) * 2.0 - 1.0),
+			(rand(glm::vec2(0.987, i)) * 2.0 - 1.0)
+		));
+		float vel[3] = {
+			v.x,
+			v.y,
+			v.z
+		};
+		
+		resultData.push_back(BoidsData(pos, vel));
+	}
+
 	m_computeBuffer_BoidsData->SetData<std::vector<BoidsData>>(resultData);
 	
 	//SetBuffer//////////////
@@ -113,6 +135,11 @@ void KuraGPGPU::Update() {
 	m_computeShader_data->SetFloatUniform("_separateDistMin", 10);
 	m_computeShader_data->SetFloatUniform("_alignmentDistMin", 250);*/
 	m_computeShader_data->Dispatch(num/256,1,1);
+
+	/*std::vector<BoidsData> debugData = std::vector<BoidsData>(num, BoidsData());
+	m_computeBuffer_BoidsData->GetBufferData<BoidsData>(&debugData[0],10);
+
+	debugData.clear();*/
 }
 
 void KuraGPGPU::Draw() {
@@ -137,4 +164,8 @@ void KuraGPGPU::Draw() {
 
 void KuraGPGPU::ProcessInput(const Uint8* state)const {
 
+}
+
+float KuraGPGPU::rand(glm::vec2 st) {
+	return glm::fract(glm::sin(glm::dot(st, glm::vec2(12.9898, 78.233))) * 43758.5453);
 }
