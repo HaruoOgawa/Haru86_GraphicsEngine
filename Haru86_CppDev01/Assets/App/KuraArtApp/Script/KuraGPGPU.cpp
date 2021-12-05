@@ -137,9 +137,9 @@ void KuraGPGPU::Update() {
 	m_computeShader_data->Dispatch(num/256,1,1);
 
 	//Camera/////////////////////
-	/*float initPos[3] = { 0,0,0 };
+	float initPos[3] = { 0,0,0 };
 	float initvel[3] = { 0,0,0 };
-	int targetIndex = 1000;
+	int targetIndex = num/4;
 	
 	std::vector<BoidsData> targerBoidsData = std::vector<BoidsData>(1, BoidsData(initPos,initvel));
 	m_computeBuffer_BoidsData->GetBufferData<BoidsData>(&targerBoidsData[0], targetIndex,1);
@@ -149,22 +149,13 @@ void KuraGPGPU::Update() {
 	Game::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter = glm::vec3(
 		targerBoidsData[0].position[0], targerBoidsData[0].position[1], targerBoidsData[0].position[2]
 	);
-
 	//camera postion
 	Game::GetInstance()->game_camera_instance->transform->position =
 		Game::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter
-		+ glm::vec3(0.0,0.0,0.0001);
+		+ glm::vec3(0.0,1.0,1.0);
 
-	printf("debugData position x:%f, y:%f, z:%f \n", 
-		targerBoidsData[0].position[0], 
-		targerBoidsData[0].position[1], 
-		targerBoidsData[0].position[2]
-	);
+	targerBoidsData.clear();
 
-	targerBoidsData.clear();*/
-	Game::GetInstance()->game_camera_instance->transform->position = glm::vec3(
-		glm::cos(Game::GetInstance()->time*0.0001)*100.0,0.0, glm::sin(Game::GetInstance()->time*0.0001) * 100.0
-	);
 }
 
 void KuraGPGPU::Draw() {
