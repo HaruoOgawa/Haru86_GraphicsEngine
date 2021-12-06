@@ -4,15 +4,13 @@ layout(location=0)in vec3 vertex;
 layout(location=1)in vec3 normal;
 layout(location=2)in vec2 texcoord;
 
-uniform mat4 MVPMatrix;
-uniform mat4 MMatrix;
-uniform mat4 VMatrix;
-uniform mat4 PMatrix;
 uniform float _time;
 uniform float _deltaTime;
 uniform int _boids_count;
+uniform mat4 MVPMatrix;
 
 out float v2g_flag;
+out vec3 v2g_pos;
 
 #define PI 3.14159265
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
@@ -25,6 +23,7 @@ void main(){
 		rand(vec2(gl_InstanceID,0.456))*2.0-1.0,
 		rand(vec2(gl_InstanceID,0.789))-0.1
 	)*300.0;
+	v2g_pos=pos;
 
 	int id=gl_InstanceID;
 	float flag=1.0;
@@ -35,9 +34,7 @@ void main(){
 	}
 	v2g_flag=flag;
 
-	vec3 vert=vertex;
-	vert+=pos;
-	gl_Position=PMatrix*VMatrix*vec4(vert,1.0);
-	
+	//gl_Position=vec4(vertex,1.0);
+	gl_Position=MVPMatrix*vec4(vertex,1.0);
 	
 }

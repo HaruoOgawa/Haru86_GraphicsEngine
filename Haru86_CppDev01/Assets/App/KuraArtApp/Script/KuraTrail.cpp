@@ -23,15 +23,17 @@ KuraTrail::KuraTrail(Object* o, KuraGPGPU* kuraGPGPU)
 	kuraGPGPU_instance(kuraGPGPU),
 	nodeSegment(512)
 {
-	num = kuraGPGPU->num * nodeSegment;
+	//num = kuraGPGPU->num * nodeSegment;
+	num = 1024;
 
 	m_material = std::make_unique<Material>(
 		"./Assets/Shader/KuraShader/GPUTrail_Render.vert",
-		"./Assets/Shader/KuraShader/GPUTrail_Render.geom",
+		//"./Assets/Shader/KuraShader/GPUTrail_Render.geom",
 		"./Assets/Shader/KuraShader/GPUTrail_Render.frag"		
 	);
 
-	m_mesh = std::make_unique<Mesh>(PrimitiveType::POINT);
+	//m_mesh = std::make_unique<Mesh>(PrimitiveType::POINT);
+	m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
 
 	Start();
 }
@@ -54,7 +56,6 @@ void KuraTrail::ProcessInput(const Uint8* state)const {
 
 void KuraTrail::Draw() {
 	owner->transform->CalMatrix();
-	owner->transform->CalMatrix();
 	m_material->SetActive();
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -66,5 +67,5 @@ void KuraTrail::Draw() {
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 	m_material->SetIntUniform("_boids_count", num);
-	Graphics::DrawInstancedWithMesh(m_mesh.get(), num, m_material.get(), GL_POINTS);
+	Graphics::DrawInstancedWithMesh(m_mesh.get(), num, m_material.get(), GL_TRIANGLES);
 }

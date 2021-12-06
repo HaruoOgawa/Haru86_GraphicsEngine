@@ -41,19 +41,18 @@ void KuraArtApp::Start() {
 
 	Kura::gpgpu_obj = std::make_unique<Object>();
 	Kura::gpgpu_obj->AddComponent(new KuraGPGPU(Kura::gpgpu_obj.get()));
-	/*Kura::gpgpu_obj->AddComponent(new KuraTrail(Kura::gpgpu_obj.get(),
+	Kura::gpgpu_obj->AddComponent(new KuraTrail(Kura::gpgpu_obj.get(),
 		static_cast<KuraGPGPU*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))
-	));*/
+	));
 
 }
 void KuraArtApp::Update() {
-	static_cast<AudioSourceComponent*>(Kura::audioObj->audioSource)->Update();
 	Kura::gpgpu_obj->Update();
 }
 
 void KuraArtApp::Draw() {
 	static_cast<KuraGPGPU*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))->Draw();
-	//static_cast<KuraTrail*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraTrail).name())))->Draw();
+	static_cast<KuraTrail*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraTrail).name())))->Draw();
 	
 }
 

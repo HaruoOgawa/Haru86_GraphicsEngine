@@ -18,7 +18,7 @@ AudioSourceComponent::AudioSourceComponent(class Object* o, std::string audioSou
 	: Component(o, static_cast<std::string>(typeid(AudioSourceComponent).name()).substr(6))
 {
 	m_audioSourcePath = audioSourcePath;
-	Initialize();
+	//Initialize();
 }
 
 AudioSourceComponent::~AudioSourceComponent() {
@@ -56,7 +56,9 @@ bool AudioSourceComponent::Initialize() {
 	LoadBank("Assets/Master Bank.bank");
 
 	
-	CreateSound(m_audioSourcePath);
+	if (!CreateSound(m_audioSourcePath)) {
+		return false;
+	}
 
 	return true;
 }
@@ -132,30 +134,32 @@ void AudioSourceComponent::UnLoadAllBank() {
 	eventMap.clear();
 }
 
-void AudioSourceComponent::CreateSound(std::string name) {
+bool AudioSourceComponent::CreateSound(std::string name) {
 	FMOD_RESULT result;
 	result = lowLevelSystem->createStream(name.c_str(), FMOD_DEFAULT, 0, &sound);
 	
 	if (result == FMOD_OK) {
-		//FMOD::Channel* channel;
-		result = lowLevelSystem->playSound( sound, nullptr,false, &channel);
-		if (result != FMOD_OK) {
-			SDL_Log("Cannnot Play Sound: (%d) %s", result, FMOD_ErrorString(result));
-			delete sound;
-			delete channel;
-		}
-		/*else {
-			channel->setVolume(0.1f);
-		}*/
-		
+		//channel->setVolume(0.1f);
+		return true;
 	}
 	else {
 		char a[] = "a";
 		SDL_Log("Cannnot Load Sound: (%d) %s",result,FMOD_ErrorString(result));
 		delete sound;
+		return false;
 	}
 
 }
+
+void AudioSourceComponent::Play() {
+	FMOD_RESULT result = lowLevelSystem->playSound(sound, nullptr, false, &channel);
+	if (result != FMOD_OK) {
+		SDL_Log("Cannnot Play Sound: (%d) %s", result, FMOD_ErrorString(result));
+		delete sound;
+		delete channel;
+	}
+}
+
 void AudioSourceComponent::Update() {
 	
 }

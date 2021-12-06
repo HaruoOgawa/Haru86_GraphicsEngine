@@ -23,9 +23,13 @@ AudioObject::~AudioObject() {
 }
 
 bool AudioObject::Initialize() {
+	if (!audioSource->Initialize()) {
+		return false;
+	}
+
 	return true;
 }
 
 void AudioObject::PlayAudio() {
-
+	audioSource->Play();
 }
