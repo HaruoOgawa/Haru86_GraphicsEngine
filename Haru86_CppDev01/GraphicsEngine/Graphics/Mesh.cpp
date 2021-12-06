@@ -38,6 +38,9 @@ void Mesh::CreateMesh(PrimitiveType primType) {
 	case PrimitiveType::SPHERE:
 		Primitive::CreateSphere(&vertices,&indices);
 		break;
+	case PrimitiveType::POINT:
+		Primitive::CreatePoint(&vertices2D, &dimention, &indices2D);
+		break;
 	default:
 		Primitive::CreateBoard(&vertices, &indices);
 		break;

@@ -38,6 +38,7 @@ public:
     void ProcessInput(const Uint8* state)const override;
     void Draw();
     float rand(glm::vec2 st);
+    int num;
     friend class KuraArtApp;
 private:
     std::unique_ptr<class Material> m_material;
@@ -46,7 +47,7 @@ private:
     std::unique_ptr<class ComputeBuffer> m_computeBuffer_BoidsForce;
     std::unique_ptr<class ComputeShader> m_computeShader_force;
     std::unique_ptr<class ComputeShader> m_computeShader_data;
-    int num;
+   
     
 };
 

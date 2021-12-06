@@ -183,7 +183,7 @@ void KuraGPGPU::Draw() {
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 	m_material->SetIntUniform("_boids_count", num);
-	Graphics::DrawInstancedWithMesh(m_mesh.get(), num,m_material.get());
+	Graphics::DrawInstancedWithMesh(m_mesh.get(), num,m_material.get(),GL_TRIANGLES);
 
 }
 

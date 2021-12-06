@@ -231,3 +231,32 @@ void Primitive::CreateSphere(std::vector<float>* vertices, std::vector<int>* ind
 	}
 }
 
+void Primitive::CreatePoint(std::vector<std::vector<float>>* vertices, std::vector<int>* dimention, std::vector<unsigned short>* indices) {
+	std::vector<float> vertex = {
+		0.0f, 0.0f, 0.0f
+	};
+
+	std::vector<float> normal = {
+		0.f, 0.f, 0.0f
+	};
+
+	std::vector<float> texcoord = {
+		 0.0f,0.0f
+	};
+
+	std::vector<unsigned int> i = {
+		0
+	};
+
+	vertices->push_back(vertex);
+	vertices->push_back(normal);
+	vertices->push_back(texcoord);
+
+	dimention->push_back(3);
+	dimention->push_back(3);
+	dimention->push_back(2);
+
+	for (auto data : i) {
+		indices->emplace_back(data);
+	}
+}
