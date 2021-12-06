@@ -24,7 +24,8 @@ void main(){
 	//col.rgb=texture(_trailTex,g2f_o.uv).rgb;
 
 	float node_life=1.0-clamp(_time*0.001-g2f_o.node_life,0.0,_initNodeLife)/_initNodeLife;
-    col.a=node_life; 
+    node_life=1.0;
+	col.a=node_life; 
 
 	gl_FragColor=col;
 }
