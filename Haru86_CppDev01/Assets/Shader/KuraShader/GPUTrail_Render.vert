@@ -101,12 +101,7 @@ int CalCorrectIndex(int trailIndex,int calIndex){
 }
 
 void main(){
-	/*vec3 pos=vec3(rand(vec2(gl_InstanceID,0.123))*2.0-1.0,
-		rand(vec2(gl_InstanceID,0.456))*2.0-1.0,
-		rand(vec2(gl_InstanceID,0.789))-0.1
-	)*300.0;
-	v2g_pos=pos;*/
-
+	
 	int id=gl_InstanceID;
 	float flag=1.0;
 	if(id>_boids_count/2+1){

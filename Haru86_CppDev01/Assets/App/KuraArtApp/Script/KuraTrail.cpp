@@ -24,7 +24,7 @@ KuraTrail::KuraTrail(Object* o, KuraGPGPU* kuraGPGPU)
 	: Component(o, static_cast<std::string>(typeid(KuraTrail).name()).substr(6)),
 	kuraGPGPU_instance(kuraGPGPU),
 	trailNum(kuraGPGPU->num),
-	nodeSegment(16)
+	nodeSegment(512)
 {
 	nodeNum = trailNum * nodeSegment;
 	

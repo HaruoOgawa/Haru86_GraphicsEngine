@@ -24,7 +24,7 @@
 
 KuraGPGPU::KuraGPGPU(Object* o)
 	: Component(o, static_cast<std::string>(typeid(KuraGPGPU).name()).substr(6)),
-	num(1024)
+	num(512)
 {
 	//m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
 	//owner->SetScale(glm::vec3(0.01));

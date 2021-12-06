@@ -20,11 +20,6 @@ void main(){
 	vec4 col=vec4(1.0);
 	col.rgb=vec3(0.0);
 
-	float flag=g2f_flag;
-	if(flag==0.0){
-		//discard;
-	}
-
 	float node_life=1.0-clamp(_time-g2f_o.node_life,0.0,_initNodeLife)/_initNodeLife;
     //col.a=node_life; 
 
