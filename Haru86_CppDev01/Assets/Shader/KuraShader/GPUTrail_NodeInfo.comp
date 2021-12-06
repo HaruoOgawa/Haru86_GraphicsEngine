@@ -1,6 +1,38 @@
 #version 430
 
+layout(local_size_x=256,local_size_y=1,local_size_z=1) in;
+
 void main(){
 	uint DID=gl_GlobalInvocationID.x;
 	
+	/*int trailIndex=(int)DID.x;
+    trail trail_data=_trailIndexData_read[trailIndex];
+    input_data input_next_data=_input_data_read[trailIndex];
+    int nowCalNodeIndex=trail_data.nextCalNodeIndex;
+    int myNodeIndex=trailIndex*_nodeSegment+nowCalNodeIndex;
+    node node_data=_node_data_read[myNodeIndex];
+    
+    float calNodeLength=length(input_next_data.nextInputPosition-node_data.node_position);
+
+    if(calNodeLength>=_nodeDistanceMin){
+       //cal node
+        node_data.renderFlag++;
+        node_data.node_position=input_next_data.nextInputPosition;
+        node_data.node_life=_DTime;
+        //cal trail
+        int leftSideFirst=nowCalNodeIndex;
+        int rightSideFirst=(nowCalNodeIndex+(_nodeSegment-1))%_nodeSegment;
+        int rightSideSecond=(nowCalNodeIndex+(_nodeSegment-2))%_nodeSegment;
+
+        nowCalNodeIndex++;
+        nowCalNodeIndex=(uint)nowCalNodeIndex%_nodeSegment;
+        trail_data.nextCalNodeIndex=nowCalNodeIndex;
+        trail_data.leftSideFirst=leftSideFirst;
+        trail_data.rightSideFirst=rightSideFirst;
+        trail_data.rightSideSecond=rightSideSecond;
+
+        //write to buffer
+        _node_data_read[myNodeIndex]=node_data;
+        _trailIndexData_read[trailIndex]=trail_data;
+    } */
 }

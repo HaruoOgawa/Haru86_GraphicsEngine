@@ -8,15 +8,15 @@ struct trail {
     int rightSideFirst;
     int rightSideSecond;
     float trail_color[4];
-    trail(int nodeIndex,int LSideFirst,int RSideFirst,int RSideSecond,float col[4]) {
+    trail(int nodeIndex,int nodeSegment) {
         nextCalNodeIndex= nodeIndex;
-        leftSideFirst= LSideFirst;
-        rightSideFirst= RSideFirst;
-        rightSideSecond= RSideSecond;
-        trail_color[0]= col[0];
-        trail_color[1]= col[1];
-        trail_color[2]= col[2];
-        trail_color[3]= col[3];
+        leftSideFirst= 0;
+        rightSideFirst= nodeSegment-1;
+        rightSideSecond= nodeSegment-2;
+        trail_color[0]= 1.0;
+        trail_color[1]= 1.0;
+        trail_color[2]= 1.0;
+        trail_color[3]= 1.0;
     }
 };
 
@@ -24,12 +24,12 @@ struct node {
     float node_position[3];
     float node_life;
     int renderFlag;
-    node(float pos[3],float life,int flag) {
+    node(float pos[3],float life) {
         node_position[0] = pos[0];
         node_position[1] = pos[1];
         node_position[2] = pos[2];
         node_life = life;
-        renderFlag = flag;
+        renderFlag = 0;
     }
 };
 

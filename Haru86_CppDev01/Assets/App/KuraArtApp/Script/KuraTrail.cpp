@@ -53,14 +53,34 @@ KuraTrail::~KuraTrail() {
 
 void KuraTrail::Start() {
 	//init buffer data
-	//std::vector<trail> init_trail=std::vector<trail>()
+	std::vector<trail> init_trail = std::vector<trail>(trailNum, trail(0, nodeSegment));
+	float input_pos[3] = { 0.0,0.0,0.0 };
+	std::vector<input_data> init_input_data = std::vector<input_data>(trailNum, input_data(input_pos));
+	
+	std::vector<node> init_node;
+	float initPos[3] = { 0,0,0 };
+	float initvel[3] = { 0,0,0 };
+	std::vector<BoidsData> init_boidsData = std::vector<BoidsData>(trailNum, BoidsData(initPos, initvel));
+	kuraGPGPU_instance->m_computeBuffer_BoidsData->GetBufferData(&init_boidsData[0], 0, trailNum);
 
 	for (int i = 0; i < trailNum;i++) {
-
+		float boids_pos[3] = { init_boidsData[i].position[0],init_boidsData[i].position[1],init_boidsData[i].position[2] };
 		for (int q = 0; q < nodeSegment; q++) {
-
+			init_node.push_back(node(boids_pos, 5));
 		}
 	}
+
+	init_boidsData.clear();
+
+	//set init data to buffer
+	m_buffer_trail->SetData<std::vector<trail>>(init_trail);
+	m_buffer_node->SetData<std::vector<node>>(init_node);
+	m_buffer_input->SetData<std::vector<input_data>>(init_input_data);
+
+	//clear init data
+	init_trail.clear();
+	init_input_data.clear();
+	init_node.clear();
 
 	//next input
 	m_computeShader_NextInputPos->SetBuffer(kuraGPGPU_instance->m_computeBuffer_BoidsData.get(), 1, m_material.get());
@@ -72,9 +92,17 @@ void KuraTrail::Start() {
 	//set buffer to material
 	m_material->SetBuffer(m_buffer_node.get(), 3);
 	m_material->SetBuffer(m_buffer_input.get(), 4);
+
 }
 
 void KuraTrail::Update() {
+	//NextInputPos
+	m_computeShader_NextInputPos->SetActive();
+	m_computeShader_NextInputPos->Dispatch(trailNum/256,1,1);
+
+	//NodeInfo
+	m_computeShader_NodeInfo->SetActive();
+	m_computeShader_NodeInfo->Dispatch(trailNum / 256, 1, 1);
 
 }
 
@@ -94,6 +122,5 @@ void KuraTrail::Draw() {
 	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
-	m_material->SetIntUniform("_boids_count", num);
-	Graphics::DrawInstancedWithMesh(m_mesh.get(), num, m_material.get(), GL_TRIANGLES);
+	Graphics::DrawInstancedWithMesh(m_mesh.get(), nodeNum, m_material.get(), GL_TRIANGLES);
 }
