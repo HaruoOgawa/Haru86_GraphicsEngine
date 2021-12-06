@@ -18,7 +18,7 @@ uniform float _initNodeLife;
 
 void main(){
 	vec4 col=vec4(1.0);
-	col.rgb=vec3(0.0);
+	col.rgb=vec3(g2f_o.uv,0.0);
 
 	float node_life=1.0-clamp(_time-g2f_o.node_life,0.0,_initNodeLife)/_initNodeLife;
     //col.a=node_life; 
