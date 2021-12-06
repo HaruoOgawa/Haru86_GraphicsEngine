@@ -132,6 +132,11 @@ void Material::SetVec2Uniform(std::string uniformName, glm::vec2 val) {
 	glUniform2fv(location,1, reinterpret_cast<GLfloat*>(&val));
 }
 
+void Material::SetVec3Uniform(std::string uniformName, glm::vec3 val) {
+	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
+	glUniform3fv(location,1, reinterpret_cast<GLfloat*>(&val));
+}
+
 void Material::SetTexUniform(std::string uniformName, unsigned int val) {
 	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
 	glUniform1i(location, static_cast<GLuint>(val-1));

@@ -20,6 +20,7 @@ public:
     void SetFloatUniform(std::string uniformName,float val);
     void SetIntUniform(std::string uniformName,int val);
     void SetVec2Uniform(std::string uniformName, glm::vec2 val);
+    void SetVec3Uniform(std::string uniformName, glm::vec3 val);
     void SetTexUniform(std::string uniformName, unsigned int val);
     void SetBuffer(class ComputeBuffer* buffer, int bufferIndex);
 private :

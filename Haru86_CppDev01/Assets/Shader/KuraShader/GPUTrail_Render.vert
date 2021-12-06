@@ -62,6 +62,7 @@ uniform float _deltaTime;
 uniform float _initNodeLife;
 uniform float _nodeSegment;
 uniform float _TrailWidth;
+uniform int _boids_count;
 
 out float v2g_flag;
 //out vec3 v2g_pos;
@@ -95,7 +96,7 @@ float rand(vec2 seeds){
 
 int CalCorrectIndex(int trailIndex,int calIndex){
     //trailIndex*_nodeSegment+_nodeSegment‚ð-1‚µ‚½‚çŽ¡‚Á‚½
-    int index=min(trailIndex*_nodeSegment+_nodeSegment-1,max(trailIndex*_nodeSegment,calIndex));
+    int index=int(min(trailIndex*_nodeSegment+_nodeSegment-1,max(trailIndex*_nodeSegment,calIndex)));
     return index;
 }
 
@@ -119,7 +120,7 @@ void main(){
 
 	 int nodeIndex=id;
      int trailIndex=int(floor(nodeIndex/_nodeSegment));
-     int nowIndexInNodes=id-trailIndex*_nodeSegment;
+     int nowIndexInNodes=int(id-trailIndex*_nodeSegment);
                
      node node_data0_1=outBuffer_node.nodes[CalCorrectIndex(trailIndex,int(nodeIndex-1))];
      node node_data00=outBuffer_node.nodes[CalCorrectIndex(trailIndex,int(nodeIndex))];

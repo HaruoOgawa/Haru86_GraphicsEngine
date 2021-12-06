@@ -34,11 +34,12 @@ uniform mat4 MMatrix;
 uniform mat4 VMatrix;
 uniform mat4 PMatrix;
 uniform float _time;
-uniform vec3 _WorldSpaceCameraPos;
 uniform float _deltaTime;
+uniform vec3 _WorldSpaceCameraPos;
 uniform float _initNodeLife;
 uniform float _nodeSegment;
 uniform float _TrailWidth;
+uniform int _boids_count;
 
 #define PI 3.14159265
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))

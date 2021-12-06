@@ -17,6 +17,8 @@
 #include <glm/gtc/quaternion.hpp>
 #include "GraphicsEngine/Graphics/Texture.h"
 #include "./Assets/App/KuraArtApp/Script/KuraGPGPU.h"
+#include "GraphicsEngine/Object/CameraObject.h"
+#include "GraphicsEngine/Component/CameraComponent.h"
 
 KuraTrail::KuraTrail(Object* o, KuraGPGPU* kuraGPGPU)
 	: Component(o, static_cast<std::string>(typeid(KuraTrail).name()).substr(6)),
@@ -128,7 +130,10 @@ void KuraTrail::Draw() {
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 
 	//GPU Trail Uniform
-	//m_material->Set _WorldSpaceCameraPos
-
+	m_material->SetVec3Uniform("_WorldSpaceCameraPos",Game::GetInstance()->game_camera_instance->transform->position);
+	m_material->SetFloatUniform("_initNodeLife", 5);
+	m_material->SetFloatUniform("_nodeSegment",nodeSegment );
+	m_material->SetFloatUniform("_TrailWidth", 0.1);
+	m_material->SetIntUniform("_boids_count", nodeNum);
 	Graphics::DrawInstancedWithMesh(m_mesh.get(), nodeNum, m_material.get(), GL_POINTS);
 }
