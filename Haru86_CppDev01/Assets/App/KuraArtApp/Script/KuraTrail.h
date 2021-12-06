@@ -64,5 +64,6 @@ private:
     int trailNum;
     int nodeNum;
     int nodeSegment;
+    std::unique_ptr<class Texture> m_texture_trail;
 };
 

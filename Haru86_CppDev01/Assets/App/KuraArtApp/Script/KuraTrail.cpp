@@ -19,12 +19,13 @@
 #include "./Assets/App/KuraArtApp/Script/KuraGPGPU.h"
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Component/CameraComponent.h"
+#include "GraphicsEngine/Graphics/Texture.h"
 
 KuraTrail::KuraTrail(Object* o, KuraGPGPU* kuraGPGPU)
 	: Component(o, static_cast<std::string>(typeid(KuraTrail).name()).substr(6)),
 	kuraGPGPU_instance(kuraGPGPU),
 	trailNum(kuraGPGPU->num),
-	nodeSegment(512)
+	nodeSegment(256)
 {
 	nodeNum = trailNum * nodeSegment;
 	
@@ -34,9 +35,13 @@ KuraTrail::KuraTrail(Object* o, KuraGPGPU* kuraGPGPU)
 		"./Assets/Shader/KuraShader/GPUTrail_Render.frag"		
 	);
 
-	m_mesh = std::make_unique<Mesh>(PrimitiveType::POINT);
-	//m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
+	m_texture_trail = std::make_unique<Texture>();
+	if (!m_texture_trail->Load("./Assets/Resources/glTFData/Phoenix_Blender/PosTex.png")) {
+		printf("Cannot Load Texture\n");
+	}
 
+	m_mesh = std::make_unique<Mesh>(PrimitiveType::POINT);
+	
 	//compute shader
 	m_computeShader_NextInputPos = std::make_unique<ComputeShader>("./Assets/Shader/KuraShader/GPUTrail_NextInputPos.comp");
 	m_computeShader_NodeInfo = std::make_unique<ComputeShader>("./Assets/Shader/KuraShader/GPUTrail_NodeInfo.comp");
@@ -117,11 +122,14 @@ void KuraTrail::ProcessInput(const Uint8* state)const {
 }
 
 void KuraTrail::Draw() {
+	m_texture_trail->SetActive();
+	m_material->SetTexUniform("_trailTex", m_texture_trail->GetTextureID());
+	
 	owner->transform->CalMatrix();
 	m_material->SetActive();
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glDisable(GL_DEPTH_TEST);
+	//glDisable(GL_DEPTH_TEST);
 	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix()); 
 	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
