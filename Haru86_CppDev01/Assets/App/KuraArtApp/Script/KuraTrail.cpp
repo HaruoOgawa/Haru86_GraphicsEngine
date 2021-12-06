@@ -87,11 +87,11 @@ void KuraTrail::Start() {
 	m_computeShader_NextInputPos->SetBuffer(m_buffer_input.get(), 2, m_material.get());
 	//node info
 	m_computeShader_NodeInfo->SetBuffer(m_buffer_node.get(), 3, m_material.get());
-	m_computeShader_NodeInfo->SetBuffer(m_buffer_input.get(), 4, m_material.get());
+	m_computeShader_NodeInfo->SetBuffer(m_buffer_trail.get(), 4, m_material.get());
 
 	//set buffer to material
 	m_material->SetBuffer(m_buffer_node.get(), 3);
-	m_material->SetBuffer(m_buffer_input.get(), 4);
+	m_material->SetBuffer(m_buffer_trail.get(), 4);
 
 }
 
@@ -102,6 +102,10 @@ void KuraTrail::Update() {
 
 	//NodeInfo
 	m_computeShader_NodeInfo->SetActive();
+	m_computeShader_NodeInfo->SetIntUniform("_nodeSegment", nodeSegment);
+	m_computeShader_NodeInfo->SetFloatUniform("_nodeDistanceMin", 1);
+	m_computeShader_NodeInfo->SetFloatUniform("_time",Game::GetInstance()->time );
+	m_computeShader_NodeInfo->SetFloatUniform("_initNodeLife", 5.0);
 	m_computeShader_NodeInfo->Dispatch(trailNum / 256, 1, 1);
 
 }
