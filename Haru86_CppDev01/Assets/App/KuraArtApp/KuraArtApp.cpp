@@ -12,6 +12,7 @@
 #include <string>
 #include "GraphicsEngine/Object/Object.h"
 #include "./Assets/App/KuraArtApp/Script/KuraGPGPU.h"
+#include "./Assets/App/KuraArtApp/Script/KuraTrail.h"
 #include "GraphicsEngine/Object/CameraObject.h"
 
 namespace Kura{
@@ -40,7 +41,7 @@ void KuraArtApp::Start() {
 
 	Kura::gpgpu_obj = std::make_unique<Object>();
 	Kura::gpgpu_obj->AddComponent(new KuraGPGPU(Kura::gpgpu_obj.get()));
-
+	Kura::gpgpu_obj->AddComponent(new KuraTrail(Kura::gpgpu_obj.get()));
 
 }
 void KuraArtApp::Update() {
@@ -50,6 +51,7 @@ void KuraArtApp::Update() {
 
 void KuraArtApp::Draw() {
 	static_cast<KuraGPGPU*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))->Draw();
+	static_cast<KuraTrail*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraTrail).name())))->Draw();
 	
 }
 
