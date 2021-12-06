@@ -23,68 +23,44 @@ float rand(vec2 seeds){
 
 void main(){
 	vec3 pos=v2g_pos[0];
-	float size=2000.0;
-	//prim 1
-	vec3 outPos=gl_in[0].gl_Position.xyz+normalize(vec3(
-			rand(vec2(pos.x,0.123)),
-			rand(vec2(pos.y,0.123)),
-			rand(vec2(pos.z,0.123))
-	))*size;
+	float size=1.0+sin(_time)*0.5;
+	//prim 1//////////////////////////////////////////////////////
+	vec3 outPos=gl_in[0].gl_Position.xyz+vec3(1.0,1.0,0.0)*size;
 	outPos=(MMatrix*vec4(outPos,1.0)).xyz;
-	gl_Position=PMatrix*VMatrix*vec4(outPos,1.0);
+	gl_Position=PMatrix*VMatrix*vec4(outPos+v2g_pos[0],1.0);
 	g2f_flag=v2g_flag[0];
 	EmitVertex();
 	
-	outPos=gl_in[0].gl_Position.xyz+normalize(vec3(
-			rand(vec2(pos.x,0.456)),
-			rand(vec2(pos.y,0.456)),
-			rand(vec2(pos.z,0.456))
-	))*size;
+	outPos=gl_in[0].gl_Position.xyz+vec3(-1.0,1.0,0.0)*size;
 	outPos=(MMatrix*vec4(outPos,1.0)).xyz;
-	gl_Position=PMatrix*VMatrix*vec4(outPos,1.0);
+	gl_Position=PMatrix*VMatrix*vec4(outPos+v2g_pos[0],1.0);
 	g2f_flag=v2g_flag[0];
 	EmitVertex();
 	
-	outPos=gl_in[0].gl_Position.xyz+normalize(vec3(
-			rand(vec2(pos.x,0.789)),
-			rand(vec2(pos.y,0.789)),
-			rand(vec2(pos.z,0.789))
-	))*size;
+	outPos=gl_in[0].gl_Position.xyz+vec3(-1.0,-1.0,0.0)*size;
 	outPos=(MMatrix*vec4(outPos,1.0)).xyz;
-	gl_Position=PMatrix*VMatrix*vec4(outPos,1.0);
+	gl_Position=PMatrix*VMatrix*vec4(outPos+v2g_pos[0],1.0);
 	g2f_flag=v2g_flag[0];
 	EmitVertex();
 	
 	EndPrimitive();
 	
-	//prim 2
-	outPos=gl_in[0].gl_Position.xyz+normalize(vec3(
-			rand(vec2(pos.x,0.987)),
-			rand(vec2(pos.y,0.987)),
-			rand(vec2(pos.z,0.987))
-	))*size;
+	//prim 2//////////////////////////////////////////////////////
+	outPos=gl_in[0].gl_Position.xyz+vec3(-1.0,-1.0,0.0)*size;
 	outPos=(MMatrix*vec4(outPos,1.0)).xyz;
-	gl_Position=PMatrix*VMatrix*vec4(outPos,1.0);
+	gl_Position=PMatrix*VMatrix*vec4(outPos+v2g_pos[0],1.0);
 	g2f_flag=v2g_flag[0];
 	EmitVertex();
 	
-	outPos=gl_in[0].gl_Position.xyz+normalize(vec3(
-			rand(vec2(pos.x,0.654)),
-			rand(vec2(pos.y,0.654)),
-			rand(vec2(pos.z,0.654))
-	))*size;
+	outPos=gl_in[0].gl_Position.xyz+vec3(1.0,-1.0,0.0)*size;
 	outPos=(MMatrix*vec4(outPos,1.0)).xyz;
-	gl_Position=PMatrix*VMatrix*vec4(outPos,1.0);
+	gl_Position=PMatrix*VMatrix*vec4(outPos+v2g_pos[0],1.0);
 	g2f_flag=v2g_flag[0];
 	EmitVertex();
 	
-	outPos=gl_in[0].gl_Position.xyz+normalize(vec3(
-			rand(vec2(pos.x,0.321)),
-			rand(vec2(pos.y,0.321)),
-			rand(vec2(pos.z,0.321))
-	))*size;
+	outPos=gl_in[0].gl_Position.xyz+vec3(1.0,1.0,0.0)*size;
 	outPos=(MMatrix*vec4(outPos,1.0)).xyz;
-	gl_Position=PMatrix*VMatrix*vec4(outPos,1.0);
+	gl_Position=PMatrix*VMatrix*vec4(outPos+v2g_pos[0],1.0);
 	g2f_flag=v2g_flag[0];
 	EmitVertex();
 	

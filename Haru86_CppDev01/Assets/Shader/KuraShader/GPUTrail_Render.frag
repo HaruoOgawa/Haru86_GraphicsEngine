@@ -10,7 +10,7 @@ void main(){
 
 	float flag=g2f_flag;
 	if(flag==0.0){
-		discard;
+		//discard;
 	}
 
 	gl_FragColor=col;

@@ -77,6 +77,8 @@ float rand(vec2 seeds){
 //outBuffer_node.nodes
 //outBuffer_trail.trails
 
+//////////////////////////////
+
 void main(){
 	vec3 pos=vec3(rand(vec2(gl_InstanceID,0.123))*2.0-1.0,
 		rand(vec2(gl_InstanceID,0.456))*2.0-1.0,
@@ -93,7 +95,6 @@ void main(){
 	}
 	v2g_flag=flag;
 
-	//gl_Position=vec4(vertex,1.0);
-	gl_Position=MVPMatrix*vec4(vertex,1.0);
+	gl_Position=vec4(vertex,1.0);
 	
 }

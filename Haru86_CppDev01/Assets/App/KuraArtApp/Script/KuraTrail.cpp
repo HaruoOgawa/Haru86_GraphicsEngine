@@ -28,12 +28,12 @@ KuraTrail::KuraTrail(Object* o, KuraGPGPU* kuraGPGPU)
 	
 	m_material = std::make_unique<Material>(
 		"./Assets/Shader/KuraShader/GPUTrail_Render.vert",
-		//"./Assets/Shader/KuraShader/GPUTrail_Render.geom",
+		"./Assets/Shader/KuraShader/GPUTrail_Render.geom",
 		"./Assets/Shader/KuraShader/GPUTrail_Render.frag"		
 	);
 
-	//m_mesh = std::make_unique<Mesh>(PrimitiveType::POINT);
-	m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
+	m_mesh = std::make_unique<Mesh>(PrimitiveType::POINT);
+	//m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
 
 	//compute shader
 	m_computeShader_NextInputPos = std::make_unique<ComputeShader>("./Assets/Shader/KuraShader/GPUTrail_NextInputPos.comp");
@@ -126,5 +126,5 @@ void KuraTrail::Draw() {
 	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
-	Graphics::DrawInstancedWithMesh(m_mesh.get(), nodeNum, m_material.get(), GL_TRIANGLES);
+	Graphics::DrawInstancedWithMesh(m_mesh.get(), nodeNum, m_material.get(), GL_POINTS);
 }
