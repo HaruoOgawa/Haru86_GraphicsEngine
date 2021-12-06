@@ -126,5 +126,9 @@ void KuraTrail::Draw() {
 	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
+
+	//GPU Trail Uniform
+	//m_material->Set _WorldSpaceCameraPos
+
 	Graphics::DrawInstancedWithMesh(m_mesh.get(), nodeNum, m_material.get(), GL_POINTS);
 }
