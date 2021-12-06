@@ -24,7 +24,7 @@
 
 KuraGPGPU::KuraGPGPU(Object* o)
 	: Component(o, static_cast<std::string>(typeid(KuraGPGPU).name()).substr(6)),
-	num(4096)
+	num(1024)
 {
 	m_mesh = glTFLoader::Load("./Assets/Resources/glTFData/PhoenixWithVAT/Phoenix.gltf");
 	//owner->SetScale(glm::vec3(10.0, 10.0, 10.0));

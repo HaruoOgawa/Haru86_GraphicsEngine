@@ -16,7 +16,6 @@
 
 namespace Kura{
 	std::unique_ptr<AudioObject> audioObj;
-	//std::unique_ptr<GameObject> testObj;
 	std::unique_ptr<Object> gpgpu_obj;
 	std::unique_ptr<CameraObject> camera_obj;
 }
@@ -30,8 +29,6 @@ KuraArtApp::~KuraArtApp() {
 
 }
 
-//ƒJƒƒ‰‚Ìæ‚èˆµ‚¢‚É‚Â‚¢‚Ä‹­‰»‚·‚é•K—v‚ª‚ ‚é
-
 void KuraArtApp::Start() {
 	Kura::camera_obj = std::make_unique<CameraObject>(CameraType::FIXED_CAMERA);
 	Kura::camera_obj->SetPosition(glm::vec3(0, 0, -3.0));
@@ -41,9 +38,6 @@ void KuraArtApp::Start() {
 		Kura::audioObj->PlayAudio();
 	}
 
-	//Kura::testObj = std::make_unique<GameObject>(PrimitiveType::BOARD);
-	//Kura::testObj = std::make_unique<GameObject>("./Assets/Resources/glTFData/Phoenix_Blender/Phoenix.gltf");
-
 	Kura::gpgpu_obj = std::make_unique<Object>();
 	Kura::gpgpu_obj->AddComponent(new KuraGPGPU(Kura::gpgpu_obj.get()));
 
@@ -52,13 +46,11 @@ void KuraArtApp::Start() {
 void KuraArtApp::Update() {
 	static_cast<AudioSourceComponent*>(Kura::audioObj->audioSource)->Update();
 	Kura::gpgpu_obj->Update();
-	//Kura::testObj->Update();
 }
 
 void KuraArtApp::Draw() {
-	
 	static_cast<KuraGPGPU*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))->Draw();
-	//Kura::testObj->meshComp->Draw();
+	
 }
 
 void KuraArtApp::Timeline(TimelineObject* timeline) {
