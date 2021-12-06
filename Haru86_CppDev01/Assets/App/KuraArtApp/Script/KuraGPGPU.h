@@ -39,11 +39,12 @@ public:
     void Draw();
     float rand(glm::vec2 st);
     int num;
+    std::unique_ptr<class ComputeBuffer> m_computeBuffer_BoidsData;
     friend class KuraArtApp;
 private:
     std::unique_ptr<class Material> m_material;
     std::unique_ptr<class Mesh> m_mesh;
-    std::unique_ptr<class ComputeBuffer> m_computeBuffer_BoidsData;
+    
     std::unique_ptr<class ComputeBuffer> m_computeBuffer_BoidsForce;
     std::unique_ptr<class ComputeShader> m_computeShader_force;
     std::unique_ptr<class ComputeShader> m_computeShader_data;
