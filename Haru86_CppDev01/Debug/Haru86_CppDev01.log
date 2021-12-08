@@ -14,6 +14,43 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU
           [
               genType=double
           ]
+  KuraTrail.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.h(10,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'Graphics' の左辺を無視します。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraTrail.cpp(143,45): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraTrail.cpp(144,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  コードを生成中...
+Mesh.obj : warning LNK4099: PDB 'vc142.pdb' が 'Mesh.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+UIComponent.obj : warning LNK4099: PDB 'vc142.pdb' が 'UIComponent.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+TransformComponent.obj : warning LNK4099: PDB 'vc142.pdb' が 'TransformComponent.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+TimelineObject.obj : warning LNK4099: PDB 'vc142.pdb' が 'TimelineObject.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+TimelineComponent.obj : warning LNK4099: PDB 'vc142.pdb' が 'TimelineComponent.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+Time.obj : warning LNK4099: PDB '' が 'Time.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+Texture.obj : warning LNK4099: PDB 'vc142.pdb' が 'Texture.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+RectTransformComponent.obj : warning LNK4099: PDB 'vc142.pdb' が 'RectTransformComponent.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+Primitive.obj : warning LNK4099: PDB 'vc142.pdb' が 'Primitive.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+Object.obj : warning LNK4099: PDB 'vc142.pdb' が 'Object.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+MeshRendererComponent.obj : warning LNK4099: PDB 'vc142.pdb' が 'MeshRendererComponent.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+Material.obj : warning LNK4099: PDB 'vc142.pdb' が 'Material.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+KuraArtApp.obj : warning LNK4099: PDB 'vc142.pdb' が 'KuraArtApp.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+GameRenderer.obj : warning LNK4099: PDB 'vc142.pdb' が 'GameRenderer.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+GameObject.obj : warning LNK4099: PDB 'vc142.pdb' が 'GameObject.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+Game.obj : warning LNK4099: PDB 'vc142.pdb' が 'Game.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+Font.obj : warning LNK4099: PDB 'vc142.pdb' が 'Font.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+Component.obj : warning LNK4099: PDB 'vc142.pdb' が 'Component.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+AudioSourceComponent.obj : warning LNK4099: PDB 'vc142.pdb' が 'AudioSourceComponent.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+AudioObject.obj : warning LNK4099: PDB 'vc142.pdb' が 'AudioObject.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+Graphics.obj : warning LNK4099: PDB 'vc142.pdb' が 'Graphics.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+ComputeShader.obj : warning LNK4099: PDB 'vc142.pdb' が 'ComputeShader.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+ComputeBuffer.obj : warning LNK4099: PDB 'vc142.pdb' が 'ComputeBuffer.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+glTFLoader.obj : warning LNK4099: PDB 'vc142.pdb' が 'glTFLoader.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+glTFBinaryReader.obj : warning LNK4099: PDB 'vc142.pdb' が 'glTFBinaryReader.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+CameraObject.obj : warning LNK4099: PDB '' が 'CameraObject.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+CameraComponent.obj : warning LNK4099: PDB 'vc142.pdb' が 'CameraComponent.obj' で、または 'E:\CppDev\Haru86_CppDev01\Debug\vc142.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+DemoApp.obj : warning LNK4099: PDB '' が 'DemoApp.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+soil.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_DXT.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+soil.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(image_helper.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+soil.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(SOIL.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' が 'soil.lib(stb_image_aug.obj)' で、または 'E:\CppDev\Haru86_CppDev01\Debug\SOIL.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
   Haru86_CppDev01.vcxproj -> E:\CppDev\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2-2.0.16\lib\x86\SDL2.dll
   1 個のファイルをコピーしました

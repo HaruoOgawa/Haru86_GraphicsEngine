@@ -150,13 +150,13 @@ void KuraGPGPU::Update() {
 	float initvel[3] = { 0,0,0 };
 	int targetIndex = num/4;
 	
-	std::vector<BoidsData> targerBoidsData = std::vector<BoidsData>(1, BoidsData(initPos,initvel));
-	m_computeBuffer_BoidsData->GetBufferData<BoidsData>(&targerBoidsData[0], targetIndex,1);
+	std::vector<BoidsData> targerBoidsData = std::vector<BoidsData>(num, BoidsData(initPos, initvel));
+	m_computeBuffer_BoidsData->GetBufferData(&targerBoidsData[0], 0, num);
 	float radius = 0.0001;
-	
+
 	//camera center
 	Game::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter = glm::vec3(
-		targerBoidsData[0].position[0], targerBoidsData[0].position[1], targerBoidsData[0].position[2]
+		targerBoidsData[targetIndex].position[0], targerBoidsData[targetIndex].position[1], targerBoidsData[targetIndex].position[2]
 	);
 	//camera postion
 	Game::GetInstance()->game_camera_instance->transform->position =
