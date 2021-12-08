@@ -4,6 +4,7 @@
 struct BoidsData {
     vec3 position;
     vec3 velocity;
+    vec3 viewDir;
 };
 
 layout(std430,binding=1) buffer destBufferBoidsData

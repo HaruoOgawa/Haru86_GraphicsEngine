@@ -19,6 +19,7 @@ layout(std430,binding=0) buffer destBufferBoidsForce
 struct BoidsData {
     vec3 position;
     vec3 velocity;
+	vec3 viewDir;
 };
 
 layout(std430,binding=1) buffer destBufferBoidsData
@@ -121,7 +122,7 @@ void main(){
 	vert.yz*=rot(-PI/2.0);
 
 	//rotation
-    vec3 force=outBufferBoidsForce.boidsForce[gl_InstanceID].force;
+    vec3 force=outBufferBoidsData.boidsData[id].viewDir;
     force=(
 		(length(force)==0.0)? force : normalize(force)
 	)*2.0*PI-PI;

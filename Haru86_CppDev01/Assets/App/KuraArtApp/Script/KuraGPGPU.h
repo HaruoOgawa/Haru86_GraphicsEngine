@@ -15,6 +15,7 @@ struct BoidsForce {
 struct BoidsData {
     float position[3];
     float velocity[3];
+    float viewDir[3];
     BoidsData(float p[3],float v[3]) {
         position[0] = p[0];
         position[1] = p[1];
@@ -23,6 +24,10 @@ struct BoidsData {
         velocity[0] = v[0];
         velocity[1] = v[1];
         velocity[2] = v[2];
+
+        viewDir[0] = p[0];
+        viewDir[1] = p[1];
+        viewDir[2] = p[2];
 
     }
 };
