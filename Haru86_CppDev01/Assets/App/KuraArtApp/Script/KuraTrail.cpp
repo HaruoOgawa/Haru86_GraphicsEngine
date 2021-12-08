@@ -141,7 +141,7 @@ void KuraTrail::Draw() {
 	m_material->SetVec3Uniform("_WorldSpaceCameraPos",Game::GetInstance()->game_camera_instance->transform->position);
 	m_material->SetFloatUniform("_initNodeLife", 5);
 	m_material->SetFloatUniform("_nodeSegment",nodeSegment );
-	m_material->SetFloatUniform("_TrailWidth", 0.1);
+	m_material->SetFloatUniform("_TrailWidth", 0.5);
 	m_material->SetIntUniform("_boids_count", nodeNum);
 	Graphics::DrawInstancedWithMesh(m_mesh.get(), nodeNum, m_material.get(), GL_POINTS);
 }
