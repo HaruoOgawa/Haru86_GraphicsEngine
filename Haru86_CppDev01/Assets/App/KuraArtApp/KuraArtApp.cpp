@@ -20,6 +20,7 @@ namespace Kura{
 	std::unique_ptr<AudioObject> audioObj;
 	std::unique_ptr<Object> gpgpu_obj;
 	std::unique_ptr<CameraObject> camera_obj;
+	std::unique_ptr<GameObject> test_obj;
 }
 
 KuraArtApp::KuraArtApp()
@@ -32,14 +33,16 @@ KuraArtApp::~KuraArtApp() {
 }
 
 void KuraArtApp::Start() {
-	Kura::background_obj = std::make_unique<GameObject>(PrimitiveType::SPHERE,
+	//Background////////////////////
+	/*Kura::background_obj = std::make_unique<GameObject>(PrimitiveType::SPHERE,
 		"./Assets/Shader/KuraShader/Background.vert",
 		"./Assets/Shader/KuraShader/Background.frag");
 	Kura::background_obj->SetScale(glm::vec3(500.0));
 	std::vector<std::string> texPath = { "./Assets/Resources/TextureData/sample.png" };
 	std::vector<std::string> texUniformName = {"_backgroundTex"};
-	Kura::background_obj->meshComp->material->LoadTextureList(texPath, texUniformName);
+	Kura::background_obj->meshComp->material->LoadTextureList(texPath, texUniformName);*/
 
+	//
 	Kura::camera_obj = std::make_unique<CameraObject>(CameraType::FIXED_CAMERA);
 	Kura::camera_obj->SetPosition(glm::vec3(0, 0, -3.0));
 	
@@ -53,6 +56,16 @@ void KuraArtApp::Start() {
 	Kura::gpgpu_obj->AddComponent(new KuraTrail(Kura::gpgpu_obj.get(),
 		static_cast<KuraGPGPU*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))
 	));
+
+	//test obj////////////////////////////
+	/*Kura::test_obj = std::make_unique<GameObject>(PrimitiveType::BOARD,
+		"./Assets/Shader/Standard.vert",
+		"./Assets/Shader/Standard.frag");
+	Kura::test_obj->SetScale(glm::vec3(2.0));
+	Kura::test_obj->SetPosition(glm::vec3(0.0,0.0,-2.0));
+	std::vector<std::string> test_texPath = { "./Assets/Resources/TextureData/brush_pow2.png" };
+	std::vector<std::string> test_texUniformName = { "_brush_pow2" };
+	Kura::test_obj->meshComp->material->LoadTextureList(test_texPath, test_texUniformName);*/
 
 }
 void KuraArtApp::Update() {

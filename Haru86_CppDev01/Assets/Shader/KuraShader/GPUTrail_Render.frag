@@ -14,18 +14,20 @@ in g2f g2f_o;
 uniform float _time;
 uniform float _initNodeLife;
 uniform sampler2D _trailTex;
+uniform float _nodeSegment;
 
 #define LightDir vec3(-0.613121, -0.1916, 0.766402)
 
 void main(){
 	vec4 col=vec4(1.0);
 	col.rgb=vec3(0.0);
-	col.rgb=vec3(g2f_o.uv,0.0);
-	//col.rgb=texture(_trailTex,g2f_o.uv).rgb;
+	col.rgb=vec3(mod(g2f_o.uv,1.0),0.0);
+	vec2 st=mod(g2f_o.uv,1.0);
+	col=texture(_trailTex,st);
 
-	float node_life=1.0-clamp(_time*0.001-g2f_o.node_life,0.0,_initNodeLife)/_initNodeLife;
+/*	float node_life=1.0-clamp(_time*0.001-g2f_o.node_life,0.0,_initNodeLife)/_initNodeLife;
     node_life=1.0;
-	col.a=node_life; 
+	col.a=node_life; */
 
 	gl_FragColor=col;
 }

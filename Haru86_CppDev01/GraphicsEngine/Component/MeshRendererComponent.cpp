@@ -83,9 +83,10 @@ void MeshRendererComponent::Draw() {
 	//ここでTextureをアクティブにする
 	material->SetActiveTextureList();
 
+
 	if (primTex != nullptr) {
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		//glEnable(GL_BLEND);
+		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		primTex->SetActive();
 		material->SetTexUniform("_fontTexture", primTex->GetTextureID());
 	}
@@ -96,6 +97,8 @@ void MeshRendererComponent::Draw() {
 	else if(useZTest==false){
 		glDisable(GL_DEPTH_TEST);
 	}
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
 	material->SetActive();
 	material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix());

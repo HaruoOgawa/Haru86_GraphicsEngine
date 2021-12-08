@@ -122,14 +122,15 @@ void KuraTrail::ProcessInput(const Uint8* state)const {
 }
 
 void KuraTrail::Draw() {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glDisable(GL_DEPTH_TEST);
+
 	m_texture_trail->SetActive();
 	m_material->SetTexUniform("_trailTex", m_texture_trail->GetTextureID());
 	
 	owner->transform->CalMatrix();
 	m_material->SetActive();
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	//glDisable(GL_DEPTH_TEST);
 	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix()); 
 	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
@@ -141,7 +142,7 @@ void KuraTrail::Draw() {
 	m_material->SetVec3Uniform("_WorldSpaceCameraPos",Game::GetInstance()->game_camera_instance->transform->position);
 	m_material->SetFloatUniform("_initNodeLife", 5);
 	m_material->SetFloatUniform("_nodeSegment",nodeSegment );
-	m_material->SetFloatUniform("_TrailWidth", 0.5);
+	m_material->SetFloatUniform("_TrailWidth", 0.25);
 	m_material->SetIntUniform("_boids_count", nodeNum);
 	Graphics::DrawInstancedWithMesh(m_mesh.get(), nodeNum, m_material.get(), GL_POINTS);
 }
