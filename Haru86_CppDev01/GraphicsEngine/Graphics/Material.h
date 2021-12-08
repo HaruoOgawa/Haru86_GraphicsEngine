@@ -3,6 +3,9 @@
 #include <string>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include <vector>
+#include <memory>
+#include <map>
 
 class Material 
 {
@@ -23,10 +26,13 @@ public:
     void SetVec3Uniform(std::string uniformName, glm::vec3 val);
     void SetTexUniform(std::string uniformName, unsigned int val);
     void SetBuffer(class ComputeBuffer* buffer, int bufferIndex);
+    void LoadTextureList(std::vector<std::string> texPathList,std::vector<std::string> texUniformNameList);
+    void SetActiveTextureList();
 private :
     GLuint vertShaderData;
     GLuint geometryShaderData;
     GLuint fragShaderData;
     GLuint shaderPrg;
+    std::vector<std::unique_ptr<class Texture>> m_texture_list;
 };
 

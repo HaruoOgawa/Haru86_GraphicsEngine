@@ -4,6 +4,7 @@
 #include "./SDL.h"
 #include <iostream>
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
+#include "GraphicsEngine/Graphics/Texture.h"
 
 Material::Material() {
 	LoadShader("./Assets/Shader/Standard.vert", "./Assets/Shader/Standard.frag");
@@ -145,6 +146,27 @@ void Material::SetTexUniform(std::string uniformName, unsigned int val) {
 void Material::SetBuffer(ComputeBuffer* buffer,int bufferIndex) {
 	SetActive();
 	glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bufferIndex, buffer->ssbo);
+}
+
+void Material::LoadTextureList(std::vector<std::string> texPathList, std::vector<std::string> texUniformNameList) {
+	for (int i = 0; i < texPathList.size();i++) {
+		
+		std::unique_ptr<Texture> tex = std::make_unique<Texture>();
+		tex->texUniformName = texUniformNameList[i];
+		if (!tex->Load(texPathList[i])) {
+			printf("Cannot Load This Texture\n");
+		}
+		else {
+
+			m_texture_list.push_back(std::move(tex));
+		}
+	}
+}
+void Material::SetActiveTextureList() {
+	for (int i = 0; i < m_texture_list.size(); i++) {
+		m_texture_list[i]->SetActive();
+		SetTexUniform(m_texture_list[i]->texUniformName, m_texture_list[i]->GetTextureID());
+	}
 }
 
 void Material::UnLoadData() {

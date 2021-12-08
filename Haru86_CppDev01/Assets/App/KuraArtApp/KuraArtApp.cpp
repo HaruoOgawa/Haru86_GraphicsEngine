@@ -16,6 +16,7 @@
 #include "GraphicsEngine/Object/CameraObject.h"
 
 namespace Kura{
+	std::unique_ptr<GameObject> background_obj;
 	std::unique_ptr<AudioObject> audioObj;
 	std::unique_ptr<Object> gpgpu_obj;
 	std::unique_ptr<CameraObject> camera_obj;
@@ -31,12 +32,20 @@ KuraArtApp::~KuraArtApp() {
 }
 
 void KuraArtApp::Start() {
+	Kura::background_obj = std::make_unique<GameObject>(PrimitiveType::BOARD,
+		"./Assets/Shader/KuraShader/Background.vert",
+		"./Assets/Shader/KuraShader/Background.frag");
+	Kura::background_obj->SetScale(glm::vec3(4.0));
+	std::vector<std::string> texPath = { "./Assets/Resources/TextureData/sample.png" };
+	std::vector<std::string> texUniformName = {"_backgroundTex"};
+	Kura::background_obj->meshComp->material->LoadTextureList(texPath, texUniformName);
+
 	Kura::camera_obj = std::make_unique<CameraObject>(CameraType::FIXED_CAMERA);
 	Kura::camera_obj->SetPosition(glm::vec3(0, 0, -3.0));
 	
 	Kura::audioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
 	if (Kura::audioObj->Initialize()) {
-		Kura::audioObj->PlayAudio();
+		//Kura::audioObj->PlayAudio();
 	}
 
 	Kura::gpgpu_obj = std::make_unique<Object>();

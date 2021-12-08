@@ -261,6 +261,8 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="Assets\App\KuraArtApp\Script\KuraTrail.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shader\KuraShader\Background.frag" />
+    <None Include="Assets\Shader\KuraShader\Background.vert" />
     <None Include="Assets\Shader\KuraShader\BoidsForce.comp" />
     <None Include="Assets\Shader\KuraShader\BoidsData.comp" />
     <None Include="Assets\Shader\KuraShader\BoidsResult.frag" />

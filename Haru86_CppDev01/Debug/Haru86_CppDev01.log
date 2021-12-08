@@ -1,6 +1,6 @@
-﻿  KuraTrail.cpp
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.h(10,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'Graphics' の左辺を無視します。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraTrail.cpp(143,45): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+﻿  KuraArtApp.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(27,44): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(32): message : 'TimelineAnimationClip' の宣言を確認してください
   Haru86_CppDev01.vcxproj -> E:\CppDev\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2-2.0.16\lib\x86\SDL2.dll
   1 個のファイルをコピーしました
@@ -32,6 +32,8 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraTrail
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\Standard.vert
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\UIStandard.frag
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\UIStandard.vert
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\Background.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\Background.vert
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\BoidsData.comp
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\BoidsForce.comp
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\BoidsResult.frag
@@ -51,7 +53,7 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraTrail
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene3.frag
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene4.frag
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene5.frag
-  26 個のファイルをコピーしました
+  28 個のファイルをコピーしました
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\FontData\FRSCRIPT.TTF
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix\Phoenix\Phoenix.glb
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix\Phoenix\Phoenix.gltf
@@ -72,5 +74,6 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraTrail
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix_Blender\untitled.glb
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\MusicData\lug00ber_they_are_feeding.mp3
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\MusicData\n111.mp3
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\TextureData\sample.png
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\TextureData\trailTex.png
-  21 個のファイルをコピーしました
+  22 個のファイルをコピーしました

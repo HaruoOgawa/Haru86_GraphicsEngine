@@ -269,6 +269,8 @@
     <None Include="Assets\Shader\KuraShader\GPUTrail_Render.vert" />
     <None Include="Assets\Shader\KuraShader\GPUTrail_Render.geom" />
     <None Include="Assets\Shader\KuraShader\GPUTrail_Render.frag" />
+    <None Include="Assets\Shader\KuraShader\Background.vert" />
+    <None Include="Assets\Shader\KuraShader\Background.frag" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\Resources\FontData\FRSCRIPT.TTF" />
