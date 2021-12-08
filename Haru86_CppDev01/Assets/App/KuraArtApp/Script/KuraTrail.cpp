@@ -36,7 +36,7 @@ KuraTrail::KuraTrail(Object* o, KuraGPGPU* kuraGPGPU)
 	);
 
 	m_texture_trail = std::make_unique<Texture>();
-	if (!m_texture_trail->Load("./Assets/Resources/glTFData/Phoenix_Blender/PosTex.png")) {
+	if (!m_texture_trail->Load("./Assets/Resources/TextureData/trailTex.png")) {
 		printf("Cannot Load Texture\n");
 	}
 
