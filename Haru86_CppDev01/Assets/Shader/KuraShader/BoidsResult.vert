@@ -40,6 +40,10 @@ uniform int _boids_count;
 #define PI 3.14159265
 #define rot(a) mat2(cos(a),sin(a),-sin(a),cos(a))
 
+float atan2(in float y, in float x){
+    return x == 0.0 ? sign(y)*PI/2 : atan(y, x);
+}
+
 float rand(vec2 seeds){
   return fract(sin(dot(seeds, vec2(12.9898,78.233))) * 43758.5453);
 }
@@ -84,7 +88,7 @@ out float v2g_flag;
 
 mat4 GetRotMatrix(vec3 angle){
                
-	float sfai=sin(angle.x); float stheta=sin(angle.y); float spusi=sin(angle.z);
+	/*float sfai=sin(angle.x); float stheta=sin(angle.y); float spusi=sin(angle.z);
 	float cfai=cos(angle.x); float ctheta=cos(angle.y); float cpusi=cos(angle.z);
                 
 	mat4 rotateMatrix=mat4(
@@ -92,7 +96,27 @@ mat4 GetRotMatrix(vec3 angle){
 		vec4(cfai*spusi,cfai*cpusi,-sfai,0.0),
 		vec4(-stheta*cpusi+ctheta*sfai*spusi,stheta*spusi+ctheta*sfai*cpusi,ctheta*cfai,0.0),
 		vec4(0.0,0.0,0.0,1.0)
-    );
+    );*/
+
+	mat4 rotateMatrix=
+		mat4(
+			vec4(cos(angle.z),-sin(angle.z),0.0,0.0),
+			vec4(sin(angle.z),cos(angle.z),0.0,0.0),
+			vec4(0.0,0.0,1.0,0.0),
+			vec4(0.0,0.0,0.0,1.0)
+		)*
+		mat4(
+			vec4(cos(angle.y),0.0,sin(angle.y),0.0),
+			vec4(0.0,1.0,0.0,0.0),
+			vec4(-sin(angle.y),0.0,cos(angle.y),0.0),
+			vec4(0.0,0.0,0.0,1.0)
+		)*
+		mat4(
+			vec4(1.0,0.0,0.0,0.0),
+			vec4(0.0,cos(angle.x),-sin(angle.x),0.0),
+			vec4(0.0,sin(angle.x),cos(angle.x),0.0),
+			vec4(0.0,0.0,0.0,1.0)
+		);
 
     return rotateMatrix;
 }
@@ -122,15 +146,28 @@ void main(){
 	vert.yz*=rot(-PI/2.0);
 
 	//rotation
+    //vec3 force=outBufferBoidsForce.boidsForce[id].force;
     vec3 force=outBufferBoidsData.boidsData[id].viewDir;
     force=(
 		(length(force)==0.0)? force : normalize(force)
-	)*2.0*PI-PI;
-    float theta_x=atan(force.y,force.z);
-    theta_x=2.0*PI-theta_x;
-    float theta_y=atan(force.x,force.z);
-                
-    mat4 rotMat=GetRotMatrix(vec3(theta_x,theta_y,0.0));
+	);
+
+	//atan2
+
+    float theta_x=PI;
+    //theta_x=2.0*PI-theta_x;
+    float theta_y=atan2(force.x,force.z);
+    float theta_z=atan2(force.x,force.y);
+
+	/*
+	float theta_x=atan2(force.z,force.y);
+    float theta_y=atan2(force.z,force.x);
+    float theta_z=atan2(force.y,force.x);
+	*/
+      
+	  
+	//vert.xz*=rot(PI);   
+    mat4 rotMat=GetRotMatrix(vec3(theta_x,theta_y,theta_z));
     vert=(rotMat*vec4(vert,1.0)).xyz;
 	
 	vert*=2000.0;

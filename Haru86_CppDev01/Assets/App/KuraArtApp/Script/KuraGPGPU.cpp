@@ -132,17 +132,6 @@ void KuraGPGPU::Update() {
 	m_computeShader_data->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_computeShader_data->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 	//boid uniform
-	/*m_computeShader_data->SetIntUniform("_boids_count", num);
-	m_computeShader_data->SetFloatUniform("_maxBoidsDist", 50);
-	m_computeShader_data->SetFloatUniform("_maxBoidsField", 400);
-	m_computeShader_data->SetFloatUniform("_centerPosPower", 1000000.0);
-	m_computeShader_data->SetFloatUniform("_NoiseValue", 0.1);
-	m_computeShader_data->SetFloatUniform("_joinPower", 10);
-	m_computeShader_data->SetFloatUniform("_separatePower", 10);
-	m_computeShader_data->SetFloatUniform("_alignmentPower", 10);
-	m_computeShader_data->SetFloatUniform("_joinDisMin", 100);
-	m_computeShader_data->SetFloatUniform("_separateDistMin", 10);
-	m_computeShader_data->SetFloatUniform("_alignmentDistMin", 250);*/
 	m_computeShader_data->Dispatch(num/256,1,1);
 
 	//Camera/////////////////////
@@ -152,7 +141,7 @@ void KuraGPGPU::Update() {
 	
 	std::vector<BoidsData> targerBoidsData = std::vector<BoidsData>(num, BoidsData(initPos, initvel));
 	m_computeBuffer_BoidsData->GetBufferData(&targerBoidsData[0], 0, num);
-	float radius = 0.0001;
+	float radius = 2.0;
 
 	//camera center
 	Game::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter = glm::vec3(
@@ -161,7 +150,9 @@ void KuraGPGPU::Update() {
 	//camera postion
 	Game::GetInstance()->game_camera_instance->transform->position =
 		Game::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter
-		+ glm::vec3(0.0,1.0,1.0);
+		+ glm::vec3(glm::cos(Game::GetInstance()->time*0.001), 
+			glm::sin(Game::GetInstance()->time * 0.001), 
+			glm::sin(Game::GetInstance()->time * 0.001))* radius;
 
 	targerBoidsData.clear();
 
