@@ -113,16 +113,17 @@ void KuraGPGPU::Update() {
 	m_computeShader_force->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_computeShader_force->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 	//boid uniform
-	m_computeShader_force->SetIntUniform("_boids_count", num);
 	m_computeShader_force->SetFloatUniform("_maxBoidsDist", 50);
-	m_computeShader_force->SetFloatUniform("_maxBoidsField",400);
 	m_computeShader_force->SetFloatUniform("_centerPosPower", 1000000.0);
-	m_computeShader_force->SetFloatUniform("_NoiseValue", 0.1);
+	
 	//ŽÀÛ‚ÉŽg‚Á‚Ä‚¢‚éuniform
+	m_computeShader_force->SetIntUniform("_boids_count", num);
+	m_computeShader_force->SetFloatUniform("_maxBoidsField", 400);
+	m_computeShader_force->SetFloatUniform("_NoiseValue", 0.1);
 	m_computeShader_force->SetFloatUniform("_joinPower", 1000);
 	m_computeShader_force->SetFloatUniform("_separatePower", 10);
 	m_computeShader_force->SetFloatUniform("_alignmentPower", 10);
-	m_computeShader_force->SetFloatUniform("_joinDisMin", 100);
+	m_computeShader_force->SetFloatUniform("_joinDisMin", 10);
 	m_computeShader_force->SetFloatUniform("_separateDistMin", 10);
 	m_computeShader_force->SetFloatUniform("_alignmentDistMin", 250);
 	m_computeShader_force->Dispatch(num / 256, 1, 1);
@@ -135,7 +136,7 @@ void KuraGPGPU::Update() {
 	m_computeShader_data->Dispatch(num/256,1,1);
 
 	//Camera/////////////////////
-	/*float initPos[3] = { 0,0,0 };
+	float initPos[3] = { 0,0,0 };
 	float initvel[3] = { 0,0,0 };
 	int targetIndex = num/4;
 	
@@ -154,7 +155,7 @@ void KuraGPGPU::Update() {
 			glm::sin(Game::GetInstance()->time * 0.001), 
 			glm::sin(Game::GetInstance()->time * 0.001))* radius;
 
-	targerBoidsData.clear();*/
+	targerBoidsData.clear();
 
 }
 

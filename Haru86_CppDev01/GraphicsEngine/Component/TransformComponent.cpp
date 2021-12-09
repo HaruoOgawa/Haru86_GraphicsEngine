@@ -69,10 +69,10 @@ void TransformComponent::ComputePerspectiveMatrix() {
 	float height = static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().y);
 	
 	pMatrix = glm::perspective(
-		glm::radians(120.0f),
+		glm::radians(90.0f),
 		width/height,
 		0.1f,
-		100.0f
+		1000.0f
 	);
 }
 

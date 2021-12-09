@@ -158,12 +158,12 @@ void main(){
 
     float speed=0.005;
     
-    for(int i=0;i<_boids_count;i+=255){
+    for(int i=0;i<_boids_count;i+=256){
         shared_BoidsData[GID]=outBufferBoidsData.boidsData[i+GID];
         
         groupMemoryBarrier();
 
-        for(int q=0;q<255;q++){
+        for(int q=0;q<256;q++){
             vec3 other_position=shared_BoidsData[q].position;
             vec3 other_velocity=shared_BoidsData[q].velocity;
 
