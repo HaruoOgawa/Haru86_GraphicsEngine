@@ -242,6 +242,10 @@ void main(){
     noiseVector=noiseVector*perlinNoise(vec2(_deltaTime,float(DID)))*0.2;
     result_velocity+=noiseVector;
 
-    outBufferBoidsForce.boidsForce[DID].force=result_velocity;
+    outBufferBoidsForce.boidsForce[DID].force=vec3(
+        (isnan(result_velocity.x))?0.001:result_velocity.x,
+        (isnan(result_velocity.y))?0.001:result_velocity.y,
+        (isnan(result_velocity.z))?0.001:result_velocity.z
+    );
 
 }

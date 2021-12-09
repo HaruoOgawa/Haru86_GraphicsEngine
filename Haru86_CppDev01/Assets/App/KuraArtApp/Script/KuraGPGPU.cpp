@@ -135,7 +135,7 @@ void KuraGPGPU::Update() {
 	m_computeShader_data->Dispatch(num/256,1,1);
 
 	//Camera/////////////////////
-	/*float initPos[3] = { 0,0,0 };
+	float initPos[3] = { 0,0,0 };
 	float initvel[3] = { 0,0,0 };
 	int targetIndex = num/4;
 	
@@ -154,7 +154,7 @@ void KuraGPGPU::Update() {
 			glm::sin(Game::GetInstance()->time * 0.001), 
 			glm::sin(Game::GetInstance()->time * 0.001))* radius;
 
-	targerBoidsData.clear();*/
+	targerBoidsData.clear();
 
 }
 
