@@ -35,7 +35,7 @@ void KuraArtApp::Start() {
 	Kura::background_obj = std::make_unique<GameObject>(PrimitiveType::SPHERE,
 		"./Assets/Shader/KuraShader/Background.vert",
 		"./Assets/Shader/KuraShader/Background.frag");
-	Kura::background_obj->SetScale(glm::vec3(500.0));
+	Kura::background_obj->SetScale(glm::vec3(1.0));
 	std::vector<std::string> texPath = { "./Assets/Resources/TextureData/sample.png" };
 	std::vector<std::string> texUniformName = {"_backgroundTex"};
 	Kura::background_obj->meshComp->material->LoadTextureList(texPath, texUniformName);
@@ -45,7 +45,7 @@ void KuraArtApp::Start() {
 	
 	Kura::audioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
 	if (Kura::audioObj->Initialize()) {
-		Kura::audioObj->PlayAudio();
+		//Kura::audioObj->PlayAudio();
 	}
 
 	Kura::gpgpu_obj = std::make_unique<Object>();
