@@ -54,6 +54,7 @@ void KuraArtApp::Start() {
 		static_cast<KuraGPGPU*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))
 	));
 
+
 }
 void KuraArtApp::Update() {
 	Kura::gpgpu_obj->Update();
