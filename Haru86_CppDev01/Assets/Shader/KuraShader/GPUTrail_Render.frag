@@ -21,12 +21,15 @@ void main(){
 	vec4 col=vec4(1.0);
 	col.rgb=vec3(0.0);
 	col.rgb=vec3(mod(g2f_o.uv,1.0),0.0);
-	vec2 st=mod(g2f_o.uv,10.0);
-	st.x*=0.1;
+	vec2 st=mod(g2f_o.uv,5.0);
+	st.x*=0.2;
 	col=texture(_trailTex,st);
 
-	//float node_life=1.0-clamp(_time-g2f_o.node_life,0.0,_initNodeLife)/_initNodeLife;
-    //col.a=node_life; 
+	if(col.a<0.5){
+		discard;
+	}
+	float node_life=1.0-clamp(_time*0.001-g2f_o.node_life,0.0,_initNodeLife)/_initNodeLife;
+    col.a=node_life*0.75; 
 
 	gl_FragColor=col;
 }
