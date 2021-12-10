@@ -11,7 +11,7 @@ in float g2f_flag;
 #define LightDir vec3(-0.613121, -0.1916, 0.766402)
 
 void main(){
-	vec4 col=vec4(0.5);
+	vec4 col=vec4(1.0);
 	col.rgb=vec3(0.0);
 
 	float flag=g2f_flag;

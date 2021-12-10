@@ -239,13 +239,13 @@ void main(){
     result_velocity=Turn(my_position,result_velocity,float(DID));
 
     vec3 noiseVector=normalize(cross(result_velocity,vec3(0.,0.,1.)));
-    noiseVector=noiseVector*perlinNoise(vec2(_deltaTime,float(DID)))*2.0;
+    noiseVector=noiseVector*perlinNoise(vec2(_time*0.001,float(DID)))*0.25;
     result_velocity+=noiseVector;
 
     outBufferBoidsForce.boidsForce[DID].force=vec3(
-        (isnan(result_velocity.x))?0.001:result_velocity.x,
-        (isnan(result_velocity.y))?0.001:result_velocity.y,
-        (isnan(result_velocity.z))?0.001:result_velocity.z
+        (isnan(result_velocity.x))?0.005:result_velocity.x,
+        (isnan(result_velocity.y))?0.005:result_velocity.y,
+        (isnan(result_velocity.z))?0.005:result_velocity.z
     );
 
 }

@@ -36,7 +36,7 @@ KuraTrail::KuraTrail(Object* o, KuraGPGPU* kuraGPGPU)
 	);
 
 	m_texture_trail = std::make_unique<Texture>();
-	if (!m_texture_trail->Load("./Assets/Resources/TextureData/trailTex.png")) {
+	if (!m_texture_trail->Load("./Assets/Resources/TextureData/brush_pow2.png")) {
 		printf("Cannot Load Texture\n");
 	}
 
@@ -130,6 +130,7 @@ void KuraTrail::Draw() {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_DEPTH_TEST);
+
 	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix()); 
 	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());

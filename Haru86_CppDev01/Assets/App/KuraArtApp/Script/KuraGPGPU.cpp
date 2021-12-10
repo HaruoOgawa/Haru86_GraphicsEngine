@@ -120,11 +120,11 @@ void KuraGPGPU::Update() {
 	m_computeShader_force->SetFloatUniform("_NoiseValue", 0.1);
 	//ŽÀÛ‚ÉŽg‚Á‚Ä‚¢‚éuniform
 	m_computeShader_force->SetFloatUniform("_joinPower", 1000);
-	m_computeShader_force->SetFloatUniform("_separatePower", 10);
-	m_computeShader_force->SetFloatUniform("_alignmentPower", 10);
+	m_computeShader_force->SetFloatUniform("_separatePower", 100);
+	m_computeShader_force->SetFloatUniform("_alignmentPower", 100);
 	m_computeShader_force->SetFloatUniform("_joinDisMin", 100);
 	m_computeShader_force->SetFloatUniform("_separateDistMin", 10);
-	m_computeShader_force->SetFloatUniform("_alignmentDistMin", 250);
+	m_computeShader_force->SetFloatUniform("_alignmentDistMin", 100);
 	m_computeShader_force->Dispatch(num / 256, 1, 1);
 
 	//Dispatch Data///////////////
@@ -141,7 +141,8 @@ void KuraGPGPU::Update() {
 	
 	std::vector<BoidsData> targerBoidsData = std::vector<BoidsData>(num, BoidsData(initPos, initvel));
 	m_computeBuffer_BoidsData->GetBufferData(&targerBoidsData[0], 0, num);
-	float radius = 2.0;
+	float radius = 4.0;
+	float speed = 0.0001;
 
 	//camera center
 	Game::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter = glm::vec3(
@@ -150,9 +151,10 @@ void KuraGPGPU::Update() {
 	//camera postion
 	Game::GetInstance()->game_camera_instance->transform->position =
 		Game::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter
-		+ glm::vec3(glm::cos(Game::GetInstance()->time*0.001), 
-			glm::sin(Game::GetInstance()->time * 0.001), 
-			glm::sin(Game::GetInstance()->time * 0.001))* radius;
+		+ glm::vec3(
+			glm::cos(Game::GetInstance()->time* speed),
+			glm::sin(Game::GetInstance()->time * speed),
+			glm::sin(Game::GetInstance()->time * speed))* radius;
 
 	targerBoidsData.clear();
 
@@ -166,7 +168,7 @@ void KuraGPGPU::Draw() {
 	
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 	
 
 	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix() * m_mesh->localMatrix); //
