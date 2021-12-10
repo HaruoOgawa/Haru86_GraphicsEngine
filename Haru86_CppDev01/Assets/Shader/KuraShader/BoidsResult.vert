@@ -135,7 +135,10 @@ void main(){
 		flag=1.0;
 	}
 
-	vec3 now_position=outBufferBoidsData.boidsData[id].position;
+	bool forceNor =(length(outBufferBoidsForce.boidsForce[id].force)==0.0);
+	vec3 now_position=outBufferBoidsData.boidsData[id].position
+		-((forceNor)? vec3(0.0) : normalize(outBufferBoidsForce.boidsForce[id].force)*2.0);
+	
 
 	vec3 vert=vertex;
 	

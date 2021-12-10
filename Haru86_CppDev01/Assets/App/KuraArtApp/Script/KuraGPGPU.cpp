@@ -24,7 +24,7 @@
 
 KuraGPGPU::KuraGPGPU(Object* o)
 	: Component(o, static_cast<std::string>(typeid(KuraGPGPU).name()).substr(6)),
-	num(512)
+	num(1024)
 {
 	//m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
 	//owner->SetScale(glm::vec3(0.01));
@@ -142,7 +142,7 @@ void KuraGPGPU::Update() {
 	std::vector<BoidsData> targerBoidsData = std::vector<BoidsData>(num, BoidsData(initPos, initvel));
 	m_computeBuffer_BoidsData->GetBufferData(&targerBoidsData[0], 0, num);
 	float radius = 4.0;
-	float speed = 0.0001;
+	float speed = 0.0005;
 
 	//camera center
 	Game::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter = glm::vec3(
@@ -168,7 +168,7 @@ void KuraGPGPU::Draw() {
 	
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_DEPTH_TEST);
 	
 
 	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix() * m_mesh->localMatrix); //
