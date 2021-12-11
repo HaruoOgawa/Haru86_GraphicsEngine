@@ -274,6 +274,11 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <None Include="Assets\Shader\KuraShader\GPUTrail_Render.geom" />
     <None Include="Assets\Shader\KuraShader\GPUTrail_Render.vert" />
     <None Include="Assets\Shader\KuraShader\KuraPostProcess.frag" />
+    <None Include="Assets\Shader\KuraShader\KuraTerrain.frag" />
+    <None Include="Assets\Shader\KuraShader\KuraTerrain.geom" />
+    <None Include="Assets\Shader\KuraShader\KuraTerrain.tesc" />
+    <None Include="Assets\Shader\KuraShader\KuraTerrain.tese" />
+    <None Include="Assets\Shader\KuraShader\KuraTerrain.vert" />
     <None Include="bin\libfreetype-6.dll" />
     <None Include="bin\SDL2_ttf.dll" />
     <None Include="bin\zlib1.dll" />

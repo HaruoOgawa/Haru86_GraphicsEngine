@@ -38,16 +38,23 @@ void KuraArtApp::Start() {
 		"./Assets/Shader/KuraShader/Background.frag");
 	Kura::background_obj->SetScale(glm::vec3(5000.0));
 	std::vector<std::string> texPath = { "./Assets/Resources/TextureData/InkBackground.png" };
-	std::vector<std::string> texUniformName = {"_backgroundTex"};
+	std::vector<std::string> texUniformName = { "_backgroundTex" };
 	Kura::background_obj->meshComp->material->LoadTextureList(texPath, texUniformName);
 
 	Kura::camera_obj = std::make_unique<CameraObject>(CameraType::FIXED_CAMERA);
 	Kura::camera_obj->SetPosition(glm::vec3(0, 0, -3.0));
-	
+
 	Kura::audioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
 	if (Kura::audioObj->Initialize()) {
 		Kura::audioObj->PlayAudio();
 	}
+
+	std::string kuraTerratnShaders[2] = { "./Assets/Shader/KuraShader/KuraTerrain.tesc","./Assets/Shader/KuraShader/KuraTerrain.tese"};
+	Kura::KuraTerrain_obj = std::make_unique<GameObject>(PrimitiveType::BOARD,
+		"./Assets/Shader/KuraShader/KuraTerrain.vert",
+		kuraTerratnShaders,
+		"./Assets/Shader/KuraShader/KuraTerrain.frag"
+	);
 
 	Kura::gpgpu_obj = std::make_unique<Object>();
 	Kura::gpgpu_obj->AddComponent(new KuraGPGPU(Kura::gpgpu_obj.get()));

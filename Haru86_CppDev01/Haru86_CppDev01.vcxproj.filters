@@ -272,6 +272,11 @@
     <None Include="Assets\Shader\KuraShader\Background.vert" />
     <None Include="Assets\Shader\KuraShader\Background.frag" />
     <None Include="Assets\Shader\KuraShader\KuraPostProcess.frag" />
+    <None Include="Assets\Shader\KuraShader\KuraTerrain.vert" />
+    <None Include="Assets\Shader\KuraShader\KuraTerrain.frag" />
+    <None Include="Assets\Shader\KuraShader\KuraTerrain.geom" />
+    <None Include="Assets\Shader\KuraShader\KuraTerrain.tesc" />
+    <None Include="Assets\Shader\KuraShader\KuraTerrain.tese" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\Resources\FontData\FRSCRIPT.TTF" />
