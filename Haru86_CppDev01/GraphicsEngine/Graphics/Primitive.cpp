@@ -91,7 +91,7 @@ void Primitive::Draw() {
 
 void Primitive::Draw(std::string drawType) {
 	SetActive();
-	glDrawElements(GL_PATCHES, GetNumIndices(), GL_UNSIGNED_SHORT, nullptr);
+	glDrawArrays(GL_PATCHES, 0, 4);
 }
 
 void Primitive::SetActive() {

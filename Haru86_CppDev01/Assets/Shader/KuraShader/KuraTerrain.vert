@@ -17,6 +17,8 @@ layout(location=2)in vec2 texcoord;
 
 void main(){
 	vec4 pos=vec4(vertex,1.0);
+	pos.xz*=rot(_time*0.001);
+	pos.xy*=rot(_time*0.001);
 	gl_Position=pos;
 	//uv=texcoord;
 }

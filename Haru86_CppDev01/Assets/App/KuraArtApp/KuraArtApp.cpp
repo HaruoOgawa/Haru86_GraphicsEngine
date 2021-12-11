@@ -55,6 +55,8 @@ void KuraArtApp::Start() {
 		kuraTerratnShaders,
 		"./Assets/Shader/KuraShader/KuraTerrain.frag"
 	);
+	Kura::KuraTerrain_obj->SetScale(glm::vec3(5.0,5.0,1.0));
+	//Kura::KuraTerrain_obj->SetRotation(glm::quat(glm::vec3(1.0, 0.0, 0.0)));
 
 	Kura::gpgpu_obj = std::make_unique<Object>();
 	Kura::gpgpu_obj->AddComponent(new KuraGPGPU(Kura::gpgpu_obj.get()));
@@ -69,8 +71,8 @@ void KuraArtApp::Update() {
 }
 
 void KuraArtApp::Draw() {
-	static_cast<KuraGPGPU*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))->Draw();
-	static_cast<KuraTrail*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraTrail).name())))->Draw();
+	//static_cast<KuraGPGPU*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))->Draw();
+	//static_cast<KuraTrail*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraTrail).name())))->Draw();
 	
 }
 
