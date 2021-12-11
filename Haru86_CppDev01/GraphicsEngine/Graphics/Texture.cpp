@@ -3,7 +3,8 @@
 #include <soil.h>
 
 Texture::Texture()
-	:mTextureID(0)
+	//:mTextureID(0)
+	:mTextureID(-1)
 	, mWidth(0)
 	, mHeight(0)
 {

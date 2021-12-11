@@ -7,7 +7,8 @@
 enum class PrimitiveType {
 	BOARD,
 	CUBE,
-	SPHERE
+	SPHERE,
+	POINT
 };
 
 class Mesh

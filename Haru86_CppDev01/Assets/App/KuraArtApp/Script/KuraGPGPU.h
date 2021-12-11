@@ -15,6 +15,7 @@ struct BoidsForce {
 struct BoidsData {
     float position[3];
     float velocity[3];
+    float viewDir[3];
     BoidsData(float p[3],float v[3]) {
         position[0] = p[0];
         position[1] = p[1];
@@ -23,6 +24,10 @@ struct BoidsData {
         velocity[0] = v[0];
         velocity[1] = v[1];
         velocity[2] = v[2];
+
+        viewDir[0] = p[0];
+        viewDir[1] = p[1];
+        viewDir[2] = p[2];
 
     }
 };
@@ -38,15 +43,17 @@ public:
     void ProcessInput(const Uint8* state)const override;
     void Draw();
     float rand(glm::vec2 st);
+    int num;
+    std::unique_ptr<class ComputeBuffer> m_computeBuffer_BoidsData;
     friend class KuraArtApp;
 private:
     std::unique_ptr<class Material> m_material;
     std::unique_ptr<class Mesh> m_mesh;
-    std::unique_ptr<class ComputeBuffer> m_computeBuffer_BoidsData;
+    
     std::unique_ptr<class ComputeBuffer> m_computeBuffer_BoidsForce;
     std::unique_ptr<class ComputeShader> m_computeShader_force;
     std::unique_ptr<class ComputeShader> m_computeShader_data;
-    int num;
+   
     
 };
 

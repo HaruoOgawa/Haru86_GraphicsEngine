@@ -19,32 +19,31 @@ Mesh::~Mesh() {
 }
 
 void Mesh::CreateMesh(PrimitiveType primType) {
-	std::vector<float> vertices;
-	std::vector<int> indices;
-
-	std::vector<std::vector<float>> vertices2D;
+	
+	std::vector<std::vector<float>> vertices;
 	std::vector<int> dimention;
-	std::vector<unsigned short> indices2D;
+	std::vector<unsigned short> indices;
 
 	switch (primType)
 	{
 	case PrimitiveType::BOARD:
-		//Primitive::CreateBoard(&vertices, &indices);
-		Primitive::CreateBoard(&vertices2D, &dimention,&indices2D);
+		Primitive::CreateBoard(&vertices, &dimention,&indices);
 		break;
 	case PrimitiveType::CUBE:
-		Primitive::CreateCube(&vertices, &indices);
+		Primitive::CreateCube(&vertices, &dimention, &indices);
 		break;
 	case PrimitiveType::SPHERE:
-		Primitive::CreateSphere(&vertices,&indices);
+		Primitive::CreateSphere(&vertices, &dimention, &indices);
+		break;
+	case PrimitiveType::POINT:
+		Primitive::CreatePoint(&vertices, &dimention, &indices);
 		break;
 	default:
-		Primitive::CreateBoard(&vertices, &indices);
+		Primitive::CreateBoard(&vertices, &dimention, &indices);
 		break;
 	}
 	
-	//std::unique_ptr<Primitive> prim = std::make_unique<Primitive>(vertices,indices);
-	std::unique_ptr<Primitive> prim = std::make_unique<Primitive>(vertices2D, dimention, indices2D);
+	std::unique_ptr<Primitive> prim = std::make_unique<Primitive>(vertices, dimention, indices);
 	m_primitives.push_back(std::move(prim));
 
 }

@@ -217,6 +217,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Object\Object.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Primitive.h" />
     <ClInclude Include="GraphicsEngine\Component\RectTransformComponent.h" />
+    <ClInclude Include="Assets\App\KuraArtApp\Script\KuraTrail.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Texture.h" />
     <ClInclude Include="GraphicsEngine\Game\Time.h" />
@@ -257,13 +258,22 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Component\TransformComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Component\UIComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\Mesh.cpp" />
+    <ClCompile Include="Assets\App\KuraArtApp\Script\KuraTrail.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shader\KuraShader\Background.frag" />
+    <None Include="Assets\Shader\KuraShader\Background.vert" />
     <None Include="Assets\Shader\KuraShader\BoidsForce.comp" />
     <None Include="Assets\Shader\KuraShader\BoidsData.comp" />
     <None Include="Assets\Shader\KuraShader\BoidsResult.frag" />
     <None Include="Assets\Shader\KuraShader\BoidsResult.geom" />
     <None Include="Assets\Shader\KuraShader\BoidsResult.vert" />
+    <None Include="Assets\Shader\KuraShader\GPUTrail_NextInputPos.comp" />
+    <None Include="Assets\Shader\KuraShader\GPUTrail_NodeInfo.comp" />
+    <None Include="Assets\Shader\KuraShader\GPUTrail_Render.frag" />
+    <None Include="Assets\Shader\KuraShader\GPUTrail_Render.geom" />
+    <None Include="Assets\Shader\KuraShader\GPUTrail_Render.vert" />
+    <None Include="Assets\Shader\KuraShader\KuraPostProcess.frag" />
     <None Include="bin\libfreetype-6.dll" />
     <None Include="bin\SDL2_ttf.dll" />
     <None Include="bin\zlib1.dll" />

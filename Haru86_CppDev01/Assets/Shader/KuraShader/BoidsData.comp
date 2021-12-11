@@ -14,6 +14,7 @@ layout(std430,binding=0) buffer destBufferBoidsForce
 struct BoidsData {
     vec3 position;
     vec3 velocity;
+    vec3 viewDir;
 };
 
 layout(std430,binding=1) buffer destBufferBoidsData
@@ -136,6 +137,7 @@ void main(){
    
     boids_data.position=next_pos;
     boids_data.velocity=nex_vel;
+    boids_data.viewDir=next_pos-now_pos;
 
    outBufferBoidsData.boidsData[DID]=boids_data;
 

@@ -129,6 +129,9 @@
     <ClInclude Include="GraphicsEngine\Component\CameraComponent.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Assets\App\KuraArtApp\Script\KuraTrail.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine\App\BaseApp\Main.cpp">
@@ -221,6 +224,9 @@
     <ClCompile Include="GraphicsEngine\Component\CameraComponent.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Assets\App\KuraArtApp\Script\KuraTrail.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -258,6 +264,14 @@
     <None Include="Assets\Shader\KuraShader\BoidsData.comp" />
     <None Include="Assets\Shader\KuraShader\BoidsResult.geom" />
     <None Include="Assets\Shader\KuraShader\BoidsForce.comp" />
+    <None Include="Assets\Shader\KuraShader\GPUTrail_NextInputPos.comp" />
+    <None Include="Assets\Shader\KuraShader\GPUTrail_NodeInfo.comp" />
+    <None Include="Assets\Shader\KuraShader\GPUTrail_Render.vert" />
+    <None Include="Assets\Shader\KuraShader\GPUTrail_Render.geom" />
+    <None Include="Assets\Shader\KuraShader\GPUTrail_Render.frag" />
+    <None Include="Assets\Shader\KuraShader\Background.vert" />
+    <None Include="Assets\Shader\KuraShader\Background.frag" />
+    <None Include="Assets\Shader\KuraShader\KuraPostProcess.frag" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\Resources\FontData\FRSCRIPT.TTF" />

@@ -13,9 +13,11 @@ public:
 	unsigned int GetTextureID() const { return mTextureID; }
 	void SetActive();
 	void Unload();
+	friend class Material;
 private:
 	unsigned int mTextureID;
 	int mWidth;
 	int mHeight;
+	std::string texUniformName;
 };
 

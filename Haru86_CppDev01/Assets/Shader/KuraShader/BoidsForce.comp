@@ -12,6 +12,7 @@ layout(std430,binding=0) buffer destBufferBoidsForce
 struct BoidsData {
     vec3 position;
     vec3 velocity;
+    vec3 viewDir;
 };
 
 layout(std430,binding=1) buffer destBufferBoidsData
@@ -233,14 +234,23 @@ void main(){
         result_velocity+=vec3(alignmentForce*_alignmentPower);
     
     }
-    vec3 previous_result_velocity=result_velocity;
-    result_velocity+=vec3(rand(vec2(float(DID),0.123))*2.0-1.0,rand(vec2(float(DID),0.456))*2.0-1.0,rand(vec2(float(DID),0.789))*2.0-1.0)*_NoiseValue*10.0;
+    
+     //Perlin Noise
+     vec3 nv=vec3(0.,0.,1.);
+    //nv=(int(floor(_time*0.001))%3==0)?vec3(0.,1.,0.):nv;
+    //nv=(int(floor(_time*0.001))%3==1)?vec3(1.,0.,0.):nv;
+
+    vec3 noiseVector=normalize(cross(result_velocity,nv));
+    float k=100.0;
+    noiseVector=noiseVector*(perlinNoise(vec2(_time*0.0001,float(DID)))*k-k*0.5);
+    result_velocity+=noiseVector;
+
     result_velocity=Turn(my_position,result_velocity,float(DID));
 
-    vec3 noiseVector=normalize(cross(result_velocity,vec3(0.,0.,1.)));
-    //noiseVector=noiseVector*perlinNoise(vec2(_deltaTime,float(DID)))*0.2;
-   // result_velocity+=noiseVector;
-
-    outBufferBoidsForce.boidsForce[DID].force=result_velocity;
+    outBufferBoidsForce.boidsForce[DID].force=vec3(
+        (isnan(result_velocity.x))?0.005:result_velocity.x,
+        (isnan(result_velocity.y))?0.005:result_velocity.y,
+        (isnan(result_velocity.z))?0.005:result_velocity.z
+    );
 
 }
