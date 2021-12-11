@@ -17,6 +17,7 @@
 
 namespace Kura{
 	std::unique_ptr<GameObject> background_obj;
+	std::unique_ptr<GameObject> KuraTerrain_obj;
 	std::unique_ptr<AudioObject> audioObj;
 	std::unique_ptr<Object> gpgpu_obj;
 	std::unique_ptr<CameraObject> camera_obj;
