@@ -16,6 +16,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 {
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
+	mesh->glDrawType = GLDrawType::NONE;
 	material = new Material();
 }
 
@@ -24,6 +25,7 @@ MeshRendererComponent::MeshRendererComponent(class Object* o, std::string objPat
 {
 	useZTest = true;
 	mesh = glTFLoader::Load(objPath);
+	mesh->glDrawType = GLDrawType::NONE;
 	material = new Material();
 }
 
@@ -32,7 +34,17 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 {
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
+	mesh->glDrawType = GLDrawType::NONE;
 	material = new Material(vertexShaderName,fragmentShaderName);
+}
+
+MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName)
+	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
+{
+	useZTest = true;
+	mesh = std::make_unique<Mesh>((primType));
+	mesh->glDrawType = GLDrawType::TESSELLATION;
+	material = new Material(vertexShaderName,tessellationShaderName,fragmentShaderName);
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, std::string textureString)
@@ -40,20 +52,11 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 {
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
+	mesh->glDrawType = GLDrawType::NONE;
 	material = new Material(vertexShaderName,fragmentShaderName);
 	if (GameRenderer::GetInstance()->font!=nullptr) {
 		primTex = GameRenderer::GetInstance()->font->GetFontTexture(textureString,glm::vec3(1.0,1.0,1.0), 30);
 	}
-	/*primTex =new Texture();
-	if (!primTex->Load("C:/Users/Haruo Ogawa/Pictures/noise.png")) {
-		delete primTex;
-		primTex = nullptr;
-		printf("Cannot LoadTex");
-	}
-	else {
-		printf("Tex is Loaded !!");
-		printf("primTex: %p \n",primTex);
-	}*/
 	
 }
 
@@ -63,6 +66,7 @@ MeshRendererComponent::MeshRendererComponent(class Object* o, std::string modelD
 {
 	useZTest = true;
 	mesh = glTFLoader::Load(modelDataPath);
+	mesh->glDrawType = GLDrawType::NONE;
 	material = new Material(vertexShaderName,fragmentShaderName);
 }
 
@@ -82,6 +86,8 @@ void MeshRendererComponent::Update() {
 void MeshRendererComponent::Draw() {
 	//ここでTextureをアクティブにする
 	material->SetActiveTextureList();
+
+	
 
 	if (primTex != nullptr) {
 		glEnable(GL_BLEND);
@@ -110,7 +116,15 @@ void MeshRendererComponent::Draw() {
 		clip->callback(clip->lifeTimeRate);
 	}
 
-	mesh->Draw();
+	if (mesh->glDrawType == GLDrawType::TESSELLATION) {
+		glPatchParameteri(GL_PATCH_VERTICES, 4);
+		mesh->Draw(mesh->glDrawType);
+	}
+	else {
+		mesh->Draw();
+	}
+
+	
 }
 
 void MeshRendererComponent::DrawBoard() {

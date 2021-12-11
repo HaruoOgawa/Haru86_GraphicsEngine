@@ -2,6 +2,7 @@
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 #include <GL/glut.h>
+#include "GraphicsEngine/Graphics/Mesh.h"
 
 Primitive::Primitive(std::vector<float> vertices, std::vector<int> indices) {
 	CreatePrimitive(vertices, indices);
@@ -86,6 +87,11 @@ void Primitive::CreatePrimitive(std::vector<std::vector<float>> vertices, std::v
 void Primitive::Draw() {
 	SetActive();
 	glDrawElements(GL_TRIANGLES, GetNumIndices(), GL_UNSIGNED_SHORT, nullptr);
+}
+
+void Primitive::Draw(std::string drawType) {
+	SetActive();
+	glDrawElements(GL_PATCHES, GetNumIndices(), GL_UNSIGNED_SHORT, nullptr);
 }
 
 void Primitive::SetActive() {

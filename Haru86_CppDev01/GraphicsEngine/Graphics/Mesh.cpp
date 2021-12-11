@@ -55,6 +55,13 @@ void Mesh::Draw() {
 
 }
 
+void Mesh::Draw(GLDrawType drawType) {
+	for (int i = 0; i < m_primitives.size();i++) {
+		m_primitives[i]->Draw("tessellation");
+	}
+
+}
+
 void Mesh::UnLoadData() {
 	
 }

@@ -15,6 +15,11 @@ Material::Material(std::string vertexShaderName, std::string fragmentShaderName)
 	LoadShader(vertexShaderName, fragmentShaderName);
 }
 
+Material::Material(std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName)
+{
+	LoadShader(vertexShaderName,tessellationShaderName, fragmentShaderName);
+}
+
 Material::Material(std::string vertexShaderName, std::string geometryShaderName, std::string fragmentShaderName)
 {
 	LoadShader(vertexShaderName, geometryShaderName, fragmentShaderName);
@@ -30,6 +35,35 @@ void Material::LoadShader(std::string vertName, std::string fragName) {
 		
 		shaderPrg = glCreateProgram();
 		glAttachShader(shaderPrg, vertShaderData);
+		glAttachShader(shaderPrg, fragShaderData);
+		glLinkProgram(shaderPrg);
+
+		GLint status;
+		glGetProgramiv(shaderPrg, GL_LINK_STATUS, &status);
+		if (status != GL_TRUE) {
+			SDL_Log("Cannot Load Program Data");
+			char buffer[512];
+			memset(buffer, 0, 512);
+			glGetProgramInfoLog(shaderPrg, 511, nullptr, buffer);
+			SDL_Log("GLSL Link Status:\n%s", buffer);
+		}
+		else
+		{
+			//SDL_Log("Success!! Loaded All Shader file");
+		}
+	}
+}
+
+void Material::LoadShader(std::string vertName, std::string tessellationShaderName[2], std::string fragName) {
+	if (CompileShader(vertName,GL_VERTEX_SHADER,vertShaderData)&&
+		CompileShader(tessellationShaderName[0], GL_TESS_CONTROL_SHADER,tessControlShaderData)&&
+		CompileShader(tessellationShaderName[1],GL_TESS_EVALUATION_SHADER,tessEvalShaderData)&&
+		CompileShader(fragName,GL_FRAGMENT_SHADER,fragShaderData)) {
+		
+		shaderPrg = glCreateProgram();
+		glAttachShader(shaderPrg, vertShaderData);
+		glAttachShader(shaderPrg, tessControlShaderData);
+		glAttachShader(shaderPrg, tessEvalShaderData);
 		glAttachShader(shaderPrg, fragShaderData);
 		glLinkProgram(shaderPrg);
 

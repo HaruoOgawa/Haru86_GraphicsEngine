@@ -1,5 +1,5 @@
 ﻿  KuraArtApp.cpp
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(27,44): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(28,44): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(32): message : 'TimelineAnimationClip' の宣言を確認してください
   Haru86_CppDev01.vcxproj -> E:\CppDev\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2-2.0.16\lib\x86\SDL2.dll
@@ -45,6 +45,11 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineCompo
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPUTrail_Render.geom
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPUTrail_Render.vert
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\KuraPostProcess.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\KuraTerrain.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\KuraTerrain.geom
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\KuraTerrain.tesc
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\KuraTerrain.tese
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\KuraTerrain.vert
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\BoardRender.frag
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\BoardRender.vert
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\PostProcess.frag
@@ -54,7 +59,7 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineCompo
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene3.frag
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene4.frag
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene5.frag
-  29 個のファイルをコピーしました
+  34 個のファイルをコピーしました
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\FontData\FRSCRIPT.TTF
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix\Phoenix\Phoenix.glb
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix\Phoenix\Phoenix.gltf
