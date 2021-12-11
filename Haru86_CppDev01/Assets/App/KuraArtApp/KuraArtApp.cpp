@@ -36,7 +36,7 @@ void KuraArtApp::Start() {
 		"./Assets/Shader/KuraShader/Background.vert",
 		"./Assets/Shader/KuraShader/Background.frag");
 	Kura::background_obj->SetScale(glm::vec3(2000.0));
-	std::vector<std::string> texPath = { "./Assets/Resources/TextureData/InkBackground.jpg" };
+	std::vector<std::string> texPath = { "./Assets/Resources/TextureData/InkBackground.png" };
 	std::vector<std::string> texUniformName = {"_backgroundTex"};
 	Kura::background_obj->meshComp->material->LoadTextureList(texPath, texUniformName);
 
