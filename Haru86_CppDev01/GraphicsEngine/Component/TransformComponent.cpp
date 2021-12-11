@@ -72,7 +72,7 @@ void TransformComponent::ComputePerspectiveMatrix() {
 		glm::radians(120.0f),
 		width/height,
 		0.1f,
-		3000.0f
+		10000.0f
 	);
 }
 
