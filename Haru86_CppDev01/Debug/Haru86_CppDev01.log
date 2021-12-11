@@ -7,9 +7,9 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(61,38): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(62,38): warning C4838: 'double' から 'float' への変換には縮小変換が必要です
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(62,38): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(120,59): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(145,22): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(190,19): warning C4244: 'return': 'genType' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(122,59): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(146,22): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(191,19): warning C4244: 'return': 'genType' から 'float' への変換です。データが失われる可能性があります。
           with
           [
               genType=double
