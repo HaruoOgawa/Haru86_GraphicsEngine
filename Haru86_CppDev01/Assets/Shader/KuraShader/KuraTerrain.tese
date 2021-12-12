@@ -73,7 +73,7 @@ void main(){
 
 	//vec4 pos= v0*(1.0-u)*(1.0-v) + v1*u*(1.0-v) +v2*u*v  + v3*(1.0-u)*v;
 	vec4 pos=vec4(v0.xyz*gl_TessCoord.x+v1.xyz*gl_TessCoord.y+v2.xyz*gl_TessCoord.z,1.0); 
-    pos.xyz+=(1.0-height.r)*10.0*normal;
+    pos.xyz+=(1.0-height.r)*1000.0*normal;
 
     gl_Position=pos;
 	pid=float(gl_PrimitiveID);

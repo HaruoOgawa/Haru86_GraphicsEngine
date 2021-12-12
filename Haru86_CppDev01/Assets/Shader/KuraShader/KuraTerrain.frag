@@ -15,7 +15,7 @@ void main(){
 	
 	float diff=max(dot(normalize(g2f_normal),normalize(LightDir)),0.0);
 	col.rgb*=diff;
-	col.rgb+=vec3(0.0);
+	col.rgb+=vec3(0.1);
 
 	gl_FragColor=col;
 }
