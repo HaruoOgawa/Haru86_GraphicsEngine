@@ -43,7 +43,8 @@ void KuraArtApp::Start() {
 	Kura::background_obj->meshComp->material->LoadTextureList(texPath, texUniformName);
 
 	Kura::camera_obj = std::make_unique<CameraObject>(CameraType::FIXED_CAMERA);
-	Kura::camera_obj->SetPosition(glm::vec3(0, 10.0, -10.0));
+	//Kura::camera_obj->SetPosition(glm::vec3(0, 10.0, -10.0));
+	Kura::camera_obj->SetPosition(glm::vec3(0, 0.0, -3.0));
 
 	Kura::audioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
 	if (Kura::audioObj->Initialize()) {
@@ -59,9 +60,13 @@ void KuraArtApp::Start() {
 	};
 	
 	Kura::KuraTerrain_obj = std::make_unique<GameObject>(PrimitiveType::BOARD,shaders);
-	Kura::KuraTerrain_obj->SetScale(glm::vec3(12.0,12.0,1.0));
-	Kura::KuraTerrain_obj->SetPosition(glm::vec3(0.0,-5.0,0.0));
-	Kura::KuraTerrain_obj->SetRotation(glm::quat(glm::vec3(90.0,0.0,0.0)));
+	//Kura::KuraTerrain_obj->SetScale(glm::vec3(5.0,5.0,1.0));
+	Kura::KuraTerrain_obj->SetScale(glm::vec3(5000.0,5000.0,1.0));
+	Kura::KuraTerrain_obj->SetPosition(glm::vec3(0.0,-1.0,0.0));
+	Kura::KuraTerrain_obj->SetRotation(glm::quat(glm::vec3(3.14159265/2.0,0.0,0.0)));
+	std::vector<std::string> texPath_KuraTerrain_obj = { "./Assets/Resources/TextureData/KuraTerrainHeightMap.png" };
+	std::vector<std::string> texUniformName_KuraTerrain_obj = { "_heightMap" };
+	Kura::KuraTerrain_obj->meshComp->material->LoadTextureList(texPath_KuraTerrain_obj, texUniformName_KuraTerrain_obj);
 
 	Kura::gpgpu_obj = std::make_unique<Object>();
 	Kura::gpgpu_obj->AddComponent(new KuraGPGPU(Kura::gpgpu_obj.get()));
@@ -76,8 +81,8 @@ void KuraArtApp::Update() {
 }
 
 void KuraArtApp::Draw() {
-	//static_cast<KuraGPGPU*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))->Draw();
-	//static_cast<KuraTrail*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraTrail).name())))->Draw();
+	static_cast<KuraGPGPU*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))->Draw();
+	static_cast<KuraTrail*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraTrail).name())))->Draw();
 	
 }
 

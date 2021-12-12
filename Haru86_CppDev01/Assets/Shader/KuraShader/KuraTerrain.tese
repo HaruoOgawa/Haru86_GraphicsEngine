@@ -10,6 +10,8 @@ uniform mat4 PMatrix;
 uniform float _time;
 uniform float _deltaTime;
 
+uniform sampler2D _heightMap;
+
 in vec3 tesc2tese_normal[];
 
 out float pid;
@@ -64,19 +66,16 @@ void main(){
          tesc2tese_normal[1]*gl_TessCoord.y + 
          tesc2tese_normal[2]*gl_TessCoord.z 
     );
-    //t2f_normal=(MMatrix*vec4(normal,1.0)).xyz;
     t2f_normal=normal;
+
+    //height
+    vec3 height=texture(_heightMap,gl_TessCoord.xy).rgb;
 
 	//vec4 pos= v0*(1.0-u)*(1.0-v) + v1*u*(1.0-v) +v2*u*v  + v3*(1.0-u)*v;
 	vec4 pos=vec4(v0.xyz*gl_TessCoord.x+v1.xyz*gl_TessCoord.y+v2.xyz*gl_TessCoord.z,1.0); 
-   
-   pos.y+=(perlinNoise(gl_TessCoord.xy*10000.0+vec2(0.123,0.954))*1.2+
-        perlinNoise(gl_TessCoord.xy*500.0+vec2(0.951,0.954))*0.5+
-        perlinNoise(gl_TessCoord.xy*250.0+vec2(0.951,0.954))*0.25 +
-        perlinNoise(gl_TessCoord.xy*50.0+vec2(0.951,0.456))*0.1
-        )*0.25;
+    pos.xyz+=(1.0-height.r)*10.0*normal;
 
-    gl_Position=MVPMatrix*pos;
+    gl_Position=pos;
 	pid=float(gl_PrimitiveID);
    
 }

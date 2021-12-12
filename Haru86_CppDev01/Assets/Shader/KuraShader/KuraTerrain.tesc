@@ -6,8 +6,8 @@ layout(vertices=3)out;
 in vec3 v2tesc_normal[];
 out vec3 tesc2tese_normal[];
 
-float outLevel=100.0;
-float inLevel=100.0;
+float outLevel=320.0;
+float inLevel=160.0;
 
 void main(){
 	gl_out[gl_InvocationID].gl_Position=gl_in[gl_InvocationID].gl_Position;	

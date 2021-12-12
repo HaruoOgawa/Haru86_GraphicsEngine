@@ -1,8 +1,6 @@
 ﻿  KuraArtApp.cpp
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(29,44): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(32): message : 'TimelineAnimationClip' の宣言を確認してください
-  Object.cpp
-  コードを生成中...
   Haru86_CppDev01.vcxproj -> E:\CppDev\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2-2.0.16\lib\x86\SDL2.dll
   1 個のファイルをコピーしました
@@ -87,6 +85,7 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineCompo
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\TextureData\InkBackground.jpg
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\TextureData\InkBackground.png
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\TextureData\InkBackground.psd
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\TextureData\KuraTerrainHeightMap.png
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\TextureData\sample.png
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\TextureData\trailTex.png
-  27 個のファイルをコピーしました
+  28 個のファイルをコピーしました

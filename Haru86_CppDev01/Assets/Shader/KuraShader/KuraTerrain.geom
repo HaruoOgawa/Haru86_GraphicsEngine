@@ -19,15 +19,15 @@ void main(){
 
     vec3 normal=normalize(cross(normalize(p1.xyz-p0.xyz),normalize(p2.xyz-p0.xyz)));
 
-    gl_Position =p0;
+    gl_Position =MVPMatrix*p0;
     g2f_normal=(MMatrix*vec4(normal,1.0)).xyz;
     EmitVertex();
 
-    gl_Position =p1;
+    gl_Position =MVPMatrix*p1;
     g2f_normal=(MMatrix*vec4(normal,1.0)).xyz;
     EmitVertex();
     
-    gl_Position =p2;
+    gl_Position =MVPMatrix*p2;
     g2f_normal=(MMatrix*vec4(normal,1.0)).xyz;
     EmitVertex();
     
