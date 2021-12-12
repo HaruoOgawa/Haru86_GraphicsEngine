@@ -133,10 +133,10 @@ void Primitive::CreateBoard(std::vector<std::vector<float>>* vertices, std::vect
 	};
 
 	std::vector<float> normal = {
-		0.f, 0.f, 0.0f,
-		0.f, 0.f, 0.0f,
-		0.f, 0.f, 0.0f,
-		0.f, 0.f, 0.0f,
+		0.f, 0.f, 1.0f,
+		0.f, 0.f, 1.0f,
+		0.f, 0.f, 1.0f,
+		0.f, 0.f, 1.0f,
 	};
 	
 	std::vector<float> texcoord = {

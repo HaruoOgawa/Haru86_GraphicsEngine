@@ -14,6 +14,7 @@ in vec3 tesc2tese_normal[];
 
 out float pid;
 out vec3 t2f_normal;
+out vec2 uv;
 
 vec2 random2(vec2 seeds)
 {
@@ -58,22 +59,22 @@ void main(){
 	vec4 v2=gl_in[2].gl_Position;
 	//vec4 v3=gl_in[3].gl_Position;
 
-   /* vec3 normal=normalize(
-         tesc2tese_normal[0]*(1.0-u)*(1.0-v) +
-         tesc2tese_normal[1]*u*(1.0-v) + 
-         tesc2tese_normal[2]*u*v  + 
-         tesc2tese_normal[3]*(1.0-u)*v
+    vec3 normal=normalize(
+         tesc2tese_normal[0]*gl_TessCoord.x +
+         tesc2tese_normal[1]*gl_TessCoord.y + 
+         tesc2tese_normal[2]*gl_TessCoord.z 
     );
-    t2f_normal=(MMatrix*vec4(normal,1.0)).xyz;*/
+    //t2f_normal=(MMatrix*vec4(normal,1.0)).xyz;
+    t2f_normal=normal;
 
 	//vec4 pos= v0*(1.0-u)*(1.0-v) + v1*u*(1.0-v) +v2*u*v  + v3*(1.0-u)*v;
 	vec4 pos=vec4(v0.xyz*gl_TessCoord.x+v1.xyz*gl_TessCoord.y+v2.xyz*gl_TessCoord.z,1.0); 
    
-   /*pos.y+=perlinNoise(gl_TessCoord.xy*100.0+vec2(0.123,_time*0.001))*0.5+
-        perlinNoise(gl_TessCoord.xy*200.0+vec2(0.951,_time*0.001))*0.25+
-        perlinNoise(gl_TessCoord.xy*400.0+vec2(0.951,_time*0.001))*0.1
-    ;*/
+   pos.y+=(perlinNoise(gl_TessCoord.xy*100.0+vec2(0.123,0.954))+
+        perlinNoise(gl_TessCoord.xy*200.0+vec2(0.951,0.954))*0.5+
+        perlinNoise(gl_TessCoord.xy*400.0+vec2(0.951,0.954))*0.1)*0.5 ;
 
     gl_Position=MVPMatrix*pos;
 	pid=float(gl_PrimitiveID);
+   
 }

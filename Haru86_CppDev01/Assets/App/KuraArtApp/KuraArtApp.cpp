@@ -54,12 +54,12 @@ void KuraArtApp::Start() {
 		{GL_VERTEX_SHADER,"./Assets/Shader/KuraShader/KuraTerrain.vert"},
 		{GL_TESS_CONTROL_SHADER, "./Assets/Shader/KuraShader/KuraTerrain.tesc"},
 		{GL_TESS_EVALUATION_SHADER,"./Assets/Shader/KuraShader/KuraTerrain.tese"},
-		//{GL_GEOMETRY_SHADER,"./Assets/Shader/KuraShader/KuraTerrain.geom"},
+		{GL_GEOMETRY_SHADER,"./Assets/Shader/KuraShader/KuraTerrain.geom"},
 		{GL_FRAGMENT_SHADER,"./Assets/Shader/KuraShader/KuraTerrain.frag"}
 	};
 	
 	Kura::KuraTerrain_obj = std::make_unique<GameObject>(PrimitiveType::BOARD,shaders);
-	Kura::KuraTerrain_obj->SetScale(glm::vec3(10.0,10.0,1.0));
+	Kura::KuraTerrain_obj->SetScale(glm::vec3(12.0,12.0,1.0));
 	Kura::KuraTerrain_obj->SetPosition(glm::vec3(0.0,-5.0,0.0));
 	
 
