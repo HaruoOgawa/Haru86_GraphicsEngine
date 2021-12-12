@@ -55,7 +55,7 @@ void KuraGPGPU::Start() {
 	std::vector<BoidsData> resultData;
 	
 	for (int i = 0; i < num;i++) {
-		float size = 300.0;
+		float size = 100.0;
 		float pos[3] = {
 			(rand(glm::vec2(i,0.951))*2.0-1.0)* size,
 			(rand(glm::vec2(i,0.456))*2.0-1.0)* size,
@@ -118,7 +118,7 @@ void KuraGPGPU::Update() {
 	
 	//ŽÀÛ‚ÉŽg‚Á‚Ä‚¢‚éuniform
 	m_computeShader_force->SetIntUniform("_boids_count", num);
-	m_computeShader_force->SetFloatUniform("_maxBoidsField", 400);
+	m_computeShader_force->SetFloatUniform("_maxBoidsField", 200);
 	m_computeShader_force->SetFloatUniform("_NoiseValue", 0.1);
 	m_computeShader_force->SetFloatUniform("_joinPower", 100);
 	m_computeShader_force->SetFloatUniform("_separatePower", 1000);
@@ -136,7 +136,7 @@ void KuraGPGPU::Update() {
 	m_computeShader_data->Dispatch(num/256,1,1);
 
 	//Camera/////////////////////
-	/*float initPos[3] = { 0,0,0 };
+	float initPos[3] = { 0,0,0 };
 	float initvel[3] = { 0,0,0 };
 	int targetIndex = num/4;
 	
@@ -157,7 +157,7 @@ void KuraGPGPU::Update() {
 			glm::sin(Game::GetInstance()->time * speed),
 			glm::sin(Game::GetInstance()->time * speed))* radius;
 
-	targerBoidsData.clear();*/
+	targerBoidsData.clear();
 
 }
 

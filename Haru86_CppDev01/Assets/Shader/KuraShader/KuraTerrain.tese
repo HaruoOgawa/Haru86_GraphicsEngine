@@ -70,9 +70,11 @@ void main(){
 	//vec4 pos= v0*(1.0-u)*(1.0-v) + v1*u*(1.0-v) +v2*u*v  + v3*(1.0-u)*v;
 	vec4 pos=vec4(v0.xyz*gl_TessCoord.x+v1.xyz*gl_TessCoord.y+v2.xyz*gl_TessCoord.z,1.0); 
    
-   pos.y+=(perlinNoise(gl_TessCoord.xy*100.0+vec2(0.123,0.954))+
-        perlinNoise(gl_TessCoord.xy*200.0+vec2(0.951,0.954))*0.5+
-        perlinNoise(gl_TessCoord.xy*400.0+vec2(0.951,0.954))*0.1)*0.5 ;
+   pos.y+=(perlinNoise(gl_TessCoord.xy*10000.0+vec2(0.123,0.954))*1.2+
+        perlinNoise(gl_TessCoord.xy*500.0+vec2(0.951,0.954))*0.5+
+        perlinNoise(gl_TessCoord.xy*250.0+vec2(0.951,0.954))*0.25 +
+        perlinNoise(gl_TessCoord.xy*50.0+vec2(0.951,0.456))*0.1
+        )*0.25;
 
     gl_Position=MVPMatrix*pos;
 	pid=float(gl_PrimitiveID);
