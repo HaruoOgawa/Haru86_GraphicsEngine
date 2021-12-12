@@ -131,7 +131,7 @@ void MeshRendererComponent::Draw() {
 	}
 
 	if (mesh->glDrawType == GLDrawType::TESSELLATION) {
-		glPatchParameteri(GL_PATCH_VERTICES, 4);
+		//glPatchParameteri(GL_PATCH_VERTICES, 4);
 		mesh->Draw(mesh->glDrawType);
 	}
 	else {

@@ -1,12 +1,13 @@
 #version 410
 
-layout(vertices=4)out;
+//layout(vertices=4)out;
+layout(vertices=3)out;
 
 in vec3 v2tesc_normal[];
 out vec3 tesc2tese_normal[];
 
-float outLevel=20.0;
-float inLevel=20.0;
+float outLevel=1.0;
+float inLevel=1.0;
 
 void main(){
 	gl_out[gl_InvocationID].gl_Position=gl_in[gl_InvocationID].gl_Position;	
@@ -15,9 +16,9 @@ void main(){
 	gl_TessLevelOuter[0]=outLevel;
 	gl_TessLevelOuter[1]=outLevel;
 	gl_TessLevelOuter[2]=outLevel;
-	gl_TessLevelOuter[3]=outLevel;
+	//gl_TessLevelOuter[3]=outLevel;
 	
 	gl_TessLevelInner[0]=inLevel;
-	gl_TessLevelInner[1]=inLevel;
+	//gl_TessLevelInner[1]=inLevel;
 
 }

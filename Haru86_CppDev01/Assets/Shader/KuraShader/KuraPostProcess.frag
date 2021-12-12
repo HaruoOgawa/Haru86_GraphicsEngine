@@ -21,7 +21,7 @@ void main(void){
 	vec2 st=uv;
 	st=2.0*st-1.0;
 	float width=0.4;
-	col.rgb*=(abs(st.y)>1.0-width)? 0.0:1.0;
+	//col.rgb*=(abs(st.y)>1.0-width)? 0.0:1.0;
 	
 	gl_FragColor=col;
 }
