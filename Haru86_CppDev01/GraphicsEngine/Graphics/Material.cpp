@@ -63,10 +63,7 @@ void Material::LoadShader(std::map<GLenum, std::string> shaders) {
 			printf("Compile is failure...\n");
 			break;
 		}
-		else {
-			printf("Compile is Suceesee!! \n");
-		}
-
+		
 	}
 	
 	if (compileResult) {

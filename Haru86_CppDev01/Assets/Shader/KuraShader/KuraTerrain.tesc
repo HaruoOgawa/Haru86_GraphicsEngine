@@ -6,7 +6,7 @@ in vec3 v2tesc_normal[];
 out vec3 tesc2tese_normal[];
 
 float outLevel=20.0;
-float inLevel=10.0;
+float inLevel=20.0;
 
 void main(){
 	gl_out[gl_InvocationID].gl_Position=gl_in[gl_InvocationID].gl_Position;	
