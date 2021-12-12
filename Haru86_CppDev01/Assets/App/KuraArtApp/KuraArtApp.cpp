@@ -43,12 +43,11 @@ void KuraArtApp::Start() {
 	Kura::background_obj->meshComp->material->LoadTextureList(texPath, texUniformName);
 
 	Kura::camera_obj = std::make_unique<CameraObject>(CameraType::FIXED_CAMERA);
-	//Kura::camera_obj->SetPosition(glm::vec3(0, 10.0, -10.0));
 	Kura::camera_obj->SetPosition(glm::vec3(0, 0.0, -3.0));
 
 	Kura::audioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
 	if (Kura::audioObj->Initialize()) {
-		//Kura::audioObj->PlayAudio();
+		Kura::audioObj->PlayAudio();
 	}
 
 	std::map<GLenum, std::string> shaders = {
@@ -60,7 +59,6 @@ void KuraArtApp::Start() {
 	};
 	
 	Kura::KuraTerrain_obj = std::make_unique<GameObject>(PrimitiveType::BOARD,shaders);
-	//Kura::KuraTerrain_obj->SetScale(glm::vec3(5.0,5.0,1.0));
 	Kura::KuraTerrain_obj->SetScale(glm::vec3(5000.0,5000.0,1.0));
 	Kura::KuraTerrain_obj->SetPosition(glm::vec3(0.0,-1.0,0.0));
 	Kura::KuraTerrain_obj->SetRotation(glm::quat(glm::vec3(3.14159265/2.0,0.0,0.0)));
