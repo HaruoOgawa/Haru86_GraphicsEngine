@@ -11,10 +11,12 @@ class Material
 {
 public:
     Material();
+    Material(std::map<GLenum, std::string> shaders);
     Material(std::string vertexShaderName, std::string fragmentShaderName);
     Material(std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName);
     Material(std::string vertexShaderName, std::string geometryShaderName, std::string fragmentShaderName);
     ~Material();
+    void LoadShader(std::map<GLenum,std::string> shaders);
     void LoadShader(std::string vertName,std::string fragName);
     void LoadShader(std::string vertName, std::string tessellationShaderName[2],std::string fragName);
     void LoadShader(std::string vertName,std::string geomName,std::string fragName);

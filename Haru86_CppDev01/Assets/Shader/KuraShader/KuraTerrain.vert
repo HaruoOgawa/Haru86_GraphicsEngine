@@ -12,6 +12,7 @@ layout(location=1)in vec3 normal;
 layout(location=2)in vec2 texcoord;
 
 //out vec2 uv;
+out vec3 v2tesc_normal;
 
 #define rot(a) mat2(cos(a),-sin(a),sin(a),cos(a))
 
@@ -20,5 +21,5 @@ void main(){
 	pos.xz*=rot(_time*0.001);
 	pos.xy*=rot(_time*0.001);
 	gl_Position=pos;
-	//uv=texcoord;
+	v2tesc_normal=(MMatrix*vec4(normal,1.0)).xyz;
 }

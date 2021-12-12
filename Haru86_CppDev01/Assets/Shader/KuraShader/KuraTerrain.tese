@@ -9,8 +9,10 @@ uniform mat4 PMatrix;
 uniform float _time;
 uniform float _deltaTime;
 
-out float pid;
+in vec3 tesc2tese_normal[];
 
+out float pid;
+out vec3 t2f_normal;
 
 vec2 random2(vec2 seeds)
 {
@@ -54,6 +56,14 @@ void main(){
 	vec4 v1=gl_in[1].gl_Position;
 	vec4 v2=gl_in[2].gl_Position;
 	vec4 v3=gl_in[3].gl_Position;
+
+    vec3 normal=normalize(
+         tesc2tese_normal[0]*(1.0-u)*(1.0-v) +
+         tesc2tese_normal[1]*u*(1.0-v) + 
+         tesc2tese_normal[2]*u*v  + 
+         tesc2tese_normal[3]*(1.0-u)*v
+    );
+    t2f_normal=normal;
 
 	vec4 pos= v0*(1.0-u)*(1.0-v) + v1*u*(1.0-v) +v2*u*v  + v3*(1.0-u)*v;
 	//vec4 pos= v0*gl_TessCoord.x + v1*gl_TessCoord.y +v2*gl_TessCoord.z ;

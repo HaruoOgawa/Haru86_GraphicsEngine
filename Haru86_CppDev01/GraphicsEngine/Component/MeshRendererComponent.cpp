@@ -20,6 +20,20 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 	material = new Material();
 }
 
+MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::map<GLenum, std::string> shaders)
+	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)
+{
+	useZTest = true;
+	mesh = std::make_unique<Mesh>((primType));
+	if (shaders.find(GL_TESS_CONTROL_SHADER)!=shaders.end()) {
+		mesh->glDrawType = GLDrawType::TESSELLATION;
+	}
+	else {
+		mesh->glDrawType = GLDrawType::NONE;
+	}
+	material = new Material(shaders);
+}
+
 MeshRendererComponent::MeshRendererComponent(class Object* o, std::string objPath)
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)
 {

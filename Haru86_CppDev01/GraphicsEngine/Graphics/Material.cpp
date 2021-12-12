@@ -10,6 +10,10 @@ Material::Material() {
 	LoadShader("./Assets/Shader/Standard.vert", "./Assets/Shader/Standard.frag");
 }
 
+Material::Material(std::map<GLenum, std::string> shaders) {
+	LoadShader(shaders);
+}
+
 Material::Material(std::string vertexShaderName, std::string fragmentShaderName)
 {
 	LoadShader(vertexShaderName, fragmentShaderName);
@@ -29,6 +33,82 @@ Material::~Material() {
 	UnLoadData();
 }
 
+void Material::LoadShader(std::map<GLenum, std::string> shaders) {
+	bool compileResult = false;
+
+	for (auto shader : shaders) {
+		switch (shader.first)
+		{
+		case GL_VERTEX_SHADER:
+			compileResult = CompileShader(shader.second, shader.first, vertShaderData);
+			break;
+		case GL_TESS_CONTROL_SHADER:
+			compileResult = CompileShader(shader.second, shader.first, tessControlShaderData);
+			break;
+		case GL_TESS_EVALUATION_SHADER:
+			compileResult = CompileShader(shader.second, shader.first, tessEvalShaderData);
+			break;
+		case GL_GEOMETRY_SHADER:
+			compileResult = CompileShader(shader.second, shader.first, geometryShaderData);
+			break;
+		case GL_FRAGMENT_SHADER:
+			compileResult = CompileShader(shader.second, shader.first, fragShaderData);
+			break;
+		default:
+			compileResult = false;
+			break;
+		}
+
+		if (!compileResult) {
+			printf("Compile is failure...\n");
+			break;
+		}
+		else {
+			printf("Compile is Suceesee!! \n");
+		}
+
+	}
+	
+	if (compileResult) {
+		
+		shaderPrg = glCreateProgram();
+		
+		for (auto shader : shaders) {
+			switch (shader.first)
+			{
+			case GL_VERTEX_SHADER:
+				glAttachShader(shaderPrg, vertShaderData);
+				break;
+			case GL_TESS_CONTROL_SHADER:
+				glAttachShader(shaderPrg, tessControlShaderData);
+				break;
+			case GL_TESS_EVALUATION_SHADER:
+				glAttachShader(shaderPrg, tessEvalShaderData);
+				break;
+			case GL_GEOMETRY_SHADER:
+				glAttachShader(shaderPrg, geometryShaderData);
+				break;
+			case GL_FRAGMENT_SHADER:
+				glAttachShader(shaderPrg, fragShaderData);
+				break;
+			default:
+				break;
+			}
+		}
+
+		glLinkProgram(shaderPrg);
+
+		GLint status;
+		glGetProgramiv(shaderPrg, GL_LINK_STATUS, &status);
+		if (status != GL_TRUE) {
+			SDL_Log("Cannot Load Program Data");
+			char buffer[512];
+			memset(buffer, 0, 512);
+			glGetProgramInfoLog(shaderPrg, 511, nullptr, buffer);
+			SDL_Log("GLSL Link Status:\n%s", buffer);
+		}
+	}
+}
 void Material::LoadShader(std::string vertName, std::string fragName) {
 	if (CompileShader(vertName,GL_VERTEX_SHADER,vertShaderData)&&
 		CompileShader(fragName,GL_FRAGMENT_SHADER,fragShaderData)) {

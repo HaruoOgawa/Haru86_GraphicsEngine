@@ -14,6 +14,7 @@
 #include "./Assets/App/KuraArtApp/Script/KuraGPGPU.h"
 #include "./Assets/App/KuraArtApp/Script/KuraTrail.h"
 #include "GraphicsEngine/Object/CameraObject.h"
+#include <GL/glew.h>
 
 namespace Kura{
 	std::unique_ptr<GameObject> background_obj;
@@ -49,14 +50,24 @@ void KuraArtApp::Start() {
 		Kura::audioObj->PlayAudio();
 	}
 
-	std::string kuraTerratnShaders[2] = { "./Assets/Shader/KuraShader/KuraTerrain.tesc","./Assets/Shader/KuraShader/KuraTerrain.tese"};
+	/*std::string kuraTerratnShaders[2] = { "./Assets/Shader/KuraShader/KuraTerrain.tesc","./Assets/Shader/KuraShader/KuraTerrain.tese"};
 	Kura::KuraTerrain_obj = std::make_unique<GameObject>(PrimitiveType::BOARD,
 		"./Assets/Shader/KuraShader/KuraTerrain.vert",
 		kuraTerratnShaders,
 		"./Assets/Shader/KuraShader/KuraTerrain.frag"
 	);
+	Kura::KuraTerrain_obj->SetScale(glm::vec3(5.0,5.0,1.0));*/
+	
+	std::map<GLenum, std::string> shaders = {
+		{GL_VERTEX_SHADER,"./Assets/Shader/KuraShader/KuraTerrain.vert"},
+		{GL_TESS_CONTROL_SHADER, "./Assets/Shader/KuraShader/KuraTerrain.tesc"},
+		{GL_TESS_EVALUATION_SHADER,"./Assets/Shader/KuraShader/KuraTerrain.tese"},
+		{GL_FRAGMENT_SHADER,"./Assets/Shader/KuraShader/KuraTerrain.frag"}
+	};
+	
+	Kura::KuraTerrain_obj = std::make_unique<GameObject>(PrimitiveType::BOARD,shaders);
 	Kura::KuraTerrain_obj->SetScale(glm::vec3(5.0,5.0,1.0));
-	//Kura::KuraTerrain_obj->SetRotation(glm::quat(glm::vec3(1.0, 0.0, 0.0)));
+	
 
 	Kura::gpgpu_obj = std::make_unique<Object>();
 	Kura::gpgpu_obj->AddComponent(new KuraGPGPU(Kura::gpgpu_obj.get()));
