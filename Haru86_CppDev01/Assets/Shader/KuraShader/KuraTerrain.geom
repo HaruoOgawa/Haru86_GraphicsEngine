@@ -10,7 +10,10 @@ uniform mat4 PMatrix;
 uniform float _time;
 uniform float _deltaTime;
 
+in vec2 e2g_uv[];
+
 out vec3 g2f_normal;
+out vec2 g2f_uv;
 
 void main(){
     vec4 p0=gl_in[0].gl_Position;
@@ -27,14 +30,17 @@ void main(){
 
     gl_Position =MVPMatrix*p0;
     g2f_normal=(MMatrix*vec4(n0,1.0)).xyz;
+    g2f_uv=e2g_uv[0];
     EmitVertex();
 
     gl_Position =MVPMatrix*p1;
     g2f_normal=(MMatrix*vec4(n1,1.0)).xyz;
+    g2f_uv=e2g_uv[1];
     EmitVertex();
     
     gl_Position =MVPMatrix*p2;
     g2f_normal=(MMatrix*vec4(n2,1.0)).xyz;
+    g2f_uv=e2g_uv[2];
     EmitVertex();
     
     EndPrimitive();

@@ -16,7 +16,7 @@ in vec3 tesc2tese_normal[];
 
 out float pid;
 out vec3 t2f_normal;
-out vec2 uv;
+out vec2 e2g_uv;
 
 vec2 random2(vec2 seeds)
 {
@@ -77,5 +77,6 @@ void main(){
 
     gl_Position=pos;
 	pid=float(gl_PrimitiveID);
-   
+    e2g_uv=gl_TessCoord.xy;
+
 }
