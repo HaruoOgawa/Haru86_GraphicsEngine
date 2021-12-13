@@ -2,6 +2,7 @@
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 #include <GL/glut.h>
+#include "GraphicsEngine/Graphics/Mesh.h"
 
 Primitive::Primitive(std::vector<float> vertices, std::vector<int> indices) {
 	CreatePrimitive(vertices, indices);
@@ -88,6 +89,12 @@ void Primitive::Draw() {
 	glDrawElements(GL_TRIANGLES, GetNumIndices(), GL_UNSIGNED_SHORT, nullptr);
 }
 
+void Primitive::Draw(std::string drawType) {
+	SetActive();
+	//glDrawArrays(GL_PATCHES, 0, 4);
+	glDrawElements(GL_PATCHES, GetNumIndices(), GL_UNSIGNED_SHORT, nullptr);
+}
+
 void Primitive::SetActive() {
 	glBindVertexArray(mVertexArray);
 }
@@ -126,10 +133,10 @@ void Primitive::CreateBoard(std::vector<std::vector<float>>* vertices, std::vect
 	};
 
 	std::vector<float> normal = {
-		0.f, 0.f, 0.0f,
-		0.f, 0.f, 0.0f,
-		0.f, 0.f, 0.0f,
-		0.f, 0.f, 0.0f,
+		0.f, 0.f, 1.0f,
+		0.f, 0.f, 1.0f,
+		0.f, 0.f, 1.0f,
+		0.f, 0.f, 1.0f,
 	};
 	
 	std::vector<float> texcoord = {

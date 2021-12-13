@@ -14,8 +14,10 @@ class MeshRendererComponent :
 {
 public:
     MeshRendererComponent(class Object* o,PrimitiveType primType);
+    MeshRendererComponent(class Object* o,PrimitiveType primType, std::map<GLenum, std::string> shaders);
     MeshRendererComponent(class Object* o, std::string objPath);
     MeshRendererComponent(class Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName);
+    MeshRendererComponent(class Object* o, PrimitiveType primType, std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName);
     MeshRendererComponent(class Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, std::string textureString);
     MeshRendererComponent(class Object* o,std::string modelDataPath, std::string vertexShaderName, std::string fragmentShaderName);
     ~MeshRendererComponent();

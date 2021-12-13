@@ -57,7 +57,7 @@ void Object::SetPosition(glm::vec3 pos) {
 }
 
 void Object::SetRotation(glm::quat rot) {
-	transform->rotation;
+	transform->rotation=rot;
 
 	transform->CalMatrix();
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 
 class Primitive
 {
@@ -12,6 +13,7 @@ public:
 	void CreatePrimitive(std::vector<float> vertices, std::vector<int> indices);
 	void CreatePrimitive(std::vector<std::vector<float>> vertices,std::vector<int> dimention, std::vector<unsigned short> indices);
 	void Draw();
+	void Draw(std::string drawType);
 	void SetActive();
 	void UnLoadData();
 

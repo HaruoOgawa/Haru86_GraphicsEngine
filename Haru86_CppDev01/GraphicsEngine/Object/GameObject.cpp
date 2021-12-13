@@ -3,11 +3,20 @@
 #include "../Component/TransformComponent.h"
 #include "../Component/MeshRendererComponent.h"
 
+
 GameObject::GameObject(PrimitiveType primType) 
 	: Object(), renderOrder(RenderQueue::Geometry), renderType(RenderType::DefaultBuffer), animTime(0.0f)
 {
 	Game::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = new MeshRendererComponent(this, primType);
+	Object::AddComponent(meshComp);
+}
+
+GameObject::GameObject(PrimitiveType primType, std::map<GLenum, std::string> shaders)
+	: Object(), renderOrder(RenderQueue::Geometry), renderType(RenderType::DefaultBuffer), animTime(0.0f)
+{
+	Game::GetInstance()->gameObjectList.emplace_back(this);
+	meshComp = new MeshRendererComponent(this, primType,shaders);
 	Object::AddComponent(meshComp);
 }
 
@@ -25,6 +34,14 @@ GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std
 {
 	Game::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = new MeshRendererComponent(this, primType,vertexShaderName,fragmentShaderName);
+	Object::AddComponent(meshComp);
+}
+
+GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName)
+	: Object(), renderOrder(RenderQueue::Geometry), renderType(RenderType::DefaultBuffer), animTime(0.0f)
+{
+	Game::GetInstance()->gameObjectList.emplace_back(this);
+	meshComp = new MeshRendererComponent(this, primType,vertexShaderName,tessellationShaderName,fragmentShaderName);
 	Object::AddComponent(meshComp);
 }
 

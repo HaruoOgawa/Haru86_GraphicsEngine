@@ -23,13 +23,14 @@ public:
 	float deltaTime;
 	float frameResolusion;
 	class Font* font;
+	class Texture* frameTexture;
 private:
 	SDL_Window* sWindow;
 	int sWindowWidth;
 	int sWindowHeight;
 	class Game* mgame;
 	SDL_GLContext context;
-	class Texture* frameTexture;
+	
 	unsigned int frameBuffer;
 	class Texture* postProcessTexture;
 	unsigned int postProcessBuffer;

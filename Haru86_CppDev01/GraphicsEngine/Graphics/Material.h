@@ -11,10 +11,14 @@ class Material
 {
 public:
     Material();
+    Material(std::map<GLenum, std::string> shaders);
     Material(std::string vertexShaderName, std::string fragmentShaderName);
+    Material(std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName);
     Material(std::string vertexShaderName, std::string geometryShaderName, std::string fragmentShaderName);
     ~Material();
+    void LoadShader(std::map<GLenum,std::string> shaders);
     void LoadShader(std::string vertName,std::string fragName);
+    void LoadShader(std::string vertName, std::string tessellationShaderName[2],std::string fragName);
     void LoadShader(std::string vertName,std::string geomName,std::string fragName);
     bool CompileShader(std::string shadername,GLenum shaderType,GLuint& outShader);
     void SetActive();
@@ -28,8 +32,11 @@ public:
     void SetBuffer(class ComputeBuffer* buffer, int bufferIndex);
     void LoadTextureList(std::vector<std::string> texPathList,std::vector<std::string> texUniformNameList);
     void SetActiveTextureList();
+    void SetEactiveTextureList();
 private :
     GLuint vertShaderData;
+    GLuint tessControlShaderData;
+    GLuint tessEvalShaderData;
     GLuint geometryShaderData;
     GLuint fragShaderData;
     GLuint shaderPrg;

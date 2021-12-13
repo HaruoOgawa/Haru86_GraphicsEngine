@@ -1,6 +1,8 @@
 #include "Texture.h"
 #include <GL/glew.h>
 #include <soil.h>
+#include "GraphicsEngine/Game/Game.h"
+#include <map>
 
 Texture::Texture()
 	//:mTextureID(0)
@@ -36,6 +38,7 @@ bool Texture::Load(const std::string& fileName)
 	}
 
 	glGenTextures(1, &mTextureID);
+	glActiveTexture(Game::GetInstance()->texSlots.find(mTextureID)->second);
 	glBindTexture(GL_TEXTURE_2D, mTextureID);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, format, mWidth, mHeight, 0, format,
@@ -71,8 +74,8 @@ void Texture::CreateForRendering(int width, int height, unsigned int format)
 void Texture::CreateTrueTypeFontTexture(SDL_Surface* surf) {
 	mWidth = surf->w;
 	mHeight = surf->h;
-
 	glGenTextures(1, &mTextureID);
+	glActiveTexture(Game::GetInstance()->texSlots.find(mTextureID)->second);
 	glBindTexture(GL_TEXTURE_2D, mTextureID );
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -82,8 +85,15 @@ void Texture::CreateTrueTypeFontTexture(SDL_Surface* surf) {
 
 void Texture::SetActive()
 {
-	glActiveTexture(static_cast<GLuint>(mTextureID));
+	glActiveTexture(Game::GetInstance()->texSlots.find(mTextureID)->second);
+	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, mTextureID);
+}
+
+void Texture::SetEactive()
+{
+	glActiveTexture(Game::GetInstance()->texSlots.find(mTextureID)->second);
+	glDisable(GL_TEXTURE_2D);
 }
 
 void Texture::Unload()

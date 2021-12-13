@@ -5,6 +5,8 @@
 #include <vector>
 #include "../App/BaseApp/BaseApp.h"
 #include <memory>
+#include <map>
+#include <GL/glew.h>
 
 class Game
 {
@@ -32,6 +34,7 @@ public:
 	//frame board
 	class GameObject* renderBoard;
 	class CameraObject* game_camera_instance;
+	std::map<int, GLenum> texSlots;
 
 	friend class Main;
 	friend class GameObject;

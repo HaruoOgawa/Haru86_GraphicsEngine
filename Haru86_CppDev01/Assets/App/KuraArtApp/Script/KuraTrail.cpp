@@ -122,8 +122,6 @@ void KuraTrail::ProcessInput(const Uint8* state)const {
 }
 
 void KuraTrail::Draw() {
-	m_texture_trail->SetActive();
-	m_material->SetTexUniform("_trailTex", m_texture_trail->GetTextureID());
 	
 	owner->transform->CalMatrix();
 	m_material->SetActive();
@@ -144,5 +142,9 @@ void KuraTrail::Draw() {
 	m_material->SetFloatUniform("_nodeSegment",nodeSegment );
 	m_material->SetFloatUniform("_TrailWidth", 0.4*7.0);
 	m_material->SetIntUniform("_boids_count", nodeNum);
+
+	m_texture_trail->SetActive();
+	m_material->SetTexUniform("_trailTex", m_texture_trail->GetTextureID());
+
 	Graphics::DrawInstancedWithMesh(m_mesh.get(), nodeNum, m_material.get(), GL_POINTS);
 }

@@ -11,6 +11,11 @@ enum class PrimitiveType {
 	POINT
 };
 
+enum class GLDrawType {
+	NONE,
+	TESSELLATION
+};
+
 class Mesh
 {
 public:
@@ -19,10 +24,11 @@ public:
 	~Mesh();
 	void UnLoadData();
 	void Draw();
+	void Draw(GLDrawType drawType);
 	friend class Graphics;
 	friend class glTFLoader;
 	glm::mat4 localMatrix;
-	
+	GLDrawType glDrawType;
 private:
 	void CreateMesh(PrimitiveType primType);
 	std::vector<std::unique_ptr<class Primitive>> m_primitives;

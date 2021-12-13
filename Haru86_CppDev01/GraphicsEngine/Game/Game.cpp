@@ -38,6 +38,44 @@ Game::Game()
 {
 	//app = new App();
 	timeObj = new Time(60.0f);
+
+	for (int i = 0; i < 10;i++) {
+		switch (i)
+		{
+		case 0:
+			texSlots.emplace(i, GL_TEXTURE0);
+			break;
+		case 1:
+			texSlots.emplace(i, GL_TEXTURE1);
+			break;
+		case 2:
+			texSlots.emplace(i, GL_TEXTURE2);
+			break;
+		case 3:
+			texSlots.emplace(i, GL_TEXTURE3);
+			break;
+		case 4:
+			texSlots.emplace(i, GL_TEXTURE4);
+			break;
+		case 5:
+			texSlots.emplace(i, GL_TEXTURE5);
+			break;
+		case 6:
+			texSlots.emplace(i, GL_TEXTURE6);
+			break;
+		case 7:
+			texSlots.emplace(i, GL_TEXTURE7);
+			break;
+		case 8:
+			texSlots.emplace(i, GL_TEXTURE8);
+			break;
+		case 9:
+			texSlots.emplace(i, GL_TEXTURE9);
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 Game::~Game() {
