@@ -171,23 +171,31 @@ void main(){
             float dis=length(other_position-my_position);
             dis=abs(dis);
 
+           
             //join
-            if(dis>0&&dis<=_joinDisMin){
+            if(dis>0.0&&dis<=_joinDisMin){
                 vec3 dirPos=other_position;
                 joinPosSum+=dirPos*(1.0/dis);
                 joinCount++;
             }
+
             //separate
-            if(dis>0&&dis<=_separateDistMin){
+            if(dis>10.0&&dis<=_separateDistMin){
                 vec3 dirVector=other_position-my_position;
                 separateVectorSum-=dirVector*(1.0/dis);
                 separateCount++;
+            }else if(dis>=0.0&&dis<=10.0){
+                vec3 dirVector=other_position-my_position;
+                separateVectorSum-=dirVector*1000.0;
+                separateCount++;
             }
+
             //alignment
-            if(dis>0&&dis<=_alignmentDistMin){
+            if(dis>0.0&&dis<=_alignmentDistMin){
                 alignmentVectorSum+=other_velocity*(1.0/dis);
                 alignmentCount++;
             }
+
             disMin=min(disMin,dis);
             disMax=max(disMax,dis);
             
