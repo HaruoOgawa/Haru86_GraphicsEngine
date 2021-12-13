@@ -62,8 +62,8 @@ void KuraArtApp::Start() {
 	Kura::KuraTerrain_obj->SetScale(glm::vec3(5000.0,5000.0,1.0));
 	Kura::KuraTerrain_obj->SetPosition(glm::vec3(0.0,-1.0,0.0));
 	Kura::KuraTerrain_obj->SetRotation(glm::quat(glm::vec3(3.14159265/2.0,0.0,0.0)));
-	std::vector<std::string> texPath_KuraTerrain_obj = { "./Assets/Resources/TextureData/KuraTerrainHeightMap.png" };
-	std::vector<std::string> texUniformName_KuraTerrain_obj = { "_heightMap" };
+	std::vector<std::string> texPath_KuraTerrain_obj = { "./Assets/Resources/TextureData/KuraTerrainHeightMap.png","./Assets/Resources/TextureData/InkBackground.png" };
+	std::vector<std::string> texUniformName_KuraTerrain_obj = { "_heightMap","_terrainMap" };
 	Kura::KuraTerrain_obj->meshComp->material->LoadTextureList(texPath_KuraTerrain_obj, texUniformName_KuraTerrain_obj);
 
 	Kura::gpgpu_obj = std::make_unique<Object>();

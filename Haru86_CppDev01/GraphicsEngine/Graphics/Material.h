@@ -32,6 +32,7 @@ public:
     void SetBuffer(class ComputeBuffer* buffer, int bufferIndex);
     void LoadTextureList(std::vector<std::string> texPathList,std::vector<std::string> texUniformNameList);
     void SetActiveTextureList();
+    void SetEactiveTextureList();
 private :
     GLuint vertShaderData;
     GLuint tessControlShaderData;

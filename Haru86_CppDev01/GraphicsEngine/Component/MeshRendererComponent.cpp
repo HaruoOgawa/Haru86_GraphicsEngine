@@ -98,11 +98,7 @@ void MeshRendererComponent::Update() {
 }
 
 void MeshRendererComponent::Draw() {
-	//ここでTextureをアクティブにする
-	material->SetActiveTextureList();
-
 	
-
 	if (primTex != nullptr) {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -126,6 +122,9 @@ void MeshRendererComponent::Draw() {
 	material->SetFloatUniform("_deltaTime", game->deltaTime);
 	material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
 
+	//ここでTextureをアクティブにする
+	material->SetActiveTextureList();
+
 	for (auto clip : animationClips) {
 		clip->callback(clip->lifeTimeRate);
 	}
@@ -138,7 +137,9 @@ void MeshRendererComponent::Draw() {
 		mesh->Draw();
 	}
 
-	
+	//使い終わったらここでTextureをエナクティブにする
+	material->SetEactiveTextureList();
+
 }
 
 void MeshRendererComponent::DrawBoard() {

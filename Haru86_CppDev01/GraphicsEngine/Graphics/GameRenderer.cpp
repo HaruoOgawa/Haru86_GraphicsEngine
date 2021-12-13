@@ -161,6 +161,7 @@ void GameRenderer::Draw() {
 		frameTexture->SetActive();
 		obj->meshComp->material->SetTexUniform("frameTex", frameTexture->GetTextureID());
 		obj->meshComp->DrawBoard();
+		frameTexture->SetEactive();
 	}
 
 	SDL_GL_SwapWindow(sWindow);

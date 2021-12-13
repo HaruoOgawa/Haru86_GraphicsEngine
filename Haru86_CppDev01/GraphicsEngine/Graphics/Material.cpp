@@ -251,7 +251,8 @@ void Material::SetVec3Uniform(std::string uniformName, glm::vec3 val) {
 
 void Material::SetTexUniform(std::string uniformName, unsigned int val) {
 	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
-	glUniform1i(location, static_cast<GLuint>(val-1));
+	//glUniform1i(location, static_cast<GLuint>(val-1));
+	glUniform1i(location, static_cast<GLuint>(val));
 }
 
 void Material::SetBuffer(ComputeBuffer* buffer,int bufferIndex) {
@@ -279,6 +280,13 @@ void Material::SetActiveTextureList() {
 		SetTexUniform(m_texture_list[i]->texUniformName, m_texture_list[i]->GetTextureID());
 	}
 }
+
+void Material::SetEactiveTextureList() {
+	for (int i = 0; i < m_texture_list.size(); i++) {
+		m_texture_list[i]->SetEactive();
+	}
+}
+
 
 void Material::UnLoadData() {
 	glDeleteProgram(shaderPrg);
