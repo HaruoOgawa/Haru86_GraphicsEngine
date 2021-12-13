@@ -51,8 +51,9 @@ shared BoidsData shared_BoidsData[NUMTHREADS_X_NUM];
 vec3 Turn(vec3 pos,vec3 vel,float uid){
     vec3 turnVel=vec3(0,0,0);
      
-    float seed=2.5;
-    
+    //float seed=2.5;
+     float seed=.85;
+
     if(pos.x<-1.0*_maxBoidsField){
         vel.x+=seed*abs(vel.x);
     }
