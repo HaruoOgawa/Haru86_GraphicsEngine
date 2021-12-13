@@ -123,9 +123,9 @@ void KuraGPGPU::Update() {
 	m_computeShader_force->SetFloatUniform("_joinPower", 100);
 	m_computeShader_force->SetFloatUniform("_separatePower", 1000);
 	m_computeShader_force->SetFloatUniform("_alignmentPower", 100);
-	m_computeShader_force->SetFloatUniform("_joinDisMin", 10);
-	m_computeShader_force->SetFloatUniform("_separateDistMin", 10);
-	m_computeShader_force->SetFloatUniform("_alignmentDistMin", 10);
+	m_computeShader_force->SetFloatUniform("_joinDisMin", 0.1);  // pre10
+	m_computeShader_force->SetFloatUniform("_separateDistMin", 1000); //pre10
+	m_computeShader_force->SetFloatUniform("_alignmentDistMin", 0.1); //pre10
 	m_computeShader_force->Dispatch(num / 256, 1, 1);
 
 	//Dispatch Data///////////////
