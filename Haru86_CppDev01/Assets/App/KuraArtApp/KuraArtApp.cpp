@@ -47,7 +47,7 @@ void KuraArtApp::Start() {
 
 	Kura::audioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
 	if (Kura::audioObj->Initialize()) {
-		Kura::audioObj->PlayAudio();
+		//Kura::audioObj->PlayAudio();
 	}
 
 	std::map<GLenum, std::string> shaders = {
