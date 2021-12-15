@@ -146,7 +146,7 @@ void main(){
 	vert.z+=sin(_time*0.015+gl_InstanceID*100)*pow(length(vert.x),2.0)*1000.0;
 	
 	
-	vert.yz*=rot(-PI/2.0);
+	vert.yz*=rot(-PI/6.0);
 
 	//rotation
     //vec3 force=outBufferBoidsForce.boidsForce[id].force;

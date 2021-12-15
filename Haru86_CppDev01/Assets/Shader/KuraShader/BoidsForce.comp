@@ -244,7 +244,7 @@ void main(){
     
     }
     
-     //Perlin Noise
+     /*//Perlin Noise
      vec3 nv=vec3(0.,0.,1.);
     //nv=(int(floor(_time*0.001))%3==0)?vec3(0.,1.,0.):nv;
     //nv=(int(floor(_time*0.001))%3==1)?vec3(1.,0.,0.):nv;
@@ -252,7 +252,7 @@ void main(){
     vec3 noiseVector=normalize(cross(result_velocity,nv));
     float k=100.0;
     noiseVector=noiseVector*(perlinNoise(vec2(_time*0.0001,float(DID)))*k-k*0.5);
-    result_velocity+=noiseVector;
+    result_velocity+=noiseVector;*/
 
     result_velocity=Turn(my_position,result_velocity,float(DID));
 
