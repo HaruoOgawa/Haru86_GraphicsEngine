@@ -16,9 +16,7 @@ void main(){
 	gl_TessLevelOuter[0]=outLevel;
 	gl_TessLevelOuter[1]=outLevel;
 	gl_TessLevelOuter[2]=outLevel;
-	//gl_TessLevelOuter[3]=outLevel;
 	
 	gl_TessLevelInner[0]=inLevel;
-	//gl_TessLevelInner[1]=inLevel;
-
+	
 }

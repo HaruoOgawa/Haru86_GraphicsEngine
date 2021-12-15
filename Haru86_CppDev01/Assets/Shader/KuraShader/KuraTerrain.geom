@@ -1,7 +1,6 @@
 #version 410 
 layout(triangles) in;
 layout(triangle_strip,max_vertices=3) out;
-//layout(line_strip,max_vertices=4) out;
 
 uniform mat4 MVPMatrix;
 uniform mat4 MMatrix;
