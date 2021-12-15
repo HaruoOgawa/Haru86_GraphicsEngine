@@ -94,9 +94,6 @@ bool Game::Initialize() {
 		return false;
 	}
 
-	//capture wait time
-	//while (SDL_GetTicks()<5000.0) {}
-
 	LoadData();
 	
 	return true;
@@ -126,7 +123,7 @@ void Game::RunLoop() {
 void Game::UpdateTimeline() {
 	static_cast<std::shared_ptr<class TimelineComponent>>(timelineObj->timelineComponent)->Update();
 
-	std::sort(gameObjectList.begin(), gameObjectList.end(), [](GameObject* a, GameObject* b) {
+	std::sort(gameObjectList.begin(), gameObjectList.end(), [](std::shared_ptr<GameObject> a, std::shared_ptr<GameObject> b) {
 		return a->renderOrder < b->renderOrder;
 	});
 }
@@ -153,11 +150,9 @@ void Game::InputProcess() {
 
 	const Uint8* state = SDL_GetKeyboardState(NULL);
 
-	
 	for (auto obj : gameObjectList) {
 		obj->ProcessInput(state);
 	}
-
 
 }
 

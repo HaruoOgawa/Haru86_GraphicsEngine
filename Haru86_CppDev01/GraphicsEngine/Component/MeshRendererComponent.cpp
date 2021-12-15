@@ -11,7 +11,7 @@
 #include "GraphicsEngine/Graphics/glTFLoader.h"
 #include "GraphicsEngine/Graphics/glTFLoader.h"
 
-MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object> o, PrimitiveType primType)
+MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)
 {
 	useZTest = true;
@@ -20,7 +20,7 @@ MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object> o, Primitiv
 	material = std::make_shared<Material>();
 }
 
-MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object> o, PrimitiveType primType, std::map<GLenum, std::string> shaders)
+MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::map<GLenum, std::string> shaders)
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)
 {
 	useZTest = true;
@@ -34,7 +34,7 @@ MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object> o, Primitiv
 	material = std::make_shared<Material>(shaders);
 }
 
-MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object> o, std::string objPath)
+MeshRendererComponent::MeshRendererComponent(Object* o, std::string objPath)
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)
 {
 	useZTest = true;
@@ -43,7 +43,7 @@ MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object> o, std::str
 	material = std::make_shared<Material>();
 }
 
-MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object> o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
+MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
@@ -52,7 +52,7 @@ MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object> o, Primitiv
 	material = std::make_shared<Material>(vertexShaderName,fragmentShaderName);
 }
 
-MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object> o, PrimitiveType primType, std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName)
+MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName)
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
@@ -61,7 +61,7 @@ MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object> o, Primitiv
 	material = std::make_shared<Material>(vertexShaderName,tessellationShaderName,fragmentShaderName);
 }
 
-MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object> o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, std::string textureString)
+MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, std::string textureString)
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
@@ -75,7 +75,7 @@ MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object> o, Primitiv
 }
 
 
-MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object> o, std::string modelDataPath, std::string vertexShaderName, std::string fragmentShaderName)
+MeshRendererComponent::MeshRendererComponent(Object* o, std::string modelDataPath, std::string vertexShaderName, std::string fragmentShaderName)
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
@@ -83,8 +83,6 @@ MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object> o, std::str
 	mesh->glDrawType = GLDrawType::NONE;
 	material = std::make_shared<Material>(vertexShaderName,fragmentShaderName);
 }
-
-
 
 MeshRendererComponent::~MeshRendererComponent() {
 

@@ -52,7 +52,7 @@ class TimelineComponent :
     public Component
 {
 public:
-    TimelineComponent(std::shared_ptr<class Object> o);
+    TimelineComponent(class Object* o);
     ~TimelineComponent();
     void Update() override;
     void Initialize();

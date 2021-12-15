@@ -7,7 +7,7 @@ class CameraComponent :
     public Component
 {
 public:
-    CameraComponent(std::shared_ptr<class Object> o, enum class CameraType cameraType);
+    CameraComponent(class Object* o, enum class CameraType cameraType);
     ~CameraComponent();
     void Start() override;
     void Update() override;

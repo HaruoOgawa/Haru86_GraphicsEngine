@@ -7,7 +7,7 @@ class RectTransformComponent :
     public Component
 {
 public:
-    RectTransformComponent(std::shared_ptr<class GameObject> o,float wRate,float hRate);
+    RectTransformComponent(class GameObject* o,float wRate,float hRate);
     ~RectTransformComponent();
     void ProcessInput(const Uint8* state)const override;
     glm::vec2 rectPosition;

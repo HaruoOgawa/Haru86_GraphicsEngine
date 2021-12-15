@@ -21,7 +21,6 @@ void Object::AddComponent(std::shared_ptr<class Component> component) {
 	myComponent.insert({ component->superClassName,component});
 }
 
-
 void Object::RemoveComponent(std::shared_ptr<class Component> component) {
 	
 }

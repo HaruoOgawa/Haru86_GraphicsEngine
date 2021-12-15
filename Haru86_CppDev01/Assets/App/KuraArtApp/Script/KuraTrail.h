@@ -46,7 +46,7 @@ class KuraTrail :
 	public Component
 {
 public:
-    KuraTrail(std::shared_ptr<class Object> o,std::shared_ptr<class KuraGPGPU> kuraGPGPU);
+    KuraTrail(class Object* o, class KuraGPGPU* kuraGPGPU);
     ~KuraTrail();
     void Start() override;
     void Update() override;

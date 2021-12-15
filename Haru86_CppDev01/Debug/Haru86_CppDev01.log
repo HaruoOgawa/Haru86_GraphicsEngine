@@ -1,424 +1,91 @@
-﻿  DemoApp.cpp
+﻿  KuraArtApp.cpp
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(29,60): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(33): message : 'TimelineAnimationClip' の宣言を確認してください
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(129,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(150,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(171,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(192,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(219,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(219,56): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(220,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(220,56): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(226,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(310,87): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(311,97): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(311,62): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(312,100): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(312,65): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(314,74): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(332,82): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(332,54): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(349,85): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(349,57): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(382,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(382,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(383,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(383,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(384,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(384,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(385,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(385,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(386,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(386,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(388,82): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-  KuraGPGPU.cpp
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.h(11,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'Graphics' の左辺を無視します。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\glTFLoader.h(9,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'glTFLoader' の左辺を無視します。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(57,38): warning C4838: 'double' から 'float' への変換には縮小変換が必要です
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(57,38): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(58,38): warning C4838: 'double' から 'float' への変換には縮小変換が必要です
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(58,38): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(59,38): warning C4838: 'double' から 'float' への変換には縮小変換が必要です
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(59,38): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(119,59): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(123,59): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(125,65): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(143,22): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(187,19): warning C4244: 'return': 'genType' から 'float' への変換です。データが失われる可能性があります。
-          with
-          [
-              genType=double
-          ]
-  CameraComponent.cpp
-  CameraObject.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(138,52): error C2664: 'CameraComponent::CameraComponent(std::shared_ptr<Object>,CameraType)': 引数 1 を '_Ty' から 'std::shared_ptr<Object>' へ変換できません。
-          with
-          [
-              _Ty=CameraObject *
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(137,1): message : class 'std::shared_ptr<Object>' のコンストラクターが 'explicit' と宣言されています。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\CameraComponent.h(10,5): message : 'CameraComponent::CameraComponent' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2186): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,CameraObject*,CameraType&>(_Ty &,CameraObject *&&,CameraType &) noexcept(false)' のリファレンスを確認してください
-          with
-          [
-              _Ty=CameraComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2906): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<CameraObject*,CameraType&>(CameraObject *&&,CameraType &)' のリファレンスを確認してください
-          with
-          [
-              _Ty=CameraComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2907): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<CameraObject*,CameraType&>(CameraObject *&&,CameraType &)' のリファレンスを確認してください
-          with
-          [
-              _Ty=CameraComponent
-          ]
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Object\CameraObject.cpp(9): message : コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<CameraComponent> std::make_shared<CameraComponent,CameraObject*,CameraType&>(CameraObject *&&,CameraType &)' のリファレンスを確認してください
-  glTFBinaryReader.cpp
-  AudioObject.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(138,52): error C2664: 'AudioSourceComponent::AudioSourceComponent(std::shared_ptr<Object>)': 引数 1 を '_Ty' から 'std::shared_ptr<Object>' へ変換できません。
-          with
-          [
-              _Ty=AudioObject *
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(137,1): message : class 'std::shared_ptr<Object>' のコンストラクターが 'explicit' と宣言されています。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\AudioSourceComponent.h(28,5): message : 'AudioSourceComponent::AudioSourceComponent' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2186): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,AudioObject*>(_Ty &,AudioObject *&&) noexcept(false)' のリファレンスを確認してください
-          with
-          [
-              _Ty=AudioSourceComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2906): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<AudioObject*>(AudioObject *&&)' のリファレンスを確認してください
-          with
-          [
-              _Ty=AudioSourceComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2907): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<AudioObject*>(AudioObject *&&)' のリファレンスを確認してください
-          with
-          [
-              _Ty=AudioSourceComponent
-          ]
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Object\AudioObject.cpp(8): message : コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<AudioSourceComponent> std::make_shared<AudioSourceComponent,AudioObject*>(AudioObject *&&)' のリファレンスを確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(138,52): error C2664: 'AudioSourceComponent::AudioSourceComponent(std::shared_ptr<Object>,std::string)': 引数 1 を '_Ty' から 'std::shared_ptr<Object>' へ変換できません。
-          with
-          [
-              _Ty=AudioObject *
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(137,1): message : class 'std::shared_ptr<Object>' のコンストラクターが 'explicit' と宣言されています。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\AudioSourceComponent.h(29,5): message : 'AudioSourceComponent::AudioSourceComponent' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2186): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,AudioObject*,std::string&>(_Ty &,AudioObject *&&,std::string &) noexcept(false)' のリファレンスを確認してください
-          with
-          [
-              _Ty=AudioSourceComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2906): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<AudioObject*,std::string&>(AudioObject *&&,std::string &)' のリファレンスを確認してください
-          with
-          [
-              _Ty=AudioSourceComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2907): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<AudioObject*,std::string&>(AudioObject *&&,std::string &)' のリファレンスを確認してください
-          with
-          [
-              _Ty=AudioSourceComponent
-          ]
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Object\AudioObject.cpp(15): message : コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<AudioSourceComponent> std::make_shared<AudioSourceComponent,AudioObject*,std::string&>(AudioObject *&&,std::string &)' のリファレンスを確認してください
-  AudioSourceComponent.cpp
-  Component.cpp
-  Game.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(1622,19): error C2664: 'bool Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(1622,20): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.cpp(131,2): message : 'Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(1621): message : コンパイル対象の関数 テンプレート インスタンス化 'bool std::_Debug_lt_pred<_Pr&,std::shared_ptr<GameObject>&,std::shared_ptr<GameObject>&,0>(Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>&,_Ty1,_Ty2) noexcept(<expr>)' のリファレンスを確認してください
-          with
-          [
-              _Pr=Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>,
-              _Ty1=std::shared_ptr<GameObject> &,
-              _Ty2=std::shared_ptr<GameObject> &
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7485): message : コンパイル対象の関数 テンプレート インスタンス化 '_BidIt std::_Insertion_sort_unchecked<_RanIt,_Pr>(const _BidIt,const _BidIt,_Pr)' のリファレンスを確認してください
-          with
-          [
-              _BidIt=std::shared_ptr<GameObject> *,
-              _RanIt=std::shared_ptr<GameObject> *,
-              _Pr=Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7515): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::_Sort_unchecked<std::shared_ptr<GameObject>*,_Fn>(_RanIt,_RanIt,int,_Pr)' のリファレンスを確認してください
-          with
-          [
-              _Fn=Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>,
-              _RanIt=std::shared_ptr<GameObject> *,
-              _Pr=Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>
-          ]
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.cpp(131): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::sort<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>>(const _RanIt,const _RanIt,_Pr)' のリファレンスを確認してください
-          with
-          [
-              _Ty=std::shared_ptr<GameObject>,
-              _RanIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::shared_ptr<GameObject>>>>,
-              _Pr=Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7419,1): error C2664: 'bool Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7419,22): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.cpp(131,2): message : 'Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7496): message : コンパイル対象の関数 テンプレート インスタンス化 'std::pair<_RanIt,_RanIt> std::_Partition_by_median_guess_unchecked<_RanIt,_Pr>(_RanIt,_RanIt,_Pr)' のリファレンスを確認してください
-          with
-          [
-              _RanIt=std::shared_ptr<GameObject> *,
-              _Pr=Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7423,1): error C2664: 'bool Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7423,82): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.cpp(131,2): message : 'Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7434,1): error C2664: 'bool Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7434,30): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.cpp(131,2): message : 'Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7447,1): error C2664: 'bool Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7447,30): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.cpp(131,2): message : 'Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()' の宣言を確認してください
-  GameObject.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(138,52): error C2664: 'MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object>,PrimitiveType)': 引数 1 を '_Ty' から 'std::shared_ptr<Object>' へ変換できません。
-          with
-          [
-              _Ty=GameObject *
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(137,1): message : class 'std::shared_ptr<Object>' のコンストラクターが 'explicit' と宣言されています。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(16,5): message : 'MeshRendererComponent::MeshRendererComponent' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2186): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,GameObject*,PrimitiveType&>(_Ty &,GameObject *&&,PrimitiveType &) noexcept(false)' のリファレンスを確認してください
-          with
-          [
-              _Ty=MeshRendererComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2906): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<GameObject*,PrimitiveType&>(GameObject *&&,PrimitiveType &)' のリファレンスを確認してください
-          with
-          [
-              _Ty=MeshRendererComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2907): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<GameObject*,PrimitiveType&>(GameObject *&&,PrimitiveType &)' のリファレンスを確認してください
-          with
-          [
-              _Ty=MeshRendererComponent
-          ]
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Object\GameObject.cpp(11): message : コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<MeshRendererComponent> std::make_shared<MeshRendererComponent,GameObject*,PrimitiveType&>(GameObject *&&,PrimitiveType &)' のリファレンスを確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(138,52): error C2664: 'MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object>,PrimitiveType,std::map<GLenum,std::string,std::less<GLenum>,std::allocator<std::pair<const GLenum,std::string>>>)': 引数 1 を '_Ty' から 'std::shared_ptr<Object>' へ変換できません。
-          with
-          [
-              _Ty=GameObject *
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(137,1): message : class 'std::shared_ptr<Object>' のコンストラクターが 'explicit' と宣言されています。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(17,5): message : 'MeshRendererComponent::MeshRendererComponent' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2186): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,GameObject*,PrimitiveType&,std::map<GLenum,std::string,std::less<GLenum>,std::allocator<std::pair<const GLenum,std::string>>>&>(_Ty &,GameObject *&&,PrimitiveType &,std::map<GLenum,std::string,std::less<GLenum>,std::allocator<std::pair<const GLenum,std::string>>> &) noexcept(false)' のリファレンスを確認してください
-          with
-          [
-              _Ty=MeshRendererComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2906): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<GameObject*,PrimitiveType&,std::map<GLenum,std::string,std::less<GLenum>,std::allocator<std::pair<const GLenum,std::string>>>&>(GameObject *&&,PrimitiveType &,std::map<GLenum,std::string,std::less<GLenum>,std::allocator<std::pair<const GLenum,std::string>>> &)' のリファレンスを確認してください
-          with
-          [
-              _Ty=MeshRendererComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2907): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<GameObject*,PrimitiveType&,std::map<GLenum,std::string,std::less<GLenum>,std::allocator<std::pair<const GLenum,std::string>>>&>(GameObject *&&,PrimitiveType &,std::map<GLenum,std::string,std::less<GLenum>,std::allocator<std::pair<const GLenum,std::string>>> &)' のリファレンスを確認してください
-          with
-          [
-              _Ty=MeshRendererComponent
-          ]
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Object\GameObject.cpp(19): message : コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<MeshRendererComponent> std::make_shared<MeshRendererComponent,GameObject*,PrimitiveType&,std::map<GLenum,std::string,std::less<GLenum>,std::allocator<std::pair<const GLenum,std::string>>>&>(GameObject *&&,PrimitiveType &,std::map<GLenum,std::string,std::less<GLenum>,std::allocator<std::pair<const GLenum,std::string>>> &)' のリファレンスを確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(138,52): error C2664: 'MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object>,PrimitiveType,std::string,std::string)': 引数 1 を '_Ty' から 'std::shared_ptr<Object>' へ変換できません。
-          with
-          [
-              _Ty=GameObject *
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(137,1): message : class 'std::shared_ptr<Object>' のコンストラクターが 'explicit' と宣言されています。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(19,5): message : 'MeshRendererComponent::MeshRendererComponent' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2186): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,GameObject*,PrimitiveType&,std::string&,std::string&>(_Ty &,GameObject *&&,PrimitiveType &,std::string &,std::string &) noexcept(false)' のリファレンスを確認してください
-          with
-          [
-              _Ty=MeshRendererComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2906): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<GameObject*,PrimitiveType&,std::string&,std::string&>(GameObject *&&,PrimitiveType &,std::string &,std::string &)' のリファレンスを確認してください
-          with
-          [
-              _Ty=MeshRendererComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2907): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<GameObject*,PrimitiveType&,std::string&,std::string&>(GameObject *&&,PrimitiveType &,std::string &,std::string &)' のリファレンスを確認してください
-          with
-          [
-              _Ty=MeshRendererComponent
-          ]
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Object\GameObject.cpp(36): message : コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<MeshRendererComponent> std::make_shared<MeshRendererComponent,GameObject*,PrimitiveType&,std::string&,std::string&>(GameObject *&&,PrimitiveType &,std::string &,std::string &)' のリファレンスを確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(138,52): error C2664: 'MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object>,PrimitiveType,std::string,std::string [],std::string)': 引数 1 を '_Ty' から 'std::shared_ptr<Object>' へ変換できません。
-          with
-          [
-              _Ty=GameObject *
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(137,1): message : class 'std::shared_ptr<Object>' のコンストラクターが 'explicit' と宣言されています。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(20,5): message : 'MeshRendererComponent::MeshRendererComponent' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2186): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,GameObject*,PrimitiveType&,std::string&,std::string&[],std::string&>(_Ty &,GameObject *&&,PrimitiveType &,std::string &,std::string &[],std::string &) noexcept(false)' のリファレンスを確認してください
-          with
-          [
-              _Ty=MeshRendererComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2906): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<GameObject*,PrimitiveType&,std::string&,std::string&[],std::string&>(GameObject *&&,PrimitiveType &,std::string &,std::string &[],std::string &)' のリファレンスを確認してください
-          with
-          [
-              _Ty=MeshRendererComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2907): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<GameObject*,PrimitiveType&,std::string&,std::string&[],std::string&>(GameObject *&&,PrimitiveType &,std::string &,std::string &[],std::string &)' のリファレンスを確認してください
-          with
-          [
-              _Ty=MeshRendererComponent
-          ]
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Object\GameObject.cpp(44): message : コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<MeshRendererComponent> std::make_shared<MeshRendererComponent,GameObject*,PrimitiveType&,std::string&,std::string&[],std::string&>(GameObject *&&,PrimitiveType &,std::string &,std::string &[],std::string &)' のリファレンスを確認してください
-  GameRenderer.cpp
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\GameRenderer.cpp(34,1): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\GameRenderer.cpp(92,8): warning C4834: 'nodiscard' 属性を持つ関数の戻り値を破棄しています
-  Main.cpp
-  KuraArtApp.cpp
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(29,60): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(33): message : 'TimelineAnimationClip' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(138,52): error C2664: 'KuraTrail::KuraTrail(std::shared_ptr<Object>,std::shared_ptr<KuraGPGPU>)': 引数 2 を '_Ty' から 'std::shared_ptr<KuraGPGPU>' へ変換できません。
-          with
-          [
-              _Ty=KuraGPGPU *
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(137,1): message : class 'std::shared_ptr<KuraGPGPU>' のコンストラクターが 'explicit' と宣言されています。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraTrail.h(49,5): message : 'KuraTrail::KuraTrail' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2186): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,std::shared_ptr<Object>&,KuraGPGPU*>(_Ty &,std::shared_ptr<Object> &,KuraGPGPU *&&) noexcept(false)' のリファレンスを確認してください
-          with
-          [
-              _Ty=KuraTrail
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2906): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<std::shared_ptr<Object>&,KuraGPGPU*>(std::shared_ptr<Object> &,KuraGPGPU *&&)' のリファレンスを確認してください
-          with
-          [
-              _Ty=KuraTrail
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2907): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<std::shared_ptr<Object>&,KuraGPGPU*>(std::shared_ptr<Object> &,KuraGPGPU *&&)' のリファレンスを確認してください
-          with
-          [
-              _Ty=KuraTrail
-          ]
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\KuraArtApp.cpp(73): message : コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<KuraTrail> std::make_shared<KuraTrail,std::shared_ptr<Object>&,KuraGPGPU*>(std::shared_ptr<Object> &,KuraGPGPU *&&)' のリファレンスを確認してください
-  Material.cpp
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Material.cpp(264,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Material.cpp(278,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Material.cpp(285,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-  MeshRendererComponent.cpp
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(34,1): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'class' として使われていましたが 'struct' として使われています。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(33): message : 'TimelineAnimationClip' の宣言を確認してください
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\glTFLoader.h(9,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'glTFLoader' の左辺を無視します。
-  Object.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(138,52): error C2664: 'TransformComponent::TransformComponent(std::shared_ptr<Object>,glm::vec3,glm::quat,glm::vec3)': 引数 1 を '_Ty' から 'std::shared_ptr<Object>' へ変換できません。
-          with
-          [
-              _Ty=Object *
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(137,1): message : class 'std::shared_ptr<Object>' のコンストラクターが 'explicit' と宣言されています。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TransformComponent.h(12,5): message : 'TransformComponent::TransformComponent' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2186): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Object*,glm::vec<3,float,glm::packed_highp>,glm::qua<float,glm::packed_highp>,glm::vec<3,float,glm::packed_highp>>(_Ty &,Object *&&,glm::vec<3,float,glm::packed_highp> &&,glm::qua<float,glm::packed_highp> &&,glm::vec<3,float,glm::packed_highp> &&) noexcept(false)' のリファレンスを確認してください
-          with
-          [
-              _Ty=TransformComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2906): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<Object*,glm::vec<3,float,glm::packed_highp>,glm::qua<float,glm::packed_highp>,glm::vec<3,float,glm::packed_highp>>(Object *&&,glm::vec<3,float,glm::packed_highp> &&,glm::qua<float,glm::packed_highp> &&,glm::vec<3,float,glm::packed_highp> &&)' のリファレンスを確認してください
-          with
-          [
-              _Ty=TransformComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2907): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<Object*,glm::vec<3,float,glm::packed_highp>,glm::qua<float,glm::packed_highp>,glm::vec<3,float,glm::packed_highp>>(Object *&&,glm::vec<3,float,glm::packed_highp> &&,glm::qua<float,glm::packed_highp> &&,glm::vec<3,float,glm::packed_highp> &&)' のリファレンスを確認してください
-          with
-          [
-              _Ty=TransformComponent
-          ]
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Object\Object.cpp(12): message : コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransformComponent> std::make_shared<TransformComponent,Object*,glm::vec3,glm::quat,glm::vec3>(Object *&&,glm::vec3 &&,glm::quat &&,glm::vec3 &&)' のリファレンスを確認してください
-  RectTransformComponent.cpp
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\RectTransformComponent.cpp(30,32): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\RectTransformComponent.cpp(31,32): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-  Texture.cpp
-  TimelineComponent.cpp
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(29,60): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(33): message : 'TimelineAnimationClip' の宣言を確認してください
-  TimelineObject.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(138,52): error C2664: 'TimelineComponent::TimelineComponent(std::shared_ptr<Object>)': 引数 1 を '_Ty' から 'std::shared_ptr<Object>' へ変換できません。
-          with
-          [
-              _Ty=TimelineObject *
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(137,1): message : class 'std::shared_ptr<Object>' のコンストラクターが 'explicit' と宣言されています。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(55,5): message : 'TimelineComponent::TimelineComponent' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2186): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,TimelineObject*>(_Ty &,TimelineObject *&&) noexcept(false)' のリファレンスを確認してください
-          with
-          [
-              _Ty=TimelineComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2906): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<TimelineObject*>(TimelineObject *&&)' のリファレンスを確認してください
-          with
-          [
-              _Ty=TimelineComponent
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\memory(2907): message : コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<TimelineObject*>(TimelineObject *&&)' のリファレンスを確認してください
-          with
-          [
-              _Ty=TimelineComponent
-          ]
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Object\TimelineObject.cpp(5): message : コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TimelineComponent> std::make_shared<TimelineComponent,TimelineObject*>(TimelineObject *&&)' のリファレンスを確認してください
-  コードを生成中...
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\AudioSourceComponent.cpp(200): warning C4715: 'AudioSourceComponent::StopAudioCheck': 値を返さないコントロール パスがあります。
-  コンパイル中...
-  TransformComponent.cpp
-  UIComponent.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(1622,19): error C2664: 'bool UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(1622,20): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\UIComponent.cpp(71,3): message : 'UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(1621): message : コンパイル対象の関数 テンプレート インスタンス化 'bool std::_Debug_lt_pred<_Pr&,std::shared_ptr<GameObject>&,std::shared_ptr<GameObject>&,0>(UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>&,_Ty1,_Ty2) noexcept(<expr>)' のリファレンスを確認してください
-          with
-          [
-              _Pr=UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>,
-              _Ty1=std::shared_ptr<GameObject> &,
-              _Ty2=std::shared_ptr<GameObject> &
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7485): message : コンパイル対象の関数 テンプレート インスタンス化 '_BidIt std::_Insertion_sort_unchecked<_RanIt,_Pr>(const _BidIt,const _BidIt,_Pr)' のリファレンスを確認してください
-          with
-          [
-              _BidIt=std::shared_ptr<GameObject> *,
-              _RanIt=std::shared_ptr<GameObject> *,
-              _Pr=UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7515): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::_Sort_unchecked<std::shared_ptr<GameObject>*,_Fn>(_RanIt,_RanIt,int,_Pr)' のリファレンスを確認してください
-          with
-          [
-              _Fn=UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>,
-              _RanIt=std::shared_ptr<GameObject> *,
-              _Pr=UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>
-          ]
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\UIComponent.cpp(71): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::sort<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>>(const _RanIt,const _RanIt,_Pr)' のリファレンスを確認してください
-          with
-          [
-              _Ty=std::shared_ptr<GameObject>,
-              _RanIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::shared_ptr<GameObject>>>>,
-              _Pr=UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7419,1): error C2664: 'bool UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7419,22): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\UIComponent.cpp(71,3): message : 'UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7496): message : コンパイル対象の関数 テンプレート インスタンス化 'std::pair<_RanIt,_RanIt> std::_Partition_by_median_guess_unchecked<_RanIt,_Pr>(_RanIt,_RanIt,_Pr)' のリファレンスを確認してください
-          with
-          [
-              _RanIt=std::shared_ptr<GameObject> *,
-              _Pr=UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7423,1): error C2664: 'bool UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7423,82): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\UIComponent.cpp(71,3): message : 'UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7434,1): error C2664: 'bool UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7434,30): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\UIComponent.cpp(71,3): message : 'UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7447,1): error C2664: 'bool UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7447,30): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\UIComponent.cpp(71,3): message : 'UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()' の宣言を確認してください
-  Mesh.cpp
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Mesh.cpp(52,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Mesh.cpp(59,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-  KuraTrail.cpp
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.h(11,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'Graphics' の左辺を無視します。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraTrail.cpp(142,45): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraTrail.cpp(143,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-  コードを生成中...
+  Haru86_CppDev01.vcxproj -> E:\CppDev\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2-2.0.16\lib\x86\SDL2.dll
+  1 個のファイルをコピーしました
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_image-2.0.5\lib\x86\libjpeg-9.dll
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_image-2.0.5\lib\x86\libpng16-16.dll
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_image-2.0.5\lib\x86\libtiff-5.dll
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_image-2.0.5\lib\x86\libwebp-7.dll
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_image-2.0.5\lib\x86\SDL2_image.dll
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_image-2.0.5\lib\x86\zlib1.dll
+  6 個のファイルをコピーしました
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_ttf-2.0.15\lib\x86\libfreetype-6.dll
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_ttf-2.0.15\lib\x86\SDL2_ttf.dll
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2_ttf-2.0.15\lib\x86\zlib1.dll
+  3 個のファイルをコピーしました
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\FMOD_API\studio\lib\fmodstudio.dll
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\FMOD_API\studio\lib\fmodstudio64.dll
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\FMOD_API\studio\lib\fmodstudioL.dll
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\FMOD_API\studio\lib\fmodstudioL64.dll
+  4 個のファイルをコピーしました
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\FMOD_API\lowlevel\lib\fmod.dll
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\FMOD_API\lowlevel\lib\fmod64.dll
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\FMOD_API\lowlevel\lib\fmodL.dll
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\FMOD_API\lowlevel\lib\fmodL64.dll
+  4 個のファイルをコピーしました
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\demo.vert
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\FontText.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\FontText.vert
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\Standard.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\Standard.vert
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\UIStandard.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\UIStandard.vert
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\Background.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\Background.vert
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\BoidsData.comp
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\BoidsForce.comp
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\BoidsResult.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\BoidsResult.geom
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\BoidsResult.vert
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPUTrail_NextInputPos.comp
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPUTrail_NodeInfo.comp
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPUTrail_Render.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPUTrail_Render.geom
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\GPUTrail_Render.vert
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\KuraPostProcess.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\KuraTerrain.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\KuraTerrain.geom
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\KuraTerrain.tesc
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\KuraTerrain.tese
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\KuraShader\KuraTerrain.vert
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\BoardRender.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\BoardRender.vert
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\PostProcess.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\save.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\scene1.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\scene2.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene3.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene4.frag
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Shader\VedaStructuredShader\Scene5.frag
+  34 個のファイルをコピーしました
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\FontData\FRSCRIPT.TTF
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix\Phoenix\Phoenix.glb
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix\Phoenix\Phoenix.gltf
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix\Phoenix\Phoenix_data.bin
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix\Phoenix\Phoenix_img0.png
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\PhoenixWithVAT\NormalTex.png
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\PhoenixWithVAT\Phoenix.glb
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\PhoenixWithVAT\Phoenix.gltf
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\PhoenixWithVAT\Phoenix_data.bin
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\PhoenixWithVAT\Phoenix_img0.png
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\PhoenixWithVAT\Phoenix_img1.png
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\PhoenixWithVAT\Phoenix_img2.png
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\PhoenixWithVAT\PosTex.png
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix_Blender\NormalTex.png
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix_Blender\Phoenix.gltf
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix_Blender\Phoenix_Data.bin
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix_Blender\PosTex.png
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\glTFData\Phoenix_Blender\untitled.glb
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\MusicData\lug00ber_they_are_feeding.mp3
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\MusicData\n111.mp3
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\TextureData\brush_pow2.png
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\TextureData\brush_pow2._WithWing.png
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\TextureData\InkBackground.jpg
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\TextureData\InkBackground.png
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\TextureData\InkBackground.psd
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\TextureData\KuraTerrainHeightMap.png
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\TextureData\sample.png
+  E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\Resources\TextureData\trailTex.png
+  28 個のファイルをコピーしました

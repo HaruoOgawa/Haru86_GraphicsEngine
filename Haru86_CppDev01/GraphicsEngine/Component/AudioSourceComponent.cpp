@@ -7,13 +7,13 @@
 
 FMOD::Sound* sound;
 
-AudioSourceComponent::AudioSourceComponent(std::shared_ptr<Object> o)
+AudioSourceComponent::AudioSourceComponent(Object* o)
 	: Component(o, static_cast<std::string>(typeid(AudioSourceComponent).name()).substr(6))
 {
 	m_audioSourcePath = "./Assets/Resources/MusicData/lug00ber_they_are_feeding.mp3";
 }
 
-AudioSourceComponent::AudioSourceComponent(std::shared_ptr<Object> o, std::string audioSourcePath)
+AudioSourceComponent::AudioSourceComponent(Object* o, std::string audioSourcePath)
 	: Component(o, static_cast<std::string>(typeid(AudioSourceComponent).name()).substr(6))
 {
 	m_audioSourcePath = audioSourcePath;

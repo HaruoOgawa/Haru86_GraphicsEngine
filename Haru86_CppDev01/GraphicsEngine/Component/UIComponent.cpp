@@ -12,7 +12,7 @@
 #include "../Component/AudioSourceComponent.h"
 #include <algorithm>
 
-UIComponent::UIComponent(std::shared_ptr<GameObject> o)
+UIComponent::UIComponent(GameObject* o)
 	: Component(o, static_cast<std::string>(typeid(UIComponent).name()).substr(6))
 {
 	o->UseZTest(false);
@@ -66,7 +66,7 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 
 		Game::GetInstance()->timelineObj->timelineComponent->ResetTimeline();
 		Game::GetInstance()->timelineObj->timelineComponent->ComputeTimeline(t);
-		std::sort(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), [](GameObject* a, GameObject* b) {
+		std::sort(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), [](std::shared_ptr<GameObject> a, std::shared_ptr<GameObject> b) {
 			return a->renderOrder < b->renderOrder;
 		});
 	}

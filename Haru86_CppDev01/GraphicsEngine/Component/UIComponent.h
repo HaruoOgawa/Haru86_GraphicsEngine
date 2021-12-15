@@ -6,7 +6,7 @@ class UIComponent :
     public Component
 {
 public:
-    UIComponent(std::shared_ptr<class GameObject> o);
+    UIComponent(class GameObject* o);
     ~UIComponent();
     void Update() override;
     void ProcessInput(const Uint8* state)const override;

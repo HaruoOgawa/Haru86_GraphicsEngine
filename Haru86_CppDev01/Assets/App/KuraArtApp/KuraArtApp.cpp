@@ -67,8 +67,8 @@ void KuraArtApp::Start() {
 	Kura::KuraTerrain_obj->meshComp->material->LoadTextureList(texPath_KuraTerrain_obj, texUniformName_KuraTerrain_obj);
 
 	Kura::gpgpu_obj = std::make_shared<Object>();
-	Kura::gpgpu_obj->AddComponent(std::make_shared<KuraGPGPU>(Kura::gpgpu_obj));
-	Kura::gpgpu_obj->AddComponent(std::make_shared<KuraTrail>(Kura::gpgpu_obj,
+	Kura::gpgpu_obj->AddComponent(std::make_shared<KuraGPGPU>(Kura::gpgpu_obj.get()));
+	Kura::gpgpu_obj->AddComponent(std::make_shared<KuraTrail>(Kura::gpgpu_obj.get(),
 		static_cast<KuraGPGPU*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))
 	));
 

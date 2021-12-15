@@ -7,7 +7,7 @@
 #include <algorithm>
 #include "./MeshRendererComponent.h"
 
-TimelineComponent::TimelineComponent(std::shared_ptr<Object> o)
+TimelineComponent::TimelineComponent(Object* o)
 	:Component(o, static_cast<std::string>(typeid(TimelineComponent).name()).substr(6))
 {
 	timeVal = game->time;

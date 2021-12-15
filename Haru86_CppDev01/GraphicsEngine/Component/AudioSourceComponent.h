@@ -25,8 +25,8 @@ class AudioSourceComponent :
     public Component
 {
 public:
-    AudioSourceComponent(std::shared_ptr<class Object> o);
-    AudioSourceComponent(std::shared_ptr<class Object> o, std::string audioSourcePath);
+    AudioSourceComponent(class Object* o);
+    AudioSourceComponent(class Object* o, std::string audioSourcePath);
     ~AudioSourceComponent();
     bool Initialize();
 	void Play();
