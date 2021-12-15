@@ -56,8 +56,6 @@ private :
 	std::vector<class GameObject*> postProcessGameObjectList;
 	std::vector<class UIObject*> uiObjectList;
 	
-	class AudioObject* audioObj;
-	
 	bool mouseStateBool;
 	
 protected:
