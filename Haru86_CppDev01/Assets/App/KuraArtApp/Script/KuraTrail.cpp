@@ -21,7 +21,7 @@
 #include "GraphicsEngine/Component/CameraComponent.h"
 #include "GraphicsEngine/Graphics/Texture.h"
 
-KuraTrail::KuraTrail(Object* o, KuraGPGPU* kuraGPGPU)
+KuraTrail::KuraTrail(std::shared_ptr<Object> o, std::shared_ptr<KuraGPGPU> kuraGPGPU)
 	: Component(o, static_cast<std::string>(typeid(KuraTrail).name()).substr(6)),
 	kuraGPGPU_instance(kuraGPGPU),
 	trailNum(kuraGPGPU->num),

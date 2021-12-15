@@ -7,16 +7,14 @@
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Component/CameraComponent.h"
 
-TransformComponent::TransformComponent(Object* o, glm::vec3 pos,glm::quat rot,glm::vec3 s)
+TransformComponent::TransformComponent(std::shared_ptr<Object> o, glm::vec3 pos,glm::quat rot,glm::vec3 s)
 	: Component(o, static_cast<std::string>(typeid(TransformComponent).name()).substr(6)),position(pos),rotation(rot),scale(s)
 {
 	CalMatrix();
 }
 
 TransformComponent::~TransformComponent() {
-	/*delete position;
-	delete rotation;
-	delete scale;*/
+
 }
 
 void TransformComponent::Update() {

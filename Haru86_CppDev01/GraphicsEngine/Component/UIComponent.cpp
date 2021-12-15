@@ -12,7 +12,7 @@
 #include "../Component/AudioSourceComponent.h"
 #include <algorithm>
 
-UIComponent::UIComponent(GameObject* o)
+UIComponent::UIComponent(std::shared_ptr<GameObject> o)
 	: Component(o, static_cast<std::string>(typeid(UIComponent).name()).substr(6))
 {
 	o->UseZTest(false);

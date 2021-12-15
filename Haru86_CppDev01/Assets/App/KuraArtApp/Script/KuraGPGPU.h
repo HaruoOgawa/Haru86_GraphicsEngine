@@ -36,7 +36,7 @@ class KuraGPGPU :
     public Component
 {
 public:
-    KuraGPGPU(class Object* o);
+    KuraGPGPU(std::shared_ptr<class Object> o);
     ~KuraGPGPU();
     void Start() override;
     void Update() override;

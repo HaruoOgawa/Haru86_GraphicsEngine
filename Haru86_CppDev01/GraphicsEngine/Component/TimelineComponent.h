@@ -2,13 +2,14 @@
 #include "Component.h"
 #include <vector>
 #include <functional>
+#include <memory>
 
 struct TimelineActivationClip
 {
-    class GameObject* gameObject;
+    std::shared_ptr<class GameObject> gameObject;
     float startTime;
     float endTime;
-    TimelineActivationClip(class GameObject* obj,float s,float e) {
+    TimelineActivationClip(std::shared_ptr<class GameObject> obj,float s,float e) {
         this->gameObject = obj;
         this->startTime = s;
         this->endTime = e;
@@ -17,11 +18,11 @@ struct TimelineActivationClip
 
 struct TimelineCustomClip
 {
-    class GameObject* gameObject;
+    std::shared_ptr<class GameObject> gameObject;
     float startTime;
     float endTime;
     std::function<void(void)> callback;
-    TimelineCustomClip(class GameObject* obj,float s,float e,std::function<void(void)> func) {
+    TimelineCustomClip(std::shared_ptr<class GameObject> obj,float s,float e,std::function<void(void)> func) {
         this->gameObject = obj;
         this->startTime = s;
         this->endTime = e;
@@ -31,13 +32,13 @@ struct TimelineCustomClip
 
 struct TimelineAnimationClip
 {
-    class GameObject* gameObject;
+    std::shared_ptr<class GameObject> gameObject;
     float startTime;
     float endTime;
     float lifeTime;
     float lifeTimeRate;
     std::function<void(float)> callback;
-    TimelineAnimationClip(class GameObject* obj,float s,float e,std::function<void(float)> func) {
+    TimelineAnimationClip(std::shared_ptr<class GameObject> obj,float s,float e,std::function<void(float)> func) {
         this->gameObject = obj;
         this->startTime = s;
         this->endTime = e;
@@ -51,7 +52,7 @@ class TimelineComponent :
     public Component
 {
 public:
-    TimelineComponent(class Object* o);
+    TimelineComponent(std::shared_ptr<class Object> o);
     ~TimelineComponent();
     void Update() override;
     void Initialize();
@@ -70,11 +71,11 @@ private:
     void ComputeCustomTrack(float time);
     void ComputeAnimationTrack(float time);
     void ClearTimeline();
-    std::vector<TimelineActivationClip*> waittingActiovationClip;
-    std::vector<TimelineActivationClip*> runningActiovationClip;
-    std::vector<TimelineCustomClip*> waittingCustomClip;
-    std::vector<TimelineCustomClip*> runningCustomClip;
-    std::vector<TimelineAnimationClip*> waittingAnimationClip;
-    std::vector<TimelineAnimationClip*> runningAnimationClip;
+    std::vector<std::shared_ptr<TimelineActivationClip>> waittingActiovationClip;
+    std::vector<std::shared_ptr<TimelineActivationClip>> runningActiovationClip;
+    std::vector<std::shared_ptr<TimelineCustomClip>> waittingCustomClip;
+    std::vector<std::shared_ptr<TimelineCustomClip>> runningCustomClip;
+    std::vector<std::shared_ptr<TimelineAnimationClip>> waittingAnimationClip;
+    std::vector<std::shared_ptr<TimelineAnimationClip>> runningAnimationClip;
 };
 

@@ -3,11 +3,12 @@
 #include "../Object/Object.h"
 #include "../Game/Game.h"
 #include <string>
+#include <memory>
 
 class Component
 {
 public:
-	Component(class Object* o,std::string name);
+	Component(std::shared_ptr<class Object> o,std::string name);
 	~Component();
 	virtual void Start();
 	virtual void Update();
@@ -15,8 +16,8 @@ public:
 	std::string superClassName;
 	friend Object;
 protected:
-	class Object* owner;
-	class Game* game;
+	std::shared_ptr<class Object> owner;
+	std::shared_ptr<class Game> game;
 	
 };
 

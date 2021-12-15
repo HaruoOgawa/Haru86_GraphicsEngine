@@ -22,7 +22,7 @@
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Component/CameraComponent.h"
 
-KuraGPGPU::KuraGPGPU(Object* o)
+KuraGPGPU::KuraGPGPU(std::shared_ptr<Object> o)
 	: Component(o, static_cast<std::string>(typeid(KuraGPGPU).name()).substr(6)),
 	num(1024)
 {

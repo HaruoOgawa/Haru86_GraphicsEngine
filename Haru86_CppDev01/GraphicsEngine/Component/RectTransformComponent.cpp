@@ -6,7 +6,7 @@
 #include <string>
 #include <glm/glm.hpp>
 
-RectTransformComponent::RectTransformComponent(GameObject* o, float wRate, float hRate)
+RectTransformComponent::RectTransformComponent(std::shared_ptr<GameObject> o, float wRate, float hRate)
 	:Component(o, static_cast<std::string>(typeid(RectTransformComponent).name()).substr(6))
 {
 	

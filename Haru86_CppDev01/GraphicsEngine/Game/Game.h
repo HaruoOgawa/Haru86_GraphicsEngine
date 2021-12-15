@@ -32,7 +32,7 @@ public:
 
 	class BaseApp* app;
 	//frame board
-	class GameObject* renderBoard;
+	std::shared_ptr<class GameObject> renderBoard;
 	class CameraObject* game_camera_instance;
 	std::map<int, GLenum> texSlots;
 

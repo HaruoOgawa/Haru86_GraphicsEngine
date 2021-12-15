@@ -1,12 +1,13 @@
 #pragma once
 #include "Component.h"
 #include <glm/glm.hpp>
+#include <memory>
 
 class CameraComponent :
     public Component
 {
 public:
-    CameraComponent(class Object* o, enum class CameraType cameraType);
+    CameraComponent(std::shared_ptr<class Object> o, enum class CameraType cameraType);
     ~CameraComponent();
     void Start() override;
     void Update() override;
