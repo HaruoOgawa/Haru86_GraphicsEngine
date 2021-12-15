@@ -37,7 +37,7 @@ Game::Game()
 	animTime(0.0f)
 {
 	//app = new App();
-	timeObj = new Time(60.0f);
+	timeObj = std::make_shared<Time>(60.0f);
 
 	for (int i = 0; i < 10;i++) {
 		switch (i)
@@ -106,7 +106,7 @@ void Game::LoadData() {
 	
 	app->Start();
 	
-	timelineObj = new TimelineObject();
+	timelineObj = std::make_shared<TimelineObject>();
 
 	app->Timeline(timelineObj);
 	timelineObj->Initialize();
@@ -184,29 +184,9 @@ void Game::GenerateOutput() {
 
 void Game::ShutDown() {
 	GameRenderer::GetInstance()->ShutDown();
-	//delete gameRenderer;
 	GameRenderer::Destroy();
-	delete app;
-	delete timelineObj;
-	for (auto obj : gameObjectList) {
-		delete obj;
-	}
-
-	for (auto obj : boardGameObjectList) {
-		delete obj;
-	}
-
-	for (auto obj : postProcessGameObjectList) {
-		delete obj;
-	}
-
-	for (auto obj : uiObjectList) {
-		delete obj;
-	}
-
 	gameObjectList.clear();
 	boardGameObjectList.clear();
 	postProcessGameObjectList.clear();
 	uiObjectList.clear();
-
 }

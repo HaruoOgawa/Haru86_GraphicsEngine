@@ -1,25 +1,27 @@
 ﻿  DemoApp.cpp
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(29,60): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(33): message : 'TimelineAnimationClip' の宣言を確認してください
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(130,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(151,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(172,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(193,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(129,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(150,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(171,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(192,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(219,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(219,56): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(220,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(220,56): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(221,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(221,56): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(227,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(311,87): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(312,97): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(312,62): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(313,100): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(313,65): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(315,74): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(333,82): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(333,54): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(350,85): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(350,57): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(226,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(310,87): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(311,97): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(311,62): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(312,100): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(312,65): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(314,74): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(332,82): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(332,54): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(349,85): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(349,57): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(382,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(382,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(383,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(383,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(384,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
@@ -28,9 +30,26 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(385,89)
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(385,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(386,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(386,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(387,89): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(387,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(389,82): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\DemoApp\DemoApp.cpp(388,82): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+  KuraGPGPU.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.h(11,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'Graphics' の左辺を無視します。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\glTFLoader.h(9,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'glTFLoader' の左辺を無視します。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(57,38): warning C4838: 'double' から 'float' への変換には縮小変換が必要です
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(57,38): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(58,38): warning C4838: 'double' から 'float' への変換には縮小変換が必要です
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(58,38): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(59,38): warning C4838: 'double' から 'float' への変換には縮小変換が必要です
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(59,38): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(119,59): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(123,59): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(125,65): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(143,22): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraGPGPU.cpp(187,19): warning C4244: 'return': 'genType' から 'float' への変換です。データが失われる可能性があります。
+          with
+          [
+              genType=double
+          ]
+  CameraComponent.cpp
   CameraObject.cpp
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(138,52): error C2664: 'CameraComponent::CameraComponent(std::shared_ptr<Object>,CameraType)': 引数 1 を '_Ty' から 'std::shared_ptr<Object>' へ変換できません。
           with
@@ -104,6 +123,57 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\1
           ]
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Object\AudioObject.cpp(15): message : コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<AudioSourceComponent> std::make_shared<AudioSourceComponent,AudioObject*,std::string&>(AudioObject *&&,std::string &)' のリファレンスを確認してください
   AudioSourceComponent.cpp
+  Component.cpp
+  Game.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(1622,19): error C2664: 'bool Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(1622,20): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.cpp(131,2): message : 'Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()' の宣言を確認してください
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(1621): message : コンパイル対象の関数 テンプレート インスタンス化 'bool std::_Debug_lt_pred<_Pr&,std::shared_ptr<GameObject>&,std::shared_ptr<GameObject>&,0>(Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>&,_Ty1,_Ty2) noexcept(<expr>)' のリファレンスを確認してください
+          with
+          [
+              _Pr=Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>,
+              _Ty1=std::shared_ptr<GameObject> &,
+              _Ty2=std::shared_ptr<GameObject> &
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7485): message : コンパイル対象の関数 テンプレート インスタンス化 '_BidIt std::_Insertion_sort_unchecked<_RanIt,_Pr>(const _BidIt,const _BidIt,_Pr)' のリファレンスを確認してください
+          with
+          [
+              _BidIt=std::shared_ptr<GameObject> *,
+              _RanIt=std::shared_ptr<GameObject> *,
+              _Pr=Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7515): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::_Sort_unchecked<std::shared_ptr<GameObject>*,_Fn>(_RanIt,_RanIt,int,_Pr)' のリファレンスを確認してください
+          with
+          [
+              _Fn=Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>,
+              _RanIt=std::shared_ptr<GameObject> *,
+              _Pr=Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>
+          ]
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.cpp(131): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::sort<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>>(const _RanIt,const _RanIt,_Pr)' のリファレンスを確認してください
+          with
+          [
+              _Ty=std::shared_ptr<GameObject>,
+              _RanIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::shared_ptr<GameObject>>>>,
+              _Pr=Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7419,1): error C2664: 'bool Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7419,22): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.cpp(131,2): message : 'Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()' の宣言を確認してください
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7496): message : コンパイル対象の関数 テンプレート インスタンス化 'std::pair<_RanIt,_RanIt> std::_Partition_by_median_guess_unchecked<_RanIt,_Pr>(_RanIt,_RanIt,_Pr)' のリファレンスを確認してください
+          with
+          [
+              _RanIt=std::shared_ptr<GameObject> *,
+              _Pr=Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7423,1): error C2664: 'bool Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7423,82): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.cpp(131,2): message : 'Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()' の宣言を確認してください
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7434,1): error C2664: 'bool Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7434,30): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.cpp(131,2): message : 'Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()' の宣言を確認してください
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7447,1): error C2664: 'bool Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7447,30): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Game\Game.cpp(131,2): message : 'Game::UpdateTimeline::<lambda_a7ce26832395ef1058b76cd836876446>::operator ()' の宣言を確認してください
   GameObject.cpp
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(138,52): error C2664: 'MeshRendererComponent::MeshRendererComponent(std::shared_ptr<Object>,PrimitiveType)': 引数 1 を '_Ty' から 'std::shared_ptr<Object>' へ変換できません。
           with
@@ -199,6 +269,8 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\1
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Object\GameObject.cpp(44): message : コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<MeshRendererComponent> std::make_shared<MeshRendererComponent,GameObject*,PrimitiveType&,std::string&,std::string&[],std::string&>(GameObject *&&,PrimitiveType &,std::string &,std::string &[],std::string &)' のリファレンスを確認してください
   GameRenderer.cpp
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\GameRenderer.cpp(34,1): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\GameRenderer.cpp(92,8): warning C4834: 'nodiscard' 属性を持つ関数の戻り値を破棄しています
+  Main.cpp
   KuraArtApp.cpp
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(29,60): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(33): message : 'TimelineAnimationClip' の宣言を確認してください
@@ -257,31 +329,13 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\1
               _Ty=TransformComponent
           ]
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Object\Object.cpp(12): message : コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransformComponent> std::make_shared<TransformComponent,Object*,glm::vec3,glm::quat,glm::vec3>(Object *&&,glm::vec3 &&,glm::quat &&,glm::vec3 &&)' のリファレンスを確認してください
+  RectTransformComponent.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\RectTransformComponent.cpp(30,32): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\RectTransformComponent.cpp(31,32): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  Texture.cpp
   TimelineComponent.cpp
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(29,60): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(33): message : 'TimelineAnimationClip' の宣言を確認してください
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xmemory(696,82): error C2440: '初期化中': 'std::shared_ptr<GameObject>' から '_Objty' に変換できません。
-          with
-          [
-              _Objty=GameObject *
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xmemory(696,82): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\vector(689): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,std::shared_ptr<GameObject>&>(_Alloc &,_Objty *const ,std::shared_ptr<GameObject> &)' のリファレンスを確認してください
-          with
-          [
-              _Alloc=std::allocator<GameObject *>,
-              _Ty=GameObject *,
-              _Objty=GameObject *
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\vector(694): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,std::shared_ptr<GameObject>&>(_Alloc &,_Objty *const ,std::shared_ptr<GameObject> &)' のリファレンスを確認してください
-          with
-          [
-              _Alloc=std::allocator<GameObject *>,
-              _Ty=GameObject *,
-              _Objty=GameObject *
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\vector(707): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::vector<GameObject *,std::allocator<GameObject *>>::_Emplace_back_with_unused_capacity<std::shared_ptr<GameObject>&>(std::shared_ptr<GameObject> &)' のリファレンスを確認してください
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.cpp(63): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::vector<GameObject *,std::allocator<GameObject *>>::emplace_back<std::shared_ptr<GameObject>&>(std::shared_ptr<GameObject> &)' のリファレンスを確認してください
   TimelineObject.cpp
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(138,52): error C2664: 'TimelineComponent::TimelineComponent(std::shared_ptr<Object>)': 引数 1 を '_Ty' から 'std::shared_ptr<Object>' へ変換できません。
           with
@@ -306,10 +360,65 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\1
               _Ty=TimelineComponent
           ]
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Object\TimelineObject.cpp(5): message : コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TimelineComponent> std::make_shared<TimelineComponent,TimelineObject*>(TimelineObject *&&)' のリファレンスを確認してください
+  コードを生成中...
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\AudioSourceComponent.cpp(200): warning C4715: 'AudioSourceComponent::StopAudioCheck': 値を返さないコントロール パスがあります。
+  コンパイル中...
   TransformComponent.cpp
+  UIComponent.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(1622,19): error C2664: 'bool UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(1622,20): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\UIComponent.cpp(71,3): message : 'UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()' の宣言を確認してください
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\xutility(1621): message : コンパイル対象の関数 テンプレート インスタンス化 'bool std::_Debug_lt_pred<_Pr&,std::shared_ptr<GameObject>&,std::shared_ptr<GameObject>&,0>(UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>&,_Ty1,_Ty2) noexcept(<expr>)' のリファレンスを確認してください
+          with
+          [
+              _Pr=UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>,
+              _Ty1=std::shared_ptr<GameObject> &,
+              _Ty2=std::shared_ptr<GameObject> &
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7485): message : コンパイル対象の関数 テンプレート インスタンス化 '_BidIt std::_Insertion_sort_unchecked<_RanIt,_Pr>(const _BidIt,const _BidIt,_Pr)' のリファレンスを確認してください
+          with
+          [
+              _BidIt=std::shared_ptr<GameObject> *,
+              _RanIt=std::shared_ptr<GameObject> *,
+              _Pr=UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7515): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::_Sort_unchecked<std::shared_ptr<GameObject>*,_Fn>(_RanIt,_RanIt,int,_Pr)' のリファレンスを確認してください
+          with
+          [
+              _Fn=UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>,
+              _RanIt=std::shared_ptr<GameObject> *,
+              _Pr=UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>
+          ]
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\UIComponent.cpp(71): message : コンパイル対象の関数 テンプレート インスタンス化 'void std::sort<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>>(const _RanIt,const _RanIt,_Pr)' のリファレンスを確認してください
+          with
+          [
+              _Ty=std::shared_ptr<GameObject>,
+              _RanIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::shared_ptr<GameObject>>>>,
+              _Pr=UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7419,1): error C2664: 'bool UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7419,22): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\UIComponent.cpp(71,3): message : 'UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()' の宣言を確認してください
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7496): message : コンパイル対象の関数 テンプレート インスタンス化 'std::pair<_RanIt,_RanIt> std::_Partition_by_median_guess_unchecked<_RanIt,_Pr>(_RanIt,_RanIt,_Pr)' のリファレンスを確認してください
+          with
+          [
+              _RanIt=std::shared_ptr<GameObject> *,
+              _Pr=UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7423,1): error C2664: 'bool UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7423,82): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\UIComponent.cpp(71,3): message : 'UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()' の宣言を確認してください
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7434,1): error C2664: 'bool UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7434,30): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\UIComponent.cpp(71,3): message : 'UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()' の宣言を確認してください
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7447,1): error C2664: 'bool UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()(GameObject *,GameObject *) const': 引数 1 を 'std::shared_ptr<GameObject>' から 'GameObject *' へ変換できません。
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.28.29910\include\algorithm(7447,30): message : この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\UIComponent.cpp(71,3): message : 'UIComponent::ProcessInput::<lambda_b510b7f13d06ca6af22e8e7516627b7e>::operator ()' の宣言を確認してください
+  Mesh.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Mesh.cpp(52,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Mesh.cpp(59,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
   KuraTrail.cpp
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.h(11,2): warning C4091: 'static ': 変数が何も宣言されていないときは、'Graphics' の左辺を無視します。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraTrail.cpp(142,45): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraTrail.cpp(143,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
   コードを生成中...
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\AudioSourceComponent.cpp(200): warning C4715: 'AudioSourceComponent::StopAudioCheck': 値を返さないコントロール パスがあります。

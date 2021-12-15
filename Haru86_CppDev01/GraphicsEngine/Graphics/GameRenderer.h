@@ -1,8 +1,8 @@
 #pragma once
-//#include "GL/glew.h"
 #include "SDL.h"
 #include "../Game/Game.h"
 #include <glm/glm.hpp>
+#include <memory>
 
 class GameRenderer
 {
@@ -18,12 +18,12 @@ public:
 	bool Initialize(float width, float height);
 	void ShutDown();
 	void Draw();
-	bool CreateFrameBuffer(class Texture* fTex,unsigned int& fBuffer);
+	bool CreateFrameBuffer(std::shared_ptr<class Texture> fTex,unsigned int& fBuffer);
 	glm::ivec2 GetScreenSize();
 	float deltaTime;
 	float frameResolusion;
-	class Font* font;
-	class Texture* frameTexture;
+	std::shared_ptr<class Font> font;
+	std::shared_ptr<class Texture> frameTexture;
 private:
 	SDL_Window* sWindow;
 	int sWindowWidth;
@@ -32,7 +32,7 @@ private:
 	SDL_GLContext context;
 	
 	unsigned int frameBuffer;
-	class Texture* postProcessTexture;
+	std::shared_ptr<class Texture> postProcessTexture;
 	unsigned int postProcessBuffer;
 	
 protected:

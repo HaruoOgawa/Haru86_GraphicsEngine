@@ -86,14 +86,10 @@ bool GameRenderer::Initialize(float width,float height) {
 		SDL_Log("Can not create frame buffer");
 	}
 	
-	/*if (!CreateFrameBuffer(postProcessTexture, postProcessBuffer)) {
-		SDL_Log("Can not create frame buffer");
-	}*/
-
-	font = new Font();
+	font =  std::make_shared<Font>();
 	if (!(font->Load("./Assets/Resources/FontData/FRSCRIPT.TTF"))) {
-		delete font;
-		font = nullptr;
+		font.reset();
+		font == nullptr;
 	}
 
 	return true;
@@ -103,7 +99,7 @@ glm::ivec2 GameRenderer::GetScreenSize() {
 	return glm::ivec2(sWindowWidth, sWindowHeight);
 }
 
-bool GameRenderer::CreateFrameBuffer(class Texture* fTex, unsigned int& fBuffer) {
+bool GameRenderer::CreateFrameBuffer(std::shared_ptr<Texture> fTex, unsigned int& fBuffer) {
 	int width = static_cast<int>(GetScreenSize().x) ;
 	int height = static_cast<int>(GetScreenSize().y );
 	
@@ -176,7 +172,7 @@ void GameRenderer::ShutDown() {
 	if (frameTexture!=nullptr) {
 		glDeleteFramebuffers(1, &frameBuffer);
 		frameTexture->Unload();
-		delete frameTexture;
+		frameTexture.reset();
 		frameTexture = nullptr;
 	}
 }

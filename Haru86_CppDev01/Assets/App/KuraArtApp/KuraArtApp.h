@@ -13,6 +13,6 @@ public:
     void Start()  override;
     void Update()  override;
     void Draw() override;
-    void Timeline(class TimelineObject* timelineObj)  override;
+    void Timeline(std::shared_ptr<class TimelineObject> timelineObj)  override;
 };
 

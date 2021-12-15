@@ -69,9 +69,8 @@ void DemoApp::Draw() {
 
 }
 
-void DemoApp::Timeline(TimelineObject* timeline)  {
+void DemoApp::Timeline(std::shared_ptr<TimelineObject> timeline)  {
 	//Ray Activation
-	
 	timeline->AddActivationClip(Scene1_Frag,0.0f,42.0f);
 	timeline->AddActivationClip(Scene2_Frag, 42.0f, 64.0f);
 	timeline->AddActivationClip(Scene3_Frag, 64.0f, 85.0f);

@@ -5,7 +5,7 @@
 
 int main(int argc, char** argv) {
 	Game::Create();
-	Game::GetInstance()->app = new KuraArtApp();
+	Game::GetInstance()->app = std::shared_ptr<KuraArtApp>();
 	
 	if (Game::GetInstance()->Initialize()) {
 		//std::cout << "Open Game" << std::endl;

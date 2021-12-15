@@ -32,7 +32,6 @@ public:
 	friend class UIComponent;
 	friend class RectTransformComponent;
 private:
-	
 	class Game* game;
 protected:
 	std::unordered_map<std::string, std::shared_ptr<class Component>> myComponent;
