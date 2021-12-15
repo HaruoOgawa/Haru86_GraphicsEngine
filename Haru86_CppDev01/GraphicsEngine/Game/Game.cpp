@@ -124,7 +124,7 @@ void Game::RunLoop() {
 }
 
 void Game::UpdateTimeline() {
-	static_cast<TimelineComponent*>(timelineObj->timelineComponent)->Update();
+	static_cast<std::shared_ptr<class TimelineComponent>>(timelineObj->timelineComponent)->Update();
 
 	std::sort(gameObjectList.begin(), gameObjectList.end(), [](GameObject* a, GameObject* b) {
 		return a->renderOrder < b->renderOrder;

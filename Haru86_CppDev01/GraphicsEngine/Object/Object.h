@@ -8,14 +8,15 @@
 #include <typeinfo>
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
+#include <memory>
 
 class Object
 {
 public:
 	Object();
 	~Object();
-	void AddComponent(class Component* component);
-	void RemoveComponent(class Component* component);
+	void AddComponent(std::shared_ptr<class Component> component);
+	void RemoveComponent(std::shared_ptr<class Component> component);
 	class Component* GetComponent(std::string componentName);
 	void SetTransform(glm::vec3 pos, glm::quat rot, glm::vec3 s);
 	void SetPosition(glm::vec3 pos);
@@ -25,7 +26,7 @@ public:
 	glm::vec3 GetPosition();
 	glm::quat GetRotation();
 	glm::vec3 GetScale();
-	class TransformComponent* transform;
+	std::shared_ptr<class TransformComponent> transform;
 	friend class MeshRendererComponent;
 	friend class GameRenderer;
 	friend class UIComponent;
@@ -34,7 +35,7 @@ private:
 	
 	class Game* game;
 protected:
-	std::unordered_map<std::string, class Component*> myComponent;
+	std::unordered_map<std::string, std::shared_ptr<class Component>> myComponent;
 };
 
 

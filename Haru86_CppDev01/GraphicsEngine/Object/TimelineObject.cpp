@@ -2,7 +2,7 @@
 #include "../Component/TimelineComponent.h"
 
 TimelineObject::TimelineObject() {
-	timelineComponent = new TimelineComponent(this);
+	timelineComponent =  std::make_shared<TimelineComponent>(this);
 	AddComponent(timelineComponent);
 }
 TimelineObject::~TimelineObject() {

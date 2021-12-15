@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
 #include <string>
+#include <memory>
 
 class AudioObject :
     public Object
@@ -14,6 +15,6 @@ public:
     friend class Game;
     friend class BaseApp;
     friend class UIComponent;
-    class AudioSourceComponent* audioSource;
+    std::shared_ptr<class AudioSourceComponent> audioSource;
 };
 
