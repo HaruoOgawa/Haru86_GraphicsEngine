@@ -54,16 +54,16 @@ public:
     void Draw();
 private:
     std::shared_ptr<class KuraGPGPU> kuraGPGPU_instance;
-    std::unique_ptr<class Material> m_material;
-    std::unique_ptr<class Mesh> m_mesh;
-    std::unique_ptr<class ComputeBuffer> m_buffer_trail;
-    std::unique_ptr<class ComputeBuffer> m_buffer_node;
-    std::unique_ptr<class ComputeBuffer> m_buffer_input;
-    std::unique_ptr<class ComputeShader> m_computeShader_NextInputPos;
-    std::unique_ptr<class ComputeShader> m_computeShader_NodeInfo;
+    std::shared_ptr<class Material> m_material;
+    std::shared_ptr<class Mesh> m_mesh;
+    std::shared_ptr<class ComputeBuffer> m_buffer_trail;
+    std::shared_ptr<class ComputeBuffer> m_buffer_node;
+    std::shared_ptr<class ComputeBuffer> m_buffer_input;
+    std::shared_ptr<class ComputeShader> m_computeShader_NextInputPos;
+    std::shared_ptr<class ComputeShader> m_computeShader_NodeInfo;
     int trailNum;
     int nodeNum;
     int nodeSegment;
-    std::unique_ptr<class Texture> m_texture_trail;
+    std::shared_ptr<class Texture> m_texture_trail;
 };
 

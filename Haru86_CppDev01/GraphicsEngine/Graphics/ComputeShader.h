@@ -16,7 +16,7 @@ class ComputeShader
 public:
 	ComputeShader(std::string shaderPath);
 	~ComputeShader();
-	void SetBuffer(class ComputeBuffer* buffer,int bufferindex,class Material* material);
+	void SetBuffer(std::shared_ptr<class ComputeBuffer> buffer,int bufferindex,std::shared_ptr<class Material> material);
 	void SetMatrixUniform(std::string uniformName, glm::mat4 matrix);
 	void SetFloatUniform(std::string uniformName, float val);
 	void SetIntUniform(std::string uniformName, int val);
@@ -31,7 +31,6 @@ public:
 private:
 	GLuint shaderPrg;
 	GLuint computeShaderData;
-	//OpenGL‚Ì§–ñ‚É‚æ‚èˆê‚Â‚ÌComputeShader‚Ég‚¦‚éComputeBuffer‚Ì”‚ÍÅ‘å4ŒÂ‚Ü‚Å(index‚Ì”ÍˆÍ‚Í0`3)
-	std::vector<ComputeBuffer*> m_buffers;
+	std::vector<std::shared_ptr<ComputeBuffer>> m_buffers;
 };
 

@@ -255,7 +255,7 @@ void Material::SetTexUniform(std::string uniformName, unsigned int val) {
 	glUniform1i(location, static_cast<GLuint>(val));
 }
 
-void Material::SetBuffer(ComputeBuffer* buffer,int bufferIndex) {
+void Material::SetBuffer(std::shared_ptr<ComputeBuffer> buffer,int bufferIndex) {
 	SetActive();
 	glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bufferIndex, buffer->ssbo);
 }

@@ -5,6 +5,6 @@
 static class glTFLoader
 {
 public:
-	static std::unique_ptr<class Mesh> Load(std::string gltfDataPath);
+	static std::shared_ptr<class Mesh> Load(std::string gltfDataPath);
 };
 
