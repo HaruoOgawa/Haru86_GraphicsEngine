@@ -72,6 +72,8 @@ void KuraArtApp::Start() {
 		static_cast<KuraGPGPU*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))
 	));
 
+	Game::GetInstance()->renderBoard = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/KuraShader/KuraPostProcess.frag", RenderType::FrameBuffer);
+
 }
 void KuraArtApp::Update() {
 	Kura::gpgpu_obj->Update();

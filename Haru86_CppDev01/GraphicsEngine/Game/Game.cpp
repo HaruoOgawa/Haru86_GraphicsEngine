@@ -103,10 +103,7 @@ bool Game::Initialize() {
 }
 
 void Game::LoadData() {
-	//renderBoard = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/VedaStructuredShader/BoardRender.frag", RenderType::FrameBuffer);
-	renderBoard = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert",
-		"./Assets/Shader/KuraShader/KuraPostProcess.frag", RenderType::FrameBuffer);
-
+	
 	app->Start();
 	
 	timelineObj = new TimelineObject();

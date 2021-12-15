@@ -99,13 +99,6 @@ void MeshRendererComponent::Update() {
 
 void MeshRendererComponent::Draw() {
 	
-	if (primTex != nullptr) {
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		primTex->SetActive();
-		material->SetTexUniform("_fontTexture", primTex->GetTextureID());
-	}
-
 	if (useZTest == true) {
 		glEnable(GL_DEPTH_TEST);
 	}
@@ -121,6 +114,13 @@ void MeshRendererComponent::Draw() {
 	material->SetFloatUniform("_time", game->time);
 	material->SetFloatUniform("_deltaTime", game->deltaTime);
 	material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
+
+	if (primTex != nullptr) {
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		primTex->SetActive();
+		material->SetTexUniform("_fontTexture", primTex->GetTextureID());
+	}
 
 	//ここでTextureをアクティブにする
 	material->SetActiveTextureList();

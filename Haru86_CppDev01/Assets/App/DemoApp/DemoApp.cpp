@@ -35,7 +35,6 @@ DemoApp::~DemoApp() {
 
 }
 void DemoApp::Start()  {
-	
 
 	Scene1_Frag = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/demo.vert", "./Assets/Shader/VedaStructuredShader/scene1.frag");
 	Scene2_Frag = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/demo.vert", "./Assets/Shader/VedaStructuredShader/scene2.frag");
@@ -43,17 +42,18 @@ void DemoApp::Start()  {
 	Scene4_Frag = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/demo.vert", "./Assets/Shader/VedaStructuredShader/scene4.frag");
 	Scene5_Frag = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/demo.vert", "./Assets/Shader/VedaStructuredShader/scene5.frag");
 
-
 	/*GameObject* uiButton = new GameObject(PrimitiveType::BOARD,"./Assets/Shader/UIStandard.vert","./Assets/Shader/UIStandard.frag");
 	uiButton->SetScale(glm::vec3(0.1f,0.05f,1.0f)*0.5f);
 	uiButton->AddComponent(new UIComponent(uiButton));
 	uiButton->AddComponent(new RectTransformComponent(uiButton,0.1f,0.1f));*/
 
-	
 	DemoText = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Demo Scene");
 	MusicText = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Music: lug00ber");
 	MyCreditText= std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Mouvie: Haru86_");
 	TitleText = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Labyrinth");
+
+	//Load PostProcess
+	Game::GetInstance()->renderBoard = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/VedaStructuredShader/BoardRender.frag", RenderType::FrameBuffer);
 
 	DemoAudioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/lug00ber_they_are_feeding.mp3");
 	if (DemoAudioObj->Initialize()) {
@@ -233,8 +233,6 @@ void DemoApp::Timeline(TimelineObject* timeline)  {
 		Scene1_Frag->meshComp->material->SetFloatUniform("_cameraPositionIndex", 4);
 		Scene1_Frag->meshComp->material->SetFloatUniform("_cameraMoveVal", val);
 	});
-
-
 
 	//font/////////////////////////////////
 
