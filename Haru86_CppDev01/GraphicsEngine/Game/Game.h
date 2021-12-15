@@ -30,7 +30,7 @@ public:
 	std::shared_ptr<class TimelineObject> timelineObj;
 	float animTime;
 
-	std::shared_ptr<class BaseApp> app;
+	class BaseApp* app;
 	//frame board
 	std::shared_ptr<class GameObject> renderBoard;
 	class CameraObject* game_camera_instance;

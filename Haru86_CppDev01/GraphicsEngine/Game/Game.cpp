@@ -36,7 +36,6 @@ Game::Game()
 	mouseStateBool(false),
 	animTime(0.0f)
 {
-	//app = new App();
 	timeObj = std::make_shared<Time>(60.0f);
 
 	for (int i = 0; i < 10;i++) {
@@ -100,14 +99,10 @@ bool Game::Initialize() {
 }
 
 void Game::LoadData() {
-	
 	app->Start();
-	
 	timelineObj = std::make_shared<TimelineObject>();
-
 	app->Timeline(timelineObj);
 	timelineObj->Initialize();
-
 }
 
 void Game::RunLoop() {
@@ -180,6 +175,28 @@ void Game::GenerateOutput() {
 void Game::ShutDown() {
 	GameRenderer::GetInstance()->ShutDown();
 	GameRenderer::Destroy();
+	
+	timeObj.reset();
+	timelineObj.reset();
+	renderBoard.reset();
+	gameRenderer.reset();
+
+	for (auto itm : gameObjectList) {
+		itm.reset();
+	}
+
+	for (auto itm : boardGameObjectList) {
+		itm.reset();
+	}
+
+	for (auto itm : postProcessGameObjectList) {
+		itm.reset();
+	}
+
+	for (auto itm : uiObjectList) {
+		itm.reset();
+	}
+
 	gameObjectList.clear();
 	boardGameObjectList.clear();
 	postProcessGameObjectList.clear();

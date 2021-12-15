@@ -20,7 +20,17 @@ AudioSourceComponent::AudioSourceComponent(Object* o, std::string audioSourcePat
 }
 
 AudioSourceComponent::~AudioSourceComponent() {
+	if (channel!=nullptr) {
+		delete channel;
+	}
 
+	if (lowLevelSystem!=nullptr) {
+		delete lowLevelSystem;
+	}
+	
+	if (mSystem!=nullptr) {
+		delete mSystem;
+	}
 }
 
 bool AudioSourceComponent::Initialize() {
