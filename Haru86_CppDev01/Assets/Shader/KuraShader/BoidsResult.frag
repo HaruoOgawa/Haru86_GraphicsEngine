@@ -17,7 +17,7 @@ void main(){
 	float flag=g2f_flag;
 	//col.a=flag;
 	if(flag==0.0){
-		discard;
+		//discard;
 	}
 
 	float diff=max(dot(normalize(g2f_normal),normalize(LightDir)),0.0);

@@ -26,11 +26,8 @@ KuraGPGPU::KuraGPGPU(Object* o)
 	: Component(o, static_cast<std::string>(typeid(KuraGPGPU).name()).substr(6)),
 	num(1024)
 {
-	//m_mesh = std::make_unique<Mesh>(PrimitiveType::BOARD);
-	//owner->SetScale(glm::vec3(0.01));
 	m_mesh = glTFLoader::Load("./Assets/Resources/glTFData/PhoenixWithVAT/Phoenix.gltf");
 	
-
 	m_material = std::make_unique<Material>(
 		"./Assets/Shader/KuraShader/BoidsResult.vert",
 		"./Assets/Shader/KuraShader/BoidsResult.geom",
@@ -123,9 +120,9 @@ void KuraGPGPU::Update() {
 	m_computeShader_force->SetFloatUniform("_joinPower", 100);
 	m_computeShader_force->SetFloatUniform("_separatePower", 1000);
 	m_computeShader_force->SetFloatUniform("_alignmentPower", 100);
-	m_computeShader_force->SetFloatUniform("_joinDisMin", 10);
-	m_computeShader_force->SetFloatUniform("_separateDistMin", 10);
-	m_computeShader_force->SetFloatUniform("_alignmentDistMin", 10);
+	m_computeShader_force->SetFloatUniform("_joinDisMin", 0.1);  // pre10
+	m_computeShader_force->SetFloatUniform("_separateDistMin", 1000); //pre10
+	m_computeShader_force->SetFloatUniform("_alignmentDistMin", 0.1); //pre10
 	m_computeShader_force->Dispatch(num / 256, 1, 1);
 
 	//Dispatch Data///////////////
@@ -171,7 +168,6 @@ void KuraGPGPU::Draw() {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDisable(GL_DEPTH_TEST);
 	
-
 	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix() * m_mesh->localMatrix); //
 	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());

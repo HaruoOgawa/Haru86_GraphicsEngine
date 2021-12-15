@@ -137,7 +137,7 @@ void main(){
 
 	bool forceNor =(length(outBufferBoidsForce.boidsForce[id].force)==0.0);
 	vec3 now_position=outBufferBoidsData.boidsData[id].position
-		-((forceNor)? vec3(0.0) : normalize(outBufferBoidsForce.boidsForce[id].force)*2.0);
+		-((forceNor)? vec3(0.0) : normalize(outBufferBoidsForce.boidsForce[id].force)*1.5);
 	
 
 	vec3 vert=vertex;
@@ -146,7 +146,7 @@ void main(){
 	vert.z+=sin(_time*0.015+gl_InstanceID*100)*pow(length(vert.x),2.0)*1000.0;
 	
 	
-	vert.yz*=rot(-PI/2.0);
+	vert.yz*=rot(-PI/6.0);
 
 	//rotation
     //vec3 force=outBufferBoidsForce.boidsForce[id].force;
