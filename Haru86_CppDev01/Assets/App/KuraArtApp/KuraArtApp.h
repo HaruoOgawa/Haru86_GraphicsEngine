@@ -14,5 +14,11 @@ public:
     void Update()  override;
     void Draw() override;
     void Timeline(std::shared_ptr<class TimelineObject> timelineObj)  override;
+private :
+    std::shared_ptr<class GameObject> background_obj;
+    std::shared_ptr<class GameObject> KuraTerrain_obj;
+    std::shared_ptr<class AudioObject> audioObj;
+    std::shared_ptr<class Object> gpgpu_obj;
+    std::shared_ptr<class CameraObject> camera_obj;
 };
 
