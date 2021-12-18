@@ -27,7 +27,7 @@ public:
 	void Restart();
 	float time;
 	float deltaTime;
-	std::shared_ptr<class Time> timeObj;
+	std::unique_ptr<class Time> timeObj;
 	std::unique_ptr<class TimelineObject> timelineObj;
 	float animTime;
 

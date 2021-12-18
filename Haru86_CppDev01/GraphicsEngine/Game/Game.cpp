@@ -102,7 +102,7 @@ bool Game::Initialize() {
 
 void Game::LoadData() {
 	app = std::make_unique<KuraArtApp>();
-	timeObj = std::make_shared<Time>(60.0f);
+	timeObj = std::make_unique<Time>(60.0f);
 	app->Start();
 	timelineObj = std::make_unique<TimelineObject>();
 	app->Timeline(timelineObj.get());

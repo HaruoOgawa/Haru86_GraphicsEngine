@@ -73,7 +73,9 @@ void KuraArtApp::Start() {
 }
 void KuraArtApp::Update() {
 	gpgpu_obj->Update();
-
+	if (Game::GetInstance()->time>3000.0) {
+		Game::GetInstance()->Restart();
+	}
 }
 
 void KuraArtApp::Draw() {
