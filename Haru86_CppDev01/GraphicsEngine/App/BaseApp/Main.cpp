@@ -5,10 +5,9 @@
 
 int main(int argc, char** argv) {
 	Game::Create();
-	Game::GetInstance()->app = new KuraArtApp();
+	Game::GetInstance()->app = std::make_shared<KuraArtApp>();
 	
 	if (Game::GetInstance()->Initialize()) {
-		//std::cout << "Open Game" << std::endl;
 		Game::GetInstance()->RunLoop();
 	}
 
