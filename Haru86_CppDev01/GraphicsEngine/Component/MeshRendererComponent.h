@@ -26,12 +26,12 @@ public:
     void DrawBoard();
     void ProcessInput(const Uint8* state)const override;
     bool useZTest;
-    std::vector<class TimelineAnimationClip*> animationClips;
-    Material* material;
+    std::vector<std::shared_ptr<class TimelineAnimationClip>> animationClips;
+    std::shared_ptr<class Material> material;
     friend class GameRenderer;
 private:
-    std::unique_ptr<Mesh> mesh;
-    class Texture* primTex;
+    std::shared_ptr<Mesh> mesh;
+    std::shared_ptr<class Texture> primTex;
     class Object* myowner;
 };
 

@@ -9,30 +9,26 @@
 Object::Object()
 	: game(Game::GetInstance())
 {
-	transform = new TransformComponent(this, glm::vec3(0,0,0),  glm::quat(glm::vec3(0,0,0)),  glm::vec3(1.0f,1.0f,1.0f));
+	transform = std::make_shared<TransformComponent>(this, glm::vec3(0,0,0),  glm::quat(glm::vec3(0,0,0)),  glm::vec3(1.0f,1.0f,1.0f));
 	Object::AddComponent(transform);
 }
 
 Object::~Object() {
-	for (auto comp : myComponent) {
-		RemoveComponent(comp.second);
-	}
 	myComponent.clear();
 }
 
-void Object::AddComponent(Component* component) {
-	myComponent.insert({ component->superClassName,component });
+void Object::AddComponent(std::shared_ptr<class Component> component) {
+	myComponent.insert({ component->superClassName,component});
 }
 
-
-void Object::RemoveComponent(Component* component) {
-	delete  component;
+void Object::RemoveComponent(std::shared_ptr<class Component> component) {
+	
 }
 
 
 Component* Object::GetComponent(std::string componentName) {
 	auto item = myComponent.find(componentName.substr(6));
-	return item->second;
+	return item->second.get();
 }
 
 void Object::Update() {

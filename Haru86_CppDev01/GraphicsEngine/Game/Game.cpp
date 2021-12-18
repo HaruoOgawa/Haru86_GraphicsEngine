@@ -28,7 +28,7 @@ void Game::Destroy()
 }
 
 Game::Game()
-	: gameRenderer(nullptr),
+	: 
 	isRunning(true),
 	time(0.0f),
 	deltaTime(0.0f),
@@ -36,8 +36,7 @@ Game::Game()
 	mouseStateBool(false),
 	animTime(0.0f)
 {
-	//app = new App();
-	timeObj = new Time(60.0f);
+	timeObj = std::make_shared<Time>(60.0f);
 
 	for (int i = 0; i < 10;i++) {
 		switch (i)
@@ -94,26 +93,16 @@ bool Game::Initialize() {
 		return false;
 	}
 
-	//capture wait time
-	//while (SDL_GetTicks()<5000.0) {}
-
 	LoadData();
 	
 	return true;
 }
 
 void Game::LoadData() {
-	//renderBoard = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/VedaStructuredShader/BoardRender.frag", RenderType::FrameBuffer);
-	renderBoard = new GameObject(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert",
-		"./Assets/Shader/KuraShader/KuraPostProcess.frag", RenderType::FrameBuffer);
-
 	app->Start();
-	
-	timelineObj = new TimelineObject();
-
+	timelineObj = std::make_shared<TimelineObject>();
 	app->Timeline(timelineObj);
 	timelineObj->Initialize();
-
 }
 
 void Game::RunLoop() {
@@ -127,7 +116,7 @@ void Game::RunLoop() {
 }
 
 void Game::UpdateTimeline() {
-	static_cast<TimelineComponent*>(timelineObj->timelineComponent)->Update();
+	static_cast<std::shared_ptr<class TimelineComponent>>(timelineObj->timelineComponent)->Update();
 
 	std::sort(gameObjectList.begin(), gameObjectList.end(), [](GameObject* a, GameObject* b) {
 		return a->renderOrder < b->renderOrder;
@@ -156,11 +145,9 @@ void Game::InputProcess() {
 
 	const Uint8* state = SDL_GetKeyboardState(NULL);
 
-	
 	for (auto obj : gameObjectList) {
 		obj->ProcessInput(state);
 	}
-
 
 }
 
@@ -183,33 +170,12 @@ void Game::GenerateOutput() {
 	GameRenderer::GetInstance()->Draw();
 }
 
-
-
 void Game::ShutDown() {
 	GameRenderer::GetInstance()->ShutDown();
-	//delete gameRenderer;
 	GameRenderer::Destroy();
-	delete app;
-	delete timelineObj;
-	for (auto obj : gameObjectList) {
-		delete obj;
-	}
-
-	for (auto obj : boardGameObjectList) {
-		delete obj;
-	}
-
-	for (auto obj : postProcessGameObjectList) {
-		delete obj;
-	}
-
-	for (auto obj : uiObjectList) {
-		delete obj;
-	}
 
 	gameObjectList.clear();
 	boardGameObjectList.clear();
 	postProcessGameObjectList.clear();
 	uiObjectList.clear();
-
 }

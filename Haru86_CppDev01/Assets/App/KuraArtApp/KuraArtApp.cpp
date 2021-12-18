@@ -17,11 +17,11 @@
 #include <GL/glew.h>
 
 namespace Kura{
-	std::unique_ptr<GameObject> background_obj;
-	std::unique_ptr<GameObject> KuraTerrain_obj;
-	std::unique_ptr<AudioObject> audioObj;
-	std::unique_ptr<Object> gpgpu_obj;
-	std::unique_ptr<CameraObject> camera_obj;
+	std::shared_ptr<GameObject> background_obj;
+	std::shared_ptr<GameObject> KuraTerrain_obj;
+	std::shared_ptr<AudioObject> audioObj;
+	std::shared_ptr<Object> gpgpu_obj;
+	std::shared_ptr<CameraObject> camera_obj;
 }
 
 KuraArtApp::KuraArtApp()
@@ -34,7 +34,7 @@ KuraArtApp::~KuraArtApp() {
 }
 
 void KuraArtApp::Start() {
-	Kura::background_obj = std::make_unique<GameObject>(PrimitiveType::SPHERE,
+	Kura::background_obj = std::make_shared<GameObject>(PrimitiveType::SPHERE,
 		"./Assets/Shader/KuraShader/Background.vert",
 		"./Assets/Shader/KuraShader/Background.frag");
 	Kura::background_obj->SetScale(glm::vec3(5000.0));
@@ -42,10 +42,10 @@ void KuraArtApp::Start() {
 	std::vector<std::string> texUniformName = { "_backgroundTex" };
 	Kura::background_obj->meshComp->material->LoadTextureList(texPath, texUniformName);
 
-	Kura::camera_obj = std::make_unique<CameraObject>(CameraType::FIXED_CAMERA);
+	Kura::camera_obj = std::make_shared<CameraObject>(CameraType::FIXED_CAMERA);
 	Kura::camera_obj->SetPosition(glm::vec3(0, 0.0, -3.0));
 
-	Kura::audioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
+	Kura::audioObj = std::make_shared<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
 	if (Kura::audioObj->Initialize()) {
 		Kura::audioObj->PlayAudio();
 	}
@@ -58,7 +58,7 @@ void KuraArtApp::Start() {
 		{GL_FRAGMENT_SHADER,"./Assets/Shader/KuraShader/KuraTerrain.frag"}
 	};
 	
-	Kura::KuraTerrain_obj = std::make_unique<GameObject>(PrimitiveType::BOARD,shaders);
+	Kura::KuraTerrain_obj = std::make_shared<GameObject>(PrimitiveType::BOARD,shaders);
 	Kura::KuraTerrain_obj->SetScale(glm::vec3(5000.0,5000.0,1.0));
 	Kura::KuraTerrain_obj->SetPosition(glm::vec3(0.0,-1.0,0.0));
 	Kura::KuraTerrain_obj->SetRotation(glm::quat(glm::vec3(3.14159265/2.0,0.0,0.0)));
@@ -66,11 +66,13 @@ void KuraArtApp::Start() {
 	std::vector<std::string> texUniformName_KuraTerrain_obj = { "_heightMap","_terrainMap" };
 	Kura::KuraTerrain_obj->meshComp->material->LoadTextureList(texPath_KuraTerrain_obj, texUniformName_KuraTerrain_obj);
 
-	Kura::gpgpu_obj = std::make_unique<Object>();
-	Kura::gpgpu_obj->AddComponent(new KuraGPGPU(Kura::gpgpu_obj.get()));
-	Kura::gpgpu_obj->AddComponent(new KuraTrail(Kura::gpgpu_obj.get(),
+	Kura::gpgpu_obj = std::make_shared<Object>();
+	Kura::gpgpu_obj->AddComponent(std::make_shared<KuraGPGPU>(Kura::gpgpu_obj.get()));
+	Kura::gpgpu_obj->AddComponent(std::make_shared<KuraTrail>(Kura::gpgpu_obj.get(),
 		static_cast<KuraGPGPU*>(Kura::gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))
 	));
+
+	Game::GetInstance()->renderBoard = std::make_shared<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/KuraShader/KuraPostProcess.frag", RenderType::FrameBuffer);
 
 }
 void KuraArtApp::Update() {
@@ -83,7 +85,7 @@ void KuraArtApp::Draw() {
 	
 }
 
-void KuraArtApp::Timeline(TimelineObject* timeline) {
+void KuraArtApp::Timeline(std::shared_ptr<TimelineObject> timeline) {
 	
 }
 

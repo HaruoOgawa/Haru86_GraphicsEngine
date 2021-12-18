@@ -26,13 +26,13 @@ public:
 	void ShutDown();
 	float time;
 	float deltaTime;
-	class Time* timeObj;
-	class TimelineObject* timelineObj;
+	std::shared_ptr<class Time> timeObj;
+	std::shared_ptr<class TimelineObject> timelineObj;
 	float animTime;
 
-	class BaseApp* app;
+	std::shared_ptr<class BaseApp> app;
 	//frame board
-	class GameObject* renderBoard;
+	std::shared_ptr<class GameObject> renderBoard;
 	class CameraObject* game_camera_instance;
 	std::map<int, GLenum> texSlots;
 
@@ -48,15 +48,12 @@ private :
 	void UpdateGame();
 	void GenerateOutput();
 	void LoadData();
-	class GameRenderer* gameRenderer;
 	bool isRunning;
 	float previousTime;
 	std::vector<class GameObject*> gameObjectList;
 	std::vector<class GameObject*> boardGameObjectList;
 	std::vector<class GameObject*> postProcessGameObjectList;
 	std::vector<class UIObject*> uiObjectList;
-	
-	class AudioObject* audioObj;
 	
 	bool mouseStateBool;
 	

@@ -44,9 +44,6 @@ void Primitive::CreatePrimitive(std::vector<float> vertices, std::vector<int> in
 		reinterpret_cast<void*>(sizeof(float) * 6)
 	);
 
-	//glBindBuffer(GL_ARRAY_BUFFER, 0);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
 }
 
 void Primitive::CreatePrimitive(std::vector<std::vector<float>> vertices, std::vector<int> dimention, std::vector<unsigned short> indices) {
@@ -80,8 +77,6 @@ void Primitive::CreatePrimitive(std::vector<std::vector<float>> vertices, std::v
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mNumIndices * sizeof(unsigned short), indices.data(), GL_STATIC_DRAW);
 
-
-	//printf("vertex in prim x:%f , y:%f , z%f \n", vertices[0][0], vertices[0][1], vertices[0][2]);
 }
 
 void Primitive::Draw() {
@@ -91,7 +86,6 @@ void Primitive::Draw() {
 
 void Primitive::Draw(std::string drawType) {
 	SetActive();
-	//glDrawArrays(GL_PATCHES, 0, 4);
 	glDrawElements(GL_PATCHES, GetNumIndices(), GL_UNSIGNED_SHORT, nullptr);
 }
 

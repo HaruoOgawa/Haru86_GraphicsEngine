@@ -14,9 +14,7 @@ TransformComponent::TransformComponent(Object* o, glm::vec3 pos,glm::quat rot,gl
 }
 
 TransformComponent::~TransformComponent() {
-	/*delete position;
-	delete rotation;
-	delete scale;*/
+
 }
 
 void TransformComponent::Update() {

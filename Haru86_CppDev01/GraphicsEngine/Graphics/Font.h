@@ -5,6 +5,7 @@
 #include <SDL.h>
 #include <string>
 #include <glm/glm.hpp>
+#include <memory>
 
 class Font
 {
@@ -13,7 +14,7 @@ public:
 	~Font();
 	bool Load(std::string fontPass);
 	void UnLoad();
-	Texture* GetFontTexture(const std::string fontText,const glm::vec3 color,int fontSize);
+	std::shared_ptr<Texture> GetFontTexture(const std::string fontText,const glm::vec3 color,int fontSize);
 private:
 	std::unordered_map<int, TTF_Font*> fontData;
 };

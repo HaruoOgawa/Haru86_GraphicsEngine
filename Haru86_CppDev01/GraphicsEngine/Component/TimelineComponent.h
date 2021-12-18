@@ -2,6 +2,7 @@
 #include "Component.h"
 #include <vector>
 #include <functional>
+#include <memory>
 
 struct TimelineActivationClip
 {
@@ -70,11 +71,11 @@ private:
     void ComputeCustomTrack(float time);
     void ComputeAnimationTrack(float time);
     void ClearTimeline();
-    std::vector<TimelineActivationClip*> waittingActiovationClip;
-    std::vector<TimelineActivationClip*> runningActiovationClip;
-    std::vector<TimelineCustomClip*> waittingCustomClip;
-    std::vector<TimelineCustomClip*> runningCustomClip;
-    std::vector<TimelineAnimationClip*> waittingAnimationClip;
-    std::vector<TimelineAnimationClip*> runningAnimationClip;
+    std::vector<std::shared_ptr<TimelineActivationClip>> waittingActiovationClip;
+    std::vector<std::shared_ptr<TimelineActivationClip>> runningActiovationClip;
+    std::vector<std::shared_ptr<TimelineCustomClip>> waittingCustomClip;
+    std::vector<std::shared_ptr<TimelineCustomClip>> runningCustomClip;
+    std::vector<std::shared_ptr<TimelineAnimationClip>> waittingAnimationClip;
+    std::vector<std::shared_ptr<TimelineAnimationClip>> runningAnimationClip;
 };
 

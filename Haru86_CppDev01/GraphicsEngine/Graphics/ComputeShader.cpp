@@ -15,7 +15,7 @@ ComputeShader::~ComputeShader() {
 	m_buffers.clear();
 }
 
-void ComputeShader::SetBuffer(ComputeBuffer* buffer, int bufferindex, Material* material) {
+void ComputeShader::SetBuffer(std::shared_ptr<ComputeBuffer> buffer, int bufferindex, std::shared_ptr<Material> material) {
 	m_buffers.push_back(buffer);
 	//‚»‚ê‚¼‚ê‚ÌShader‚ÉBuffer‚ðƒZƒbƒg
 	//material->SetBuffer(buffer, bufferindex);
@@ -49,10 +49,7 @@ void ComputeShader::SetTexUniform(std::string uniformName, unsigned int val) {
 	glUniform1i(location, static_cast<GLuint>(val - 1));
 }
 
-
-
 void ComputeShader::Dispatch(int xGroupNum, int yGroupNum, int zGroupNum) {
-	//glUseProgram(shaderPrg);
 	glDispatchCompute(xGroupNum, yGroupNum, zGroupNum);
 }
 
@@ -120,7 +117,6 @@ void ComputeShader::BindComputeBuffer(CorrectionType correctionType) {
 			glBindBuffer(GL_ARRAY_BUFFER, m_buffers[i]->ssbo);
 		}
 	}
-	printf("m_buffers.size():%d \n",m_buffers.size());
 }
 
 void ComputeShader::DisBindComputeBuffer(CorrectionType correctionType) {

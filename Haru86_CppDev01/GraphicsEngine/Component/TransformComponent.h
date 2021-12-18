@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include "../Game/Game.h"
+#include <memory>
 
 class TransformComponent :
     public Component

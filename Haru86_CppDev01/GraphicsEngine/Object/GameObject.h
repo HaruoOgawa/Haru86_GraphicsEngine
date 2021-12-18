@@ -9,6 +9,7 @@
 #include <string>
 #include <GL/glew.h>
 #include <typeinfo>
+#include <memory>
 
 enum RenderQueue
 {
@@ -39,7 +40,7 @@ public:
 	void UseZTest(bool use);
 	void SetRenderOlder(int order);
 	void ProcessInput(const Uint8* state);
-	class MeshRendererComponent* meshComp;
+	std::shared_ptr<class MeshRendererComponent> meshComp;
 	float animTime = 0.0f;
 	friend class GameRenderer;
 	friend class TimelineComponent;

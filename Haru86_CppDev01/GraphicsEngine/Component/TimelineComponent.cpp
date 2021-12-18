@@ -195,12 +195,6 @@ void TimelineComponent::ResetTimeline() {
 	for (auto clip : runningAnimationClip) {
 		clip->lifeTime = 0.0f;
 		clip->lifeTimeRate = 0.0f;
-		/*auto iter = std::find(clip->gameObject->meshComp->animationClips.begin(), clip->gameObject->meshComp->animationClips.end(), clip);
-		if (iter != clip->gameObject->meshComp->animationClips.end()) {
-			clip->gameObject->meshComp->animationClips.erase(clip->gameObject->meshComp->animationClips.begin()
-				+ std::distance(clip->gameObject->meshComp->animationClips.begin(), iter));
-		}*/
-
 		clip->gameObject->meshComp->animationClips.clear();
 		waittingAnimationClip.emplace_back(clip);
 	}
@@ -210,72 +204,13 @@ void TimelineComponent::ResetTimeline() {
 
 void TimelineComponent::ClearTimeline() {
 	//activation//////////////////
-	for (auto clip : waittingActiovationClip) {
-		if (clip->gameObject != nullptr) {
-			delete clip->gameObject;
-		}
-		
-		if (clip != nullptr) {
-			delete clip;
-		}
-	}
 	waittingActiovationClip.clear();
-	
-	for (auto clip : runningActiovationClip) {
-		if (clip->gameObject != nullptr) {
-			delete clip->gameObject;
-		}
-
-		if (clip != nullptr) {
-			delete clip;
-		}
-	}
 	runningActiovationClip.clear();
-	
 	//Custom Activation////////////////
-	for (auto clip : waittingCustomClip) {
-		if (clip->gameObject != nullptr) {
-			delete clip->gameObject;
-		}
-
-		if (clip != nullptr) {
-			delete clip;
-		}
-	}
 	waittingCustomClip.clear();
-	
-	for (auto clip : runningCustomClip) {
-		if (clip->gameObject != nullptr) {
-			delete clip->gameObject;
-		}
-
-		if (clip != nullptr) {
-			delete clip;
-		}
-	}
 	runningCustomClip.clear();
-	
 	//Animation////////////////
-	for (auto clip : waittingAnimationClip) {
-		if (clip->gameObject != nullptr) {
-			delete clip->gameObject;
-		}
-
-		if (clip != nullptr) {
-			delete clip;
-		}
-	}
 	waittingAnimationClip.clear();
-	
-	for (auto clip : runningAnimationClip) {
-		if (clip->gameObject != nullptr) {
-			delete clip->gameObject;
-		}
-
-		if (clip != nullptr) {
-			delete clip;
-		}
-	}
 	runningAnimationClip.clear();
 
 }

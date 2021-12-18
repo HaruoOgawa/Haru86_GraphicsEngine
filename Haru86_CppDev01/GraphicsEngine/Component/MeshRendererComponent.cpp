@@ -17,7 +17,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
 	mesh->glDrawType = GLDrawType::NONE;
-	material = new Material();
+	material = std::make_shared<Material>();
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::map<GLenum, std::string> shaders)
@@ -31,16 +31,16 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 	else {
 		mesh->glDrawType = GLDrawType::NONE;
 	}
-	material = new Material(shaders);
+	material = std::make_shared<Material>(shaders);
 }
 
-MeshRendererComponent::MeshRendererComponent(class Object* o, std::string objPath)
+MeshRendererComponent::MeshRendererComponent(Object* o, std::string objPath)
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = glTFLoader::Load(objPath);
 	mesh->glDrawType = GLDrawType::NONE;
-	material = new Material();
+	material = std::make_shared<Material>();
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
@@ -49,7 +49,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
 	mesh->glDrawType = GLDrawType::NONE;
-	material = new Material(vertexShaderName,fragmentShaderName);
+	material = std::make_shared<Material>(vertexShaderName,fragmentShaderName);
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName)
@@ -58,7 +58,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
 	mesh->glDrawType = GLDrawType::TESSELLATION;
-	material = new Material(vertexShaderName,tessellationShaderName,fragmentShaderName);
+	material = std::make_shared<Material>(vertexShaderName,tessellationShaderName,fragmentShaderName);
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, std::string textureString)
@@ -67,7 +67,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
 	mesh->glDrawType = GLDrawType::NONE;
-	material = new Material(vertexShaderName,fragmentShaderName);
+	material = std::make_shared<Material>(vertexShaderName,fragmentShaderName);
 	if (GameRenderer::GetInstance()->font!=nullptr) {
 		primTex = GameRenderer::GetInstance()->font->GetFontTexture(textureString,glm::vec3(1.0,1.0,1.0), 30);
 	}
@@ -75,22 +75,17 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 }
 
 
-MeshRendererComponent::MeshRendererComponent(class Object* o, std::string modelDataPath, std::string vertexShaderName, std::string fragmentShaderName)
+MeshRendererComponent::MeshRendererComponent(Object* o, std::string modelDataPath, std::string vertexShaderName, std::string fragmentShaderName)
 	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = glTFLoader::Load(modelDataPath);
 	mesh->glDrawType = GLDrawType::NONE;
-	material = new Material(vertexShaderName,fragmentShaderName);
+	material = std::make_shared<Material>(vertexShaderName,fragmentShaderName);
 }
 
-
-
 MeshRendererComponent::~MeshRendererComponent() {
-	delete material;
-	if (primTex != nullptr) {
-		delete primTex;
-	}
+
 }
 
 void MeshRendererComponent::Update() {
@@ -99,13 +94,6 @@ void MeshRendererComponent::Update() {
 
 void MeshRendererComponent::Draw() {
 	
-	if (primTex != nullptr) {
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		primTex->SetActive();
-		material->SetTexUniform("_fontTexture", primTex->GetTextureID());
-	}
-
 	if (useZTest == true) {
 		glEnable(GL_DEPTH_TEST);
 	}
@@ -121,6 +109,13 @@ void MeshRendererComponent::Draw() {
 	material->SetFloatUniform("_time", game->time);
 	material->SetFloatUniform("_deltaTime", game->deltaTime);
 	material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
+
+	if (primTex != nullptr) {
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		primTex->SetActive();
+		material->SetTexUniform("_fontTexture", primTex->GetTextureID());
+	}
 
 	//ここでTextureをアクティブにする
 	material->SetActiveTextureList();

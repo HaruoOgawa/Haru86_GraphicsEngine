@@ -3,6 +3,7 @@
 #include "../Object/Object.h"
 #include "../Game/Game.h"
 #include <string>
+#include <memory>
 
 class Component
 {
