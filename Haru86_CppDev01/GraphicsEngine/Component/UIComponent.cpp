@@ -66,7 +66,7 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 
 		Game::GetInstance()->timelineObj->timelineComponent->ResetTimeline();
 		Game::GetInstance()->timelineObj->timelineComponent->ComputeTimeline(t);
-		std::sort(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), [](std::shared_ptr<GameObject> a, std::shared_ptr<GameObject> b) {
+		std::sort(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), [](GameObject* a, GameObject* b) {
 			return a->renderOrder < b->renderOrder;
 		});
 	}

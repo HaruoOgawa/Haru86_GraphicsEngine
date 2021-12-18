@@ -48,13 +48,12 @@ private :
 	void UpdateGame();
 	void GenerateOutput();
 	void LoadData();
-	std::shared_ptr<class GameRenderer> gameRenderer;
 	bool isRunning;
 	float previousTime;
-	std::vector<std::shared_ptr<class GameObject>> gameObjectList;
-	std::vector<std::shared_ptr<class GameObject>> boardGameObjectList;
-	std::vector<std::shared_ptr<class GameObject>> postProcessGameObjectList;
-	std::vector<std::shared_ptr<class UIObject>> uiObjectList;
+	std::vector<class GameObject*> gameObjectList;
+	std::vector<class GameObject*> boardGameObjectList;
+	std::vector<class GameObject*> postProcessGameObjectList;
+	std::vector<class UIObject*> uiObjectList;
 	
 	bool mouseStateBool;
 	

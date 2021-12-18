@@ -28,7 +28,7 @@ void Game::Destroy()
 }
 
 Game::Game()
-	: gameRenderer(nullptr),
+	: 
 	isRunning(true),
 	time(0.0f),
 	deltaTime(0.0f),
@@ -118,7 +118,7 @@ void Game::RunLoop() {
 void Game::UpdateTimeline() {
 	static_cast<std::shared_ptr<class TimelineComponent>>(timelineObj->timelineComponent)->Update();
 
-	std::sort(gameObjectList.begin(), gameObjectList.end(), [](std::shared_ptr<GameObject> a, std::shared_ptr<GameObject> b) {
+	std::sort(gameObjectList.begin(), gameObjectList.end(), [](GameObject* a, GameObject* b) {
 		return a->renderOrder < b->renderOrder;
 	});
 }
@@ -170,32 +170,9 @@ void Game::GenerateOutput() {
 	GameRenderer::GetInstance()->Draw();
 }
 
-
-
 void Game::ShutDown() {
 	GameRenderer::GetInstance()->ShutDown();
 	GameRenderer::Destroy();
-	
-	timeObj.reset();
-	timelineObj.reset();
-	renderBoard.reset();
-	gameRenderer.reset();
-
-	for (auto itm : gameObjectList) {
-		itm.reset();
-	}
-
-	for (auto itm : boardGameObjectList) {
-		itm.reset();
-	}
-
-	for (auto itm : postProcessGameObjectList) {
-		itm.reset();
-	}
-
-	for (auto itm : uiObjectList) {
-		itm.reset();
-	}
 
 	gameObjectList.clear();
 	boardGameObjectList.clear();

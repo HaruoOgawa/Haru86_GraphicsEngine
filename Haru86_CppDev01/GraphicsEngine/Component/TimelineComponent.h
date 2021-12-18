@@ -6,10 +6,10 @@
 
 struct TimelineActivationClip
 {
-    std::shared_ptr<class GameObject> gameObject;
+    class GameObject* gameObject;
     float startTime;
     float endTime;
-    TimelineActivationClip(std::shared_ptr<class GameObject> obj,float s,float e) {
+    TimelineActivationClip(class GameObject* obj,float s,float e) {
         this->gameObject = obj;
         this->startTime = s;
         this->endTime = e;
@@ -18,11 +18,11 @@ struct TimelineActivationClip
 
 struct TimelineCustomClip
 {
-    std::shared_ptr<class GameObject> gameObject;
+    class GameObject* gameObject;
     float startTime;
     float endTime;
     std::function<void(void)> callback;
-    TimelineCustomClip(std::shared_ptr<class GameObject> obj,float s,float e,std::function<void(void)> func) {
+    TimelineCustomClip(class GameObject* obj,float s,float e,std::function<void(void)> func) {
         this->gameObject = obj;
         this->startTime = s;
         this->endTime = e;
@@ -32,13 +32,13 @@ struct TimelineCustomClip
 
 struct TimelineAnimationClip
 {
-    std::shared_ptr<class GameObject> gameObject;
+    class GameObject* gameObject;
     float startTime;
     float endTime;
     float lifeTime;
     float lifeTimeRate;
     std::function<void(float)> callback;
-    TimelineAnimationClip(std::shared_ptr<class GameObject> obj,float s,float e,std::function<void(float)> func) {
+    TimelineAnimationClip(class GameObject* obj,float s,float e,std::function<void(float)> func) {
         this->gameObject = obj;
         this->startTime = s;
         this->endTime = e;

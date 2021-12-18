@@ -32,6 +32,6 @@ public:
 private:
     std::shared_ptr<Mesh> mesh;
     std::shared_ptr<class Texture> primTex;
-    std::shared_ptr<class Object> myowner;
+    class Object* myowner;
 };
 
