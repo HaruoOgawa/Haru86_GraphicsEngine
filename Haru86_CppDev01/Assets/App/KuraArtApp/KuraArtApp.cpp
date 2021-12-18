@@ -17,6 +17,7 @@
 #include <GL/glew.h>
 
 KuraArtApp::KuraArtApp()
+	: BaseApp()
 {
 	
 }
@@ -34,8 +35,9 @@ void KuraArtApp::Start() {
 	std::vector<std::string> texUniformName = { "_backgroundTex" };
 	background_obj->meshComp->material->LoadTextureList(texPath, texUniformName);
 
-	camera_obj = std::make_shared<CameraObject>(CameraType::FIXED_CAMERA);
+	camera_obj = std::make_unique<CameraObject>(CameraType::FIXED_CAMERA);
 	camera_obj->SetPosition(glm::vec3(0, 0.0, -3.0));
+	Game::GetInstance()->game_camera_instance = camera_obj.get();
 
 	audioObj = std::make_shared<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
 	if (audioObj->Initialize()) {

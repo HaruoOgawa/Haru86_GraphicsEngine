@@ -14,7 +14,6 @@ TransformComponent::TransformComponent(Object* o, glm::vec3 pos,glm::quat rot,gl
 }
 
 TransformComponent::~TransformComponent() {
-
 }
 
 void TransformComponent::Update() {

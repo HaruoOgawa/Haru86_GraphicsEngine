@@ -9,7 +9,6 @@ CameraComponent::CameraComponent(Object* o, enum class CameraType cameraType)
 }
 
 CameraComponent::~CameraComponent() {
-
 }
 
 void CameraComponent::Start() {

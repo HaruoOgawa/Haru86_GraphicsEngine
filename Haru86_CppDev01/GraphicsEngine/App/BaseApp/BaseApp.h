@@ -3,6 +3,9 @@
 
 class BaseApp
 {
+public:
+	BaseApp();
+	virtual ~BaseApp();
 private:
 	friend class Game;
 	friend class GameRenderer;
