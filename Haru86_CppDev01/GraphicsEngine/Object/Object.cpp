@@ -15,7 +15,6 @@ Object::Object()
 
 Object::~Object() {
 	myComponent.clear();
-	printf("Object is Called\n");
 }
 
 void Object::AddComponent(std::shared_ptr<class Component> component) {

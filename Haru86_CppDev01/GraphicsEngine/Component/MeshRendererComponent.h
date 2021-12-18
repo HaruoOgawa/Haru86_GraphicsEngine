@@ -30,8 +30,8 @@ public:
     std::shared_ptr<class Material> material;
     friend class GameRenderer;
 private:
-    std::shared_ptr<Mesh> mesh;
-    std::shared_ptr<class Texture> primTex;
+    std::unique_ptr<Mesh> mesh;
+    std::unique_ptr<class Texture> primTex;
     class Object* myowner;
 };
 

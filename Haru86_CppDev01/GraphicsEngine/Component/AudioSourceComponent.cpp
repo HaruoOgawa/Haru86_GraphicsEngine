@@ -5,8 +5,6 @@
 #include "./SDL.h"
 #include <iostream>
 
-FMOD::Sound* sound;
-
 AudioSourceComponent::AudioSourceComponent(Object* o)
 	: Component(o, static_cast<std::string>(typeid(AudioSourceComponent).name()).substr(6))
 {
@@ -20,17 +18,8 @@ AudioSourceComponent::AudioSourceComponent(Object* o, std::string audioSourcePat
 }
 
 AudioSourceComponent::~AudioSourceComponent() {
-	if (channel!=nullptr) {
-		delete channel;
-	}
-
-	if (lowLevelSystem!=nullptr) {
-		delete lowLevelSystem;
-	}
-	
-	if (mSystem!=nullptr) {
-		delete mSystem;
-	}
+	Shutdown();
+	printf("AudioSourceComponent is Shutdowned\n");
 }
 
 bool AudioSourceComponent::Initialize() {
@@ -224,8 +213,16 @@ void AudioSourceComponent::Shutdown() {
 	UnLoadAllBank();
 	UnLoadSound();
 
-	if (mSystem) {
-		mSystem->release();
+	if (channel != nullptr) {
+		delete channel;
+	}
+
+	if (lowLevelSystem != nullptr) {
+		delete lowLevelSystem;
+	}
+
+	if (mSystem != nullptr) {
+		delete mSystem;
 	}
 }
 

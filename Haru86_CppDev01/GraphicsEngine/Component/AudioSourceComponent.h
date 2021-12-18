@@ -10,6 +10,7 @@ namespace FMOD
 	class System;
 	class Channel;
 	class Event;
+	class Sound;
 	namespace Studio
 	{
 		class Bank;
@@ -48,5 +49,6 @@ private :
 	std::unordered_map<std::string, std::shared_ptr<FMOD::Studio::EventDescription>> eventMap;
 	FMOD::Channel* channel;
 	std::string m_audioSourcePath;
+	FMOD::Sound* sound;
 };
 

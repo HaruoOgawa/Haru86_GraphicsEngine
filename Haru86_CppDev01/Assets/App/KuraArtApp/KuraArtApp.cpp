@@ -23,11 +23,11 @@ KuraArtApp::KuraArtApp()
 }
 
 KuraArtApp::~KuraArtApp() {
-
+	printf("KuraApp is Deleted\n");
 }
 
 void KuraArtApp::Start() {
-	background_obj = std::make_shared<GameObject>(PrimitiveType::SPHERE,
+	background_obj = std::make_unique<GameObject>(PrimitiveType::SPHERE,
 		"./Assets/Shader/KuraShader/Background.vert",
 		"./Assets/Shader/KuraShader/Background.frag");
 	background_obj->SetScale(glm::vec3(5000.0));
@@ -39,7 +39,7 @@ void KuraArtApp::Start() {
 	camera_obj->SetPosition(glm::vec3(0, 0.0, -3.0));
 	Game::GetInstance()->game_camera_instance = camera_obj.get();
 
-	audioObj = std::make_shared<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
+	audioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
 	if (audioObj->Initialize()) {
 		audioObj->PlayAudio();
 	}
@@ -52,7 +52,7 @@ void KuraArtApp::Start() {
 		{GL_FRAGMENT_SHADER,"./Assets/Shader/KuraShader/KuraTerrain.frag"}
 	};
 	
-	KuraTerrain_obj = std::make_shared<GameObject>(PrimitiveType::BOARD,shaders);
+	KuraTerrain_obj = std::make_unique<GameObject>(PrimitiveType::BOARD,shaders);
 	KuraTerrain_obj->SetScale(glm::vec3(5000.0,5000.0,1.0));
 	KuraTerrain_obj->SetPosition(glm::vec3(0.0,-1.0,0.0));
 	KuraTerrain_obj->SetRotation(glm::quat(glm::vec3(3.14159265/2.0,0.0,0.0)));
@@ -60,7 +60,7 @@ void KuraArtApp::Start() {
 	std::vector<std::string> texUniformName_KuraTerrain_obj = { "_heightMap","_terrainMap" };
 	KuraTerrain_obj->meshComp->material->LoadTextureList(texPath_KuraTerrain_obj, texUniformName_KuraTerrain_obj);
 
-	gpgpu_obj = std::make_shared<Object>();
+	gpgpu_obj = std::make_unique<Object>();
 	gpgpu_obj->AddComponent(std::make_shared<KuraGPGPU>(gpgpu_obj.get()));
 	gpgpu_obj->AddComponent(std::make_shared<KuraTrail>(gpgpu_obj.get(),
 		static_cast<KuraGPGPU*>(gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))

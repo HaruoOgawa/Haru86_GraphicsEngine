@@ -38,7 +38,6 @@ KuraGPGPU::KuraGPGPU(Object* o)
 }
 
 KuraGPGPU::~KuraGPGPU() {
-
 }
 
 void KuraGPGPU::Start() {

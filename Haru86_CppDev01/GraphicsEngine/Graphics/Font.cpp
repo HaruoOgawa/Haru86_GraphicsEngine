@@ -48,8 +48,8 @@ void Font::UnLoad() {
 	TTF_Quit();
 }
 
-std::shared_ptr<Texture> Font::GetFontTexture(const std::string fontText, const glm::vec3 color, int fontSize) {
-	std::shared_ptr<Texture> texture = nullptr;
+std::unique_ptr<Texture> Font::GetFontTexture(const std::string fontText, const glm::vec3 color, int fontSize) {
+	std::unique_ptr<Texture> texture = nullptr;
 
 	
 
@@ -70,7 +70,7 @@ std::shared_ptr<Texture> Font::GetFontTexture(const std::string fontText, const 
 		SDL_Surface* surf = TTF_RenderUTF8_Blended(font, fontText.c_str(), sdlColor);
 		
 		if (surf != nullptr) {
-			texture = std::make_shared<Texture>();
+			texture = std::make_unique<Texture>();
 			texture->CreateTrueTypeFontTexture(surf);
 			SDL_FreeSurface(surf);
 			printf("Surf is NOT nullptr!!!!! \n");
