@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include "../../Assets/App/KuraArtApp/KuraArtApp.h"
 
 Game* Game::s_pInstance = nullptr;
 
@@ -34,9 +35,10 @@ Game::Game()
 	deltaTime(0.0f),
 	previousTime(0.0f),
 	mouseStateBool(false),
-	animTime(0.0f)
+	animTime(0.0f),
+	isRestart(false)
 {
-	timeObj = std::make_shared<Time>(60.0f);
+	
 
 	for (int i = 0; i < 10;i++) {
 		switch (i)
@@ -99,6 +101,8 @@ bool Game::Initialize() {
 }
 
 void Game::LoadData() {
+	app = std::make_unique<KuraArtApp>();
+	timeObj = std::make_shared<Time>(60.0f);
 	app->Start();
 	timelineObj = std::make_unique<TimelineObject>();
 	app->Timeline(timelineObj.get());
@@ -108,10 +112,15 @@ void Game::LoadData() {
 void Game::RunLoop() {
 	while (isRunning)
 	{
-		UpdateTimeline();
-		InputProcess();
-		UpdateGame();
-		GenerateOutput();
+		if (isRestart) {
+			Reflesh();
+		}
+		else {
+			UpdateTimeline();
+			InputProcess();
+			UpdateGame();
+			GenerateOutput();
+		}
 	}
 }
 
@@ -168,6 +177,37 @@ void Game::UpdateGame() {
 }
 void Game::GenerateOutput() {
 	GameRenderer::GetInstance()->Draw();
+}
+
+void Game::Reflesh() {
+	//Listを解放
+	gameObjectList.clear();
+	boardGameObjectList.clear();
+	postProcessGameObjectList.clear();
+	uiObjectList.clear();
+
+	//メモリを解放
+	timelineObj.reset();
+	timeObj.reset();
+	renderBoard.reset();
+	game_camera_instance = nullptr;
+	app.reset();
+
+	//メンバ変数を初期化
+	isRunning = true;
+	time = 0.0f;
+	deltaTime = 0.0f;
+	previousTime = 0.0f;
+	mouseStateBool = false;
+	animTime = 0.0f;
+	isRestart = false;
+
+	//再度リソースをロードする
+	LoadData();
+}
+
+void Game::Restart() {
+	isRestart = true;
 }
 
 void Game::ShutDown() {

@@ -24,6 +24,7 @@ public:
 	bool Initialize();
 	void RunLoop();
 	void ShutDown();
+	void Restart();
 	float time;
 	float deltaTime;
 	std::shared_ptr<class Time> timeObj;
@@ -32,7 +33,7 @@ public:
 
 	std::unique_ptr<class BaseApp> app;
 	//frame board
-	std::shared_ptr<class GameObject> renderBoard;
+	std::unique_ptr<class GameObject> renderBoard;
 	class CameraObject* game_camera_instance;
 	std::map<int, GLenum> texSlots;
 
@@ -48,6 +49,7 @@ private :
 	void UpdateGame();
 	void GenerateOutput();
 	void LoadData();
+	void Reflesh();
 	bool isRunning;
 	float previousTime;
 	std::vector<class GameObject*> gameObjectList;
@@ -56,6 +58,7 @@ private :
 	std::vector<class UIObject*> uiObjectList;
 	
 	bool mouseStateBool;
+	bool isRestart;
 	
 protected:
 	static Game* s_pInstance;

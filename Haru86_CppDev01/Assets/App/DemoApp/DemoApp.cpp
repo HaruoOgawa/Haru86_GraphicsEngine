@@ -37,7 +37,7 @@ void DemoApp::Start()  {
 	TitleText = std::make_shared<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Labyrinth");
 
 	//Load PostProcess
-	Game::GetInstance()->renderBoard = std::make_shared<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/VedaStructuredShader/BoardRender.frag", RenderType::FrameBuffer);
+	Game::GetInstance()->renderBoard = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/VedaStructuredShader/BoardRender.frag", RenderType::FrameBuffer);
 
 	DemoAudioObj = std::make_shared<AudioObject>("./Assets/Resources/MusicData/lug00ber_they_are_feeding.mp3");
 	if (DemoAudioObj->Initialize()) {
