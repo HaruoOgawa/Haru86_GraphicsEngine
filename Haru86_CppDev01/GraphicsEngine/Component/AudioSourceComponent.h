@@ -45,8 +45,8 @@ private :
 	void UnLoadSound();
 	FMOD::Studio::System* mSystem;
 	FMOD::System* lowLevelSystem;
-	std::unordered_map<std::string, std::shared_ptr<FMOD::Studio::Bank>> banksMap;
-	std::unordered_map<std::string, std::shared_ptr<FMOD::Studio::EventDescription>> eventMap;
+	std::unordered_map<std::string, FMOD::Studio::Bank*> banksMap;
+	std::unordered_map<std::string, FMOD::Studio::EventDescription*> eventMap;
 	FMOD::Channel* channel;
 	std::string m_audioSourcePath;
 	FMOD::Sound* sound;

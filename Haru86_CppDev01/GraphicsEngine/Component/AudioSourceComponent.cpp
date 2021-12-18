@@ -100,7 +100,7 @@ void AudioSourceComponent::UnLoadBask(std::string fileName) {
 		return;
 	}
 
-	std::shared_ptr<FMOD::Studio::Bank> bank = item->second;
+	FMOD::Studio::Bank* bank = item->second;
 	int numEvents = 0;
 	bank->getEventCount(&numEvents);
 	if (numEvents > 0) {
@@ -123,10 +123,15 @@ void AudioSourceComponent::UnLoadBask(std::string fileName) {
 }
 
 void AudioSourceComponent::UnLoadAllBank() {
+	for (auto& item : eventMap) {
+		item.second->unloadSampleData();
+	}
+	
 	for (auto& item : banksMap) {
 		item.second->unloadSampleData();
 		item.second->unload();
 	}
+
 	banksMap.clear();
 	eventMap.clear();
 }
@@ -209,21 +214,18 @@ void AudioSourceComponent::UnLoadSound() {
 }
 
 void AudioSourceComponent::Shutdown() {
-	
 	UnLoadAllBank();
-	UnLoadSound();
-
-	if (channel != nullptr) {
-		delete channel;
-	}
-
+	/*UnLoadSound();
+	
 	if (lowLevelSystem != nullptr) {
 		delete lowLevelSystem;
 	}
 
 	if (mSystem != nullptr) {
 		delete mSystem;
-	}
+	}*/
+
+	mSystem->release();
 }
 
 void AudioSourceComponent::ProcessInput(const Uint8* state)const {

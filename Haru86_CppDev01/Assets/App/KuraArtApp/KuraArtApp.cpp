@@ -23,19 +23,9 @@ KuraArtApp::KuraArtApp()
 }
 
 KuraArtApp::~KuraArtApp() {
-	printf("KuraApp is Deleted\n");
-	
 	background_obj.reset();
 	KuraTerrain_obj.reset();
-	//audioObj.reset();
-
-	if (audioObj) {
-		printf("audioObj is NOT null!!\n");
-	}
-	else {
-		printf("audioObj is null ...\n");
-	}
-
+	audioObj.reset();
 }
 
 void KuraArtApp::Start() {
