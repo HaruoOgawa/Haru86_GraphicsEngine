@@ -11,7 +11,7 @@ CameraObject::CameraObject(CameraType cameraType)
 }
 
 CameraObject::~CameraObject() {
-
+	printf("CameraObject is Called\n");
 }
 
 void CameraObject::Update() {

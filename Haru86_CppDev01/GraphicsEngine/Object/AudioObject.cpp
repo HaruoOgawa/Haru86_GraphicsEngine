@@ -17,7 +17,7 @@ AudioObject::AudioObject(std::string audioSourcePath)
 }
 
 AudioObject::~AudioObject() {
-
+	printf("AudioObject is Called\n");
 }
 
 bool AudioObject::Initialize() {

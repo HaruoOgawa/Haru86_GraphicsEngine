@@ -27,10 +27,10 @@ public:
 	float time;
 	float deltaTime;
 	std::shared_ptr<class Time> timeObj;
-	std::shared_ptr<class TimelineObject> timelineObj;
+	std::unique_ptr<class TimelineObject> timelineObj;
 	float animTime;
 
-	std::shared_ptr<class BaseApp> app;
+	std::unique_ptr<class BaseApp> app;
 	//frame board
 	std::shared_ptr<class GameObject> renderBoard;
 	class CameraObject* game_camera_instance;

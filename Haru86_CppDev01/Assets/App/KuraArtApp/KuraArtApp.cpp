@@ -77,7 +77,7 @@ void KuraArtApp::Draw() {
 	
 }
 
-void KuraArtApp::Timeline(std::shared_ptr<TimelineObject> timeline) {
+void KuraArtApp::Timeline(class TimelineObject* timeline) {
 	
 }
 

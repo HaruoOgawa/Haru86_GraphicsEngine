@@ -100,8 +100,8 @@ bool Game::Initialize() {
 
 void Game::LoadData() {
 	app->Start();
-	timelineObj = std::make_shared<TimelineObject>();
-	app->Timeline(timelineObj);
+	timelineObj = std::make_unique<TimelineObject>();
+	app->Timeline(timelineObj.get());
 	timelineObj->Initialize();
 }
 

@@ -13,7 +13,7 @@ public:
 	void Start()  override;
 	void Update()  override;
 	void Draw() override;
-	void Timeline(std::shared_ptr<class TimelineObject> timelineObj)  override;
+	void Timeline(class TimelineObject* timelineObj)  override;
 private:
 	//audio
 	std::shared_ptr<class AudioObject> DemoAudioObj;

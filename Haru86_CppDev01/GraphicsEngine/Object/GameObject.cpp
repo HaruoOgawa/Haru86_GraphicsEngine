@@ -70,7 +70,7 @@ GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std
 }
 
 GameObject::~GameObject() {
-	
+	printf("GameObject is Called\n");
 }
 
 

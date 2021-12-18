@@ -6,7 +6,6 @@ TimelineObject::TimelineObject() {
 	AddComponent(timelineComponent);
 }
 TimelineObject::~TimelineObject() {
-
 }
 
 void TimelineObject::AddActivationClip(GameObject* obj, float startTime, float endTime) {

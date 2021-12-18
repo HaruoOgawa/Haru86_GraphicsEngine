@@ -8,7 +8,7 @@ Component::Component(Object* o, std::string name)
 }
 
 Component::~Component() {
-
+	printf("Component is Called\n");
 }
 
 void Component::Start() {
