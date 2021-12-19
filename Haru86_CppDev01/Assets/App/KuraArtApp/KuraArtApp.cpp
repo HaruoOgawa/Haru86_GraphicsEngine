@@ -19,15 +19,12 @@
 KuraArtApp::KuraArtApp()
 	: BaseApp()
 {
-	
 }
 
 KuraArtApp::~KuraArtApp() {
 	background_obj.reset();
 	KuraTerrain_obj.reset();
 	audioObj.reset();
-
-	printf("KuraApp is Deleted \n");
 }
 
 void KuraArtApp::Start() {
@@ -66,9 +63,9 @@ void KuraArtApp::Start() {
 
 	gpgpu_obj = std::make_unique<Object>();
 	gpgpu_obj->AddComponent(std::make_shared<KuraGPGPU>(gpgpu_obj.get()));
-	/*gpgpu_obj->AddComponent(std::make_shared<KuraTrail>(gpgpu_obj.get(),
+	gpgpu_obj->AddComponent(std::make_shared<KuraTrail>(gpgpu_obj.get(),
 		static_cast<KuraGPGPU*>(gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))
-	));*/
+	));
 
 	Game::GetInstance()->renderBoard = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/KuraShader/KuraPostProcess.frag", RenderType::FrameBuffer);
 
@@ -79,13 +76,11 @@ void KuraArtApp::Update() {
 	if (Game::GetInstance()->time>3000.0) {
 		Game::GetInstance()->Restart();
 	}
-
 }
 
 void KuraArtApp::Draw() {
 	static_cast<KuraGPGPU*>(gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))->Draw();
-	//static_cast<KuraTrail*>(gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraTrail).name())))->Draw();
-	
+	static_cast<KuraTrail*>(gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraTrail).name())))->Draw();
 }
 
 void KuraArtApp::Timeline(class TimelineObject* timeline) {

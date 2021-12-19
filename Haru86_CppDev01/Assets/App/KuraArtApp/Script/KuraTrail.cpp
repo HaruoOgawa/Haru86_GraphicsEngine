@@ -55,7 +55,7 @@ KuraTrail::KuraTrail(Object* o, KuraGPGPU* kuraGPGPU)
 }
 
 KuraTrail::~KuraTrail() {
-	printf("KuraTrail is Deleted \n");
+	kuraGPGPU_instance = nullptr;
 }
 
 void KuraTrail::Start() {
