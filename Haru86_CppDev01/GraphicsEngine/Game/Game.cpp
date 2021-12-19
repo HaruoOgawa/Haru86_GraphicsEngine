@@ -206,17 +206,12 @@ void Game::Reflesh() {
 
 	//メモリを解放
 	game_camera_instance = nullptr;
-	printf("camera \n");
 	timelineObj.reset();
-	printf("timelineObj reset\n");
 	timeObj.reset();
-	printf("timeObj\n");
 	renderBoard.reset();
-	printf("renderBoard \n");
 	if (app) {
 		app.reset();
 	}
-	printf("app\n");
 	
 	//再度リソースをロードする
 	LoadData();

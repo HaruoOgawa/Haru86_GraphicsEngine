@@ -73,8 +73,9 @@ void KuraArtApp::Start() {
 void KuraArtApp::Update() {
 	gpgpu_obj->Update();
 	
-	if (Game::GetInstance()->time>3000.0) {
+	if (Game::GetInstance()->time>10000.0) {
 		Game::GetInstance()->Restart();
+		printf("Game::GetInstance()->time: %f\n", Game::GetInstance()->time);
 	}
 }
 
