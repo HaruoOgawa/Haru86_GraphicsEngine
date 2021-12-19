@@ -45,7 +45,7 @@ void KuraArtApp::Start() {
 		audioObj->PlayAudio();
 	}
 
-	std::map<GLenum, std::string> shaders = {
+	/*std::map<GLenum, std::string> shaders = {
 		{GL_VERTEX_SHADER,"./Assets/Shader/KuraShader/KuraTerrain.vert"},
 		{GL_TESS_CONTROL_SHADER, "./Assets/Shader/KuraShader/KuraTerrain.tesc"},
 		{GL_TESS_EVALUATION_SHADER,"./Assets/Shader/KuraShader/KuraTerrain.tese"},
@@ -65,23 +65,23 @@ void KuraArtApp::Start() {
 	gpgpu_obj->AddComponent(std::make_shared<KuraGPGPU>(gpgpu_obj.get()));
 	gpgpu_obj->AddComponent(std::make_shared<KuraTrail>(gpgpu_obj.get(),
 		static_cast<KuraGPGPU*>(gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))
-	));
+	));*/
 
 	Game::GetInstance()->renderBoard = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/KuraShader/KuraPostProcess.frag", RenderType::FrameBuffer);
 
 }
 void KuraArtApp::Update() {
-	gpgpu_obj->Update();
+	//gpgpu_obj->Update();
 	
-	if (Game::GetInstance()->time>10000.0) {
+	if (Game::GetInstance()->time>3000) {
 		Game::GetInstance()->Restart();
 		printf("Game::GetInstance()->time: %f\n", Game::GetInstance()->time);
 	}
 }
 
 void KuraArtApp::Draw() {
-	static_cast<KuraGPGPU*>(gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))->Draw();
-	static_cast<KuraTrail*>(gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraTrail).name())))->Draw();
+	//static_cast<KuraGPGPU*>(gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))->Draw();
+	//static_cast<KuraTrail*>(gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraTrail).name())))->Draw();
 }
 
 void KuraArtApp::Timeline(class TimelineObject* timeline) {
