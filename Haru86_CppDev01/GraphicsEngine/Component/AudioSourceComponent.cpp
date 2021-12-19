@@ -19,7 +19,6 @@ AudioSourceComponent::AudioSourceComponent(Object* o, std::string audioSourcePat
 
 AudioSourceComponent::~AudioSourceComponent() {
 	Shutdown();
-	printf("AudioSourceComponent is Shutdowned\n");
 }
 
 bool AudioSourceComponent::Initialize() {
@@ -52,7 +51,6 @@ bool AudioSourceComponent::Initialize() {
 	LoadBank("Assets/Master Bank.strings.bank");
 	LoadBank("Assets/Master Bank.bank");
 
-	
 	if (!CreateSound(m_audioSourcePath)) {
 		return false;
 	}
@@ -89,10 +87,8 @@ void AudioSourceComponent::LoadBank(std::string fileName) {
 				e->getPath(eventName, maxPathLength, nullptr);
 				eventMap.emplace(eventName, e);
 			}
-
 		}
 	}
-
 }
 void AudioSourceComponent::UnLoadBask(std::string fileName) {
 	auto item = banksMap.find(fileName);
@@ -150,7 +146,6 @@ bool AudioSourceComponent::CreateSound(std::string name) {
 		delete sound;
 		return false;
 	}
-
 }
 
 void AudioSourceComponent::Play() {
@@ -184,8 +179,6 @@ void AudioSourceComponent::SkipAudio(float startTime) {
 		else {
 			channel->setPosition(static_cast<unsigned int>(GetAudioLength() - 2000), FMOD_TIMEUNIT_MS);
 		}
-		
-		
 	}
 }
 
@@ -215,16 +208,6 @@ void AudioSourceComponent::UnLoadSound() {
 
 void AudioSourceComponent::Shutdown() {
 	UnLoadAllBank();
-	/*UnLoadSound();
-	
-	if (lowLevelSystem != nullptr) {
-		delete lowLevelSystem;
-	}
-
-	if (mSystem != nullptr) {
-		delete mSystem;
-	}*/
-
 	mSystem->release();
 }
 

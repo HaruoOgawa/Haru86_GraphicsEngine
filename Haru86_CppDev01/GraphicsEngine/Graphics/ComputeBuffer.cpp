@@ -6,7 +6,6 @@ ComputeBuffer::ComputeBuffer(GLsizeiptr size) {
 
 ComputeBuffer::~ComputeBuffer() {
 	DeleteBuffer();
-	printf("ComputeBuffer is Deleted\n");
 }
 
 void ComputeBuffer::CreateBuffer(GLsizeiptr size) {
@@ -16,7 +15,6 @@ void ComputeBuffer::CreateBuffer(GLsizeiptr size) {
 	glBufferData(GL_SHADER_STORAGE_BUFFER, size, NULL, GL_DYNAMIC_DRAW);
 	glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 }
-
 
 void ComputeBuffer::DeleteBuffer(){
 	glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
