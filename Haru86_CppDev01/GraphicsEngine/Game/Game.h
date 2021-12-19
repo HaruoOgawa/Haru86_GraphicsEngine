@@ -3,7 +3,7 @@
 #include "SDL.h"
 #include "../Graphics/GameRenderer.h"
 #include <vector>
-#include "../App/BaseApp/BaseApp.h"
+
 #include <memory>
 #include <map>
 #include <GL/glew.h>

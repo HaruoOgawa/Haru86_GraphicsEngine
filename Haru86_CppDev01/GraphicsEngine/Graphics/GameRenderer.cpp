@@ -136,7 +136,9 @@ void GameRenderer::Draw() {
 		obj->meshComp->Draw();
 	}
 
-	mgame->app->Draw();
+	if (mgame->app) {
+		mgame->app->Draw();
+	}
 
 	//pass2////////////////////////////////////////////////
 	

@@ -132,7 +132,7 @@ void MeshRendererComponent::Draw() {
 		mesh->Draw();
 	}
 
-	//使い終わったらここでTextureをエナクティブにする
+	//使い終わったらここでTextureを非アクティブにする
 	material->SetEactiveTextureList();
 
 }

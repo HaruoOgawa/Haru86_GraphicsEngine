@@ -26,6 +26,8 @@ KuraArtApp::~KuraArtApp() {
 	background_obj.reset();
 	KuraTerrain_obj.reset();
 	audioObj.reset();
+
+	printf("KuraApp is Deleted \n");
 }
 
 void KuraArtApp::Start() {
@@ -73,9 +75,9 @@ void KuraArtApp::Start() {
 }
 void KuraArtApp::Update() {
 	gpgpu_obj->Update();
-	if (Game::GetInstance()->time>3000.0) {
+	/*if (Game::GetInstance()->time>3000.0) {
 		Game::GetInstance()->Restart();
-	}
+	}*/
 }
 
 void KuraArtApp::Draw() {

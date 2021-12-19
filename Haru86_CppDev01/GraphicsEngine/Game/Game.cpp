@@ -9,7 +9,11 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include "../App/BaseApp/BaseApp.h"
 #include "../../Assets/App/KuraArtApp/KuraArtApp.h"
+
+#include <exception>
+#include <stdexcept>
 
 Game* Game::s_pInstance = nullptr;
 
@@ -20,7 +24,6 @@ void Game::Create()
 		s_pInstance = new Game;
 	}
 }
-
 
 void Game::Destroy()
 {
@@ -39,7 +42,6 @@ Game::Game()
 	isRestart(false)
 {
 	
-
 	for (int i = 0; i < 10;i++) {
 		switch (i)
 		{
@@ -101,12 +103,16 @@ bool Game::Initialize() {
 }
 
 void Game::LoadData() {
+	printf("Loading Start___________________________\n");
+
 	app = std::make_unique<KuraArtApp>();
 	timeObj = std::make_unique<Time>(60.0f);
 	app->Start();
 	timelineObj = std::make_unique<TimelineObject>();
 	app->Timeline(timelineObj.get());
 	timelineObj->Initialize();
+
+	printf("Loading Finish___________________________\n");
 }
 
 void Game::RunLoop() {
@@ -172,7 +178,10 @@ void Game::UpdateGame() {
 	for (auto obj : gameObjectList) {
 		obj->Update();
 	}
-	app->Update();
+	
+	if (app) {
+		app->Update();
+	}
 	
 }
 void Game::GenerateOutput() {
@@ -186,13 +195,6 @@ void Game::Reflesh() {
 	postProcessGameObjectList.clear();
 	uiObjectList.clear();
 
-	//メモリを解放
-	timelineObj.reset();
-	timeObj.reset();
-	renderBoard.reset();
-	game_camera_instance = nullptr;
-	app.reset();
-
 	//メンバ変数を初期化
 	isRunning = true;
 	time = 0.0f;
@@ -202,6 +204,20 @@ void Game::Reflesh() {
 	animTime = 0.0f;
 	isRestart = false;
 
+	//メモリを解放
+	game_camera_instance = nullptr;
+	printf("camera \n");
+	timelineObj.reset();
+	printf("timelineObj reset\n");
+	timeObj.reset();
+	printf("timeObj\n");
+	renderBoard.reset();
+	printf("renderBoard \n");
+	if (app) {
+		app.reset();
+	}
+	printf("app\n");
+	
 	//再度リソースをロードする
 	LoadData();
 }

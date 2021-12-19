@@ -9,8 +9,12 @@ int main(int argc, char** argv) {
 		Game::GetInstance()->RunLoop();
 	}
 
+	printf("Game is Finished\n");
+
 	Game::GetInstance()->ShutDown();
 	Game::Destroy();
+
+	printf("Game is Destroyed\n");
 
 	return 0;
 }
