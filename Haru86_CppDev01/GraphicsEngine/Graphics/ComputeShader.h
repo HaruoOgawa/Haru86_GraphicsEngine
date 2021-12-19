@@ -28,6 +28,7 @@ public:
 	void BindComputeBuffer(CorrectionType correctionType);
 	void DisBindComputeBuffer(CorrectionType correctionType);
 	void SetActive();
+	void DeleteShader();
 private:
 	GLuint shaderPrg;
 	GLuint computeShaderData;

@@ -38,6 +38,7 @@ KuraGPGPU::KuraGPGPU(Object* o)
 }
 
 KuraGPGPU::~KuraGPGPU() {
+	printf("KuraGPGPU is Deleted \n");
 }
 
 void KuraGPGPU::Start() {

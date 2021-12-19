@@ -74,15 +74,17 @@ void KuraArtApp::Start() {
 
 }
 void KuraArtApp::Update() {
-	gpgpu_obj->Update();
-	/*if (Game::GetInstance()->time>3000.0) {
+	//gpgpu_obj->Update();
+	
+	if (Game::GetInstance()->time>3000.0) {
 		Game::GetInstance()->Restart();
-	}*/
+	}
+
 }
 
 void KuraArtApp::Draw() {
-	static_cast<KuraGPGPU*>(gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))->Draw();
-	static_cast<KuraTrail*>(gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraTrail).name())))->Draw();
+	//static_cast<KuraGPGPU*>(gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))->Draw();
+	//static_cast<KuraTrail*>(gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraTrail).name())))->Draw();
 	
 }
 

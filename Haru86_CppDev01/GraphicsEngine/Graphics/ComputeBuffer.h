@@ -22,6 +22,7 @@ public:
 		glGetBufferSubData(GL_SHADER_STORAGE_BUFFER, offset, sizeof(T)*num,data);
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 	}
+	void DeleteBuffer();
 
 	friend class ComputeShader;
 	friend class Material;
