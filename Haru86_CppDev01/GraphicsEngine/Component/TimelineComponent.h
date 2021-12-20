@@ -71,11 +71,11 @@ private:
     void ComputeCustomTrack(float time);
     void ComputeAnimationTrack(float time);
     void ClearTimeline();
-    std::vector<std::shared_ptr<TimelineActivationClip>> waittingActiovationClip;
-    std::vector<std::shared_ptr<TimelineActivationClip>> runningActiovationClip;
-    std::vector<std::shared_ptr<TimelineCustomClip>> waittingCustomClip;
-    std::vector<std::shared_ptr<TimelineCustomClip>> runningCustomClip;
-    std::vector<std::shared_ptr<TimelineAnimationClip>> waittingAnimationClip;
-    std::vector<std::shared_ptr<TimelineAnimationClip>> runningAnimationClip;
+    std::vector<class TimelineActivationClip*> waittingActiovationClip;
+    std::vector<class TimelineActivationClip*> runningActiovationClip;
+    std::vector<class TimelineCustomClip*> waittingCustomClip;
+    std::vector<class TimelineCustomClip*> runningCustomClip;
+    std::vector<class TimelineAnimationClip*> waittingAnimationClip;
+    std::vector<class TimelineAnimationClip*> runningAnimationClip;
 };
 
