@@ -75,7 +75,6 @@ void KuraArtApp::Update() {
 	
 	if (Game::GetInstance()->time>3000) {
 		Game::GetInstance()->Restart();
-		printf("Game::GetInstance()->time: %f\n", Game::GetInstance()->time);
 	}
 }
 

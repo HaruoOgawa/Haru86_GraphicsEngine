@@ -103,16 +103,12 @@ bool Game::Initialize() {
 }
 
 void Game::LoadData() {
-	printf("Loading Start___________________________\n");
-
 	app = std::make_unique<KuraArtApp>();
 	timeObj = std::make_unique<Time>(60.0f);
 	app->Start();
 	timelineObj = std::make_unique<TimelineObject>();
 	app->Timeline(timelineObj.get());
 	timelineObj->Initialize();
-
-	printf("Loading Finish___________________________\n");
 }
 
 void Game::RunLoop() {
