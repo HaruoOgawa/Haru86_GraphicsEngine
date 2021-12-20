@@ -9,6 +9,9 @@ uniform float _frameResolusion;
 uniform float _postProcessFlag;
 uniform float _postProcessVal;
 
+uniform float _alphaVal;
+uniform int _renderMode;
+
 #define PI 3.14159265
 
 float rand(vec2 seeds){
@@ -23,5 +26,13 @@ void main(void){
 	float width=0.4;
 	col.rgb*=(abs(st.y)>1.0-width)? 0.0:1.0;
 	
+	if(_renderMode==1.0){
+		col.a=max(0.0,min(_alphaVal,1.0));
+	}else if(_renderMode==2.0){
+		col.a=1.0-max(0.0,min(_alphaVal,1.0));
+	}else{
+		//None
+	}
+
 	gl_FragColor=col;
 }

@@ -29,7 +29,8 @@ void TimelineComponent::Initialize() {
 }
 
 void TimelineComponent::InitializeActivationTrack() {
-	for (auto clip : waittingActiovationClip) {
+	for (auto i = 0; i < waittingActiovationClip.size();i++) {
+		auto clip = waittingActiovationClip[i];
 		auto iter = std::find(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), clip->gameObject);
 		if (iter!= game->GetInstance()->gameObjectList.end()) {
 			game->GetInstance()->gameObjectList.erase(game->GetInstance()->gameObjectList.begin()
@@ -38,7 +39,8 @@ void TimelineComponent::InitializeActivationTrack() {
 	}
 }
 void TimelineComponent::InitializeCustomTrack() {
-	for (auto clip : waittingCustomClip) {
+	for (auto i = 0; i < waittingCustomClip.size(); i++) {
+		auto clip = waittingCustomClip[i];
 		auto iter = std::find(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), clip->gameObject);
 		if (iter != game->GetInstance()->gameObjectList.end()) {
 			game->GetInstance()->gameObjectList.erase(game->GetInstance()->gameObjectList.begin()
@@ -58,7 +60,8 @@ void TimelineComponent::ComputeTimeline(float time) {
 }
 
 void TimelineComponent::ComputeActivationTrack(float time) {
-	for (auto clip : waittingActiovationClip) {
+	for (auto i = 0; i < waittingActiovationClip.size(); i++) {
+		auto clip = waittingActiovationClip[i];
 		if (clip->startTime<time&&clip->endTime>=time) {
 			game->GetInstance()->gameObjectList.emplace_back(clip->gameObject);
 			runningActiovationClip.emplace_back(clip);
@@ -72,7 +75,8 @@ void TimelineComponent::ComputeActivationTrack(float time) {
 		}
 	}
 
-	for (auto clip : runningActiovationClip) {
+	for (auto i = 0; i < runningActiovationClip.size(); i++) {
+		auto clip = runningActiovationClip[i];
 		if (time>clip->endTime) {
 			auto iter = std::find(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), clip->gameObject);
 			if (iter != game->GetInstance()->gameObjectList.end()) {
@@ -93,7 +97,8 @@ void TimelineComponent::ComputeActivationTrack(float time) {
 	}
 }
 void TimelineComponent::ComputeCustomTrack(float time) {
-	for (auto clip : waittingCustomClip) {
+	for (auto i = 0; i < waittingCustomClip.size(); i++) {
+		auto clip = waittingCustomClip[i];
 		if (clip->startTime < time && clip->endTime >= time) {
 			clip->callback();
 			game->GetInstance()->gameObjectList.emplace_back(clip->gameObject);
@@ -108,7 +113,8 @@ void TimelineComponent::ComputeCustomTrack(float time) {
 		}
 	}
 
-	for (auto clip : runningCustomClip) {
+	for (auto i = 0; i < runningCustomClip.size(); i++) {
+		auto clip = runningCustomClip[i];
 		if (time > clip->endTime) {
 			auto iter = std::find(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), clip->gameObject);
 			if (iter!=game->GetInstance()->gameObjectList.end()) {
@@ -130,7 +136,8 @@ void TimelineComponent::ComputeCustomTrack(float time) {
 }
 
 void TimelineComponent::ComputeAnimationTrack(float time) {
-	for (auto clip : waittingAnimationClip) {
+	for (auto i = 0; i < waittingAnimationClip.size(); i++) {
+		auto clip = waittingAnimationClip[i];
 		if (clip->startTime < time && clip->endTime >= time) {
 			clip->lifeTime = 0.0f;
 			clip->lifeTimeRate = 0.0f;
@@ -146,7 +153,8 @@ void TimelineComponent::ComputeAnimationTrack(float time) {
 		}
 	}
 
-	for (auto clip : runningAnimationClip) {
+	for (auto i = 0; i < runningAnimationClip.size(); i++) {
+		auto clip = runningAnimationClip[i];
 		clip->lifeTime += Game::GetInstance()->deltaTime;
 		clip->lifeTimeRate = clip->lifeTime / (clip->endTime*0.001f - clip->startTime * 0.001f);
 		if (time > clip->endTime) {
@@ -170,7 +178,8 @@ void TimelineComponent::ComputeAnimationTrack(float time) {
 }
 
 void TimelineComponent::ResetTimeline() {
-	for (auto clip : runningActiovationClip) {
+	for (auto i = 0; i < runningActiovationClip.size(); i++) {
+		auto clip = runningActiovationClip[i];
 		auto iter = std::find(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), clip->gameObject);
 		if (iter != game->GetInstance()->gameObjectList.end()) {
 			game->GetInstance()->gameObjectList.erase(game->GetInstance()->gameObjectList.begin()
@@ -181,7 +190,8 @@ void TimelineComponent::ResetTimeline() {
 	}
 	runningActiovationClip.clear();
 	
-	for (auto clip : runningCustomClip) {
+	for (auto i = 0; i < runningCustomClip.size(); i++) {
+		auto clip = runningCustomClip[i];
 		auto iter = std::find(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), clip->gameObject);
 		if (iter != game->GetInstance()->gameObjectList.end()) {
 			game->GetInstance()->gameObjectList.erase(game->GetInstance()->gameObjectList.begin()
@@ -192,7 +202,8 @@ void TimelineComponent::ResetTimeline() {
 	}
 	runningCustomClip.clear();
 	
-	for (auto clip : runningAnimationClip) {
+	for (auto i = 0; i < runningAnimationClip.size(); i++) {
+		auto clip = runningAnimationClip[i];
 		clip->lifeTime = 0.0f;
 		clip->lifeTimeRate = 0.0f;
 		clip->gameObject->meshComp->animationClips.clear();
