@@ -45,7 +45,7 @@ void KuraArtApp::Start() {
 		audioObj->PlayAudio();
 	}
 
-	/*std::map<GLenum, std::string> shaders = {
+	std::map<GLenum, std::string> shaders = {
 		{GL_VERTEX_SHADER,"./Assets/Shader/KuraShader/KuraTerrain.vert"},
 		{GL_TESS_CONTROL_SHADER, "./Assets/Shader/KuraShader/KuraTerrain.tesc"},
 		{GL_TESS_EVALUATION_SHADER,"./Assets/Shader/KuraShader/KuraTerrain.tese"},
@@ -61,7 +61,7 @@ void KuraArtApp::Start() {
 	std::vector<std::string> texUniformName_KuraTerrain_obj = { "_heightMap","_terrainMap" };
 	KuraTerrain_obj->meshComp->material->LoadTextureList(texPath_KuraTerrain_obj, texUniformName_KuraTerrain_obj);
 
-	gpgpu_obj = std::make_unique<Object>();
+	/*gpgpu_obj = std::make_unique<Object>();
 	gpgpu_obj->AddComponent(std::make_shared<KuraGPGPU>(gpgpu_obj.get()));
 	gpgpu_obj->AddComponent(std::make_shared<KuraTrail>(gpgpu_obj.get(),
 		static_cast<KuraGPGPU*>(gpgpu_obj->GetComponent(static_cast<std::string>(typeid(KuraGPGPU).name())))
