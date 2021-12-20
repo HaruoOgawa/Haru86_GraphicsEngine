@@ -43,6 +43,7 @@ void KuraArtApp::Start() {
 	audioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
 	if (audioObj->Initialize()) {
 		audioObj->PlayAudio();
+		audioObj->audioSource->SkipAudio(240000.0);
 	}
 
 	std::map<GLenum, std::string> shaders = {
@@ -80,23 +81,6 @@ void KuraArtApp::Draw() {
 }
 
 void KuraArtApp::Timeline(class TimelineObject* timeline) {
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 0.0, 2000.0, [](float val) {
-		float animTime = 2.0f;
-		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_renderMode", 1.0);
-		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_alphaVal", val / animTime);
-	});
 	
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 2000.0, 4000.0, [](float val) {
-		float animTime = 2.0f;
-		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_renderMode", 0.0);
-		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_alphaVal", val / animTime);
-	});
-
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 245000.0, 247000.0, [](float val) {
-		float animTime = 2.0f;
-		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_renderMode", 2.0);
-		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_alphaVal", val / animTime);
-	});
-
 }
 
