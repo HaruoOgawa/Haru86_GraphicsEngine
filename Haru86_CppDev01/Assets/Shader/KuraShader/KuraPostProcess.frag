@@ -9,7 +9,7 @@ uniform float _frameResolusion;
 uniform float _postProcessFlag;
 uniform float _postProcessVal;
 
-uniform int _renderMode;
+uniform float _renderMode;
 uniform float _alphaVal;
 
 #define PI 3.14159265
@@ -26,13 +26,13 @@ void main(void){
 	float width=0.4;
 	col.rgb*=(abs(st.y)>1.0-width)? 0.0:1.0;
 	
-	if(_renderMode==0){
+	if(_renderMode==0.0){
 		float val=max(0.0,min(1.0,_alphaVal));
 		col.rgb*=val;
-	}else if(_renderMode==1){
-		float val=1.0-max(0.0,min(1.0,_alphaVal));
+	}else if(_renderMode==1.0){
+		float val=max(0.0,min(1.0,1.0-_alphaVal));
 		col.rgb*=val;
-	}else if(_renderMode==2){
+	}else if(_renderMode==2.0){
 		//None
 	}
 

@@ -81,23 +81,21 @@ void KuraArtApp::Draw() {
 
 void KuraArtApp::Timeline(class TimelineObject* timeline) {
 	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 0.0, 1.0, [](float val) {
-		Game::GetInstance()->renderBoard->meshComp->material->SetIntUniform("_renderMode", 0);
+		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_renderMode", 0.0);
 		float animVal = 1.0;
 		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_alphaVal", val/ animVal);
 	});
 	
 	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 1.0, 3.0, [](float val) {
-		Game::GetInstance()->renderBoard->meshComp->material->SetIntUniform("_renderMode", 2);
+		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_renderMode", 2.0);
 		float animVal = 2.0;
 		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_alphaVal", val / animVal);
-
 	});
-	
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 245.0, 247.0, [](float val) {
-		Game::GetInstance()->renderBoard->meshComp->material->SetIntUniform("_renderMode", 1);
-		float animVal = 2.0;
+	//233718.625000
+	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 233.0-6.0, 233.0-5.0, [](float val) {
+		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_renderMode", 1.0);
+		float animVal = 1.0;
 		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_alphaVal", val / animVal);
-
 	});
 }
 
