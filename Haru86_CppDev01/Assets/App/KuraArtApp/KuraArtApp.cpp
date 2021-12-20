@@ -43,6 +43,7 @@ void KuraArtApp::Start() {
 	audioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
 	if (audioObj->Initialize()) {
 		audioObj->PlayAudio();
+		audioObj->audioSource->SkipAudio(240000.0);
 	}
 
 	std::map<GLenum, std::string> shaders = {
@@ -72,10 +73,6 @@ void KuraArtApp::Start() {
 }
 void KuraArtApp::Update() {
 	gpgpu_obj->Update();
-	
-	if (Game::GetInstance()->time>3000) {
-		Game::GetInstance()->Restart();
-	}
 }
 
 void KuraArtApp::Draw() {

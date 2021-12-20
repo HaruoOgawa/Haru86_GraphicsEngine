@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_map>
 #include <memory>
+#include <fmod_common.h>
 
 namespace FMOD
 {
@@ -43,6 +44,8 @@ private :
 	void UnLoadAllBank();
 	bool CreateSound(std::string name);
 	void UnLoadSound();
+	static FMOD_RESULT __stdcall EndOfSong(FMOD_CHANNELCONTROL* channelControl, FMOD_CHANNELCONTROL_TYPE controlType,
+		FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType, void* commanData1, void* commanData2);
 	FMOD::Studio::System* mSystem;
 	FMOD::System* lowLevelSystem;
 	std::unordered_map<std::string, FMOD::Studio::Bank*> banksMap;
