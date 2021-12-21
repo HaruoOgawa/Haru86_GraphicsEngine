@@ -291,5 +291,14 @@ void Material::SetEactiveTextureList() {
 void Material::UnLoadData() {
 	glDeleteProgram(shaderPrg);
 	glDeleteShader(vertShaderData);
+	if (tessControlShaderData) {
+		glDeleteShader(tessControlShaderData);
+	}
+	if (tessEvalShaderData) {
+		glDeleteShader(tessEvalShaderData);
+	}
+	if (geometryShaderData) {
+		glDeleteShader(geometryShaderData);
+	}
 	glDeleteShader(fragShaderData);
 }

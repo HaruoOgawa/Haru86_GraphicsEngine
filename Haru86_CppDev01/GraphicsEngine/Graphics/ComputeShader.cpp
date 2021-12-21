@@ -13,12 +13,11 @@ ComputeShader::ComputeShader(std::string shaderPath) {
 
 ComputeShader::~ComputeShader() {
 	m_buffers.clear();
+	DeleteShader();
 }
 
 void ComputeShader::SetBuffer(std::shared_ptr<ComputeBuffer> buffer, int bufferindex, std::shared_ptr<Material> material) {
 	m_buffers.push_back(buffer);
-	//‚»‚ê‚¼‚ê‚ÌShader‚ÉBuffer‚ðƒZƒbƒg
-	//material->SetBuffer(buffer, bufferindex);
 	SetActive();
 	glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bufferindex, buffer->ssbo);
 }
@@ -134,4 +133,9 @@ void ComputeShader::DisBindComputeBuffer(CorrectionType correctionType) {
 
 void ComputeShader::SetActive() {
 	glUseProgram(shaderPrg);
+}
+
+void ComputeShader::DeleteShader() {
+	glUseProgram(shaderPrg);
+	glDeleteProgram(shaderPrg);
 }

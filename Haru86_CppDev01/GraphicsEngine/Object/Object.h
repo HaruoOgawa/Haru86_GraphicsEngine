@@ -14,7 +14,7 @@ class Object
 {
 public:
 	Object();
-	~Object();
+	virtual ~Object();
 	void AddComponent(std::shared_ptr<class Component> component);
 	void RemoveComponent(std::shared_ptr<class Component> component);
 	class Component* GetComponent(std::string componentName);

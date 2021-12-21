@@ -4,8 +4,7 @@
 #include <vector>
 #include "./SDL.h"
 #include <iostream>
-
-FMOD::Sound* sound;
+#include "GraphicsEngine/Game/Game.h"
 
 AudioSourceComponent::AudioSourceComponent(Object* o)
 	: Component(o, static_cast<std::string>(typeid(AudioSourceComponent).name()).substr(6))
@@ -20,17 +19,7 @@ AudioSourceComponent::AudioSourceComponent(Object* o, std::string audioSourcePat
 }
 
 AudioSourceComponent::~AudioSourceComponent() {
-	if (channel!=nullptr) {
-		delete channel;
-	}
-
-	if (lowLevelSystem!=nullptr) {
-		delete lowLevelSystem;
-	}
-	
-	if (mSystem!=nullptr) {
-		delete mSystem;
-	}
+	Shutdown();
 }
 
 bool AudioSourceComponent::Initialize() {
@@ -63,7 +52,6 @@ bool AudioSourceComponent::Initialize() {
 	LoadBank("Assets/Master Bank.strings.bank");
 	LoadBank("Assets/Master Bank.bank");
 
-	
 	if (!CreateSound(m_audioSourcePath)) {
 		return false;
 	}
@@ -100,10 +88,8 @@ void AudioSourceComponent::LoadBank(std::string fileName) {
 				e->getPath(eventName, maxPathLength, nullptr);
 				eventMap.emplace(eventName, e);
 			}
-
 		}
 	}
-
 }
 void AudioSourceComponent::UnLoadBask(std::string fileName) {
 	auto item = banksMap.find(fileName);
@@ -111,7 +97,7 @@ void AudioSourceComponent::UnLoadBask(std::string fileName) {
 		return;
 	}
 
-	std::shared_ptr<FMOD::Studio::Bank> bank = item->second;
+	FMOD::Studio::Bank* bank = item->second;
 	int numEvents = 0;
 	bank->getEventCount(&numEvents);
 	if (numEvents > 0) {
@@ -134,10 +120,15 @@ void AudioSourceComponent::UnLoadBask(std::string fileName) {
 }
 
 void AudioSourceComponent::UnLoadAllBank() {
+	for (auto& item : eventMap) {
+		item.second->unloadSampleData();
+	}
+	
 	for (auto& item : banksMap) {
 		item.second->unloadSampleData();
 		item.second->unload();
 	}
+
 	banksMap.clear();
 	eventMap.clear();
 }
@@ -156,7 +147,6 @@ bool AudioSourceComponent::CreateSound(std::string name) {
 		delete sound;
 		return false;
 	}
-
 }
 
 void AudioSourceComponent::Play() {
@@ -165,6 +155,9 @@ void AudioSourceComponent::Play() {
 		SDL_Log("Cannnot Play Sound: (%d) %s", result, FMOD_ErrorString(result));
 		delete sound;
 		delete channel;
+	}
+	else {
+		channel->setCallback(AudioSourceComponent::EndOfSong);
 	}
 }
 
@@ -190,8 +183,6 @@ void AudioSourceComponent::SkipAudio(float startTime) {
 		else {
 			channel->setPosition(static_cast<unsigned int>(GetAudioLength() - 2000), FMOD_TIMEUNIT_MS);
 		}
-		
-		
 	}
 }
 
@@ -209,6 +200,16 @@ bool AudioSourceComponent::StopAudioCheck(float startTime) {
 	}
 }
 
+FMOD_RESULT F_CALLBACK AudioSourceComponent::EndOfSong(FMOD_CHANNELCONTROL* channelControl, FMOD_CHANNELCONTROL_TYPE controlType,
+	FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType, void* commanData1, void* commanData2)
+{
+	if (controlType == FMOD_CHANNELCONTROL_CHANNEL && callbackType == FMOD_CHANNELCONTROL_CALLBACK_END) {
+		Game::GetInstance()->Restart();
+	}
+
+	return FMOD_OK;
+}
+
 void AudioSourceComponent::UnLoadSound() {
 	if (sound != nullptr) {
 		delete sound;
@@ -220,13 +221,8 @@ void AudioSourceComponent::UnLoadSound() {
 }
 
 void AudioSourceComponent::Shutdown() {
-	
 	UnLoadAllBank();
-	UnLoadSound();
-
-	if (mSystem) {
-		mSystem->release();
-	}
+	mSystem->release();
 }
 
 void AudioSourceComponent::ProcessInput(const Uint8* state)const {

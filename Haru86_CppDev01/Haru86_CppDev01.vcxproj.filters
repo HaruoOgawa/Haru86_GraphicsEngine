@@ -227,6 +227,9 @@
     <ClCompile Include="Assets\App\KuraArtApp\Script\KuraTrail.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="GraphicsEngine\App\BaseApp\BaseApp.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

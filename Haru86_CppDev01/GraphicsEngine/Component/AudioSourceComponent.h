@@ -4,12 +4,14 @@
 #include <string>
 #include <unordered_map>
 #include <memory>
+#include <fmod_common.h>
 
 namespace FMOD
 {
 	class System;
 	class Channel;
 	class Event;
+	class Sound;
 	namespace Studio
 	{
 		class Bank;
@@ -42,11 +44,14 @@ private :
 	void UnLoadAllBank();
 	bool CreateSound(std::string name);
 	void UnLoadSound();
+	static FMOD_RESULT __stdcall EndOfSong(FMOD_CHANNELCONTROL* channelControl, FMOD_CHANNELCONTROL_TYPE controlType,
+		FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType, void* commanData1, void* commanData2);
 	FMOD::Studio::System* mSystem;
 	FMOD::System* lowLevelSystem;
-	std::unordered_map<std::string, std::shared_ptr<FMOD::Studio::Bank>> banksMap;
-	std::unordered_map<std::string, std::shared_ptr<FMOD::Studio::EventDescription>> eventMap;
+	std::unordered_map<std::string, FMOD::Studio::Bank*> banksMap;
+	std::unordered_map<std::string, FMOD::Studio::EventDescription*> eventMap;
 	FMOD::Channel* channel;
 	std::string m_audioSourcePath;
+	FMOD::Sound* sound;
 };
 

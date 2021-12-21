@@ -230,6 +230,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   <ItemGroup>
     <ClCompile Include="Assets\App\DemoApp\DemoApp.cpp" />
     <ClCompile Include="Assets\App\KuraArtApp\Script\KuraGPGPU.cpp" />
+    <ClCompile Include="GraphicsEngine\App\BaseApp\BaseApp.cpp" />
     <ClCompile Include="GraphicsEngine\Component\CameraComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Object\CameraObject.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\glTFBinaryReader.cpp" />

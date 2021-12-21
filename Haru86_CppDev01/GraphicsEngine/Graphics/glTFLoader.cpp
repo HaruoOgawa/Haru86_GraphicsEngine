@@ -15,7 +15,7 @@
 #include "GraphicsEngine/Graphics/glTFBinaryReader.h"
 
 
-std::shared_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
+std::unique_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 
 	tinygltf::TinyGLTF loader;
 	tinygltf::Model model;
@@ -23,7 +23,7 @@ std::shared_ptr<Mesh> glTFLoader::Load(std::string gltfDataPath) {
 	std::string warn;
 	bool result = loader.LoadASCIIFromFile(&model, &err, &warn, gltfDataPath);
 	
-	std::shared_ptr<Mesh> m_mesh = std::make_unique<Mesh>();
+	std::unique_ptr<Mesh> m_mesh = std::make_unique<Mesh>();
 	glm::mat4 translationMatirx = glm::translate(glm::mat4(1.0f), glm::vec3(
 		0.0,//-2.5335649919168424e-14,
 		0.0,//1.102462761082279e-7,

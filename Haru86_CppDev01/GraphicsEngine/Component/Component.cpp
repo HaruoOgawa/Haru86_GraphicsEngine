@@ -8,7 +8,6 @@ Component::Component(Object* o, std::string name)
 }
 
 Component::~Component() {
-
 }
 
 void Component::Start() {

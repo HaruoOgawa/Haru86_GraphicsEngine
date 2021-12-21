@@ -53,7 +53,7 @@ public:
     void ProcessInput(const Uint8* state)const override;
     void Draw();
 private:
-    std::shared_ptr<class KuraGPGPU> kuraGPGPU_instance;
+    class KuraGPGPU* kuraGPGPU_instance;
     std::shared_ptr<class Material> m_material;
     std::shared_ptr<class Mesh> m_mesh;
     std::shared_ptr<class ComputeBuffer> m_buffer_trail;

@@ -17,7 +17,6 @@ AudioObject::AudioObject(std::string audioSourcePath)
 }
 
 AudioObject::~AudioObject() {
-
 }
 
 bool AudioObject::Initialize() {

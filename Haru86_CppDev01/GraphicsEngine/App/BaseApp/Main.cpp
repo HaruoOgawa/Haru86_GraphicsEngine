@@ -1,18 +1,20 @@
 #include "Main.h"
 #include <iostream>
 #include "../../Game/Game.h"
-#include "../../../Assets/App/KuraArtApp/KuraArtApp.h"
 
 int main(int argc, char** argv) {
 	Game::Create();
-	Game::GetInstance()->app = std::make_shared<KuraArtApp>();
 	
 	if (Game::GetInstance()->Initialize()) {
 		Game::GetInstance()->RunLoop();
 	}
 
+	//printf("Game is Finished\n");
+
 	Game::GetInstance()->ShutDown();
 	Game::Destroy();
+
+	//printf("Game is Destroyed\n");
 
 	return 0;
 }

@@ -9,6 +9,11 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include "../App/BaseApp/BaseApp.h"
+#include "../../Assets/App/KuraArtApp/KuraArtApp.h"
+
+#include <exception>
+#include <stdexcept>
 
 Game* Game::s_pInstance = nullptr;
 
@@ -19,7 +24,6 @@ void Game::Create()
 		s_pInstance = new Game;
 	}
 }
-
 
 void Game::Destroy()
 {
@@ -34,10 +38,10 @@ Game::Game()
 	deltaTime(0.0f),
 	previousTime(0.0f),
 	mouseStateBool(false),
-	animTime(0.0f)
+	animTime(0.0f),
+	isRestart(false)
 {
-	timeObj = std::make_shared<Time>(60.0f);
-
+	
 	for (int i = 0; i < 10;i++) {
 		switch (i)
 		{
@@ -99,19 +103,26 @@ bool Game::Initialize() {
 }
 
 void Game::LoadData() {
+	app = std::make_unique<KuraArtApp>();
+	timeObj = std::make_unique<Time>(60.0f);
 	app->Start();
-	timelineObj = std::make_shared<TimelineObject>();
-	app->Timeline(timelineObj);
+	timelineObj = std::make_unique<TimelineObject>();
+	app->Timeline(timelineObj.get());
 	timelineObj->Initialize();
 }
 
 void Game::RunLoop() {
 	while (isRunning)
 	{
-		UpdateTimeline();
-		InputProcess();
-		UpdateGame();
-		GenerateOutput();
+		if (isRestart) {
+			Reflesh();
+		}
+		else {
+			UpdateTimeline();
+			InputProcess();
+			UpdateGame();
+			GenerateOutput();
+		}
 	}
 }
 
@@ -163,11 +174,47 @@ void Game::UpdateGame() {
 	for (auto obj : gameObjectList) {
 		obj->Update();
 	}
-	app->Update();
+	
+	if (app) {
+		app->Update();
+	}
 	
 }
 void Game::GenerateOutput() {
 	GameRenderer::GetInstance()->Draw();
+}
+
+void Game::Reflesh() {
+	//Listを解放
+	gameObjectList.clear();
+	boardGameObjectList.clear();
+	postProcessGameObjectList.clear();
+	uiObjectList.clear();
+
+	//メンバ変数を初期化
+	isRunning = true;
+	time = 0.0f;
+	deltaTime = 0.0f;
+	previousTime = 0.0f;
+	mouseStateBool = false;
+	animTime = 0.0f;
+	isRestart = false;
+
+	//メモリを解放
+	game_camera_instance = nullptr;
+	timelineObj.reset();
+	timeObj.reset();
+	renderBoard.reset();
+	if (app) {
+		app.reset();
+	}
+	
+	//再度リソースをロードする
+	LoadData();
+}
+
+void Game::Restart() {
+	isRestart = true;
 }
 
 void Game::ShutDown() {

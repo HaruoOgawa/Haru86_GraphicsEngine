@@ -3,7 +3,7 @@
 #include "SDL.h"
 #include "../Graphics/GameRenderer.h"
 #include <vector>
-#include "../App/BaseApp/BaseApp.h"
+
 #include <memory>
 #include <map>
 #include <GL/glew.h>
@@ -24,15 +24,16 @@ public:
 	bool Initialize();
 	void RunLoop();
 	void ShutDown();
+	void Restart();
 	float time;
 	float deltaTime;
-	std::shared_ptr<class Time> timeObj;
-	std::shared_ptr<class TimelineObject> timelineObj;
+	std::unique_ptr<class Time> timeObj;
+	std::unique_ptr<class TimelineObject> timelineObj;
 	float animTime;
 
-	std::shared_ptr<class BaseApp> app;
+	std::unique_ptr<class BaseApp> app;
 	//frame board
-	std::shared_ptr<class GameObject> renderBoard;
+	std::unique_ptr<class GameObject> renderBoard;
 	class CameraObject* game_camera_instance;
 	std::map<int, GLenum> texSlots;
 
@@ -48,6 +49,7 @@ private :
 	void UpdateGame();
 	void GenerateOutput();
 	void LoadData();
+	void Reflesh();
 	bool isRunning;
 	float previousTime;
 	std::vector<class GameObject*> gameObjectList;
@@ -56,6 +58,7 @@ private :
 	std::vector<class UIObject*> uiObjectList;
 	
 	bool mouseStateBool;
+	bool isRestart;
 	
 protected:
 	static Game* s_pInstance;

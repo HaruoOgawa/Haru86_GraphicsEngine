@@ -55,7 +55,7 @@ KuraTrail::KuraTrail(Object* o, KuraGPGPU* kuraGPGPU)
 }
 
 KuraTrail::~KuraTrail() {
-
+	kuraGPGPU_instance = nullptr;
 }
 
 void KuraTrail::Start() {
