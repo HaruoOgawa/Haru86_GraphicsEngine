@@ -1,5 +1,18 @@
-﻿  AudioSourceComponent.cpp
-E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\AudioSourceComponent.cpp(201): warning C4715: 'AudioSourceComponent::StopAudioCheck': 値を返さないコントロール パスがあります。
+﻿  KuraArtApp.cpp
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(74,45): warning C4099: 'TimelineActivationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(7): message : 'TimelineActivationClip' の宣言を確認してください
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(75,45): warning C4099: 'TimelineActivationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(7): message : 'TimelineActivationClip' の宣言を確認してください
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(76,41): warning C4099: 'TimelineCustomClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(19): message : 'TimelineCustomClip' の宣言を確認してください
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(77,41): warning C4099: 'TimelineCustomClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(19): message : 'TimelineCustomClip' の宣言を確認してください
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(78,44): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(33): message : 'TimelineAnimationClip' の宣言を確認してください
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(79,44): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(33): message : 'TimelineAnimationClip' の宣言を確認してください
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\MeshRendererComponent.h(29,44): warning C4099: 'TimelineAnimationClip': タイプ名は最初 'struct' として使われていましたが 'class' として使われています。
+E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Component\TimelineComponent.h(33): message : 'TimelineAnimationClip' の宣言を確認してください
   Haru86_CppDev01.vcxproj -> E:\CppDev\Haru86_CppDev01\Debug\Haru86_CppDev01.exe
   E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Library\SDL2-2.0.16\lib\x86\SDL2.dll
   1 個のファイルをコピーしました
