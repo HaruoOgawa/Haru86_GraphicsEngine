@@ -35,8 +35,6 @@ bool Font::Load(std::string fontPass) {
 		fontData.emplace(size, font);
 	}
 
-	//printf("fontData.size: %d \n",fontData.size());
-
 	return true;
 }
 
@@ -59,13 +57,9 @@ std::unique_ptr<Texture> Font::GetFontTexture(const std::string fontText, const 
 	sdlColor.b = static_cast<Uint8>(color.z * 0);
 	sdlColor.a = 255;
 
-	printf("sdlColor r:%d , g:%d , b:%d a:%d \n",static_cast<int>(sdlColor.r), static_cast<int>(sdlColor.g), static_cast<int>(sdlColor.b), static_cast<int>(sdlColor.a));
-	
 	auto iter = fontData.find(fontSize);
 	if (iter!=fontData.end()) {
 		TTF_Font* font = iter->second;
-
-		printf("fontText.c_str(): %s \n", fontText.c_str());
 
 		SDL_Surface* surf = TTF_RenderUTF8_Blended(font, fontText.c_str(), sdlColor);
 		
@@ -73,10 +67,6 @@ std::unique_ptr<Texture> Font::GetFontTexture(const std::string fontText, const 
 			texture = std::make_unique<Texture>();
 			texture->CreateTrueTypeFontTexture(surf);
 			SDL_FreeSurface(surf);
-			printf("Surf is NOT nullptr!!!!! \n");
-		}
-		else {
-			printf("Surf is nullptr... \n");
 		}
 	}
 	else {
