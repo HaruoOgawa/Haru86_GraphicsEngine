@@ -11,6 +11,7 @@
 #include <algorithm>
 #include "../App/BaseApp/BaseApp.h"
 #include "../../Assets/App/KuraArtApp/KuraArtApp.h"
+//#include "../../Assets/App/DemoApp/DemoApp.h"
 
 #include <exception>
 #include <stdexcept>
