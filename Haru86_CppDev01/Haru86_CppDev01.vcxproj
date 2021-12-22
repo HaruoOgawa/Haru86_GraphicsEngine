@@ -101,7 +101,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;fmodL_vc.lib;fmodstudioL_vc.lib;SDL2_ttf.lib;SOIL_LIB.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;fmodL_vc.lib;fmodstudioL_vc.lib;SDL2_ttf.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\SDL2-2.0.16\lib\x86;$(ProjectDir)GraphicsEngine\Library\SDL2_image-2.0.5\lib\x86;$(ProjectDir)GraphicsEngine\Library\FMOD_API\studio\lib;$(ProjectDir)GraphicsEngine\Library\FMOD_API\lowlevel\lib;$(ProjectDir)GraphicsEngine\Library\SDL2_ttf-2.0.15\lib\x86;$(ProjectDir)GraphicsEngine\Library\soil\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
@@ -134,7 +134,7 @@ xcopy "$(ProjectDir)Assets\Resources" "$(OutDir)Assets\Resources" /i /s /y
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)GraphicsEngine\Library\SDL2-2.0.16\lib\x86;$(ProjectDir)GraphicsEngine\Library\SDL2_image-2.0.5\lib\x86;$(ProjectDir)GraphicsEngine\Library\FMOD_API\studio\lib;$(ProjectDir)GraphicsEngine\Library\FMOD_API\lowlevel\lib;$(ProjectDir)GraphicsEngine\Library\SDL2_ttf-2.0.15\lib\x86;$(ProjectDir)GraphicsEngine\Library\soil\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;fmodL_vc.lib;fmodstudioL_vc.lib;SDL2_ttf.lib;SOIL_LIB.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;fmodL_vc.lib;fmodstudioL_vc.lib;SDL2_ttf.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)GraphicsEngine\Library\SDL2-2.0.16\lib\x86\*.dll" "$(OutDir)" /i /s /y

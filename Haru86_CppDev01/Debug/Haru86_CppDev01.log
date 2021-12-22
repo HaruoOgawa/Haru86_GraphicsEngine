@@ -268,7 +268,7 @@ E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\GraphicsEngine\Graphics\Graphics.h(11,
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraTrail.cpp(142,45): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
 E:\CppDev\Haru86_CppDev01\Haru86_CppDev01\Assets\App\KuraArtApp\Script\KuraTrail.cpp(143,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
   コードを生成中...
-  SOIL_LIB.lib(soil.obj) : MSIL .netmodule または /GL を伴ってコンパイルされたモジュールが見つかりました。/LTCG を使用して再開始してください。リンカーのパフォーマンスを向上させるためには、コマンドラインに /LTCG を追加してください。
+  SOIL.lib(soil.obj) : MSIL .netmodule または /GL を伴ってコンパイルされたモジュールが見つかりました。/LTCG を使用して再開始してください。リンカーのパフォーマンスを向上させるためには、コマンドラインに /LTCG を追加してください。
 LINK : warning LNK4075: /INCREMENTAL は /LTCG の指定によって無視されます。
 LINK : warning LNK4098: defaultlib 'MSVCRT' は他のライブラリの使用と競合しています。/NODEFAULTLIB:library を使用してください。
   コード生成しています。
