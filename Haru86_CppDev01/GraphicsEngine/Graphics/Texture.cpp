@@ -1,6 +1,6 @@
 #include "Texture.h"
 #include <GL/glew.h>
-#include <soil.h>
+#include <SOIL.h>
 #include "GraphicsEngine/Game/Game.h"
 #include <map>
 
