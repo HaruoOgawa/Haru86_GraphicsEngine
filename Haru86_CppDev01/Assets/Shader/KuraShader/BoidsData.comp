@@ -134,7 +134,7 @@ void main(){
     
     vec3 nex_vel=force;
     
-    float axisNoiseVal=0.75;
+   /*float axisNoiseVal=0.75;
     float axisNoisePower=2.0;
     if(abs(dot(normalize(nex_vel),vec3(1.0,0.0,0.0)))>=axisNoiseVal){
          nex_vel+=vec3(
@@ -154,7 +154,7 @@ void main(){
             perlinNoise(vec2(float(DID)*100.0,111.0+_time))*2.0-1.0,
            0.0 // perlinNoise(vec2(float(DID)*100.0,499.0+_time))*2.0-1.0
          )*axisNoisePower;
-    }
+    }*/
 
     vec3 next_pos=now_pos+normalize(nex_vel)*_deltaTime*50.0;
    
