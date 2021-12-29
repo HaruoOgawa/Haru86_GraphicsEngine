@@ -1,5 +1,5 @@
 ## about this repository
-* 私、Haru86_が趣味で開発中のゲームエンジンです
+* 私、Haru86_ (https://twitter.com/Haru86_HO )が趣味で開発中のゲームエンジンです
   * メガデモ・デジタルアート・クリエイティブコーディング等の制作をC++ベースで行うことができます
   * 全体の設計としてはUnityとopenFrameworksのハイブリットのようなものです 
 ## 開発の注意点
