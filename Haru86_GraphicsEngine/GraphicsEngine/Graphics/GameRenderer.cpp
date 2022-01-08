@@ -124,8 +124,7 @@ void GameRenderer::Draw() {
 	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
 	glViewport(0, 0, static_cast<int>(GetScreenSize().x* frameResolusion), static_cast<int>(GetScreenSize().y* frameResolusion));
 	
-	//glClearColor(0.0f, 0.0f,0.0f,1.0f);
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	glClearColor(0.0f, 0.0f,0.0f,1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	glEnable(GL_DEPTH_TEST);

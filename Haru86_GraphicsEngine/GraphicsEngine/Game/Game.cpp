@@ -10,8 +10,10 @@
 #include <vector>
 #include <algorithm>
 #include "../App/BaseApp/BaseApp.h"
-#include "../../Assets/App/KuraArtApp/KuraArtApp.h"
+#include "../../Assets/App/CreativeCoding20220108/CC220108App.h"
+//#include "../../Assets/App/KuraArtApp/KuraArtApp.h"
 //#include "../../Assets/App/DemoApp/DemoApp.h"
+
 
 #include <exception>
 #include <stdexcept>
@@ -104,9 +106,15 @@ bool Game::Initialize() {
 }
 
 void Game::LoadData() {
-	app = std::make_unique<KuraArtApp>();
+	app = std::make_unique<CC220108App>();
 	timeObj = std::make_unique<Time>(60.0f);
 	app->Start();
+
+	//renderBoardがユーザーに指定されていないのであれば、デフォルトのものをセットする
+	if (renderBoard==nullptr) {
+		renderBoard = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/StandardRenderBoard.vert", "./Assets/Shader/StandardRenderBoard.frag", RenderType::FrameBuffer);
+	}
+
 	timelineObj = std::make_unique<TimelineObject>();
 	app->Timeline(timelineObj.get());
 	timelineObj->Initialize();

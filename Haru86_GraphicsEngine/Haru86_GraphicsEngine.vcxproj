@@ -199,6 +199,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   <ItemGroup>
     <ClInclude Include="Assets\App\DemoApp\DemoApp.h" />
     <ClInclude Include="Assets\App\KuraArtApp\Script\KuraGPGPU.h" />
+    <ClInclude Include="Assets\App\CreativeCoding20220108\CC220108App.h" />
     <ClInclude Include="GraphicsEngine\Component\CameraComponent.h" />
     <ClInclude Include="GraphicsEngine\Object\CameraObject.h" />
     <ClInclude Include="GraphicsEngine\Graphics\glTFBinaryReader.h" />
@@ -238,6 +239,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   <ItemGroup>
     <ClCompile Include="Assets\App\DemoApp\DemoApp.cpp" />
     <ClCompile Include="Assets\App\KuraArtApp\Script\KuraGPGPU.cpp" />
+    <ClCompile Include="Assets\App\CreativeCoding20220108\CC220108App.cpp" />
     <ClCompile Include="GraphicsEngine\App\BaseApp\BaseApp.cpp" />
     <ClCompile Include="GraphicsEngine\Component\CameraComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Object\CameraObject.cpp" />
@@ -288,6 +290,8 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <None Include="Assets\Shader\KuraShader\KuraTerrain.tesc" />
     <None Include="Assets\Shader\KuraShader\KuraTerrain.tese" />
     <None Include="Assets\Shader\KuraShader\KuraTerrain.vert" />
+    <None Include="Assets\Shader\StandardRenderBoard.frag" />
+    <None Include="Assets\Shader\StandardRenderBoard.vert" />
     <None Include="bin\libfreetype-6.dll" />
     <None Include="bin\SDL2_ttf.dll" />
     <None Include="bin\zlib1.dll" />

@@ -134,7 +134,6 @@ void MeshRendererComponent::Draw() {
 
 	//使い終わったらここでTextureを非アクティブにする
 	material->SetEactiveTextureList();
-
 }
 
 void MeshRendererComponent::DrawBoard() {
