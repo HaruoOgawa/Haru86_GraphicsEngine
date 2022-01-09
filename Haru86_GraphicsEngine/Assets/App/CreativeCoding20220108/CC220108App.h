@@ -13,7 +13,7 @@ public:
     void Draw() override;
     void Timeline(class TimelineObject* timelineObj)  override;
 private:
-    std::unique_ptr<class GameObject> ins_cubes;
+    std::unique_ptr<class Object> ins_cubes;
     std::unique_ptr<class CameraObject> cam_obj;
 };
 
