@@ -4,6 +4,7 @@
 #include "GraphicsEngine/Graphics/Graphics.h"
 #include <GL/glew.h>
 #include "GraphicsEngine/Component/TransformComponent.h"
+#include "GraphicsEngine/Object/CameraObject.h"
 
 CBoxInstancing::CBoxInstancing(Object* o)
 	: Component(o, static_cast<std::string>(typeid(CBoxInstancing).name()).substr(6))
@@ -17,7 +18,10 @@ CBoxInstancing::~CBoxInstancing() {
 void CBoxInstancing::Start() {
 	owner->transform->scale = glm::vec3(1.0);
 	m_mesh = std::make_shared<Mesh>(PrimitiveType::CUBE);
-	m_material = std::make_shared<Material>();
+	m_material = std::make_shared<Material>(
+		"./Assets/Shader/CreativeCoding20220108/InstancedBox.vert",
+		"./Assets/Shader/CreativeCoding20220108/InstancedBox.frag"
+	);
 }
 
 void CBoxInstancing::Update() {
@@ -33,6 +37,7 @@ void CBoxInstancing::Draw() {
 	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
+	m_material->SetVec3Uniform("_CameraPosition", Game::GetInstance()->game_camera_instance->GetPosition());
 	Graphics::DrawInstancedWithMesh(m_mesh, 256, m_material,GL_TRIANGLES);
 	
 }
