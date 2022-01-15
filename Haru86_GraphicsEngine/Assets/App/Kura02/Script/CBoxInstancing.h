@@ -16,5 +16,6 @@ public:
 private:
     std::shared_ptr<class Mesh> m_mesh;
     std::shared_ptr<class Material> m_material;
+    int instanciedCound;
 };
 

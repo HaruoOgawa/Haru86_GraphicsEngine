@@ -7,7 +7,8 @@
 #include "GraphicsEngine/Object/CameraObject.h"
 
 CBoxInstancing::CBoxInstancing(Object* o)
-	: Component(o, static_cast<std::string>(typeid(CBoxInstancing).name()).substr(6))
+	: Component(o, static_cast<std::string>(typeid(CBoxInstancing).name()).substr(6)),
+	instanciedCound(124*124)
 {
 	Start();
 }
@@ -41,7 +42,11 @@ void CBoxInstancing::Draw() {
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 	m_material->SetVec3Uniform("_CameraPosition", Game::GetInstance()->game_camera_instance->GetPosition());
-	Graphics::DrawInstancedWithMesh(m_mesh, 256, m_material,GL_TRIANGLES);
+	m_material->SetIntUniform("_instancedCound", instanciedCound);
+	m_material->SetIntUniform("_sideCubeCount", instanciedCound/2);
+	m_material->SetFloatUniform("_cubeWidth", 1.0);
+	m_material->SetVec3Uniform("_lightDir", glm::vec3(-2.0, 1.0, 1.0));
+	Graphics::DrawInstancedWithMesh(m_mesh, instanciedCound, m_material,GL_TRIANGLES);
 	
 }
 
