@@ -5,10 +5,12 @@
 #include <GL/glew.h>
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/Object/CameraObject.h"
+#include "GraphicsEngine/Graphics/ComputeBuffer.h"
 
 CBoxInstancing::CBoxInstancing(Object* o)
 	: Component(o, static_cast<std::string>(typeid(CBoxInstancing).name()).substr(6)),
-	instanciedCound(124*124)
+	instanciedCound(124*124),
+	sideCubeCount(124)
 {
 	Start();
 }
@@ -24,6 +26,17 @@ void CBoxInstancing::Start() {
 		"./Assets/Shader/Kura02/InstancedBox.frag"
 	);
 	
+	m_cubeGroundBuffer = std::make_shared<ComputeBuffer>(sizeof(SCubeFieldObj)*instanciedCound);
+	std::vector<SCubeFieldObj> init_CubeFieldObj;
+	for (int y = 0; y < sideCubeCount;y++) {
+		for (int x = 0; x < sideCubeCount; x++) {
+			SCubeFieldObj obj(x,y,x+y*sideCubeCount);
+		}
+	}
+	m_cubeGroundBuffer->SetData<std::vector<SCubeFieldObj>>(init_CubeFieldObj);
+
+	//set buffer to material
+	m_material->SetBuffer(m_cubeGroundBuffer, 0);
 }
 
 void CBoxInstancing::Update() {
@@ -43,7 +56,7 @@ void CBoxInstancing::Draw() {
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 	m_material->SetVec3Uniform("_CameraPosition", Game::GetInstance()->game_camera_instance->GetPosition());
 	m_material->SetIntUniform("_instancedCound", instanciedCound);
-	m_material->SetIntUniform("_sideCubeCount", instanciedCound/2);
+	m_material->SetIntUniform("_sideCubeCount", sideCubeCount);
 	m_material->SetFloatUniform("_cubeWidth", 1.0);
 	m_material->SetVec3Uniform("_lightDir", glm::vec3(-2.0, 1.0, 1.0));
 	Graphics::DrawInstancedWithMesh(m_mesh, instanciedCound, m_material,GL_TRIANGLES);

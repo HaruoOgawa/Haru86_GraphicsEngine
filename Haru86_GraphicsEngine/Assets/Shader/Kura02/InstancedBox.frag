@@ -1,4 +1,4 @@
-#version 330
+#version 430
 
 uniform vec3 _CameraPosition;
 uniform vec3 _lightDir;
@@ -23,6 +23,8 @@ void main(){
   col+=0.05;
 
   //col=(worldNormal+1.0)*0.5;
+
+	col=vec3(1.0);
 
 	gl_FragColor=vec4(col,0.5);
 }
