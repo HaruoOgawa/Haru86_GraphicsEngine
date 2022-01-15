@@ -17,10 +17,10 @@ void main(){
     //Specular
     vec3 viewDir=normalize(_CameraPosition- worldPosition);
     vec3 H=normalize(viewDir+_lightDir);
-    float spec=pow(max(0.0,dot(H,worldNormal)),2.0);
+    float spec=pow(max(0.0,dot(H,worldNormal)),20.0);
    //col.rgb*=spec;
 
-  col+=0.01;
+  col+=0.05;
 
   //col=(worldNormal+1.0)*0.5;
 
