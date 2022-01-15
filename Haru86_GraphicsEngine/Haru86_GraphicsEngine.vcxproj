@@ -198,9 +198,9 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Assets\App\DemoApp\DemoApp.h" />
+    <ClInclude Include="Assets\App\Kura02\Kura02.h" />
     <ClInclude Include="Assets\App\KuraArtApp\Script\KuraGPGPU.h" />
-    <ClInclude Include="Assets\App\CreativeCoding20220108\CC220108App.h" />
-    <ClInclude Include="Assets\App\CreativeCoding20220108\Script\CBoxInstancing.h" />
+    <ClInclude Include="Assets\App\Kura02\Script\CBoxInstancing.h" />
     <ClInclude Include="GraphicsEngine\Component\CameraComponent.h" />
     <ClInclude Include="GraphicsEngine\Object\CameraObject.h" />
     <ClInclude Include="GraphicsEngine\Graphics\glTFBinaryReader.h" />
@@ -239,9 +239,9 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets\App\DemoApp\DemoApp.cpp" />
+    <ClCompile Include="Assets\App\Kura02\Kura02.cpp" />
     <ClCompile Include="Assets\App\KuraArtApp\Script\KuraGPGPU.cpp" />
-    <ClCompile Include="Assets\App\CreativeCoding20220108\CC220108App.cpp" />
-    <ClCompile Include="Assets\App\CreativeCoding20220108\Script\CBoxInstancing.cpp" />
+    <ClCompile Include="Assets\App\Kura02\Script\CBoxInstancing.cpp" />
     <ClCompile Include="GraphicsEngine\App\BaseApp\BaseApp.cpp" />
     <ClCompile Include="GraphicsEngine\Component\CameraComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Object\CameraObject.cpp" />
@@ -274,8 +274,8 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="Assets\App\KuraArtApp\Script\KuraTrail.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shader\CreativeCoding20220108\InstancedBox.frag" />
-    <None Include="Assets\Shader\CreativeCoding20220108\InstancedBox.vert" />
+    <None Include="Assets\Shader\Kura02\InstancedBox.frag" />
+    <None Include="Assets\Shader\Kura02\InstancedBox.vert" />
     <None Include="Assets\Shader\KuraShader\Background.frag" />
     <None Include="Assets\Shader\KuraShader\Background.vert" />
     <None Include="Assets\Shader\KuraShader\BoidsForce.comp" />

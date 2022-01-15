@@ -1,4 +1,4 @@
-#include "CC220108App.h"
+#include "Kura02.h"
 #include "GraphicsEngine/Object/TimelineObject.h"
 #include "GraphicsEngine/Component/TimelineComponent.h"
 #include "GraphicsEngine/Object/GameObject.h"
@@ -9,17 +9,17 @@
 #include "GraphicsEngine/Game/Game.h"
 #include "./Script/CBoxInstancing.h"
 
-CC220108App::CC220108App():
+Kura02::Kura02():
 	BaseApp()
 {
 
 }
 
-CC220108App::~CC220108App() {
+Kura02::~Kura02() {
 
 }
 
-void CC220108App::Start() {
+void Kura02::Start() {
 	cam_obj = std::make_unique<CameraObject>(CameraType::FIXED_CAMERA);
 	cam_obj->SetPosition(glm::vec3(0.0, 0.0, -3.0));
 	Game::GetInstance()->game_camera_instance = cam_obj.get();
@@ -31,14 +31,14 @@ void CC220108App::Start() {
 	test_obj->SetPosition(glm::vec3(2.0, 0.0, 0.0));
 }
 
-void CC220108App::Update() {
+void Kura02::Update() {
 	ins_cubes->Update();
 }
 
-void CC220108App::Draw() {
+void Kura02::Draw() {
 	static_cast<CBoxInstancing*>(ins_cubes->GetComponent(static_cast<std::string>(typeid(CBoxInstancing).name())))->Draw();
 }
 
-void CC220108App::Timeline(class TimelineObject* timelineObj) {
+void Kura02::Timeline(class TimelineObject* timelineObj) {
 
 }

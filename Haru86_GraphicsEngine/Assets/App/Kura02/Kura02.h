@@ -2,12 +2,12 @@
 #include "../../../GraphicsEngine/Game/Game.h"
 #include "../../../GraphicsEngine/App/BaseApp/BaseApp.h"
 #include <memory>
-class CC220108App :
+class Kura02 :
     public BaseApp
 {
 public:
-    CC220108App();
-    ~CC220108App();
+    Kura02();
+    ~Kura02();
     void Start()  override;
     void Update()  override;
     void Draw() override;

@@ -10,9 +10,9 @@
 #include <vector>
 #include <algorithm>
 #include "../App/BaseApp/BaseApp.h"
-#include "../../Assets/App/CreativeCoding20220108/CC220108App.h"
+#include "../../Assets/App/Kura02/Kura02.h"
 //#include "../../Assets/App/KuraArtApp/KuraArtApp.h"
-//#include "../../Assets/App/DemoApp/DemoApp.h"
+#include "../../Assets/App/DemoApp/DemoApp.h"
 
 
 #include <exception>
@@ -106,7 +106,7 @@ bool Game::Initialize() {
 }
 
 void Game::LoadData() {
-	app = std::make_unique<CC220108App>();
+	app = std::make_unique<Kura02>();
 	timeObj = std::make_unique<Time>(60.0f);
 	app->Start();
 

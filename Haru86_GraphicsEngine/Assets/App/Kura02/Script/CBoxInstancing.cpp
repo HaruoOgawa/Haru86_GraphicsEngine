@@ -19,9 +19,10 @@ void CBoxInstancing::Start() {
 	owner->transform->scale = glm::vec3(1.0);
 	m_mesh = std::make_shared<Mesh>(PrimitiveType::CUBE);
 	m_material = std::make_shared<Material>(
-		"./Assets/Shader/CreativeCoding20220108/InstancedBox.vert",
-		"./Assets/Shader/CreativeCoding20220108/InstancedBox.frag"
+		"./Assets/Shader/Kura02/InstancedBox.vert",
+		"./Assets/Shader/Kura02/InstancedBox.frag"
 	);
+	
 }
 
 void CBoxInstancing::Update() {
@@ -31,6 +32,8 @@ void CBoxInstancing::Update() {
 void CBoxInstancing::Draw() {
 	owner->transform->CalMatrix();
 	m_material->SetActive();
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_BLEND_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix() ); //
 	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());

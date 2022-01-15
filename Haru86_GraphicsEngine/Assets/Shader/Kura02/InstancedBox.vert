@@ -20,7 +20,7 @@ void main(){
 	vec3 pos=(MMatrix*vec4(vertex*(rand(vec2(0.974,gl_InstanceID*1000.0))+0.5)*2.0,1.0)).xyz;
 	pos+=vec3(
 		rand(vec2(gl_InstanceID*1000.0,0.651))*2.0-1.0,
-
+		rand(vec2(gl_InstanceID*1000.0,0.491))*2.0-1.0,
 		rand(vec2(gl_InstanceID*1000.0,0.159))*2.0-1.0
 	)*10.0;
 	//pos.xy=(length(pos.xy)<4.0)? pos.xy+pos.xy*1.5 : pos.xy;

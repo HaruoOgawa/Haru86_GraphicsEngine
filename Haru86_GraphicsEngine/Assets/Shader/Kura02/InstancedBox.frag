@@ -3,5 +3,6 @@
 uniform vec3 _CameraPosition;
 
 void main(){
-	gl_FragColor=vec4(1.0);
+	vec3 col=vec3(1.0);
+	gl_FragColor=vec4(col,0.5);
 }
