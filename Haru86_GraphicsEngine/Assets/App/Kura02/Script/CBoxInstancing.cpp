@@ -6,6 +6,7 @@
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
+#include "GraphicsEngine/Game/Game.h"
 
 CBoxInstancing::CBoxInstancing(Object* o)
 	: Component(o, static_cast<std::string>(typeid(CBoxInstancing).name()).substr(6)),
@@ -60,6 +61,7 @@ void CBoxInstancing::Draw() {
 	m_material->SetIntUniform("_sideCubeCount", sideCubeCount);
 	m_material->SetFloatUniform("_cubeWidth", 1.0);
 	m_material->SetVec3Uniform("_lightDir", glm::vec3(-2.0, 1.0, 1.0));
+	
 	Graphics::DrawInstancedWithMesh(m_mesh, instanciedCound, m_material,GL_TRIANGLES);
 	
 }

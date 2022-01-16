@@ -54,7 +54,11 @@ void main(){
 	SCubeFieldObj objData=outBufferCubeFieldObj.cubeObj[gl_InstanceID];
 	float xVal=_cubeWidth*float(_sideCubeCount)*(objData.xIndex/float(_sideCubeCount-1))*2.0-_cubeWidth*float(_sideCubeCount);
 	float zVal=_cubeWidth*float(_sideCubeCount)*(objData.yIndex/float(_sideCubeCount-1))*2.0-_cubeWidth*float(_sideCubeCount);
+	
 	float yVal=-5.0;
+	vec2 st=(vec2(float(objData.xIndex),float(objData.yIndex))/float(_sideCubeCount))*2.0-1.0;
+	yVal+=sin(-_time*0.005+length(st)*25.0)*max(1.0,length(st)*2.0);
+
 	float adjustPos=0.6;
 	pos+=vec3(xVal*adjustPos,yVal,zVal*adjustPos);
 

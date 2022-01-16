@@ -5,6 +5,7 @@
 #include "GraphicsEngine/Object/Object.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/Object/CameraObject.h"
+#include "GraphicsEngine/Component/CameraComponent.h"
 #include <glm/glm.hpp>
 #include "GraphicsEngine/Game/Game.h"
 #include "./Script/CBoxInstancing.h"
@@ -21,7 +22,8 @@ Kura02::~Kura02() {
 
 void Kura02::Start() {
 	cam_obj = std::make_unique<CameraObject>(CameraType::FIXED_CAMERA);
-	cam_obj->SetPosition(glm::vec3(0.0, 0.0, -3.0));
+	//cam_obj->SetPosition(glm::vec3(0.0, 0.0, -3.0));
+	cam_obj->m_cameraComponent->cameraCenter = glm::vec3(0.0,-0.5,0.0);
 	Game::GetInstance()->game_camera_instance = cam_obj.get();
 
 	ins_cubes = std::make_unique<Object>();
@@ -31,6 +33,11 @@ void Kura02::Start() {
 
 void Kura02::Update() {
 	ins_cubes->Update();
+	cam_obj->transform->position = glm::vec3(
+		glm::cos(Game::GetInstance()->time * 0.0001),
+		0.0, 
+		glm::sin(Game::GetInstance()->time * 0.0001)
+	);
 }
 
 void Kura02::Draw() {

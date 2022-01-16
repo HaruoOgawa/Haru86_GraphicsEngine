@@ -228,6 +228,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Graphics\Primitive.h" />
     <ClInclude Include="GraphicsEngine\Component\RectTransformComponent.h" />
     <ClInclude Include="Assets\App\KuraArtApp\Script\KuraTrail.h" />
+    <ClInclude Include="GraphicsEngine\Object\RaymarchingObject.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Texture.h" />
     <ClInclude Include="GraphicsEngine\Game\Time.h" />
@@ -272,6 +273,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Component\UIComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\Mesh.cpp" />
     <ClCompile Include="Assets\App\KuraArtApp\Script\KuraTrail.cpp" />
+    <ClCompile Include="GraphicsEngine\Object\RaymarchingObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shader\Kura02\InstancedBox.frag" />
