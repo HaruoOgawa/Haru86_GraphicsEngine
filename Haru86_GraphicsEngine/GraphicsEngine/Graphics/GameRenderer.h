@@ -24,7 +24,12 @@ public:
 	float deltaTime;
 	float frameResolusion;
 	std::shared_ptr<class Font> font;
-	std::shared_ptr<class Texture> frameTexture;
+
+	//FrameTextures
+	std::shared_ptr<class Texture> polygon_frameTexture;
+	std::shared_ptr<class Texture> polygon_depthTexture;
+	std::shared_ptr<class Texture> raymarching_frameTexture;
+	std::shared_ptr<class Texture> raymarching_depthTexture;
 private:
 	SDL_Window* sWindow;
 	int sWindowWidth;
@@ -32,7 +37,12 @@ private:
 	class Game* mgame;
 	SDL_GLContext context;
 	
-	unsigned int frameBuffer;
+	//FrameBuffer
+	unsigned int polygon_frameBuffer;
+	unsigned int polygon_depthBuffer;
+	unsigned int raymarching_frameBuffer;
+	unsigned int raymarching_depthBuffer;
+
 	std::shared_ptr<class Texture> postProcessTexture;
 	unsigned int postProcessBuffer;
 	

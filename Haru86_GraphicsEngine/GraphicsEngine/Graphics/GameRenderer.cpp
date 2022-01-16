@@ -29,7 +29,10 @@ GameRenderer::GameRenderer(Game* game)
 	deltaTime(0.0f),
 	frameResolusion(0.7),
 	font(nullptr),
-	frameTexture(new Texture()),
+	polygon_frameTexture(std::make_shared<Texture>()),
+	polygon_depthTexture(std::make_shared<Texture>()),
+	raymarching_frameTexture(std::make_shared<Texture>()),
+	raymarching_depthTexture(std::make_shared<Texture>()),
 	postProcessTexture(nullptr)
 {
 	
@@ -81,10 +84,22 @@ bool GameRenderer::Initialize(float width,float height) {
 	}
 	glGetError();
 
-
-	if (!CreateFrameBuffer(frameTexture,frameBuffer,GL_RGBA, GL_RGBA)) {
+	//CreateFrameBuffer
+	if (!CreateFrameBuffer(polygon_frameTexture, polygon_frameBuffer,GL_RGBA, GL_RGBA)) {
 		SDL_Log("Can not create frame buffer");
 	}
+	/*
+	if (!CreateFrameBuffer(polygon_depthTexture, polygon_depthBuffer,GL_RGBA, GL_RGBA)) {
+		SDL_Log("Can not create frame buffer");
+	}*/
+
+	/*if (!CreateFrameBuffer(raymarching_frameTexture, raymarching_frameBuffer, GL_RGBA, GL_RGBA)) {
+		SDL_Log("Can not create frame buffer");
+	}
+
+	if (!CreateFrameBuffer(raymarching_depthTexture, raymarching_depthBuffer, GL_RGBA, GL_RGBA)) {
+		SDL_Log("Can not create frame buffer");
+	}*/
 	
 	font =  std::make_shared<Font>();
 	if (!(font->Load("./Assets/Resources/FontData/FRSCRIPT.TTF"))) {
@@ -116,6 +131,8 @@ bool GameRenderer::CreateFrameBuffer(std::shared_ptr<Texture> fTex, unsigned int
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fTex->GetTextureID(), 0);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);
 
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
 	return true;
 
 }
@@ -123,7 +140,7 @@ bool GameRenderer::CreateFrameBuffer(std::shared_ptr<Texture> fTex, unsigned int
 void GameRenderer::Draw() {
 	//ポリゴンオブジェクトのカラーマップをレンダリング///////////////////
 	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
-	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, polygon_frameBuffer);
 	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -141,26 +158,76 @@ void GameRenderer::Draw() {
 	}
 
 	//ポリゴンオブジェクトをデプスマップをレンダリング
-	Game::GetInstance()->renderingTarget = ERerderingTarget::DEPTH;
+	/*Game::GetInstance()->renderingTarget = ERerderingTarget::DEPTH;
+	glBindFramebuffer(GL_FRAMEBUFFER, polygon_depthBuffer);
+	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glEnable(GL_DEPTH_TEST);
+
+	for (auto obj : mgame->gameObjectList) {
+		obj->transform->CalMatrix();
+		obj->meshComp->Draw();
+	}
+
+	if (mgame->app) {
+		mgame->app->Draw();
+	}
 
 	//レイマーチングオブジェクトのカラーマップをレンダリング///////////////
 	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+	glBindFramebuffer(GL_FRAMEBUFFER, raymarching_frameBuffer);
+	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
 
 	//レイマーチングオブジェクトのデプスマップをレンダリング
 	Game::GetInstance()->renderingTarget = ERerderingTarget::DEPTH;
+	glBindFramebuffer(GL_FRAMEBUFFER, raymarching_depthBuffer);
+	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glEnable(GL_DEPTH_TEST);*/
 
 	//ポリゴンオブジェクトとレイマーチングオブジェクトのカラーマップをブレンドする
-	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+	/*Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+	//glBindFramebuffer(GL_FRAMEBUFFER, polygon_frameBuffer);
+	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glEnable(GL_DEPTH_TEST);
 
 	//ポリゴンオブジェクトとレイマーチングオブジェクトのデプスマップをブレンドする
 	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+	//glBindFramebuffer(GL_FRAMEBUFFER, polygon_frameBuffer);
+	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glEnable(GL_DEPTH_TEST);*/
 
 	//ポストプロセス////////////////////////////////////////
 	//ポストプロセスオブジェクトなるものを作ってもいいかもしれない
 	//よく使うものはプリセットとして用意しておいて使いたいもののブーリアンをtrueにして使用
 	//複数のポストプロセスはカラーブレンドする
 	//カスタムポストプロセスもここで宣言する
-	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+	/*Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+	//glBindFramebuffer(GL_FRAMEBUFFER, polygon_frameBuffer);
+	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glEnable(GL_DEPTH_TEST);*/
 
 	//最終的な結果を作成する///////////////////////////////
 	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
@@ -176,15 +243,14 @@ void GameRenderer::Draw() {
 	for (auto obj : mgame->boardGameObjectList) {
 		//PostProcessTextureのセット メンバ変数のPOstProcessIDを参照するとか？？
 		obj->transform->CalMatrix();
-		frameTexture->SetActive();
-		obj->meshComp->material->SetTexUniform("frameTex", frameTexture->GetTextureID());
+		polygon_frameTexture->SetActive();
+		obj->meshComp->material->SetTexUniform("frameTex", polygon_frameTexture->GetTextureID());
 		obj->meshComp->DrawBoard();
-		frameTexture->SetEactive();
+		polygon_frameTexture->SetEactive();
 	}
 
 	//垂直同期を実行
 	SDL_GL_SwapWindow(sWindow);
-
 }
 
 void GameRenderer::ShutDown() {
@@ -192,10 +258,31 @@ void GameRenderer::ShutDown() {
 	SDL_DestroyWindow(sWindow);
 
 	
-	if (frameTexture!=nullptr) {
-		glDeleteFramebuffers(1, &frameBuffer);
-		frameTexture->Unload();
-		frameTexture.reset();
-		frameTexture = nullptr;
+	if (polygon_frameTexture!=nullptr) {
+		glDeleteFramebuffers(1, &polygon_frameBuffer);
+		polygon_frameTexture->Unload();
+		polygon_frameTexture.reset();
+		polygon_frameTexture = nullptr;
+	}
+
+	if (polygon_depthTexture != nullptr) {
+		glDeleteFramebuffers(1, &polygon_depthBuffer);
+		polygon_depthTexture->Unload();
+		polygon_depthTexture.reset();
+		polygon_depthTexture = nullptr;
+	}
+
+	if (raymarching_frameTexture != nullptr) {
+		glDeleteFramebuffers(1, &raymarching_frameBuffer);
+		raymarching_frameTexture->Unload();
+		raymarching_frameTexture.reset();
+		raymarching_frameTexture = nullptr;
+	}
+
+	if (raymarching_depthTexture != nullptr) {
+		glDeleteFramebuffers(1, &raymarching_depthBuffer);
+		raymarching_depthTexture->Unload();
+		raymarching_depthTexture.reset();
+		raymarching_depthTexture = nullptr;
 	}
 }
