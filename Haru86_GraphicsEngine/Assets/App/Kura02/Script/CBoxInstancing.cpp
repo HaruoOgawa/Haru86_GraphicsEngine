@@ -30,9 +30,10 @@ void CBoxInstancing::Start() {
 	std::vector<SCubeFieldObj> init_CubeFieldObj;
 	for (int y = 0; y < sideCubeCount;y++) {
 		for (int x = 0; x < sideCubeCount; x++) {
-			SCubeFieldObj obj(x,y,x+y*sideCubeCount);
+			init_CubeFieldObj.push_back(SCubeFieldObj(x, y, x + y * sideCubeCount));
 		}
 	}
+
 	m_cubeGroundBuffer->SetData<std::vector<SCubeFieldObj>>(init_CubeFieldObj);
 
 	//set buffer to material

@@ -13,18 +13,7 @@ void main(){
 	vec3 L=normalize(_lightDir);
 	float diff=max(0.0,dot(worldNormal,L));
 	col.rgb*=diff;
-
-    //Specular
-    vec3 viewDir=normalize(_CameraPosition- worldPosition);
-    vec3 H=normalize(viewDir+_lightDir);
-    float spec=pow(max(0.0,dot(H,worldNormal)),20.0);
-   //col.rgb*=spec;
-
-  col+=0.05;
-
-  //col=(worldNormal+1.0)*0.5;
-
-	col=vec3(1.0);
+	col+=0.05;
 
 	gl_FragColor=vec4(col,0.5);
 }

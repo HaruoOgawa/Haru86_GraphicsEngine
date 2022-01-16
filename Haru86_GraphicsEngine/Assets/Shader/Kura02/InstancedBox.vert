@@ -52,17 +52,11 @@ void main(){
 	vec3 pos=(ModelMatrix*vec4(vertex,1.0)).xyz;
 
 	SCubeFieldObj objData=outBufferCubeFieldObj.cubeObj[gl_InstanceID];
-	float xVal=_cubeWidth*float(_sideCubeCount)*(objData.xIndex/float(_sideCubeCount-1));//*2.0-_cubeWidth*float(_sideCubeCount);
-	float zVal=_cubeWidth*float(_sideCubeCount)*(objData.yIndex/float(_sideCubeCount-1));//*2.0-_cubeWidth*float(_sideCubeCount);
-	float yVal=-1.0;
-
-	//pos+=vec3(xVal,yVal,zVal);
-
-	pos+=vec3(
-		(rand(vec2(0.123,float(objData.xIndex)))*2.0-1.0)*100.0,
-		-0.5,
-		(rand(vec2(0.971,float(objData.yIndex)))*2.0-1.0)*100.0
-	);
+	float xVal=_cubeWidth*float(_sideCubeCount)*(objData.xIndex/float(_sideCubeCount-1))*2.0-_cubeWidth*float(_sideCubeCount);
+	float zVal=_cubeWidth*float(_sideCubeCount)*(objData.yIndex/float(_sideCubeCount-1))*2.0-_cubeWidth*float(_sideCubeCount);
+	float yVal=-5.0;
+	float adjustPos=0.6;
+	pos+=vec3(xVal*adjustPos,yVal,zVal*adjustPos);
 
 	gl_Position=PMatrix*VMatrix*vec4(pos,1.0);
 	worldPosition=pos;
