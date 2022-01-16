@@ -1,13 +1,14 @@
 #pragma once
 #include <string>
 #include <SDL.h>
+#include <GL/glew.h>
 
 class Texture
 {
 public:
 	Texture();
 	~Texture();
-	void CreateForRendering(int width, int height, unsigned int format);
+	void CreateForRendering(int width, int height,GLint internalformat,GLint format);
 	void CreateTrueTypeFontTexture(SDL_Surface* surf);
 	bool Load(const std::string& fileName);
 	unsigned int GetTextureID() const { return mTextureID; }

@@ -82,7 +82,7 @@ bool GameRenderer::Initialize(float width,float height) {
 	glGetError();
 
 
-	if (!CreateFrameBuffer(frameTexture,frameBuffer)) {
+	if (!CreateFrameBuffer(frameTexture,frameBuffer,GL_RGBA, GL_RGBA)) {
 		SDL_Log("Can not create frame buffer");
 	}
 	
@@ -99,7 +99,7 @@ glm::ivec2 GameRenderer::GetScreenSize() {
 	return glm::ivec2(sWindowWidth, sWindowHeight);
 }
 
-bool GameRenderer::CreateFrameBuffer(std::shared_ptr<Texture> fTex, unsigned int& fBuffer) {
+bool GameRenderer::CreateFrameBuffer(std::shared_ptr<Texture> fTex, unsigned int& fBuffer, GLint internalformat, GLint format) {
 	int width = static_cast<int>(GetScreenSize().x) ;
 	int height = static_cast<int>(GetScreenSize().y );
 	
@@ -107,7 +107,7 @@ bool GameRenderer::CreateFrameBuffer(std::shared_ptr<Texture> fTex, unsigned int
 	GLuint depthBuffer;
 	glGenRenderbuffers(1, &depthBuffer);
 
-	fTex->CreateForRendering(width, height, GL_RGBA);
+	fTex->CreateForRendering(width, height,internalformat, format);
 	
 	glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer);
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
@@ -121,14 +121,15 @@ bool GameRenderer::CreateFrameBuffer(std::shared_ptr<Texture> fTex, unsigned int
 }
 
 void GameRenderer::Draw() {
+	//ポリゴンオブジェクトのカラーマップをレンダリング///////////////////
+	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
-	glViewport(0, 0, static_cast<int>(GetScreenSize().x* frameResolusion), static_cast<int>(GetScreenSize().y* frameResolusion));
-	
-	glClearColor(0.0f, 0.0f,0.0f,1.0f);
+	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
+
 	glEnable(GL_DEPTH_TEST);
-	glDisable(GL_BLEND);
 
 	for (auto obj : mgame->gameObjectList) {
 		obj->transform->CalMatrix();
@@ -139,11 +140,32 @@ void GameRenderer::Draw() {
 		mgame->app->Draw();
 	}
 
-	//pass2////////////////////////////////////////////////
-	
-	//pass3////////////////////////////////////////////////
+	//ポリゴンオブジェクトをデプスマップをレンダリング
+	Game::GetInstance()->renderingTarget = ERerderingTarget::DEPTH;
+
+	//レイマーチングオブジェクトのカラーマップをレンダリング///////////////
+	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+
+	//レイマーチングオブジェクトのデプスマップをレンダリング
+	Game::GetInstance()->renderingTarget = ERerderingTarget::DEPTH;
+
+	//ポリゴンオブジェクトとレイマーチングオブジェクトのカラーマップをブレンドする
+	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+
+	//ポリゴンオブジェクトとレイマーチングオブジェクトのデプスマップをブレンドする
+	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+
+	//ポストプロセス////////////////////////////////////////
+	//ポストプロセスオブジェクトなるものを作ってもいいかもしれない
+	//よく使うものはプリセットとして用意しておいて使いたいもののブーリアンをtrueにして使用
+	//複数のポストプロセスはカラーブレンドする
+	//カスタムポストプロセスもここで宣言する
+	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+
+	//最終的な結果を作成する///////////////////////////////
+	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glViewport(0, 0, GetScreenSize().x , GetScreenSize().y);
+	glViewport(0, 0, GetScreenSize().x, GetScreenSize().y);
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -151,7 +173,6 @@ void GameRenderer::Draw() {
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
 
-	
 	for (auto obj : mgame->boardGameObjectList) {
 		//PostProcessTextureのセット メンバ変数のPOstProcessIDを参照するとか？？
 		obj->transform->CalMatrix();
@@ -161,6 +182,7 @@ void GameRenderer::Draw() {
 		frameTexture->SetEactive();
 	}
 
+	//垂直同期を実行
 	SDL_GL_SwapWindow(sWindow);
 
 }

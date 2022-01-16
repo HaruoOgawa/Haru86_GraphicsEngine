@@ -42,7 +42,8 @@ Game::Game()
 	previousTime(0.0f),
 	mouseStateBool(false),
 	animTime(0.0f),
-	isRestart(false)
+	isRestart(false),
+	renderingTarget(ERerderingTarget::COLOR)
 {
 	
 	for (int i = 0; i < 10;i++) {
@@ -208,6 +209,7 @@ void Game::Reflesh() {
 	mouseStateBool = false;
 	animTime = 0.0f;
 	isRestart = false;
+	renderingTarget = ERerderingTarget::COLOR;
 
 	//ƒƒ‚ƒŠ‚ð‰ð•ú
 	game_camera_instance = nullptr;

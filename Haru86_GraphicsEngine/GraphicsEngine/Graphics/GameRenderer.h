@@ -2,6 +2,7 @@
 #include "SDL.h"
 #include "../Game/Game.h"
 #include <glm/glm.hpp>
+#include <GL/glew.h>
 #include <memory>
 
 class GameRenderer
@@ -18,7 +19,7 @@ public:
 	bool Initialize(float width, float height);
 	void ShutDown();
 	void Draw();
-	bool CreateFrameBuffer(std::shared_ptr<class Texture> fTex,unsigned int& fBuffer);
+	bool CreateFrameBuffer(std::shared_ptr<class Texture> fTex,unsigned int& fBuffer, GLint internalformat, GLint format);
 	glm::ivec2 GetScreenSize();
 	float deltaTime;
 	float frameResolusion;

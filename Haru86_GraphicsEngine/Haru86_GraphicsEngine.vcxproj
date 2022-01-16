@@ -276,6 +276,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Object\RaymarchingObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shader\DepthColor.frag" />
     <None Include="Assets\Shader\Kura02\InstancedBox.frag" />
     <None Include="Assets\Shader\Kura02\InstancedBox.vert" />
     <None Include="Assets\Shader\KuraShader\Background.frag" />

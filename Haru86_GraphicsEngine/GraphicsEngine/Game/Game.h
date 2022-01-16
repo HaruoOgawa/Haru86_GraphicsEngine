@@ -8,6 +8,12 @@
 #include <map>
 #include <GL/glew.h>
 
+enum ERerderingTarget
+{
+	COLOR,
+	DEPTH
+};
+
 class Game
 {
 public:
@@ -37,6 +43,8 @@ public:
 	class CameraObject* game_camera_instance;
 	std::map<int, GLenum> texSlots;
 
+	
+
 	friend class Main;
 	friend class GameObject;
 	friend class UIObject;
@@ -59,6 +67,7 @@ private :
 	
 	bool mouseStateBool;
 	bool isRestart;
+	ERerderingTarget renderingTarget;
 	
 protected:
 	static Game* s_pInstance;
