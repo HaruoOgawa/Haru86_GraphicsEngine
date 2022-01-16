@@ -13,8 +13,7 @@ in vec3 worldNormal;
 // DÅiGGXÅjÇÃçÄ
 float D_GGX(vec3 H, vec3 N) {
     float NdotH = clamp(dot(H, N),0.0,1.0);
-    float roughness = pow(clamp(1.0-_Roughness,0.0,1.0),2.0);
-    roughness=pow(roughness,2.0);
+    float roughness = clamp(1.0-_Roughness,0.0,1.0);
     float alpha = roughness * roughness;
     float alpha2 = alpha * alpha;
     float t = ((NdotH * NdotH) * (alpha2 - 1.0) + 1.0);
