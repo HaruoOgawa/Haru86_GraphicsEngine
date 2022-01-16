@@ -8,59 +8,69 @@
 #include "GraphicsEngine/Game/Game.h"
 
 Material::Material() {
-	LoadShader("./Assets/Shader/Standard.vert", "./Assets/Shader/Standard.frag", shaderPrg);
-	LoadShader("./Assets/Shader/Standard.vert", "./Assets/Shader/DepthColor.frag", depthShaderPrg);
+	LoadShader("./Assets/Shader/Standard.vert", "./Assets/Shader/Standard.frag", shaderPrg
+		, vertShaderData, tessControlShaderData, tessEvalShaderData, geometryShaderData, fragShaderData);
+	LoadShader("./Assets/Shader/Standard.vert", "./Assets/Shader/DepthColor.frag", depthShaderPrg
+		, depthVertShaderData, depthTessControlShaderData, depthTessEvalShaderData, depthGeometryShaderData, depthFragShaderData);
 }
 
 Material::Material(std::map<GLenum, std::string> shaders) {
-	LoadShader(shaders, shaderPrg);
+	LoadShader(shaders, shaderPrg
+		, vertShaderData, tessControlShaderData, tessEvalShaderData, geometryShaderData, fragShaderData);
 	auto depthShaders = shaders;
 	depthShaders[GL_FRAGMENT_SHADER] = "./Assets/Shader/DepthColor.frag";
-	LoadShader(depthShaders, depthShaderPrg);
+	LoadShader(depthShaders, depthShaderPrg
+		, depthVertShaderData, depthTessControlShaderData, depthTessEvalShaderData, depthGeometryShaderData, depthFragShaderData);
 }
 
 Material::Material(std::string vertexShaderName, std::string fragmentShaderName)
 {
-	LoadShader(vertexShaderName, fragmentShaderName, shaderPrg);
-	LoadShader(vertexShaderName, "./Assets/Shader/DepthColor.frag", depthShaderPrg);
+	LoadShader(vertexShaderName, fragmentShaderName, shaderPrg
+		, vertShaderData, tessControlShaderData, tessEvalShaderData, geometryShaderData, fragShaderData);
+	LoadShader(vertexShaderName, "./Assets/Shader/DepthColor.frag", depthShaderPrg
+		, depthVertShaderData, depthTessControlShaderData, depthTessEvalShaderData, depthGeometryShaderData, depthFragShaderData);
 }
 
 Material::Material(std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName)
 {
-	LoadShader(vertexShaderName,tessellationShaderName, fragmentShaderName, shaderPrg);
-	LoadShader(vertexShaderName,tessellationShaderName, "./Assets/Shader/DepthColor.frag", depthShaderPrg);
+	LoadShader(vertexShaderName,tessellationShaderName, fragmentShaderName, shaderPrg
+		, vertShaderData, tessControlShaderData, tessEvalShaderData, geometryShaderData, fragShaderData);
+	LoadShader(vertexShaderName,tessellationShaderName, "./Assets/Shader/DepthColor.frag", depthShaderPrg
+		, depthVertShaderData, depthTessControlShaderData, depthTessEvalShaderData, depthGeometryShaderData, depthFragShaderData);
 }
 
 Material::Material(std::string vertexShaderName, std::string geometryShaderName, std::string fragmentShaderName)
 {
-	LoadShader(vertexShaderName, geometryShaderName, fragmentShaderName, shaderPrg);
-	LoadShader(vertexShaderName, geometryShaderName, "./Assets/Shader/DepthColor.frag", depthShaderPrg);
+	LoadShader(vertexShaderName, geometryShaderName, fragmentShaderName, shaderPrg
+		, vertShaderData, tessControlShaderData, tessEvalShaderData, geometryShaderData, fragShaderData);
+	LoadShader(vertexShaderName, geometryShaderName, "./Assets/Shader/DepthColor.frag", depthShaderPrg
+		, depthVertShaderData, depthTessControlShaderData, depthTessEvalShaderData, depthGeometryShaderData, depthFragShaderData);
 }
 
 Material::~Material() {
 	UnLoadData();
 }
 
-void Material::LoadShader(std::map<GLenum, std::string> shaders, GLuint& prg) {
+void Material::LoadShader(std::map<GLenum, std::string> shaders, GLuint& prg, GLuint& vert, GLuint& tc, GLuint& tv, GLuint& geom, GLuint& frag) {
 	bool compileResult = false;
 
 	for (auto shader : shaders) {
 		switch (shader.first)
 		{
 		case GL_VERTEX_SHADER:
-			compileResult = CompileShader(shader.second, shader.first, vertShaderData);
+			compileResult = CompileShader(shader.second, shader.first, vert);
 			break;
 		case GL_TESS_CONTROL_SHADER:
-			compileResult = CompileShader(shader.second, shader.first, tessControlShaderData);
+			compileResult = CompileShader(shader.second, shader.first, tc);
 			break;
 		case GL_TESS_EVALUATION_SHADER:
-			compileResult = CompileShader(shader.second, shader.first, tessEvalShaderData);
+			compileResult = CompileShader(shader.second, shader.first, tv);
 			break;
 		case GL_GEOMETRY_SHADER:
-			compileResult = CompileShader(shader.second, shader.first, geometryShaderData);
+			compileResult = CompileShader(shader.second, shader.first, geom);
 			break;
 		case GL_FRAGMENT_SHADER:
-			compileResult = CompileShader(shader.second, shader.first, fragShaderData);
+			compileResult = CompileShader(shader.second, shader.first, frag);
 			break;
 		default:
 			compileResult = false;
@@ -82,19 +92,19 @@ void Material::LoadShader(std::map<GLenum, std::string> shaders, GLuint& prg) {
 			switch (shader.first)
 			{
 			case GL_VERTEX_SHADER:
-				glAttachShader(prg, vertShaderData);
+				glAttachShader(prg, vert);
 				break;
 			case GL_TESS_CONTROL_SHADER:
-				glAttachShader(prg, tessControlShaderData);
+				glAttachShader(prg, tc);
 				break;
 			case GL_TESS_EVALUATION_SHADER:
-				glAttachShader(prg, tessEvalShaderData);
+				glAttachShader(prg, tv);
 				break;
 			case GL_GEOMETRY_SHADER:
-				glAttachShader(prg, geometryShaderData);
+				glAttachShader(prg, geom);
 				break;
 			case GL_FRAGMENT_SHADER:
-				glAttachShader(prg, fragShaderData);
+				glAttachShader(prg, frag);
 				break;
 			default:
 				break;
@@ -114,13 +124,13 @@ void Material::LoadShader(std::map<GLenum, std::string> shaders, GLuint& prg) {
 		}
 	}
 }
-void Material::LoadShader(std::string vertName, std::string fragName, GLuint& prg) {
-	if (CompileShader(vertName,GL_VERTEX_SHADER,vertShaderData)&&
-		CompileShader(fragName,GL_FRAGMENT_SHADER,fragShaderData)) {
+void Material::LoadShader(std::string vertName, std::string fragName, GLuint& prg, GLuint& vert, GLuint& tc, GLuint& tv, GLuint& geom, GLuint& frag) {
+	if (CompileShader(vertName,GL_VERTEX_SHADER, vert)&&
+		CompileShader(fragName,GL_FRAGMENT_SHADER,frag)) {
 		
 		prg = glCreateProgram();
-		glAttachShader(prg, vertShaderData);
-		glAttachShader(prg, fragShaderData);
+		glAttachShader(prg, vert);
+		glAttachShader(prg, frag);
 		glLinkProgram(prg);
 
 		GLint status;
@@ -139,17 +149,17 @@ void Material::LoadShader(std::string vertName, std::string fragName, GLuint& pr
 	}
 }
 
-void Material::LoadShader(std::string vertName, std::string tessellationShaderName[2], std::string fragName, GLuint& prg) {
-	if (CompileShader(vertName,GL_VERTEX_SHADER,vertShaderData)&&
-		CompileShader(tessellationShaderName[0], GL_TESS_CONTROL_SHADER,tessControlShaderData)&&
-		CompileShader(tessellationShaderName[1],GL_TESS_EVALUATION_SHADER,tessEvalShaderData)&&
-		CompileShader(fragName,GL_FRAGMENT_SHADER,fragShaderData)) {
+void Material::LoadShader(std::string vertName, std::string tessellationShaderName[2], std::string fragName, GLuint& prg, GLuint& vert, GLuint& tc, GLuint& tv, GLuint& geom, GLuint& frag) {
+	if (CompileShader(vertName,GL_VERTEX_SHADER, vert)&&
+		CompileShader(tessellationShaderName[0], GL_TESS_CONTROL_SHADER, tc)&&
+		CompileShader(tessellationShaderName[1],GL_TESS_EVALUATION_SHADER, tv)&&
+		CompileShader(fragName,GL_FRAGMENT_SHADER, frag)) {
 		
 		prg = glCreateProgram();
-		glAttachShader(prg, vertShaderData);
-		glAttachShader(prg, tessControlShaderData);
-		glAttachShader(prg, tessEvalShaderData);
-		glAttachShader(prg, fragShaderData);
+		glAttachShader(prg, vert);
+		glAttachShader(prg, tc);
+		glAttachShader(prg, tv);
+		glAttachShader(prg, frag);
 		glLinkProgram(prg);
 
 		GLint status;
@@ -168,15 +178,15 @@ void Material::LoadShader(std::string vertName, std::string tessellationShaderNa
 	}
 }
 
-void Material::LoadShader(std::string vertName, std::string geomName, std::string fragName, GLuint& prg) {
-	if (CompileShader(vertName,GL_VERTEX_SHADER,vertShaderData)&&
-		CompileShader(geomName,GL_GEOMETRY_SHADER, geometryShaderData)&&
-		CompileShader(fragName,GL_FRAGMENT_SHADER,fragShaderData)) {
+void Material::LoadShader(std::string vertName, std::string geomName, std::string fragName, GLuint& prg, GLuint& vert, GLuint& tc, GLuint& tv, GLuint& geom, GLuint& frag) {
+	if (CompileShader(vertName,GL_VERTEX_SHADER, vert)&&
+		CompileShader(geomName,GL_GEOMETRY_SHADER, geom)&&
+		CompileShader(fragName,GL_FRAGMENT_SHADER, frag)) {
 		
 		prg = glCreateProgram();
-		glAttachShader(prg, vertShaderData);
-		glAttachShader(prg, geometryShaderData);
-		glAttachShader(prg, fragShaderData);
+		glAttachShader(prg, vert);
+		glAttachShader(prg, geom);
+		glAttachShader(prg, frag);
 		glLinkProgram(prg);
 
 		GLint status;
@@ -229,42 +239,43 @@ bool Material::CompileShader(std::string shadername, GLenum shaderType, GLuint& 
 }
 
 void Material::SetActive() {
-	if (Game::GetInstance()->renderingTarget==ERerderingTarget::COLOR) {
-		glUseProgram(shaderPrg);
-	}
-	else if (Game::GetInstance()->renderingTarget == ERerderingTarget::DEPTH) {
-		glUseProgram(depthShaderPrg);
-	}
-	
+	auto& prg = GetCurrentShaderPrg();
+	glUseProgram(prg);
 }
 
 void Material::SetMatrixUniform(std::string uniformName, glm::mat4 matrix) {
-	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
+	auto& prg = GetCurrentShaderPrg();
+	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
 	glUniformMatrix4fv(location, 1, GL_FALSE, reinterpret_cast<const float*>(&matrix[0][0]));
 }
 
 void Material::SetFloatUniform(std::string uniformName, float val) {
-	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
+	auto& prg = GetCurrentShaderPrg();
+	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
 	glUniform1f(location, val);
 }
 
 void Material::SetIntUniform(std::string uniformName, int val) {
-	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
+	auto& prg = GetCurrentShaderPrg();
+	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
 	glUniform1i(location, val);
 }
 
 void Material::SetVec2Uniform(std::string uniformName, glm::vec2 val) {
-	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
+	auto& prg = GetCurrentShaderPrg();
+	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
 	glUniform2fv(location,1, reinterpret_cast<GLfloat*>(&val));
 }
 
 void Material::SetVec3Uniform(std::string uniformName, glm::vec3 val) {
-	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
+	auto& prg = GetCurrentShaderPrg();
+	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
 	glUniform3fv(location,1, reinterpret_cast<GLfloat*>(&val));
 }
 
 void Material::SetTexUniform(std::string uniformName, unsigned int val) {
-	GLuint location = glGetUniformLocation(shaderPrg, uniformName.c_str());
+	auto& prg = GetCurrentShaderPrg();
+	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
 	//glUniform1i(location, static_cast<GLuint>(val-1));
 	glUniform1i(location, static_cast<GLuint>(val));
 }
@@ -301,10 +312,18 @@ void Material::SetEactiveTextureList() {
 	}
 }
 
+GLuint& Material::GetCurrentShaderPrg() {
+	if (Game::GetInstance()->renderingTarget == ERerderingTarget::COLOR) {
+		return shaderPrg;
+	}
+	else if (Game::GetInstance()->renderingTarget == ERerderingTarget::DEPTH) {
+		return depthShaderPrg;
+	}
+}
 
 void Material::UnLoadData() {
+	//Delete Color
 	glDeleteProgram(shaderPrg);
-	glDeleteProgram(depthShaderPrg);
 	glDeleteShader(vertShaderData);
 	if (tessControlShaderData) {
 		glDeleteShader(tessControlShaderData);
@@ -316,4 +335,18 @@ void Material::UnLoadData() {
 		glDeleteShader(geometryShaderData);
 	}
 	glDeleteShader(fragShaderData);
+
+	//Delete Depth
+	glDeleteProgram(depthShaderPrg);
+	glDeleteShader(depthVertShaderData);
+	if (depthTessControlShaderData) {
+		glDeleteShader(depthTessControlShaderData);
+	}
+	if (depthTessEvalShaderData) {
+		glDeleteShader(depthTessEvalShaderData);
+	}
+	if (depthGeometryShaderData) {
+		glDeleteShader(depthGeometryShaderData);
+	}
+	glDeleteShader(depthFragShaderData);
 }
