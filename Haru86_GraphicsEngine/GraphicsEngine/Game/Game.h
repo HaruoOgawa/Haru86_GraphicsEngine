@@ -51,6 +51,7 @@ public:
 	friend class GameRenderer;
 	friend class TimelineComponent;
 	friend class UIComponent;
+	friend class Material;
 private :
 	void UpdateTimeline();
 	void InputProcess();

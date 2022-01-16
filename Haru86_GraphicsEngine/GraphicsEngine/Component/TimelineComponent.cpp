@@ -76,8 +76,10 @@ void TimelineComponent::ComputeActivationTrack(float time) {
 		if (time>clip->endTime) {
 			auto iter = std::find(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), clip->gameObject);
 			if (iter != game->GetInstance()->gameObjectList.end()) {
-				game->GetInstance()->gameObjectList.erase(game->GetInstance()->gameObjectList.begin()
-					+ std::distance(game->GetInstance()->gameObjectList.begin(), iter));
+				game->GetInstance()->gameObjectList.erase(
+					game->GetInstance()->gameObjectList.begin()
+					+ std::distance(game->GetInstance()->gameObjectList.begin(), iter)
+				);
 			}
 
 			auto runningIter = std::find(runningActiovationClip.begin(), runningActiovationClip.end(), clip);

@@ -5,35 +5,43 @@
 #include <iostream>
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
 #include "GraphicsEngine/Graphics/Texture.h"
+#include "GraphicsEngine/Game/Game.h"
 
 Material::Material() {
-	LoadShader("./Assets/Shader/Standard.vert", "./Assets/Shader/Standard.frag");
+	LoadShader("./Assets/Shader/Standard.vert", "./Assets/Shader/Standard.frag", shaderPrg);
+	LoadShader("./Assets/Shader/Standard.vert", "./Assets/Shader/DepthColor.frag", depthShaderPrg);
 }
 
 Material::Material(std::map<GLenum, std::string> shaders) {
-	LoadShader(shaders);
+	LoadShader(shaders, shaderPrg);
+	auto depthShaders = shaders;
+	depthShaders[GL_FRAGMENT_SHADER] = "./Assets/Shader/DepthColor.frag";
+	LoadShader(depthShaders, depthShaderPrg);
 }
 
 Material::Material(std::string vertexShaderName, std::string fragmentShaderName)
 {
-	LoadShader(vertexShaderName, fragmentShaderName);
+	LoadShader(vertexShaderName, fragmentShaderName, shaderPrg);
+	LoadShader(vertexShaderName, "./Assets/Shader/DepthColor.frag", depthShaderPrg);
 }
 
 Material::Material(std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName)
 {
-	LoadShader(vertexShaderName,tessellationShaderName, fragmentShaderName);
+	LoadShader(vertexShaderName,tessellationShaderName, fragmentShaderName, shaderPrg);
+	LoadShader(vertexShaderName,tessellationShaderName, "./Assets/Shader/DepthColor.frag", depthShaderPrg);
 }
 
 Material::Material(std::string vertexShaderName, std::string geometryShaderName, std::string fragmentShaderName)
 {
-	LoadShader(vertexShaderName, geometryShaderName, fragmentShaderName);
+	LoadShader(vertexShaderName, geometryShaderName, fragmentShaderName, shaderPrg);
+	LoadShader(vertexShaderName, geometryShaderName, "./Assets/Shader/DepthColor.frag", depthShaderPrg);
 }
 
 Material::~Material() {
 	UnLoadData();
 }
 
-void Material::LoadShader(std::map<GLenum, std::string> shaders) {
+void Material::LoadShader(std::map<GLenum, std::string> shaders, GLuint& prg) {
 	bool compileResult = false;
 
 	for (auto shader : shaders) {
@@ -68,60 +76,60 @@ void Material::LoadShader(std::map<GLenum, std::string> shaders) {
 	
 	if (compileResult) {
 		
-		shaderPrg = glCreateProgram();
+		prg = glCreateProgram();
 		
 		for (auto shader : shaders) {
 			switch (shader.first)
 			{
 			case GL_VERTEX_SHADER:
-				glAttachShader(shaderPrg, vertShaderData);
+				glAttachShader(prg, vertShaderData);
 				break;
 			case GL_TESS_CONTROL_SHADER:
-				glAttachShader(shaderPrg, tessControlShaderData);
+				glAttachShader(prg, tessControlShaderData);
 				break;
 			case GL_TESS_EVALUATION_SHADER:
-				glAttachShader(shaderPrg, tessEvalShaderData);
+				glAttachShader(prg, tessEvalShaderData);
 				break;
 			case GL_GEOMETRY_SHADER:
-				glAttachShader(shaderPrg, geometryShaderData);
+				glAttachShader(prg, geometryShaderData);
 				break;
 			case GL_FRAGMENT_SHADER:
-				glAttachShader(shaderPrg, fragShaderData);
+				glAttachShader(prg, fragShaderData);
 				break;
 			default:
 				break;
 			}
 		}
 
-		glLinkProgram(shaderPrg);
+		glLinkProgram(prg);
 
 		GLint status;
-		glGetProgramiv(shaderPrg, GL_LINK_STATUS, &status);
+		glGetProgramiv(prg, GL_LINK_STATUS, &status);
 		if (status != GL_TRUE) {
 			SDL_Log("Cannot Load Program Data");
 			char buffer[512];
 			memset(buffer, 0, 512);
-			glGetProgramInfoLog(shaderPrg, 511, nullptr, buffer);
+			glGetProgramInfoLog(prg, 511, nullptr, buffer);
 			SDL_Log("GLSL Link Status:\n%s", buffer);
 		}
 	}
 }
-void Material::LoadShader(std::string vertName, std::string fragName) {
+void Material::LoadShader(std::string vertName, std::string fragName, GLuint& prg) {
 	if (CompileShader(vertName,GL_VERTEX_SHADER,vertShaderData)&&
 		CompileShader(fragName,GL_FRAGMENT_SHADER,fragShaderData)) {
 		
-		shaderPrg = glCreateProgram();
-		glAttachShader(shaderPrg, vertShaderData);
-		glAttachShader(shaderPrg, fragShaderData);
-		glLinkProgram(shaderPrg);
+		prg = glCreateProgram();
+		glAttachShader(prg, vertShaderData);
+		glAttachShader(prg, fragShaderData);
+		glLinkProgram(prg);
 
 		GLint status;
-		glGetProgramiv(shaderPrg, GL_LINK_STATUS, &status);
+		glGetProgramiv(prg, GL_LINK_STATUS, &status);
 		if (status != GL_TRUE) {
 			SDL_Log("Cannot Load Program Data");
 			char buffer[512];
 			memset(buffer, 0, 512);
-			glGetProgramInfoLog(shaderPrg, 511, nullptr, buffer);
+			glGetProgramInfoLog(prg, 511, nullptr, buffer);
 			SDL_Log("GLSL Link Status:\n%s", buffer);
 		}
 		else
@@ -131,26 +139,26 @@ void Material::LoadShader(std::string vertName, std::string fragName) {
 	}
 }
 
-void Material::LoadShader(std::string vertName, std::string tessellationShaderName[2], std::string fragName) {
+void Material::LoadShader(std::string vertName, std::string tessellationShaderName[2], std::string fragName, GLuint& prg) {
 	if (CompileShader(vertName,GL_VERTEX_SHADER,vertShaderData)&&
 		CompileShader(tessellationShaderName[0], GL_TESS_CONTROL_SHADER,tessControlShaderData)&&
 		CompileShader(tessellationShaderName[1],GL_TESS_EVALUATION_SHADER,tessEvalShaderData)&&
 		CompileShader(fragName,GL_FRAGMENT_SHADER,fragShaderData)) {
 		
-		shaderPrg = glCreateProgram();
-		glAttachShader(shaderPrg, vertShaderData);
-		glAttachShader(shaderPrg, tessControlShaderData);
-		glAttachShader(shaderPrg, tessEvalShaderData);
-		glAttachShader(shaderPrg, fragShaderData);
-		glLinkProgram(shaderPrg);
+		prg = glCreateProgram();
+		glAttachShader(prg, vertShaderData);
+		glAttachShader(prg, tessControlShaderData);
+		glAttachShader(prg, tessEvalShaderData);
+		glAttachShader(prg, fragShaderData);
+		glLinkProgram(prg);
 
 		GLint status;
-		glGetProgramiv(shaderPrg, GL_LINK_STATUS, &status);
+		glGetProgramiv(prg, GL_LINK_STATUS, &status);
 		if (status != GL_TRUE) {
 			SDL_Log("Cannot Load Program Data");
 			char buffer[512];
 			memset(buffer, 0, 512);
-			glGetProgramInfoLog(shaderPrg, 511, nullptr, buffer);
+			glGetProgramInfoLog(prg, 511, nullptr, buffer);
 			SDL_Log("GLSL Link Status:\n%s", buffer);
 		}
 		else
@@ -160,24 +168,24 @@ void Material::LoadShader(std::string vertName, std::string tessellationShaderNa
 	}
 }
 
-void Material::LoadShader(std::string vertName, std::string geomName, std::string fragName) {
+void Material::LoadShader(std::string vertName, std::string geomName, std::string fragName, GLuint& prg) {
 	if (CompileShader(vertName,GL_VERTEX_SHADER,vertShaderData)&&
 		CompileShader(geomName,GL_GEOMETRY_SHADER, geometryShaderData)&&
 		CompileShader(fragName,GL_FRAGMENT_SHADER,fragShaderData)) {
 		
-		shaderPrg = glCreateProgram();
-		glAttachShader(shaderPrg, vertShaderData);
-		glAttachShader(shaderPrg, geometryShaderData);
-		glAttachShader(shaderPrg, fragShaderData);
-		glLinkProgram(shaderPrg);
+		prg = glCreateProgram();
+		glAttachShader(prg, vertShaderData);
+		glAttachShader(prg, geometryShaderData);
+		glAttachShader(prg, fragShaderData);
+		glLinkProgram(prg);
 
 		GLint status;
-		glGetProgramiv(shaderPrg, GL_LINK_STATUS, &status);
+		glGetProgramiv(prg, GL_LINK_STATUS, &status);
 		if (status != GL_TRUE) {
 			SDL_Log("Cannot Load Program Data");
 			char buffer[512];
 			memset(buffer, 0, 512);
-			glGetProgramInfoLog(shaderPrg, 511, nullptr, buffer);
+			glGetProgramInfoLog(prg, 511, nullptr, buffer);
 			SDL_Log("GLSL Link Status:\n%s", buffer);
 		}
 		else
@@ -221,7 +229,13 @@ bool Material::CompileShader(std::string shadername, GLenum shaderType, GLuint& 
 }
 
 void Material::SetActive() {
-	glUseProgram(shaderPrg);
+	if (Game::GetInstance()->renderingTarget==ERerderingTarget::COLOR) {
+		glUseProgram(shaderPrg);
+	}
+	else if (Game::GetInstance()->renderingTarget == ERerderingTarget::DEPTH) {
+		glUseProgram(depthShaderPrg);
+	}
+	
 }
 
 void Material::SetMatrixUniform(std::string uniformName, glm::mat4 matrix) {
@@ -290,6 +304,7 @@ void Material::SetEactiveTextureList() {
 
 void Material::UnLoadData() {
 	glDeleteProgram(shaderPrg);
+	glDeleteProgram(depthShaderPrg);
 	glDeleteShader(vertShaderData);
 	if (tessControlShaderData) {
 		glDeleteShader(tessControlShaderData);
