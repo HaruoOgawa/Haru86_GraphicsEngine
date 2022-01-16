@@ -48,8 +48,9 @@ void CBoxInstancing::Update() {
 void CBoxInstancing::Draw() {
 	owner->transform->CalMatrix();
 	m_material->SetActive();
-	//glEnable(GL_BLEND);
-	//glBlendFunc(GL_BLEND_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix() ); //
 	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
@@ -61,7 +62,8 @@ void CBoxInstancing::Draw() {
 	m_material->SetIntUniform("_sideCubeCount", sideCubeCount);
 	m_material->SetFloatUniform("_cubeWidth", 1.0);
 	m_material->SetVec3Uniform("_lightDir", glm::vec3(-2.0, 1.0, 1.0));
-	
+	m_material->SetFloatUniform("_Roughness", 0.5);
+	m_material->SetFloatUniform("_FresnelReflectance",1.0);
 	Graphics::DrawInstancedWithMesh(m_mesh, instanciedCound, m_material,GL_TRIANGLES);
 	
 }

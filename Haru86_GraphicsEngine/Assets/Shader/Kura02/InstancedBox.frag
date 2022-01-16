@@ -13,7 +13,8 @@ in vec3 worldNormal;
 // D（GGX）の項
 float D_GGX(vec3 H, vec3 N) {
     float NdotH = clamp(dot(H, N),0.0,1.0);
-    float roughness = clamp(_Roughness,0.0,1.0);
+    float roughness = pow(clamp(1.0-_Roughness,0.0,1.0),2.0);
+    roughness=pow(roughness,2.0);
     float alpha = roughness * roughness;
     float alpha2 = alpha * alpha;
     float t = ((NdotH * NdotH) * (alpha2 - 1.0) + 1.0);
@@ -53,6 +54,37 @@ void main(){
 	float diff=max(0.0,dot(worldNormal,L));
 	col.rgb*=diff;
 	col+=0.01;
+    
+
+    //PBR///////////////////
+     
+    // ワールド空間上のライト位置と法線との内積を計算
+    vec3 lightDirectionNormal = normalize(_lightDir);
+    float NdotL = clamp(dot(worldNormal, lightDirectionNormal),0.0,1.0);
+
+    // ワールド空間上の視点（カメラ）位置と法線との内積を計算
+    vec3 viewDirectionNormal = normalize((_CameraPosition - worldPosition).xyz);
+    float NdotV = clamp(dot(worldNormal, viewDirectionNormal),0.0,1.0);
+
+    // ライトと視点ベクトルのハーフベクトルを計算
+    vec3 halfVector = normalize(lightDirectionNormal + viewDirectionNormal);
+
+    // D_GGXの項
+    float D = D_GGX(halfVector,worldNormal);
+
+    // Fの項
+    float F = Flesnel(viewDirectionNormal, halfVector);
+
+    // Gの項
+    float G = G_CookTorrance(lightDirectionNormal, viewDirectionNormal, halfVector,worldNormal);
+
+    // スペキュラおよびディフューズを計算
+    float specularReflection = (D * F * G) / (4.0 * NdotV * NdotL + 0.000001);
+  
+    vec3 pbrCol=vec3(0.5,0.0,0.1);
+
+    col=col+pbrCol*specularReflection;
+    col*=0.75;
 
 	gl_FragColor=vec4(col,0.5);
 }
