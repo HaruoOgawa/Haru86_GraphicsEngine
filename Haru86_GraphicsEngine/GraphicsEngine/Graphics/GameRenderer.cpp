@@ -35,8 +35,8 @@ GameRenderer::GameRenderer(Game* game)
 	polygon_depthTexture(std::make_shared<Texture>()),
 	raymarching_frameTexture(std::make_shared<Texture>()),
 	raymarching_depthTexture(std::make_shared<Texture>()),
-	postProcessTexture(nullptr),
-	m_Mixer(std::make_unique<PolygonRaymarchingMixer>())
+	p_r_BlendingTexture(std::make_shared<Texture>()),
+	postProcessTexture(nullptr)
 {
 	
 }
@@ -113,6 +113,8 @@ bool GameRenderer::Initialize(float width,float height) {
 		font.reset();
 		font == nullptr;
 	}
+
+	m_Mixer = std::make_unique<PolygonRaymarchingMixer>();
 
 	return true;
 }
