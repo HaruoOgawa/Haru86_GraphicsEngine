@@ -34,11 +34,9 @@ void RaymarchingObject::Draw() {
 	m_material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
 	m_material->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
 	if (Game::GetInstance()->renderingTarget==ERerderingTarget::COLOR) {
-		printf("Game::GetInstance()->renderingTarget is Color\n");
 		m_material->SetFloatUniform("_RenderingTarget", 1.0);
 	}
 	else if (Game::GetInstance()->renderingTarget == ERerderingTarget::DEPTH) {
-		printf("Game::GetInstance()->renderingTarget is Depth\n");
 		m_material->SetFloatUniform("_RenderingTarget", 2.0);
 	}
 	m_mesh->Draw();

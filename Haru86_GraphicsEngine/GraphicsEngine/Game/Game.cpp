@@ -46,7 +46,7 @@ Game::Game()
 	m_RaymarchingObject(nullptr)
 {
 	
-	for (int i = 0; i < 10;i++) {
+	for (int i = 0; i < 20;i++) {
 		switch (i)
 		{
 		case 0:
@@ -78,6 +78,36 @@ Game::Game()
 			break;
 		case 9:
 			texSlots.emplace(i, GL_TEXTURE9);
+			break;
+		case 10:
+			texSlots.emplace(i, GL_TEXTURE10);
+			break;
+		case 11:
+			texSlots.emplace(i, GL_TEXTURE11);
+			break;
+		case 12:
+			texSlots.emplace(i, GL_TEXTURE12);
+			break;
+		case 13:
+			texSlots.emplace(i, GL_TEXTURE13);
+			break;
+		case 14:
+			texSlots.emplace(i, GL_TEXTURE14);
+			break;
+		case 15:
+			texSlots.emplace(i, GL_TEXTURE15);
+			break;
+		case 16:
+			texSlots.emplace(i, GL_TEXTURE16);
+			break;
+		case 17:
+			texSlots.emplace(i, GL_TEXTURE17);
+			break;
+		case 18:
+			texSlots.emplace(i, GL_TEXTURE18);
+			break;
+		case 19:
+			texSlots.emplace(i, GL_TEXTURE19);
 			break;
 		default:
 			break;

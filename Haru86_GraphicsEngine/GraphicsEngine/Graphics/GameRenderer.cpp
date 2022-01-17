@@ -179,7 +179,7 @@ void GameRenderer::Draw() {
 
 	//レイマーチングオブジェクトのカラーマップをレンダリング///////////////
 	if (Game::GetInstance()->m_RaymarchingObject) {
-		Game::GetInstance()->renderingTarget = ERerderingTarget::DEPTH;
+		Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 		glBindFramebuffer(GL_FRAMEBUFFER, raymarching_frameBuffer);
 		glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
 

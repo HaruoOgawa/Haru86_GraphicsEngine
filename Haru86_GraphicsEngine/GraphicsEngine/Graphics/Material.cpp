@@ -32,10 +32,16 @@ Material::Material(std::string vertexShaderName, std::string fragmentShaderName)
 }
 
 Material::Material(std::string vertexShaderName, std::string fragmentShaderName, RenderingSurfaceType renderingSurfaceType) {
-	LoadShader(vertexShaderName, fragmentShaderName, shaderPrg
-		, vertShaderData, tessControlShaderData, tessEvalShaderData, geometryShaderData, fragShaderData);
 	if (renderingSurfaceType==RenderingSurfaceType::POLYGON) {
+		LoadShader(vertexShaderName, fragmentShaderName, shaderPrg
+			, vertShaderData, tessControlShaderData, tessEvalShaderData, geometryShaderData, fragShaderData);
 		LoadShader(vertexShaderName, "./Assets/Shader/DepthColor.frag", depthShaderPrg
+			, depthVertShaderData, depthTessControlShaderData, depthTessEvalShaderData, depthGeometryShaderData, depthFragShaderData);
+	}
+	else if (renderingSurfaceType == RenderingSurfaceType::RAYMARCHING) {
+		LoadShader(vertexShaderName, fragmentShaderName, shaderPrg
+			, vertShaderData, tessControlShaderData, tessEvalShaderData, geometryShaderData, fragShaderData);
+		LoadShader(vertexShaderName, fragmentShaderName, depthShaderPrg
 			, depthVertShaderData, depthTessControlShaderData, depthTessEvalShaderData, depthGeometryShaderData, depthFragShaderData);
 	}
 }
@@ -322,16 +328,11 @@ void Material::SetEactiveTextureList() {
 }
 
 GLuint& Material::GetCurrentShaderPrg() {
-	if (depthShaderPrg) {
-		if (Game::GetInstance()->renderingTarget == ERerderingTarget::COLOR) {
-			return shaderPrg;
-		}
-		else if (Game::GetInstance()->renderingTarget == ERerderingTarget::DEPTH) {
-			return depthShaderPrg;
-		}
-	}
-	else {
+	if (Game::GetInstance()->renderingTarget == ERerderingTarget::COLOR) {
 		return shaderPrg;
+	}
+	else if (Game::GetInstance()->renderingTarget == ERerderingTarget::DEPTH) {
+		return depthShaderPrg;
 	}
 }
 
