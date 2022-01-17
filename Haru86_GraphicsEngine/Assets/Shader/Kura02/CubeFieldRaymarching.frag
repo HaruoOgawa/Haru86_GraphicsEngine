@@ -108,7 +108,7 @@ void main(){
     col+=vec3(0.8,0.25,0.8)*exp(-.1*t)*acc2*0.005;
 
   }else if(_RenderingTarget==2.0){
-    col=clamp(1.0-vec3(1.0)*exp(-.45*t),0.0,1.0);
+    col=clamp(1.0-vec3(1.0)*exp(-.05*t),0.0,1.0);
   }
 
   gl_FragColor=vec4(col,1.0);

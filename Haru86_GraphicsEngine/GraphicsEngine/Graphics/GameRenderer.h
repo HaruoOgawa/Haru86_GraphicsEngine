@@ -31,6 +31,8 @@ public:
 	std::shared_ptr<class Texture> raymarching_frameTexture;
 	std::shared_ptr<class Texture> raymarching_depthTexture;
 	std::shared_ptr<class Texture> p_r_BlendingTexture;
+
+	friend class PolygonRaymarchingMixer;
 private:
 	SDL_Window* sWindow;
 	int sWindowWidth;
