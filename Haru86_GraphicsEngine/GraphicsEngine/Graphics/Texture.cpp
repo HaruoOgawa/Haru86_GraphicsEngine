@@ -68,7 +68,7 @@ void Texture::CreateForRendering(int width, int height, GLint internalformat, GL
 	glTexImage2D(GL_TEXTURE_2D, 0, internalformat, mWidth, mHeight, 0, format,
 		GL_UNSIGNED_BYTE, 0);
 
-	//glBindTexture(GL_TEXTURE_2D, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Texture::CreateTrueTypeFontTexture(SDL_Surface* surf) {

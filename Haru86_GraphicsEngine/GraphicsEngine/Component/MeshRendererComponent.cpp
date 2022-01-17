@@ -153,6 +153,19 @@ void MeshRendererComponent::DrawBoard() {
 	material->SetFloatUniform("_deltaTime", game->deltaTime);
 	material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
 	material->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+	
+	if (GameRenderer::GetInstance()->polygon_frameTexture !=nullptr) {
+		GameRenderer::GetInstance()->polygon_frameTexture->SetActive();
+		material->SetTexUniform("frameTex", GameRenderer::GetInstance()->polygon_frameTexture->GetTextureID());
+		GameRenderer::GetInstance()->polygon_frameTexture->SetEactive();
+	}
+	
+	if (GameRenderer::GetInstance()->polygon_depthTexture !=nullptr) {
+		GameRenderer::GetInstance()->polygon_depthTexture->SetActive();
+		//material->SetTexUniform("frameTex", GameRenderer::GetInstance()->polygon_depthTexture->GetTextureID());
+		GameRenderer::GetInstance()->polygon_depthTexture->SetEactive();
+	}
+		
 
 	for (auto clip : animationClips) {
 		clip->callback(clip->lifeTimeRate);

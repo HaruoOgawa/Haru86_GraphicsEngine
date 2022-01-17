@@ -88,18 +88,18 @@ bool GameRenderer::Initialize(float width,float height) {
 	if (!CreateFrameBuffer(polygon_frameTexture, polygon_frameBuffer,GL_RGBA, GL_RGBA)) {
 		SDL_Log("Can not create frame buffer");
 	}
-	/*
+	
 	if (!CreateFrameBuffer(polygon_depthTexture, polygon_depthBuffer,GL_RGBA, GL_RGBA)) {
 		SDL_Log("Can not create frame buffer");
-	}*/
+	}
 
-	/*if (!CreateFrameBuffer(raymarching_frameTexture, raymarching_frameBuffer, GL_RGBA, GL_RGBA)) {
+	if (!CreateFrameBuffer(raymarching_frameTexture, raymarching_frameBuffer, GL_RGBA, GL_RGBA)) {
 		SDL_Log("Can not create frame buffer");
 	}
 
 	if (!CreateFrameBuffer(raymarching_depthTexture, raymarching_depthBuffer, GL_RGBA, GL_RGBA)) {
 		SDL_Log("Can not create frame buffer");
-	}*/
+	}
 	
 	font =  std::make_shared<Font>();
 	if (!(font->Load("./Assets/Resources/FontData/FRSCRIPT.TTF"))) {
@@ -158,7 +158,7 @@ void GameRenderer::Draw() {
 	}
 
 	//ポリゴンオブジェクトをデプスマップをレンダリング
-	/*Game::GetInstance()->renderingTarget = ERerderingTarget::DEPTH;
+	Game::GetInstance()->renderingTarget = ERerderingTarget::DEPTH;
 	glBindFramebuffer(GL_FRAMEBUFFER, polygon_depthBuffer);
 	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
 
@@ -193,7 +193,7 @@ void GameRenderer::Draw() {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glEnable(GL_DEPTH_TEST);*/
+	glEnable(GL_DEPTH_TEST);
 
 	//ポリゴンオブジェクトとレイマーチングオブジェクトのカラーマップをブレンドする
 	/*Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
@@ -241,12 +241,8 @@ void GameRenderer::Draw() {
 	glDisable(GL_BLEND);
 
 	for (auto obj : mgame->boardGameObjectList) {
-		//PostProcessTextureのセット メンバ変数のPOstProcessIDを参照するとか？？
 		obj->transform->CalMatrix();
-		polygon_frameTexture->SetActive();
-		obj->meshComp->material->SetTexUniform("frameTex", polygon_frameTexture->GetTextureID());
 		obj->meshComp->DrawBoard();
-		polygon_frameTexture->SetEactive();
 	}
 
 	//垂直同期を実行
