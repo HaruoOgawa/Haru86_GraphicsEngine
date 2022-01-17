@@ -9,6 +9,7 @@
 #include "GraphicsEngine/App/BaseApp/BaseApp.h"
 #include "GraphicsEngine/Object/RaymarchingObject.h"
 #include "GraphicsEngine/Graphics/PolygonRaymarchingMixer.h"
+#include "GraphicsEngine/Graphics/PostProcess.h"
 
 GameRenderer* GameRenderer::renderer_instance = nullptr;
 
@@ -38,7 +39,7 @@ GameRenderer::GameRenderer(Game* game)
 	p_r_BlendingTexture(std::make_shared<Texture>()),
 	postProcessTexture(nullptr)
 {
-	
+	PostProcess::CreateInstance();
 }
 
 GameRenderer::~GameRenderer() {
@@ -266,6 +267,7 @@ void GameRenderer::ShutDown() {
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(sWindow);
 
+	PostProcess::DestroyInstance();
 	
 	if (polygon_frameTexture!=nullptr) {
 		glDeleteFramebuffers(1, &polygon_frameBuffer);
