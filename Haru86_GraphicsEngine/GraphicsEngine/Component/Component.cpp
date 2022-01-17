@@ -17,3 +17,6 @@ void Component::Update() {
 
 }
 
+void Component::Dtaw() {
+}
+

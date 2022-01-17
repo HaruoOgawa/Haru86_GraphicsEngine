@@ -7,12 +7,19 @@
 #include <memory>
 #include <map>
 
+enum RenderingSurfaceType
+{
+    POLYGON,
+    RAYMARCHING,
+};
+
 class Material 
 {
 public:
     Material();
     Material(std::map<GLenum, std::string> shaders);
     Material(std::string vertexShaderName, std::string fragmentShaderName);
+    Material(std::string vertexShaderName, std::string fragmentShaderName, RenderingSurfaceType renderingSurfaceType);
     Material(std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName);
     Material(std::string vertexShaderName, std::string geometryShaderName, std::string fragmentShaderName);
     ~Material();
