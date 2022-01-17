@@ -28,17 +28,24 @@ void PolygonRaymarchingMixer::Draw() {
 		m_material->SetTexUniform("polygon_depthTexture", GameRenderer::GetInstance()->polygon_depthTexture->GetTextureID());
 		GameRenderer::GetInstance()->polygon_depthTexture->SetEactive();
 	}
-	//raymarching_frameTexture
-	if (GameRenderer::GetInstance()->raymarching_frameTexture != nullptr) {
-		GameRenderer::GetInstance()->raymarching_frameTexture->SetActive();
-		m_material->SetTexUniform("raymarching_frameTexture", GameRenderer::GetInstance()->raymarching_frameTexture->GetTextureID());
-		GameRenderer::GetInstance()->raymarching_frameTexture->SetEactive();
+
+	if (Game::GetInstance()->m_RaymarchingObject) {
+		//raymarching_frameTexture
+		if (GameRenderer::GetInstance()->raymarching_frameTexture != nullptr) {
+			GameRenderer::GetInstance()->raymarching_frameTexture->SetActive();
+			m_material->SetTexUniform("raymarching_frameTexture", GameRenderer::GetInstance()->raymarching_frameTexture->GetTextureID());
+			GameRenderer::GetInstance()->raymarching_frameTexture->SetEactive();
+		}
+		//raymarching_depthTexture
+		if (GameRenderer::GetInstance()->raymarching_depthTexture != nullptr) {
+			GameRenderer::GetInstance()->raymarching_depthTexture->SetActive();
+			m_material->SetTexUniform("raymarching_depthTexture", GameRenderer::GetInstance()->raymarching_depthTexture->GetTextureID());
+			GameRenderer::GetInstance()->raymarching_depthTexture->SetEactive();
+		}
 	}
-	//raymarching_depthTexture
-	if (GameRenderer::GetInstance()->raymarching_depthTexture != nullptr) {
-		GameRenderer::GetInstance()->raymarching_depthTexture->SetActive();
-		m_material->SetTexUniform("raymarching_depthTexture", GameRenderer::GetInstance()->raymarching_depthTexture->GetTextureID());
-		GameRenderer::GetInstance()->raymarching_depthTexture->SetEactive();
+	else {
+		m_material->SetFloatUniform("_existRaymarching", 1.0);
 	}
+	
 	m_mesh->Draw();
 }
