@@ -30,6 +30,7 @@ public:
 	std::shared_ptr<class Texture> polygon_depthTexture;
 	std::shared_ptr<class Texture> raymarching_frameTexture;
 	std::shared_ptr<class Texture> raymarching_depthTexture;
+	std::shared_ptr<class Texture> p_r_BlendingTexture;
 private:
 	SDL_Window* sWindow;
 	int sWindowWidth;
@@ -42,9 +43,12 @@ private:
 	unsigned int polygon_depthBuffer;
 	unsigned int raymarching_frameBuffer;
 	unsigned int raymarching_depthBuffer;
+	unsigned int p_r_BlendingBuffer;
 
 	std::shared_ptr<class Texture> postProcessTexture;
 	unsigned int postProcessBuffer;
+
+	std::unique_ptr<class PolygonRaymarchingMixer> m_Mixer;
 	
 protected:
 	static GameRenderer* renderer_instance;

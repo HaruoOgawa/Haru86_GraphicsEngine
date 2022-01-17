@@ -167,10 +167,10 @@ void MeshRendererComponent::DrawBoard() {
 		GameRenderer::GetInstance()->polygon_depthTexture->SetEactive();
 	}*/
 
-	if (GameRenderer::GetInstance()->raymarching_frameTexture != nullptr) {
-		GameRenderer::GetInstance()->raymarching_frameTexture->SetActive();
-		material->SetTexUniform("frameTex", GameRenderer::GetInstance()->raymarching_frameTexture->GetTextureID());
-		GameRenderer::GetInstance()->raymarching_frameTexture->SetEactive();
+	if (GameRenderer::GetInstance()->p_r_BlendingTexture != nullptr) {
+		GameRenderer::GetInstance()->p_r_BlendingTexture->SetActive();
+		material->SetTexUniform("frameTex", GameRenderer::GetInstance()->p_r_BlendingTexture->GetTextureID());
+		GameRenderer::GetInstance()->p_r_BlendingTexture->SetEactive();
 	}
 
 	for (auto clip : animationClips) {

@@ -8,6 +8,7 @@
 #include "./Font.h"
 #include "GraphicsEngine/App/BaseApp/BaseApp.h"
 #include "GraphicsEngine/Object/RaymarchingObject.h"
+#include "GraphicsEngine/Graphics/PolygonRaymarchingMixer.h"
 
 GameRenderer* GameRenderer::renderer_instance = nullptr;
 
@@ -34,7 +35,8 @@ GameRenderer::GameRenderer(Game* game)
 	polygon_depthTexture(std::make_shared<Texture>()),
 	raymarching_frameTexture(std::make_shared<Texture>()),
 	raymarching_depthTexture(std::make_shared<Texture>()),
-	postProcessTexture(nullptr)
+	postProcessTexture(nullptr),
+	m_Mixer(std::make_unique<PolygonRaymarchingMixer>())
 {
 	
 }
@@ -99,6 +101,10 @@ bool GameRenderer::Initialize(float width,float height) {
 	}
 
 	if (!CreateFrameBuffer(raymarching_depthTexture, raymarching_depthBuffer, GL_RGBA, GL_RGBA)) {
+		SDL_Log("Can not create frame buffer");
+	}
+	
+	if (!CreateFrameBuffer(p_r_BlendingTexture, p_r_BlendingBuffer, GL_RGBA, GL_RGBA)) {
 		SDL_Log("Can not create frame buffer");
 	}
 
@@ -205,9 +211,9 @@ void GameRenderer::Draw() {
 		Game::GetInstance()->m_RaymarchingObject->Draw();
 	}
 
-	//ポリゴンオブジェクトとレイマーチングオブジェクトのカラーマップをブレンドする
-	/*Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
-	//glBindFramebuffer(GL_FRAMEBUFFER, polygon_frameBuffer);
+	//ポリゴンオブジェクトとレイマーチングオブジェクトをブレンドする
+	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+	glBindFramebuffer(GL_FRAMEBUFFER, p_r_BlendingBuffer);
 	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -215,17 +221,12 @@ void GameRenderer::Draw() {
 
 	glEnable(GL_DEPTH_TEST);
 
-	//ポリゴンオブジェクトとレイマーチングオブジェクトのデプスマップをブレンドする
-	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
-	//glBindFramebuffer(GL_FRAMEBUFFER, polygon_frameBuffer);
-	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
-
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glEnable(GL_DEPTH_TEST);*/
+	//ミキシング
+	m_Mixer->Draw();
 
 	//ポストプロセス////////////////////////////////////////
+	// ポストプロセスオブジェクトを作り、それにTextureのshared_ptrを渡して任意のタイミングで関数を呼ぶことでポストプロセスを実現
+	// 	   ブレンド前にポリゴンに適応するもの(Bloom・Glowなど)やブレンド後に全体に適応するもの(Vignet・Noiseなど)もあるはずだから
 	//ポストプロセスオブジェクトなるものを作ってもいいかもしれない
 	//よく使うものはプリセットとして用意しておいて使いたいもののブーリアンをtrueにして使用
 	//複数のポストプロセスはカラーブレンドする

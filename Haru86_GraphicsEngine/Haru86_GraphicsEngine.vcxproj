@@ -229,6 +229,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Component\RectTransformComponent.h" />
     <ClInclude Include="Assets\App\KuraArtApp\Script\KuraTrail.h" />
     <ClInclude Include="GraphicsEngine\Object\RaymarchingObject.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\PolygonRaymarchingMixer.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Texture.h" />
     <ClInclude Include="GraphicsEngine\Game\Time.h" />
@@ -274,6 +275,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Graphics\Mesh.cpp" />
     <ClCompile Include="Assets\App\KuraArtApp\Script\KuraTrail.cpp" />
     <ClCompile Include="GraphicsEngine\Object\RaymarchingObject.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\PolygonRaymarchingMixer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shader\DepthColor.frag" />
@@ -298,6 +300,8 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <None Include="Assets\Shader\KuraShader\KuraTerrain.tesc" />
     <None Include="Assets\Shader\KuraShader\KuraTerrain.tese" />
     <None Include="Assets\Shader\KuraShader\KuraTerrain.vert" />
+    <None Include="Assets\Shader\PolygonRaymarchingMixer.frag" />
+    <None Include="Assets\Shader\PolygonRaymarchingMixer.vert" />
     <None Include="Assets\Shader\RaymarchingObject.vert" />
     <None Include="Assets\Shader\StandardRenderBoard.frag" />
     <None Include="Assets\Shader\StandardRenderBoard.vert" />
