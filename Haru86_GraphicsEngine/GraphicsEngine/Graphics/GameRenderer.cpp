@@ -187,6 +187,7 @@ void GameRenderer::Draw() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
 
+		Game::GetInstance()->m_RaymarchingObject->transform->CalMatrix();
 		Game::GetInstance()->m_RaymarchingObject->Draw();
 	}
 
