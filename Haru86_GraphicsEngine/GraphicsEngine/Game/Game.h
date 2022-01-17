@@ -46,6 +46,7 @@ public:
 	
 	friend class Main;
 	friend class GameObject;
+	friend class RaymarchingObject;
 	friend class UIObject;
 	friend class GameRenderer;
 	friend class TimelineComponent;

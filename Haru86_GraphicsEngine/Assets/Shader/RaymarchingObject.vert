@@ -9,8 +9,11 @@ uniform mat4 MMatrix;
 uniform mat4 VMatrix;
 uniform mat4 PMatrix;
 
+out vec2 uv;
+
 void main(){
 	vec4 pos=vec4(vertex,1.0);
 	pos.xy*=2.0;
 	gl_Position=pos;
+	uv=texcoord;
 }
