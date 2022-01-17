@@ -165,7 +165,6 @@ void MeshRendererComponent::DrawBoard() {
 		//material->SetTexUniform("frameTex", GameRenderer::GetInstance()->polygon_depthTexture->GetTextureID());
 		GameRenderer::GetInstance()->polygon_depthTexture->SetEactive();
 	}
-		
 
 	for (auto clip : animationClips) {
 		clip->callback(clip->lifeTimeRate);

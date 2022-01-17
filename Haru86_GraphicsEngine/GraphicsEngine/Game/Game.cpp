@@ -12,11 +12,10 @@
 #include "../App/BaseApp/BaseApp.h"
 #include "../../Assets/App/Kura02/Kura02.h"
 //#include "../../Assets/App/KuraArtApp/KuraArtApp.h"
-#include "../../Assets/App/DemoApp/DemoApp.h"
-
-
+//#include "../../Assets/App/DemoApp/DemoApp.h"
 #include <exception>
 #include <stdexcept>
+#include "GraphicsEngine/Object/RaymarchingObject.h"
 
 Game* Game::s_pInstance = nullptr;
 
@@ -43,7 +42,8 @@ Game::Game()
 	mouseStateBool(false),
 	animTime(0.0f),
 	isRestart(false),
-	renderingTarget(ERerderingTarget::COLOR)
+	renderingTarget(ERerderingTarget::COLOR),
+	m_RaymarchingObject(nullptr)
 {
 	
 	for (int i = 0; i < 10;i++) {
@@ -219,6 +219,7 @@ void Game::Reflesh() {
 	if (app) {
 		app.reset();
 	}
+	m_RaymarchingObject = nullptr;
 	
 	//再度リソースをロードする
 	LoadData();

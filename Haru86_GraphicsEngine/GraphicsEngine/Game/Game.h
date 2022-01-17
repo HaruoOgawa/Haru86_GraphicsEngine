@@ -42,9 +42,8 @@ public:
 	std::unique_ptr<class GameObject> renderBoard;
 	class CameraObject* game_camera_instance;
 	std::map<int, GLenum> texSlots;
-
+	class RaymarchingObject* m_RaymarchingObject;
 	
-
 	friend class Main;
 	friend class GameObject;
 	friend class UIObject;

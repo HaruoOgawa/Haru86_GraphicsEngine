@@ -323,7 +323,6 @@ void Material::SetEactiveTextureList() {
 
 GLuint& Material::GetCurrentShaderPrg() {
 	if (depthShaderPrg) {
-		printf("depthShaderPrg NOT null \n");
 		if (Game::GetInstance()->renderingTarget == ERerderingTarget::COLOR) {
 			return shaderPrg;
 		}
@@ -332,7 +331,6 @@ GLuint& Material::GetCurrentShaderPrg() {
 		}
 	}
 	else {
-		printf("depthShaderPrg is null... \n");
 		return shaderPrg;
 	}
 }

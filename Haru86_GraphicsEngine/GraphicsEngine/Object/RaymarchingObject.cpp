@@ -1,6 +1,7 @@
 #include "RaymarchingObject.h"
 #include "GraphicsEngine/Graphics/Material.h"
 #include "GraphicsEngine/Graphics/Mesh.h"
+#include "GraphicsEngine/Game/Game.h"
 
 RaymarchingObject::RaymarchingObject(std::string fragmentShaderName)
 	: Object()

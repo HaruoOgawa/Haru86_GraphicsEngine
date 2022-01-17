@@ -7,6 +7,7 @@
 #include "./Texture.h"
 #include "./Font.h"
 #include "GraphicsEngine/App/BaseApp/BaseApp.h"
+#include "GraphicsEngine/Object/RaymarchingObject.h"
 
 GameRenderer* GameRenderer::renderer_instance = nullptr;
 
@@ -100,7 +101,7 @@ bool GameRenderer::Initialize(float width,float height) {
 	if (!CreateFrameBuffer(raymarching_depthTexture, raymarching_depthBuffer, GL_RGBA, GL_RGBA)) {
 		SDL_Log("Can not create frame buffer");
 	}
-	
+
 	font =  std::make_shared<Font>();
 	if (!(font->Load("./Assets/Resources/FontData/FRSCRIPT.TTF"))) {
 		font.reset();
@@ -177,23 +178,30 @@ void GameRenderer::Draw() {
 	}
 
 	//レイマーチングオブジェクトのカラーマップをレンダリング///////////////
-	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
-	glBindFramebuffer(GL_FRAMEBUFFER, raymarching_frameBuffer);
-	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
+	if (Game::GetInstance()->m_RaymarchingObject) {
+		Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+		glBindFramebuffer(GL_FRAMEBUFFER, raymarching_frameBuffer);
+		glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_DEPTH_TEST);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glEnable(GL_DEPTH_TEST);
+
+		Game::GetInstance()->m_RaymarchingObject->Draw();
+	}
 
 	//レイマーチングオブジェクトのデプスマップをレンダリング
-	Game::GetInstance()->renderingTarget = ERerderingTarget::DEPTH;
-	glBindFramebuffer(GL_FRAMEBUFFER, raymarching_depthBuffer);
-	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
+	if (Game::GetInstance()->m_RaymarchingObject) {
+		Game::GetInstance()->renderingTarget = ERerderingTarget::DEPTH;
+		glBindFramebuffer(GL_FRAMEBUFFER, raymarching_depthBuffer);
+		glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glEnable(GL_DEPTH_TEST);
 
-	glEnable(GL_DEPTH_TEST);
+		Game::GetInstance()->m_RaymarchingObject->Draw();
+	}
 
 	//ポリゴンオブジェクトとレイマーチングオブジェクトのカラーマップをブレンドする
 	/*Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
