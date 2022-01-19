@@ -66,7 +66,6 @@ const bool PostProcess::GetUsePostProcess()const {
 }
 
 void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTexture, const unsigned int& DestBuffer)const {
-	printf("DrawPolygonPostProcess\n");
 	if (m_UsePostProcess) {
 		// Draw Bloom
 		if (m_UseBloom)m_Bloom->Draw(SrcTexture, m_BloomFrameBuffer);
@@ -87,7 +86,7 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 		// Bloom
 		if (m_BloomTexture&& m_UseBloom) {
 			m_BloomTexture->SetActive();
-			m_material->SetTexUniform("", m_BloomTexture->GetTextureID());
+			m_material->SetTexUniform("_BloomTexture", m_BloomTexture->GetTextureID());
 			m_material->SetFloatUniform("_UseBloom", 1.0);
 			m_BloomTexture->SetEactive();
 		}
@@ -117,7 +116,6 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 }
 
 void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture, const unsigned int& DestBuffer)const {
-	printf("DrawLatePostProcess\n");
 	if (m_UsePostProcess) {
 		
 		// Draw PostProcess Result
@@ -130,6 +128,8 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 		glEnable(GL_DEPTH_TEST);
 
 		m_LateMaterial->SetActive();
+		// Sample SrcTexture
+		m_LateMaterial->SetTexUniform("_SrcTexture", SrcTexture->GetTextureID());
 		m_mesh->Draw();
 	}
 	else {
@@ -143,6 +143,7 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 		glEnable(GL_DEPTH_TEST);
 
 		m_LateMaterial->SetActive();
+
 		m_mesh->Draw();
 	}
 }

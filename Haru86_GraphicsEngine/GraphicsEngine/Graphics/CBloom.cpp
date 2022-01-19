@@ -3,6 +3,7 @@
 #include "Material.h"
 #include "Mesh.h"
 #include "GraphicsEngine/Game/Game.h"
+#include "GraphicsEngine/Graphics/GameRenderer.h"
 
 CBloom::CBloom():
 	m_IlluminanceMap(std::make_shared<Texture>()),
@@ -26,6 +27,10 @@ void CBloom::Initialize() {
 	m_BlurMaterial = std::make_shared<Material>("./Assets/Shader/StandardRenderBoard.vert", "./Assets/Shader/BloomBlur.frag");
 	m_BloomResultMaterial = std::make_shared<Material>("./Assets/Shader/StandardRenderBoard.vert", "./Assets/Shader/BloomResult.frag");
 	m_mesh = std::make_shared<Mesh>(PrimitiveType::BOARD);
+
+	// Create FrameBuffer  Œã‚Ù‚ÇHDRTexture‚É‚·‚é
+	if(!GameRenderer::GetInstance()->CreateFrameBuffer(m_IlluminanceMap, m_IlluminanceBuffer,GL_RGBA, GL_RGBA))printf("Cannot Create FrameBuffer\n");
+	if(!GameRenderer::GetInstance()->CreateFrameBuffer(m_BlurMap, m_BlurBuffer,GL_RGBA, GL_RGBA))printf("Cannot Create FrameBuffer\n");
 }
 
 void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int& DestBuffer) {
@@ -40,7 +45,7 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 	glEnable(GL_DEPTH_TEST);
 
 	m_IlluminanceMaterial->SetActive();
-	m_IlluminanceMaterial->SetTexUniform("", SrcTexture->GetTextureID());
+	m_IlluminanceMaterial->SetTexUniform("_SrcTexture", SrcTexture->GetTextureID());
 	m_mesh->Draw();
 
 	// Blur
@@ -56,7 +61,7 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 	m_BlurMaterial->SetActive();
 	if (m_IlluminanceMap) {
 		m_IlluminanceMap->SetActive();
-		m_BlurMaterial->SetTexUniform("", m_IlluminanceMap->GetTextureID());
+		m_BlurMaterial->SetTexUniform("_IlluminanceTexture", m_IlluminanceMap->GetTextureID());
 		m_IlluminanceMap->SetEactive();
 	}
 	m_mesh->Draw();
@@ -74,7 +79,7 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 	m_BloomResultMaterial->SetActive();
 	if (m_BlurMap) {
 		m_BlurMap->SetActive();
-		m_BloomResultMaterial->SetTexUniform("", m_BlurMap->GetTextureID());
+		m_BloomResultMaterial->SetTexUniform("_BlurTexture", m_BlurMap->GetTextureID());
 		m_BlurMap->SetEactive();
 	}
 	m_mesh->Draw();
