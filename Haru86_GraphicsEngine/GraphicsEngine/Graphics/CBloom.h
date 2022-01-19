@@ -2,9 +2,22 @@
 #include <memory>
 
 class Texture;
+class Material;
+class Mesh;
 
 class CBloom
-{
+{	
+	// FrameBuffer
+	std::shared_ptr<Texture> m_IlluminanceMap;
+	std::shared_ptr<Texture> m_BlurMap;
+	unsigned int m_IlluminanceBuffer;
+	unsigned int m_BlurBuffer;
+
+	// Mesh Material
+	std::shared_ptr<Material> m_IlluminanceMaterial;
+	std::shared_ptr<Material> m_BlurMaterial;
+	std::shared_ptr<Material> m_BloomResultMaterial;
+	std::shared_ptr<Mesh> m_mesh;
 
 public:
 	CBloom();

@@ -3,17 +3,23 @@
 
 class Texture;
 class CBloom;
+class Mesh;
+class Material;
 
 class PostProcess
 {
+	//base
+	std::shared_ptr<Mesh> m_mesh;
+	std::shared_ptr<Material> m_material;
 	bool m_UsePostProcess;
-	bool m_UseBloom;
-	float m_BloomIntensity;
 
 	//bloom
+	bool m_UseBloom;
+	float m_BloomIntensity;
 	std::unique_ptr<CBloom> m_Bloom;
 	std::shared_ptr<Texture> m_BloomTexture;
 	unsigned int m_BloomFrameBuffer;
+
 public:
 	static void CreateInstance();
 	static PostProcess* GetInstance();

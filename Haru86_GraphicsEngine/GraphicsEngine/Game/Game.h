@@ -52,6 +52,9 @@ public:
 	friend class TimelineComponent;
 	friend class UIComponent;
 	friend class Material;
+	friend class PostProcess;
+	friend class CBloom;
+
 private :
 	void UpdateTimeline();
 	void InputProcess();

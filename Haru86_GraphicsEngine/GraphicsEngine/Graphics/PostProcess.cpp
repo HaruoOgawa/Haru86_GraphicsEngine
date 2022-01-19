@@ -6,6 +6,9 @@
 #include "GraphicsEngine/Graphics/Mesh.h"
 #include "GraphicsEngine/Graphics/Material.h"
 #include "GraphicsEngine/Graphics/GameRenderer.h"
+#include "GraphicsEngine/Graphics/Mesh.h"
+#include "GraphicsEngine/Graphics/Material.h"
+#include "GraphicsEngine/Game/Game.h"
 
 //instance‚ð’è‹`‚·‚é
 PostProcess* PostProcess::instance = nullptr;
@@ -41,6 +44,9 @@ PostProcess::~PostProcess() {
 
 void PostProcess::Initialize() {
 
+	m_mesh = std::make_shared<Mesh>(PrimitiveType::BOARD);
+	m_material = std::make_shared<Material>("./Assets/Shader/StandardRenderBoard.vert", "./Assets/Shader/PostProcess.frag");
+
 	if (!GameRenderer::GetInstance()->CreateFrameBuffer(m_BloomTexture, m_BloomFrameBuffer,GL_RGBA,GL_RGBA)) {
 		printf("Cannot Create FrameBuffer\n");
 	}
@@ -65,6 +71,7 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 		if (m_UseBloom)m_Bloom->Draw(SrcTexture, m_BloomFrameBuffer);
 
 		// Draw PostProcess Result
+		Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 		glBindFramebuffer(GL_FRAMEBUFFER, DestBuffer);
 		glViewport(0, 0, static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().x * GameRenderer::GetInstance()->frameResolusion), static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().y * GameRenderer::GetInstance()->frameResolusion));
 
@@ -72,9 +79,26 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glEnable(GL_DEPTH_TEST);
+
+		// draw PostProcess Board
+		m_material->SetActive();
+
+		// Bloom
+		if (m_BloomTexture&& m_UseBloom) {
+			m_BloomTexture->SetActive();
+			m_material->SetTexUniform("", m_BloomTexture->GetTextureID());
+			m_material->SetFloatUniform("_UseBloom", 1.0);
+			m_BloomTexture->SetEactive();
+		}
+		else {
+			m_material->SetFloatUniform("_UseBloom", 0.0);
+		}
+
+		m_mesh->Draw();
 	}
 	else {
 		// Draw PostProcess Result
+		Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 		glBindFramebuffer(GL_FRAMEBUFFER, DestBuffer);
 		glViewport(0, 0, static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().x * GameRenderer::GetInstance()->frameResolusion), static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().y * GameRenderer::GetInstance()->frameResolusion));
 
@@ -82,6 +106,11 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glEnable(GL_DEPTH_TEST);
+
+		// draw PostProcess Board
+		m_material->SetActive();
+		m_material->SetFloatUniform("_UseBloom", 0.0);
+		m_mesh->Draw();
 
 	}
 }
@@ -97,7 +126,11 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
 		glEnable(GL_DEPTH_TEST);
+
+		m_material->SetActive();
+		m_mesh->Draw();
 	}
 	else {
 		// Draw PostProcess Result
@@ -109,6 +142,8 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 
 		glEnable(GL_DEPTH_TEST);
 
+		m_material->SetActive();
+		m_mesh->Draw();
 	}
 }
 
