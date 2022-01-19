@@ -10,6 +10,7 @@
 #include "GraphicsEngine/Game/Game.h"
 #include "./Script/CBoxInstancing.h"
 #include "GraphicsEngine/Object/RaymarchingObject.h"
+#include "GraphicsEngine/Graphics/PostProcess.h"
 
 Kura02::Kura02():
 	BaseApp()
@@ -32,6 +33,10 @@ void Kura02::Start() {
 
 	raymarching_obj = std::make_unique<RaymarchingObject>("./Assets/Shader/Kura02/CubeFieldRaymarching.frag");
 	Game::GetInstance()->m_RaymarchingObject = raymarching_obj.get();
+
+	// ポストプロセスの使用を宣言
+	PostProcess::GetInstance()->EnablePostProcess();
+	PostProcess::GetInstance()->EnableBloom(1.0);
 }
 
 void Kura02::Update() {

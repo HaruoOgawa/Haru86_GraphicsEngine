@@ -37,7 +37,8 @@ GameRenderer::GameRenderer(Game* game)
 	raymarching_frameTexture(std::make_shared<Texture>()),
 	raymarching_depthTexture(std::make_shared<Texture>()),
 	p_r_BlendingTexture(std::make_shared<Texture>()),
-	postProcessTexture(nullptr)
+	m_PolygonPostProcess_FrameTexture(std::make_shared<Texture>()),
+	m_LatePostProcess_FrameTexture(std::make_shared<Texture>())
 {
 	PostProcess::CreateInstance();
 }
@@ -106,6 +107,14 @@ bool GameRenderer::Initialize(float width,float height) {
 	}
 	
 	if (!CreateFrameBuffer(p_r_BlendingTexture, p_r_BlendingBuffer, GL_RGBA, GL_RGBA)) {
+		SDL_Log("Can not create frame buffer");
+	}
+	
+	if (!CreateFrameBuffer(m_PolygonPostProcess_FrameTexture, m_PolygonPostProcess_FrameBuffer, GL_RGBA, GL_RGBA)) {
+		SDL_Log("Can not create frame buffer");
+	}
+	
+	if (!CreateFrameBuffer(m_LatePostProcess_FrameTexture, m_LatePostProcess_FrameBuffer, GL_RGBA, GL_RGBA)) {
 		SDL_Log("Can not create frame buffer");
 	}
 
@@ -186,6 +195,9 @@ void GameRenderer::Draw() {
 		mgame->app->Draw();
 	}
 
+	// ポリゴンオブジェクトのポストプロセス
+	PostProcess::GetInstance()->DrawPolygonPostProcess(polygon_frameTexture, m_PolygonPostProcess_FrameBuffer);
+
 	//レイマーチングオブジェクトのカラーマップをレンダリング///////////////
 	if (Game::GetInstance()->m_RaymarchingObject) {
 		Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
@@ -227,21 +239,14 @@ void GameRenderer::Draw() {
 	//ミキシング
 	m_Mixer->Draw();
 
-	//ポストプロセス////////////////////////////////////////
+	//ミキシングしたフレームバッファのポストプロセス////////////////////////////////////////
 	// ポストプロセスオブジェクトを作り、それにTextureのshared_ptrを渡して任意のタイミングで関数を呼ぶことでポストプロセスを実現
 	// 	   ブレンド前にポリゴンに適応するもの(Bloom・Glowなど)やブレンド後に全体に適応するもの(Vignet・Noiseなど)もあるはずだから
 	//ポストプロセスオブジェクトなるものを作ってもいいかもしれない
 	//よく使うものはプリセットとして用意しておいて使いたいもののブーリアンをtrueにして使用
 	//複数のポストプロセスはカラーブレンドする
 	//カスタムポストプロセスもここで宣言する
-	/*Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
-	//glBindFramebuffer(GL_FRAMEBUFFER, polygon_frameBuffer);
-	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
-
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glEnable(GL_DEPTH_TEST);*/
+	PostProcess::GetInstance()->DrawLatePostProcess(p_r_BlendingTexture, m_LatePostProcess_FrameBuffer);
 
 	//最終的な結果を作成する///////////////////////////////
 	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;

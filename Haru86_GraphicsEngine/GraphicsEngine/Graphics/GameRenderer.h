@@ -31,6 +31,9 @@ public:
 	std::shared_ptr<class Texture> raymarching_frameTexture;
 	std::shared_ptr<class Texture> raymarching_depthTexture;
 	std::shared_ptr<class Texture> p_r_BlendingTexture;
+	//PostProcess FrameTexture
+	std::shared_ptr<class Texture> m_PolygonPostProcess_FrameTexture;
+	std::shared_ptr<class Texture> m_LatePostProcess_FrameTexture;
 
 	friend class PolygonRaymarchingMixer;
 private:
@@ -46,10 +49,11 @@ private:
 	unsigned int raymarching_frameBuffer;
 	unsigned int raymarching_depthBuffer;
 	unsigned int p_r_BlendingBuffer;
+	//PostProcess FrameBuffer
+	unsigned int m_PolygonPostProcess_FrameBuffer;
+	unsigned int m_LatePostProcess_FrameBuffer;
 
-	std::shared_ptr<class Texture> postProcessTexture;
-	unsigned int postProcessBuffer;
-
+	//ポリゴンとレイマーチングのミックス
 	std::unique_ptr<class PolygonRaymarchingMixer> m_Mixer;
 	
 protected:
