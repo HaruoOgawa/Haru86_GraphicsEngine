@@ -40,7 +40,6 @@ GameRenderer::GameRenderer(Game* game)
 	m_PolygonPostProcess_FrameTexture(std::make_shared<Texture>()),
 	m_LatePostProcess_FrameTexture(std::make_shared<Texture>())
 {
-	PostProcess::CreateInstance();
 }
 
 GameRenderer::~GameRenderer() {
@@ -88,6 +87,9 @@ bool GameRenderer::Initialize(float width,float height) {
 		return false;
 	}
 	glGetError();
+
+	// Create PostProcess
+	PostProcess::CreateInstance();
 
 	//CreateFrameBuffer
 	if (!CreateFrameBuffer(polygon_frameTexture, polygon_frameBuffer,GL_RGBA, GL_RGBA)) {
