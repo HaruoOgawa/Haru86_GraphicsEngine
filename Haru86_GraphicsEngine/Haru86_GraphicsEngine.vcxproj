@@ -282,6 +282,9 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Graphics\PostProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shader\BloomBlur.frag" />
+    <None Include="Assets\Shader\BloomIlluminance.frag" />
+    <None Include="Assets\Shader\BloomResult.frag" />
     <None Include="Assets\Shader\DepthColor.frag" />
     <None Include="Assets\Shader\Kura02\CubeFieldRaymarching.frag" />
     <None Include="Assets\Shader\Kura02\InstancedBox.frag" />
@@ -304,8 +307,10 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <None Include="Assets\Shader\KuraShader\KuraTerrain.tesc" />
     <None Include="Assets\Shader\KuraShader\KuraTerrain.tese" />
     <None Include="Assets\Shader\KuraShader\KuraTerrain.vert" />
+    <None Include="Assets\Shader\LatePostProcess.frag" />
     <None Include="Assets\Shader\PolygonRaymarchingMixer.frag" />
     <None Include="Assets\Shader\PolygonRaymarchingMixer.vert" />
+    <None Include="Assets\Shader\PolygonPostProcess.frag" />
     <None Include="Assets\Shader\RaymarchingObject.vert" />
     <None Include="Assets\Shader\StandardRenderBoard.frag" />
     <None Include="Assets\Shader\StandardRenderBoard.vert" />

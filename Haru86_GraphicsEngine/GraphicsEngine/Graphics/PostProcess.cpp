@@ -45,7 +45,8 @@ PostProcess::~PostProcess() {
 void PostProcess::Initialize() {
 
 	m_mesh = std::make_shared<Mesh>(PrimitiveType::BOARD);
-	m_material = std::make_shared<Material>("./Assets/Shader/StandardRenderBoard.vert", "./Assets/Shader/PostProcess.frag");
+	m_material = std::make_shared<Material>("./Assets/Shader/StandardRenderBoard.vert", "./Assets/Shader/PolygonPostProcess.frag");
+	m_LateMaterial = std::make_shared<Material>("./Assets/Shader/StandardRenderBoard.vert", "./Assets/Shader/LatePostProcess.frag");
 
 	if (!GameRenderer::GetInstance()->CreateFrameBuffer(m_BloomTexture, m_BloomFrameBuffer,GL_RGBA,GL_RGBA)) {
 		printf("Cannot Create FrameBuffer\n");
@@ -126,10 +127,9 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
 		glEnable(GL_DEPTH_TEST);
 
-		m_material->SetActive();
+		m_LateMaterial->SetActive();
 		m_mesh->Draw();
 	}
 	else {
@@ -142,7 +142,7 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 
 		glEnable(GL_DEPTH_TEST);
 
-		m_material->SetActive();
+		m_LateMaterial->SetActive();
 		m_mesh->Draw();
 	}
 }
