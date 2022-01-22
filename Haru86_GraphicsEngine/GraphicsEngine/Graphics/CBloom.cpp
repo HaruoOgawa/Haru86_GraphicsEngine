@@ -4,6 +4,7 @@
 #include "Mesh.h"
 #include "GraphicsEngine/Game/Game.h"
 #include "GraphicsEngine/Graphics/GameRenderer.h"
+#include "GraphicsEngine/Graphics/PostProcess.h"
 
 CBloom::CBloom():
 	m_IlluminanceMap(std::make_shared<Texture>()),
@@ -48,7 +49,12 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 	m_IlluminanceMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_IlluminanceMaterial->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
 	m_IlluminanceMaterial->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+	SrcTexture->SetActive();
 	m_IlluminanceMaterial->SetTexUniform("_SrcTexture", SrcTexture->GetTextureID());
+	SrcTexture->SetEactive();
+	m_IlluminanceMaterial->SetFloatUniform("_BloomThreshold", PostProcess::GetInstance()->GetBloomThreshold());
+	m_IlluminanceMaterial->SetFloatUniform("_BloomIntensity", PostProcess::GetInstance()->GetBloomIntensity());
+
 	m_mesh->Draw();
 
 	// Blur
@@ -91,6 +97,9 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 		m_BloomResultMaterial->SetTexUniform("_BlurTexture", m_BlurMap->GetTextureID());
 		m_BlurMap->SetEactive();
 	}
+	SrcTexture->SetActive();
+	m_BloomResultMaterial->SetTexUniform("_SrcTexture", SrcTexture->GetTextureID());
+	SrcTexture->SetEactive();
 	m_mesh->Draw();
 
 }

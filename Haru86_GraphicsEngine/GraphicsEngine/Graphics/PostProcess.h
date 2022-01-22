@@ -17,6 +17,7 @@ class PostProcess
 	//bloom
 	bool m_UseBloom;
 	float m_BloomIntensity;
+	float m_BloomThreshold;
 	std::unique_ptr<CBloom> m_Bloom;
 	std::shared_ptr<Texture> m_BloomTexture;
 	unsigned int m_BloomFrameBuffer;
@@ -32,8 +33,11 @@ public:
 	const bool GetUsePostProcess()const;
 	void DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTexture,const unsigned int& DestBuffer)const;
 	void DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture, const unsigned int& DestBuffer)const;
-	void EnableBloom(float bloomIntensity);
+	void EnableBloom(float bloomThreshold,float bloomIntensity);
 	
+	const float GetBloomThreshold()const;
+	const float GetBloomIntensity()const;
+
 private:
 	void Initialize();
 	void Release();

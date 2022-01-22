@@ -36,7 +36,7 @@ void Kura02::Start() {
 
 	// ポストプロセスの使用を宣言
 	PostProcess::GetInstance()->EnablePostProcess();
-	PostProcess::GetInstance()->EnableBloom(1.0);
+	PostProcess::GetInstance()->EnableBloom(0.25,1.0);
 }
 
 void Kura02::Update() {

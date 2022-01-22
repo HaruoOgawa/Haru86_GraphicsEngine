@@ -173,9 +173,18 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 	}
 }
 
-void PostProcess::EnableBloom(float bloomIntensity) {
+void PostProcess::EnableBloom(float bloomThreshold, float bloomIntensity) {
 	m_UseBloom = true;
+	m_BloomThreshold = bloomThreshold;
 	m_BloomIntensity = bloomIntensity;
+}
+
+const float PostProcess::GetBloomThreshold()const {
+	return m_BloomThreshold;
+}
+
+const float PostProcess::GetBloomIntensity()const {
+	return m_BloomIntensity;
 }
 
 void PostProcess::DrawBloom() {
