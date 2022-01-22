@@ -75,13 +75,16 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 		glBindFramebuffer(GL_FRAMEBUFFER, DestBuffer);
 		glViewport(0, 0, static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().x * GameRenderer::GetInstance()->frameResolusion), static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().y * GameRenderer::GetInstance()->frameResolusion));
 
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glEnable(GL_DEPTH_TEST);
 
 		// draw PostProcess Board
 		m_material->SetActive();
+		m_material->SetFloatUniform("_time", Game::GetInstance()->time);
+		m_material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
+		m_material->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
 
 		// Bloom
 		if (m_BloomTexture&& m_UseBloom) {
@@ -109,6 +112,10 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 
 		// draw PostProcess Board
 		m_material->SetActive();
+		m_material->SetFloatUniform("_time", Game::GetInstance()->time);
+		m_material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
+		m_material->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+
 		m_material->SetFloatUniform("_UseBloom", 0.0);
 		m_mesh->Draw();
 

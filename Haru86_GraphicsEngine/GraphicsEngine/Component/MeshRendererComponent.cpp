@@ -154,10 +154,16 @@ void MeshRendererComponent::DrawBoard() {
 	material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
 	material->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
 	
-	if (GameRenderer::GetInstance()->p_r_BlendingTexture != nullptr) {
+	/*if (GameRenderer::GetInstance()->p_r_BlendingTexture != nullptr) {
 		GameRenderer::GetInstance()->p_r_BlendingTexture->SetActive();
 		material->SetTexUniform("frameTex", GameRenderer::GetInstance()->p_r_BlendingTexture->GetTextureID());
 		GameRenderer::GetInstance()->p_r_BlendingTexture->SetEactive();
+	}*/
+	
+	if (GameRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture != nullptr) {
+		GameRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture->SetActive();
+		material->SetTexUniform("frameTex", GameRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture->GetTextureID());
+		GameRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture->SetEactive();
 	}
 
 	for (auto clip : animationClips) {
