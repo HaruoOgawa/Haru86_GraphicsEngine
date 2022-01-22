@@ -8,7 +8,7 @@ class Texture
 public:
 	Texture();
 	~Texture();
-	void CreateForRendering(int width, int height,GLint internalformat,GLint format);
+	void CreateForRendering(int width, int height,GLint internalformat,GLint format,GLenum type= GL_UNSIGNED_BYTE);
 	void CreateTrueTypeFontTexture(SDL_Surface* surf);
 	bool Load(const std::string& fileName);
 	unsigned int GetTextureID() const { return mTextureID; }

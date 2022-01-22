@@ -135,7 +135,7 @@ glm::ivec2 GameRenderer::GetScreenSize() {
 	return glm::ivec2(sWindowWidth, sWindowHeight);
 }
 
-bool GameRenderer::CreateFrameBuffer(std::shared_ptr<Texture> fTex, unsigned int& fBuffer, GLint internalformat, GLint format) {
+bool GameRenderer::CreateFrameBuffer(std::shared_ptr<Texture> fTex, unsigned int& fBuffer, GLint internalformat, GLint format, GLenum type) {
 	int width = static_cast<int>(GetScreenSize().x) ;
 	int height = static_cast<int>(GetScreenSize().y );
 	
@@ -143,7 +143,7 @@ bool GameRenderer::CreateFrameBuffer(std::shared_ptr<Texture> fTex, unsigned int
 	GLuint depthBuffer;
 	glGenRenderbuffers(1, &depthBuffer);
 
-	fTex->CreateForRendering(width, height,internalformat, format);
+	fTex->CreateForRendering(width, height,internalformat, format, type);
 	
 	glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer);
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);

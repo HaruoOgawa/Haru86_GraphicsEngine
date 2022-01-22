@@ -53,7 +53,7 @@ bool Texture::Load(const std::string& fileName)
 	return true;
 }
 
-void Texture::CreateForRendering(int width, int height, GLint internalformat, GLint format)
+void Texture::CreateForRendering(int width, int height, GLint internalformat, GLint format, GLenum type)
 {
 	mWidth = width;
 	mHeight = height;
@@ -66,7 +66,7 @@ void Texture::CreateForRendering(int width, int height, GLint internalformat, GL
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	
 	glTexImage2D(GL_TEXTURE_2D, 0, internalformat, mWidth, mHeight, 0, format,
-		GL_UNSIGNED_BYTE, 0);
+		type, 0);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

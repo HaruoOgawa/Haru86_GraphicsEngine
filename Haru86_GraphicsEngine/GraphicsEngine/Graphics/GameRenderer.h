@@ -19,7 +19,7 @@ public:
 	bool Initialize(float width, float height);
 	void ShutDown();
 	void Draw();
-	bool CreateFrameBuffer(std::shared_ptr<class Texture> fTex,unsigned int& fBuffer, GLint internalformat, GLint format);
+	bool CreateFrameBuffer(std::shared_ptr<class Texture> fTex,unsigned int& fBuffer, GLint internalformat, GLint format, GLenum type = GL_UNSIGNED_BYTE);
 	glm::ivec2 GetScreenSize();
 	float deltaTime;
 	float frameResolusion;
