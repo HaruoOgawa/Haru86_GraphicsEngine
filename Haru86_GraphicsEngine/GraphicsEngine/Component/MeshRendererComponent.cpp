@@ -154,16 +154,19 @@ void MeshRendererComponent::DrawBoard() {
 	material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
 	material->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
 	
-	/*if (GameRenderer::GetInstance()->p_r_BlendingTexture != nullptr) {
-		GameRenderer::GetInstance()->p_r_BlendingTexture->SetActive();
-		material->SetTexUniform("frameTex", GameRenderer::GetInstance()->p_r_BlendingTexture->GetTextureID());
-		GameRenderer::GetInstance()->p_r_BlendingTexture->SetEactive();
-	}*/
-	
+	// PolygonPostProcessのテスト
+	/*
 	if (GameRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture != nullptr) {
 		GameRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture->SetActive();
 		material->SetTexUniform("frameTex", GameRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture->GetTextureID());
 		GameRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture->SetEactive();
+	}*/
+
+	// PostProcess後の最終結果 → m_LatePostProcess_FrameTexture
+	if (GameRenderer::GetInstance()->m_LatePostProcess_FrameTexture != nullptr) {
+		GameRenderer::GetInstance()->m_LatePostProcess_FrameTexture->SetActive();
+		material->SetTexUniform("frameTex", GameRenderer::GetInstance()->m_LatePostProcess_FrameTexture->GetTextureID());
+		GameRenderer::GetInstance()->m_LatePostProcess_FrameTexture->SetEactive();
 	}
 
 	for (auto clip : animationClips) {

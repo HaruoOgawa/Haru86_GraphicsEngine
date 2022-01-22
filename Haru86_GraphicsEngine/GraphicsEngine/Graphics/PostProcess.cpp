@@ -86,13 +86,6 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 		m_material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
 		m_material->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
 
-		// Sample
-		// Set SrcTexture
-		/*SrcTexture->SetActive();
-		m_material->SetTexUniform("_SrcTexture", SrcTexture->GetTextureID());
-		SrcTexture->SetEactive();*/
-		//
-
 		// Bloom
 		if (m_BloomTexture&& m_UseBloom) {
 			m_BloomTexture->SetActive();
@@ -153,8 +146,12 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 		glEnable(GL_DEPTH_TEST);
 
 		m_LateMaterial->SetActive();
-		// Sample SrcTexture
+		m_LateMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
+		m_LateMaterial->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
+		m_LateMaterial->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+		SrcTexture->SetActive();
 		m_LateMaterial->SetTexUniform("_SrcTexture", SrcTexture->GetTextureID());
+		SrcTexture->SetEactive();
 		m_mesh->Draw();
 	}
 	else {
@@ -168,6 +165,12 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 		glEnable(GL_DEPTH_TEST);
 
 		m_LateMaterial->SetActive();
+		m_LateMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
+		m_LateMaterial->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
+		m_LateMaterial->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+		SrcTexture->SetActive();
+		m_LateMaterial->SetTexUniform("_SrcTexture", SrcTexture->GetTextureID());
+		SrcTexture->SetEactive();
 
 		m_mesh->Draw();
 	}
