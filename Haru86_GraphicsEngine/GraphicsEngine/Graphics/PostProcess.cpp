@@ -48,7 +48,7 @@ void PostProcess::Initialize() {
 	m_material = std::make_shared<Material>("./Assets/Shader/StandardRenderBoard.vert", "./Assets/Shader/PolygonPostProcess.frag");
 	m_LateMaterial = std::make_shared<Material>("./Assets/Shader/StandardRenderBoard.vert", "./Assets/Shader/LatePostProcess.frag");
 
-	if (!GameRenderer::GetInstance()->CreateFrameBuffer(m_BloomTexture, m_BloomFrameBuffer,GL_RGBA,GL_RGBA)) {
+	if (!GameRenderer::GetInstance()->CreateFrameBuffer(m_BloomTexture, m_BloomFrameBuffer,GL_RGBA16F, GL_RGBA, GL_FLOAT)) {
 		printf("Cannot Create FrameBuffer\n");
 	}
 }

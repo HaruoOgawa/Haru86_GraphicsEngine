@@ -92,7 +92,7 @@ bool GameRenderer::Initialize(float width,float height) {
 	PostProcess::CreateInstance();
 
 	//CreateFrameBuffer
-	if (!CreateFrameBuffer(polygon_frameTexture, polygon_frameBuffer,GL_RGBA, GL_RGBA)) {
+	if (!CreateFrameBuffer(polygon_frameTexture, polygon_frameBuffer, GL_RGBA16F, GL_RGBA, GL_FLOAT)) {
 		SDL_Log("Can not create frame buffer");
 	}
 	
@@ -108,15 +108,15 @@ bool GameRenderer::Initialize(float width,float height) {
 		SDL_Log("Can not create frame buffer");
 	}
 	
-	if (!CreateFrameBuffer(p_r_BlendingTexture, p_r_BlendingBuffer, GL_RGBA, GL_RGBA)) {
+	if (!CreateFrameBuffer(p_r_BlendingTexture, p_r_BlendingBuffer, GL_RGBA16F, GL_RGBA, GL_FLOAT)) {
 		SDL_Log("Can not create frame buffer");
 	}
 	
-	if (!CreateFrameBuffer(m_PolygonPostProcess_FrameTexture, m_PolygonPostProcess_FrameBuffer, GL_RGBA, GL_RGBA)) {
+	if (!CreateFrameBuffer(m_PolygonPostProcess_FrameTexture, m_PolygonPostProcess_FrameBuffer, GL_RGBA16F, GL_RGBA, GL_FLOAT)) {
 		SDL_Log("Can not create frame buffer");
 	}
 	
-	if (!CreateFrameBuffer(m_LatePostProcess_FrameTexture, m_LatePostProcess_FrameBuffer, GL_RGBA, GL_RGBA)) {
+	if (!CreateFrameBuffer(m_LatePostProcess_FrameTexture, m_LatePostProcess_FrameBuffer, GL_RGBA16F, GL_RGBA, GL_FLOAT)) {
 		SDL_Log("Can not create frame buffer");
 	}
 

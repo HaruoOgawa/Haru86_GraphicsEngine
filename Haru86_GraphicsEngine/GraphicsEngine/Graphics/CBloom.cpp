@@ -30,8 +30,8 @@ void CBloom::Initialize() {
 	m_mesh = std::make_shared<Mesh>(PrimitiveType::BOARD);
 
 	// Create FrameBuffer  Œã‚Ù‚ÇHDRTexture‚É‚·‚é
-	if(!GameRenderer::GetInstance()->CreateFrameBuffer(m_IlluminanceMap, m_IlluminanceBuffer,GL_RGBA, GL_RGBA))printf("Cannot Create FrameBuffer\n");
-	if(!GameRenderer::GetInstance()->CreateFrameBuffer(m_BlurMap, m_BlurBuffer,GL_RGBA, GL_RGBA))printf("Cannot Create FrameBuffer\n");
+	if(!GameRenderer::GetInstance()->CreateFrameBuffer(m_IlluminanceMap, m_IlluminanceBuffer, GL_RGBA16F, GL_RGBA, GL_FLOAT))printf("Cannot Create FrameBuffer\n");
+	if(!GameRenderer::GetInstance()->CreateFrameBuffer(m_BlurMap, m_BlurBuffer, GL_RGBA16F, GL_RGBA, GL_FLOAT))printf("Cannot Create FrameBuffer\n");
 }
 
 void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int& DestBuffer) {

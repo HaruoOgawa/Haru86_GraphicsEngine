@@ -7,8 +7,13 @@ uniform float _FresnelReflectance;
 
 in vec3 worldPosition;
 in vec3 worldNormal;
+in float id;
 
 #define rot(a) mat2(cos(a),-sin(a),sin(a),cos(a))
+
+float rand(vec2 seeds){
+  return fract(sin(dot(seeds, vec2(12.9898,78.233))) * 43758.5453);
+}
 
 // DÅiGGXÅjÇÃçÄ
 float D_GGX(vec3 H, vec3 N) {
@@ -49,7 +54,7 @@ void main(){
 	vec3 col=vec3(1.0);
 
 	//diffuse
-	vec3 L=normalize(_lightDir);
+	/*vec3 L=normalize(_lightDir);
 	float diff=max(0.0,dot(worldNormal,L));
 	col.rgb*=diff;
 	col+=0.01;
@@ -82,8 +87,17 @@ void main(){
   
     vec3 pbrCol=vec3(0.5,0.0,0.1);
 
-    col=col+pbrCol*specularReflection;
-    col*=0.75;
+    col=col+pbrCol*specularReflection;*/
+    
+    col=vec3(rand(vec2(id,0.123)))*1.5;
+
+    
+   /* col=vec3(
+        rand(vec2(id,0.159)),
+        rand(vec2(id,7.957)),
+        rand(vec2(id,0.681))
+    )*1.0;*/
 
 	gl_FragColor=vec4(col,0.5);
+	//gl_FragColor=vec4(col,1.0);
 }

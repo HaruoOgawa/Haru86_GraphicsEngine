@@ -1,5 +1,7 @@
 #version 430
 
+precision highp float;
+
 in vec2 uv;
 in float time;
 in vec2 resolution;

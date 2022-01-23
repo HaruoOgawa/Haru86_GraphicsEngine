@@ -283,6 +283,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shader\BloomBlur.frag" />
+    <None Include="Assets\Shader\BloomDemo.frag" />
     <None Include="Assets\Shader\BloomIlluminance.frag" />
     <None Include="Assets\Shader\BloomResult.frag" />
     <None Include="Assets\Shader\DepthColor.frag" />

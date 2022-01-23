@@ -30,6 +30,7 @@ layout(std430,binding=0) buffer destBufferCubeFieldObj
 
 out vec3 worldPosition;
 out vec3 worldNormal;
+out float id;
 
 #define rot(a) mat2(cos(a),-sin(a),sin(a),cos(a))
 #define PI 3.14159265
@@ -100,4 +101,6 @@ void main(){
 	gl_Position=PMatrix*VMatrix*vec4(pos,1.0);
 	worldPosition=pos;
 	worldNormal=normalize((ModelMatrix*vec4(normal,1.0)).xyz);
+
+	id=float(gl_InstanceID);
 }
