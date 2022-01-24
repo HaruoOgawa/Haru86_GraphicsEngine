@@ -16,11 +16,11 @@ PolygonRaymarchingMixer::~PolygonRaymarchingMixer() {
 void PolygonRaymarchingMixer::Draw() {
 	m_material->SetActive();
 	m_material->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
-	//polygon_frameTexture
-	if (GameRenderer::GetInstance()->polygon_frameTexture != nullptr) {
-		GameRenderer::GetInstance()->polygon_frameTexture->SetActive();
-		m_material->SetTexUniform("polygon_frameTexture", GameRenderer::GetInstance()->polygon_frameTexture->GetTextureID());
-		GameRenderer::GetInstance()->polygon_frameTexture->SetEactive();
+	//m_PolygonPostProcess_FrameTexture
+	if (GameRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture != nullptr) {
+		GameRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture->SetActive();
+		m_material->SetTexUniform("polygon_frameTexture", GameRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture->GetTextureID());
+		GameRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture->SetEactive();
 	}
 	//polygon_depthTexture
 	if (GameRenderer::GetInstance()->polygon_depthTexture != nullptr) {

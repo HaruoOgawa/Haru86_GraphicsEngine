@@ -32,8 +32,8 @@ void Kura02::Start() {
 	ins_cubes = std::make_unique<Object>();
 	ins_cubes->AddComponent(std::make_shared<CBoxInstancing>(ins_cubes.get()));
 
-	//raymarching_obj = std::make_unique<RaymarchingObject>("./Assets/Shader/Kura02/CubeFieldRaymarching.frag");
-	//Game::GetInstance()->m_RaymarchingObject = raymarching_obj.get();
+	raymarching_obj = std::make_unique<RaymarchingObject>("./Assets/Shader/Kura02/CubeFieldRaymarching.frag");
+	Game::GetInstance()->m_RaymarchingObject = raymarching_obj.get();
 
 	// ポストプロセスの使用を宣言
 	PostProcess::GetInstance()->EnablePostProcess();
