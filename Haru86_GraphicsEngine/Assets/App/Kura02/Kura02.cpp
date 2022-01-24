@@ -55,11 +55,11 @@ void Kura02::Start() {
 
 void Kura02::Update() {
 	//ins_cubes->Update();
-	/*cam_obj->transform->position = glm::vec3(
+	cam_obj->transform->position = glm::vec3(
 		glm::cos(Game::GetInstance()->time * 0.0001),
 		0.0, 
 		glm::sin(Game::GetInstance()->time * 0.0001)
-	);*/
+	);
 }
 
 void Kura02::Draw() {

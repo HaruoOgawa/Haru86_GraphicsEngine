@@ -3,7 +3,7 @@
 in vec2 uv;
 
 void main(){
-	vec3 col=vec3(uv,0.0);
+	vec3 col=vec3(1.0,0.0,0.0);
 
 	col+=vec3(1.0);
 

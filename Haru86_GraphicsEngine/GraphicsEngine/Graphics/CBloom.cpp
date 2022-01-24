@@ -8,9 +8,11 @@
 
 CBloom::CBloom():
 	m_IlluminanceMap(std::make_shared<Texture>()),
-	m_BlurMap(std::make_shared<Texture>()),
+	m_BlurMapX(std::make_shared<Texture>()),
+	m_BlurMapY(std::make_shared<Texture>()),
 	m_IlluminanceBuffer(0),
-	m_BlurBuffer(0)
+	m_BlurBufferX(0),
+	m_BlurBufferY(0)
 {
 	Initialize();
 }
@@ -31,7 +33,8 @@ void CBloom::Initialize() {
 
 	// Create FrameBuffer  Œã‚Ù‚ÇHDRTexture‚É‚·‚é
 	if(!GameRenderer::GetInstance()->CreateFrameBuffer(m_IlluminanceMap, m_IlluminanceBuffer, GL_RGBA16F, GL_RGBA, GL_FLOAT))printf("Cannot Create FrameBuffer\n");
-	if(!GameRenderer::GetInstance()->CreateFrameBuffer(m_BlurMap, m_BlurBuffer, GL_RGBA16F, GL_RGBA, GL_FLOAT))printf("Cannot Create FrameBuffer\n");
+	if(!GameRenderer::GetInstance()->CreateFrameBuffer(m_BlurMapX, m_BlurBufferX, GL_RGBA16F, GL_RGBA, GL_FLOAT))printf("Cannot Create FrameBuffer\n");
+	if(!GameRenderer::GetInstance()->CreateFrameBuffer(m_BlurMapY, m_BlurBufferY, GL_RGBA16F, GL_RGBA, GL_FLOAT))printf("Cannot Create FrameBuffer\n");
 
 	// weights‚ÌŒvŽZ
 	float blurPower = 1000.0; // from 10.0 to 1000.0
@@ -44,14 +47,10 @@ void CBloom::Initialize() {
 		weights.push_back(w);
 		if (i > 0) { w *= 2.0; }
 		t += w;
-		printf("w: %lf \n", w);
 	}
-	printf("t: %lf \n", t);
-
 	
 	for (int i = 0; i < 10; i++) {
 		weights[i] /= t;
-		printf("weights[%d]: %f \n", i, weights[i]);
 	}
 }
 
@@ -78,9 +77,9 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 
 	m_mesh->Draw();
 
-	// Blur
+	// BlurX
 	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
-	glBindFramebuffer(GL_FRAMEBUFFER, m_BlurBuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, m_BlurBufferX);
 	glViewport(0, 0, static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().x * GameRenderer::GetInstance()->frameResolusion), static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().y * GameRenderer::GetInstance()->frameResolusion));
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -98,6 +97,30 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 		m_IlluminanceMap->SetEactive();
 	}
 	m_BlurMaterial->SetFloatVectorUniform("_weights", weights);
+	m_BlurMaterial->SetFloatUniform("_IsHorizontal", 1.0);
+	m_mesh->Draw();
+	
+	// BlurY
+	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+	glBindFramebuffer(GL_FRAMEBUFFER, m_BlurBufferY);
+	glViewport(0, 0, static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().x * GameRenderer::GetInstance()->frameResolusion), static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().y * GameRenderer::GetInstance()->frameResolusion));
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glEnable(GL_DEPTH_TEST);
+
+	m_BlurMaterial->SetActive();
+	m_BlurMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
+	m_BlurMaterial->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
+	m_BlurMaterial->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+	if (m_BlurMapX) {
+		m_BlurMapX->SetActive();
+		m_BlurMaterial->SetTexUniform("_IlluminanceTexture", m_BlurMapX->GetTextureID());
+		m_BlurMapX->SetEactive();
+	}
+	m_BlurMaterial->SetFloatVectorUniform("_weights", weights);
+	m_BlurMaterial->SetFloatUniform("_IsHorizontal", 0.0);
 	m_mesh->Draw();
 
 	// Result
@@ -114,10 +137,10 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 	m_BloomResultMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
 	m_BloomResultMaterial->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
 	m_BloomResultMaterial->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
-	if (m_BlurMap) {
-		m_BlurMap->SetActive();
-		m_BloomResultMaterial->SetTexUniform("_BlurTexture", m_BlurMap->GetTextureID());
-		m_BlurMap->SetEactive();
+	if (m_BlurMapY) {
+		m_BlurMapY->SetActive();
+		m_BloomResultMaterial->SetTexUniform("_BlurTexture", m_BlurMapY->GetTextureID());
+		m_BlurMapY->SetEactive();
 	}
 	SrcTexture->SetActive();
 	m_BloomResultMaterial->SetTexUniform("_SrcTexture", SrcTexture->GetTextureID());

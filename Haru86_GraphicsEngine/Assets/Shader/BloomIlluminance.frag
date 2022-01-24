@@ -17,13 +17,13 @@ void main(){
 	col=texture(_SrcTexture,uv*_frameResolusion).rgb;
 
 	// ‹P“x‚ðŒvŽZ 1
-	//col.rgb=max(col.rgb-_BloomThreshold,0.0)*_BloomIntensity;
+	col.rgb=max(col.rgb-_BloomThreshold,0.0)*_BloomIntensity;
 
 	// ‹P“x‚ðŒvŽZ 2
-	float brightness=dot(col,vec3(0.2126, 0.7152, 0.0722));
-	if(brightness<1.0){
+	/*float brightness=dot(col,vec3(0.2126, 0.7152, 0.0722));
+	if(brightness<=1.0){
 		col=vec3(0.0);
-	}
+	}*/
 
 	gl_FragColor=vec4(col,1.0);
 }

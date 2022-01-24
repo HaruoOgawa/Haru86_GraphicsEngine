@@ -10,9 +10,11 @@ class CBloom
 {	
 	// FrameBuffer
 	std::shared_ptr<Texture> m_IlluminanceMap;
-	std::shared_ptr<Texture> m_BlurMap;
+	std::shared_ptr<Texture> m_BlurMapX;
+	std::shared_ptr<Texture> m_BlurMapY;
 	unsigned int m_IlluminanceBuffer;
-	unsigned int m_BlurBuffer;
+	unsigned int m_BlurBufferX;
+	unsigned int m_BlurBufferY;
 	std::vector<float> weights;
 
 	// Mesh Material
