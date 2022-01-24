@@ -295,6 +295,13 @@ void Material::SetTexUniform(std::string uniformName, unsigned int val) {
 	glUniform1i(location, static_cast<GLuint>(val));
 }
 
+void Material::SetFloatVectorUniform(std::string uniformName, std::vector<float> val) {
+	auto& prg = GetCurrentShaderPrg();
+	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
+	//glUniform1fv(location, val.size(), reinterpret_cast<GLfloat*>(&val));
+	glUniform1fv(location, val.size(), reinterpret_cast<GLfloat*>(&val[0]));
+}
+
 void Material::SetBuffer(std::shared_ptr<ComputeBuffer> buffer,int bufferIndex) {
 	SetActive();
 	glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bufferIndex, buffer->ssbo);

@@ -36,6 +36,7 @@ public:
     void SetVec2Uniform(std::string uniformName, glm::vec2 val);
     void SetVec3Uniform(std::string uniformName, glm::vec3 val);
     void SetTexUniform(std::string uniformName, unsigned int val);
+    void SetFloatVectorUniform(std::string uniformName, std::vector<float> val);
     void SetBuffer(std::shared_ptr<class ComputeBuffer> buffer, int bufferIndex);
     void LoadTextureList(std::vector<std::string> texPathList,std::vector<std::string> texUniformNameList);
     void SetActiveTextureList();

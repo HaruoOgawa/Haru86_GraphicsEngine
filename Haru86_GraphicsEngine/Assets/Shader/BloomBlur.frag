@@ -9,25 +9,31 @@ in vec2 resolution;
 uniform sampler2D _IlluminanceTexture;
 uniform float _frameResolusion;
 uniform vec2 _resolution;
+uniform float _weights[10];
 
 void main(){
 	vec3 col=vec3(0.0); 
 	vec2 texelSize=1.0/_resolution.xy;
-	
-	int fSize=4;
+	//texelSize/=_frameResolusion;
+	//texelSize*=2.0;
 
-	for(int x=-fSize;x<=fSize;x++){
-		for(int y=-fSize;y<=fSize;y++){
-			vec2 st= uv+vec2(
-				texelSize.x*float(x),
-				texelSize.y*float(y)
-			);
-			col+=texture(_IlluminanceTexture,st*_frameResolusion).rgb;
+	int fSize=10;
 
-		}
+	// ガウシアンブラーの実装
+
+	// x blur
+	col+=texture(_IlluminanceTexture,uv*_frameResolusion).rgb*_weights[0];
+	for(int i=1;i<fSize;i++){
+		col+=texture(_IlluminanceTexture,( uv+vec2(texelSize.x*float(i),0.0))*_frameResolusion).rgb*_weights[i];
+		col+=texture(_IlluminanceTexture,( uv-vec2(texelSize.x*float(i),0.0))*_frameResolusion).rgb*_weights[i];
 	}
 
-	col/=pow(fSize*2+1,2.0);
+	// y blur
+	col+=texture(_IlluminanceTexture,uv*_frameResolusion).rgb*_weights[0];
+	for(int i=1;i<fSize;i++){
+		col+=texture(_IlluminanceTexture,( uv+vec2(0.0,texelSize.y*float(i)))*_frameResolusion).rgb*_weights[i];
+		col+=texture(_IlluminanceTexture,( uv-vec2(0.0,texelSize.y*float(i)))*_frameResolusion).rgb*_weights[i];
+	}
 
 	//col.rgb=texture(_IlluminanceTexture,uv*_frameResolusion).rgb;
 	

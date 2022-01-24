@@ -32,6 +32,27 @@ void CBloom::Initialize() {
 	// Create FrameBuffer  Œã‚Ù‚ÇHDRTexture‚É‚·‚é
 	if(!GameRenderer::GetInstance()->CreateFrameBuffer(m_IlluminanceMap, m_IlluminanceBuffer, GL_RGBA16F, GL_RGBA, GL_FLOAT))printf("Cannot Create FrameBuffer\n");
 	if(!GameRenderer::GetInstance()->CreateFrameBuffer(m_BlurMap, m_BlurBuffer, GL_RGBA16F, GL_RGBA, GL_FLOAT))printf("Cannot Create FrameBuffer\n");
+
+	// weights‚ÌŒvŽZ
+	float blurPower = 1000.0; // from 10.0 to 1000.0
+	float t = 0.0;
+	float d = blurPower * blurPower *0.001;
+	
+	for (int i = 0; i < 10;i++) {
+		float r = 2.0 * static_cast<float>(i);
+		float w = glm::exp(-0.5 * (r * r) / d);
+		weights.push_back(w);
+		if (i > 0) { w *= 2.0; }
+		t += w;
+		printf("w: %lf \n", w);
+	}
+	printf("t: %lf \n", t);
+
+	
+	for (int i = 0; i < 10; i++) {
+		weights[i] /= t;
+		printf("weights[%d]: %f \n", i, weights[i]);
+	}
 }
 
 void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int& DestBuffer) {
@@ -76,6 +97,7 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 		m_BlurMaterial->SetTexUniform("_IlluminanceTexture", m_IlluminanceMap->GetTextureID());
 		m_IlluminanceMap->SetEactive();
 	}
+	m_BlurMaterial->SetFloatVectorUniform("_weights", weights);
 	m_mesh->Draw();
 
 	// Result

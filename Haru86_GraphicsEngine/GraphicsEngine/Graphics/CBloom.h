@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <vector>
 
 class Texture;
 class Material;
@@ -12,6 +13,7 @@ class CBloom
 	std::shared_ptr<Texture> m_BlurMap;
 	unsigned int m_IlluminanceBuffer;
 	unsigned int m_BlurBuffer;
+	std::vector<float> weights;
 
 	// Mesh Material
 	std::shared_ptr<Material> m_IlluminanceMaterial;
