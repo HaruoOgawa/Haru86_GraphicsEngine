@@ -105,8 +105,8 @@ void main(){
 	id=float(gl_InstanceID);
 
 	randColor=vec3(
-		rand(vec2(float(gl_InstanceID)*100.0,0.159))*2.0,
-        rand(vec2(float(gl_InstanceID)*100.0,7.957))*2.0,
-        rand(vec2(float(gl_InstanceID)*100.0,0.681))*2.0
+		//rand(vec2(float(gl_InstanceID)*100.0,0.159))*2.0,
+        //rand(vec2(float(gl_InstanceID)*100.0,7.957))*2.0,
+        rand(vec2(float(gl_InstanceID)*100.0,0.681))*1.5
 	);
 }
