@@ -29,24 +29,11 @@ void Kura02::Start() {
 	Game::GetInstance()->game_camera_instance = cam_obj.get();
 	cam_obj->transform->position = glm::vec3(0.0,0.0,1.0);
 
-	/*ins_cubes = std::make_unique<Object>();
+	ins_cubes = std::make_unique<Object>();
 	ins_cubes->AddComponent(std::make_shared<CBoxInstancing>(ins_cubes.get()));
 
-	raymarching_obj = std::make_unique<RaymarchingObject>("./Assets/Shader/Kura02/CubeFieldRaymarching.frag");
-	Game::GetInstance()->m_RaymarchingObject = raymarching_obj.get();*/
-
-	// test obj
-	test_obj = std::make_unique<GameObject>(PrimitiveType::CUBE, 
-		"./Assets/Shader/Standard.vert",
-		"./Assets/Shader/BloomDemo.frag"
-	);
-	test_obj->SetScale(glm::vec3(0.5));
-	test_obj->SetPosition(glm::vec3(0.5, 0.0, 0.0));
-
-	// test obj 2
-	test_obj2 = std::make_unique<GameObject>(PrimitiveType::CUBE);
-	test_obj2->SetPosition(glm::vec3(-0.5, 0.0, 0.0));
-	test_obj2->SetScale(glm::vec3(0.5));
+	//raymarching_obj = std::make_unique<RaymarchingObject>("./Assets/Shader/Kura02/CubeFieldRaymarching.frag");
+	//Game::GetInstance()->m_RaymarchingObject = raymarching_obj.get();
 
 	// ポストプロセスの使用を宣言
 	PostProcess::GetInstance()->EnablePostProcess();
@@ -54,7 +41,7 @@ void Kura02::Start() {
 }
 
 void Kura02::Update() {
-	//ins_cubes->Update();
+	ins_cubes->Update();
 	cam_obj->transform->position = glm::vec3(
 		glm::cos(Game::GetInstance()->time * 0.0001),
 		0.0, 
@@ -63,7 +50,7 @@ void Kura02::Update() {
 }
 
 void Kura02::Draw() {
-	//static_cast<CBoxInstancing*>(ins_cubes->GetComponent(static_cast<std::string>(typeid(CBoxInstancing).name())))->Draw();
+	static_cast<CBoxInstancing*>(ins_cubes->GetComponent(static_cast<std::string>(typeid(CBoxInstancing).name())))->Draw();
 }
 
 void Kura02::Timeline(class TimelineObject* timelineObj) {

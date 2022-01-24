@@ -31,10 +31,10 @@ layout(std430,binding=0) buffer destBufferCubeFieldObj
 out vec3 worldPosition;
 out vec3 worldNormal;
 out float id;
+out vec3 randColor;
 
 #define rot(a) mat2(cos(a),-sin(a),sin(a),cos(a))
 #define PI 3.14159265
-
 
 float rand(vec2 seeds){
   return fract(sin(dot(seeds, vec2(12.9898,78.233))) * 43758.5453);
@@ -103,4 +103,10 @@ void main(){
 	worldNormal=normalize((ModelMatrix*vec4(normal,1.0)).xyz);
 
 	id=float(gl_InstanceID);
+
+	randColor=vec3(
+		rand(vec2(float(gl_InstanceID)*100.0,0.159))*2.0,
+        rand(vec2(float(gl_InstanceID)*100.0,7.957))*2.0,
+        rand(vec2(float(gl_InstanceID)*100.0,0.681))*2.0
+	);
 }
