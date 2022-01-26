@@ -290,6 +290,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <None Include="Assets\Shader\Kura02\CubeFieldRaymarching.frag" />
     <None Include="Assets\Shader\Kura02\InstancedBox.frag" />
     <None Include="Assets\Shader\Kura02\InstancedBox.vert" />
+    <None Include="Assets\Shader\Kura02\veda\CubeFieldRaymarching_VEDA.frag" />
     <None Include="Assets\Shader\KuraShader\Background.frag" />
     <None Include="Assets\Shader\KuraShader\Background.vert" />
     <None Include="Assets\Shader\KuraShader\BoidsForce.comp" />

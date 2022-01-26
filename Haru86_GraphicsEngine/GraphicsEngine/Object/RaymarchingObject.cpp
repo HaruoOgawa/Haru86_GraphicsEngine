@@ -3,6 +3,8 @@
 #include "GraphicsEngine/Graphics/Mesh.h"
 #include "GraphicsEngine/Game/Game.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
+#include "GraphicsEngine/Object/CameraObject.h"
+#include "GraphicsEngine/Component/TransformComponent.h"
 
 RaymarchingObject::RaymarchingObject(std::string fragmentShaderName)
 	: Object()
@@ -39,5 +41,7 @@ void RaymarchingObject::Draw() {
 	else if (Game::GetInstance()->renderingTarget == ERerderingTarget::DEPTH) {
 		m_material->SetFloatUniform("_RenderingTarget", 2.0);
 	}
+	m_material->SetVec3Uniform("_camerePosition", Game::GetInstance()->game_camera_instance->transform->position);
+
 	m_mesh->Draw();
 }
