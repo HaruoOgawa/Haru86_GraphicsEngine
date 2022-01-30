@@ -32,6 +32,7 @@ out vec3 worldPosition;
 out vec3 worldNormal;
 out float id;
 out vec3 randColor;
+out vec2 uv;
 
 #define rot(a) mat2(cos(a),-sin(a),sin(a),cos(a))
 #define PI 3.14159265
@@ -105,8 +106,10 @@ void main(){
 	id=float(gl_InstanceID);
 
 	randColor=vec3(
-		//rand(vec2(float(gl_InstanceID)*100.0,0.159))*2.0,
-        //rand(vec2(float(gl_InstanceID)*100.0,7.957))*2.0,
-        rand(vec2(float(gl_InstanceID)*100.0,0.681))*1.5
+		//rand(vec2(float(gl_InstanceID),0.159))*2.0,
+        //rand(vec2(float(gl_InstanceID),7.957))*2.0,
+        rand(vec2(float(gl_InstanceID),0.681))*2.0
 	);
+
+	uv=texcoord;
 }

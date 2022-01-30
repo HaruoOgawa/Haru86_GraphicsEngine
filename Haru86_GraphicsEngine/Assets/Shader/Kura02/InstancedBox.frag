@@ -9,6 +9,7 @@ in vec3 worldPosition;
 in vec3 worldNormal;
 in float id;
 in vec3 randColor;
+in vec2 uv;
 
 #define rot(a) mat2(cos(a),-sin(a),sin(a),cos(a))
 
@@ -52,13 +53,13 @@ float G_CookTorrance(vec3 L, vec3 V, vec3 H, vec3 N) {
 }
 
 void main(){
-	vec3 col=vec3(1.0);
+	vec3 col=vec3(0.0);
 
 	//diffuse
-	vec3 L=normalize(_lightDir);
+	/*vec3 L=normalize(_lightDir);
 	float diff=max(0.0,dot(worldNormal,L));
 	col.rgb*=diff;
-	col+=0.01;
+	col+=0.01;*/
     
 
     //PBR///////////////////
@@ -91,7 +92,11 @@ void main(){
     col=col+pbrCol*specularReflection;
     
     col+=randColor;
-    
+
+    vec2 st=uv*2.0-1.0;
+    col=col*step(abs(st.x),0.9)*step(abs(st.y),0.9);
+
+    //col=vec3(uv,0.0);
 	//gl_FragColor=vec4(col,0.5);
 	gl_FragColor=vec4(col,1.0);
 }
