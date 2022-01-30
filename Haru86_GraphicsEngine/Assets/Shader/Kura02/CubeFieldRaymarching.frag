@@ -23,6 +23,8 @@ float Cube(vec3 p,vec3 s){
 }
 
 float map(vec3 p){
+    //p.z-=5.0;
+
    p.xy*=rot(_time);
   p.xz*=rot(_time);
   p.yz*=rot(_time);
@@ -36,12 +38,12 @@ float map(vec3 p){
     if(pos1.x<pos1.z)pos1.xz=pos1.zx;
     if(pos1.y<pos1.z)pos1.yz=pos1.zy;
     // move
-    float off=0.65+mt*0.05;
+    float off=1.65+mt*0.05;
     pos1.x+=rand(vec2(i,0.156))*off-off*0.5;
     pos1.y+=rand(vec2(i,0.491))*off-off*0.5;
     pos1.z+=rand(vec2(i,0.791))*off-off*0.5;
     //scale
-    float rs=1.25+mt*0.01;
+    float rs=2.25+mt*0.05;
     pos1*=rand(vec2(i,94.0))*rs+0.5;
 
     d0=min(d0,Cube(pos1,vec3(0.25,0.25,0.5)));
@@ -76,7 +78,7 @@ void main(){
 
   //camera
   //vec3 ro=vec3(0.0,0.0,1.0);
-  vec3 ro=_camerePosition*7.5;
+  vec3 ro=_camerePosition;
   vec3 ta=vec3(0.0);
   vec3 cd=normalize(ta-ro);
   vec3 cs=normalize(cross(cd,vec3(0.0,1.0,0.0)));
@@ -114,10 +116,10 @@ void main(){
   );
 
   if(_RenderingTarget==1.0){
-    col=vec3(0.1,0.25,1.0)*glow*acc*0.01;
+    col=vec3(1.0)*acc*0.1;
 
   }else if(_RenderingTarget==2.0){
-    col=clamp(1.0-vec3(1.0)*exp(-.05*t),0.0,1.0);
+    col=clamp(1.0-vec3(1.0)*exp(-.005*t),0.0,1.0);
   }
 
   //col=vec3(1.0);

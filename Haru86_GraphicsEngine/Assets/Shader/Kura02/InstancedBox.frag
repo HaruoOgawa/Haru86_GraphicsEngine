@@ -86,7 +86,7 @@ void main(){
     // スペキュラおよびディフューズを計算
     float specularReflection = (D * F * G) / (4.0 * NdotV * NdotL + 0.000001);
   
-    vec3 pbrCol=vec3(0.5,0.0,0.1);
+    vec3 pbrCol=vec3(1.0);
 
     col=col+pbrCol*specularReflection;
     
