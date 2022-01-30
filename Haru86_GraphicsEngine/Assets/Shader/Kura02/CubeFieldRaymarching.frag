@@ -23,14 +23,15 @@ float Cube(vec3 p,vec3 s){
 }
 
 float map(vec3 p){
- 
-   p.xy*=rot(_time);
-  p.xz*=rot(_time);
-  p.yz*=rot(_time);
-
-  float mt=floor(_time*0.25)+pow(fract(_time*0.25),.15);
+      float mt=floor(_time*0.25)+pow(fract(_time*0.25),.15);
   float styleVal=6.5;
   float trs_val=step(fract(_time),0.5);
+ 
+   p.xy*=rot(mt);
+  p.xz*=rot(mt);
+  p.yz*=rot(mt);
+
+
 
   vec3 pos1=p;
   float d0=1000.0;
@@ -57,7 +58,7 @@ float map(vec3 p){
   pos1.yz*=rot(mt);
   //pos1.xz*=rot(mt);
 
-    d0=min(d0,Cube(pos1,vec3(0.25,0.25,0.5)));
+    d0=min(d0,Cube(pos1,vec3(0.25,0.25,0.25)));
 
   }
 

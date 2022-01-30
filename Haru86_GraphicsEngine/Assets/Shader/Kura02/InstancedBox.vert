@@ -93,7 +93,7 @@ void main(){
 	
 	float yVal=-5.0;
 	vec2 st=(vec2(float(objData.xIndex),float(objData.yIndex))/float(_sideCubeCount))*2.0-1.0;
-	yVal+=perlinNoise(vec2(-_time*0.001,length(st)*100.0))*max(1.0,length(st)*2.0)*1.0+
+	yVal+=perlinNoise(vec2(-_time*0.001,length(st)*100.0))+//*max(1.0,length(st)*2.0)*1.0+
 		sin(-_time*0.0025+length(st)*25.0)*max(1.0,length(st)*2.0);
 
 	float adjustPos=0.5;
