@@ -12,32 +12,49 @@ in vec2 uv;
 
 #define rot(a) mat2(cos(a),-sin(a),sin(a),cos(a))
 
+float rand(vec2 st)
+{
+    return fract(sin(dot(st, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
 float Cube(vec3 p,vec3 s){
   p=abs(p);
   return length(max(p-s,0.0));
 }
 
 float map(vec3 p){
- 
- /*p.z-=_time;
+   p.xy*=rot(_time);
+  p.xz*=rot(_time);
+  p.yz*=rot(_time);
 
-  float k=2.5;
-  vec3 p0=p;
-p0=mod(p0,k)-k*0.5;
-  for(int i=0;i<3;i++){
-    p0=abs(p0)-.5;
-    p0.xz*=rot(1.5);
-    p0.xy*=rot(0.25);
-    p0.yz*=rot(0.5);
-    p0.z=abs(p0.z)-.85;
+  float mt=floor(_time*0.5)+pow(fract(_time*0.5),.5);
+  vec3 pos1=p;
+  float d0=1000.0;
+  for(int i=0;i<5;i++){
+    pos1=abs(pos1)-0.25;
+    if(pos1.x<pos1.y)pos1.xy=pos1.yx;
+    if(pos1.x<pos1.z)pos1.xz=pos1.zx;
+    if(pos1.y<pos1.z)pos1.yz=pos1.zy;
+    // move
+    float off=0.65+mt*0.05;
+    pos1.x+=rand(vec2(i,0.156))*off-off*0.5;
+    pos1.y+=rand(vec2(i,0.491))*off-off*0.5;
+    pos1.z+=rand(vec2(i,0.791))*off-off*0.5;
+    //scale
+    float rs=1.25+mt*0.01;
+    pos1*=rand(vec2(i,94.0))*rs+0.5;
+
+    d0=min(d0,Cube(pos1,vec3(0.25,0.25,0.5)));
+
   }
-
-  float d0=Cube(p0,vec3(0.3));*/
-
-  float d0=Cube(p,vec3(0.3));
+  // rotate
+/*  float rv=3.14159265*mt;
+  pos1.xy*=rot(rv*rand(vec2(0.791,i)));
+  pos1.yz*=rot(rv*rv*rand(vec2(0.913,i)));
+  pos1.xz*=rot(rand(vec2(0.123,i)));*/
 
   return d0;
-  //return 1.0;
+ 
 }
 
 vec3 gn(vec3 p){
@@ -59,7 +76,7 @@ void main(){
 
   //camera
   //vec3 ro=vec3(0.0,0.0,1.0);
-  vec3 ro=_camerePosition;
+  vec3 ro=_camerePosition*7.5;
   vec3 ta=vec3(0.0);
   vec3 cd=normalize(ta-ro);
   vec3 cs=normalize(cross(cd,vec3(0.0,1.0,0.0)));
@@ -80,7 +97,7 @@ void main(){
   }
 
   float glow=0.0;
-  const float s = 0.0075;
+  const float s = 0.05;
   vec3 n0=gn(ro+rd*t);
   vec3 n1=gn(ro+rd*t+vec3(sign(n0.x)*s,0.0,0.0));
   vec3 n2=gn(ro+rd*t+vec3(0.0,sign(n0.y)*s,0.0));
@@ -97,7 +114,7 @@ void main(){
   );
 
   if(_RenderingTarget==1.0){
-    col=(n0+1.0)*0.5*acc*0.01;
+    col=vec3(0.1,0.25,1.0)*glow*acc*0.01;
 
   }else if(_RenderingTarget==2.0){
     col=clamp(1.0-vec3(1.0)*exp(-.05*t),0.0,1.0);
