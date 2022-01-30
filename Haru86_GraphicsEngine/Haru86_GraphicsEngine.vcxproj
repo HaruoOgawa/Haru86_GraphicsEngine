@@ -201,6 +201,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="Assets\App\Kura02\Kura02.h" />
     <ClInclude Include="Assets\App\KuraArtApp\Script\KuraGPGPU.h" />
     <ClInclude Include="Assets\App\Kura02\Script\CBoxInstancing.h" />
+    <ClInclude Include="Assets\App\Kura02\Script\CKura3DGPUTrail.h" />
     <ClInclude Include="GraphicsEngine\Graphics\CBloom.h" />
     <ClInclude Include="GraphicsEngine\Component\CameraComponent.h" />
     <ClInclude Include="GraphicsEngine\Object\CameraObject.h" />
@@ -246,6 +247,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="Assets\App\Kura02\Kura02.cpp" />
     <ClCompile Include="Assets\App\KuraArtApp\Script\KuraGPGPU.cpp" />
     <ClCompile Include="Assets\App\Kura02\Script\CBoxInstancing.cpp" />
+    <ClCompile Include="Assets\App\Kura02\Script\CKura3DGPUTrail.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\CBloom.cpp" />
     <ClCompile Include="GraphicsEngine\App\BaseApp\BaseApp.cpp" />
     <ClCompile Include="GraphicsEngine\Component\CameraComponent.cpp" />
