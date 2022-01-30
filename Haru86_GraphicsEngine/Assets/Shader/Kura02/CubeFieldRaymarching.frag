@@ -23,12 +23,15 @@ float Cube(vec3 p,vec3 s){
 }
 
 float map(vec3 p){
+  
    p.xy*=rot(_time);
   p.xz*=rot(_time);
   p.yz*=rot(_time);
 
-  float mt=floor(_time*0.05)+pow(fract(_time*0.05),.5);
+  float mt=floor(_time*0.25)+pow(fract(_time*0.25),.15);
   float styleVal=6.5;
+  float trs_val=step(fract(_time),0.5);
+
   vec3 pos1=p;
   float d0=1000.0;
   for(int i=0;i<5;i++){
@@ -44,15 +47,24 @@ float map(vec3 p){
     //scale
     float rs=1.25+styleVal*0.1;
     pos1*=rand(vec2(i,94.0))*rs+0.5;
+    
+  // rotate
+  float rv=3.14159265*0.5*(
+   trs_val
+  );
+  pos1.xy*=rot(mt);
+  pos1.yz*=rot(mt);
+  pos1.xz*=rot(mt);
 
     d0=min(d0,Cube(pos1,vec3(0.25,0.25,0.5)));
 
   }
-  // rotate
-/*  float rv=3.14159265*mt;
+
+  /*
   pos1.xy*=rot(rv*rand(vec2(0.791,i)));
-  pos1.yz*=rot(rv*rv*rand(vec2(0.913,i)));
-  pos1.xz*=rot(rand(vec2(0.123,i)));*/
+  pos1.yz*=rot(rv*rand(vec2(0.913,i)));
+  pos1.xz*=rot(rv*rand(vec2(0.123,i)));
+  */
 
   return d0;
  
@@ -115,7 +127,7 @@ void main(){
   );
 
   if(_RenderingTarget==1.0){
-    col=vec3(1.0)*acc*0.05*glow;
+    col=vec3(1.0)*acc*0.05;
 
   }else if(_RenderingTarget==2.0){
     col=clamp(1.0-vec3(1.0)*exp(-.005*t),0.0,1.0);

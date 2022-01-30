@@ -32,8 +32,8 @@ float map(vec3 p){
   p.xz*=rot(time);
   p.yz*=rot(time);
 
-  float mt=floor(time*0.05)+pow(fract(time*0.05),.5);
-  mt=6.5;
+  float mt=floor(time)+pow(fract(time),.5);
+  float styleVal=6.5;
   vec3 pos1=p;
   float d0=1000.0;
   for(int i=0;i<5;i++){
@@ -42,12 +42,12 @@ float map(vec3 p){
     if(pos1.x<pos1.z)pos1.xz=pos1.zx;
     if(pos1.y<pos1.z)pos1.yz=pos1.zy;
     // move
-    float off=0.65+mt*0.1;
+    float off=0.65+styleVal*0.1;
     pos1.x+=rand(vec2(i,0.156))*off-off*0.5;
     pos1.y+=rand(vec2(i,0.491))*off-off*0.5;
     pos1.z+=rand(vec2(i,0.791))*off-off*0.5;
     //scale
-    float rs=1.25+mt*0.1;
+    float rs=1.25+styleVal*0.1;
     pos1*=rand(vec2(i,94.0))*rs+0.5;
 
     d0=min(d0,Cube(pos1,vec3(0.25,0.25,0.5)));
