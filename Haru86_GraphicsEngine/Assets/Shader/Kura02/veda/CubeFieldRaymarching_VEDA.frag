@@ -32,7 +32,8 @@ float map(vec3 p){
   p.xz*=rot(time);
   p.yz*=rot(time);
 
-  float mt=floor(time*0.005)+pow(fract(time*0.005),.5);
+  float mt=floor(time*0.05)+pow(fract(time*0.05),.5);
+  mt=6.5;
   vec3 pos1=p;
   float d0=1000.0;
   for(int i=0;i<5;i++){
@@ -41,22 +42,45 @@ float map(vec3 p){
     if(pos1.x<pos1.z)pos1.xz=pos1.zx;
     if(pos1.y<pos1.z)pos1.yz=pos1.zy;
     // move
-    float off=0.65+mt*0.05;
+    float off=0.65+mt*0.1;
     pos1.x+=rand(vec2(i,0.156))*off-off*0.5;
     pos1.y+=rand(vec2(i,0.491))*off-off*0.5;
     pos1.z+=rand(vec2(i,0.791))*off-off*0.5;
     //scale
-    float rs=1.25+mt*0.01;
+    float rs=1.25+mt*0.1;
     pos1*=rand(vec2(i,94.0))*rs+0.5;
 
     d0=min(d0,Cube(pos1,vec3(0.25,0.25,0.5)));
 
   }
-  // rotate
-/*  float rv=3.14159265*mt;
-  pos1.xy*=rot(rv*rand(vec2(0.791,i)));
-  pos1.yz*=rot(rv*rv*rand(vec2(0.913,i)));
-  pos1.xz*=rot(rand(vec2(0.123,i)));*/
+
+  /*
+  p.xy*=rot(time);
+  p.xz*=rot(time);
+  p.yz*=rot(time);
+
+  float mt=floor(time*0.05)+pow(fract(time*0.05),.5);
+  mt=6.5;
+  vec3 pos1=p;
+  float d0=1000.0;
+  for(int i=0;i<5;i++){
+    pos1=abs(pos1)-0.25;
+    if(pos1.x<pos1.y)pos1.xy=pos1.yx;
+    if(pos1.x<pos1.z)pos1.xz=pos1.zx;
+    if(pos1.y<pos1.z)pos1.yz=pos1.zy;
+    // move
+    float off=0.65+mt*0.1;
+    pos1.x+=rand(vec2(i,0.156))*off-off*0.5;
+    pos1.y+=rand(vec2(i,0.491))*off-off*0.5;
+    pos1.z+=rand(vec2(i,0.791))*off-off*0.5;
+    //scale
+    float rs=1.25+mt*0.1;
+    pos1*=rand(vec2(i,94.0))*rs+0.5;
+
+    d0=min(d0,Cube(pos1,vec3(0.25,0.25,0.5)));
+
+  }
+  */
 
   return d0;
 }
@@ -120,7 +144,7 @@ vec2  st=(gl_FragCoord.xy*2.0-resolution.xy)/min(resolution.x,resolution.y);
 
 //  if(_RenderingTarget==1.0){
 
-    col=vec3(0.1,0.25,1.0)*glow*acc*0.01;
+    col=vec3(1.0)*acc*0.05*glow;
 
 /*  }else if(_RenderingTarget==2.0){
     col=clamp(1.0-vec3(1.0)*exp(-.05*t),0.0,1.0);
