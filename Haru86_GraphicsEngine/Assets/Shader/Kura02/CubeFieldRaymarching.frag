@@ -41,12 +41,12 @@ float map(vec3 p){
     if(pos1.x<pos1.z)pos1.xz=pos1.zx;
     if(pos1.y<pos1.z)pos1.yz=pos1.zy;
     // move
-    float off=0.65+styleVal*0.1;
+    float off=0.65+styleVal*0.1+0.1;
     pos1.x+=rand(vec2(i,0.156))*off-off*0.5;
     pos1.y+=rand(vec2(i,0.491))*off-off*0.5;
     pos1.z+=rand(vec2(i,0.791))*off-off*0.5;
     //scale
-    float rs=1.25+styleVal*0.1;
+    float rs=1.25+styleVal*0.1+0.15;
     pos1*=rand(vec2(i,94.0))*rs+0.5;
     
   // rotate
@@ -130,7 +130,7 @@ void main(){
 
   if(_RenderingTarget==1.0){
     col=vec3(1.0)*acc*0.05;
-    //col=vec3(1.0)*acc*0.05*glow;
+    //col=vec3(1.0)*acc*0.1*glow;
 
   }else if(_RenderingTarget==2.0){
     col=clamp(1.0-vec3(1.0)*exp(-.0075*t),0.0,1.0);
