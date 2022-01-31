@@ -50,7 +50,6 @@ void Kura02::Update() {
 		glm::sin(Game::GetInstance()->time * 0.0001)*10.0
 	);
 
-	static_cast<CKura3DGPUTrail*>(ins_cubes->GetComponent(static_cast<std::string>(typeid(CKura3DGPUTrail).name())))->Update();
 }
 
 void Kura02::Draw() {
