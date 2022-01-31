@@ -1,13 +1,19 @@
 #include "GraphicsEngine/Object/Object.h"
+#include "GraphicsEngine/Component/Component.h"
+#include "GraphicsEngine/Component/TransformComponent.h"
+#include "GraphicsEngine/Game/Game.h"
+#include "GraphicsEngine/Graphics/Graphics.h"
+#include "GraphicsEngine/Object/CameraObject.h"
 #include "CKura3DGPUTrail.h"
 #include "GraphicsEngine/Graphics/ComputeShader.h"
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
 #include "GraphicsEngine/Graphics/Material.h"
 #include "GraphicsEngine/Graphics/Mesh.h"
+#include "GraphicsEngine/Graphics/Texture.h"
 
 CKura3DGPUTrail::CKura3DGPUTrail(Object* o)
 	: Component(o, static_cast<std::string>(typeid(CKura3DGPUTrail).name()).substr(6)),
-	num(256),
+	num(512),
 	m_computeBuffer_BoidsForce(nullptr),
 	m_computeBuffer_BoidsData(nullptr),
 	m_computeShader_force(nullptr),
@@ -19,10 +25,11 @@ CKura3DGPUTrail::CKura3DGPUTrail(Object* o)
 	m_buffer_input(nullptr),
 	m_computeShader_NextInputPos(nullptr),
 	m_computeShader_NodeInfo(nullptr),
-	trailNum(256),
-	nodeNum(256),
 	nodeSegment(256)
 {
+	trailNum = num;
+	nodeNum = trailNum * nodeSegment;
+
 	Start();
 }
 
@@ -30,6 +37,7 @@ CKura3DGPUTrail::~CKura3DGPUTrail() {
 }
 
 void CKura3DGPUTrail::Start() {
+	//Boids/////////////////////////////////////////////////
 	//force=0 data=1
 	//force buffer
 	m_computeBuffer_BoidsForce = std::make_shared<ComputeBuffer>(sizeof(BoidsForce) * num);
@@ -81,7 +89,73 @@ void CKura3DGPUTrail::Start() {
 	//clear data
 	forceData.clear();
 	resultData.clear();
-	printf("Start\n");
+	////////////////////////////////////////////////////////
+	
+	//Trail /////////////////////////////////////////////////
+	m_material = std::make_shared<Material>(
+		"./Assets/Shader/KuraShader/GPUTrail_Render.vert",
+		"./Assets/Shader/KuraShader/GPUTrail_Render.geom",
+		"./Assets/Shader/KuraShader/GPUTrail_Render.frag"
+		);
+
+	m_texture_trail = std::make_shared<Texture>();
+	if (!m_texture_trail->Load("./Assets/Resources/TextureData/brush_pow2._WithWing.png")) {
+		printf("Cannot Load Texture\n");
+	}
+
+	m_mesh = std::make_shared<Mesh>(PrimitiveType::POINT);
+
+	//compute shader
+	m_computeShader_NextInputPos = std::make_shared<ComputeShader>("./Assets/Shader/KuraShader/GPUTrail_NextInputPos.comp");
+	m_computeShader_NodeInfo = std::make_shared<ComputeShader>("./Assets/Shader/KuraShader/GPUTrail_NodeInfo.comp");
+
+	//compute buffer
+	m_buffer_trail = std::make_shared<ComputeBuffer>(sizeof(trail) * trailNum);
+	m_buffer_node = std::make_shared<ComputeBuffer>(sizeof(node) * nodeNum);
+	m_buffer_input = std::make_shared<ComputeBuffer>(sizeof(input_data) * trailNum);
+
+	//init buffer data
+	std::vector<trail> init_trail = std::vector<trail>(trailNum, trail(0, nodeSegment));
+	float input_pos[3] = { 0.0,0.0,0.0 };
+	std::vector<input_data> init_input_data = std::vector<input_data>(trailNum, input_data(input_pos));
+
+	std::vector<node> init_node;
+	float initPos[3] = { 0,0,0 };
+	float initvel[3] = { 0,0,0 };
+	std::vector<BoidsData> init_boidsData = std::vector<BoidsData>(trailNum, BoidsData(initPos, initvel));
+	m_computeBuffer_BoidsData->GetBufferData(&init_boidsData[0], 0, trailNum);
+
+	for (int i = 0; i < trailNum; i++) {
+		float boids_pos[3] = { init_boidsData[i].position[0],init_boidsData[i].position[1],init_boidsData[i].position[2] };
+		for (int q = 0; q < nodeSegment; q++) {
+			init_node.push_back(node(boids_pos, 5));
+		}
+	}
+
+	init_boidsData.clear();
+
+	//set init data to buffer
+	m_buffer_trail->SetData<std::vector<trail>>(init_trail);
+	m_buffer_node->SetData<std::vector<node>>(init_node);
+	m_buffer_input->SetData<std::vector<input_data>>(init_input_data);
+
+	//clear init data
+	init_trail.clear();
+	init_input_data.clear();
+	init_node.clear();
+
+	//next input
+	m_computeShader_NextInputPos->SetBuffer(m_computeBuffer_BoidsData, 1, m_material);
+	m_computeShader_NextInputPos->SetBuffer(m_buffer_input, 2, m_material);
+	//node info
+	m_computeShader_NodeInfo->SetBuffer(m_buffer_node, 3, m_material);
+	m_computeShader_NodeInfo->SetBuffer(m_buffer_trail, 4, m_material);
+
+	//set buffer to material
+	m_material->SetBuffer(m_buffer_node, 3);
+	m_material->SetBuffer(m_buffer_trail, 4);
+	////////////////////////////////////////////////////////
+
 }
 
 void CKura3DGPUTrail::Update() {
@@ -113,9 +187,48 @@ void CKura3DGPUTrail::Update() {
 	//boid uniform
 	m_computeShader_data->Dispatch(num / 256, 1, 1);
 	////////////////////////////////////////////////////////
+	
+	//Trail /////////////////////////////////////////////////
+	//NextInputPos
+	m_computeShader_NextInputPos->SetActive();
+	m_computeShader_NextInputPos->Dispatch(trailNum / 256, 1, 1);
+
+	//NodeInfo
+	m_computeShader_NodeInfo->SetActive();
+	m_computeShader_NodeInfo->SetIntUniform("_nodeSegment", nodeSegment);
+	m_computeShader_NodeInfo->SetFloatUniform("_nodeDistanceMin", 1);
+	m_computeShader_NodeInfo->SetFloatUniform("_time", Game::GetInstance()->time);
+	m_computeShader_NodeInfo->SetFloatUniform("_initNodeLife", 5.0);
+	m_computeShader_NodeInfo->Dispatch(trailNum / 256, 1, 1);
+	////////////////////////////////////////////////////////
 }
 
 void CKura3DGPUTrail::Draw() {
+	owner->transform->CalMatrix();
+	m_material->SetActive();
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_DEPTH_TEST);
+
+	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix());
+	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
+	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
+	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
+	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
+	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
+
+	//GPU Trail Uniform
+	m_material->SetVec3Uniform("_WorldSpaceCameraPos", Game::GetInstance()->game_camera_instance->transform->position);
+	m_material->SetFloatUniform("_initNodeLife", 5);
+	m_material->SetFloatUniform("_nodeSegment", nodeSegment);
+	m_material->SetFloatUniform("_TrailWidth", 0.4 * 7.0);
+	m_material->SetIntUniform("_boids_count", nodeNum);
+
+	m_texture_trail->SetActive();
+	m_material->SetTexUniform("_trailTex", m_texture_trail->GetTextureID());
+
+	Graphics::DrawInstancedWithMesh(m_mesh, nodeNum, m_material, GL_POINTS);
+
 }
 
 void CKura3DGPUTrail::ProcessInput(const Uint8* state)const {

@@ -99,6 +99,7 @@ class CKura3DGPUTrail :
     int trailNum;
     int nodeNum;
     int nodeSegment;
+    std::shared_ptr<class Texture> m_texture_trail;
 
 public:
     CKura3DGPUTrail(Object* o);
