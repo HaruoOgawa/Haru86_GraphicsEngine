@@ -29,7 +29,7 @@ void main(){
 
 	//col=raymarchingDepth;
 	//col=polygonCol;
-	//col=(raymarchingDepth+polygonDepth)*0.5;
+	//	col=(raymarchingDepth+polygonDepth)*0.5;
 
 	gl_FragColor=vec4(col,1.0);
 }

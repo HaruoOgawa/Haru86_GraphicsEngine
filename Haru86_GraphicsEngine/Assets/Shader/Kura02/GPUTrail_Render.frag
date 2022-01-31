@@ -31,5 +31,7 @@ void main(){
 	float node_life=1.0-clamp(_time*0.001-g2f_o.node_life,0.0,_initNodeLife)/_initNodeLife;
     col.a=node_life*1.0; 
 	
+	col.rgb=1.0-col.rgb;
+
 	gl_FragColor=col;
 }

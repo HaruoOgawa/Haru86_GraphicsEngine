@@ -20,7 +20,7 @@ layout(std430,binding=1) buffer destBufferBoidsData
 	BoidsData boidsData[];
 } outBufferBoidsData;
 
-layout(local_size_x=256,local_size_y=1,local_size_z=1) in;
+layout(local_size_x=128,local_size_y=1,local_size_z=1) in;
 
 uniform float _time;
 uniform float _deltaTime;
@@ -30,7 +30,7 @@ uniform float _adjustTime;
 
 //Boids Func////////////////////////////////////////////////////////////////////////////
 
-#define NUMTHREADS_X_NUM 256
+#define NUMTHREADS_X_NUM 128
 
 uniform int _boids_count;
 uniform float _maxBoidsDist;
