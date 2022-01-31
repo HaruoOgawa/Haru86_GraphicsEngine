@@ -109,6 +109,7 @@ public:
     void Draw();
     void ProcessInput(const Uint8* state)const override;
     float rand(glm::vec2 st);
+    void TrailUpdate();
 private:
     
 };

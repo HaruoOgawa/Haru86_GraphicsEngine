@@ -221,7 +221,8 @@ void CKura3DGPUTrail::Draw() {
 	m_material->SetVec3Uniform("_WorldSpaceCameraPos", Game::GetInstance()->game_camera_instance->transform->position);
 	m_material->SetFloatUniform("_initNodeLife", 5);
 	m_material->SetFloatUniform("_nodeSegment", nodeSegment);
-	m_material->SetFloatUniform("_TrailWidth", 0.4 * 7.0);
+	//m_material->SetFloatUniform("_TrailWidth", 0.4 * 7.0);
+	m_material->SetFloatUniform("_TrailWidth", 0.1 );
 	m_material->SetIntUniform("_boids_count", nodeNum);
 
 	m_texture_trail->SetActive();
