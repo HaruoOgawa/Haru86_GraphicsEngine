@@ -81,10 +81,10 @@ void CKura3DGPUTrail::Start() {
 
 	//SetBuffer//////////////
 	//force compute
-	m_computeShader_force = std::make_shared<ComputeShader>("./Assets/Shader/KuraShader/BoidsForce.comp");
+	m_computeShader_force = std::make_shared<ComputeShader>("./Assets/Shader/Kura02/BoidsForce.comp");
 	
 	//data compute
-	m_computeShader_data = std::make_shared<ComputeShader>("./Assets/Shader/KuraShader/BoidsData.comp");
+	m_computeShader_data = std::make_shared<ComputeShader>("./Assets/Shader/Kura02/BoidsData.comp");
 	
 	//clear data
 	forceData.clear();
@@ -93,9 +93,9 @@ void CKura3DGPUTrail::Start() {
 	
 	//Trail /////////////////////////////////////////////////
 	m_material = std::make_shared<Material>(
-		"./Assets/Shader/KuraShader/GPUTrail_Render.vert",
-		"./Assets/Shader/KuraShader/GPUTrail_Render.geom",
-		"./Assets/Shader/KuraShader/GPUTrail_Render.frag"
+		"./Assets/Shader/Kura02/GPUTrail_Render.vert",
+		"./Assets/Shader/Kura02/GPUTrail_Render.geom",
+		"./Assets/Shader/Kura02/GPUTrail_Render.frag"
 		);
 
 	m_texture_trail = std::make_shared<Texture>();
@@ -106,8 +106,8 @@ void CKura3DGPUTrail::Start() {
 	m_mesh = std::make_shared<Mesh>(PrimitiveType::POINT);
 
 	//compute shader
-	m_computeShader_NextInputPos = std::make_shared<ComputeShader>("./Assets/Shader/KuraShader/GPUTrail_NextInputPos.comp");
-	m_computeShader_NodeInfo = std::make_shared<ComputeShader>("./Assets/Shader/KuraShader/GPUTrail_NodeInfo.comp");
+	m_computeShader_NextInputPos = std::make_shared<ComputeShader>("./Assets/Shader/Kura02/GPUTrail_NextInputPos.comp");
+	m_computeShader_NodeInfo = std::make_shared<ComputeShader>("./Assets/Shader/Kura02/GPUTrail_NodeInfo.comp");
 
 	//compute buffer
 	m_buffer_trail = std::make_shared<ComputeBuffer>(sizeof(trail) * trailNum);
