@@ -41,7 +41,7 @@ public:
     void LoadTextureList(std::vector<std::string> texPathList,std::vector<std::string> texUniformNameList);
     void SetActiveTextureList();
     void SetEactiveTextureList();
-    GLuint& GetCurrentShaderPrg();
+    GLuint GetCurrentShaderPrg();
 private :
     //Color Render Buffer
     GLuint vertShaderData;

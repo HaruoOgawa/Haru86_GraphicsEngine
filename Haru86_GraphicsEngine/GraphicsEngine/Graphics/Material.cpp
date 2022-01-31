@@ -7,14 +7,40 @@
 #include "GraphicsEngine/Graphics/Texture.h"
 #include "GraphicsEngine/Game/Game.h"
 
-Material::Material() {
+Material::Material()
+	: vertShaderData(-1),
+	tessControlShaderData(-1),
+	tessEvalShaderData(-1),
+	geometryShaderData(-1),
+	fragShaderData(-1),
+	shaderPrg(-1),
+	depthVertShaderData(-1),
+	depthTessControlShaderData(-1),
+	depthTessEvalShaderData(-1),
+	depthGeometryShaderData(-1),
+	depthFragShaderData(-1),
+	depthShaderPrg(-1)
+{
 	LoadShader("./Assets/Shader/Standard.vert", "./Assets/Shader/Standard.frag", shaderPrg
 		, vertShaderData, tessControlShaderData, tessEvalShaderData, geometryShaderData, fragShaderData);
 	LoadShader("./Assets/Shader/Standard.vert", "./Assets/Shader/DepthColor.frag", depthShaderPrg
 		, depthVertShaderData, depthTessControlShaderData, depthTessEvalShaderData, depthGeometryShaderData, depthFragShaderData);
 }
 
-Material::Material(std::map<GLenum, std::string> shaders) {
+Material::Material(std::map<GLenum, std::string> shaders) 
+	: vertShaderData(-1),
+	tessControlShaderData(-1),
+	tessEvalShaderData(-1),
+	geometryShaderData(-1),
+	fragShaderData(-1),
+	shaderPrg(-1),
+	depthVertShaderData(-1),
+	depthTessControlShaderData(-1),
+	depthTessEvalShaderData(-1),
+	depthGeometryShaderData(-1),
+	depthFragShaderData(-1),
+	depthShaderPrg(-1)
+{
 	LoadShader(shaders, shaderPrg
 		, vertShaderData, tessControlShaderData, tessEvalShaderData, geometryShaderData, fragShaderData);
 	auto depthShaders = shaders;
@@ -24,6 +50,18 @@ Material::Material(std::map<GLenum, std::string> shaders) {
 }
 
 Material::Material(std::string vertexShaderName, std::string fragmentShaderName)
+	: vertShaderData(-1),
+	tessControlShaderData(-1),
+	tessEvalShaderData(-1),
+	geometryShaderData(-1),
+	fragShaderData(-1),
+	shaderPrg(-1),
+	depthVertShaderData(-1),
+	depthTessControlShaderData(-1),
+	depthTessEvalShaderData(-1),
+	depthGeometryShaderData(-1),
+	depthFragShaderData(-1),
+	depthShaderPrg(-1)
 {
 	LoadShader(vertexShaderName, fragmentShaderName, shaderPrg
 		, vertShaderData, tessControlShaderData, tessEvalShaderData, geometryShaderData, fragShaderData);
@@ -31,7 +69,20 @@ Material::Material(std::string vertexShaderName, std::string fragmentShaderName)
 		, depthVertShaderData, depthTessControlShaderData, depthTessEvalShaderData, depthGeometryShaderData, depthFragShaderData);
 }
 
-Material::Material(std::string vertexShaderName, std::string fragmentShaderName, RenderingSurfaceType renderingSurfaceType) {
+Material::Material(std::string vertexShaderName, std::string fragmentShaderName, RenderingSurfaceType renderingSurfaceType) 
+	: vertShaderData(-1),
+	tessControlShaderData(-1),
+	tessEvalShaderData(-1),
+	geometryShaderData(-1),
+	fragShaderData(-1),
+	shaderPrg(-1),
+	depthVertShaderData(-1),
+	depthTessControlShaderData(-1),
+	depthTessEvalShaderData(-1),
+	depthGeometryShaderData(-1),
+	depthFragShaderData(-1),
+	depthShaderPrg(-1)
+{
 	if (renderingSurfaceType==RenderingSurfaceType::POLYGON) {
 		LoadShader(vertexShaderName, fragmentShaderName, shaderPrg
 			, vertShaderData, tessControlShaderData, tessEvalShaderData, geometryShaderData, fragShaderData);
@@ -47,6 +98,18 @@ Material::Material(std::string vertexShaderName, std::string fragmentShaderName,
 }
 
 Material::Material(std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName)
+	: vertShaderData(-1),
+	tessControlShaderData(-1),
+	tessEvalShaderData(-1),
+	geometryShaderData(-1),
+	fragShaderData(-1),
+	shaderPrg(-1),
+	depthVertShaderData(-1),
+	depthTessControlShaderData(-1),
+	depthTessEvalShaderData(-1),
+	depthGeometryShaderData(-1),
+	depthFragShaderData(-1),
+	depthShaderPrg(-1)
 {
 	LoadShader(vertexShaderName,tessellationShaderName, fragmentShaderName, shaderPrg
 		, vertShaderData, tessControlShaderData, tessEvalShaderData, geometryShaderData, fragShaderData);
@@ -55,6 +118,18 @@ Material::Material(std::string vertexShaderName, std::string tessellationShaderN
 }
 
 Material::Material(std::string vertexShaderName, std::string geometryShaderName, std::string fragmentShaderName)
+	: vertShaderData(-1),
+	tessControlShaderData(-1),
+	tessEvalShaderData(-1),
+	geometryShaderData(-1),
+	fragShaderData(-1),
+	shaderPrg(-1),
+	depthVertShaderData(-1),
+	depthTessControlShaderData(-1),
+	depthTessEvalShaderData(-1),
+	depthGeometryShaderData(-1),
+	depthFragShaderData(-1),
+	depthShaderPrg(-1)
 {
 	LoadShader(vertexShaderName, geometryShaderName, fragmentShaderName, shaderPrg
 		, vertShaderData, tessControlShaderData, tessEvalShaderData, geometryShaderData, fragShaderData);
@@ -254,49 +329,49 @@ bool Material::CompileShader(std::string shadername, GLenum shaderType, GLuint& 
 }
 
 void Material::SetActive() {
-	auto& prg = GetCurrentShaderPrg();
+	auto prg = GetCurrentShaderPrg();
 	glUseProgram(prg);
 }
 
 void Material::SetMatrixUniform(std::string uniformName, glm::mat4 matrix) {
-	auto& prg = GetCurrentShaderPrg();
+	auto prg = GetCurrentShaderPrg();
 	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
 	glUniformMatrix4fv(location, 1, GL_FALSE, reinterpret_cast<const float*>(&matrix[0][0]));
 }
 
 void Material::SetFloatUniform(std::string uniformName, float val) {
-	auto& prg = GetCurrentShaderPrg();
+	auto prg = GetCurrentShaderPrg();
 	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
 	glUniform1f(location, val);
 }
 
 void Material::SetIntUniform(std::string uniformName, int val) {
-	auto& prg = GetCurrentShaderPrg();
+	auto prg = GetCurrentShaderPrg();
 	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
 	glUniform1i(location, val);
 }
 
 void Material::SetVec2Uniform(std::string uniformName, glm::vec2 val) {
-	auto& prg = GetCurrentShaderPrg();
+	auto prg = GetCurrentShaderPrg();
 	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
 	glUniform2fv(location,1, reinterpret_cast<GLfloat*>(&val));
 }
 
 void Material::SetVec3Uniform(std::string uniformName, glm::vec3 val) {
-	auto& prg = GetCurrentShaderPrg();
+	auto prg = GetCurrentShaderPrg();
 	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
 	glUniform3fv(location,1, reinterpret_cast<GLfloat*>(&val));
 }
 
 void Material::SetTexUniform(std::string uniformName, unsigned int val) {
-	auto& prg = GetCurrentShaderPrg();
+	auto prg = GetCurrentShaderPrg();
 	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
 	//glUniform1i(location, static_cast<GLuint>(val-1));
 	glUniform1i(location, static_cast<GLuint>(val));
 }
 
 void Material::SetFloatVectorUniform(std::string uniformName, std::vector<float> val) {
-	auto& prg = GetCurrentShaderPrg();
+	auto prg = GetCurrentShaderPrg();
 	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
 	//glUniform1fv(location, val.size(), reinterpret_cast<GLfloat*>(&val));
 	glUniform1fv(location, val.size(), reinterpret_cast<GLfloat*>(&val[0]));
@@ -334,7 +409,7 @@ void Material::SetEactiveTextureList() {
 	}
 }
 
-GLuint& Material::GetCurrentShaderPrg() {
+GLuint Material::GetCurrentShaderPrg() {
 	if (Game::GetInstance()->renderingTarget == ERerderingTarget::COLOR) {
 		return shaderPrg;
 	}
