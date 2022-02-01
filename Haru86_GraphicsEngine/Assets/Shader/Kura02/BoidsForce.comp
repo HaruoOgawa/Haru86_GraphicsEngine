@@ -34,7 +34,8 @@ uniform float _adjustTime;
 
 uniform int _boids_count;
 uniform float _maxBoidsDist;
-uniform float _maxBoidsField;
+//uniform float _maxBoidsField;
+uniform vec3 _maxBoidsField;
 uniform float _centerPosPower;
 uniform float _NoiseValue;
 
@@ -54,28 +55,41 @@ vec3 Turn(vec3 pos,vec3 vel,float uid){
     //float seed=2.5;
      float seed=.85;
 
-    if(pos.x<-1.0*_maxBoidsField){
+    if(pos.x<-1.0*_maxBoidsField.x){
         vel.x+=seed*abs(vel.x);
     }
-     if(pos.x>_maxBoidsField){
+     if(pos.x>_maxBoidsField.x){
         vel.x-=seed*abs(vel.x);
     }
     
-    if(pos.y<-1.0*_maxBoidsField){
+    if(pos.y<-1.0*_maxBoidsField.y){
         vel.y+=seed*abs(vel.y);
     }
-     if(pos.y>_maxBoidsField){
+     if(pos.y>_maxBoidsField.y){
         vel.y-=seed*abs(vel.y);
     }
 
-    if(pos.z<-1.0*_maxBoidsField){
+    if(pos.z<-1.0*_maxBoidsField.z){
         vel.z+=seed*abs(vel.z);
     }
-     if(pos.z>_maxBoidsField){
+     if(pos.z>_maxBoidsField.z){
         vel.z-=seed*abs(vel.z);
     }
 
     return vel;
+}
+
+vec3 TurnFromCenter(vec3 pos,vec3 vel,float uid){
+    vec3 VecFC=normalize(vec3(0.0)-pos);
+    float nearCV=abs(dot(VecFC,normalize(vel)));
+    
+    vec3 rv=vel;
+    if(nearCV>0.8){
+        vec3 mv=normalize(cross(VecFC,normalize(vel)));
+        rv+=mv;
+    }
+
+    return rv;
 }
 
 float rand(vec2 st)
@@ -211,6 +225,7 @@ void main(){
     }
    
     result_velocity=Turn(my_position,result_velocity,float(DID));
+    result_velocity=TurnFromCenter(my_position,result_velocity,float(DID));
 
     outBufferBoidsForce.boidsForce[DID].force=vec3(
         (isnan(result_velocity.x))?0.005:result_velocity.x,

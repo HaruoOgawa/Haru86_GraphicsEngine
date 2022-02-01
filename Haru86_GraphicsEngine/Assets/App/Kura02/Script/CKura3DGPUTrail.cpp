@@ -170,7 +170,8 @@ void CKura3DGPUTrail::Update() {
 
 	//ŽÀÛ‚ÉŽg‚Á‚Ä‚¢‚éuniform
 	m_computeShader_force->SetIntUniform("_boids_count", num);
-	m_computeShader_force->SetFloatUniform("_maxBoidsField", 200);
+	//m_computeShader_force->SetFloatUniform("_maxBoidsField", 200);
+	m_computeShader_force->SetVec3Uniform("_maxBoidsField", glm::vec3(200,50.0, 200));
 	m_computeShader_force->SetFloatUniform("_NoiseValue", 0.1);
 	m_computeShader_force->SetFloatUniform("_joinPower", 100);
 	m_computeShader_force->SetFloatUniform("_separatePower", 1000);

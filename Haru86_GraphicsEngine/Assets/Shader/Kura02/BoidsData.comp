@@ -39,7 +39,8 @@ uniform float _deltaTime;
 
 uniform int _boids_count;
 uniform float _maxBoidsDist;
-uniform float _maxBoidsField;
+//uniform float _maxBoidsField;
+uniform vec3 _maxBoidsField;
 uniform float _centerPosPower;
 uniform float _NoiseValue;
 
@@ -52,35 +53,6 @@ uniform float _separateDistMin;
 uniform float _alignmentDistMin;
 
 shared BoidsData shared_BoidsData[NUMTHREADS_X_NUM];
-
-vec3 Turn(vec3 pos,vec3 vel,vec3 uid){
-    vec3 turnVel=vec3(0,0,0);
-     
-    float seed=2.5;
-    
-    if(pos.x<-1.0*_maxBoidsField){
-        vel.x+=seed*abs(vel.x);
-    }
-     if(pos.x>_maxBoidsField){
-        vel.x-=seed*abs(vel.x);
-    }
-    
-    if(pos.y<-1.0*_maxBoidsField){
-        vel.y+=seed*abs(vel.y);
-    }
-     if(pos.y>_maxBoidsField){
-        vel.y-=seed*abs(vel.y);
-    }
-
-    if(pos.z<-1.0*_maxBoidsField){
-        vel.z+=seed*abs(vel.z);
-    }
-     if(pos.z>_maxBoidsField){
-        vel.z-=seed*abs(vel.z);
-    }
-
-    return vel;
-}
 
 float rand(vec2 st)
 {

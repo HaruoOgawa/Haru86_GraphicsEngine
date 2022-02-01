@@ -21,6 +21,7 @@ public:
 	void SetFloatUniform(std::string uniformName, float val);
 	void SetIntUniform(std::string uniformName, int val);
 	void SetVec2Uniform(std::string uniformName, glm::vec2 val);
+	void SetVec3Uniform(std::string uniformName, glm::vec3 val);
 	void SetTexUniform(std::string uniformName, unsigned int val);
 	void Dispatch(int xGroupNum, int yGroupNum, int zGroupNum);
 	void LoadComputeShader(std::string computeShaderPath);
