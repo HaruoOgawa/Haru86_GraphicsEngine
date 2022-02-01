@@ -84,9 +84,9 @@ vec3 TurnFromCenter(vec3 pos,vec3 vel,float uid){
     float nearCV=abs(dot(VecFC,normalize(vel)));
     
     vec3 rv=vel;
-    if(nearCV>0.8){
+    if(nearCV>0.6){
         vec3 mv=normalize(cross(VecFC,normalize(vel)));
-        rv+=mv;
+        rv+=mv*1.0*nearCV;
     }
 
     return rv;

@@ -25,7 +25,7 @@ CKura3DGPUTrail::CKura3DGPUTrail(Object* o)
 	m_buffer_input(nullptr),
 	m_computeShader_NextInputPos(nullptr),
 	m_computeShader_NodeInfo(nullptr),
-	nodeSegment(128)
+	nodeSegment(256)
 {
 	trailNum = num;
 	nodeNum = trailNum * nodeSegment;
@@ -171,7 +171,7 @@ void CKura3DGPUTrail::Update() {
 	//ŽÀÛ‚ÉŽg‚Á‚Ä‚¢‚éuniform
 	m_computeShader_force->SetIntUniform("_boids_count", num);
 	//m_computeShader_force->SetFloatUniform("_maxBoidsField", 200);
-	m_computeShader_force->SetVec3Uniform("_maxBoidsField", glm::vec3(200,50.0, 200));
+	m_computeShader_force->SetVec3Uniform("_maxBoidsField", glm::vec3(100,10,100));
 	m_computeShader_force->SetFloatUniform("_NoiseValue", 0.1);
 	m_computeShader_force->SetFloatUniform("_joinPower", 100);
 	m_computeShader_force->SetFloatUniform("_separatePower", 1000);
