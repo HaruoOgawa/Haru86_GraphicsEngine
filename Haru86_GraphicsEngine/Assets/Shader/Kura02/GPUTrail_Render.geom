@@ -1,7 +1,7 @@
 #version 430
 
 layout(points) in;
-layout(triangle_strip,max_vertices=4) out;
+layout(triangle_strip,max_vertices=36) out;
 
 struct v2g{
     vec3 node_pos ;
@@ -49,8 +49,114 @@ float rand(vec2 seeds){
 }
 
 void main(){
+    vec3 Tangent=normalize(v2g_o[0].node_nextPos-v2g_o[0].node_pos);
+    vec3 Normal=normalize(Tangent,v2g_o[0].node_dir);
+    vec3 BioNormal=normalize(Tangent,Normal);
+    vec3 Pos=v2g_o[0].node_pos;
+    
+    vec3 NextTangent=normalize(v2g_o[0].node_nextPos-v2g_o[0].node_pos);
+    vec3 NextNormal=normalize(Tangent,v2g_o[0].node_dir);
+    vec3 NextBioNormal=normalize(Tangent,Normal);
+    vec3 NextPos=v2g_o[0].node_nextPos;
 
-   vec3 camDir=normalize(v2g_o[0].node_pos-_WorldSpaceCameraPos.xyz);
+    // âΩäpå`Ç©
+    int N=4;
+
+    for(int i=0;i<N;i++){
+        float a=2.0*PI*((i+2)/N);
+        float b=2.0*PI*((i+1)/N);
+       
+        gl_Position=MVPMatrix*vec4(
+            _TrailWidth*normalize(cos(a)*BioNormal+sin(a)*Normal)+
+            Pos
+        ,1.0);
+        g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,1.0);
+        g2f_o.uv.x*=_nodeSegment;
+        g2f_o.trail_ID=v2g_o[0].trail_ID;
+        g2f_o.node_life=v2g_o[0].node_life;
+        g2f_o.trail_color=v2g_o[0].trail_color;
+        EmitVertex();
+
+        gl_Position=MVPMatrix*vec4(
+            _TrailWidth*normalize(cos(b)*BioNormal+sin(b)*Normal)+
+            Pos
+        ,1.0)
+        g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,0.0);
+        g2f_o.uv.x*=_nodeSegment;
+        g2f_o.trail_ID=v2g_o[0].trail_ID;
+        g2f_o.node_life=v2g_o[0].node_life;
+        g2f_o.trail_color=v2g_o[0].trail_color;
+        EmitVertex();
+
+        float nextUVx=(nowIndexInNodes+1)/_nodeSegment;
+                
+        gl_Position=MVPMatrix*vec4(
+            _TrailWidth*normalize(cos(a)*NextBioNormal+sin(a)*NextNormal)+
+            Pos
+        ,1.0);
+        g2f_o.uv=vec2(
+         (nextUVx>1.0) ? 0.0 : nextUVx
+        ,1.0);
+        g2f_o.uv.x*=_nodeSegment;
+        g2f_o.trail_ID=v2g_o[0].trail_ID;
+        g2f_o.node_life=v2g_o[0].node_life;
+        g2f_o.trail_color=v2g_o[0].trail_color;
+        EmitVertex();
+
+       gl_Position=MVPMatrix*vec4(
+            _TrailWidth*normalize(cos(b)*NextBioNormal+sin(b)*NextNormal)+
+            Pos
+        ,1.0);
+        g2f_o.uv=vec2(
+         (nextUVx>1.0) ? 0.0 : nextUVx
+        ,0.0);
+        g2f_o.uv.x*=_nodeSegment;
+        g2f_o.trail_ID=v2g_o[0].trail_ID;
+        g2f_o.node_life=v2g_o[0].node_life;
+        g2f_o.trail_color=v2g_o[0].trail_color;
+        EmitVertex();
+
+        EndPrimitive();
+    }
+
+    // äWÇçÏê¨
+        for(int i=0;i<N;i++){
+            float a=2.0*PI*((i+2)/N);
+       
+            gl_Position=MVPMatrix*vec4(
+            _TrailWidth*normalize(cos(a)*BioNormal+sin(a)*Normal)+
+            Pos
+        ,1.0);
+            g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,1.0);
+            g2f_o.uv.x*=_nodeSegment;
+            g2f_o.trail_ID=v2g_o[0].trail_ID;
+            g2f_o.node_life=v2g_o[0].node_life;
+            g2f_o.trail_color=v2g_o[0].trail_color;
+            EmitVertex();        
+        }
+
+        EndPrimitive();
+
+        // 
+        for(int i=0;i<N;i++){
+             float a=2.0*PI*((i+1)/N);
+
+            gl_Position=MVPMatrix*vec4(
+            _TrailWidth*normalize(cos(a)*NextBioNormal+sin(a)*NextNormal)+
+            Pos
+        ,1.0);
+            g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,1.0);
+            g2f_o.uv.x*=_nodeSegment;
+            g2f_o.trail_ID=v2g_o[0].trail_ID;
+            g2f_o.node_life=v2g_o[0].node_life;
+            g2f_o.trail_color=v2g_o[0].trail_color;
+            EmitVertex();        
+        }
+
+        EndPrimitive();
+
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    /*vec3 camDir=normalize(v2g_o[0].node_pos-_WorldSpaceCameraPos.xyz);
     vec3 camNextDir=normalize(v2g_o[0].node_nextPos-_WorldSpaceCameraPos.xyz);
     vec3 node_cam_sideDir=normalize(cross(camDir,v2g_o[0].node_dir));
     vec3 node_cam_nextSideDir=normalize(cross(camNextDir,v2g_o[0].node_nextDir));
@@ -101,7 +207,8 @@ void main(){
     g2f_o.trail_color=v2g_o[0].trail_color;
     EmitVertex();
 
-    EndPrimitive();
+    EndPrimitive();*/
 
+    /////////////////////////////////////////////////////////////////////////////////////////////
 
 }
