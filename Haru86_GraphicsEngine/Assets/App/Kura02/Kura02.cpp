@@ -54,7 +54,7 @@ void Kura02::Update() {
 
 void Kura02::Draw() {
 	static_cast<CBoxInstancing*>(ins_cubes->GetComponent(static_cast<std::string>(typeid(CBoxInstancing).name())))->Draw();
-	static_cast<CKura3DGPUTrail*>(ins_cubes->GetComponent(static_cast<std::string>(typeid(CKura3DGPUTrail).name())))->Draw();
+	//static_cast<CKura3DGPUTrail*>(ins_cubes->GetComponent(static_cast<std::string>(typeid(CKura3DGPUTrail).name())))->Draw();
 }
 
 void Kura02::Timeline(class TimelineObject* timelineObj) {

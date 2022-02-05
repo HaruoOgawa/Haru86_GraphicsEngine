@@ -73,6 +73,7 @@ struct v2g{
     vec3 node_nextPos;
     vec3 node_dir;
     vec3 node_nextDir;
+    vec3 node_previousDir;
     float node_life;
     float trail_ID ;
     int nowIndexInNodes;
@@ -125,8 +126,12 @@ void main(){
                 
      vec3 node_pos=node_data00.node_position;
      vec3 node_nextPos=node_data01.node_position;
-     vec3 node_dir=normalize(node_data01.node_position-node_data0_1.node_position);
-     vec3 node_nextDir=normalize(node_data02.node_position-node_data00.node_position);
+     ///////vec3 node_dir=normalize(node_data01.node_position-node_data0_1.node_position);
+     vec3 node_dir=normalize(node_data01.node_position-node_data00.node_position);
+     ///////vec3 node_nextDir=normalize(node_data02.node_position-node_data00.node_position);
+     vec3 node_nextDir=normalize(node_data02.node_position-node_data01.node_position);
+     vec3 node_previousDir=normalize(node_data00.node_position-node_data0_1.node_position);
+
      float node_life=node_data00.node_life;
 
      trail now_trail_data=outBuffer_trail.trails[trailIndex];
@@ -136,12 +141,14 @@ void main(){
         node_nextPos=node_pos;
         node_dir=node_pos;
         node_nextDir=node_pos;
+        node_previousDir=node_pos;
      }
 
      v2g_o.node_pos=node_pos;
      v2g_o.node_nextPos=node_nextPos;
      v2g_o.node_dir=node_dir;
      v2g_o.node_nextDir=node_nextDir;
+     v2g_o.node_previousDir=node_previousDir;
      v2g_o.node_life=node_life;
      v2g_o.trail_ID=trailIndex;
      v2g_o.trail_color=trail_color;

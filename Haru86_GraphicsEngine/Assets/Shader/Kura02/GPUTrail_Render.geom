@@ -1,13 +1,14 @@
 #version 430
 
 layout(points) in;
-layout(triangle_strip,max_vertices=36) out;
+layout(triangle_strip,max_vertices=20) out;
 
 struct v2g{
     vec3 node_pos ;
     vec3 node_nextPos;
     vec3 node_dir;
     vec3 node_nextDir;
+    vec3 node_previousDir;
     float node_life;
     float trail_ID ;
     int nowIndexInNodes;
@@ -49,14 +50,16 @@ float rand(vec2 seeds){
 }
 
 void main(){
-    vec3 Tangent=normalize(v2g_o[0].node_nextPos-v2g_o[0].node_pos);
-    vec3 Normal=normalize(Tangent,v2g_o[0].node_dir);
+
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    vec3 Tangent=normalize(v2g_o[0].node_dir);
+    vec3 Normal=normalize(Tangent,v2g_o[0].node_previousDir);
     vec3 BioNormal=normalize(Tangent,Normal);
     vec3 Pos=v2g_o[0].node_pos;
     
-    vec3 NextTangent=normalize(v2g_o[0].node_nextPos-v2g_o[0].node_pos);
-    vec3 NextNormal=normalize(Tangent,v2g_o[0].node_dir);
-    vec3 NextBioNormal=normalize(Tangent,Normal);
+    vec3 NextTangent=normalize(v2g_o[0].node_nextDir);
+    vec3 NextNormal=normalize(NextTangent,Tangent);
+    vec3 NextBioNormal=normalize(NextTangent,NextNormal);
     vec3 NextPos=v2g_o[0].node_nextPos;
 
     // ‰½ŠpŒ`‚©
@@ -67,7 +70,7 @@ void main(){
         float b=2.0*PI*((i+1)/N);
        
         gl_Position=MVPMatrix*vec4(
-            _TrailWidth*normalize(cos(a)*BioNormal+sin(a)*Normal)+
+            _TrailWidth*normalize(cos(a)*Normal+sin(a)*BioNormal)+
             Pos
         ,1.0);
         g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,1.0);
@@ -78,7 +81,7 @@ void main(){
         EmitVertex();
 
         gl_Position=MVPMatrix*vec4(
-            _TrailWidth*normalize(cos(b)*BioNormal+sin(b)*Normal)+
+            _TrailWidth*normalize(cos(b)*Normal+sin(b)*BioNormal)+
             Pos
         ,1.0)
         g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,0.0);
@@ -91,8 +94,8 @@ void main(){
         float nextUVx=(nowIndexInNodes+1)/_nodeSegment;
                 
         gl_Position=MVPMatrix*vec4(
-            _TrailWidth*normalize(cos(a)*NextBioNormal+sin(a)*NextNormal)+
-            Pos
+            _TrailWidth*normalize(cos(a)*NextNormal+sin(a)*NextBioNormal)+
+            NextPos
         ,1.0);
         g2f_o.uv=vec2(
          (nextUVx>1.0) ? 0.0 : nextUVx
@@ -104,8 +107,8 @@ void main(){
         EmitVertex();
 
        gl_Position=MVPMatrix*vec4(
-            _TrailWidth*normalize(cos(b)*NextBioNormal+sin(b)*NextNormal)+
-            Pos
+            _TrailWidth*normalize(cos(b)*NextNormal+sin(b)*NextBioNormal)+
+            NextPos
         ,1.0);
         g2f_o.uv=vec2(
          (nextUVx>1.0) ? 0.0 : nextUVx
@@ -124,7 +127,7 @@ void main(){
             float a=2.0*PI*((i+2)/N);
        
             gl_Position=MVPMatrix*vec4(
-            _TrailWidth*normalize(cos(a)*BioNormal+sin(a)*Normal)+
+            _TrailWidth*normalize(cos(a)*Normal+sin(a)*BioNormal)+
             Pos
         ,1.0);
             g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,1.0);
@@ -142,8 +145,8 @@ void main(){
              float a=2.0*PI*((i+1)/N);
 
             gl_Position=MVPMatrix*vec4(
-            _TrailWidth*normalize(cos(a)*NextBioNormal+sin(a)*NextNormal)+
-            Pos
+            _TrailWidth*normalize(cos(a)*NextNormal+sin(a)*NextBioNormal)+
+            NextPos
         ,1.0);
             g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,1.0);
             g2f_o.uv.x*=_nodeSegment;
