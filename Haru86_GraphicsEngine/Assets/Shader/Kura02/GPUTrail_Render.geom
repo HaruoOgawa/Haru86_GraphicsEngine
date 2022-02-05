@@ -53,14 +53,16 @@ void main(){
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     vec3 Tangent=normalize(v2g_o[0].node_dir);
-    vec3 Normal=normalize(Tangent,v2g_o[0].node_previousDir);
-    vec3 BioNormal=normalize(Tangent,Normal);
+    vec3 Normal=normalize(cross(Tangent,v2g_o[0].node_previousDir));
+    vec3 BioNormal=normalize(cross(Tangent,Normal));
     vec3 Pos=v2g_o[0].node_pos;
     
     vec3 NextTangent=normalize(v2g_o[0].node_nextDir);
-    vec3 NextNormal=normalize(NextTangent,Tangent);
-    vec3 NextBioNormal=normalize(NextTangent,NextNormal);
+    vec3 NextNormal=normalize(cross(NextTangent,Tangent));
+    vec3 NextBioNormal=normalize(cross(NextTangent,NextNormal));
     vec3 NextPos=v2g_o[0].node_nextPos;
+
+    float nowIndexInNodes=float(v2g_o[0].nowIndexInNodes);
 
     // âΩäpå`Ç©
     int N=4;
@@ -83,7 +85,7 @@ void main(){
         gl_Position=MVPMatrix*vec4(
             _TrailWidth*normalize(cos(b)*Normal+sin(b)*BioNormal)+
             Pos
-        ,1.0)
+        ,1.0);
         g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,0.0);
         g2f_o.uv.x*=_nodeSegment;
         g2f_o.trail_ID=v2g_o[0].trail_ID;
