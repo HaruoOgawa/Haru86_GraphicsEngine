@@ -135,7 +135,12 @@ void main(){
      float node_life=node_data00.node_life;
 
      trail now_trail_data=outBuffer_trail.trails[trailIndex];
-     vec4 trail_color=now_trail_data.trail_color;
+     //vec4 trail_color=now_trail_data.trail_color;
+     vec4 trail_color=vec4(vec3(
+		//rand(vec2(float(trailIndex),0.159))*2.0,
+        //rand(vec2(float(trailIndex),7.957))*2.0,
+        rand(vec2(float(trailIndex),0.681))*2.0
+	),1.0);
      if(nowIndexInNodes==now_trail_data.leftSideFirst||nowIndexInNodes==now_trail_data.rightSideFirst||nowIndexInNodes==now_trail_data.rightSideSecond){
         node_pos=node_pos;
         node_nextPos=node_pos;
