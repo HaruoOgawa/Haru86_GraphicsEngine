@@ -228,6 +228,7 @@ void CKura3DGPUTrail::Draw() {
 
 	m_texture_trail->SetActive();
 	m_material->SetTexUniform("_trailTex", m_texture_trail->GetTextureID());
+	m_material->SetVec3Uniform("_lightDir", glm::vec3(-2.0, 1.0, 1.0));
 
 	Graphics::DrawInstancedWithMesh(m_mesh, nodeNum, m_material, GL_POINTS);
 

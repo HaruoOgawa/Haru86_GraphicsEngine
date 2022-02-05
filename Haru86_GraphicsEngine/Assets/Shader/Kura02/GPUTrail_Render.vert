@@ -126,9 +126,9 @@ void main(){
                 
      vec3 node_pos=node_data00.node_position;
      vec3 node_nextPos=node_data01.node_position;
-     ///////vec3 node_dir=normalize(node_data01.node_position-node_data0_1.node_position);
+     //vec3 node_dir=normalize(node_data01.node_position-node_data0_1.node_position);
      vec3 node_dir=normalize(node_data01.node_position-node_data00.node_position);
-     ///////vec3 node_nextDir=normalize(node_data02.node_position-node_data00.node_position);
+     //vec3 node_nextDir=normalize(node_data02.node_position-node_data00.node_position);
      vec3 node_nextDir=normalize(node_data02.node_position-node_data01.node_position);
      vec3 node_previousDir=normalize(node_data00.node_position-node_data0_1.node_position);
 

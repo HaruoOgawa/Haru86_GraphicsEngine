@@ -6,6 +6,7 @@ struct g2f{
 	float node_life;
 	float trail_ID ;
 	vec4 trail_color;
+	vec3 normal;
 };
 
 in float g2f_flag;
@@ -14,6 +15,7 @@ in g2f g2f_o;
 uniform float _time;
 uniform float _initNodeLife;
 uniform sampler2D _trailTex;
+uniform vec3 _lightDir;
 
 #define LightDir vec3(-0.613121, -0.1916, 0.766402)
 
@@ -32,6 +34,12 @@ void main(){
     col.a=node_life*1.0; 
 	
 	col.rgb=1.0-col.rgb;*/
+
+	//diffuse
+	/*vec3 L=normalize(_lightDir);
+	float diff=max(0.0,dot(g2f_o.normal,L));
+	col.rgb*=diff;
+	col+=0.01;*/
 
 
 	gl_FragColor=col;
