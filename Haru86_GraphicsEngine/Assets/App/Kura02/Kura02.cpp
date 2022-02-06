@@ -32,7 +32,7 @@ void Kura02::Start() {
 
 	ins_cubes = std::make_unique<Object>();
 	ins_cubes->AddComponent(std::make_shared<CBoxInstancing>(ins_cubes.get()));
-	//ins_cubes->AddComponent(std::make_shared<CKura3DGPUTrail>(ins_cubes.get()));
+	ins_cubes->AddComponent(std::make_shared<CKura3DGPUTrail>(ins_cubes.get()));
 
 	raymarching_obj = std::make_unique<RaymarchingObject>("./Assets/Shader/Kura02/CubeFieldRaymarching.frag");
 	Game::GetInstance()->m_RaymarchingObject = raymarching_obj.get();
@@ -54,7 +54,7 @@ void Kura02::Update() {
 
 void Kura02::Draw() {
 	static_cast<CBoxInstancing*>(ins_cubes->GetComponent(static_cast<std::string>(typeid(CBoxInstancing).name())))->Draw();
-	//static_cast<CKura3DGPUTrail*>(ins_cubes->GetComponent(static_cast<std::string>(typeid(CKura3DGPUTrail).name())))->Draw();
+	static_cast<CKura3DGPUTrail*>(ins_cubes->GetComponent(static_cast<std::string>(typeid(CKura3DGPUTrail).name())))->Draw();
 }
 
 void Kura02::Timeline(class TimelineObject* timelineObj) {
