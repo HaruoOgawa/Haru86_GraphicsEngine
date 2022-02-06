@@ -144,7 +144,7 @@ void main(){
         50.0*(perlinNoise(vec2(float(DID))      +vec2(_time+deltaX))*2.0-1.0)*sin(float(DID)+_time+deltaX)
     );
 
-    float radius=3.0;
+    float radius=3.5;
     result_velocity+=normalize(result_velocity)*radius;
 
     outBufferBoidsForce.boidsForce[DID].force=vec3(

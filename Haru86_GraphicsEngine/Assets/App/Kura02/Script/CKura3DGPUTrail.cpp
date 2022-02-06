@@ -25,7 +25,7 @@ CKura3DGPUTrail::CKura3DGPUTrail(Object* o)
 	m_buffer_input(nullptr),
 	m_computeShader_NextInputPos(nullptr),
 	m_computeShader_NodeInfo(nullptr),
-	nodeSegment(256)
+	nodeSegment(128)
 {
 	trailNum = num;
 	nodeNum = trailNum * nodeSegment;
@@ -179,28 +179,28 @@ void CKura3DGPUTrail::Update() {
 	m_computeShader_force->SetFloatUniform("_joinDisMin", 0.1);  // pre10
 	m_computeShader_force->SetFloatUniform("_separateDistMin", 1000); //pre10
 	m_computeShader_force->SetFloatUniform("_alignmentDistMin", 0.1); //pre10
-	m_computeShader_force->Dispatch(num / 16, 1, 1);
+	m_computeShader_force->Dispatch(num / 32, 1, 1);
 
 	//Dispatch Data///////////////
 	m_computeShader_data->SetActive();
 	m_computeShader_data->SetFloatUniform("_time", Game::GetInstance()->time * 0.001);
 	m_computeShader_data->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
 	//boid uniform
-	m_computeShader_data->Dispatch(num / 16, 1, 1);
+	m_computeShader_data->Dispatch(num / 32, 1, 1);
 	////////////////////////////////////////////////////////
 	
 	//Trail /////////////////////////////////////////////////
 	//NextInputPos
 	m_computeShader_NextInputPos->SetActive();
-	m_computeShader_NextInputPos->Dispatch(trailNum / 16, 1, 1);
+	m_computeShader_NextInputPos->Dispatch(trailNum / 32, 1, 1);
 
 	//NodeInfo
 	m_computeShader_NodeInfo->SetActive();
 	m_computeShader_NodeInfo->SetIntUniform("_nodeSegment", nodeSegment);
-	m_computeShader_NodeInfo->SetFloatUniform("_nodeDistanceMin", 0.1);
-	m_computeShader_NodeInfo->SetFloatUniform("_time", Game::GetInstance()->time);
+	m_computeShader_NodeInfo->SetFloatUniform("_nodeDistanceMin", 0.01);
+	m_computeShader_NodeInfo->SetFloatUniform("_time", Game::GetInstance()->time * 0.001);
 	m_computeShader_NodeInfo->SetFloatUniform("_initNodeLife", 5.0);
-	m_computeShader_NodeInfo->Dispatch(trailNum / 16, 1, 1);
+	m_computeShader_NodeInfo->Dispatch(trailNum / 32, 1, 1);
 	////////////////////////////////////////////////////////
 }
 

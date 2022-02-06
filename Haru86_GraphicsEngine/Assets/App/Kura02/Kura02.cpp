@@ -45,9 +45,9 @@ void Kura02::Start() {
 void Kura02::Update() {
 	ins_cubes->Update();
 	cam_obj->transform->position = glm::vec3(
-		glm::cos(Game::GetInstance()->time * 0.0001)*5.5,
+		glm::cos(Game::GetInstance()->time * 0.0001)*8.5,
 		0.0, 
-		glm::sin(Game::GetInstance()->time * 0.0001)* 5.5
+		glm::sin(Game::GetInstance()->time * 0.0001)* 8.5
 	);
 
 }
