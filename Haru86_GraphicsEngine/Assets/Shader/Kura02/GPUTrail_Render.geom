@@ -54,7 +54,7 @@ float rand(vec2 seeds){
 void main(){
 
     /////////////////////////////////////////////////////////////////////////////////////////////
-    vec3 Tangent=normalize(v2g_o[0].node_dir);
+    /*vec3 Tangent=normalize(v2g_o[0].node_dir);
     vec3 Normal=normalize(cross(Tangent,v2g_o[0].node_previousDir));
     vec3 BioNormal=normalize(cross(Tangent,Normal));
     vec3 Pos=v2g_o[0].node_pos;
@@ -264,10 +264,10 @@ void main(){
      g2f_o.worldPosition=(MMatrix*vec4(Pos+normalize(v02)*_TrailWidth,1.0)).xyz;
     EmitVertex();
 
-    EndPrimitive();
+    EndPrimitive();*/
 
     /////////////////////////////////////////////////////////////////////////////////////////////
-    /*vec3 Tangent=normalize(v2g_o[0].node_dir);
+     vec3 Tangent=normalize(v2g_o[0].node_dir);
     vec3 Normal=normalize(cross(Tangent,v2g_o[0].node_previousDir));
     vec3 BioNormal=normalize(cross(Tangent,Normal));
     vec3 Pos=v2g_o[0].node_pos;
@@ -278,130 +278,51 @@ void main(){
     vec3 NextPos=v2g_o[0].node_nextPos;
 
     float nowIndexInNodes=float(v2g_o[0].nowIndexInNodes);
-
-    //Create Surface
-	gl_Position=MVPMatrix*vec4(Pos+normalize(cos(_time*0.01)*Normal+sin(_time*0.01)*BioNormal)*_TrailWidth,1.0);
-    g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,1.0);
-    g2f_o.uv.x*=_nodeSegment;
-    g2f_o.trail_ID=v2g_o[0].trail_ID;
-    g2f_o.node_life=v2g_o[0].node_life;
-    g2f_o.trail_color=v2g_o[0].trail_color;
-    g2f_o.normal=(vec4(Normal,1.0)*MMatrix).xyz;
-    EmitVertex();
-
-    gl_Position=MVPMatrix*vec4(Pos-normalize(cos(_time*0.01)*Normal+sin(_time*0.01)*BioNormal)*_TrailWidth,1.0);
-    g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,0.0);
-    g2f_o.uv.x*=_nodeSegment;
-    g2f_o.trail_ID=v2g_o[0].trail_ID;
-    g2f_o.node_life=v2g_o[0].node_life;
-    g2f_o.trail_color=v2g_o[0].trail_color;
-    g2f_o.normal=(vec4(-Normal,1.0)*MMatrix).xyz;
-    EmitVertex();
-
     float nextUVx=(nowIndexInNodes+1)/_nodeSegment;
-                
-    gl_Position=MVPMatrix*vec4(NextPos+normalize(cos(_time*0.01)*NextNormal+sin(_time*0.01)*NextBioNormal)*_TrailWidth,1.0);
-    g2f_o.uv=vec2(
-     (nextUVx>1.0) ? 0.0 : nextUVx
-    ,1.0);
-    g2f_o.uv.x*=_nodeSegment;
-    g2f_o.trail_ID=v2g_o[0].trail_ID;
-    g2f_o.node_life=v2g_o[0].node_life;
-    g2f_o.trail_color=v2g_o[0].trail_color;
-    g2f_o.normal=(vec4(NextNormal,1.0)*MMatrix).xyz;
-    EmitVertex();
+    int N=8;
 
-    gl_Position=MVPMatrix*vec4(NextPos-normalize(cos(_time*0.01)*NextNormal+sin(_time*0.01)*NextBioNormal)*_TrailWidth,1.0);
-    g2f_o.uv=vec2(
-     (nextUVx>1.0) ? 0.0 : nextUVx
-    ,0.0);
-    g2f_o.uv.x*=_nodeSegment;
-    g2f_o.trail_ID=v2g_o[0].trail_ID;
-    g2f_o.node_life=v2g_o[0].node_life;
-    g2f_o.trail_color=v2g_o[0].trail_color;
-    g2f_o.normal=(vec4(-NextNormal,1.0)*MMatrix).xyz;
-    EmitVertex();
-
-    EndPrimitive();*/
-    
     //Create Surface
-	/*gl_Position=MVPMatrix*vec4(Pos+BioNormal*_TrailWidth,1.0);
-    g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,1.0);
-    g2f_o.uv.x*=_nodeSegment;
-    g2f_o.trail_ID=v2g_o[0].trail_ID;
-    g2f_o.node_life=v2g_o[0].node_life;
-    g2f_o.trail_color=v2g_o[0].trail_color;
-    g2f_o.normal=(vec4(BioNormal,1.0)*MMatrix).xyz;
-    EmitVertex();
-
-    gl_Position=MVPMatrix*vec4(Pos-BioNormal*_TrailWidth,1.0);
-    g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,0.0);
-    g2f_o.uv.x*=_nodeSegment;
-    g2f_o.trail_ID=v2g_o[0].trail_ID;
-    g2f_o.node_life=v2g_o[0].node_life;
-    g2f_o.trail_color=v2g_o[0].trail_color;
-    g2f_o.normal=(vec4(-BioNormal,1.0)*MMatrix).xyz;
-    EmitVertex();
-             
-    gl_Position=MVPMatrix*vec4(NextPos+NextBioNormal*_TrailWidth,1.0);
-    g2f_o.uv=vec2(
-     (nextUVx>1.0) ? 0.0 : nextUVx
-    ,1.0);
-    g2f_o.uv.x*=_nodeSegment;
-    g2f_o.trail_ID=v2g_o[0].trail_ID;
-    g2f_o.node_life=v2g_o[0].node_life;
-    g2f_o.trail_color=v2g_o[0].trail_color;
-    g2f_o.normal=(vec4(NextBioNormal,1.0)*MMatrix).xyz;
-    EmitVertex();
-
-    gl_Position=MVPMatrix*vec4(NextPos-NextBioNormal*_TrailWidth,1.0);
-    g2f_o.uv=vec2(
-     (nextUVx>1.0) ? 0.0 : nextUVx
-    ,0.0);
-    g2f_o.uv.x*=_nodeSegment;
-    g2f_o.trail_ID=v2g_o[0].trail_ID;
-    g2f_o.node_life=v2g_o[0].node_life;
-    g2f_o.trail_color=v2g_o[0].trail_color;
-    g2f_o.normal=(vec4(-NextBioNormal,1.0)*MMatrix).xyz;
-    EmitVertex();
-
-    EndPrimitive();*/
-
-    // âΩäpå`Ç©
-    /*int N=4;
-
-    for(int i=0;i<N;i++){
-        float a=2.0*PI*((i+1)/N);
-        float b=2.0*PI*((i+2)/N);
-       
-        gl_Position=MVPMatrix*vec4(
-            _TrailWidth*normalize(cos(a)*Normal+sin(a)*BioNormal)+
-            Pos
-        ,1.0);
+     for(int i=0;i<N;i++){
+        //float a=(PI/2.0)*float(i);
+        //float b=(PI/2.0)*float(i+1);
+        
+        float a=((2.0*PI)/float(N))*float(i);
+        float b=((2.0*PI)/float(N))*float(i+1);
+     
+        //v00
+	    gl_Position=MVPMatrix*vec4(Pos+normalize(cos(a)*Normal+sin(a)*BioNormal)*_TrailWidth,1.0);
         g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,1.0);
         g2f_o.uv.x*=_nodeSegment;
         g2f_o.trail_ID=v2g_o[0].trail_ID;
         g2f_o.node_life=v2g_o[0].node_life;
         g2f_o.trail_color=v2g_o[0].trail_color;
+        g2f_o.normal=(vec4(Normal,1.0)*MMatrix).xyz;
         EmitVertex();
 
-        gl_Position=MVPMatrix*vec4(
-            _TrailWidth*normalize(cos(b)*Normal+sin(b)*BioNormal)+
-            Pos
+        //v01
+        gl_Position=MVPMatrix*vec4(NextPos+normalize(cos(a)*NextNormal+sin(a)*NextBioNormal)*_TrailWidth,1.0);
+        g2f_o.uv=vec2(
+         (nextUVx>1.0) ? 0.0 : nextUVx
         ,1.0);
+        g2f_o.uv.x*=_nodeSegment;
+        g2f_o.trail_ID=v2g_o[0].trail_ID;
+        g2f_o.node_life=v2g_o[0].node_life;
+        g2f_o.trail_color=v2g_o[0].trail_color;
+        g2f_o.normal=(vec4(NextNormal,1.0)*MMatrix).xyz;
+        EmitVertex();
+
+        //v02
+        gl_Position=MVPMatrix*vec4(Pos-normalize(cos(b)*Normal+sin(b)*BioNormal)*_TrailWidth,1.0);
         g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,0.0);
         g2f_o.uv.x*=_nodeSegment;
         g2f_o.trail_ID=v2g_o[0].trail_ID;
         g2f_o.node_life=v2g_o[0].node_life;
         g2f_o.trail_color=v2g_o[0].trail_color;
+        g2f_o.normal=(vec4(-Normal,1.0)*MMatrix).xyz;
         EmitVertex();
-
-        float nextUVx=(nowIndexInNodes+1)/_nodeSegment;
-        
-        gl_Position=MVPMatrix*vec4(
-            _TrailWidth*normalize(cos(b)*NextNormal+sin(b)*NextBioNormal)+
-            NextPos
-        ,1.0);
+            
+        //v03
+        gl_Position=MVPMatrix*vec4(NextPos-normalize(cos(b)*NextNormal+sin(b)*NextBioNormal)*_TrailWidth,1.0);
         g2f_o.uv=vec2(
          (nextUVx>1.0) ? 0.0 : nextUVx
         ,0.0);
@@ -409,119 +330,12 @@ void main(){
         g2f_o.trail_ID=v2g_o[0].trail_ID;
         g2f_o.node_life=v2g_o[0].node_life;
         g2f_o.trail_color=v2g_o[0].trail_color;
-        EmitVertex();
-
-        gl_Position=MVPMatrix*vec4(
-            _TrailWidth*normalize(cos(a)*NextNormal+sin(a)*NextBioNormal)+
-            NextPos
-        ,1.0);
-        g2f_o.uv=vec2(
-         (nextUVx>1.0) ? 0.0 : nextUVx
-        ,1.0);
-        g2f_o.uv.x*=_nodeSegment;
-        g2f_o.trail_ID=v2g_o[0].trail_ID;
-        g2f_o.node_life=v2g_o[0].node_life;
-        g2f_o.trail_color=v2g_o[0].trail_color;
+        g2f_o.normal=(vec4(-NextNormal,1.0)*MMatrix).xyz;
         EmitVertex();
 
         EndPrimitive();
-    }*/
-
-    // äWÇçÏê¨
-    /*    for(int i=0;i<N;i++){
-            float a=2.0*PI*((i+2)/N);
-       
-            gl_Position=MVPMatrix*vec4(
-            _TrailWidth*normalize(cos(a)*Normal+sin(a)*BioNormal)+
-            Pos
-        ,1.0);
-            g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,1.0);
-            g2f_o.uv.x*=_nodeSegment;
-            g2f_o.trail_ID=v2g_o[0].trail_ID;
-            g2f_o.node_life=v2g_o[0].node_life;
-            g2f_o.trail_color=v2g_o[0].trail_color;
-            EmitVertex();        
-        }
-
-        EndPrimitive();
-
-        // 
-        for(int i=0;i<N;i++){
-             float a=2.0*PI*((i+1)/N);
-
-            gl_Position=MVPMatrix*vec4(
-            _TrailWidth*normalize(cos(a)*NextNormal+sin(a)*NextBioNormal)+
-            NextPos
-        ,1.0);
-            g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,1.0);
-            g2f_o.uv.x*=_nodeSegment;
-            g2f_o.trail_ID=v2g_o[0].trail_ID;
-            g2f_o.node_life=v2g_o[0].node_life;
-            g2f_o.trail_color=v2g_o[0].trail_color;
-            EmitVertex();        
-        }
-
-        EndPrimitive();*/
+     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////
-  /*  vec3 camDir=normalize(v2g_o[0].node_pos-_WorldSpaceCameraPos.xyz);
-    vec3 camNextDir=normalize(v2g_o[0].node_nextPos-_WorldSpaceCameraPos.xyz);
-    vec3 node_cam_sideDir=normalize(cross(camDir,v2g_o[0].node_dir));
-    vec3 node_cam_nextSideDir=normalize(cross(camNextDir,v2g_o[0].node_nextDir));
-
-    vec4 render_node_pos01=vec4(v2g_o[0].node_pos+node_cam_sideDir*_TrailWidth,1.0);
-    vec4 render_node_pos0_1=vec4(v2g_o[0].node_pos-node_cam_sideDir*_TrailWidth,1.0);
-    vec4 render_node_pos11=vec4(v2g_o[0].node_nextPos+node_cam_nextSideDir*_TrailWidth,1.0);
-    vec4 render_node_pos1_1=vec4(v2g_o[0].node_nextPos-node_cam_nextSideDir*_TrailWidth,1.0);
-
-    float nowIndexInNodes=float(v2g_o[0].nowIndexInNodes);
-    vec3 normal=normalize(cross(v2g_o[0].node_dir,v2g_o[0].node_nextDir));
-
-	//Create Surface
-	gl_Position=MVPMatrix*render_node_pos01;
-    g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,1.0);
-    g2f_o.uv.x*=_nodeSegment;
-    g2f_o.trail_ID=v2g_o[0].trail_ID;
-    g2f_o.node_life=v2g_o[0].node_life;
-    g2f_o.trail_color=v2g_o[0].trail_color;
-    g2f_o.normal=(vec4(normal,1.0)*MMatrix).xyz;
-    EmitVertex();
-
-    gl_Position=MVPMatrix*render_node_pos0_1;
-    g2f_o.uv=vec2(nowIndexInNodes/_nodeSegment,0.0);
-    g2f_o.uv.x*=_nodeSegment;
-    g2f_o.trail_ID=v2g_o[0].trail_ID;
-    g2f_o.node_life=v2g_o[0].node_life;
-    g2f_o.trail_color=v2g_o[0].trail_color;
-    g2f_o.normal=(vec4(normal,1.0)*MMatrix).xyz;
-    EmitVertex();
-
-    float nextUVx=(nowIndexInNodes+1)/_nodeSegment;
-                
-    gl_Position=MVPMatrix*render_node_pos11;
-    g2f_o.uv=vec2(
-     (nextUVx>1.0) ? 0.0 : nextUVx
-    ,1.0);
-    g2f_o.uv.x*=_nodeSegment;
-    g2f_o.trail_ID=v2g_o[0].trail_ID;
-    g2f_o.node_life=v2g_o[0].node_life;
-    g2f_o.trail_color=v2g_o[0].trail_color;
-    g2f_o.normal=(vec4(normal,1.0)*MMatrix).xyz;
-    EmitVertex();
-
-    gl_Position=MVPMatrix*render_node_pos1_1;
-    g2f_o.uv=vec2(
-     (nextUVx>1.0) ? 0.0 : nextUVx
-    ,0.0);
-    g2f_o.uv.x*=_nodeSegment;
-    g2f_o.trail_ID=v2g_o[0].trail_ID;
-    g2f_o.node_life=v2g_o[0].node_life;
-    g2f_o.trail_color=v2g_o[0].trail_color;
-    g2f_o.normal=(vec4(normal,1.0)*MMatrix).xyz;
-    EmitVertex();
-
-    EndPrimitive();*/
-
-    /////////////////////////////////////////////////////////////////////////////////////////////
-
+  
 }
