@@ -20,7 +20,7 @@ Kura02::Kura02():
 }
 
 Kura02::~Kura02() {
-
+	printf("Kura02 is Released\n");
 }
 
 void Kura02::Start() {
@@ -50,6 +50,9 @@ void Kura02::Update() {
 		glm::sin(Game::GetInstance()->time * 0.0001)* 8.5
 	);
 
+	if (Game::GetInstance()->time>=1000.0*60.0*60.0) {
+		Game::GetInstance()->Restart();
+	}
 }
 
 void Kura02::Draw() {
