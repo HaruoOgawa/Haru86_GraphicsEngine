@@ -13,7 +13,7 @@
 #include <algorithm>
 
 UIComponent::UIComponent(GameObject* o)
-	: Component(o, static_cast<std::string>(typeid(UIComponent).name()).substr(6))
+	: Component(o)
 {
 	o->UseZTest(false);
 	o->SetRenderOlder(RenderQueue::UI);
@@ -32,9 +32,9 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 
 	if (CheckInnnerBox(fx,fy)&& Game::GetInstance()->mouseStateBool) {
 		float maxLeftPointX = static_cast<RectTransformComponent*>(owner->
-			GetComponent(static_cast<std::string>(typeid(RectTransformComponent).name())))->maxLeftPointX;
+			GetComponent<RectTransformComponent>().get())->maxLeftPointX;
 		float maxRightPointX = static_cast<RectTransformComponent*>(owner->
-			GetComponent(static_cast<std::string>(typeid(RectTransformComponent).name())))->maxRightPointX;
+			GetComponent<RectTransformComponent>().get())->maxRightPointX;
 
 		if (fx < maxLeftPointX) {
 			fx = maxLeftPointX;
@@ -62,7 +62,7 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 
 		owner->SetPosition(glm::vec3(pos.x, owner->transform->position.y, owner->transform->position.z));
 		static_cast<RectTransformComponent*>(owner->
-			GetComponent(static_cast<std::string>(typeid(RectTransformComponent).name())))->rectPosition.x = fx;
+			GetComponent<RectTransformComponent>().get())->rectPosition.x = fx;
 
 		Game::GetInstance()->timelineObj->timelineComponent->ResetTimeline();
 		Game::GetInstance()->timelineObj->timelineComponent->ComputeTimeline(t);
@@ -74,10 +74,10 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 
 bool UIComponent::CheckInnnerBox( float x,  float y)const {
 	glm::vec2 rectScale = static_cast<RectTransformComponent*>(owner->
-		GetComponent(static_cast<std::string>(typeid(RectTransformComponent).name())))->rectScale;
+		GetComponent<RectTransformComponent>().get())->rectScale;
 	
 	glm::vec2 rectPosition = static_cast<RectTransformComponent*>(owner->
-		GetComponent(static_cast<std::string>(typeid(RectTransformComponent).name())))->rectPosition;
+		GetComponent<RectTransformComponent>().get())->rectPosition;
 
 	glm::vec2 minPos = rectPosition - rectScale;
 	glm::vec2 maxPos = rectPosition + rectScale;

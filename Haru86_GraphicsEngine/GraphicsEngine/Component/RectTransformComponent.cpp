@@ -7,7 +7,7 @@
 #include <glm/glm.hpp>
 
 RectTransformComponent::RectTransformComponent(GameObject* o, float wRate, float hRate)
-	:Component(o, static_cast<std::string>(typeid(RectTransformComponent).name()).substr(6))
+	:Component(o)
 {
 	
 	glm::vec2 size = static_cast<glm::vec2>(GraphicsRenderer::GetInstance()->GetScreenSize());

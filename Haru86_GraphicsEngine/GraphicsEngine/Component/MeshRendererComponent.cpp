@@ -12,7 +12,7 @@
 #include "GraphicsEngine/Graphics/glTFLoader.h"
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
-	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)
+	: Component(o), myowner(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
@@ -21,7 +21,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::map<GLenum, std::string> shaders)
-	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)
+	: Component(o), myowner(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
@@ -35,7 +35,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, std::string objPath)
-	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)
+	: Component(o), myowner(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = glTFLoader::Load(objPath);
@@ -44,7 +44,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, std::string objPath)
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
-	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
+	: Component(o),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
@@ -53,7 +53,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName)
-	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
+	: Component(o),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
@@ -62,7 +62,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, std::string textureString)
-	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
+	: Component(o),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
@@ -76,7 +76,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 
 
 MeshRendererComponent::MeshRendererComponent(Object* o, std::string modelDataPath, std::string vertexShaderName, std::string fragmentShaderName)
-	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
+	: Component(o),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = glTFLoader::Load(modelDataPath);

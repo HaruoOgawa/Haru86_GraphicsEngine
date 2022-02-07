@@ -6,7 +6,7 @@ CameraObject::CameraObject(CameraType cameraType)
 	: Object(),m_cameraType(cameraType)
 {
 	m_cameraComponent =  std::make_shared<CameraComponent>(this,cameraType);
-	AddComponent(m_cameraComponent);
+	AddComponent<CameraComponent>(m_cameraComponent);
 }
 
 CameraObject::~CameraObject() {

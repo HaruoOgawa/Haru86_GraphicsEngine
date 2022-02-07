@@ -9,7 +9,7 @@
 #include "GraphicsEngine/Game/Game.h"
 
 CBoxInstancing::CBoxInstancing(Object* o)
-	: Component(o, static_cast<std::string>(typeid(CBoxInstancing).name()).substr(6)),
+	: Component(o),
 	instanciedCound(124*124),
 	sideCubeCount(124)
 {

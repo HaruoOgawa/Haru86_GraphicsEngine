@@ -9,7 +9,7 @@ GameObject::GameObject(PrimitiveType primType)
 {
 	Game::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp =  std::make_shared<MeshRendererComponent>(this, primType);
-	AddComponent(meshComp);
+	AddComponent<MeshRendererComponent>(meshComp);
 }
 
 GameObject::GameObject(PrimitiveType primType, std::map<GLenum, std::string> shaders)
@@ -17,7 +17,7 @@ GameObject::GameObject(PrimitiveType primType, std::map<GLenum, std::string> sha
 {
 	Game::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = std::make_shared<MeshRendererComponent>(this, primType,shaders);
-	AddComponent(meshComp);
+	AddComponent<MeshRendererComponent>(meshComp);
 }
 
 
@@ -26,7 +26,7 @@ GameObject::GameObject(std::string objPath)
 {
 	Game::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = std::make_shared<MeshRendererComponent>(this, objPath);
-	AddComponent(meshComp);
+	AddComponent<MeshRendererComponent>(meshComp);
 }
 
 GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
@@ -34,7 +34,7 @@ GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std
 {
 	Game::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = std::make_shared<MeshRendererComponent>(this, primType,vertexShaderName,fragmentShaderName);
-	AddComponent(meshComp);
+	AddComponent<MeshRendererComponent>(meshComp);
 }
 
 GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName)
@@ -42,7 +42,7 @@ GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std
 {
 	Game::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = std::make_shared<MeshRendererComponent>(this, primType,vertexShaderName,tessellationShaderName,fragmentShaderName);
-	AddComponent(meshComp);
+	AddComponent<MeshRendererComponent>(meshComp);
 }
 
 GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, std::string textureString)
@@ -50,7 +50,7 @@ GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std
 {
 	Game::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = std::make_shared<MeshRendererComponent>(this, primType,vertexShaderName,fragmentShaderName, textureString);
-	AddComponent(meshComp);
+	AddComponent<MeshRendererComponent>(meshComp);
 	UseZTest(false);
 	SetRenderOlder(RenderQueue::UI);
 }
@@ -66,7 +66,7 @@ GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std
 	}
 	
 	meshComp = std::make_shared<MeshRendererComponent>(this, primType, vertexShaderName, fragmentShaderName);
-	AddComponent(meshComp);
+	AddComponent<MeshRendererComponent>(meshComp);
 }
 
 GameObject::~GameObject() {

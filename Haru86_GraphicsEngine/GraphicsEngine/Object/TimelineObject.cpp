@@ -3,7 +3,7 @@
 
 TimelineObject::TimelineObject() {
 	timelineComponent =  std::make_shared<TimelineComponent>(this);
-	AddComponent(timelineComponent);
+	AddComponent<TimelineComponent>(timelineComponent);
 }
 TimelineObject::~TimelineObject() {
 }

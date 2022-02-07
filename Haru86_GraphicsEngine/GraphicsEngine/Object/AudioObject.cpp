@@ -6,14 +6,14 @@ AudioObject::AudioObject()
 	: Object()
 {
 	audioSource =  std::make_shared<AudioSourceComponent>(this);
-	AddComponent(audioSource);
+	AddComponent<AudioSourceComponent>(audioSource);
 }
 
 AudioObject::AudioObject(std::string audioSourcePath)
 	: Object()
 {
 	audioSource = std::make_shared<AudioSourceComponent>(this, audioSourcePath);
-	AddComponent(audioSource);
+	AddComponent<AudioSourceComponent>(audioSource);
 }
 
 AudioObject::~AudioObject() {

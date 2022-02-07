@@ -23,7 +23,7 @@
 #include "GraphicsEngine/Component/CameraComponent.h"
 
 KuraGPGPU::KuraGPGPU(Object* o)
-	: Component(o, static_cast<std::string>(typeid(KuraGPGPU).name()).substr(6)),
+	: Component(o),
 	num(1024)
 {
 	m_mesh = glTFLoader::Load("./Assets/Resources/glTFData/PhoenixWithVAT/Phoenix.gltf");
