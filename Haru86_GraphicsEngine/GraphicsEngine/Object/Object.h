@@ -25,12 +25,11 @@ public:
 	}
 
 	void RemoveComponent(std::shared_ptr<Component> component);
-	//Component* GetComponent(std::string componentName);
 	
 	template<typename T>
-	const std::shared_ptr<Component>& GetComponent()const {
+	T* GetComponent()const {
 		auto item = myComponent.find(typeid(T));
-		return item->second;
+		return static_cast<T*>(item->second.get());
 	}
 
 	void SetTransform(glm::vec3 pos, glm::quat rot, glm::vec3 s);

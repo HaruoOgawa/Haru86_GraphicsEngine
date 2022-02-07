@@ -31,10 +31,10 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 	float fy = static_cast<float>(GraphicsRenderer::GetInstance()->GetScreenSize().y) * 0.5f- static_cast<float>(y);
 
 	if (CheckInnnerBox(fx,fy)&& Game::GetInstance()->mouseStateBool) {
-		float maxLeftPointX = static_cast<RectTransformComponent*>(owner->
-			GetComponent<RectTransformComponent>().get())->maxLeftPointX;
-		float maxRightPointX = static_cast<RectTransformComponent*>(owner->
-			GetComponent<RectTransformComponent>().get())->maxRightPointX;
+		float maxLeftPointX = owner->
+			GetComponent<RectTransformComponent>()->maxLeftPointX;
+		float maxRightPointX = owner->
+			GetComponent<RectTransformComponent>()->maxRightPointX;
 
 		if (fx < maxLeftPointX) {
 			fx = maxLeftPointX;
@@ -61,8 +61,8 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 		pos = glm::vec2(modelPos.x / modelPos.w, modelPos.y / modelPos.w);
 
 		owner->SetPosition(glm::vec3(pos.x, owner->transform->position.y, owner->transform->position.z));
-		static_cast<RectTransformComponent*>(owner->
-			GetComponent<RectTransformComponent>().get())->rectPosition.x = fx;
+		owner->
+			GetComponent<RectTransformComponent>()->rectPosition.x = fx;
 
 		Game::GetInstance()->timelineObj->timelineComponent->ResetTimeline();
 		Game::GetInstance()->timelineObj->timelineComponent->ComputeTimeline(t);
@@ -73,11 +73,11 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 }
 
 bool UIComponent::CheckInnnerBox( float x,  float y)const {
-	glm::vec2 rectScale = static_cast<RectTransformComponent*>(owner->
-		GetComponent<RectTransformComponent>().get())->rectScale;
+	glm::vec2 rectScale = owner->
+		GetComponent<RectTransformComponent>()->rectScale;
 	
-	glm::vec2 rectPosition = static_cast<RectTransformComponent*>(owner->
-		GetComponent<RectTransformComponent>().get())->rectPosition;
+	glm::vec2 rectPosition = owner->
+		GetComponent<RectTransformComponent>()->rectPosition;
 
 	glm::vec2 minPos = rectPosition - rectScale;
 	glm::vec2 maxPos = rectPosition + rectScale;

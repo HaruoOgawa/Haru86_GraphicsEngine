@@ -17,20 +17,9 @@ Object::~Object() {
 	myComponent.clear();
 }
 
-/*
-void Object::AddComponent(std::shared_ptr<class Component> component) {
-	myComponent.insert({ component->superClassName,component});
-}*/
-
 void Object::RemoveComponent(std::shared_ptr<class Component> component) {
 	
 }
-
-/*
-Component* Object::GetComponent(std::string componentName) {
-	auto item = myComponent.find(componentName.substr(6));
-	return item->second.get();
-}*/
 
 void Object::Update() {
 	for (auto comp : myComponent) {

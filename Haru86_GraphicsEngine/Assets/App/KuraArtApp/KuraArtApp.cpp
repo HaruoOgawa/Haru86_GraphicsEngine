@@ -64,8 +64,8 @@ void KuraArtApp::Start() {
 	gpgpu_obj = std::make_unique<Object>();
 	gpgpu_obj->AddComponent<KuraGPGPU>(std::make_shared<KuraGPGPU>(gpgpu_obj.get()));
 	gpgpu_obj->AddComponent<KuraTrail>(std::make_shared<KuraTrail>(gpgpu_obj.get(),
-		static_cast<KuraGPGPU*>(gpgpu_obj->GetComponent<KuraGPGPU>().get())
-	));
+		gpgpu_obj->GetComponent<KuraGPGPU>())
+	);
 
 	Game::GetInstance()->renderBoard = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/KuraShader/KuraPostProcess.frag", RenderType::FrameBuffer);
 
@@ -75,8 +75,8 @@ void KuraArtApp::Update() {
 }
 
 void KuraArtApp::Draw() {
-	static_cast<KuraGPGPU*>(gpgpu_obj->GetComponent<KuraGPGPU>().get())->Draw();
-	static_cast<KuraTrail*>(gpgpu_obj->GetComponent<KuraTrail>().get())->Draw();
+	gpgpu_obj->GetComponent<KuraGPGPU>()->Draw();
+	gpgpu_obj->GetComponent<KuraTrail>()->Draw();
 }
 
 void KuraArtApp::Timeline(class TimelineObject* timeline) {
