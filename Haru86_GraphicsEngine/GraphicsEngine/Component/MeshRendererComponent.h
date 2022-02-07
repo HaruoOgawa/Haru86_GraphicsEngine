@@ -28,7 +28,7 @@ public:
     bool useZTest;
     std::vector<class TimelineAnimationClip*> animationClips;
     std::shared_ptr<class Material> material;
-    friend class GameRenderer;
+    friend class GraphicsRenderer;
 private:
     std::unique_ptr<Mesh> mesh;
     std::unique_ptr<class Texture> primTex;

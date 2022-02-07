@@ -8,7 +8,7 @@ public:
 	virtual ~BaseApp();
 private:
 	friend class Game;
-	friend class GameRenderer;
+	friend class GraphicsRenderer;
 	virtual void Start()  = 0;
 	virtual void Update()  = 0;
 	virtual void Draw()  = 0;

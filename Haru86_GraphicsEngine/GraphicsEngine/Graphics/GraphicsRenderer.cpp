@@ -1,4 +1,4 @@
-#include "GameRenderer.h"
+#include "GraphicsRenderer.h"
 #include "GL/glew.h"
 #include "../Object/GameObject.h"
 #include "../Component/MeshRendererComponent.h"
@@ -11,20 +11,20 @@
 #include "GraphicsEngine/Graphics/PolygonRaymarchingMixer.h"
 #include "GraphicsEngine/Graphics/PostProcess.h"
 
-GameRenderer* GameRenderer::renderer_instance = nullptr;
+GraphicsRenderer* GraphicsRenderer::renderer_instance = nullptr;
 
-void GameRenderer::Create() {
+void GraphicsRenderer::Create() {
 	if (!renderer_instance) {
-		renderer_instance = new GameRenderer(Game::GetInstance());
+		renderer_instance = new GraphicsRenderer(Game::GetInstance());
 	}
 }
 
-void GameRenderer::Destroy() {
+void GraphicsRenderer::Destroy() {
 	delete renderer_instance;
 	renderer_instance = nullptr;
 }
 
-GameRenderer::GameRenderer(Game* game)
+GraphicsRenderer::GraphicsRenderer(Game* game)
 	: mgame(game),
 	sWindow(nullptr),
 	sWindowWidth(500),
@@ -42,11 +42,11 @@ GameRenderer::GameRenderer(Game* game)
 {
 }
 
-GameRenderer::~GameRenderer() {
+GraphicsRenderer::~GraphicsRenderer() {
 
 }
 
-bool GameRenderer::Initialize(float width,float height) {
+bool GraphicsRenderer::Initialize(float width,float height) {
 	
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -131,11 +131,11 @@ bool GameRenderer::Initialize(float width,float height) {
 	return true;
 }
 
-glm::ivec2 GameRenderer::GetScreenSize() {
+glm::ivec2 GraphicsRenderer::GetScreenSize() {
 	return glm::ivec2(sWindowWidth, sWindowHeight);
 }
 
-bool GameRenderer::CreateFrameBuffer(std::shared_ptr<Texture> fTex, unsigned int& fBuffer, GLint internalformat, GLint format, GLenum type) {
+bool GraphicsRenderer::CreateFrameBuffer(std::shared_ptr<Texture> fTex, unsigned int& fBuffer, GLint internalformat, GLint format, GLenum type) {
 	int width = static_cast<int>(GetScreenSize().x) ;
 	int height = static_cast<int>(GetScreenSize().y );
 	
@@ -158,7 +158,7 @@ bool GameRenderer::CreateFrameBuffer(std::shared_ptr<Texture> fTex, unsigned int
 
 }
 
-void GameRenderer::Draw() {
+void GraphicsRenderer::Draw() {
 	//ポリゴンオブジェクトのカラーマップをレンダリング///////////////////
 	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 	glBindFramebuffer(GL_FRAMEBUFFER, polygon_frameBuffer);
@@ -264,7 +264,7 @@ void GameRenderer::Draw() {
 	SDL_GL_SwapWindow(sWindow);
 }
 
-void GameRenderer::ShutDown() {
+void GraphicsRenderer::ShutDown() {
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(sWindow);
 

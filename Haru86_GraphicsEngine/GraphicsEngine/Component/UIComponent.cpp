@@ -2,7 +2,7 @@
 #include "../Object/GameObject.h"
 #include "../Game/Game.h"
 #include <SDL.h>
-#include "../Graphics/GameRenderer.h"
+#include "../Graphics/GraphicsRenderer.h"
 #include <glm/glm.hpp>
 #include "./TransformComponent.h"
 #include "./RectTransformComponent.h"
@@ -27,8 +27,8 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 	int x, y;
 	SDL_GetMouseState(&x, &y);
 
-	float fx = static_cast<float>(x) - static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().x) * 0.5f;
-	float fy = static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().y) * 0.5f- static_cast<float>(y);
+	float fx = static_cast<float>(x) - static_cast<float>(GraphicsRenderer::GetInstance()->GetScreenSize().x) * 0.5f;
+	float fy = static_cast<float>(GraphicsRenderer::GetInstance()->GetScreenSize().y) * 0.5f- static_cast<float>(y);
 
 	if (CheckInnnerBox(fx,fy)&& Game::GetInstance()->mouseStateBool) {
 		float maxLeftPointX = static_cast<RectTransformComponent*>(owner->
@@ -51,8 +51,8 @@ void UIComponent::ProcessInput(const Uint8* state) const {
 		Game::GetInstance()->previousTime = t;
 		Game::GetInstance()->time = t;
 		
-		float xval = fx / (static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().x) * 0.5f);
-		float yval = fy / (static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().y) * 0.5f);
+		float xval = fx / (static_cast<float>(GraphicsRenderer::GetInstance()->GetScreenSize().x) * 0.5f);
+		float yval = fy / (static_cast<float>(GraphicsRenderer::GetInstance()->GetScreenSize().y) * 0.5f);
 		
 		glm::vec2 pos = glm::vec2(xval, yval);
 		glm::vec4 modelPos =

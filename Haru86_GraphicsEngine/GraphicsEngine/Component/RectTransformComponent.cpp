@@ -1,6 +1,6 @@
 #include "RectTransformComponent.h"
 #include "../Object/GameObject.h"
-#include "../Graphics/GameRenderer.h"
+#include "../Graphics/GraphicsRenderer.h"
 #include "./TransformComponent.h"
 #include <iostream>
 #include <string>
@@ -10,7 +10,7 @@ RectTransformComponent::RectTransformComponent(GameObject* o, float wRate, float
 	:Component(o, static_cast<std::string>(typeid(RectTransformComponent).name()).substr(6))
 {
 	
-	glm::vec2 size = static_cast<glm::vec2>(GameRenderer::GetInstance()->GetScreenSize());
+	glm::vec2 size = static_cast<glm::vec2>(GraphicsRenderer::GetInstance()->GetScreenSize());
 	//rate 0.0 ~ 1.0
  	glm::vec2 pos = glm::vec2(size.x * wRate -size.x * 0.5, size.y * hRate - size.y * 0.5);
 	rectPosition = pos;

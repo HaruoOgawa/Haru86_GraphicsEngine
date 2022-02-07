@@ -28,7 +28,7 @@ public:
 	glm::vec3 GetScale();
 	std::shared_ptr<class TransformComponent> transform;
 	friend class MeshRendererComponent;
-	friend class GameRenderer;
+	friend class GraphicsRenderer;
 	friend class UIComponent;
 	friend class RectTransformComponent;
 private:
