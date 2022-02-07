@@ -29,13 +29,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -221,7 +221,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Graphics\Font.h" />
     <ClInclude Include="GraphicsEngine\Game\Game.h" />
     <ClInclude Include="GraphicsEngine\Object\GameObject.h" />
-    <ClInclude Include="GraphicsEngine\Graphics\GameRenderer.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\GraphicsRenderer.h" />
     <ClInclude Include="GraphicsEngine\App\BaseApp\Main.h" />
     <ClInclude Include="Assets\App\KuraArtApp\KuraArtApp.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Material.h" />
@@ -263,7 +263,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Graphics\Font.cpp" />
     <ClCompile Include="GraphicsEngine\Game\Game.cpp" />
     <ClCompile Include="GraphicsEngine\Object\GameObject.cpp" />
-    <ClCompile Include="GraphicsEngine\Graphics\GameRenderer.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\GraphicsRenderer.cpp" />
     <ClCompile Include="GraphicsEngine\App\BaseApp\Main.cpp" />
     <ClCompile Include="Assets\App\KuraArtApp\KuraArtApp.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\Material.cpp" />

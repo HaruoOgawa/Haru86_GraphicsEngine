@@ -12,7 +12,7 @@
 #include "GraphicsEngine/Graphics/Texture.h"
 
 CKura3DGPUTrail::CKura3DGPUTrail(Object* o)
-	: Component(o, static_cast<std::string>(typeid(CKura3DGPUTrail).name()).substr(6)),
+	: Component(o),
 	num(32),
 	m_computeBuffer_BoidsForce(nullptr),
 	m_computeBuffer_BoidsData(nullptr),

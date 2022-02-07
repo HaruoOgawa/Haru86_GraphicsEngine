@@ -5,17 +5,17 @@
 #include <GL/glew.h>
 #include <memory>
 
-class GameRenderer
+class GraphicsRenderer
 {
 public:
-	static GameRenderer* GetInstance() {
+	static GraphicsRenderer* GetInstance() {
 		return renderer_instance;
 	}
 	static void Create();
 	static void Destroy();
 
-	GameRenderer(class Game* game);
-	~GameRenderer();
+	GraphicsRenderer(class Game* game);
+	~GraphicsRenderer();
 	bool Initialize(float width, float height);
 	void ShutDown();
 	void Draw();
@@ -57,6 +57,6 @@ private:
 	std::unique_ptr<class PolygonRaymarchingMixer> m_Mixer;
 	
 protected:
-	static GameRenderer* renderer_instance;
+	static GraphicsRenderer* renderer_instance;
 };
 

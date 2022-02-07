@@ -4,7 +4,7 @@
 #include "./TransformComponent.h"
 #include <string>
 #include <iostream>
-#include "../Graphics/GameRenderer.h"
+#include "../Graphics/GraphicsRenderer.h"
 #include "./TimelineComponent.h"
 #include "../Graphics/Texture.h"
 #include "../Graphics/Font.h"
@@ -12,7 +12,7 @@
 #include "GraphicsEngine/Graphics/glTFLoader.h"
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
-	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)
+	: Component(o), myowner(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
@@ -21,7 +21,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::map<GLenum, std::string> shaders)
-	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)
+	: Component(o), myowner(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
@@ -35,7 +35,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, std::string objPath)
-	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)), myowner(o), primTex(nullptr)
+	: Component(o), myowner(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = glTFLoader::Load(objPath);
@@ -44,7 +44,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, std::string objPath)
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
-	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
+	: Component(o),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
@@ -53,7 +53,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName)
-	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
+	: Component(o),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
@@ -62,21 +62,21 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, std::string textureString)
-	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
+	: Component(o),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = std::make_unique<Mesh>((primType));
 	mesh->glDrawType = GLDrawType::NONE;
 	material = std::make_shared<Material>(vertexShaderName,fragmentShaderName);
-	if (GameRenderer::GetInstance()->font!=nullptr) {
-		primTex = GameRenderer::GetInstance()->font->GetFontTexture(textureString,glm::vec3(1.0,1.0,1.0), 30);
+	if (GraphicsRenderer::GetInstance()->font!=nullptr) {
+		primTex = GraphicsRenderer::GetInstance()->font->GetFontTexture(textureString,glm::vec3(1.0,1.0,1.0), 30);
 	}
 	
 }
 
 
 MeshRendererComponent::MeshRendererComponent(Object* o, std::string modelDataPath, std::string vertexShaderName, std::string fragmentShaderName)
-	: Component(o, static_cast<std::string>(typeid(MeshRendererComponent).name()).substr(6)),myowner(o), primTex(nullptr)
+	: Component(o),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = glTFLoader::Load(modelDataPath);
@@ -108,7 +108,7 @@ void MeshRendererComponent::Draw() {
 	material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
 	material->SetFloatUniform("_time", game->time);
 	material->SetFloatUniform("_deltaTime", game->deltaTime);
-	material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
+	material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 
 	if (primTex != nullptr) {
 		glEnable(GL_BLEND);
@@ -151,21 +151,21 @@ void MeshRendererComponent::DrawBoard() {
 	material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
 	material->SetFloatUniform("_time", game->time);
 	material->SetFloatUniform("_deltaTime", game->deltaTime);
-	material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
-	material->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+	material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
+	material->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 	
 	// PolygonPostProcessのテスト
-	/*if (GameRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture != nullptr) {
-		GameRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture->SetActive();
-		material->SetTexUniform("frameTex", GameRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture->GetTextureID());
-		GameRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture->SetEactive();
+	/*if (GraphicsRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture != nullptr) {
+		GraphicsRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture->SetActive();
+		material->SetTexUniform("frameTex", GraphicsRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture->GetTextureID());
+		GraphicsRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture->SetEactive();
 	}*/
 
 	// PostProcess後の最終結果 → m_LatePostProcess_FrameTexture
-	if (GameRenderer::GetInstance()->m_LatePostProcess_FrameTexture != nullptr) {
-		GameRenderer::GetInstance()->m_LatePostProcess_FrameTexture->SetActive();
-		material->SetTexUniform("frameTex", GameRenderer::GetInstance()->m_LatePostProcess_FrameTexture->GetTextureID());
-		GameRenderer::GetInstance()->m_LatePostProcess_FrameTexture->SetEactive();
+	if (GraphicsRenderer::GetInstance()->m_LatePostProcess_FrameTexture != nullptr) {
+		GraphicsRenderer::GetInstance()->m_LatePostProcess_FrameTexture->SetActive();
+		material->SetTexUniform("frameTex", GraphicsRenderer::GetInstance()->m_LatePostProcess_FrameTexture->GetTextureID());
+		GraphicsRenderer::GetInstance()->m_LatePostProcess_FrameTexture->SetEactive();
 	}
 
 	for (auto clip : animationClips) {

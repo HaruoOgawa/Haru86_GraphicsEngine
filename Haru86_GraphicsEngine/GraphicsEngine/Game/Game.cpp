@@ -125,8 +125,8 @@ bool Game::Initialize() {
 		return false;
 	}
 
-	GameRenderer::Create();
-	if (!GameRenderer::GetInstance()->Initialize(500,500)) {
+	GraphicsRenderer::Create();
+	if (!GraphicsRenderer::GetInstance()->Initialize(500,500)) {
 		SDL_Log("Can not Initialize");
 		return false;
 	}
@@ -221,7 +221,7 @@ void Game::UpdateGame() {
 	
 }
 void Game::GenerateOutput() {
-	GameRenderer::GetInstance()->Draw();
+	GraphicsRenderer::GetInstance()->Draw();
 }
 
 void Game::Reflesh() {
@@ -260,8 +260,8 @@ void Game::Restart() {
 }
 
 void Game::ShutDown() {
-	GameRenderer::GetInstance()->ShutDown();
-	GameRenderer::Destroy();
+	GraphicsRenderer::GetInstance()->ShutDown();
+	GraphicsRenderer::Destroy();
 
 	gameObjectList.clear();
 	boardGameObjectList.clear();

@@ -22,7 +22,7 @@
 #include "GraphicsEngine/Graphics/Texture.h"
 
 KuraTrail::KuraTrail(Object* o, KuraGPGPU* kuraGPGPU)
-	: Component(o, static_cast<std::string>(typeid(KuraTrail).name()).substr(6)),
+	: Component(o),
 	kuraGPGPU_instance(kuraGPGPU),
 	trailNum(kuraGPGPU->num),
 	nodeSegment(512)

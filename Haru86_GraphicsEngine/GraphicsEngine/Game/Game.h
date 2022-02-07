@@ -1,7 +1,7 @@
 #pragma once
 
 #include "SDL.h"
-#include "../Graphics/GameRenderer.h"
+#include "../Graphics/GraphicsRenderer.h"
 #include <vector>
 
 #include <memory>
@@ -48,7 +48,7 @@ public:
 	friend class GameObject;
 	friend class RaymarchingObject;
 	friend class UIObject;
-	friend class GameRenderer;
+	friend class GraphicsRenderer;
 	friend class TimelineComponent;
 	friend class UIComponent;
 	friend class Material;

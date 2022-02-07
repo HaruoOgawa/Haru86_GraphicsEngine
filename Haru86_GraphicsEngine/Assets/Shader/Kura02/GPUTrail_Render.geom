@@ -82,7 +82,8 @@ void main(){
         g2f_o.trail_ID=v2g_o[0].trail_ID;
         g2f_o.node_life=v2g_o[0].node_life;
         g2f_o.trail_color=v2g_o[0].trail_color;
-        g2f_o.normal=(vec4(Normal,1.0)*MMatrix).xyz;
+        g2f_o.normal=(MMatrix*vec4(Normal,1.0)).xyz;
+        g2f_o.worldPosition=(MMatrix*vec4(Pos+normalize(cos(a)*Normal+sin(a)*BioNormal)*_TrailWidth,1.0)).xyz;
         EmitVertex();
 
         //v01
@@ -94,7 +95,8 @@ void main(){
         g2f_o.trail_ID=v2g_o[0].trail_ID;
         g2f_o.node_life=v2g_o[0].node_life;
         g2f_o.trail_color=v2g_o[0].trail_color;
-        g2f_o.normal=(vec4(NextNormal,1.0)*MMatrix).xyz;
+        g2f_o.normal=(MMatrix*vec4(NextNormal,1.0)).xyz;
+        g2f_o.worldPosition=(MMatrix*vec4(NextPos-normalize(cos(a)*NextNormal+sin(a)*NextBioNormal)*_TrailWidth,1.0)).xyz;
         EmitVertex();
 
         //v02
@@ -104,7 +106,8 @@ void main(){
         g2f_o.trail_ID=v2g_o[0].trail_ID;
         g2f_o.node_life=v2g_o[0].node_life;
         g2f_o.trail_color=v2g_o[0].trail_color;
-        g2f_o.normal=(vec4(-Normal,1.0)*MMatrix).xyz;
+        g2f_o.normal=(MMatrix*vec4(-Normal,1.0)).xyz;
+        g2f_o.worldPosition=(MMatrix*vec4(Pos+normalize(cos(b)*Normal+sin(b)*BioNormal)*_TrailWidth,1.0)).xyz;
         EmitVertex();
             
         //v03
@@ -116,7 +119,8 @@ void main(){
         g2f_o.trail_ID=v2g_o[0].trail_ID;
         g2f_o.node_life=v2g_o[0].node_life;
         g2f_o.trail_color=v2g_o[0].trail_color;
-        g2f_o.normal=(vec4(-NextNormal,1.0)*MMatrix).xyz;
+        g2f_o.normal=(MMatrix*vec4(-NextNormal,1.0)).xyz;
+        g2f_o.worldPosition=(MMatrix*vec4(NextPos-normalize(cos(b)*NextNormal+sin(b)*NextBioNormal)*_TrailWidth,1.0)).xyz;
         EmitVertex();
 
         EndPrimitive();

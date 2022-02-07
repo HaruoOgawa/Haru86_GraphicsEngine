@@ -20,7 +20,7 @@ Kura02::Kura02():
 }
 
 Kura02::~Kura02() {
-
+	printf("Kura02 is Released\n");
 }
 
 void Kura02::Start() {
@@ -31,8 +31,8 @@ void Kura02::Start() {
 	cam_obj->transform->position = glm::vec3(5.0,0.0,5.0);
 
 	ins_cubes = std::make_unique<Object>();
-	ins_cubes->AddComponent(std::make_shared<CBoxInstancing>(ins_cubes.get()));
-	ins_cubes->AddComponent(std::make_shared<CKura3DGPUTrail>(ins_cubes.get()));
+	ins_cubes->AddComponent<CBoxInstancing>(std::make_shared<CBoxInstancing>(ins_cubes.get()));
+	ins_cubes->AddComponent<CKura3DGPUTrail>(std::make_shared<CKura3DGPUTrail>(ins_cubes.get()));
 
 	raymarching_obj = std::make_unique<RaymarchingObject>("./Assets/Shader/Kura02/CubeFieldRaymarching.frag");
 	Game::GetInstance()->m_RaymarchingObject = raymarching_obj.get();
@@ -50,11 +50,14 @@ void Kura02::Update() {
 		glm::sin(Game::GetInstance()->time * 0.0001)* 8.5
 	);
 
+	if (Game::GetInstance()->time>=1000.0*60.0*60.0) {
+		Game::GetInstance()->Restart();
+	}
 }
 
 void Kura02::Draw() {
-	static_cast<CBoxInstancing*>(ins_cubes->GetComponent(static_cast<std::string>(typeid(CBoxInstancing).name())))->Draw();
-	static_cast<CKura3DGPUTrail*>(ins_cubes->GetComponent(static_cast<std::string>(typeid(CKura3DGPUTrail).name())))->Draw();
+	ins_cubes->GetComponent<CBoxInstancing>()->Draw();
+	ins_cubes->GetComponent<CKura3DGPUTrail>()->Draw();
 }
 
 void Kura02::Timeline(class TimelineObject* timelineObj) {

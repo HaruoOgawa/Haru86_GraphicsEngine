@@ -9,15 +9,29 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include <memory>
+#include <typeindex>
+
+class Component;
 
 class Object
 {
 public:
 	Object();
 	virtual ~Object();
-	void AddComponent(std::shared_ptr<class Component> component);
-	void RemoveComponent(std::shared_ptr<class Component> component);
-	class Component* GetComponent(std::string componentName);
+
+	template<typename T>
+	void AddComponent(std::shared_ptr<Component> component) {
+		myComponent.insert({ typeid(T),component });
+	}
+
+	void RemoveComponent(std::shared_ptr<Component> component);
+	
+	template<typename T>
+	T* GetComponent()const {
+		auto item = myComponent.find(typeid(T));
+		return static_cast<T*>(item->second.get());
+	}
+
 	void SetTransform(glm::vec3 pos, glm::quat rot, glm::vec3 s);
 	void SetPosition(glm::vec3 pos);
 	void SetRotation(glm::quat rot);
@@ -28,13 +42,13 @@ public:
 	glm::vec3 GetScale();
 	std::shared_ptr<class TransformComponent> transform;
 	friend class MeshRendererComponent;
-	friend class GameRenderer;
+	friend class GraphicsRenderer;
 	friend class UIComponent;
 	friend class RectTransformComponent;
 private:
 	class Game* game;
 protected:
-	std::unordered_map<std::string, std::shared_ptr<class Component>> myComponent;
+	std::unordered_map<std::type_index, std::shared_ptr<Component>> myComponent;
 };
 
 

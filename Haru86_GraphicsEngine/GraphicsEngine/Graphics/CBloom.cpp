@@ -3,7 +3,7 @@
 #include "Material.h"
 #include "Mesh.h"
 #include "GraphicsEngine/Game/Game.h"
-#include "GraphicsEngine/Graphics/GameRenderer.h"
+#include "GraphicsEngine/Graphics/GraphicsRenderer.h"
 #include "GraphicsEngine/Graphics/PostProcess.h"
 
 CBloom::CBloom():
@@ -32,9 +32,9 @@ void CBloom::Initialize() {
 	m_mesh = std::make_shared<Mesh>(PrimitiveType::BOARD);
 
 	// Create FrameBuffer  Œã‚Ù‚ÇHDRTexture‚É‚·‚é
-	if(!GameRenderer::GetInstance()->CreateFrameBuffer(m_IlluminanceMap, m_IlluminanceBuffer, GL_RGBA16F, GL_RGBA, GL_FLOAT))printf("Cannot Create FrameBuffer\n");
-	if(!GameRenderer::GetInstance()->CreateFrameBuffer(m_BlurMapX, m_BlurBufferX, GL_RGBA16F, GL_RGBA, GL_FLOAT))printf("Cannot Create FrameBuffer\n");
-	if(!GameRenderer::GetInstance()->CreateFrameBuffer(m_BlurMapY, m_BlurBufferY, GL_RGBA16F, GL_RGBA, GL_FLOAT))printf("Cannot Create FrameBuffer\n");
+	if(!GraphicsRenderer::GetInstance()->CreateFrameBuffer(m_IlluminanceMap, m_IlluminanceBuffer, GL_RGBA16F, GL_RGBA, GL_FLOAT))printf("Cannot Create FrameBuffer\n");
+	if(!GraphicsRenderer::GetInstance()->CreateFrameBuffer(m_BlurMapX, m_BlurBufferX, GL_RGBA16F, GL_RGBA, GL_FLOAT))printf("Cannot Create FrameBuffer\n");
+	if(!GraphicsRenderer::GetInstance()->CreateFrameBuffer(m_BlurMapY, m_BlurBufferY, GL_RGBA16F, GL_RGBA, GL_FLOAT))printf("Cannot Create FrameBuffer\n");
 
 	// weights‚ÌŒvŽZ
 	float blurPower = 1000.0; // from 10.0 to 1000.0
@@ -58,7 +58,7 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 	// Illuminance
 	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 	glBindFramebuffer(GL_FRAMEBUFFER, m_IlluminanceBuffer);
-	glViewport(0, 0, static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().x * GameRenderer::GetInstance()->frameResolusion), static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().y * GameRenderer::GetInstance()->frameResolusion));
+	glViewport(0, 0, static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().x * GraphicsRenderer::GetInstance()->frameResolusion), static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().y * GraphicsRenderer::GetInstance()->frameResolusion));
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -67,8 +67,8 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 
 	m_IlluminanceMaterial->SetActive();
 	m_IlluminanceMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
-	m_IlluminanceMaterial->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
-	m_IlluminanceMaterial->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+	m_IlluminanceMaterial->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
+	m_IlluminanceMaterial->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 	SrcTexture->SetActive();
 	m_IlluminanceMaterial->SetTexUniform("_SrcTexture", SrcTexture->GetTextureID());
 	SrcTexture->SetEactive();
@@ -80,7 +80,7 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 	// BlurX
 	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 	glBindFramebuffer(GL_FRAMEBUFFER, m_BlurBufferX);
-	glViewport(0, 0, static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().x * GameRenderer::GetInstance()->frameResolusion), static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().y * GameRenderer::GetInstance()->frameResolusion));
+	glViewport(0, 0, static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().x * GraphicsRenderer::GetInstance()->frameResolusion), static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().y * GraphicsRenderer::GetInstance()->frameResolusion));
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -89,8 +89,8 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 
 	m_BlurMaterial->SetActive();
 	m_BlurMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
-	m_BlurMaterial->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
-	m_BlurMaterial->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+	m_BlurMaterial->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
+	m_BlurMaterial->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 	if (m_IlluminanceMap) {
 		m_IlluminanceMap->SetActive();
 		m_BlurMaterial->SetTexUniform("_IlluminanceTexture", m_IlluminanceMap->GetTextureID());
@@ -103,7 +103,7 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 	// BlurY
 	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 	glBindFramebuffer(GL_FRAMEBUFFER, m_BlurBufferY);
-	glViewport(0, 0, static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().x * GameRenderer::GetInstance()->frameResolusion), static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().y * GameRenderer::GetInstance()->frameResolusion));
+	glViewport(0, 0, static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().x * GraphicsRenderer::GetInstance()->frameResolusion), static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().y * GraphicsRenderer::GetInstance()->frameResolusion));
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -112,8 +112,8 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 
 	m_BlurMaterial->SetActive();
 	m_BlurMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
-	m_BlurMaterial->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
-	m_BlurMaterial->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+	m_BlurMaterial->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
+	m_BlurMaterial->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 	if (m_BlurMapX) {
 		m_BlurMapX->SetActive();
 		m_BlurMaterial->SetTexUniform("_IlluminanceTexture", m_BlurMapX->GetTextureID());
@@ -126,7 +126,7 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 	// Result
 	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 	glBindFramebuffer(GL_FRAMEBUFFER, DestBuffer);
-	glViewport(0, 0, static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().x * GameRenderer::GetInstance()->frameResolusion), static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().y * GameRenderer::GetInstance()->frameResolusion));
+	glViewport(0, 0, static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().x * GraphicsRenderer::GetInstance()->frameResolusion), static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().y * GraphicsRenderer::GetInstance()->frameResolusion));
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -135,8 +135,8 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 
 	m_BloomResultMaterial->SetActive();
 	m_BloomResultMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
-	m_BloomResultMaterial->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
-	m_BloomResultMaterial->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+	m_BloomResultMaterial->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
+	m_BloomResultMaterial->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 	if (m_BlurMapY) {
 		m_BlurMapY->SetActive();
 		m_BloomResultMaterial->SetTexUniform("_BlurTexture", m_BlurMapY->GetTextureID());

@@ -3,12 +3,12 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include "../Game/Game.h"
-#include "../Graphics/GameRenderer.h"
+#include "../Graphics/GraphicsRenderer.h"
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Component/CameraComponent.h"
 
 TransformComponent::TransformComponent(Object* o, glm::vec3 pos,glm::quat rot,glm::vec3 s)
-	: Component(o, static_cast<std::string>(typeid(TransformComponent).name()).substr(6)),position(pos),rotation(rot),scale(s)
+	: Component(o),position(pos),rotation(rot),scale(s)
 {
 	CalMatrix();
 }
@@ -62,8 +62,8 @@ void TransformComponent::ComputeViewMatrix() {
 }
 
 void TransformComponent::ComputePerspectiveMatrix() {
-	float width = static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().x);
-	float height = static_cast<float>(GameRenderer::GetInstance()->GetScreenSize().y);
+	float width = static_cast<float>(GraphicsRenderer::GetInstance()->GetScreenSize().x);
+	float height = static_cast<float>(GraphicsRenderer::GetInstance()->GetScreenSize().y);
 	
 	pMatrix = glm::perspective(
 		glm::radians(90.0f),

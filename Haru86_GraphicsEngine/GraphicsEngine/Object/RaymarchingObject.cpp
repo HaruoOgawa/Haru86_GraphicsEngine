@@ -33,8 +33,8 @@ void RaymarchingObject::Draw() {
 	m_material->SetMatrixUniform("PMatrix", transform->GetPMatrix());
 	m_material->SetFloatUniform("_time", Game::GetInstance()->time*0.001);
 	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
-	m_material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
-	m_material->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+	m_material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
+	m_material->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 	if (Game::GetInstance()->renderingTarget==ERerderingTarget::COLOR) {
 		m_material->SetFloatUniform("_RenderingTarget", 1.0);
 	}

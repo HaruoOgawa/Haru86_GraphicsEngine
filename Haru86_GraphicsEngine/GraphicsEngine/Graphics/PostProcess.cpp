@@ -5,7 +5,7 @@
 #include "CBloom.h"
 #include "GraphicsEngine/Graphics/Mesh.h"
 #include "GraphicsEngine/Graphics/Material.h"
-#include "GraphicsEngine/Graphics/GameRenderer.h"
+#include "GraphicsEngine/Graphics/GraphicsRenderer.h"
 #include "GraphicsEngine/Graphics/Mesh.h"
 #include "GraphicsEngine/Graphics/Material.h"
 #include "GraphicsEngine/Game/Game.h"
@@ -48,7 +48,7 @@ void PostProcess::Initialize() {
 	m_material = std::make_shared<Material>("./Assets/Shader/StandardRenderBoard.vert", "./Assets/Shader/PolygonPostProcess.frag");
 	m_LateMaterial = std::make_shared<Material>("./Assets/Shader/StandardRenderBoard.vert", "./Assets/Shader/LatePostProcess.frag");
 
-	if (!GameRenderer::GetInstance()->CreateFrameBuffer(m_BloomTexture, m_BloomFrameBuffer,GL_RGBA16F, GL_RGBA, GL_FLOAT)) {
+	if (!GraphicsRenderer::GetInstance()->CreateFrameBuffer(m_BloomTexture, m_BloomFrameBuffer,GL_RGBA16F, GL_RGBA, GL_FLOAT)) {
 		printf("Cannot Create FrameBuffer\n");
 	}
 }
@@ -73,7 +73,7 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 		// Draw PostProcess Result
 		Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 		glBindFramebuffer(GL_FRAMEBUFFER, DestBuffer);
-		glViewport(0, 0, static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().x * GameRenderer::GetInstance()->frameResolusion), static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().y * GameRenderer::GetInstance()->frameResolusion));
+		glViewport(0, 0, static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().x * GraphicsRenderer::GetInstance()->frameResolusion), static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().y * GraphicsRenderer::GetInstance()->frameResolusion));
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -83,8 +83,8 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 		// draw PostProcess Board
 		m_material->SetActive();
 		m_material->SetFloatUniform("_time", Game::GetInstance()->time);
-		m_material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
-		m_material->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+		m_material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
+		m_material->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 
 		// Bloom
 		if (m_BloomTexture&& m_UseBloom) {
@@ -108,7 +108,7 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 		// Draw PostProcess Result
 		Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 		glBindFramebuffer(GL_FRAMEBUFFER, DestBuffer);
-		glViewport(0, 0, static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().x * GameRenderer::GetInstance()->frameResolusion), static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().y * GameRenderer::GetInstance()->frameResolusion));
+		glViewport(0, 0, static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().x * GraphicsRenderer::GetInstance()->frameResolusion), static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().y * GraphicsRenderer::GetInstance()->frameResolusion));
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -118,8 +118,8 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 		// draw PostProcess Board
 		m_material->SetActive();
 		m_material->SetFloatUniform("_time", Game::GetInstance()->time);
-		m_material->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
-		m_material->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+		m_material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
+		m_material->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 
 		m_material->SetFloatUniform("_UseBloom", 0.0);
 
@@ -138,7 +138,7 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 		
 		// Draw PostProcess Result
 		glBindFramebuffer(GL_FRAMEBUFFER, DestBuffer);
-		glViewport(0, 0, static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().x * GameRenderer::GetInstance()->frameResolusion), static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().y * GameRenderer::GetInstance()->frameResolusion));
+		glViewport(0, 0, static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().x * GraphicsRenderer::GetInstance()->frameResolusion), static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().y * GraphicsRenderer::GetInstance()->frameResolusion));
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -147,8 +147,8 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 
 		m_LateMaterial->SetActive();
 		m_LateMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
-		m_LateMaterial->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
-		m_LateMaterial->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+		m_LateMaterial->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
+		m_LateMaterial->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 		SrcTexture->SetActive();
 		m_LateMaterial->SetTexUniform("_SrcTexture", SrcTexture->GetTextureID());
 		SrcTexture->SetEactive();
@@ -157,7 +157,7 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 	else {
 		// Draw PostProcess Result
 		glBindFramebuffer(GL_FRAMEBUFFER, DestBuffer);
-		glViewport(0, 0, static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().x * GameRenderer::GetInstance()->frameResolusion), static_cast<int>(GameRenderer::GetInstance()->GetScreenSize().y * GameRenderer::GetInstance()->frameResolusion));
+		glViewport(0, 0, static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().x * GraphicsRenderer::GetInstance()->frameResolusion), static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().y * GraphicsRenderer::GetInstance()->frameResolusion));
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -166,8 +166,8 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 
 		m_LateMaterial->SetActive();
 		m_LateMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
-		m_LateMaterial->SetVec2Uniform("_resolution", GameRenderer::GetInstance()->GetScreenSize());
-		m_LateMaterial->SetFloatUniform("_frameResolusion", GameRenderer::GetInstance()->frameResolusion);
+		m_LateMaterial->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
+		m_LateMaterial->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 		SrcTexture->SetActive();
 		m_LateMaterial->SetTexUniform("_SrcTexture", SrcTexture->GetTextureID());
 		SrcTexture->SetEactive();

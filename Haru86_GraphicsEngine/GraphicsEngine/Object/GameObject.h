@@ -42,7 +42,7 @@ public:
 	void ProcessInput(const Uint8* state);
 	std::shared_ptr<class MeshRendererComponent> meshComp;
 	float animTime = 0.0f;
-	friend class GameRenderer;
+	friend class GraphicsRenderer;
 	friend class TimelineComponent;
 	int renderOrder;
 private:
