@@ -2,12 +2,12 @@
 #include "../../../GraphicsEngine/Game/Game.h"
 #include "../../../GraphicsEngine/App/BaseApp/BaseApp.h"
 #include <memory>
-class CC220108App :
+class Kura02 :
     public BaseApp
 {
 public:
-    CC220108App();
-    ~CC220108App();
+    Kura02();
+    ~Kura02();
     void Start()  override;
     void Update()  override;
     void Draw() override;
@@ -16,5 +16,7 @@ private:
     std::unique_ptr<class Object> ins_cubes;
     std::unique_ptr<class CameraObject> cam_obj;
     std::unique_ptr<class GameObject> test_obj;
+    std::unique_ptr<class GameObject> test_obj2;
+    std::unique_ptr<class RaymarchingObject> raymarching_obj;
 };
 

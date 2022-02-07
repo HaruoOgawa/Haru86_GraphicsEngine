@@ -12,6 +12,7 @@ public:
 	virtual ~Component();
 	virtual void Start();
 	virtual void Update();
+	virtual void Dtaw();
 	virtual void ProcessInput(const Uint8* state)const = 0;
 	std::string superClassName;
 	friend Object;

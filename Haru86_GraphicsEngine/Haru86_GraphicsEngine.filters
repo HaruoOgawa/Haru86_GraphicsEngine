@@ -93,6 +93,9 @@
     <ClInclude Include="Assets\App\KuraArtApp\KuraArtApp.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Assets\App\Kura02\Kura02.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
     <ClInclude Include="GraphicsEngine\Graphics\Graphics.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -198,6 +201,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Assets\App\KuraArtApp\KuraArtApp.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\App\Kura02\Kura02.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsEngine\Graphics\Graphics.cpp">

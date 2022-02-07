@@ -8,6 +8,12 @@
 #include <map>
 #include <GL/glew.h>
 
+enum ERerderingTarget
+{
+	COLOR,
+	DEPTH
+};
+
 class Game
 {
 public:
@@ -36,13 +42,19 @@ public:
 	std::unique_ptr<class GameObject> renderBoard;
 	class CameraObject* game_camera_instance;
 	std::map<int, GLenum> texSlots;
-
+	class RaymarchingObject* m_RaymarchingObject;
+	
 	friend class Main;
 	friend class GameObject;
+	friend class RaymarchingObject;
 	friend class UIObject;
 	friend class GameRenderer;
 	friend class TimelineComponent;
 	friend class UIComponent;
+	friend class Material;
+	friend class PostProcess;
+	friend class CBloom;
+
 private :
 	void UpdateTimeline();
 	void InputProcess();
@@ -59,6 +71,7 @@ private :
 	
 	bool mouseStateBool;
 	bool isRestart;
+	ERerderingTarget renderingTarget;
 	
 protected:
 	static Game* s_pInstance;

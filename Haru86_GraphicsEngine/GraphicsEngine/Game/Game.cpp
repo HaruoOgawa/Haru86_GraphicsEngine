@@ -10,13 +10,12 @@
 #include <vector>
 #include <algorithm>
 #include "../App/BaseApp/BaseApp.h"
-#include "../../Assets/App/CreativeCoding20220108/CC220108App.h"
+#include "../../Assets/App/Kura02/Kura02.h"
 //#include "../../Assets/App/KuraArtApp/KuraArtApp.h"
 //#include "../../Assets/App/DemoApp/DemoApp.h"
-
-
 #include <exception>
 #include <stdexcept>
+#include "GraphicsEngine/Object/RaymarchingObject.h"
 
 Game* Game::s_pInstance = nullptr;
 
@@ -42,10 +41,12 @@ Game::Game()
 	previousTime(0.0f),
 	mouseStateBool(false),
 	animTime(0.0f),
-	isRestart(false)
+	isRestart(false),
+	renderingTarget(ERerderingTarget::COLOR),
+	m_RaymarchingObject(nullptr)
 {
 	
-	for (int i = 0; i < 10;i++) {
+	for (int i = 0; i < 20;i++) {
 		switch (i)
 		{
 		case 0:
@@ -78,6 +79,36 @@ Game::Game()
 		case 9:
 			texSlots.emplace(i, GL_TEXTURE9);
 			break;
+		case 10:
+			texSlots.emplace(i, GL_TEXTURE10);
+			break;
+		case 11:
+			texSlots.emplace(i, GL_TEXTURE11);
+			break;
+		case 12:
+			texSlots.emplace(i, GL_TEXTURE12);
+			break;
+		case 13:
+			texSlots.emplace(i, GL_TEXTURE13);
+			break;
+		case 14:
+			texSlots.emplace(i, GL_TEXTURE14);
+			break;
+		case 15:
+			texSlots.emplace(i, GL_TEXTURE15);
+			break;
+		case 16:
+			texSlots.emplace(i, GL_TEXTURE16);
+			break;
+		case 17:
+			texSlots.emplace(i, GL_TEXTURE17);
+			break;
+		case 18:
+			texSlots.emplace(i, GL_TEXTURE18);
+			break;
+		case 19:
+			texSlots.emplace(i, GL_TEXTURE19);
+			break;
 		default:
 			break;
 		}
@@ -106,7 +137,7 @@ bool Game::Initialize() {
 }
 
 void Game::LoadData() {
-	app = std::make_unique<CC220108App>();
+	app = std::make_unique<Kura02>();
 	timeObj = std::make_unique<Time>(60.0f);
 	app->Start();
 
@@ -208,6 +239,7 @@ void Game::Reflesh() {
 	mouseStateBool = false;
 	animTime = 0.0f;
 	isRestart = false;
+	renderingTarget = ERerderingTarget::COLOR;
 
 	//メモリを解放
 	game_camera_instance = nullptr;
@@ -217,6 +249,7 @@ void Game::Reflesh() {
 	if (app) {
 		app.reset();
 	}
+	m_RaymarchingObject = nullptr;
 	
 	//再度リソースをロードする
 	LoadData();

@@ -29,26 +29,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -198,9 +198,11 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Assets\App\DemoApp\DemoApp.h" />
+    <ClInclude Include="Assets\App\Kura02\Kura02.h" />
     <ClInclude Include="Assets\App\KuraArtApp\Script\KuraGPGPU.h" />
-    <ClInclude Include="Assets\App\CreativeCoding20220108\CC220108App.h" />
-    <ClInclude Include="Assets\App\CreativeCoding20220108\Script\CBoxInstancing.h" />
+    <ClInclude Include="Assets\App\Kura02\Script\CBoxInstancing.h" />
+    <ClInclude Include="Assets\App\Kura02\Script\CKura3DGPUTrail.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\CBloom.h" />
     <ClInclude Include="GraphicsEngine\Component\CameraComponent.h" />
     <ClInclude Include="GraphicsEngine\Object\CameraObject.h" />
     <ClInclude Include="GraphicsEngine\Graphics\glTFBinaryReader.h" />
@@ -228,6 +230,9 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Graphics\Primitive.h" />
     <ClInclude Include="GraphicsEngine\Component\RectTransformComponent.h" />
     <ClInclude Include="Assets\App\KuraArtApp\Script\KuraTrail.h" />
+    <ClInclude Include="GraphicsEngine\Object\RaymarchingObject.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\PolygonRaymarchingMixer.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\PostProcess.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Texture.h" />
     <ClInclude Include="GraphicsEngine\Game\Time.h" />
@@ -239,9 +244,11 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets\App\DemoApp\DemoApp.cpp" />
+    <ClCompile Include="Assets\App\Kura02\Kura02.cpp" />
     <ClCompile Include="Assets\App\KuraArtApp\Script\KuraGPGPU.cpp" />
-    <ClCompile Include="Assets\App\CreativeCoding20220108\CC220108App.cpp" />
-    <ClCompile Include="Assets\App\CreativeCoding20220108\Script\CBoxInstancing.cpp" />
+    <ClCompile Include="Assets\App\Kura02\Script\CBoxInstancing.cpp" />
+    <ClCompile Include="Assets\App\Kura02\Script\CKura3DGPUTrail.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\CBloom.cpp" />
     <ClCompile Include="GraphicsEngine\App\BaseApp\BaseApp.cpp" />
     <ClCompile Include="GraphicsEngine\Component\CameraComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Object\CameraObject.cpp" />
@@ -272,10 +279,22 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Component\UIComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\Mesh.cpp" />
     <ClCompile Include="Assets\App\KuraArtApp\Script\KuraTrail.cpp" />
+    <ClCompile Include="GraphicsEngine\Object\RaymarchingObject.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\PolygonRaymarchingMixer.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\PostProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shader\CreativeCoding20220108\InstancedBox.frag" />
-    <None Include="Assets\Shader\CreativeCoding20220108\InstancedBox.vert" />
+    <None Include="Assets\Shader\BloomBlur.frag" />
+    <None Include="Assets\Shader\BloomDemo.frag" />
+    <None Include="Assets\Shader\BloomIlluminance.frag" />
+    <None Include="Assets\Shader\BloomResult.frag" />
+    <None Include="Assets\Shader\DepthColor.frag" />
+    <None Include="Assets\Shader\Kura02\CubeFieldRaymarching.frag" />
+    <None Include="Assets\Shader\Kura02\GPUTrail_Data.comp" />
+    <None Include="Assets\Shader\Kura02\GPUTrail_Force.comp" />
+    <None Include="Assets\Shader\Kura02\InstancedBox.frag" />
+    <None Include="Assets\Shader\Kura02\InstancedBox.vert" />
+    <None Include="Assets\Shader\Kura02\veda\CubeFieldRaymarching_VEDA.frag" />
     <None Include="Assets\Shader\KuraShader\Background.frag" />
     <None Include="Assets\Shader\KuraShader\Background.vert" />
     <None Include="Assets\Shader\KuraShader\BoidsForce.comp" />
@@ -294,6 +313,11 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <None Include="Assets\Shader\KuraShader\KuraTerrain.tesc" />
     <None Include="Assets\Shader\KuraShader\KuraTerrain.tese" />
     <None Include="Assets\Shader\KuraShader\KuraTerrain.vert" />
+    <None Include="Assets\Shader\LatePostProcess.frag" />
+    <None Include="Assets\Shader\PolygonRaymarchingMixer.frag" />
+    <None Include="Assets\Shader\PolygonRaymarchingMixer.vert" />
+    <None Include="Assets\Shader\PolygonPostProcess.frag" />
+    <None Include="Assets\Shader\RaymarchingObject.vert" />
     <None Include="Assets\Shader\StandardRenderBoard.frag" />
     <None Include="Assets\Shader\StandardRenderBoard.vert" />
     <None Include="bin\libfreetype-6.dll" />
