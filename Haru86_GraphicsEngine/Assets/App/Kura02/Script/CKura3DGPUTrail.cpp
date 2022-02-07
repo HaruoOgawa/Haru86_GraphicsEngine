@@ -25,7 +25,7 @@ CKura3DGPUTrail::CKura3DGPUTrail(Object* o)
 	m_buffer_input(nullptr),
 	m_computeShader_NextInputPos(nullptr),
 	m_computeShader_NodeInfo(nullptr),
-	nodeSegment(128)
+	nodeSegment(256)
 {
 	trailNum = num;
 	nodeNum = trailNum * nodeSegment;
