@@ -197,6 +197,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Assets\App\AnimationSystemApp\AnimationSystemApp.h" />
     <ClInclude Include="Assets\App\DemoApp\DemoApp.h" />
     <ClInclude Include="Assets\App\Kura02\Kura02.h" />
     <ClInclude Include="Assets\App\KuraArtApp\Script\KuraGPGPU.h" />
@@ -243,6 +244,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Graphics\Mesh.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Assets\App\AnimationSystemApp\AnimationSystemApp.cpp" />
     <ClCompile Include="Assets\App\DemoApp\DemoApp.cpp" />
     <ClCompile Include="Assets\App\Kura02\Kura02.cpp" />
     <ClCompile Include="Assets\App\KuraArtApp\Script\KuraGPGPU.cpp" />
