@@ -35,6 +35,8 @@ public:
 	std::shared_ptr<class Texture> m_PolygonPostProcess_FrameTexture;
 	std::shared_ptr<class Texture> m_LatePostProcess_FrameTexture;
 
+	void SetBackgroundColor(glm::vec3 color);
+	
 	friend class PolygonRaymarchingMixer;
 private:
 	SDL_Window* sWindow;
@@ -56,6 +58,8 @@ private:
 	//ポリゴンとレイマーチングのミックス
 	std::unique_ptr<class PolygonRaymarchingMixer> m_Mixer;
 	
+	// 初期化時の背景色
+	glm::vec3 m_BackgroundColor;
 protected:
 	static GraphicsRenderer* renderer_instance;
 };

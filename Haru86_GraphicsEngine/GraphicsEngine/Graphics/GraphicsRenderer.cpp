@@ -38,7 +38,8 @@ GraphicsRenderer::GraphicsRenderer(Game* game)
 	raymarching_depthTexture(std::make_shared<Texture>()),
 	p_r_BlendingTexture(std::make_shared<Texture>()),
 	m_PolygonPostProcess_FrameTexture(std::make_shared<Texture>()),
-	m_LatePostProcess_FrameTexture(std::make_shared<Texture>())
+	m_LatePostProcess_FrameTexture(std::make_shared<Texture>()),
+	m_BackgroundColor(0.0,0.0,0.0)
 {
 }
 
@@ -164,7 +165,7 @@ void GraphicsRenderer::Draw() {
 	glBindFramebuffer(GL_FRAMEBUFFER, polygon_frameBuffer);
 	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(m_BackgroundColor.x, m_BackgroundColor.y, m_BackgroundColor.z, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glEnable(GL_DEPTH_TEST);
@@ -262,6 +263,10 @@ void GraphicsRenderer::Draw() {
 
 	//êÇíºìØä˙Çé¿çs
 	SDL_GL_SwapWindow(sWindow);
+}
+
+void GraphicsRenderer::SetBackgroundColor(glm::vec3 color) {
+	m_BackgroundColor = color;
 }
 
 void GraphicsRenderer::ShutDown() {
