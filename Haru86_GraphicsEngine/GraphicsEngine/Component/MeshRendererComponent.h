@@ -26,6 +26,7 @@ public:
     void DrawBoard();
     void ProcessInput(const Uint8* state)const override;
     bool useZTest;
+    bool useAlphaTest;
     std::vector<class TimelineAnimationClip*> animationClips;
     std::shared_ptr<class Material> material;
     friend class GraphicsRenderer;
