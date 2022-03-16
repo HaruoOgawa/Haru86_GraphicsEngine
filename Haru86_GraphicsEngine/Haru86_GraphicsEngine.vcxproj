@@ -290,6 +290,12 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Graphics\PostProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shader\CollisionArt\CubeFieldRaymarching.frag" />
+    <None Include="Assets\Shader\CollisionArt\GPUTrail_Data.comp" />
+    <None Include="Assets\Shader\CollisionArt\GPUTrail_Force.comp" />
+    <None Include="Assets\Shader\CollisionArt\InstancedBox.frag" />
+    <None Include="Assets\Shader\CollisionArt\InstancedBox.vert" />
+    <None Include="Assets\Shader\CollisionArt\veda\CubeFieldRaymarching_VEDA.frag" />
     <None Include="Assets\Shader\BloomBlur.frag" />
     <None Include="Assets\Shader\BloomDemo.frag" />
     <None Include="Assets\Shader\BloomIlluminance.frag" />

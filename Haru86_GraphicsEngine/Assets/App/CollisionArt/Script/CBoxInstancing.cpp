@@ -23,8 +23,8 @@ void CBoxInstancing::Start() {
 	owner->transform->scale = glm::vec3(1.0);
 	m_mesh = std::make_shared<Mesh>(PrimitiveType::CUBE);
 	m_material = std::make_shared<Material>(
-		"./Assets/Shader/Kura02/InstancedBox.vert",
-		"./Assets/Shader/Kura02/InstancedBox.frag"
+		"./Assets/Shader/CollisionArt/InstancedBox.vert",
+		"./Assets/Shader/CollisionArt/InstancedBox.frag"
 	);
 	
 	m_cubeGroundBuffer = std::make_shared<ComputeBuffer>(sizeof(SCubeFieldObj)*instanciedCound);
