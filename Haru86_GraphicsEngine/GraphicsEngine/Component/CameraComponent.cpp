@@ -3,6 +3,9 @@
 #include <SDL.h>
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/Graphics/GraphicsRenderer.h"
+#include "GraphicsEngine/Game/Game.h"
+
+#define ZoomPower 2.0f
 
 CameraComponent::CameraComponent(Object* o, enum class CameraType cameraType)
 	: Component(o)
@@ -11,7 +14,10 @@ CameraComponent::CameraComponent(Object* o, enum class CameraType cameraType)
 	m_YMove(0),
 	m_IsRightClicked(false),
 	m_IsLeftClicked(false),
-	m_ScreenSize(GraphicsRenderer::GetInstance()->GetScreenSize())
+	m_ScreenSize(GraphicsRenderer::GetInstance()->GetScreenSize()),
+	m_WheelX(0),
+	m_WheelY(0),
+	m_IsMouseWheel(false)
 {
 
 }
@@ -26,6 +32,12 @@ void CameraComponent::Start() {
 void CameraComponent::Update() {
 	if (m_IsRightClicked) {
 		owner->transform->Rotate(5.0f*m_YMove/ m_ScreenSize.y,-5.0f*m_XMove/ m_ScreenSize.x,0.0f);
+	}
+
+	if (m_IsMouseWheel) {
+		glm::vec3 viewDir = glm::normalize(cameraCenter - owner->transform->position);
+		float zoomVal = ZoomPower*(float)m_WheelY;
+		owner->transform->Translate(zoomVal * viewDir);
 	}
 }
 
@@ -54,5 +66,12 @@ void CameraComponent::ProcessInput(const SDL_Event& e) {
 	}
 
 	// マウスホイールの回転量を取得する
-	//SDL_MouseWheelEvent
+	if (e.type==SDL_MOUSEWHEEL) {
+		m_IsMouseWheel = true;
+		m_WheelX = static_cast<int>(e.wheel.x);
+		m_WheelY = static_cast<int>(e.wheel.y);
+	}
+	else {
+		m_IsMouseWheel = false;
+	}
 }

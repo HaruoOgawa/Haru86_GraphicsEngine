@@ -9,8 +9,13 @@ class CameraComponent :
 {
     int m_XMove;
     int m_YMove;
+    int m_WheelX;
+    int m_WheelY;
+
     bool m_IsRightClicked;
     bool m_IsLeftClicked;
+    bool m_IsMouseWheel;
+    
     glm::vec2 m_ScreenSize;
 public:
     CameraComponent(class Object* o, enum class CameraType cameraType);

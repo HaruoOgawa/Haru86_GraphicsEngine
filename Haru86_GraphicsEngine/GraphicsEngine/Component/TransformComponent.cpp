@@ -20,8 +20,8 @@ void TransformComponent::Update() {
 
 }
 
-void TransformComponent::Translate() {
-
+void TransformComponent::Translate(glm::vec3 MoveV) {
+	position += MoveV;
 }
 void TransformComponent::Rotate(float XRot, float YRot, float ZRot) {
 	glm::mat4 RotMatrix= glm::mat4_cast(glm::quat(glm::vec3(XRot, YRot, ZRot)));
@@ -59,8 +59,6 @@ void TransformComponent::ComputeViewMatrix() {
 			glm::vec3(0.0f, 1.0f, 0.0f)
 		);
 	}
-	
-	
 }
 
 void TransformComponent::ComputePerspectiveMatrix() {
