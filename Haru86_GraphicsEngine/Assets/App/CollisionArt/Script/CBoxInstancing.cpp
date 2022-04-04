@@ -10,8 +10,8 @@
 
 CBoxInstancing::CBoxInstancing(Object* o)
 	: Component(o),
-	instanciedCound(124*124),
-	sideCubeCount(124)
+	instanciedCound(4*4*4),
+	sideCubeCount(4)
 {
 	Start();
 }
@@ -21,7 +21,7 @@ CBoxInstancing::~CBoxInstancing() {
 
 void CBoxInstancing::Start() {
 	owner->transform->scale = glm::vec3(1.0);
-	m_mesh = std::make_shared<Mesh>(PrimitiveType::SPHERE);
+	m_mesh = std::make_shared<Mesh>(PrimitiveType::CUBE);
 	m_material = std::make_shared<Material>(
 		"./Assets/Shader/CollisionArt/InstancedBox.vert",
 		"./Assets/Shader/CollisionArt/InstancedBox.frag"
@@ -29,9 +29,11 @@ void CBoxInstancing::Start() {
 	
 	m_cubeGroundBuffer = std::make_shared<ComputeBuffer>(sizeof(SCubeFieldObj)*instanciedCound);
 	std::vector<SCubeFieldObj> init_CubeFieldObj;
-	for (int y = 0; y < sideCubeCount;y++) {
-		for (int x = 0; x < sideCubeCount; x++) {
-			init_CubeFieldObj.push_back(SCubeFieldObj(x, y, x + y * sideCubeCount));
+	for (int z = 0; z < sideCubeCount; z++) {
+		for (int y = 0; y < sideCubeCount; y++) {
+			for (int x = 0; x < sideCubeCount; x++) {
+				init_CubeFieldObj.push_back(SCubeFieldObj(x, y,z));
+			}
 		}
 	}
 

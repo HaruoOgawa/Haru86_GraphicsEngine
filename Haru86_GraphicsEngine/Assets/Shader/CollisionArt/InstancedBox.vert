@@ -18,7 +18,7 @@ struct SCubeFieldObj
 {
     int xIndex;
     int yIndex;
-    int instancedIndex;
+    int zIndex;
 };
 
 layout(std430,binding=0) buffer destBufferCubeFieldObj
@@ -89,15 +89,16 @@ void main(){
 
 	SCubeFieldObj objData=outBufferCubeFieldObj.cubeObj[gl_InstanceID];
 	float xVal=_cubeWidth*float(_sideCubeCount)*(objData.xIndex/float(_sideCubeCount-1))*2.0-_cubeWidth*float(_sideCubeCount);
-	float zVal=_cubeWidth*float(_sideCubeCount)*(objData.yIndex/float(_sideCubeCount-1))*2.0-_cubeWidth*float(_sideCubeCount);
+	float yVal=_cubeWidth*float(_sideCubeCount)*(objData.yIndex/float(_sideCubeCount-1))*2.0-_cubeWidth*float(_sideCubeCount);
+	float zVal=_cubeWidth*float(_sideCubeCount)*(objData.zIndex/float(_sideCubeCount-1))*2.0-_cubeWidth*float(_sideCubeCount);
 	
-	float yVal=-5.0;
+	/*float yVal=-5.0;
 	vec2 st=(vec2(float(objData.xIndex),float(objData.yIndex))/float(_sideCubeCount))*2.0-1.0;
 	yVal+=perlinNoise(vec2(-_time*0.001,length(st)*100.0))+//*max(1.0,length(st)*2.0)*1.0+
-		sin(-_time*0.0025+length(st)*25.0)*max(1.0,length(st)*2.0);
+		sin(-_time*0.0025+length(st)*25.0)*max(1.0,length(st)*2.0);*/
 
 	float adjustPos=0.5;
-	pos+=vec3(xVal*adjustPos,yVal,zVal*adjustPos);
+	pos+=vec3(xVal*adjustPos,yVal*adjustPos,zVal*adjustPos);
 
 	gl_Position=PMatrix*VMatrix*vec4(pos,1.0);
 	worldPosition=pos;

@@ -38,7 +38,7 @@ void main(){
 
 	float specularTerm = a / (max(0.32, lh) * (1.5 + roughness) * d);
 
-	col= (randColor+specularTerm*vec3(1.0))*nl;
+	col= (randColor+specularTerm*vec3(1.0))*nl+randColor*specularTerm;
 
 	gl_FragColor=vec4(col,1.0);
 }

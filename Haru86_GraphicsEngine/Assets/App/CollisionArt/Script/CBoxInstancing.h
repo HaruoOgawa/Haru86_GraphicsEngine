@@ -11,12 +11,12 @@ struct SCubeFieldObj
 public:
     int xIndex;
     int yIndex;
-    int instancedIndex;
-    SCubeFieldObj(int x, int y, int ii)
+    int zIndex;
+    SCubeFieldObj(int x, int y, int z)
         :
         xIndex(x),
         yIndex(y),
-        instancedIndex(ii)
+        zIndex(z)
     {
     }
 };
