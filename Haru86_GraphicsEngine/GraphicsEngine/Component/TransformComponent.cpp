@@ -75,6 +75,6 @@ void TransformComponent::ComputePerspectiveMatrix() {
 	);
 }
 
-void TransformComponent::ProcessInput(const Uint8* state) {
+void TransformComponent::ProcessInput(const SDL_Event& e) {
 
 }

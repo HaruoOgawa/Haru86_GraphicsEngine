@@ -17,7 +17,7 @@ public:
     ~CameraComponent();
     void Start() override;
     void Update() override;
-    void ProcessInput(const Uint8* state) override;
+    void ProcessInput(const SDL_Event& e) override;
     enum class CameraType m_cameraType;
     glm::vec3 cameraCenter;
     glm::vec3 cameraUp;

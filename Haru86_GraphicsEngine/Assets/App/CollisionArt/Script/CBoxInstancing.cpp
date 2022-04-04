@@ -70,6 +70,6 @@ void CBoxInstancing::Draw() {
 	
 }
 
-void CBoxInstancing::ProcessInput(const Uint8* state) {
+void CBoxInstancing::ProcessInput(const SDL_Event& e) {
 
 }

@@ -39,7 +39,7 @@ public:
 	~GameObject();
 	void UseZTest(bool use);
 	void SetRenderOlder(int order);
-	void ProcessInput(const Uint8* state);
+	void ProcessInput(const SDL_Event& e);
 	std::shared_ptr<class MeshRendererComponent> meshComp;
 	float animTime = 0.0f;
 	friend class GraphicsRenderer;

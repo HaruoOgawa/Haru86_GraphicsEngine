@@ -178,7 +178,7 @@ void KuraGPGPU::Draw() {
 
 }
 
-void KuraGPGPU::ProcessInput(const Uint8* state) {
+void KuraGPGPU::ProcessInput(const SDL_Event& e) {
 
 }
 

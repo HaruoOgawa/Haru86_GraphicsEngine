@@ -217,6 +217,6 @@ void TimelineComponent::ClearTimeline() {
 
 }
 
-void TimelineComponent::ProcessInput(const Uint8* state) {
+void TimelineComponent::ProcessInput(const SDL_Event& e) {
 
 }

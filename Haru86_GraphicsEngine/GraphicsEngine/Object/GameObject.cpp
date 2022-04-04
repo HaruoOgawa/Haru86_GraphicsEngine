@@ -81,8 +81,8 @@ void GameObject::SetRenderOlder(int order) {
 	renderOrder = order;
 }
 
-void GameObject::ProcessInput(const Uint8* state) {
+void GameObject::ProcessInput(const SDL_Event& e) {
 	for (auto comp : myComponent) {
-		comp.second->ProcessInput(state);
+		comp.second->ProcessInput(e);
 	}
 }

@@ -27,9 +27,9 @@ void Object::Update() {
 	}
 }
 
-void Object::ProcessInput(const Uint8* state) {
+void Object::ProcessInput(const SDL_Event& e) {
 	for (auto comp : myComponent) {
-		comp.second->ProcessInput(state);
+		comp.second->ProcessInput(e);
 	}
 }
 

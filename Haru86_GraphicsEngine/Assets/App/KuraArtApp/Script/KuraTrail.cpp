@@ -117,7 +117,7 @@ void KuraTrail::Update() {
 
 }
 
-void KuraTrail::ProcessInput(const Uint8* state) {
+void KuraTrail::ProcessInput(const SDL_Event& e) {
 
 }
 

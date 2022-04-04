@@ -22,7 +22,7 @@ public:
     void ComputeModelMatrix();
     void ComputeViewMatrix();
     void ComputePerspectiveMatrix();
-    void ProcessInput(const Uint8* state) override;
+    void ProcessInput(const SDL_Event& e) override;
     glm::vec3 position;
     glm::quat rotation;
     glm::vec3 scale;

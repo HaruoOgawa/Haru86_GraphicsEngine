@@ -58,7 +58,7 @@ public:
     void Initialize();
     void ComputeTimeline(float time);
     void ResetTimeline();
-    void ProcessInput(const Uint8* state) override;
+    void ProcessInput(const SDL_Event& e) override;
     friend class TimelineObject;
     friend class UIComponent;
     float timeVal;

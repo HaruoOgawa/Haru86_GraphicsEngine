@@ -198,10 +198,10 @@ void Game::InputProcess() {
 	const Uint8* state = SDL_GetKeyboardState(NULL);
 
 	for (auto obj : gameObjectList) {
-		obj->ProcessInput(state);
+		obj->ProcessInput(e);
 	}
 
-	game_camera_instance->ProcessInput(state);
+	game_camera_instance->ProcessInput(e);
 
 }
 

@@ -177,6 +177,6 @@ void MeshRendererComponent::DrawBoard() {
 
 
 
-void MeshRendererComponent::ProcessInput(const Uint8* state) {
+void MeshRendererComponent::ProcessInput(const SDL_Event& e) {
 
 }
