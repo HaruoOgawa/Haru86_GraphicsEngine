@@ -68,6 +68,6 @@ void CBoxInstancing::Draw() {
 	
 }
 
-void CBoxInstancing::ProcessInput(const Uint8* state)const {
+void CBoxInstancing::ProcessInput(const Uint8* state) {
 
 }

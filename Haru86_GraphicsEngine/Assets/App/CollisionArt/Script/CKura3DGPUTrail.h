@@ -107,7 +107,7 @@ public:
     void Start() override;
     void Update() override;
     void Draw();
-    void ProcessInput(const Uint8* state)const override;
+    void ProcessInput(const Uint8* state) override;
     float rand(glm::vec2 st);
     void TrailUpdate();
 private:

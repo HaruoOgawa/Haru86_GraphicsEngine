@@ -28,7 +28,7 @@ void CollisionArt::Start() {
 	//cam_obj->SetPosition(glm::vec3(0.0, 0.0, -3.0));
 	cam_obj->m_cameraComponent->cameraCenter = glm::vec3(0.0,-1.0,0.0);
 	Game::GetInstance()->game_camera_instance = cam_obj.get();
-	cam_obj->transform->position = glm::vec3(5.0,0.0,5.0);
+	cam_obj->transform->position = glm::vec3(8.5,0.0, 8.5);
 
 	ins_cubes = std::make_unique<Object>();
 	ins_cubes->AddComponent<CBoxInstancing>(std::make_shared<CBoxInstancing>(ins_cubes.get()));
@@ -39,12 +39,6 @@ void CollisionArt::Start() {
 }
 
 void CollisionArt::Update() {
-	//ins_cubes->Update();
-	cam_obj->transform->position = glm::vec3(
-		glm::cos(Game::GetInstance()->time * 0.0001)*8.5,
-		0.0, 
-		glm::sin(Game::GetInstance()->time * 0.0001)* 8.5
-	);
 }
 
 void CollisionArt::Draw() {

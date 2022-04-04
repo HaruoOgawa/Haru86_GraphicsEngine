@@ -225,6 +225,6 @@ void AudioSourceComponent::Shutdown() {
 	mSystem->release();
 }
 
-void AudioSourceComponent::ProcessInput(const Uint8* state)const {
+void AudioSourceComponent::ProcessInput(const Uint8* state) {
 
 }

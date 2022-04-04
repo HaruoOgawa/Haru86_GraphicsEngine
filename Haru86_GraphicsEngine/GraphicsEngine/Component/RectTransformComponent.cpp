@@ -35,6 +35,6 @@ RectTransformComponent::~RectTransformComponent() {
 
 }
 
-void RectTransformComponent::ProcessInput(const Uint8* state)const {
+void RectTransformComponent::ProcessInput(const Uint8* state) {
 
 }

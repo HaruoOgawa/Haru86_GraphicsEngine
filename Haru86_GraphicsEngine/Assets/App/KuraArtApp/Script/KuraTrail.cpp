@@ -117,7 +117,7 @@ void KuraTrail::Update() {
 
 }
 
-void KuraTrail::ProcessInput(const Uint8* state)const {
+void KuraTrail::ProcessInput(const Uint8* state) {
 
 }
 

@@ -18,11 +18,11 @@ public:
     glm::mat4 GetPMatrix(){ return pMatrix; }
     void CalMatrix();
     void Translate();
-    void Rotate();
+    void Rotate(float XRot, float YRot, float ZRot);
     void ComputeModelMatrix();
     void ComputeViewMatrix();
     void ComputePerspectiveMatrix();
-    void ProcessInput(const Uint8* state)const override;
+    void ProcessInput(const Uint8* state) override;
     glm::vec3 position;
     glm::quat rotation;
     glm::vec3 scale;

@@ -23,7 +23,7 @@ UIComponent::~UIComponent() {
 
 }
 
-void UIComponent::ProcessInput(const Uint8* state) const {
+void UIComponent::ProcessInput(const Uint8* state) {
 	int x, y;
 	SDL_GetMouseState(&x, &y);
 

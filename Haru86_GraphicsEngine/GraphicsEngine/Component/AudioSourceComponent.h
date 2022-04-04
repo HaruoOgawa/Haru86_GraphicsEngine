@@ -33,7 +33,7 @@ public:
     bool Initialize();
 	void Play();
 	void Update() override;
-	void ProcessInput(const Uint8* state)const override;
+	void ProcessInput(const Uint8* state) override;
 	int GetAudioLength();
 	void SkipAudio(float startTime);
 	bool StopAudioCheck(float startTime);

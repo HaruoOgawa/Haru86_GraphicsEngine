@@ -24,7 +24,7 @@ public:
     void Update() override;
     void Draw();
     void DrawBoard();
-    void ProcessInput(const Uint8* state)const override;
+    void ProcessInput(const Uint8* state) override;
     bool useZTest;
     std::vector<class TimelineAnimationClip*> animationClips;
     std::shared_ptr<class Material> material;

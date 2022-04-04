@@ -15,7 +15,6 @@ class CameraObject :
 public:
     CameraObject(CameraType cameraType);
     ~CameraObject();
-    void Update() override;
     CameraType m_cameraType;
     std::shared_ptr<class CameraComponent> m_cameraComponent;
 private:

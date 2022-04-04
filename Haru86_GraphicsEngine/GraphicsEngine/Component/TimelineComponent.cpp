@@ -217,6 +217,6 @@ void TimelineComponent::ClearTimeline() {
 
 }
 
-void TimelineComponent::ProcessInput(const Uint8* state)const {
+void TimelineComponent::ProcessInput(const Uint8* state) {
 
 }

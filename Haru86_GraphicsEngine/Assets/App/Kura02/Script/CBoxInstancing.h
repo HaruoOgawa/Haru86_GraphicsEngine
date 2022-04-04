@@ -30,7 +30,7 @@ public:
     void Start() override;
     void Update() override;
     void Draw();
-    void ProcessInput(const Uint8* state)const override;
+    void ProcessInput(const Uint8* state) override;
 private:
     std::shared_ptr<class Mesh> m_mesh;
     std::shared_ptr<class Material> m_material;

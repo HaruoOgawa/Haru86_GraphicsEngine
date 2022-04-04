@@ -238,7 +238,7 @@ void CKura3DGPUTrail::Draw() {
 
 }
 
-void CKura3DGPUTrail::ProcessInput(const Uint8* state)const {
+void CKura3DGPUTrail::ProcessInput(const Uint8* state) {
 
 }
 

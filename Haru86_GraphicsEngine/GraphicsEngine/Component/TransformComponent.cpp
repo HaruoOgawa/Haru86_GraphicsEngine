@@ -23,8 +23,10 @@ void TransformComponent::Update() {
 void TransformComponent::Translate() {
 
 }
-void TransformComponent::Rotate() {
-
+void TransformComponent::Rotate(float XRot, float YRot, float ZRot) {
+	glm::mat4 RotMatrix= glm::mat4_cast(glm::quat(glm::vec3(XRot, YRot, ZRot)));
+	glm:: vec4 rotPosition = (RotMatrix * glm::vec4(position, 1.0));
+	position = glm::vec3(rotPosition.x, rotPosition.y, rotPosition.z);
 }
 
 void TransformComponent::CalMatrix() {
@@ -73,6 +75,6 @@ void TransformComponent::ComputePerspectiveMatrix() {
 	);
 }
 
-void TransformComponent::ProcessInput(const Uint8* state)const {
+void TransformComponent::ProcessInput(const Uint8* state) {
 
 }

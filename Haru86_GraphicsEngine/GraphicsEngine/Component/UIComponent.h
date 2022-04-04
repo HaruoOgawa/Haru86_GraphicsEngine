@@ -9,7 +9,7 @@ public:
     UIComponent(class GameObject* o);
     ~UIComponent();
     void Update() override;
-    void ProcessInput(const Uint8* state)const override;
+    void ProcessInput(const Uint8* state) override;
 private:
     bool CheckInnnerBox( float x, float y)const;
 };

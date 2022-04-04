@@ -11,7 +11,3 @@ CameraObject::CameraObject(CameraType cameraType)
 
 CameraObject::~CameraObject() {
 }
-
-void CameraObject::Update() {
-
-}

@@ -221,6 +221,8 @@ void Game::UpdateGame() {
 	if (app) {
 		app->Update();
 	}
+
+	game_camera_instance->Update();
 	
 }
 void Game::GenerateOutput() {
