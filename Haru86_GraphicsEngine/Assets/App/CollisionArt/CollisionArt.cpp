@@ -39,16 +39,12 @@ void CollisionArt::Start() {
 }
 
 void CollisionArt::Update() {
-	ins_cubes->Update();
+	//ins_cubes->Update();
 	cam_obj->transform->position = glm::vec3(
 		glm::cos(Game::GetInstance()->time * 0.0001)*8.5,
 		0.0, 
 		glm::sin(Game::GetInstance()->time * 0.0001)* 8.5
 	);
-
-	if (Game::GetInstance()->time>=1000.0*60.0*60.0) {
-		Game::GetInstance()->Restart();
-	}
 }
 
 void CollisionArt::Draw() {
