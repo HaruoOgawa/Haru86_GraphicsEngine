@@ -16,6 +16,7 @@
 #include <exception>
 #include <stdexcept>
 #include "GraphicsEngine/Object/RaymarchingObject.h"
+#include "GraphicsEngine/Object/CameraObject.h"
 
 Game* Game::s_pInstance = nullptr;
 
@@ -199,6 +200,8 @@ void Game::InputProcess() {
 	for (auto obj : gameObjectList) {
 		obj->ProcessInput(state);
 	}
+
+	game_camera_instance->ProcessInput(state);
 
 }
 

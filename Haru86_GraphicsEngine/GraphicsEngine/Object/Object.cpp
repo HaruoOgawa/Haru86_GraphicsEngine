@@ -27,6 +27,12 @@ void Object::Update() {
 	}
 }
 
+void Object::ProcessInput(const Uint8* state) {
+	for (auto comp : myComponent) {
+		comp.second->ProcessInput(state);
+	}
+}
+
 void Object::SetTransform(glm::vec3 pos, glm::quat rot, glm::vec3 s)
 { 
 	transform->position = pos;

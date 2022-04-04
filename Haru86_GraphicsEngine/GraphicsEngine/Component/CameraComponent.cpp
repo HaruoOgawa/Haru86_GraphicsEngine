@@ -1,5 +1,6 @@
 #include "CameraComponent.h"
 #include "GraphicsEngine/Object/CameraObject.h"
+#include <SDL.h>
 
 CameraComponent::CameraComponent(Object* o, enum class CameraType cameraType)
 	: Component(o)
@@ -20,5 +21,8 @@ void CameraComponent::Update() {
 }
 
 void CameraComponent::ProcessInput(const Uint8* state)const {
+	_RPTN(_CRT_WARN,"CameraComponent::ProcessInput\n","");
+	/*if (state == SDL_MOUSEBUTTONDOWN) {
 
+	}*/
 }
