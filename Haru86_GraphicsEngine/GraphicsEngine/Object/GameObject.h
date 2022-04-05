@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Game/Game.h"
+#include "../GraphicsMain/GraphicsMain.h"
 #include "./Object.h"
 #include "../Graphics/Mesh.h"
 

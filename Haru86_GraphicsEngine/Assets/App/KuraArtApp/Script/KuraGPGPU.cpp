@@ -5,7 +5,7 @@
 #include "GraphicsEngine/Graphics/Graphics.h"
 #include "GraphicsEngine/Object/Object.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
-#include "GraphicsEngine/Game/Game.h"
+#include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 #include "../KuraArtApp.h"
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
 #include "GraphicsEngine/Graphics/ComputeShader.h"
@@ -106,8 +106,8 @@ void KuraGPGPU::Start() {
 void KuraGPGPU::Update() {
 	//Dispatch force///////////////////////////
 	m_computeShader_force->SetActive();
-	m_computeShader_force->SetFloatUniform("_time", Game::GetInstance()->time);
-	m_computeShader_force->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
+	m_computeShader_force->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
+	m_computeShader_force->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
 	//boid uniform
 	m_computeShader_force->SetFloatUniform("_centerPosPower", 1000000.0);
 	m_computeShader_force->SetFloatUniform("_maxBoidsDist", 50);
@@ -126,8 +126,8 @@ void KuraGPGPU::Update() {
 
 	//Dispatch Data///////////////
 	m_computeShader_data->SetActive();
-	m_computeShader_data->SetFloatUniform("_time", Game::GetInstance()->time);
-	m_computeShader_data->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
+	m_computeShader_data->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
+	m_computeShader_data->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
 	//boid uniform
 	m_computeShader_data->Dispatch(num/256,1,1);
 
@@ -142,16 +142,16 @@ void KuraGPGPU::Update() {
 	float speed = 0.0005;
 
 	//camera center
-	Game::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter = glm::vec3(
+	GraphicsMain::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter = glm::vec3(
 		targerBoidsData[targetIndex].position[0], targerBoidsData[targetIndex].position[1], targerBoidsData[targetIndex].position[2]
 	);
 	//camera postion
-	Game::GetInstance()->game_camera_instance->transform->position =
-		Game::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter
+	GraphicsMain::GetInstance()->game_camera_instance->transform->position =
+		GraphicsMain::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter
 		+ glm::vec3(
-			glm::cos(Game::GetInstance()->time* speed),
-			glm::sin(Game::GetInstance()->time * speed),
-			glm::sin(Game::GetInstance()->time * speed))* radius;
+			glm::cos(GraphicsMain::GetInstance()->time* speed),
+			glm::sin(GraphicsMain::GetInstance()->time * speed),
+			glm::sin(GraphicsMain::GetInstance()->time * speed))* radius;
 
 	targerBoidsData.clear();
 
@@ -171,8 +171,8 @@ void KuraGPGPU::Draw() {
 	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
 	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
-	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
-	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
+	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
+	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
 	m_material->SetIntUniform("_boids_count", num);
 	Graphics::DrawInstancedWithMesh(m_mesh, num,m_material,GL_TRIANGLES);
 

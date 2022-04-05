@@ -29,7 +29,7 @@ void PolygonRaymarchingMixer::Draw() {
 		GraphicsRenderer::GetInstance()->polygon_depthTexture->SetEactive();
 	}
 
-	if (Game::GetInstance()->m_RaymarchingObject) {
+	if (GraphicsMain::GetInstance()->m_RaymarchingObject) {
 		//raymarching_frameTexture
 		if (GraphicsRenderer::GetInstance()->raymarching_frameTexture != nullptr) {
 			GraphicsRenderer::GetInstance()->raymarching_frameTexture->SetActive();

@@ -3,7 +3,7 @@
 #include "../Object/GameObject.h"
 #include "../Component/MeshRendererComponent.h"
 #include "../Component/TransformComponent.h"
-#include "../Game/Game.h"
+#include "../GraphicsMain/GraphicsMain.h"
 #include "./Texture.h"
 #include "./Font.h"
 #include "GraphicsEngine/App/BaseApp/BaseApp.h"
@@ -15,7 +15,7 @@ GraphicsRenderer* GraphicsRenderer::renderer_instance = nullptr;
 
 void GraphicsRenderer::Create() {
 	if (!renderer_instance) {
-		renderer_instance = new GraphicsRenderer(Game::GetInstance());
+		renderer_instance = new GraphicsRenderer(GraphicsMain::GetInstance());
 	}
 }
 
@@ -24,7 +24,7 @@ void GraphicsRenderer::Destroy() {
 	renderer_instance = nullptr;
 }
 
-GraphicsRenderer::GraphicsRenderer(Game* game)
+GraphicsRenderer::GraphicsRenderer(GraphicsMain* game)
 	: mgame(game),
 	sWindow(nullptr),
 	sWindowWidth(500),
@@ -160,7 +160,7 @@ bool GraphicsRenderer::CreateFrameBuffer(std::shared_ptr<Texture> fTex, unsigned
 
 void GraphicsRenderer::Draw() {
 	//ポリゴンオブジェクトのカラーマップをレンダリング///////////////////
-	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+	GraphicsMain::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 	glBindFramebuffer(GL_FRAMEBUFFER, polygon_frameBuffer);
 	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
 
@@ -179,7 +179,7 @@ void GraphicsRenderer::Draw() {
 	}
 
 	//ポリゴンオブジェクトをデプスマップをレンダリング
-	Game::GetInstance()->renderingTarget = ERerderingTarget::DEPTH;
+	GraphicsMain::GetInstance()->renderingTarget = ERerderingTarget::DEPTH;
 	glBindFramebuffer(GL_FRAMEBUFFER, polygon_depthBuffer);
 	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
 
@@ -201,8 +201,8 @@ void GraphicsRenderer::Draw() {
 	PostProcess::GetInstance()->DrawPolygonPostProcess(polygon_frameTexture, m_PolygonPostProcess_FrameBuffer);
 
 	//レイマーチングオブジェクトのカラーマップをレンダリング///////////////
-	if (Game::GetInstance()->m_RaymarchingObject) {
-		Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+	if (GraphicsMain::GetInstance()->m_RaymarchingObject) {
+		GraphicsMain::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 		glBindFramebuffer(GL_FRAMEBUFFER, raymarching_frameBuffer);
 		glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
 
@@ -210,13 +210,13 @@ void GraphicsRenderer::Draw() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
 
-		Game::GetInstance()->m_RaymarchingObject->transform->CalMatrix();
-		Game::GetInstance()->m_RaymarchingObject->Draw();
+		GraphicsMain::GetInstance()->m_RaymarchingObject->transform->CalMatrix();
+		GraphicsMain::GetInstance()->m_RaymarchingObject->Draw();
 	}
 
 	//レイマーチングオブジェクトのデプスマップをレンダリング
-	if (Game::GetInstance()->m_RaymarchingObject) {
-		Game::GetInstance()->renderingTarget = ERerderingTarget::DEPTH;
+	if (GraphicsMain::GetInstance()->m_RaymarchingObject) {
+		GraphicsMain::GetInstance()->renderingTarget = ERerderingTarget::DEPTH;
 		glBindFramebuffer(GL_FRAMEBUFFER, raymarching_depthBuffer);
 		glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
 
@@ -224,12 +224,12 @@ void GraphicsRenderer::Draw() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
 
-		Game::GetInstance()->m_RaymarchingObject->transform->CalMatrix();
-		Game::GetInstance()->m_RaymarchingObject->Draw();
+		GraphicsMain::GetInstance()->m_RaymarchingObject->transform->CalMatrix();
+		GraphicsMain::GetInstance()->m_RaymarchingObject->Draw();
 	}
 
 	//ポリゴンオブジェクトとレイマーチングオブジェクトをブレンドする
-	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+	GraphicsMain::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 	glBindFramebuffer(GL_FRAMEBUFFER, p_r_BlendingBuffer);
 	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
 
@@ -245,7 +245,7 @@ void GraphicsRenderer::Draw() {
 	PostProcess::GetInstance()->DrawLatePostProcess(p_r_BlendingTexture, m_LatePostProcess_FrameBuffer);
 
 	//最終的な結果を作成する///////////////////////////////
-	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+	GraphicsMain::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glViewport(0, 0, GetScreenSize().x, GetScreenSize().y);
 

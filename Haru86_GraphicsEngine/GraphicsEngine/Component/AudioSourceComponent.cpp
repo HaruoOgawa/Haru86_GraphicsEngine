@@ -4,7 +4,7 @@
 #include <vector>
 #include "./SDL.h"
 #include <iostream>
-#include "GraphicsEngine/Game/Game.h"
+#include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 
 AudioSourceComponent::AudioSourceComponent(Object* o)
 	: Component(o)
@@ -204,7 +204,7 @@ FMOD_RESULT F_CALLBACK AudioSourceComponent::EndOfSong(FMOD_CHANNELCONTROL* chan
 	FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType, void* commanData1, void* commanData2)
 {
 	if (controlType == FMOD_CHANNELCONTROL_CHANNEL && callbackType == FMOD_CHANNELCONTROL_CALLBACK_END) {
-		Game::GetInstance()->Restart();
+		GraphicsMain::GetInstance()->Restart();
 	}
 
 	return FMOD_OK;

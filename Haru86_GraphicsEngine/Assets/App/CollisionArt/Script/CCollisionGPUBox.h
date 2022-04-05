@@ -21,12 +21,12 @@ public:
     }
 };
 
-class CBoxInstancing :
+class CCollisionGPUBox :
     public Component
 {
 public:
-    CBoxInstancing(Object* o);
-    ~CBoxInstancing();
+    CCollisionGPUBox(Object* o);
+    ~CCollisionGPUBox();
     void Start() override;
     void Update() override;
     void Draw();

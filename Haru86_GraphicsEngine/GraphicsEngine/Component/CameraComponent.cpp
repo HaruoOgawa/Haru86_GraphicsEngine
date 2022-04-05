@@ -3,7 +3,7 @@
 #include <SDL.h>
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/Graphics/GraphicsRenderer.h"
-#include "GraphicsEngine/Game/Game.h"
+#include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 
 #define ZoomPower 2.0f
 

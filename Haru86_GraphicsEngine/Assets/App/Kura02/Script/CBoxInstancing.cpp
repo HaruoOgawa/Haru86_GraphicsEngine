@@ -6,7 +6,7 @@
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
-#include "GraphicsEngine/Game/Game.h"
+#include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 
 CBoxInstancing::CBoxInstancing(Object* o)
 	: Component(o),
@@ -55,9 +55,9 @@ void CBoxInstancing::Draw() {
 	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
 	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
-	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
-	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
-	m_material->SetVec3Uniform("_CameraPosition", Game::GetInstance()->game_camera_instance->GetPosition());
+	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
+	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
+	m_material->SetVec3Uniform("_CameraPosition", GraphicsMain::GetInstance()->game_camera_instance->GetPosition());
 	m_material->SetIntUniform("_instancedCound", instanciedCound);
 	m_material->SetIntUniform("_sideCubeCount", sideCubeCount);
 	m_material->SetFloatUniform("_cubeWidth", 1.0);

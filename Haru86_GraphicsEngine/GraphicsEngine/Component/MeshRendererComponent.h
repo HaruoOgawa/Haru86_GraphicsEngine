@@ -5,7 +5,7 @@
 #include "../Graphics/Material.h"
 #include <string>
 #include "../Graphics/Primitive.h"
-#include "../Game/Game.h"
+#include "../GraphicsMain/GraphicsMain.h"
 #include <functional>
 #include <memory>
 

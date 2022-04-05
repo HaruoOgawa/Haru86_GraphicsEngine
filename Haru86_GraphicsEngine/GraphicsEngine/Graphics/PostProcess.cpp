@@ -8,7 +8,7 @@
 #include "GraphicsEngine/Graphics/GraphicsRenderer.h"
 #include "GraphicsEngine/Graphics/Mesh.h"
 #include "GraphicsEngine/Graphics/Material.h"
-#include "GraphicsEngine/Game/Game.h"
+#include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 
 //instance‚ð’è‹`‚·‚é
 PostProcess* PostProcess::instance = nullptr;
@@ -71,7 +71,7 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 		if (m_UseBloom)m_Bloom->Draw(SrcTexture, m_BloomFrameBuffer);
 
 		// Draw PostProcess Result
-		Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+		GraphicsMain::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 		glBindFramebuffer(GL_FRAMEBUFFER, DestBuffer);
 		glViewport(0, 0, static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().x * GraphicsRenderer::GetInstance()->frameResolusion), static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().y * GraphicsRenderer::GetInstance()->frameResolusion));
 
@@ -82,7 +82,7 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 
 		// draw PostProcess Board
 		m_material->SetActive();
-		m_material->SetFloatUniform("_time", Game::GetInstance()->time);
+		m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
 		m_material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 		m_material->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 
@@ -106,7 +106,7 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 	}
 	else {
 		// Draw PostProcess Result
-		Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+		GraphicsMain::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 		glBindFramebuffer(GL_FRAMEBUFFER, DestBuffer);
 		glViewport(0, 0, static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().x * GraphicsRenderer::GetInstance()->frameResolusion), static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().y * GraphicsRenderer::GetInstance()->frameResolusion));
 
@@ -117,7 +117,7 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 
 		// draw PostProcess Board
 		m_material->SetActive();
-		m_material->SetFloatUniform("_time", Game::GetInstance()->time);
+		m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
 		m_material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 		m_material->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 
@@ -146,7 +146,7 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 		glEnable(GL_DEPTH_TEST);
 
 		m_LateMaterial->SetActive();
-		m_LateMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
+		m_LateMaterial->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
 		m_LateMaterial->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 		m_LateMaterial->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 		SrcTexture->SetActive();
@@ -165,7 +165,7 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 		glEnable(GL_DEPTH_TEST);
 
 		m_LateMaterial->SetActive();
-		m_LateMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
+		m_LateMaterial->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
 		m_LateMaterial->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 		m_LateMaterial->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 		SrcTexture->SetActive();

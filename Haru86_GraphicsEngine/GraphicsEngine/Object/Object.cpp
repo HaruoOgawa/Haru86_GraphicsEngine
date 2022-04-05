@@ -4,10 +4,10 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 
-#include "../Game/Game.h"
+#include "../GraphicsMain/GraphicsMain.h"
 
 Object::Object()
-	: game(Game::GetInstance())
+	: game(GraphicsMain::GetInstance())
 {
 	transform = std::make_shared<TransformComponent>(this, glm::vec3(0,0,0),  glm::quat(glm::vec3(0,0,0)),  glm::vec3(1.0f,1.0f,1.0f));
 	Object::AddComponent<TransformComponent>(transform);

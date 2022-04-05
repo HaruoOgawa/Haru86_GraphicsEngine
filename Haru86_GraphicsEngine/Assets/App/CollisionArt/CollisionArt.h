@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../GraphicsEngine/Game/Game.h"
+#include "../../../GraphicsEngine/GraphicsMain/GraphicsMain.h"
 #include "../../../GraphicsEngine/App/BaseApp/BaseApp.h"
 #include <memory>
 class CollisionArt :

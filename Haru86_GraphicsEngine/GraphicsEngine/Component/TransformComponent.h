@@ -2,7 +2,7 @@
 #include "./Component.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
-#include "../Game/Game.h"
+#include "../GraphicsMain/GraphicsMain.h"
 #include <memory>
 
 class TransformComponent :

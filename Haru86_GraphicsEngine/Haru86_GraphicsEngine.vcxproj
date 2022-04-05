@@ -203,7 +203,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="Assets\App\Kura02\Script\CBoxInstancing.h" />
     <ClInclude Include="Assets\App\Kura02\Script\CKura3DGPUTrail.h" />
     <ClInclude Include="Assets\App\CollisionArt\CollisionArt.h" />
-    <ClInclude Include="Assets\App\CollisionArt\Script\CBoxInstancing.h" />
+    <ClInclude Include="Assets\App\CollisionArt\Script\CCollisionGPUBox.h" />
     <ClInclude Include="Assets\App\CollisionArt\Script\CKura3DGPUTrail.h" />
     <ClInclude Include="GraphicsEngine\Graphics\CBloom.h" />
     <ClInclude Include="GraphicsEngine\Component\CameraComponent.h" />
@@ -222,7 +222,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\App\BaseApp\BaseApp.h" />
     <ClInclude Include="GraphicsEngine\Component\Component.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Font.h" />
-    <ClInclude Include="GraphicsEngine\Game\Game.h" />
+    <ClInclude Include="GraphicsEngine\GraphicsMain\GraphicsMain.h" />
     <ClInclude Include="GraphicsEngine\Object\GameObject.h" />
     <ClInclude Include="GraphicsEngine\Graphics\GraphicsRenderer.h" />
     <ClInclude Include="GraphicsEngine\App\BaseApp\Main.h" />
@@ -238,7 +238,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Graphics\PostProcess.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Texture.h" />
-    <ClInclude Include="GraphicsEngine\Game\Time.h" />
+    <ClInclude Include="GraphicsEngine\GraphicsMain\Time.h" />
     <ClInclude Include="GraphicsEngine\Component\TimelineComponent.h" />
     <ClInclude Include="GraphicsEngine\Object\TimelineObject.h" />
     <ClInclude Include="GraphicsEngine\Component\TransformComponent.h" />
@@ -252,7 +252,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="Assets\App\Kura02\Script\CBoxInstancing.cpp" />
     <ClCompile Include="Assets\App\Kura02\Script\CKura3DGPUTrail.cpp" />
     <ClCompile Include="Assets\App\CollisionArt\CollisionArt.cpp" />
-    <ClCompile Include="Assets\App\CollisionArt\Script\CBoxInstancing.cpp" />
+    <ClCompile Include="Assets\App\CollisionArt\Script\CCollisionGPUBox.cpp" />
     <ClCompile Include="Assets\App\CollisionArt\Script\CKura3DGPUTrail.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\CBloom.cpp" />
     <ClCompile Include="GraphicsEngine\App\BaseApp\BaseApp.cpp" />
@@ -267,7 +267,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Component\AudioSourceComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Component\Component.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\Font.cpp" />
-    <ClCompile Include="GraphicsEngine\Game\Game.cpp" />
+    <ClCompile Include="GraphicsEngine\GraphicsMain\GraphicsMain.cpp" />
     <ClCompile Include="GraphicsEngine\Object\GameObject.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\GraphicsRenderer.cpp" />
     <ClCompile Include="GraphicsEngine\App\BaseApp\Main.cpp" />
@@ -278,7 +278,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Graphics\Primitive.cpp" />
     <ClCompile Include="GraphicsEngine\Component\RectTransformComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\Texture.cpp" />
-    <ClCompile Include="GraphicsEngine\Game\Time.cpp" />
+    <ClCompile Include="GraphicsEngine\GraphicsMain\Time.cpp" />
     <ClCompile Include="GraphicsEngine\Component\TimelineComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Object\TimelineObject.cpp" />
     <ClCompile Include="GraphicsEngine\Component\TransformComponent.cpp" />

@@ -38,7 +38,7 @@ void KuraArtApp::Start() {
 
 	camera_obj = std::make_unique<CameraObject>(CameraType::FIXED_CAMERA);
 	camera_obj->SetPosition(glm::vec3(0, 0.0, -3.0));
-	Game::GetInstance()->game_camera_instance = camera_obj.get();
+	GraphicsMain::GetInstance()->game_camera_instance = camera_obj.get();
 
 	audioObj = std::make_unique<AudioObject>("./Assets/Resources/MusicData/n111.mp3");
 	if (audioObj->Initialize()) {
@@ -67,7 +67,7 @@ void KuraArtApp::Start() {
 		gpgpu_obj->GetComponent<KuraGPGPU>())
 	);
 
-	Game::GetInstance()->renderBoard = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/KuraShader/KuraPostProcess.frag", RenderType::FrameBuffer);
+	GraphicsMain::GetInstance()->renderBoard = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/KuraShader/KuraPostProcess.frag", RenderType::FrameBuffer);
 
 }
 void KuraArtApp::Update() {
@@ -80,22 +80,22 @@ void KuraArtApp::Draw() {
 }
 
 void KuraArtApp::Timeline(class TimelineObject* timeline) {
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 0.0, 1.0, [](float val) {
-		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_renderMode", 0.0);
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 0.0, 1.0, [](float val) {
+		GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_renderMode", 0.0);
 		float animVal = 1.0;
-		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_alphaVal", val/ animVal);
+		GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_alphaVal", val/ animVal);
 	});
 	
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 1.0, 3.0, [](float val) {
-		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_renderMode", 2.0);
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 1.0, 3.0, [](float val) {
+		GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_renderMode", 2.0);
 		float animVal = 2.0;
-		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_alphaVal", val / animVal);
+		GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_alphaVal", val / animVal);
 	});
 	
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 235.0 -2.0, 235.0 -1.0, [](float val) {
-		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_renderMode", 1.0);
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 235.0 -2.0, 235.0 -1.0, [](float val) {
+		GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_renderMode", 1.0);
 		float animVal = 1.0;
-		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_alphaVal", val / animVal);
+		GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_alphaVal", val / animVal);
 	});
 }
 

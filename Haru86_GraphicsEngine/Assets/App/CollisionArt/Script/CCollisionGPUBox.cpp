@@ -1,4 +1,4 @@
-#include "CBoxInstancing.h"
+#include "CCollisionGPUBox.h"
 #include "GraphicsEngine/Graphics/Mesh.h"
 #include "GraphicsEngine/Graphics/Material.h"
 #include "GraphicsEngine/Graphics/Graphics.h"
@@ -6,9 +6,9 @@
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
-#include "GraphicsEngine/Game/Game.h"
+#include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 
-CBoxInstancing::CBoxInstancing(Object* o)
+CCollisionGPUBox::CCollisionGPUBox(Object* o)
 	: Component(o),
 	instanciedCound(4*4*4),
 	sideCubeCount(4)
@@ -16,10 +16,10 @@ CBoxInstancing::CBoxInstancing(Object* o)
 	Start();
 }
 
-CBoxInstancing::~CBoxInstancing() {
+CCollisionGPUBox::~CCollisionGPUBox() {
 }
 
-void CBoxInstancing::Start() {
+void CCollisionGPUBox::Start() {
 	owner->transform->scale = glm::vec3(1.0);
 	m_mesh = std::make_shared<Mesh>(PrimitiveType::CUBE);
 	m_material = std::make_shared<Material>(
@@ -43,11 +43,11 @@ void CBoxInstancing::Start() {
 	m_material->SetBuffer(m_cubeGroundBuffer, 0);
 }
 
-void CBoxInstancing::Update() {
+void CCollisionGPUBox::Update() {
 
 }
 
-void CBoxInstancing::Draw() {
+void CCollisionGPUBox::Draw() {
 	owner->transform->CalMatrix();
 	m_material->SetActive();
 	glEnable(GL_DEPTH_TEST);
@@ -57,9 +57,9 @@ void CBoxInstancing::Draw() {
 	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
 	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
-	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
-	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
-	m_material->SetVec3Uniform("_CameraPosition", Game::GetInstance()->game_camera_instance->GetPosition());
+	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
+	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
+	m_material->SetVec3Uniform("_CameraPosition", GraphicsMain::GetInstance()->game_camera_instance->GetPosition());
 	m_material->SetIntUniform("_instancedCound", instanciedCound);
 	m_material->SetIntUniform("_sideCubeCount", sideCubeCount);
 	m_material->SetFloatUniform("_cubeWidth", 1.0);
@@ -70,6 +70,6 @@ void CBoxInstancing::Draw() {
 	
 }
 
-void CBoxInstancing::ProcessInput(const SDL_Event& e) {
+void CCollisionGPUBox::ProcessInput(const SDL_Event& e) {
 
 }

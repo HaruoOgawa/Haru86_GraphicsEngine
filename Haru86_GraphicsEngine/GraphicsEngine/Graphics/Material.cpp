@@ -5,7 +5,7 @@
 #include <iostream>
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
 #include "GraphicsEngine/Graphics/Texture.h"
-#include "GraphicsEngine/Game/Game.h"
+#include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 
 Material::Material()
 	: vertShaderData(-1),
@@ -410,10 +410,10 @@ void Material::SetEactiveTextureList() {
 }
 
 GLuint Material::GetCurrentShaderPrg() {
-	if (Game::GetInstance()->renderingTarget == ERerderingTarget::COLOR) {
+	if (GraphicsMain::GetInstance()->renderingTarget == ERerderingTarget::COLOR) {
 		return shaderPrg;
 	}
-	else if (Game::GetInstance()->renderingTarget == ERerderingTarget::DEPTH) {
+	else if (GraphicsMain::GetInstance()->renderingTarget == ERerderingTarget::DEPTH) {
 		return depthShaderPrg;
 	}
 }

@@ -1,6 +1,6 @@
 #include "CameraObject.h"
 #include "GraphicsEngine/Component/CameraComponent.h"
-#include "GraphicsEngine/Game/Game.h"
+#include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 
 CameraObject::CameraObject(CameraType cameraType)
 	: Object(),m_cameraType(cameraType)

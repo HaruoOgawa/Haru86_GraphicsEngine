@@ -2,7 +2,7 @@
 //#include <glm/glm.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
-#include "../Game/Game.h"
+#include "../GraphicsMain/GraphicsMain.h"
 #include "../Graphics/GraphicsRenderer.h"
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Component/CameraComponent.h"
@@ -44,8 +44,8 @@ void TransformComponent::ComputeModelMatrix() {
 }
 
 void TransformComponent::ComputeViewMatrix() {
-	if (Game::GetInstance()->game_camera_instance!=nullptr) {
-		CameraObject* cam = Game::GetInstance()->game_camera_instance;
+	if (GraphicsMain::GetInstance()->game_camera_instance!=nullptr) {
+		CameraObject* cam = GraphicsMain::GetInstance()->game_camera_instance;
 		vMatrix = glm::lookAt(
 			cam->transform->position,
 			cam->m_cameraComponent->cameraCenter,

@@ -1,6 +1,6 @@
 #pragma once
 #include "SDL.h"
-#include "../Game/Game.h"
+#include "../GraphicsMain/GraphicsMain.h"
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 #include <memory>
@@ -14,7 +14,7 @@ public:
 	static void Create();
 	static void Destroy();
 
-	GraphicsRenderer(class Game* game);
+	GraphicsRenderer(class GraphicsMain* game);
 	~GraphicsRenderer();
 	bool Initialize(float width, float height);
 	void ShutDown();
@@ -40,7 +40,7 @@ private:
 	SDL_Window* sWindow;
 	int sWindowWidth;
 	int sWindowHeight;
-	class Game* mgame;
+	class GraphicsMain* mgame;
 	SDL_GLContext context;
 	
 	//FrameBuffer

@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "GraphicsMain.h"
 #include <string>
 #include "../Object/GameObject.h"
 #include "../Graphics/Mesh.h"
@@ -18,23 +18,23 @@
 #include "GraphicsEngine/Object/RaymarchingObject.h"
 #include "GraphicsEngine/Object/CameraObject.h"
 
-Game* Game::s_pInstance = nullptr;
+GraphicsMain* GraphicsMain::s_pInstance = nullptr;
 
-void Game::Create()
+void GraphicsMain::Create()
 {
 	if (!s_pInstance)
 	{
-		s_pInstance = new Game;
+		s_pInstance = new GraphicsMain;
 	}
 }
 
-void Game::Destroy()
+void GraphicsMain::Destroy()
 {
 	delete s_pInstance;
 	s_pInstance = nullptr;
 }
 
-Game::Game()
+GraphicsMain::GraphicsMain()
 	: 
 	isRunning(true),
 	time(0.0f),
@@ -116,11 +116,11 @@ Game::Game()
 	}
 }
 
-Game::~Game() {
+GraphicsMain::~GraphicsMain() {
 	
 }
 
-bool Game::Initialize() {
+bool GraphicsMain::Initialize() {
 	if (SDL_Init(SDL_INIT_VIDEO||SDL_INIT_AUDIO)!=0) {
 		SDL_Log("SDL Init is failure: %s", SDL_GetError());
 		return false;
@@ -137,7 +137,7 @@ bool Game::Initialize() {
 	return true;
 }
 
-void Game::LoadData() {
+void GraphicsMain::LoadData() {
 	app = std::make_unique<CollisionArt>();
 	timeObj = std::make_unique<Time>(60.0f);
 	app->Start();
@@ -152,7 +152,7 @@ void Game::LoadData() {
 	timelineObj->Initialize();
 }
 
-void Game::RunLoop() {
+void GraphicsMain::RunLoop() {
 	while (isRunning)
 	{
 		if (isRestart) {
@@ -167,7 +167,7 @@ void Game::RunLoop() {
 	}
 }
 
-void Game::UpdateTimeline() {
+void GraphicsMain::UpdateTimeline() {
 	static_cast<std::shared_ptr<class TimelineComponent>>(timelineObj->timelineComponent)->Update();
 
 	std::sort(gameObjectList.begin(), gameObjectList.end(), [](GameObject* a, GameObject* b) {
@@ -175,7 +175,7 @@ void Game::UpdateTimeline() {
 	});
 }
 
-void Game::InputProcess() {
+void GraphicsMain::InputProcess() {
 	SDL_Event e;
 	while (SDL_PollEvent(&e))
 	{
@@ -205,7 +205,7 @@ void Game::InputProcess() {
 
 }
 
-void Game::UpdateGame() {
+void GraphicsMain::UpdateGame() {
 	while (!(timeObj->GetTime() > previousTime + 16.0f)) { timeObj->UpdateTime(); };
 	deltaTime = (timeObj->GetTime() - previousTime) / 1000.0f;
 	if (deltaTime > 0.05f) {
@@ -225,11 +225,11 @@ void Game::UpdateGame() {
 	game_camera_instance->Update();
 	
 }
-void Game::GenerateOutput() {
+void GraphicsMain::GenerateOutput() {
 	GraphicsRenderer::GetInstance()->Draw();
 }
 
-void Game::Reflesh() {
+void GraphicsMain::Reflesh() {
 	//List‚ð‰ð•ú
 	gameObjectList.clear();
 	boardGameObjectList.clear();
@@ -260,11 +260,11 @@ void Game::Reflesh() {
 	LoadData();
 }
 
-void Game::Restart() {
+void GraphicsMain::Restart() {
 	isRestart = true;
 }
 
-void Game::ShutDown() {
+void GraphicsMain::ShutDown() {
 	GraphicsRenderer::GetInstance()->ShutDown();
 	GraphicsRenderer::Destroy();
 

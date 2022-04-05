@@ -1,12 +1,12 @@
 #include "UIComponent.h"
 #include "../Object/GameObject.h"
-#include "../Game/Game.h"
+#include "../GraphicsMain/GraphicsMain.h"
 #include <SDL.h>
 #include "../Graphics/GraphicsRenderer.h"
 #include <glm/glm.hpp>
 #include "./TransformComponent.h"
 #include "./RectTransformComponent.h"
-#include "../Game/Time.h"
+#include "../GraphicsMain/Time.h"
 #include "../Object/TimelineObject.h"
 #include "./TimelineComponent.h"
 #include "../Component/AudioSourceComponent.h"
@@ -30,7 +30,7 @@ void UIComponent::ProcessInput(const SDL_Event& e) {
 	float fx = static_cast<float>(x) - static_cast<float>(GraphicsRenderer::GetInstance()->GetScreenSize().x) * 0.5f;
 	float fy = static_cast<float>(GraphicsRenderer::GetInstance()->GetScreenSize().y) * 0.5f- static_cast<float>(y);
 
-	if (CheckInnnerBox(fx,fy)&& Game::GetInstance()->mouseStateBool) {
+	if (CheckInnnerBox(fx,fy)&& GraphicsMain::GetInstance()->mouseStateBool) {
 		float maxLeftPointX = owner->
 			GetComponent<RectTransformComponent>()->maxLeftPointX;
 		float maxRightPointX = owner->
@@ -47,9 +47,9 @@ void UIComponent::ProcessInput(const SDL_Event& e) {
 		t = (t < 0.0f) ? 0.0f : t;
 		// sample music time
 		
-		Game::GetInstance()->timeObj->time = t;
-		Game::GetInstance()->previousTime = t;
-		Game::GetInstance()->time = t;
+		GraphicsMain::GetInstance()->timeObj->time = t;
+		GraphicsMain::GetInstance()->previousTime = t;
+		GraphicsMain::GetInstance()->time = t;
 		
 		float xval = fx / (static_cast<float>(GraphicsRenderer::GetInstance()->GetScreenSize().x) * 0.5f);
 		float yval = fy / (static_cast<float>(GraphicsRenderer::GetInstance()->GetScreenSize().y) * 0.5f);
@@ -64,8 +64,8 @@ void UIComponent::ProcessInput(const SDL_Event& e) {
 		owner->
 			GetComponent<RectTransformComponent>()->rectPosition.x = fx;
 
-		Game::GetInstance()->timelineObj->timelineComponent->ResetTimeline();
-		Game::GetInstance()->timelineObj->timelineComponent->ComputeTimeline(t);
+		GraphicsMain::GetInstance()->timelineObj->timelineComponent->ResetTimeline();
+		GraphicsMain::GetInstance()->timelineObj->timelineComponent->ComputeTimeline(t);
 		std::sort(game->GetInstance()->gameObjectList.begin(), game->GetInstance()->gameObjectList.end(), [](GameObject* a, GameObject* b) {
 			return a->renderOrder < b->renderOrder;
 		});

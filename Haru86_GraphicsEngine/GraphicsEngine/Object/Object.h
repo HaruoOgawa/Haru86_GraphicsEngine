@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Game/Game.h"
+#include "../GraphicsMain/GraphicsMain.h"
 #include "../Component/Component.h"
 #include <vector>
 #include <unordered_map>
@@ -47,7 +47,7 @@ public:
 	friend class UIComponent;
 	friend class RectTransformComponent;
 private:
-	class Game* game;
+	class GraphicsMain* game;
 protected:
 	std::unordered_map<std::type_index, std::shared_ptr<Component>> myComponent;
 };
