@@ -197,6 +197,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GraphicsEngine\Physics\CColliderTree.h" />
     <ClInclude Include="GraphicsEngine\Physics\CPhysicsEngine.h" />
     <ClInclude Include="GraphicsEngine\Physics\CBoxCollider.h" />
     <ClInclude Include="GraphicsEngine\Physics\CSphereCollider.h" />
@@ -240,6 +241,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Object\RaymarchingObject.h" />
     <ClInclude Include="GraphicsEngine\Graphics\PolygonRaymarchingMixer.h" />
     <ClInclude Include="GraphicsEngine\Graphics\PostProcess.h" />
+    <ClInclude Include="GraphicsEngine\Physics\EObjectType.h" />
     <ClInclude Include="GraphicsEngine\Physics\ICollider.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Texture.h" />
@@ -251,6 +253,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Graphics\Mesh.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GraphicsEngine\Physics\CColliderTree.cpp" />
     <ClCompile Include="GraphicsEngine\Physics\CPhysicsEngine.cpp" />
     <ClCompile Include="GraphicsEngine\Physics\CBoxCollider.cpp" />
     <ClCompile Include="GraphicsEngine\Physics\CSphereCollider.cpp" />

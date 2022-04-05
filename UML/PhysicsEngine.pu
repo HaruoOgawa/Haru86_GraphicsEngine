@@ -6,12 +6,18 @@ class CPhysicsEngine{
     - m_DynamicObjectList
 }
 
+class CColliderTree{
+
+}
+
+CPhysicsEngine <--  CColliderTree
+
 interface ICollider{
     - void AddCollider()
     - TransformComponent m_Transform
 }
 
-CPhysicsEngine <--  ICollider
+CColliderTree <--  ICollider
 
 abstract ACollider{
     - EObjectType m_ObjectType
