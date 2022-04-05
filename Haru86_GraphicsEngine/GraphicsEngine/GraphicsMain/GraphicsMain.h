@@ -58,8 +58,8 @@ public:
 private :
 	void UpdateTimeline();
 	void InputProcess();
-	void UpdateGame();
-	void GenerateOutput();
+	void Update();
+	void Draw();
 	void LoadData();
 	void Reflesh();
 	bool isRunning;

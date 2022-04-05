@@ -161,8 +161,9 @@ void GraphicsMain::RunLoop() {
 		else {
 			UpdateTimeline();
 			InputProcess();
-			UpdateGame();
-			GenerateOutput();
+			Update();
+			// UpdatePhysics	
+			Draw();
 		}
 	}
 }
@@ -205,7 +206,7 @@ void GraphicsMain::InputProcess() {
 
 }
 
-void GraphicsMain::UpdateGame() {
+void GraphicsMain::Update() {
 	while (!(timeObj->GetTime() > previousTime + 16.0f)) { timeObj->UpdateTime(); };
 	deltaTime = (timeObj->GetTime() - previousTime) / 1000.0f;
 	if (deltaTime > 0.05f) {
@@ -225,7 +226,7 @@ void GraphicsMain::UpdateGame() {
 	game_camera_instance->Update();
 	
 }
-void GraphicsMain::GenerateOutput() {
+void GraphicsMain::Draw() {
 	GraphicsRenderer::GetInstance()->Draw();
 }
 

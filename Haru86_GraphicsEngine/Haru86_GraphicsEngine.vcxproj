@@ -197,6 +197,10 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GraphicsEngine\Physics\CPhysicsEngine.h" />
+    <ClInclude Include="GraphicsEngine\Physics\CBoxCollider.h" />
+    <ClInclude Include="GraphicsEngine\Physics\CSphereCollider.h" />
+    <ClInclude Include="GraphicsEngine\Physics\ACollider.h" />
     <ClInclude Include="Assets\App\DemoApp\DemoApp.h" />
     <ClInclude Include="Assets\App\Kura02\Kura02.h" />
     <ClInclude Include="Assets\App\KuraArtApp\Script\KuraGPGPU.h" />
@@ -236,6 +240,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Object\RaymarchingObject.h" />
     <ClInclude Include="GraphicsEngine\Graphics\PolygonRaymarchingMixer.h" />
     <ClInclude Include="GraphicsEngine\Graphics\PostProcess.h" />
+    <ClInclude Include="GraphicsEngine\Physics\ICollider.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Texture.h" />
     <ClInclude Include="GraphicsEngine\GraphicsMain\Time.h" />
@@ -246,6 +251,10 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Graphics\Mesh.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GraphicsEngine\Physics\CPhysicsEngine.cpp" />
+    <ClCompile Include="GraphicsEngine\Physics\CBoxCollider.cpp" />
+    <ClCompile Include="GraphicsEngine\Physics\CSphereCollider.cpp" />
+    <ClCompile Include="GraphicsEngine\Physics\ACollider.cpp" />
     <ClCompile Include="Assets\App\DemoApp\DemoApp.cpp" />
     <ClCompile Include="Assets\App\Kura02\Kura02.cpp" />
     <ClCompile Include="Assets\App\KuraArtApp\Script\KuraGPGPU.cpp" />
