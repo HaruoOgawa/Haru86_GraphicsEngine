@@ -1,10 +1,12 @@
 #pragma once
 #include <vector>
 #include <memory>
+#include "EColliderType.h"
+
+class GameObject;
 
 namespace physics {
 	class CColliderTree;
-	class ICollider;
 
 	class CPhysicsEngine
 	{
@@ -12,8 +14,10 @@ namespace physics {
 	public:
 		CPhysicsEngine();
 		~CPhysicsEngine();
+		void Release();
 		bool Initialize();
 		bool UpdatePhysics();
+		void AddCollider(EColliderType ColliderType,GameObject* Obj);
 	};
 }
 

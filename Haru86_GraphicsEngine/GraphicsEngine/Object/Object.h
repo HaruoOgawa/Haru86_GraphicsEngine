@@ -38,6 +38,7 @@ public:
 	void SetScale(glm::vec3 s);
 	virtual void Update();
 	virtual void ProcessInput(const SDL_Event& e);
+	
 	glm::vec3 GetPosition();
 	glm::quat GetRotation();
 	glm::vec3 GetScale();

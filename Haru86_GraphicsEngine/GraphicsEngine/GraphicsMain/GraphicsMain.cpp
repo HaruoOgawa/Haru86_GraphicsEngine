@@ -17,6 +17,7 @@
 #include <stdexcept>
 #include "GraphicsEngine/Object/RaymarchingObject.h"
 #include "GraphicsEngine/Object/CameraObject.h"
+#include "GraphicsEngine/Physics/CPhysicsEngine.h"
 
 GraphicsMain* GraphicsMain::s_pInstance = nullptr;
 
@@ -44,7 +45,8 @@ GraphicsMain::GraphicsMain()
 	animTime(0.0f),
 	isRestart(false),
 	renderingTarget(ERerderingTarget::COLOR),
-	m_RaymarchingObject(nullptr)
+	m_RaymarchingObject(nullptr),
+	m_PhysicsEngine(std::make_unique<physics::CPhysicsEngine>())
 {
 	
 	for (int i = 0; i < 20;i++) {
@@ -150,6 +152,9 @@ void GraphicsMain::LoadData() {
 	timelineObj = std::make_unique<TimelineObject>();
 	app->Timeline(timelineObj.get());
 	timelineObj->Initialize();
+
+
+	m_PhysicsEngine->Initialize();
 }
 
 void GraphicsMain::RunLoop() {
@@ -162,7 +167,7 @@ void GraphicsMain::RunLoop() {
 			UpdateTimeline();
 			InputProcess();
 			Update();
-			// UpdatePhysics	
+			m_PhysicsEngine->UpdatePhysics();
 			Draw();
 		}
 	}
@@ -256,7 +261,10 @@ void GraphicsMain::Reflesh() {
 		app.reset();
 	}
 	m_RaymarchingObject = nullptr;
-	
+	if (m_PhysicsEngine) {
+		m_PhysicsEngine->Release();
+	}
+
 	//再度リソースをロードする
 	LoadData();
 }
@@ -273,4 +281,8 @@ void GraphicsMain::ShutDown() {
 	boardGameObjectList.clear();
 	postProcessGameObjectList.clear();
 	uiObjectList.clear();
+}
+
+physics::CPhysicsEngine* GraphicsMain::GetPhysicsEngine(){
+	return m_PhysicsEngine.get();
 }

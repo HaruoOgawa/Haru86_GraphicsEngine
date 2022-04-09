@@ -8,7 +8,8 @@ enum class PrimitiveType {
 	BOARD,
 	CUBE,
 	SPHERE,
-	POINT
+	POINT,
+	CUSTOM,
 };
 
 enum class GLDrawType {

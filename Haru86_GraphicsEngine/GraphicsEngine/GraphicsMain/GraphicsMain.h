@@ -8,6 +8,8 @@
 #include <map>
 #include <GL/glew.h>
 
+namespace physics { class CPhysicsEngine; }
+
 enum ERerderingTarget
 {
 	COLOR,
@@ -31,6 +33,8 @@ public:
 	void RunLoop();
 	void ShutDown();
 	void Restart();
+	physics::CPhysicsEngine* GetPhysicsEngine();
+
 	float time;
 	float deltaTime;
 	std::unique_ptr<class Time> timeObj;
@@ -44,6 +48,9 @@ public:
 	std::map<int, GLenum> texSlots;
 	class RaymarchingObject* m_RaymarchingObject;
 	
+	// ï®óùÉGÉìÉWÉì
+	std::unique_ptr<physics::CPhysicsEngine> m_PhysicsEngine;
+
 	friend class Main;
 	friend class GameObject;
 	friend class RaymarchingObject;

@@ -1,7 +1,15 @@
 #pragma once
 #include "ACollider.h"
-class CBoxCollider :
-    public ACollider
-{
-};
+
+namespace physics {
+	class CBoxCollider :
+		public ACollider
+	{
+		CBoxCollider();
+		virtual ~CBoxCollider();
+
+		virtual bool DetectCollider() override;
+	};
+}
+
 

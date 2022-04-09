@@ -241,6 +241,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Object\RaymarchingObject.h" />
     <ClInclude Include="GraphicsEngine\Graphics\PolygonRaymarchingMixer.h" />
     <ClInclude Include="GraphicsEngine\Graphics\PostProcess.h" />
+    <ClInclude Include="GraphicsEngine\Physics\EColliderType.h" />
     <ClInclude Include="GraphicsEngine\Physics\EObjectType.h" />
     <ClInclude Include="GraphicsEngine\Physics\ICollider.h" />
     <ClInclude Include="resource.h" />

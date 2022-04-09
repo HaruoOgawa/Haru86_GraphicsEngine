@@ -10,6 +10,11 @@
 #include <GL/glew.h>
 #include <typeinfo>
 #include <memory>
+#include "GraphicsEngine/Physics/EColliderType.h"
+
+namespace physics {
+	class CPhysicsEngine;
+}
 
 enum RenderQueue
 {
@@ -28,6 +33,7 @@ enum class RenderType {
 class GameObject
 	: public Object
 {
+	PrimitiveType m_PrimitiveType;
 public:
 	GameObject(PrimitiveType primType);
 	GameObject(PrimitiveType primType, std::map<GLenum, std::string> shaders);
@@ -39,14 +45,14 @@ public:
 	~GameObject();
 	void UseZTest(bool use);
 	void SetRenderOlder(int order);
-	void ProcessInput(const SDL_Event& e);
+	void ProcessInput(const SDL_Event& e) override;
+	virtual void AddCollider(physics::EColliderType ColliderType);
 	std::shared_ptr<class MeshRendererComponent> meshComp;
 	float animTime = 0.0f;
 	friend class GraphicsRenderer;
 	friend class TimelineComponent;
 	int renderOrder;
 private:
-	
 	RenderType renderType;
 };
 
