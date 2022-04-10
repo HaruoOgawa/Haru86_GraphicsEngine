@@ -71,7 +71,7 @@ namespace physics {
 	bool CColliderTree::CalculateAABB(const std::vector<float>& Vertices, glm::vec3& CenterPos, glm::vec3& MaxPos, glm::vec3& MinPos) {
 		int MinX = 0, MaxX = 0, MinY = 0, MaxY = 0, MinZ = 0, MaxZ = 0;
 
-		for (int i = 0; i < static_cast<int>(Vertices.size());i+3) {
+		for (int i = 0; i < static_cast<int>(Vertices.size());i+=3) {
 			if (Vertices[i + 0] < Vertices[MinX + 0])MinX = i;
 			if (Vertices[i + 0] > Vertices[MaxX + 0])MaxX = i;
 
