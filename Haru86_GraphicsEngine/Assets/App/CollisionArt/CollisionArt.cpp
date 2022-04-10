@@ -35,10 +35,12 @@ void CollisionArt::Start() {
 	
 	test_SphereObj = std::make_unique<GameObject>(PrimitiveType::SPHERE);
 	test_SphereObj->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
+	test_SphereObj->AddCollider(physics::EColliderType::Sphere);
 
 	test_CubeObj = std::make_unique<GameObject>(PrimitiveType::CUBE);
 	test_CubeObj->SetPosition(glm::vec3(0.0f,-5.0f,0.0));
 	test_CubeObj->SetScale(glm::vec3(50.0f, 0.5f, 50.0f));
+	//test_CubeObj->AddCollider(physics::EColliderType::Box);
 
 	// ポストプロセスの使用を宣言
 	PostProcess::GetInstance()->EnablePostProcess();

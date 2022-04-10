@@ -4,6 +4,7 @@
 #include "CBoxCollider.h"
 #include "GraphicsEngine/Component/MeshRendererComponent.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
+#include "../Debug/Console.h"
 
 namespace physics {
 	CColliderTree::CColliderTree() {
@@ -16,6 +17,7 @@ namespace physics {
 
 	bool CColliderTree::AddCollider(EColliderType ColliderType, GameObject* Obj) {
 		const auto& PrimList = Obj->GetComponent<MeshRendererComponent>()->GetMesh()->GetPrimitiveList();
+		//PrimList[0]->GetVertices()
 		
 		switch (ColliderType)
 		{
