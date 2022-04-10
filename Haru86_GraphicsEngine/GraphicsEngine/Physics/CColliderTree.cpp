@@ -4,7 +4,7 @@
 #include "CBoxCollider.h"
 #include "GraphicsEngine/Component/MeshRendererComponent.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
-#include "../Debug/Console.h"
+#include "../Message/Console.h"
 
 namespace physics {
 	CColliderTree::CColliderTree() {

@@ -197,7 +197,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="GraphicsEngine\Debug\Console.h" />
+    <ClInclude Include="GraphicsEngine\Message\Console.h" />
     <ClInclude Include="GraphicsEngine\Physics\CColliderTree.h" />
     <ClInclude Include="GraphicsEngine\Physics\CPhysicsEngine.h" />
     <ClInclude Include="GraphicsEngine\Physics\CBoxCollider.h" />
