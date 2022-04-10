@@ -1,7 +1,7 @@
 #include "ACollider.h"
 
 namespace physics {
-	ACollider::ACollider(EObjectType ObjectType, std::shared_ptr<TransformComponent> Transform) :
+	ACollider::ACollider(EObjectType ObjectType, TransformComponent* Transform) :
 		m_ObjectType(ObjectType),
 		m_Transform(Transform)
 	{

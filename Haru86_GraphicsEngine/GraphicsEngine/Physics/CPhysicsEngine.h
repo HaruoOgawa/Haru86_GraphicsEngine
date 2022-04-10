@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include "EColliderType.h"
+#include "EObjectType.h"
 
 class GameObject;
 
@@ -17,7 +18,7 @@ namespace physics {
 		void Release();
 		bool Initialize();
 		bool UpdatePhysics();
-		void AddCollider(EColliderType ColliderType,GameObject* Obj);
+		void AddCollider(EColliderType ColliderType,EObjectType ObjectType,GameObject* Obj);
 	};
 }
 

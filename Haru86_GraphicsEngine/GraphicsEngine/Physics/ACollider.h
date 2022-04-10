@@ -11,9 +11,9 @@ namespace physics {
 	class ACollider
 	{
 		EObjectType m_ObjectType;
-		std::shared_ptr<TransformComponent> m_Transform;
+		TransformComponent* m_Transform;
 	public:
-		ACollider(EObjectType ObjectType,std::shared_ptr<TransformComponent> Transform);
+		ACollider(EObjectType ObjectType, TransformComponent* Transform);
 		virtual ~ACollider();
 
 		virtual bool DetectCollider() = 0;

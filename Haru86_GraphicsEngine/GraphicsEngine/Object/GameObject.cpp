@@ -87,6 +87,6 @@ void GameObject::ProcessInput(const SDL_Event& e) {
 	}
 }
 
-void GameObject::AddCollider(physics::EColliderType ColliderType) {
-	GraphicsMain::GetInstance()->GetPhysicsEngine()->AddCollider(ColliderType,this);
+void GameObject::AddCollider(physics::EColliderType ColliderType, physics::EObjectType ObjectType) {
+	GraphicsMain::GetInstance()->GetPhysicsEngine()->AddCollider(ColliderType, ObjectType,this);
 }

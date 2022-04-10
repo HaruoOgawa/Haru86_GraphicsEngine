@@ -27,7 +27,7 @@ namespace physics {
 		return true;
 	}
 
-	void CPhysicsEngine::AddCollider(EColliderType ColliderType, GameObject* Obj) {
-		m_ColliderTree->AddCollider(ColliderType, Obj);
+	void CPhysicsEngine::AddCollider(EColliderType ColliderType, EObjectType ObjectType, GameObject* Obj) {
+		m_ColliderTree->AddCollider(ColliderType, ObjectType, Obj);
 	}
 }

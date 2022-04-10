@@ -10,7 +10,7 @@ namespace physics {
 		glm::vec3              m_LocalAxisSize;
 		
 	public:
-		CBoxCollider(EObjectType ObjectType, std::shared_ptr<TransformComponent> Transform,
+		CBoxCollider(EObjectType ObjectType, TransformComponent* Transform,
 			glm::vec3 CenterPos, std::vector<glm::vec3> LocalAxis, glm::vec3 LocalAxisSize);
 		virtual ~CBoxCollider();
 

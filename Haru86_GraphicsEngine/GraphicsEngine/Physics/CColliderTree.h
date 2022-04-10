@@ -2,7 +2,10 @@
 #include <vector>
 #include <memory>
 #include "EColliderType.h"
+#include "EObjectType.h"
+#include <glm/glm.hpp>
 class GameObject;
+class Primitive;
 
 namespace physics {
 	class ACollider;
@@ -14,10 +17,15 @@ namespace physics {
 		CColliderTree();
 		virtual ~CColliderTree();
 
-		bool AddCollider(EColliderType ColliderType, GameObject* Obj);
+		bool AddCollider(EColliderType ColliderType, EObjectType ObjectType, GameObject* Obj);
 		bool MakeColliderTree();
 	private:
-		bool CalculateSphereVolumeFromAABB();
+		bool CreateSphereCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType);
+		bool CreateBoxCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType);
+
+		bool CalculateAABB(const std::vector<float>& Vertices,glm::vec3& CenterPos, glm::vec3& MaxPos, glm::vec3& MinPos);
+
+		bool CalculateSphereVolumeFromAABB(const std::vector<float>& Vertices, glm::vec3& CenterPos , float& Radius);
 		bool OptimizeSphereVolume();
 
 		bool CalculateOBB();
