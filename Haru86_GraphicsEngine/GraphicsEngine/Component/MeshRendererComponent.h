@@ -25,12 +25,15 @@ public:
     void Draw();
     void DrawBoard();
     void ProcessInput(const SDL_Event& e) override;
+
+    const std::shared_ptr<Mesh>& GetMesh()const;
+
     bool useZTest;
     std::vector<class TimelineAnimationClip*> animationClips;
     std::shared_ptr<class Material> material;
     friend class GraphicsRenderer;
 private:
-    std::unique_ptr<Mesh> mesh;
+    std::shared_ptr<Mesh> mesh;
     std::unique_ptr<class Texture> primTex;
     class Object* myowner;
 };

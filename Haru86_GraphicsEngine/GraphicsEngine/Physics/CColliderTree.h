@@ -13,7 +13,15 @@ namespace physics {
 	public:
 		CColliderTree();
 		virtual ~CColliderTree();
-		void AddCollider(EColliderType ColliderType, GameObject* Obj);
+
+		bool AddCollider(EColliderType ColliderType, GameObject* Obj);
+		bool MakeColliderTree();
+	private:
+		bool CalculateSphereVolumeFromAABB();
+		bool OptimizeSphereVolume();
+
+		bool CalculateOBB();
+		bool OptimizeOBB();
 	};
 }
 

@@ -4,18 +4,29 @@
 #include <GL/glut.h>
 #include "GraphicsEngine/Graphics/Mesh.h"
 
-Primitive::Primitive(std::vector<float> vertices, std::vector<int> indices) {
+Primitive::Primitive(const std::vector<float>& vertices, const std::vector<int>& indices)
+{
 	CreatePrimitive(vertices, indices);
 }
 
-Primitive::Primitive(std::vector<std::vector<float>> vertices, std::vector<int> dimention, std::vector<unsigned short> indices) {
+Primitive::Primitive(const std::vector<std::vector<float>>& vertices, const std::vector<int>& dimention, const std::vector<unsigned short>& indices):
+	m_vertices(vertices),
+	m_dimention(dimention),
+	m_indices(indices)
+{
 	CreatePrimitive(vertices,dimention, indices);
 }
 Primitive::~Primitive() {
 	UnLoadData();
 }
 
-void Primitive::CreatePrimitive(std::vector<float> vertices, std::vector<int> indices) {
+void Primitive::Release() {
+	m_vertices.clear();
+	m_dimention.clear();
+	m_indices.clear();
+}
+
+void Primitive::CreatePrimitive(const std::vector<float>& vertices, const std::vector<int>& indices) {
 	unsigned int mVertexBuffer;
 	unsigned int mIndexBuffer;
 	
@@ -46,7 +57,7 @@ void Primitive::CreatePrimitive(std::vector<float> vertices, std::vector<int> in
 
 }
 
-void Primitive::CreatePrimitive(std::vector<std::vector<float>> vertices, std::vector<int> dimention, std::vector<unsigned short> indices) {
+void Primitive::CreatePrimitive(const std::vector<std::vector<float>>& vertices, const std::vector<int>& dimention, const std::vector<unsigned short>& indices) {
 	
 
 	unsigned int mVertexBuffer;
@@ -89,11 +100,24 @@ void Primitive::Draw(std::string drawType) {
 	glDrawElements(GL_PATCHES, GetNumIndices(), GL_UNSIGNED_SHORT, nullptr);
 }
 
+const std::vector<std::vector<float>>& Primitive::GetVertices()const {
+	return m_vertices;
+}
+
+const std::vector<int>& Primitive::GetDimentions()const {
+	return m_dimention;
+}
+
+const std::vector<unsigned short>& Primitive::GetIndices()const {
+	return m_indices;
+}
+
 void Primitive::SetActive() {
 	glBindVertexArray(mVertexArray);
 }
 
 void Primitive::UnLoadData() {
+	Release();
 	glDeleteVertexArrays(1, &mVertexArray);
 }
 

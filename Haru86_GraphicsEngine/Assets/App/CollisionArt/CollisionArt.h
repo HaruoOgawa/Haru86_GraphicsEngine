@@ -15,8 +15,10 @@ public:
 private:
     std::unique_ptr<class Object> ins_cubes;
     std::unique_ptr<class CameraObject> cam_obj;
-    std::unique_ptr<class GameObject> test_obj;
-    std::unique_ptr<class GameObject> test_obj2;
+
+    std::unique_ptr<class GameObject> test_CubeObj;
+    std::unique_ptr<class GameObject> test_SphereObj;
+
     std::unique_ptr<class RaymarchingObject> raymarching_obj;
 };
 

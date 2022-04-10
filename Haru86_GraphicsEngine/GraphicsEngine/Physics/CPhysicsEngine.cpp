@@ -18,6 +18,8 @@ namespace physics {
 	}
 
 	bool CPhysicsEngine::Initialize() {
+		if (!m_ColliderTree->MakeColliderTree())return false;
+
 		return true;
 	}
 
@@ -26,6 +28,6 @@ namespace physics {
 	}
 
 	void CPhysicsEngine::AddCollider(EColliderType ColliderType, GameObject* Obj) {
-
+		m_ColliderTree->AddCollider(ColliderType, Obj);
 	}
 }
