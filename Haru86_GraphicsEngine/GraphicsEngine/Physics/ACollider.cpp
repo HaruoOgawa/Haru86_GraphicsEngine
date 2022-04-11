@@ -5,6 +5,7 @@ namespace physics {
 		m_ObjectType(ObjectType),
 		m_Transform(Transform),
 		m_Force(glm::vec3(0.0f)),
+		m_Velocity(glm::vec3(0.0f)),
 		m_Mass(1.0f)
 	{
 	}
@@ -27,6 +28,14 @@ namespace physics {
 
 	const glm::vec3& ACollider::GetForce()const {
 		return m_Force;
+	}
+	
+	void ACollider::SetVelocity(glm::vec3 Velocity) {
+		m_Velocity = Velocity;
+	}
+
+	const glm::vec3& ACollider::GetVelocity()const {
+		return m_Velocity;
 	}
 
 	void ACollider::SetMass(float Mass) {

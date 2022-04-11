@@ -13,6 +13,7 @@ namespace physics {
 		EObjectType m_ObjectType;
 		TransformComponent* m_Transform;
 		glm::vec3 m_Force;
+		glm::vec3 m_Velocity;
 		float     m_Mass;
 
 	public:
@@ -25,6 +26,9 @@ namespace physics {
 
 		void SetForce(glm::vec3 Force);
 		const glm::vec3& GetForce()const;
+		
+		void SetVelocity(glm::vec3 Velocity);
+		const glm::vec3& GetVelocity()const;
 
 		void SetMass(float Mass);
 		float GetMass()const;

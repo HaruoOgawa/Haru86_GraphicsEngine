@@ -49,18 +49,22 @@ namespace physics {
 
 	bool CPhysicsEngine::AddForce(std::shared_ptr<ACollider> Collider) {
 		glm::vec3 force = glm::vec3(0.0f);
+		glm::vec3 velocity = Collider->GetVelocity();
 
-		// d—Í
+		// ‰Á‚í‚é—Í‚ðŒvŽZ‚·‚é
 		force += Collider->GetMass() * (-1.0f * glm::vec3(0.0f, gravityVal,0.0f));
-
 		Collider->SetForce(force);
+
+		// ‘¬“x
+		velocity += (Collider->GetForce() / Collider->GetMass()) * GraphicsMain::GetInstance()->deltaTime;
+		Collider->SetVelocity(velocity);
 
 		return true;
 	}
 
 	bool CPhysicsEngine::UpdatePosition(std::shared_ptr<ACollider> Collider) {
 		glm::vec3 UpdatePos = Collider->GetTransform()->GetPosition();
-		UpdatePos += (Collider->GetForce() / Collider->GetMass())* GraphicsMain::GetInstance()->deltaTime;
+		UpdatePos += Collider->GetVelocity()* GraphicsMain::GetInstance()->deltaTime;
 
 		Collider->GetTransform()->SetPosition(UpdatePos);
 		return true;
