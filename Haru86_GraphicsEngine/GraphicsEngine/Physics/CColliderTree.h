@@ -20,13 +20,13 @@ namespace physics {
 		bool AddCollider(EColliderType ColliderType, EObjectType ObjectType, GameObject* Obj);
 		bool MakeColliderTree();
 
-		bool DetectCollider(std::shared_ptr<ACollider> Collider);
+		std::vector<std::shared_ptr<ACollider>> GetPassiveColliderListFromTree(std::shared_ptr<ACollider> Collider);
 
 		const std::vector<std::shared_ptr<ACollider>>& GetColliderList()const;
 	private:
-		bool CreateSphereCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType);
-		bool CreateSimpleBoxCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType);
-		bool CreateBoxCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType);
+		bool CreateSphereCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType, EColliderType ColliderType);
+		bool CreateSimpleBoxCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType, EColliderType ColliderType);
+		bool CreateBoxCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType, EColliderType ColliderType);
 
 		bool CalculateAABB(const std::vector<float>& Vertices,glm::vec3& CenterPos, glm::vec3& MaxPos, glm::vec3& MinPos);
 

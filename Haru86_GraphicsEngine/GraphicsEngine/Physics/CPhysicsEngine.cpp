@@ -19,7 +19,13 @@ namespace physics {
 	}
 
 	void CPhysicsEngine::Release() {
+		ReleaseLoopResource();
+		m_DynamicColliderList.clear();
+		m_ColliderTree.release();
+	}
 
+	void CPhysicsEngine::ReleaseLoopResource() {
+		m_CollisionInfoList.clear();
 	}
 
 	bool CPhysicsEngine::Initialize() {
@@ -36,8 +42,10 @@ namespace physics {
 
 		for (auto& Collider : m_DynamicColliderList) {
 			if (!AddForce(Collider))return false;
-			if (!m_ColliderTree->DetectCollider(Collider))return false;
+			if (!DetectCollider(Collider))return false;
+			// 貫通を解消する
 			if (!UpdatePosition(Collider))return false;
+			ReleaseLoopResource(); // このループで作成したコリジョンのリソースを開放する
 		}
 
 		return true;
@@ -58,6 +66,19 @@ namespace physics {
 		// 速度
 		velocity += (Collider->GetForce() / Collider->GetMass()) * GraphicsMain::GetInstance()->deltaTime;
 		Collider->SetVelocity(velocity);
+
+		return true;
+	}
+
+	bool CPhysicsEngine::DetectCollider(std::shared_ptr<ACollider> Collider) {
+		// コライダーツリーから衝突しそうなコライダーリストを取得する
+		const auto PassiveColliderList = m_ColliderTree->GetPassiveColliderListFromTree(Collider);
+
+		// 各コライダーに対して衝突判定を行う
+		for (const auto& PassiveCollider : PassiveColliderList) {
+			auto CollisionInfo= PassiveCollider->DetectCollider(Collider);
+			if (CollisionInfo)m_CollisionInfoList.push_back(CollisionInfo);
+		}
 
 		return true;
 	}

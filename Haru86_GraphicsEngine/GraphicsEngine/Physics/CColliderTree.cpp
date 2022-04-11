@@ -22,11 +22,11 @@ namespace physics {
 		switch (ColliderType)
 		{
 			case physics::EColliderType::Sphere:
-				if (!CreateSphereCollider(PrimList, Obj, ObjectType))return false;
+				if (!CreateSphereCollider(PrimList, Obj, ObjectType, ColliderType))return false;
 				break;
 
 			case physics::EColliderType::Box:
-				if (!CreateSimpleBoxCollider(PrimList, Obj, ObjectType))return false;
+				if (!CreateSimpleBoxCollider(PrimList, Obj, ObjectType, ColliderType))return false;
 				break;
 
 			default:
@@ -44,15 +44,24 @@ namespace physics {
 		return true;
 	}
 
-	bool CColliderTree::DetectCollider(std::shared_ptr<ACollider> Collider) {
-		return true;
+	std::vector<std::shared_ptr<ACollider>> CColliderTree::GetPassiveColliderListFromTree(std::shared_ptr<ACollider> Collider) {
+		std::vector<std::shared_ptr<ACollider>> PassiveColliderList;
+		
+		// Ç–Ç∆Ç‹Ç∏âºÇÃé¿ëï(Ç‹ÇæÉcÉäÅ[Çé¿ëïÇµÇƒÇ¢Ç»Ç¢)
+		for (const auto& PassiveCollider : m_ColliderList) {
+			if (Collider!=PassiveCollider) {
+				PassiveColliderList.push_back(PassiveCollider);
+			}
+		}
+
+		return PassiveColliderList;
 	}
 
 	const std::vector<std::shared_ptr<ACollider>>& CColliderTree::GetColliderList()const {
 		return m_ColliderList;
 	}
 
-	bool CColliderTree::CreateSphereCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType) {
+	bool CColliderTree::CreateSphereCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType, EColliderType ColliderType) {
 		glm::vec3 CenterPos;
 		float Radius = 0.0f;
 
@@ -72,7 +81,7 @@ namespace physics {
 		return true;
 	}
 
-	bool CColliderTree::CreateSimpleBoxCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType) {
+	bool CColliderTree::CreateSimpleBoxCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType, EColliderType ColliderType) {
 		
 		glm::vec3 CenterPos = glm::vec3(0.0f, 0.0f, 0.0f);
 		
@@ -88,7 +97,7 @@ namespace physics {
 		return true;
 	}
 
-	bool CColliderTree::CreateBoxCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType) {
+	bool CColliderTree::CreateBoxCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType, EColliderType ColliderType) {
 		return true;
 	}
 

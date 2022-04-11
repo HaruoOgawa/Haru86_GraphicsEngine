@@ -2,7 +2,7 @@
 
 namespace physics {
 	CSphereCollider::CSphereCollider(EObjectType ObjectType, TransformComponent* Transform, glm::vec3 CenterPos, float Radius)
-		: ACollider(ObjectType, Transform),
+		: ACollider(ObjectType,EColliderType::Sphere, Transform),
 		m_CenterPos(CenterPos),
 		m_Radius(Radius)
 	{
@@ -12,8 +12,16 @@ namespace physics {
 
 	}
 
-	bool CSphereCollider::DetectCollider() {
-		return true;
+	std::shared_ptr<SCollisionInfo> CSphereCollider::DetectBoxCollider(std::shared_ptr<ACollider> Collider) {
+		std::shared_ptr<SCollisionInfo> CollisionInfo = nullptr;
+
+		return CollisionInfo;
+	}
+	
+	std::shared_ptr<SCollisionInfo> CSphereCollider::DetectSphereCollider(std::shared_ptr<ACollider> Collider) {
+		std::shared_ptr<SCollisionInfo> CollisionInfo = nullptr;
+
+		return CollisionInfo;
 	}
 
 }

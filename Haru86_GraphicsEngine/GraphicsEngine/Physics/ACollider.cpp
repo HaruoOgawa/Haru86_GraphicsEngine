@@ -1,8 +1,14 @@
 #include "ACollider.h"
 
 namespace physics {
-	ACollider::ACollider(EObjectType ObjectType, TransformComponent* Transform) :
+	SCollisionInfo::SCollisionInfo(float depth, glm::vec3 normal) {
+		m_depth = depth;
+		m_normal = normal;
+	}
+
+	ACollider::ACollider(EObjectType ObjectType, EColliderType ColliderType, TransformComponent* Transform) :
 		m_ObjectType(ObjectType),
+		m_ColliderType(ColliderType),
 		m_Transform(Transform),
 		m_Force(glm::vec3(0.0f)),
 		m_Velocity(glm::vec3(0.0f)),
@@ -18,8 +24,36 @@ namespace physics {
 		return m_ObjectType;
 	}
 
-	bool ACollider::DetectCollider() {
-		return true;
+	EColliderType ACollider::GetColliderType()const {
+		return m_ColliderType;
+	}
+
+	std::shared_ptr<SCollisionInfo> ACollider::DetectCollider(std::shared_ptr<ACollider> Collider) {
+		std::shared_ptr<SCollisionInfo> CollisionInfo = nullptr;
+		
+		switch (Collider->GetColliderType())
+		{
+		case EColliderType::Box:
+			CollisionInfo=DetectBoxCollider(Collider);
+			break;
+
+		case EColliderType::Sphere:
+			CollisionInfo=DetectSphereCollider(Collider);
+			break;
+
+		default:
+			break;
+		}
+
+		return CollisionInfo;
+	}
+	
+	std::shared_ptr<SCollisionInfo> ACollider::DetectBoxCollider(std::shared_ptr<ACollider> Collider) {
+		return nullptr;
+	}
+	
+	std::shared_ptr<SCollisionInfo> ACollider::DetectSphereCollider(std::shared_ptr<ACollider> Collider) {
+		return nullptr;
 	}
 
 	void ACollider::SetForce(glm::vec3 Force) {
