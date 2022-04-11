@@ -12,11 +12,24 @@ namespace physics {
 	{
 		EObjectType m_ObjectType;
 		TransformComponent* m_Transform;
+		glm::vec3 m_Force;
+		float     m_Mass;
+
 	public:
 		ACollider(EObjectType ObjectType, TransformComponent* Transform);
 		virtual ~ACollider();
 
+		EObjectType GetObjectType()const;
+
 		virtual bool DetectCollider() = 0;
+
+		void SetForce(glm::vec3 Force);
+		const glm::vec3& GetForce()const;
+
+		void SetMass(float Mass);
+		float GetMass()const;
+
+		TransformComponent* GetTransform();
 
 	private:
 

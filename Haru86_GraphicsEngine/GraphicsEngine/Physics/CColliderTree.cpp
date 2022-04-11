@@ -44,6 +44,14 @@ namespace physics {
 		return true;
 	}
 
+	bool CColliderTree::DetectCollider(std::shared_ptr<ACollider> Collider) {
+		return true;
+	}
+
+	const std::vector<std::shared_ptr<ACollider>>& CColliderTree::GetColliderList()const {
+		return m_ColliderList;
+	}
+
 	bool CColliderTree::CreateSphereCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType) {
 		glm::vec3 CenterPos;
 		float Radius = 0.0f;

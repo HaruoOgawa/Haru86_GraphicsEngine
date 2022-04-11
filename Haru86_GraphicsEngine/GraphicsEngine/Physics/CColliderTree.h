@@ -19,6 +19,10 @@ namespace physics {
 
 		bool AddCollider(EColliderType ColliderType, EObjectType ObjectType, GameObject* Obj);
 		bool MakeColliderTree();
+
+		bool DetectCollider(std::shared_ptr<ACollider> Collider);
+
+		const std::vector<std::shared_ptr<ACollider>>& GetColliderList()const;
 	private:
 		bool CreateSphereCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType);
 		bool CreateSimpleBoxCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType);
