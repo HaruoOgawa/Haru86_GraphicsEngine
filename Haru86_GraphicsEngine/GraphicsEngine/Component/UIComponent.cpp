@@ -60,7 +60,7 @@ void UIComponent::ProcessInput(const SDL_Event& e) {
 			* glm::vec4(pos.x, pos.y, 0.0f, 1.0f);
 		pos = glm::vec2(modelPos.x / modelPos.w, modelPos.y / modelPos.w);
 
-		owner->SetPosition(glm::vec3(pos.x, owner->transform->position.y, owner->transform->position.z));
+		owner->SetPosition(glm::vec3(pos.x, owner->transform->GetPosition().y, owner->transform->GetPosition().z));
 		owner->
 			GetComponent<RectTransformComponent>()->rectPosition.x = fx;
 

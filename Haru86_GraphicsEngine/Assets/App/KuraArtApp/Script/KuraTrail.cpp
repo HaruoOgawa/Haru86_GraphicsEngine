@@ -137,7 +137,7 @@ void KuraTrail::Draw() {
 	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
 
 	//GPU Trail Uniform
-	m_material->SetVec3Uniform("_WorldSpaceCameraPos",GraphicsMain::GetInstance()->game_camera_instance->transform->position);
+	m_material->SetVec3Uniform("_WorldSpaceCameraPos",GraphicsMain::GetInstance()->game_camera_instance->transform->GetPosition());
 	m_material->SetFloatUniform("_initNodeLife", 5);
 	m_material->SetFloatUniform("_nodeSegment",nodeSegment );
 	m_material->SetFloatUniform("_TrailWidth", 0.4*7.0);

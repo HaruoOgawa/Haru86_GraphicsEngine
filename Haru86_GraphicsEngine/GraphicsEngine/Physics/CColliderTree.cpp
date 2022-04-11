@@ -26,7 +26,7 @@ namespace physics {
 				break;
 
 			case physics::EColliderType::Box:
-				if (!CreateBoxCollider(PrimList, Obj, ObjectType))return false;
+				if (!CreateSimpleBoxCollider(PrimList, Obj, ObjectType))return false;
 				break;
 
 			default:
@@ -60,6 +60,22 @@ namespace physics {
 		}
 
 		m_ColliderList.push_back(std::make_shared<CSphereCollider>(ObjectType, Obj->GetComponent<TransformComponent>(), CenterPos, Radius));
+
+		return true;
+	}
+
+	bool CColliderTree::CreateSimpleBoxCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType) {
+		
+		glm::vec3 CenterPos = glm::vec3(0.0f, 0.0f, 0.0f);
+		
+		std::vector<glm::vec3> LocalAxis;
+		LocalAxis.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
+		LocalAxis.push_back(glm::vec3(0.0f, 1.0f, 0.0f));
+		LocalAxis.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+
+		glm::vec3 LocalAxisSize = Obj->GetComponent<TransformComponent>()->GetScale()*0.5f;
+
+		m_ColliderList.push_back(std::make_shared<CBoxCollider>(ObjectType, Obj->GetComponent<TransformComponent>(), CenterPos, LocalAxis, LocalAxisSize));
 
 		return true;
 	}

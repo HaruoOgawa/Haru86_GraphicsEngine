@@ -20,7 +20,7 @@ CBoxInstancing::~CBoxInstancing() {
 }
 
 void CBoxInstancing::Start() {
-	owner->transform->scale = glm::vec3(1.0);
+	owner->transform->SetScale(glm::vec3(1.0));
 	m_mesh = std::make_shared<Mesh>(PrimitiveType::CUBE);
 	m_material = std::make_shared<Material>(
 		"./Assets/Shader/Kura02/InstancedBox.vert",

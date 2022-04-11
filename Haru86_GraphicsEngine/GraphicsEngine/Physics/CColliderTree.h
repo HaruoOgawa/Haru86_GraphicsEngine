@@ -21,6 +21,7 @@ namespace physics {
 		bool MakeColliderTree();
 	private:
 		bool CreateSphereCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType);
+		bool CreateSimpleBoxCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType);
 		bool CreateBoxCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType);
 
 		bool CalculateAABB(const std::vector<float>& Vertices,glm::vec3& CenterPos, glm::vec3& MaxPos, glm::vec3& MinPos);

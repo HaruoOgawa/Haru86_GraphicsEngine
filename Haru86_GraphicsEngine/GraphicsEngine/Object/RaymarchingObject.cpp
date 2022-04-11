@@ -41,7 +41,7 @@ void RaymarchingObject::Draw() {
 	else if (GraphicsMain::GetInstance()->renderingTarget == ERerderingTarget::DEPTH) {
 		m_material->SetFloatUniform("_RenderingTarget", 2.0);
 	}
-	m_material->SetVec3Uniform("_camerePosition", GraphicsMain::GetInstance()->game_camera_instance->transform->position);
+	m_material->SetVec3Uniform("_camerePosition", GraphicsMain::GetInstance()->game_camera_instance->transform->GetPosition());
 
 	m_mesh->Draw();
 }

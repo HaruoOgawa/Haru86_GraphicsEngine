@@ -146,12 +146,12 @@ void KuraGPGPU::Update() {
 		targerBoidsData[targetIndex].position[0], targerBoidsData[targetIndex].position[1], targerBoidsData[targetIndex].position[2]
 	);
 	//camera postion
-	GraphicsMain::GetInstance()->game_camera_instance->transform->position =
+	GraphicsMain::GetInstance()->game_camera_instance->transform->SetPosition(
 		GraphicsMain::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter
 		+ glm::vec3(
 			glm::cos(GraphicsMain::GetInstance()->time* speed),
 			glm::sin(GraphicsMain::GetInstance()->time * speed),
-			glm::sin(GraphicsMain::GetInstance()->time * speed))* radius;
+			glm::sin(GraphicsMain::GetInstance()->time * speed))* radius);
 
 	targerBoidsData.clear();
 

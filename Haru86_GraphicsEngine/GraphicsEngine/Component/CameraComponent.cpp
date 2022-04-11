@@ -35,7 +35,7 @@ void CameraComponent::Update() {
 	}
 
 	if (m_IsMouseWheel) {
-		glm::vec3 viewDir = glm::normalize(cameraCenter - owner->transform->position);
+		glm::vec3 viewDir = glm::normalize(cameraCenter - owner->transform->GetPosition());
 		float zoomVal = ZoomPower*(float)m_WheelY;
 		owner->transform->Translate(zoomVal * viewDir);
 	}

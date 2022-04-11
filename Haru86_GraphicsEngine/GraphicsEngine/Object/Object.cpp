@@ -35,38 +35,38 @@ void Object::ProcessInput(const SDL_Event& e) {
 
 void Object::SetTransform(glm::vec3 pos, glm::quat rot, glm::vec3 s)
 { 
-	transform->position = pos;
-	transform->rotation = rot; 
-	transform->scale = s; 
+	transform->SetPosition(pos);
+	transform->SetRotation(rot); 
+	transform->SetScale(s); 
 
 	transform->CalMatrix();
 }
 
 void Object::SetPosition(glm::vec3 pos) {
-	transform->position = pos;
+	transform->SetPosition(pos);
 
 	transform->CalMatrix();
 }
 
 void Object::SetRotation(glm::quat rot) {
-	transform->rotation=rot;
+	transform->SetRotation(rot);
 
 	transform->CalMatrix();
 }
 void Object::SetScale(glm::vec3 s) {
-	transform->scale = s;
+	transform->SetScale(s);
 
 	transform->CalMatrix();
 }
 
 glm::vec3 Object::GetPosition() {
-	return transform->position;
+	return transform->GetPosition();
 }
 
 glm::quat Object::GetRotation() {
-	return transform->rotation;
+	return transform->GetRotation();
 }
 
 glm::vec3 Object::GetScale() {
-	return transform->scale;
+	return transform->GetScale();
 }
