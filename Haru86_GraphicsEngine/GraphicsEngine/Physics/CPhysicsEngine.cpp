@@ -78,7 +78,7 @@ namespace physics {
 		// 各コライダーに対して衝突判定を行う
 		for (const auto& PassiveCollider : PassiveColliderList) {
 			auto CollisionInfo= PassiveCollider->DetectCollider(Collider);
-			if (CollisionInfo)m_CollisionInfoList.push_back(CollisionInfo);
+			if (CollisionInfo)m_CollisionInfoList.emplace(PassiveCollider, CollisionInfo);
 		}
 
 		return true;
@@ -87,10 +87,42 @@ namespace physics {
 	bool CPhysicsEngine::ResolvePenetration(std::shared_ptr<ACollider> Collider) {
 
 		for (const auto& Info : m_CollisionInfoList) {
-			if (Info->m_IsCollided) {
-				glm::vec3 MovedPos = Collider->GetTransform()->GetPosition();
-				MovedPos += Info->m_normal;
-				Collider->GetTransform()->SetPosition(MovedPos);
+			if (Info.second->m_IsCollided) {
+				//glm::vec3 ColliderVel = Collider->GetVelocity();
+				// 	Collider->SetVelocity(ColliderVel+glm::vec3(0.0f,5.0f,0.0f));
+
+				// 各コライダーの速度
+				glm::vec3 va = Collider->GetVelocity();
+				glm::vec3 vb = Info.first->GetVelocity();
+
+				// 各コライダーの質量
+				float ma = Collider->GetMass();
+				float mb = Info.first->GetMass();
+
+				// 相対速度
+				glm::vec3 vab = vb - va;
+
+				// ばね定数
+				float k = 1.0f;
+
+				// 反発係数
+				//float e = -1.0f * ((0.0f - k * Info.second->m_depth) / (glm::dot(vab, Info.second->m_normal)));
+				//e = glm::max(0.0f, glm::min(1.0f/GraphicsMain::GetInstance()->deltaTime, e));
+				float e = 1.0f;
+				
+				// 撃力係数の算出
+				float c = (ma * mb / (ma + mb)) * ((1.0f + e) * glm::dot(vab, Info.second->m_normal) - k * Info.second->m_depth);
+
+				// 撃力を加えて貫通を解決する
+					// 衝突する側
+				va = (c * Info.second->m_normal / ma);
+				Collider->SetVelocity(va);
+
+					// 衝突される側
+				if (Info.first->GetObjectType() == EObjectType::DYNAMIC) {
+					vb = (c * Info.second->m_normal / mb);
+					Info.first->SetVelocity(vb);
+				}
 			}
 		}
 

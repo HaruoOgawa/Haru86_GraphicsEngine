@@ -37,7 +37,11 @@ namespace physics {
 		float CollidedDepth = glm::dot(CollidedNormal, CollidedNormal);
 		bool IsCollided = Collider->CalcIsingCollided(CollidedNormal,CollidedDepth);
 		if (IsCollided) {
+			// ƒ[ƒ‹ƒhÀ•WŒn‚É–ß‚·
+			CollidedNormal = (glm::mat4_cast(m_Transform->GetRotation())*glm::vec4(CollidedNormal.x, CollidedNormal.y, CollidedNormal.z,1.0f));
+			//
 			CollidedDepth = glm::sqrt(CollidedDepth);
+			//
 			CollisionInfo = std::make_shared<SCollisionInfo>(IsCollided, CollidedDepth, CollidedNormal);
 		}
 

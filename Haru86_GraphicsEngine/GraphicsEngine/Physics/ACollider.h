@@ -13,7 +13,7 @@ namespace physics {
 	{
 		bool m_IsCollided;
 		float m_depth;
-		glm::vec3 m_normal;
+		glm::vec3 m_normal; // normal‚Í”½”­‚·‚é•ûŒü
 	public:
 		SCollisionInfo(bool IsCollided,float depth, glm::vec3 normal);
 	};

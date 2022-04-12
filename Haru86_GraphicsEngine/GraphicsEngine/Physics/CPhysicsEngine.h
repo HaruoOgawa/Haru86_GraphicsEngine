@@ -3,6 +3,7 @@
 #include <memory>
 #include "EColliderType.h"
 #include "EObjectType.h"
+#include <unordered_map>
 
 class GameObject;
 
@@ -15,7 +16,7 @@ namespace physics {
 	{
 		std::unique_ptr<CColliderTree> m_ColliderTree;
 		std::vector<std::shared_ptr<ACollider>> m_DynamicColliderList;
-		std::vector<std::shared_ptr<SCollisionInfo>> m_CollisionInfoList;
+		std::unordered_map<std::shared_ptr<ACollider>, std::shared_ptr<SCollisionInfo>> m_CollisionInfoList;
 
 	public:
 		CPhysicsEngine();

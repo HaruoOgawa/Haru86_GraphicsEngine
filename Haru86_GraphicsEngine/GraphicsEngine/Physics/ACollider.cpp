@@ -1,10 +1,10 @@
 #include "ACollider.h"
 
 namespace physics {
-	SCollisionInfo::SCollisionInfo(bool IsCollided,float depth, glm::vec3 normal) {
-		m_IsCollided = IsCollided;
-		m_depth = depth;
-		m_normal = normal;
+	SCollisionInfo::SCollisionInfo(bool IsCollided,float depth, glm::vec3 normal) :
+		m_IsCollided(IsCollided),
+		m_depth(depth),
+		m_normal(normal) {
 	}
 
 	ACollider::ACollider(EObjectType ObjectType, EColliderType ColliderType, TransformComponent* Transform) :
