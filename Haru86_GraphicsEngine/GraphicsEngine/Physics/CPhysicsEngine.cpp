@@ -41,10 +41,10 @@ namespace physics {
 	bool CPhysicsEngine::UpdatePhysics() {
 
 		for (auto& Collider : m_DynamicColliderList) {
-			if (!AddForce(Collider))return false;
-			if (!DetectCollider(Collider))return false;
+			if (!AddForce(Collider))return false; // 力を加える
+			if (!DetectCollider(Collider))return false; // 衝突判定
 			// 貫通を解消する
-			if (!UpdatePosition(Collider))return false;
+			if (!UpdatePosition(Collider))return false; // 位置の更新
 			ReleaseLoopResource(); // このループで作成したコリジョンのリソースを開放する
 		}
 

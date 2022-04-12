@@ -14,5 +14,6 @@ namespace physics {
 
 		virtual std::shared_ptr<SCollisionInfo> DetectBoxCollider(std::shared_ptr<ACollider> Collider) override;
 		virtual std::shared_ptr<SCollisionInfo> DetectSphereCollider(std::shared_ptr<ACollider> Collider) override;
+		virtual bool CalcIsingCollided(glm::vec3 CollidedNormal, float CollidedDepth)override;
 	};
 }

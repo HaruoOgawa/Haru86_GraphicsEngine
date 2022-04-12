@@ -21,6 +21,7 @@ public:
     
     glm::mat4 GetMVPMatrix(){ return m_pMatrix * m_vMatrix * m_mMatrix; }
     glm::mat4 GetMMatrix(){ return m_mMatrix; }
+    glm::mat4 GetInvMMatrix(){ return glm::inverse(m_mMatrix); }
     glm::mat4 GetVMatrix() { return m_vMatrix; }
     glm::mat4 GetPMatrix(){ return m_pMatrix; }
     const glm::vec3& GetPosition()const;

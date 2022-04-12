@@ -1,7 +1,8 @@
 #include "ACollider.h"
 
 namespace physics {
-	SCollisionInfo::SCollisionInfo(float depth, glm::vec3 normal) {
+	SCollisionInfo::SCollisionInfo(bool IsCollided,float depth, glm::vec3 normal) {
+		m_IsCollided = IsCollided;
 		m_depth = depth;
 		m_normal = normal;
 	}
@@ -48,6 +49,10 @@ namespace physics {
 		return CollisionInfo;
 	}
 	
+	bool ACollider::CalcIsingCollided(glm::vec3 CollidedNormal, float CollidedDepth) {
+		return false;
+	}
+
 	std::shared_ptr<SCollisionInfo> ACollider::DetectBoxCollider(std::shared_ptr<ACollider> Collider) {
 		return nullptr;
 	}
