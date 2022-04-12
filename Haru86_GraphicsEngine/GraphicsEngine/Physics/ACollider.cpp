@@ -49,7 +49,7 @@ namespace physics {
 		return CollisionInfo;
 	}
 	
-	bool ACollider::CalcIsingCollided(glm::vec3 CollidedNormal, float CollidedDepth) {
+	bool ACollider::CalcIsingCollided(glm::vec3& CollidedNormal, float& CollidedDepth) {
 		return false;
 	}
 

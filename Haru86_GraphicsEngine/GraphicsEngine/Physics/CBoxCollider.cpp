@@ -33,8 +33,10 @@ namespace physics {
 		GetClosestPointAtOBB(ColliderPos, closestPoint);
 
 		// Õ“Ëî•ñ‚ğ‚Ü‚Æ‚ß‚é
-		glm::vec3 CollidedNormal = ColliderPos-closestPoint ;
-		float CollidedDepth = glm::dot(CollidedNormal, CollidedNormal);
+		glm::vec3 CollidedNormal = closestPoint-ColliderPos ;
+		float CollidedDepth;
+		//float CollidedDepth = glm::dot(CollidedNormal, CollidedNormal);
+
 		bool IsCollided = Collider->CalcIsingCollided(CollidedNormal,CollidedDepth);
 		if (IsCollided) {
 			// ƒ[ƒ‹ƒhÀ•WŒn‚É–ß‚·
@@ -48,7 +50,7 @@ namespace physics {
 		return CollisionInfo;
 	}
 
-	bool CBoxCollider::CalcIsingCollided(glm::vec3 CollidedNormal, float CollidedDepth) {
+	bool CBoxCollider::CalcIsingCollided(glm::vec3& CollidedNormal, float& CollidedDepth) {
 		return false;
 	}
 

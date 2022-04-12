@@ -24,7 +24,10 @@ namespace physics {
 		return CollisionInfo;
 	}
 
-	bool CSphereCollider::CalcIsingCollided(glm::vec3 CollidedNormal, float CollidedDepth) {
+	bool CSphereCollider::CalcIsingCollided(glm::vec3& CollidedNormal, float& CollidedDepth) {
+		CollidedNormal = CollidedNormal + glm::abs(glm::normalize(CollidedNormal)) * m_Radius;
+		CollidedDepth = glm::dot(CollidedNormal, CollidedNormal);
+
 		return (CollidedDepth < m_Radius* m_Radius);
 	}
 }
