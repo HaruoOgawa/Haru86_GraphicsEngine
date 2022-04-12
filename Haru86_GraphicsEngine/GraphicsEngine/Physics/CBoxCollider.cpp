@@ -36,9 +36,10 @@ namespace physics {
 		glm::vec3 CollidedNormal = ColliderPos-closestPoint ;
 		float CollidedDepth = glm::dot(CollidedNormal, CollidedNormal);
 		bool IsCollided = Collider->CalcIsingCollided(CollidedNormal,CollidedDepth);
-		if(IsCollided)CollidedDepth = glm::sqrt(CollidedDepth);
-
-		CollisionInfo = std::make_shared<SCollisionInfo>(IsCollided, CollidedDepth, CollidedNormal);
+		if (IsCollided) {
+			CollidedDepth = glm::sqrt(CollidedDepth);
+			CollisionInfo = std::make_shared<SCollisionInfo>(IsCollided, CollidedDepth, CollidedNormal);
+		}
 
 		return CollisionInfo;
 	}

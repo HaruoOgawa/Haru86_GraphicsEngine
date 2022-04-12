@@ -4,6 +4,7 @@
 #include "ACollider.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
+#include "../Message/Console.h"
 
 #define gravityVal 9.80665f 
 
@@ -43,7 +44,7 @@ namespace physics {
 		for (auto& Collider : m_DynamicColliderList) {
 			if (!AddForce(Collider))return false; // 力を加える
 			if (!DetectCollider(Collider))return false; // 衝突判定
-			// 貫通を解消する
+			if (!ResolvePenetration(Collider))return false; // 貫通を解消する
 			if (!UpdatePosition(Collider))return false; // 位置の更新
 			ReleaseLoopResource(); // このループで作成したコリジョンのリソースを開放する
 		}
@@ -78,6 +79,19 @@ namespace physics {
 		for (const auto& PassiveCollider : PassiveColliderList) {
 			auto CollisionInfo= PassiveCollider->DetectCollider(Collider);
 			if (CollisionInfo)m_CollisionInfoList.push_back(CollisionInfo);
+		}
+
+		return true;
+	}
+
+	bool CPhysicsEngine::ResolvePenetration(std::shared_ptr<ACollider> Collider) {
+
+		for (const auto& Info : m_CollisionInfoList) {
+			if (Info->m_IsCollided) {
+				glm::vec3 MovedPos = Collider->GetTransform()->GetPosition();
+				MovedPos += Info->m_normal;
+				Collider->GetTransform()->SetPosition(MovedPos);
+			}
 		}
 
 		return true;

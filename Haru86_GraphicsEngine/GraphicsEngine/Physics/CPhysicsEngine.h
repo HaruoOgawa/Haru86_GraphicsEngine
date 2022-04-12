@@ -28,6 +28,7 @@ namespace physics {
 	private:
 		bool AddForce(std::shared_ptr<ACollider> Collider);
 		bool DetectCollider(std::shared_ptr<ACollider> Collider);
+		bool ResolvePenetration(std::shared_ptr<ACollider> Collider);
 		bool UpdatePosition(std::shared_ptr<ACollider> Collider);
 	};
 }
