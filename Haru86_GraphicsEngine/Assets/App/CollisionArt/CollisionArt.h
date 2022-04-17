@@ -18,6 +18,7 @@ private:
 
     std::unique_ptr<class GameObject> test_CubeObj;
     std::unique_ptr<class GameObject> test_SphereObj;
+    std::unique_ptr<class GameObject> test_SphereObj2;
 
     std::unique_ptr<class RaymarchingObject> raymarching_obj;
 };
