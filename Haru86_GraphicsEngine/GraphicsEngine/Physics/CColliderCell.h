@@ -8,11 +8,13 @@ namespace physics {
 	class CColliderCell
 	{
 		std::vector<std::shared_ptr<CCellContents>> m_CellContentsList;
+
+		CCellContents* m_LatestCellContents;
 	public:
 		CColliderCell();
 		virtual ~CColliderCell();
 
-		bool SetCellContents(const std::shared_ptr<CCellContents>& CellContentsList);
+		bool SetCellContents(const std::shared_ptr<CCellContents>& CellContents);
 		const std::vector<std::shared_ptr<CCellContents>>& GetCellContentsList()const;
 	};
 }

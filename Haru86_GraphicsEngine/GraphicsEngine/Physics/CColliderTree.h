@@ -55,7 +55,7 @@ namespace physics {
 
 		//
 		bool MakeTree();
-		bool RegistCollider2Cell(const std::shared_ptr<ACollider>& Collider);
+		bool RegistCellContents2Cell(const std::shared_ptr<CCellContents>& CellContents);
 
 		//
 		unsigned int GetCellIndexFromMortonNumber(const glm::vec3& MinPos, const glm::vec3& MaxPos)const;

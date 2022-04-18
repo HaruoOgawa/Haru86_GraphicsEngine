@@ -52,8 +52,8 @@ namespace physics {
 		if (!MakeTree())return false;
 
 		// ツリーの初期化(最初のオブジェクト登録)
-		for (const auto& Collider : m_ColliderList) {
-			RegistCollider2Cell(Collider);
+		for (const auto& CellContents : m_CellContentsList) {
+			RegistCellContents2Cell(CellContents);
 		}
 
 		return true;
@@ -70,8 +70,9 @@ namespace physics {
 		return true;
 	}
 
-	bool CColliderTree::RegistCollider2Cell(const std::shared_ptr<ACollider>& Collider) {
+	bool CColliderTree::RegistCellContents2Cell(const std::shared_ptr<CCellContents>& CellContents) {
 		//
+		const auto& Collider = CellContents->GetCollider();
 		const auto& Bounds = Collider->GetBounds();
 		const auto WorldMatrix = Collider->GetTransform()->GetMMatrix();
 		glm::vec3 WorldMinPos = WorldMatrix * glm::vec4(Bounds->m_MinPos, 1.0f);
@@ -87,8 +88,8 @@ namespace physics {
 			}
 
 			// セルにコライダー(セルコンテンツ)を登録する
-			//m_CellContentsList
-
+			m_CellList[CellIndex]->SetCellContents(CellContents);
+			
 			return true;
 		}
 		else {
