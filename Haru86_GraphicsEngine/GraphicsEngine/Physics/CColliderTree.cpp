@@ -4,6 +4,7 @@
 #include "CSphereCollider.h"
 #include "CBoxCollider.h"
 #include "CColliderCell.h"
+#include "CCellContents.h"
 #include "GraphicsEngine/Component/MeshRendererComponent.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "../Message/Console.h"
@@ -52,14 +53,7 @@ namespace physics {
 
 		// ツリーの初期化(最初のオブジェクト登録)
 		for (const auto& Collider : m_ColliderList) {
-			//
-			const auto& Bounds = Collider->GetBounds();
-			const auto WorldMatrix = Collider->GetTransform()->GetMMatrix();
-			glm::vec3 WorldMinPos = WorldMatrix * glm::vec4(Bounds->m_MinPos,1.0f);
-			glm::vec3 WorldMaxPos = WorldMatrix * glm::vec4(Bounds->m_MaxPos,1.0f);
-
-			// モートン番号からコライダーを格納するセルのインデックスを取得する
-			unsigned long CellIndex = GetCellIndexFromMortonNumber(WorldMinPos, WorldMaxPos);
+			RegistCollider2Cell(Collider);
 		}
 
 		return true;
@@ -74,6 +68,32 @@ namespace physics {
 
 		m_CellList.resize(CellNum);
 		return true;
+	}
+
+	bool CColliderTree::RegistCollider2Cell(const std::shared_ptr<ACollider>& Collider) {
+		//
+		const auto& Bounds = Collider->GetBounds();
+		const auto WorldMatrix = Collider->GetTransform()->GetMMatrix();
+		glm::vec3 WorldMinPos = WorldMatrix * glm::vec4(Bounds->m_MinPos, 1.0f);
+		glm::vec3 WorldMaxPos = WorldMatrix * glm::vec4(Bounds->m_MaxPos, 1.0f);
+
+		// モートン番号からコライダーを格納するセルのインデックスを取得する
+		unsigned long CellIndex = GetCellIndexFromMortonNumber(WorldMinPos, WorldMaxPos);
+
+		if (CellIndex < m_CellList.size()) {
+			// もしセルがまだ空なら生成する
+			if (!m_CellList[CellIndex]) {
+				m_CellList[CellIndex] = std::make_shared<CColliderCell>();
+			}
+
+			// セルにコライダー(セルコンテンツ)を登録する
+			//m_CellContentsList
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	//
@@ -99,7 +119,7 @@ namespace physics {
 		Console::Log("MaxMortonNum: %x\n", MaxMortonNum);
 		Console::Log("ParentMorton: %x\n", ParentMorton);*/
 
-		return 0;
+		return ParentMorton;
 	}
 
 	unsigned int CColliderTree::GetMortonNumber(unsigned long x, unsigned long y, unsigned long z)const {
@@ -147,7 +167,9 @@ namespace physics {
 			}
 		}
 
+		//
 		m_ColliderList.push_back(std::make_shared<CSphereCollider>(ObjectType, Obj->GetComponent<TransformComponent>(), CenterPos, Radius));
+		m_CellContentsList.push_back(std::make_shared<CCellContents>(m_ColliderList[m_ColliderList.size()-1]));
 
 		return true;
 	}
@@ -164,6 +186,7 @@ namespace physics {
 		glm::vec3 LocalAxisSize = glm::vec3(1.0f, 1.0f, 1.0f)*0.5f;
 
 		m_ColliderList.push_back(std::make_shared<CBoxCollider>(ObjectType, Obj->GetComponent<TransformComponent>(), CenterPos, LocalAxis, LocalAxisSize));
+		m_CellContentsList.push_back(std::make_shared<CCellContents>(m_ColliderList[m_ColliderList.size() - 1]));
 
 		return true;
 	}

@@ -10,11 +10,15 @@ class Primitive;
 namespace physics {
 	class ACollider;
 	class CColliderCell;
+	class CCellContents;
 
 	class CColliderTree
 	{
+		//
 		std::vector<std::shared_ptr<ACollider>> m_ColliderList;
+		std::vector<std::shared_ptr<CCellContents>> m_CellContentsList;
 
+		//
 		int MAXCELLLEVEL;
 
 		float m_TreeMin;
@@ -24,8 +28,8 @@ namespace physics {
 		float m_CellSize;
 
 		std::vector<int> m_CellCountPerLevel;
-		std::vector<CColliderCell> m_CellList;
-
+		std::vector<std::shared_ptr<CColliderCell>> m_CellList;
+		
 	public:
 		CColliderTree();
 		virtual ~CColliderTree();
@@ -51,6 +55,7 @@ namespace physics {
 
 		//
 		bool MakeTree();
+		bool RegistCollider2Cell(const std::shared_ptr<ACollider>& Collider);
 
 		//
 		unsigned int GetCellIndexFromMortonNumber(const glm::vec3& MinPos, const glm::vec3& MaxPos)const;
