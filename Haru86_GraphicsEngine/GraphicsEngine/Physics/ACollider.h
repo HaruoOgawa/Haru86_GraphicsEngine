@@ -18,6 +18,16 @@ namespace physics {
 		SCollisionInfo(bool IsCollided,float depth, glm::vec3 normal);
 	};
 
+	struct Bounds
+	{
+		glm::vec3 m_CenterPos;
+		glm::vec3 m_MinPos;
+		glm::vec3 m_MaxPos;
+		
+	public:
+		Bounds(glm::vec3 CenterPos, glm::vec3 MinPos, glm::vec3 MaxPos);
+	};
+
 	class ACollider
 	{
 	public:
@@ -45,6 +55,8 @@ namespace physics {
 
 		TransformComponent* GetTransform();
 
+		const std::shared_ptr<Bounds>& GetBounds()const;
+
 	private:
 
 	protected:
@@ -54,5 +66,6 @@ namespace physics {
 		glm::vec3 m_Force;
 		glm::vec3 m_Velocity;
 		float     m_Mass;
+		std::shared_ptr<Bounds> m_BB4Tree;
 	};
 }

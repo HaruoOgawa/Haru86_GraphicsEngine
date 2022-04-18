@@ -7,6 +7,10 @@ namespace physics {
 		m_CenterPos(CenterPos),
 		m_Radius(Radius)
 	{
+		// コライダーツリーのためのBoundsの生成
+		glm::vec3 MinPos = m_CenterPos + m_Radius*glm::normalize(glm::vec3(-1.0f, -1.0f, -1.0f));
+		glm::vec3 MaxPos = m_CenterPos + m_Radius*glm::normalize(glm::vec3(1.0f, 1.0f, 1.0f));
+		m_BB4Tree = std::make_shared<Bounds>(m_CenterPos, MinPos, MaxPos);
 	}
 	
 	CSphereCollider::~CSphereCollider() {

@@ -9,10 +9,23 @@ class Primitive;
 
 namespace physics {
 	class ACollider;
+	class CColliderCell;
 
 	class CColliderTree
 	{
 		std::vector<std::shared_ptr<ACollider>> m_ColliderList;
+
+		int MAXCELLLEVEL;
+
+		float m_TreeMin;
+		float m_TreeMax;
+
+		int m_SizeCellNum;
+		float m_CellSize;
+
+		std::vector<int> m_CellCountPerLevel;
+		std::vector<CColliderCell> m_CellList;
+
 	public:
 		CColliderTree();
 		virtual ~CColliderTree();
@@ -35,6 +48,9 @@ namespace physics {
 
 		bool CalculateOBB();
 		bool OptimizeOBB();
+
+		//
+		bool MakeTree();
 	};
 }
 

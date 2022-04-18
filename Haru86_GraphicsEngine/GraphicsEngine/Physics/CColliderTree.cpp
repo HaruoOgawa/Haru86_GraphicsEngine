@@ -3,13 +3,19 @@
 #include "GraphicsEngine/Graphics/Primitive.h"
 #include "CSphereCollider.h"
 #include "CBoxCollider.h"
+#include "CColliderCell.h"
 #include "GraphicsEngine/Component/MeshRendererComponent.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "../Message/Console.h"
 
 namespace physics {
-	CColliderTree::CColliderTree() {
-
+	CColliderTree::CColliderTree():
+		MAXCELLLEVEL(4),
+		m_TreeMin(-100.0f),
+		m_TreeMax(100.0f)
+	{
+		m_SizeCellNum = glm::pow(2.0f, static_cast<float>(MAXCELLLEVEL));
+		m_CellSize = (m_TreeMax - m_TreeMin) / m_SizeCellNum;
 	}
 
 	CColliderTree::~CColliderTree() {
@@ -41,6 +47,24 @@ namespace physics {
 	}
 
 	bool CColliderTree::MakeColliderTree() {
+		// ツリーの構築
+		if (!MakeTree())return false;
+
+		// ツリーの初期化(最初のオブジェクト登録)
+
+
+		return true;
+	}
+
+	bool CColliderTree::MakeTree() {
+		// セルを作成
+		int CellNum = 0;
+		for (int n = 0; n < MAXCELLLEVEL+1;n++) {
+			CellNum += glm::pow(8.0f, n);
+		}
+
+		m_CellList.resize(CellNum);
+
 		return true;
 	}
 

@@ -7,13 +7,21 @@ namespace physics {
 		m_normal(normal) {
 	}
 
+	Bounds::Bounds(glm::vec3 CenterPos, glm::vec3 MinPos, glm::vec3 MaxPos) :
+		m_CenterPos(CenterPos),
+		m_MinPos(MinPos),
+		m_MaxPos(MaxPos)
+	{
+	}
+
 	ACollider::ACollider(EObjectType ObjectType, EColliderType ColliderType, TransformComponent* Transform) :
 		m_ObjectType(ObjectType),
 		m_ColliderType(ColliderType),
 		m_Transform(Transform),
 		m_Force(glm::vec3(0.0f)),
 		m_Velocity(glm::vec3(0.0f)),
-		m_Mass(1.0f)
+		m_Mass(1.0f),
+		m_BB4Tree(nullptr)
 	{
 	}
 
@@ -87,5 +95,9 @@ namespace physics {
 
 	TransformComponent* ACollider::GetTransform() {
 		return m_Transform;
+	}
+
+	const std::shared_ptr<Bounds>& ACollider::GetBounds()const {
+		return m_BB4Tree;
 	}
 }
