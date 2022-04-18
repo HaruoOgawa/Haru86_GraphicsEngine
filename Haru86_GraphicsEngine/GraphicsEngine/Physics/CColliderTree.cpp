@@ -51,7 +51,16 @@ namespace physics {
 		if (!MakeTree())return false;
 
 		// ツリーの初期化(最初のオブジェクト登録)
+		for (const auto& Collider : m_ColliderList) {
+			//
+			const auto& Bounds = Collider->GetBounds();
+			const auto WorldMatrix = Collider->GetTransform()->GetMMatrix();
+			glm::vec3 WorldMinPos = WorldMatrix * glm::vec4(Bounds->m_MinPos,1.0f);
+			glm::vec3 WorldMaxPos = WorldMatrix * glm::vec4(Bounds->m_MaxPos,1.0f);
 
+			// モートン番号からコライダーを格納するセルのインデックスを取得する
+			unsigned long CellIndex = GetCellIndexFromMortonNumber(WorldMinPos, WorldMaxPos);
+		}
 
 		return true;
 	}
@@ -64,8 +73,46 @@ namespace physics {
 		}
 
 		m_CellList.resize(CellNum);
-
 		return true;
+	}
+
+	//
+	unsigned int CColliderTree::GetCellIndexFromMortonNumber(const glm::vec3& MinPos, const glm::vec3& MaxPos)const {
+		unsigned long MinMortonNum = GetMortonNumber(
+			static_cast<unsigned long>((MinPos.x - m_TreeMin) / m_CellSize),
+			static_cast<unsigned long>((MinPos.y - m_TreeMin) / m_CellSize),
+			static_cast<unsigned long>((MinPos.z - m_TreeMin) / m_CellSize)
+		);
+		
+		unsigned long MaxMortonNum = GetMortonNumber(
+			static_cast<unsigned long>((MaxPos.x - m_TreeMin) / m_CellSize),
+			static_cast<unsigned long>((MaxPos.y - m_TreeMin) / m_CellSize),
+			static_cast<unsigned long>((MaxPos.z - m_TreeMin) / m_CellSize)
+		);
+
+		unsigned long ParentMorton = MinMortonNum ^ MaxMortonNum;
+
+		/*Console::Log("___________________\n");
+		Console::Log("MinPos=> x:%f, y:%f, z:%f\n", MinPos.x, MinPos.y, MinPos.z);
+		Console::Log("MaxPos=> x:%f, y:%f, z:%f\n", MaxPos.x, MaxPos.y, MaxPos.z);
+		Console::Log("MinMortonNum: %x\n", MinMortonNum);
+		Console::Log("MaxMortonNum: %x\n", MaxMortonNum);
+		Console::Log("ParentMorton: %x\n", ParentMorton);*/
+
+		return 0;
+	}
+
+	unsigned int CColliderTree::GetMortonNumber(unsigned long x, unsigned long y, unsigned long z)const {
+		return SeparateBitForMorton(x) | SeparateBitForMorton(y) << 1 | SeparateBitForMorton(z) << 2;
+	}
+
+	unsigned int CColliderTree::SeparateBitForMorton(unsigned long val)const {
+		unsigned long s = val;
+		s = (s | s << 8) & 0x0000f00f;
+		s = (s | s << 4) & 0x000c30c3;
+		s = (s | s << 2) & 0x00249249;
+
+		return s;
 	}
 
 	std::vector<std::shared_ptr<ACollider>> CColliderTree::GetPassiveColliderListFromTree(std::shared_ptr<ACollider> Collider) {
@@ -114,7 +161,7 @@ namespace physics {
 		LocalAxis.push_back(glm::vec3(0.0f, 1.0f, 0.0f));
 		LocalAxis.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
 
-		glm::vec3 LocalAxisSize = Obj->GetComponent<TransformComponent>()->GetScale()*0.5f;
+		glm::vec3 LocalAxisSize = glm::vec3(1.0f, 1.0f, 1.0f)*0.5f;
 
 		m_ColliderList.push_back(std::make_shared<CBoxCollider>(ObjectType, Obj->GetComponent<TransformComponent>(), CenterPos, LocalAxis, LocalAxisSize));
 

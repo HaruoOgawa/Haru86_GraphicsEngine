@@ -51,6 +51,11 @@ namespace physics {
 
 		//
 		bool MakeTree();
+
+		//
+		unsigned int GetCellIndexFromMortonNumber(const glm::vec3& MinPos, const glm::vec3& MaxPos)const;
+		unsigned int GetMortonNumber(unsigned long x, unsigned long y, unsigned long z)const;
+		unsigned int SeparateBitForMorton(unsigned long val)const;
 	};
 }
 
