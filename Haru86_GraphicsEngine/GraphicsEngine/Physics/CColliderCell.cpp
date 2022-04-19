@@ -47,4 +47,8 @@ namespace physics {
 		return true;
 	}
 
+	//
+	CCellContents* CColliderCell::GetLatestCellContents(){
+		return m_LatestCellContents;
+	}
 }

@@ -18,5 +18,8 @@ namespace physics {
 		const std::vector<std::shared_ptr<CCellContents>>& GetCellContentsList()const;
 
 		bool OnRemove(CCellContents* CellContents);
+
+		//
+		CCellContents* GetLatestCellContents();
 	};
 }

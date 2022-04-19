@@ -38,7 +38,7 @@ void CollisionArt::Start() {
 	test_SphereObj->AddCollider(physics::EColliderType::Sphere,physics::EObjectType::DYNAMIC);
 	
 	test_SphereObj2 = std::make_unique<GameObject>(PrimitiveType::SPHERE);
-	test_SphereObj2->SetPosition(glm::vec3(2.0f, 10.0f, 2.0f));
+	test_SphereObj2->SetPosition(glm::vec3(0.2f, 10.0f, 0.2f));
 	test_SphereObj2->AddCollider(physics::EColliderType::Sphere,physics::EObjectType::DYNAMIC);
 
 	test_CubeObj = std::make_unique<GameObject>(PrimitiveType::CUBE);

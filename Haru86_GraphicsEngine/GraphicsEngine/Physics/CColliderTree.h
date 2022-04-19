@@ -4,6 +4,7 @@
 #include "EColliderType.h"
 #include "EObjectType.h"
 #include <glm/glm.hpp>
+#include <unordered_map>
 class GameObject;
 class Primitive;
 
@@ -26,6 +27,7 @@ namespace physics {
 
 		int m_SizeCellNum;
 		float m_CellSize;
+		int m_CellNum;
 
 		std::vector<int> m_CellCountPerLevel;
 		std::vector<std::shared_ptr<CColliderCell>> m_CellList;
@@ -38,7 +40,10 @@ namespace physics {
 		bool MakeColliderTree();
 
 		std::vector<std::shared_ptr<ACollider>> GetPassiveColliderListFromTree(std::shared_ptr<ACollider> Collider);
-
+		
+		//
+		bool GetCollisionAllMap(std::unordered_map<ACollider*, ACollider*>& CollisionMap);
+		
 		const std::vector<std::shared_ptr<ACollider>>& GetColliderList()const;
 	private:
 		bool CreateSphereCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType, EColliderType ColliderType);
@@ -61,6 +66,9 @@ namespace physics {
 		unsigned int GetCellIndexFromMortonNumber(const glm::vec3& MinPos, const glm::vec3& MaxPos)const;
 		unsigned int GetMortonNumber(unsigned long x, unsigned long y, unsigned long z)const;
 		unsigned int SeparateBitForMorton(unsigned long val)const;
+
+		//
+		bool GetCollisionMap(unsigned long CellIndex, std::unordered_map<ACollider*, ACollider*>& CollisionList, std::vector<ACollider*>& ColliderStack);
 	};
 }
 

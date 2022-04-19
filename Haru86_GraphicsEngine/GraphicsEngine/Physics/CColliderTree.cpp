@@ -13,7 +13,8 @@ namespace physics {
 	CColliderTree::CColliderTree():
 		MAXCELLLEVEL(4),
 		m_TreeMin(-100.0f),
-		m_TreeMax(100.0f)
+		m_TreeMax(100.0f),
+		m_CellNum(0)
 	{
 		m_SizeCellNum = glm::pow(2.0f, static_cast<float>(MAXCELLLEVEL));
 		m_CellSize = (m_TreeMax - m_TreeMin) / m_SizeCellNum;
@@ -67,6 +68,8 @@ namespace physics {
 		}
 
 		m_CellList.resize(CellNum);
+
+		m_CellNum = CellNum;
 		return true;
 	}
 
@@ -172,6 +175,80 @@ namespace physics {
 		return PassiveColliderList;
 	}
 
+	//
+	bool CColliderTree::GetCollisionAllMap(std::unordered_map<ACollider*, ACollider*>& CollisionMap) {
+		// 初期化
+		CollisionMap.clear();
+
+		// ルート空間から開始する
+		std::vector<ACollider*> ColliderStack;
+		if (GetCollisionMap(0, CollisionMap, ColliderStack))return false;
+		
+		return true;
+	}
+
+	bool CColliderTree::GetCollisionMap(unsigned long CellIndex, std::unordered_map<ACollider*, ACollider*>& CollisionList, std::vector<ACollider*>& ColliderStack) {
+		CCellContents* CellContents1 = m_CellList[CellIndex]->GetLatestCellContents();
+		
+		bool IsHaveChild = false;
+		int StackObjNum = 0;
+
+		//
+		while (CellContents1!=nullptr)
+		{
+			// 動的オブジェクトでないのなら外す
+			if (CellContents1->GetCollider()->GetObjectType()!=EObjectType::DYNAMIC) {
+				CellContents1 = CellContents1->GetNextCellContents();
+				continue;
+			}
+
+			//
+			CCellContents* CellContents2 = CellContents1->GetNextCellContents();
+
+			// まず同じセルのコライダーとの衝突リストを作成する
+			while (CellContents2 != nullptr) {
+				// 衝突リスト => 衝突する側 | 衝突される側
+				CollisionList.emplace(std::make_pair(CellContents1->GetCollider().get(), CellContents2->GetCollider().get()));
+
+				//
+				CellContents2 = CellContents2->GetNextCellContents();
+			}
+
+			// 次に上位レベルのセルのコライダーとの衝突リストを作成する
+			for (int i = 0; i < static_cast<int>(ColliderStack.size());i++) {
+				// 衝突リスト => 衝突する側 | 衝突される側
+				CollisionList.emplace(std::make_pair(CellContents1->GetCollider().get(), ColliderStack[i]));
+			}
+
+			// 衝突スタックを登録する
+			ColliderStack.push_back(CellContents1->GetCollider().get());
+			IsHaveChild = true;
+			StackObjNum++;
+
+			//
+			CellContents1 = CellContents1->GetNextCellContents();
+		}
+
+		//
+		for (int n = 0; n < 8;n++) {
+			unsigned long ChildCellIndex = CellIndex << 3 + 1+n;
+			if (ChildCellIndex < m_CellNum && m_CellList[ChildCellIndex]) {
+				// 子空間に移動し衝突リストを作成する
+				GetCollisionMap(ChildCellIndex, CollisionList, ColliderStack);
+			}
+		}
+		
+		// スタックのオブジェクトを後ろから削除する
+		if (IsHaveChild) {
+			for (int i = 0; i < StackObjNum;i++) {
+				ColliderStack.pop_back();
+			}
+		}
+
+		return true;
+	}
+
+	//
 	const std::vector<std::shared_ptr<ACollider>>& CColliderTree::GetColliderList()const {
 		return m_ColliderList;
 	}

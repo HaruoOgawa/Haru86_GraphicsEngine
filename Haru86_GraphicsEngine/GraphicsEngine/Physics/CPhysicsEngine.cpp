@@ -5,6 +5,7 @@
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 #include "../Message/Console.h"
+#include <unordered_map>
 
 #define gravityVal 9.80665f 
 
@@ -40,7 +41,14 @@ namespace physics {
 	}
 
 	bool CPhysicsEngine::UpdatePhysics() {
+		// コライダーツリーから衝突リストを取得する
+		std::unordered_map<ACollider*, ACollider*> CollisionMap;
+		if (!m_ColliderTree->GetCollisionAllMap(CollisionMap))return false;
 
+		// 衝突リストごとに衝突判定を行う
+		//for(auto& Collsion : CollisionMap)
+
+		// 各コライダーごとの処理
 		for (auto& Collider : m_DynamicColliderList) {
 			if (!AddForce(Collider))return false; // 力を加える
 			if (!DetectCollider(Collider))return false; // 衝突判定
