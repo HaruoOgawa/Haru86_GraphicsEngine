@@ -113,14 +113,37 @@ namespace physics {
 
 		unsigned long ParentMorton = MinMortonNum ^ MaxMortonNum;
 
+		unsigned long CellIndex = ParentMorton;
+		int L = 0;
+
+		// CellIndex=0x0000000 は初めからルート空間にあることを示すため計算しない
+		if (CellIndex >0) {
+			for (int n = 0; n < MAXCELLLEVEL + 1; n++) {
+				unsigned long TestIndex = ParentMorton >> (3 * (n + 1));
+
+				if (TestIndex == 0) {
+					CellIndex = ParentMorton >> (3 * (n));
+					L = MAXCELLLEVEL - n;
+					break;
+				}
+			}
+		}
+		
+		// 取得した親空間のインデックスをセル配列全体でのインデックスに変換する
+		CellIndex = (glm::pow(8, L) - 1) / 7 + CellIndex;
+
 		/*Console::Log("___________________\n");
 		Console::Log("MinPos=> x:%f, y:%f, z:%f\n", MinPos.x, MinPos.y, MinPos.z);
 		Console::Log("MaxPos=> x:%f, y:%f, z:%f\n", MaxPos.x, MaxPos.y, MaxPos.z);
 		Console::Log("MinMortonNum: %x\n", MinMortonNum);
 		Console::Log("MaxMortonNum: %x\n", MaxMortonNum);
-		Console::Log("ParentMorton: %x\n", ParentMorton);*/
+		Console::Log("ParentMorton hex: %x\n", ParentMorton);
+		Console::Log("ParentMorton: %d\n", ParentMorton);
+		Console::Log("L: %d\n", L);
+		Console::Log("CellIndex hex: %x\n", CellIndex);
+		Console::Log("CellIndex: %d\n", CellIndex);*/
 
-		return ParentMorton;
+		return CellIndex;
 	}
 
 	unsigned int CColliderTree::GetMortonNumber(unsigned long x, unsigned long y, unsigned long z)const {
