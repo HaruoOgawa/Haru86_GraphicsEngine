@@ -16,5 +16,7 @@ namespace physics {
 
 		bool SetCellContents(const std::shared_ptr<CCellContents>& CellContents);
 		const std::vector<std::shared_ptr<CCellContents>>& GetCellContentsList()const;
+
+		bool OnRemove(CCellContents* CellContents);
 	};
 }

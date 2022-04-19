@@ -38,4 +38,13 @@ namespace physics {
 		return m_CellContentsList;
 	}
 
+	bool CColliderCell::OnRemove(CCellContents* CellContents) {
+		// もし最新のセルコンテンツから離脱通知がきたらその次のものに切り替える
+		if (CellContents == m_LatestCellContents) {
+			m_LatestCellContents = CellContents->GetPreCellContents();
+		}
+
+		return true;
+	}
+
 }

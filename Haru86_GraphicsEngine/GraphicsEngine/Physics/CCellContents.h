@@ -30,5 +30,8 @@ namespace physics {
 		CCellContents* GetPreCellContents()const;
 		void SetNextCellContents(CCellContents* CellContents);
 		CCellContents* GetNextCellContents()const;
+
+		//
+		bool RemoveFromCell();
 	};
 }

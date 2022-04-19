@@ -44,4 +44,30 @@ namespace physics {
 	CCellContents* CCellContents::GetNextCellContents()const {
 		return m_NextCellContents;
 	}
+
+	// 所属するセルからの離脱
+	bool CCellContents::RemoveFromCell() {
+		// 既に空なら抜ける
+		if (!m_ColliderCell)return false;
+
+		// セルに抜けることを通知する
+		if (!m_ColliderCell->OnRemove(this))return false;
+
+		// 前後のポインターを繋ぎなおす
+		if (m_PreCellContents!=nullptr) {
+			m_PreCellContents->SetNextCellContents(m_NextCellContents);
+		}
+
+		if (m_NextCellContents!=nullptr) {
+			m_NextCellContents->SetPreCellContents(m_PreCellContents);
+		}
+
+		// 自身の要素を空にする
+		m_NextCellContents = nullptr;
+		m_PreCellContents = nullptr;
+		m_ColliderCell = nullptr;
+
+		return true;
+	}
+
 }
