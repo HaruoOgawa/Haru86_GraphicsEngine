@@ -6,6 +6,7 @@
 #include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 #include "../Message/Console.h"
 #include <unordered_map>
+#include "CCellContents.h"
 
 #define gravityVal 9.80665f 
 
@@ -46,12 +47,16 @@ namespace physics {
 		if (!m_ColliderTree->GetCollisionAllMap(CollisionMap))return false;
 
 		// 各コライダーごとの処理
-		for (auto& Collider : m_DynamicColliderList) {
-			if (!AddForce(Collider))return false; // 力を加える
-			//if (!DetectCollider(Collider))return false; // 衝突判定
-			//if (!ResolvePenetration(Collider))return false; // 貫通を解消する
-			if (!UpdatePosition(Collider))return false; // 位置の更新
-			 // 更新された位置をもとにコライダーツリーを更新する
+		for (auto& CellContents : m_ColliderTree->GetCellContentsList()) {
+			if (CellContents->GetCollider()->GetObjectType() != EObjectType::DYNAMIC)continue;
+
+			if (!AddForce(CellContents->GetCollider()))return false; // 力を加える
+			if (!UpdatePosition(CellContents->GetCollider()))return false; // 位置の更新
+			
+			// 更新された位置をもとにコライダーツリーを更新する
+			if (!CellContents->RemoveFromCell())return false;
+			if (!m_ColliderTree->RegistCellContents2Cell(CellContents))return false;
+			
 			ReleaseLoopResource(); // このループで作成したコリジョンのリソースを開放する
 		}
 

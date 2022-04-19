@@ -45,6 +45,12 @@ namespace physics {
 		bool GetCollisionAllMap(std::unordered_map<ACollider*, ACollider*>& CollisionMap);
 		
 		const std::vector<std::shared_ptr<ACollider>>& GetColliderList()const;
+
+		//
+		std::vector<std::shared_ptr<CCellContents>>& GetCellContentsList();
+
+		//
+		bool RegistCellContents2Cell(const std::shared_ptr<CCellContents>& CellContents);
 	private:
 		bool CreateSphereCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType, EColliderType ColliderType);
 		bool CreateSimpleBoxCollider(const std::vector<std::shared_ptr<Primitive>>& PrimitiveList, GameObject* Obj, EObjectType ObjectType, EColliderType ColliderType);
@@ -60,8 +66,7 @@ namespace physics {
 
 		//
 		bool MakeTree();
-		bool RegistCellContents2Cell(const std::shared_ptr<CCellContents>& CellContents);
-
+		
 		//
 		unsigned int GetCellIndexFromMortonNumber(const glm::vec3& MinPos, const glm::vec3& MaxPos)const;
 		unsigned int GetMortonNumber(unsigned int x, unsigned int y, unsigned int z)const;
