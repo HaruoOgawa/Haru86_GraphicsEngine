@@ -37,7 +37,7 @@ namespace physics {
 		return m_ColliderType;
 	}
 
-	std::shared_ptr<SCollisionInfo> ACollider::DetectCollider(std::shared_ptr<ACollider> Collider) {
+	std::shared_ptr<SCollisionInfo> ACollider::DetectCollider(ACollider* Collider) {
 		std::shared_ptr<SCollisionInfo> CollisionInfo = nullptr;
 		
 		switch (Collider->GetColliderType())
@@ -61,11 +61,11 @@ namespace physics {
 		return false;
 	}
 
-	std::shared_ptr<SCollisionInfo> ACollider::DetectBoxCollider(std::shared_ptr<ACollider> Collider) {
+	std::shared_ptr<SCollisionInfo> ACollider::DetectBoxCollider(ACollider* Collider) {
 		return nullptr;
 	}
 	
-	std::shared_ptr<SCollisionInfo> ACollider::DetectSphereCollider(std::shared_ptr<ACollider> Collider) {
+	std::shared_ptr<SCollisionInfo> ACollider::DetectSphereCollider(ACollider* Collider) {
 		return nullptr;
 	}
 

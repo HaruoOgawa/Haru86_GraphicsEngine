@@ -17,13 +17,13 @@ namespace physics {
 
 	}
 
-	std::shared_ptr<SCollisionInfo> CSphereCollider::DetectBoxCollider(std::shared_ptr<ACollider> Collider) {
+	std::shared_ptr<SCollisionInfo> CSphereCollider::DetectBoxCollider(ACollider* Collider) {
 		std::shared_ptr<SCollisionInfo> CollisionInfo = nullptr;
 
 		return CollisionInfo;
 	}
 	
-	std::shared_ptr<SCollisionInfo> CSphereCollider::DetectSphereCollider(std::shared_ptr<ACollider> Collider) {
+	std::shared_ptr<SCollisionInfo> CSphereCollider::DetectSphereCollider(ACollider* Collider) {
 		std::shared_ptr<SCollisionInfo> CollisionInfo = nullptr;
 
 		// ä‘à·Ç¡ÇƒÇÕÇ¢ÇÈÇ™ÅAÇ–Ç∆Ç‹Ç∏Ç±ÇÍÇ≈åvéZÇ∑ÇÈ

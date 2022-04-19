@@ -29,8 +29,7 @@ namespace physics {
 
 		// セルをセルコンテンツに登録
 		CellContents->SetColliderCell(this);
-		//m_CellContentsList.push_back(CellContents);
-
+		
 		return true;
 	}
 

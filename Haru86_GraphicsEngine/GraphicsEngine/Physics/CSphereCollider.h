@@ -12,8 +12,8 @@ namespace physics {
 		CSphereCollider(EObjectType ObjectType, TransformComponent* Transform, glm::vec3 CenterPos, float Radius);
 		virtual ~CSphereCollider();
 
-		virtual std::shared_ptr<SCollisionInfo> DetectBoxCollider(std::shared_ptr<ACollider> Collider) override;
-		virtual std::shared_ptr<SCollisionInfo> DetectSphereCollider(std::shared_ptr<ACollider> Collider) override;
+		virtual std::shared_ptr<SCollisionInfo> DetectBoxCollider(ACollider* Collider) override;
+		virtual std::shared_ptr<SCollisionInfo> DetectSphereCollider(ACollider* Collider) override;
 		virtual bool CalcIsingCollided(glm::vec3& CollidedNormal, float& CollidedDepth)override;
 	};
 }

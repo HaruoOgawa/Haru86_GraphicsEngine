@@ -37,12 +37,12 @@ namespace physics {
 		EObjectType GetObjectType()const;
 		EColliderType GetColliderType()const;
 
-		std::shared_ptr<SCollisionInfo> DetectCollider(std::shared_ptr<ACollider> Collider);
+		std::shared_ptr<SCollisionInfo> DetectCollider(ACollider* Collider);
 		
 		virtual bool CalcIsingCollided(glm::vec3& CollidedNormal, float& CollidedDepth)=0;
 
-		virtual std::shared_ptr<SCollisionInfo> DetectBoxCollider(std::shared_ptr<ACollider> Collider) = 0;
-		virtual std::shared_ptr<SCollisionInfo> DetectSphereCollider(std::shared_ptr<ACollider> Collider) = 0;
+		virtual std::shared_ptr<SCollisionInfo> DetectBoxCollider(ACollider* Collider) = 0;
+		virtual std::shared_ptr<SCollisionInfo> DetectSphereCollider(ACollider* Collider) = 0;
 
 		void SetForce(glm::vec3 Force);
 		const glm::vec3& GetForce()const;

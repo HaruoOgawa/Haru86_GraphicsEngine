@@ -152,17 +152,6 @@ namespace physics {
 		// 取得した親空間のインデックスをセル配列全体でのインデックスに変換する
 		CellIndex = (glm::pow(8, L) - 1) / 7 + CellIndex;
 
-		/*Console::Log("___________________\n");
-		Console::Log("MinPos=> x:%f, y:%f, z:%f\n", MinPos.x, MinPos.y, MinPos.z);
-		Console::Log("MaxPos=> x:%f, y:%f, z:%f\n", MaxPos.x, MaxPos.y, MaxPos.z);
-		Console::Log("MinMortonNum: %x\n", MinMortonNum);
-		Console::Log("MaxMortonNum: %x\n", MaxMortonNum);
-		Console::Log("ParentMorton hex: %x\n", ParentMorton);
-		Console::Log("ParentMorton: %d\n", ParentMorton);
-		Console::Log("L: %d\n", L);
-		Console::Log("CellIndex hex: %x\n", CellIndex);
-		Console::Log("CellIndex: %d\n", CellIndex);*/
-
 		return CellIndex;
 	}
 
@@ -213,7 +202,7 @@ namespace physics {
 
 		bool IsHaveChild = false;
 		int StackObjNum = 0;
-
+		
 		//
 		while (CellContents1!=nullptr)
 		{
