@@ -64,11 +64,14 @@ namespace physics {
 
 		//
 		unsigned int GetCellIndexFromMortonNumber(const glm::vec3& MinPos, const glm::vec3& MaxPos)const;
-		unsigned int GetMortonNumber(unsigned long x, unsigned long y, unsigned long z)const;
-		unsigned int SeparateBitForMorton(unsigned long val)const;
+		unsigned int GetMortonNumber(unsigned int x, unsigned int y, unsigned int z)const;
+		unsigned int SeparateBitForMorton(unsigned int val)const;
 
 		//
-		bool GetCollisionMap(unsigned long CellIndex, std::unordered_map<ACollider*, ACollider*>& CollisionList, std::vector<ACollider*>& ColliderStack);
+		bool GetCollisionMap(unsigned int CellIndex, std::unordered_map<ACollider*, ACollider*>& CollisionList, std::vector<ACollider*>& ColliderStack);
+
+		//
+		bool CreateCell(unsigned int CreateCellIndex);
 	};
 }
 

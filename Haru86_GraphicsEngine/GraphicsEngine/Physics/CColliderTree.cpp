@@ -69,7 +69,24 @@ namespace physics {
 
 		m_CellList.resize(CellNum);
 
+		// ルートセルを生成
+		if (!CreateCell(0))return false;
+
 		m_CellNum = CellNum;
+		return true;
+	}
+
+	//
+	bool CColliderTree::CreateCell(unsigned int CreateCellIndex) {
+		//
+		m_CellList[CreateCellIndex]= std::make_shared<CColliderCell>();
+
+		// 親要素が存在するか確認する。なければ親要素も生成する
+		unsigned int ParentCellIndex = static_cast<unsigned int>((CreateCellIndex - 1) / 8);
+		if (ParentCellIndex < m_CellNum && !m_CellList[ParentCellIndex]) {
+			CreateCell(ParentCellIndex);
+		}
+
 		return true;
 	}
 
@@ -82,12 +99,12 @@ namespace physics {
 		glm::vec3 WorldMaxPos = WorldMatrix * glm::vec4(Bounds->m_MaxPos, 1.0f);
 
 		// モートン番号からコライダーを格納するセルのインデックスを取得する
-		unsigned long CellIndex = GetCellIndexFromMortonNumber(WorldMinPos, WorldMaxPos);
+		unsigned int CellIndex = GetCellIndexFromMortonNumber(WorldMinPos, WorldMaxPos);
 
 		if (CellIndex < m_CellList.size()) {
 			// もしセルがまだ空なら生成する
 			if (!m_CellList[CellIndex]) {
-				m_CellList[CellIndex] = std::make_shared<CColliderCell>();
+				if (!CreateCell(CellIndex))return false;
 			}
 
 			// セルにコライダー(セルコンテンツ)を登録する
@@ -102,27 +119,27 @@ namespace physics {
 
 	//
 	unsigned int CColliderTree::GetCellIndexFromMortonNumber(const glm::vec3& MinPos, const glm::vec3& MaxPos)const {
-		unsigned long MinMortonNum = GetMortonNumber(
-			static_cast<unsigned long>((MinPos.x - m_TreeMin) / m_CellSize),
-			static_cast<unsigned long>((MinPos.y - m_TreeMin) / m_CellSize),
-			static_cast<unsigned long>((MinPos.z - m_TreeMin) / m_CellSize)
+		unsigned int MinMortonNum = GetMortonNumber(
+			static_cast<unsigned int>((MinPos.x - m_TreeMin) / m_CellSize),
+			static_cast<unsigned int>((MinPos.y - m_TreeMin) / m_CellSize),
+			static_cast<unsigned int>((MinPos.z - m_TreeMin) / m_CellSize)
 		);
 		
-		unsigned long MaxMortonNum = GetMortonNumber(
-			static_cast<unsigned long>((MaxPos.x - m_TreeMin) / m_CellSize),
-			static_cast<unsigned long>((MaxPos.y - m_TreeMin) / m_CellSize),
-			static_cast<unsigned long>((MaxPos.z - m_TreeMin) / m_CellSize)
+		unsigned int MaxMortonNum = GetMortonNumber(
+			static_cast<unsigned int>((MaxPos.x - m_TreeMin) / m_CellSize),
+			static_cast<unsigned int>((MaxPos.y - m_TreeMin) / m_CellSize),
+			static_cast<unsigned int>((MaxPos.z - m_TreeMin) / m_CellSize)
 		);
 
-		unsigned long ParentMorton = MinMortonNum ^ MaxMortonNum;
+		unsigned int ParentMorton = MinMortonNum ^ MaxMortonNum;
 
-		unsigned long CellIndex = ParentMorton;
+		unsigned int CellIndex = ParentMorton;
 		int L = 0;
 
 		// CellIndex=0x0000000 は初めからルート空間にあることを示すため計算しない
 		if (CellIndex >0) {
 			for (int n = 0; n < MAXCELLLEVEL + 1; n++) {
-				unsigned long TestIndex = ParentMorton >> (3 * (n + 1));
+				unsigned int TestIndex = ParentMorton >> (3 * (n + 1));
 
 				if (TestIndex == 0) {
 					CellIndex = ParentMorton >> (3 * (n));
@@ -149,12 +166,12 @@ namespace physics {
 		return CellIndex;
 	}
 
-	unsigned int CColliderTree::GetMortonNumber(unsigned long x, unsigned long y, unsigned long z)const {
+	unsigned int CColliderTree::GetMortonNumber(unsigned int x, unsigned int y, unsigned int z)const {
 		return SeparateBitForMorton(x) | SeparateBitForMorton(y) << 1 | SeparateBitForMorton(z) << 2;
 	}
 
-	unsigned int CColliderTree::SeparateBitForMorton(unsigned long val)const {
-		unsigned long s = val;
+	unsigned int CColliderTree::SeparateBitForMorton(unsigned int val)const {
+		unsigned int s = val;
 		s = (s | s << 8) & 0x0000f00f;
 		s = (s | s << 4) & 0x000c30c3;
 		s = (s | s << 2) & 0x00249249;
@@ -182,14 +199,18 @@ namespace physics {
 
 		// ルート空間から開始する
 		std::vector<ACollider*> ColliderStack;
-		if (GetCollisionMap(0, CollisionMap, ColliderStack))return false;
-		
+		if (!GetCollisionMap(0, CollisionMap, ColliderStack))return false;
+		ColliderStack.clear();
+
 		return true;
 	}
 
-	bool CColliderTree::GetCollisionMap(unsigned long CellIndex, std::unordered_map<ACollider*, ACollider*>& CollisionList, std::vector<ACollider*>& ColliderStack) {
+	bool CColliderTree::GetCollisionMap(unsigned int CellIndex, std::unordered_map<ACollider*, ACollider*>& CollisionList, std::vector<ACollider*>& ColliderStack) {
+		if (!m_CellList[CellIndex]) {
+			if (!CreateCell(CellIndex))return false;
+		}
 		CCellContents* CellContents1 = m_CellList[CellIndex]->GetLatestCellContents();
-		
+
 		bool IsHaveChild = false;
 		int StackObjNum = 0;
 
@@ -231,10 +252,10 @@ namespace physics {
 
 		//
 		for (int n = 0; n < 8;n++) {
-			unsigned long ChildCellIndex = CellIndex << 3 + 1+n;
+			unsigned int ChildCellIndex = CellIndex * 8 + 1 + n;
 			if (ChildCellIndex < m_CellNum && m_CellList[ChildCellIndex]) {
 				// 子空間に移動し衝突リストを作成する
-				GetCollisionMap(ChildCellIndex, CollisionList, ColliderStack);
+				if (!GetCollisionMap(ChildCellIndex, CollisionList, ColliderStack))return false;
 			}
 		}
 		
