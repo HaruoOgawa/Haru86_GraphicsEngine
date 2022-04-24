@@ -100,7 +100,7 @@ namespace physics {
 
 		// モートン番号からコライダーを格納するセルのインデックスを取得する
 		unsigned int CellIndex = GetCellIndexFromMortonNumber(WorldMinPos, WorldMaxPos);
-
+		//Console::Log("CellIndex: %d\n", CellIndex);
 		if (CellIndex < m_CellList.size()) {
 			// もしセルがまだ空なら生成する
 			if (!m_CellList[CellIndex]) {
@@ -195,6 +195,9 @@ namespace physics {
 	}
 
 	bool CColliderTree::GetCollisionMap(unsigned int CellIndex, std::unordered_map<ACollider*, ACollider*>& CollisionList, std::vector<ACollider*>& ColliderStack) {
+		Console::Log("________\n");
+		Console::Log("CellIndex IN GetCollisionMap: %d\n", CellIndex);
+		
 		if (!m_CellList[CellIndex]) {
 			if (!CreateCell(CellIndex))return false;
 		}
@@ -204,10 +207,13 @@ namespace physics {
 		int StackObjNum = 0;
 		
 		//
-		while (CellContents1!=nullptr)
+		while (CellContents1 != nullptr)
 		{
+			Console::Log("CellContents1 ColliderType: %d\n"
+				,static_cast<int>(CellContents1->GetCollider()->GetColliderType()));
+
 			// 動的オブジェクトでないのなら外す
-			if (CellContents1->GetCollider()->GetObjectType()!=EObjectType::DYNAMIC) {
+			if (CellContents1->GetCollider()->GetObjectType() != EObjectType::DYNAMIC) {
 				CellContents1 = CellContents1->GetNextCellContents();
 				continue;
 			}
@@ -217,6 +223,9 @@ namespace physics {
 
 			// まず同じセルのコライダーとの衝突リストを作成する
 			while (CellContents2 != nullptr) {
+				Console::Log("CellContents2 ColliderType: %d\n"
+					, static_cast<int>(CellContents2->GetCollider()->GetColliderType()));
+
 				// 衝突リスト => 衝突する側 | 衝突される側
 				CollisionList.emplace(std::make_pair(CellContents1->GetCollider().get(), CellContents2->GetCollider().get()));
 
@@ -225,8 +234,12 @@ namespace physics {
 			}
 
 			// 次に上位レベルのセルのコライダーとの衝突リストを作成する
-			for (int i = 0; i < static_cast<int>(ColliderStack.size());i++) {
+			for (int i = 0; i < static_cast<int>(ColliderStack.size()); i++) {
 				// 衝突リスト => 衝突する側 | 衝突される側
+				Console::Log("StackList Collision=> CellContents1 ColliderType:%d / ColliderStack[i] ColliderType(): %d\n",
+					static_cast<int>(CellContents1->GetCollider()->GetColliderType()),
+					static_cast<int>(ColliderStack[i]->GetColliderType()));
+
 				CollisionList.emplace(std::make_pair(CellContents1->GetCollider().get(), ColliderStack[i]));
 			}
 

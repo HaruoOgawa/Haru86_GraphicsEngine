@@ -40,7 +40,7 @@ namespace physics {
 	bool CColliderCell::OnRemove(CCellContents* CellContents) {
 		// もし最新のセルコンテンツから離脱通知がきたらその次のものに切り替える
 		if (CellContents == m_LatestCellContents) {
-			m_LatestCellContents = CellContents->GetPreCellContents();
+			m_LatestCellContents = CellContents->GetNextCellContents();
 		}
 
 		return true;

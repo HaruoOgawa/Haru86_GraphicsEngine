@@ -31,7 +31,7 @@ namespace physics {
 		bool DetectCollider(std::shared_ptr<ACollider> Collider);
 		bool DetectCollider(const std::unordered_map<ACollider*, ACollider*>& CollisionMap);
 		bool ResolvePenetration(std::shared_ptr<ACollider> Collider);
-		bool ResolvePenetration(ACollider* Collider, std::unordered_map<std::shared_ptr<ACollider>, std::shared_ptr<SCollisionInfo>> CollisionInfoList);
+		bool ResolvePenetration(ACollider* Collider, std::unordered_map<ACollider*, std::shared_ptr<SCollisionInfo>> CollisionInfoList);
 		bool UpdatePosition(std::shared_ptr<ACollider> Collider);
 		bool UpdatePosition(ACollider* Collider);
 	};
