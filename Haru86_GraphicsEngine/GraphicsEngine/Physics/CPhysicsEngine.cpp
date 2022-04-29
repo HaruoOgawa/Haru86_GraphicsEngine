@@ -42,8 +42,6 @@ namespace physics {
 	}
 
 	bool CPhysicsEngine::UpdatePhysics() {
-		Console::Log("________________________________________\n");
-
 		// コライダーツリーから衝突リストを取得する
 		std::unordered_map<ACollider*, ACollider*> CollisionMap;
 		if (!m_ColliderTree->GetCollisionAllMap(CollisionMap))return false;
@@ -62,10 +60,6 @@ namespace physics {
 			ReleaseLoopResource(); // このループで作成したコリジョンのリソースを開放する
 		}
 
-		Console::Log("\n");
-		Console::Log(">>>>>>\n");
-
-		Console::Log("CollisionMap.size(): %d\n", CollisionMap.size());
 		// 衝突リストごとに衝突判定を行う
 		if (!DetectCollider(CollisionMap))return false;
 
@@ -151,20 +145,16 @@ namespace physics {
 
 	//
 	bool CPhysicsEngine::DetectCollider(const std::unordered_map<ACollider*, ACollider*>& CollisionMap) {
-		Console::Log("CollisionMap.size(): %d\n", CollisionMap.size());
 		for (auto& Collision : CollisionMap) {
 			
 			auto CollsionInfo = Collision.second->DetectCollider(Collision.first);
 			std::unordered_map<ACollider*, std::shared_ptr<SCollisionInfo>> CollisionInfoList;
 			
 			if (CollsionInfo) {
-				if (CollsionInfo->m_IsCollided) {
-					Console::Log("m_IsCollided is TRUE!!!!!!\n");
-				}
-				else {
-					Console::Log("m_IsCollided is FALSE......\n");
-				}
-
+				if(CollsionInfo->m_IsCollided)Console::Log(
+					"%p is Collided Forward <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n",
+					Collision.first
+					);
 				// 
 				CollisionInfoList.emplace(Collision.second,CollsionInfo);
 
@@ -173,9 +163,6 @@ namespace physics {
 
 				// 位置の更新
 				if (!UpdatePosition(Collision.first))return false;
-			}
-			else {
-				Console::Log("CollsionInfo is nullptr......\n");
 			}
 		}
 		return true;

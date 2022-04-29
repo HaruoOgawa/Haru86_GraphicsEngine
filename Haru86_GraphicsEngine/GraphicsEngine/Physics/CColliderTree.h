@@ -25,9 +25,9 @@ namespace physics {
 		float m_TreeMin;
 		float m_TreeMax;
 
-		int m_SizeCellNum;
 		float m_CellSize;
 		int m_CellNum;
+		std::vector<int> m_CellNumPerLayer;
 
 		std::vector<int> m_CellCountPerLevel;
 		std::vector<std::shared_ptr<CColliderCell>> m_CellList;

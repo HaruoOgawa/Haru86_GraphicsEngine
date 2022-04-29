@@ -10,7 +10,7 @@ namespace physics {
 		m_LocalAxisSize(LocalAxisSize)
 	{
 		// コライダーツリーのためのBoundsの生成
-		float maxSize = glm::max(m_LocalAxisSize.x, glm::max(m_LocalAxisSize.y, m_LocalAxisSize.z));
+		float maxSize = glm::max(m_LocalAxisSize.x, glm::max(m_LocalAxisSize.y, m_LocalAxisSize.z))*2.0f;
 		glm::vec3 MinPos = m_CenterPos + maxSize * glm::normalize(glm::vec3(-1.0f, -1.0f, -1.0f));
 		glm::vec3 MaxPos = m_CenterPos + maxSize * glm::normalize(glm::vec3(1.0f, 1.0f, 1.0f));
 		m_BB4Tree = std::make_shared<Bounds>(m_CenterPos, MinPos, MaxPos);
