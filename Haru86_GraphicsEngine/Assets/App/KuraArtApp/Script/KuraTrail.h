@@ -50,7 +50,7 @@ public:
     ~KuraTrail();
     void Start() override;
     void Update() override;
-    void ProcessInput(const Uint8* state)const override;
+    void ProcessInput(const SDL_Event& e) override;
     void Draw();
 private:
     class KuraGPGPU* kuraGPGPU_instance;

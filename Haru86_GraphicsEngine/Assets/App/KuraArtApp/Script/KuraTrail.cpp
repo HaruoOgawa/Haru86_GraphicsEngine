@@ -5,7 +5,7 @@
 #include "GraphicsEngine/Graphics/Graphics.h"
 #include "GraphicsEngine/Object/Object.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
-#include "GraphicsEngine/Game/Game.h"
+#include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 #include "../KuraArtApp.h"
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
 #include "GraphicsEngine/Graphics/ComputeShader.h"
@@ -111,13 +111,13 @@ void KuraTrail::Update() {
 	m_computeShader_NodeInfo->SetActive();
 	m_computeShader_NodeInfo->SetIntUniform("_nodeSegment", nodeSegment);
 	m_computeShader_NodeInfo->SetFloatUniform("_nodeDistanceMin", 1);
-	m_computeShader_NodeInfo->SetFloatUniform("_time",Game::GetInstance()->time );
+	m_computeShader_NodeInfo->SetFloatUniform("_time",GraphicsMain::GetInstance()->time );
 	m_computeShader_NodeInfo->SetFloatUniform("_initNodeLife", 5.0);
 	m_computeShader_NodeInfo->Dispatch(trailNum / 256, 1, 1);
 
 }
 
-void KuraTrail::ProcessInput(const Uint8* state)const {
+void KuraTrail::ProcessInput(const SDL_Event& e) {
 
 }
 
@@ -133,11 +133,11 @@ void KuraTrail::Draw() {
 	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
 	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
-	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
-	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
+	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
+	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
 
 	//GPU Trail Uniform
-	m_material->SetVec3Uniform("_WorldSpaceCameraPos",Game::GetInstance()->game_camera_instance->transform->position);
+	m_material->SetVec3Uniform("_WorldSpaceCameraPos",GraphicsMain::GetInstance()->game_camera_instance->transform->GetPosition());
 	m_material->SetFloatUniform("_initNodeLife", 5);
 	m_material->SetFloatUniform("_nodeSegment",nodeSegment );
 	m_material->SetFloatUniform("_TrailWidth", 0.4*7.0);

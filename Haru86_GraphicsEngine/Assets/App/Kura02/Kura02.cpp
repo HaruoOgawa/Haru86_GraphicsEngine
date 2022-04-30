@@ -7,7 +7,7 @@
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Component/CameraComponent.h"
 #include <glm/glm.hpp>
-#include "GraphicsEngine/Game/Game.h"
+#include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 #include "./Script/CBoxInstancing.h"
 #include "GraphicsEngine/Object/RaymarchingObject.h"
 #include "GraphicsEngine/Graphics/PostProcess.h"
@@ -27,15 +27,15 @@ void Kura02::Start() {
 	cam_obj = std::make_unique<CameraObject>(CameraType::FIXED_CAMERA);
 	//cam_obj->SetPosition(glm::vec3(0.0, 0.0, -3.0));
 	cam_obj->m_cameraComponent->cameraCenter = glm::vec3(0.0,-1.0,0.0);
-	Game::GetInstance()->game_camera_instance = cam_obj.get();
-	cam_obj->transform->position = glm::vec3(5.0,0.0,5.0);
+	GraphicsMain::GetInstance()->game_camera_instance = cam_obj.get();
+	cam_obj->transform->SetPosition(glm::vec3(5.0,0.0,5.0));
 
 	ins_cubes = std::make_unique<Object>();
 	ins_cubes->AddComponent<CBoxInstancing>(std::make_shared<CBoxInstancing>(ins_cubes.get()));
 	ins_cubes->AddComponent<CKura3DGPUTrail>(std::make_shared<CKura3DGPUTrail>(ins_cubes.get()));
 
 	raymarching_obj = std::make_unique<RaymarchingObject>("./Assets/Shader/Kura02/CubeFieldRaymarching.frag");
-	Game::GetInstance()->m_RaymarchingObject = raymarching_obj.get();
+	GraphicsMain::GetInstance()->m_RaymarchingObject = raymarching_obj.get();
 
 	// ポストプロセスの使用を宣言
 	PostProcess::GetInstance()->EnablePostProcess();
@@ -44,14 +44,14 @@ void Kura02::Start() {
 
 void Kura02::Update() {
 	ins_cubes->Update();
-	cam_obj->transform->position = glm::vec3(
-		glm::cos(Game::GetInstance()->time * 0.0001)*8.5,
+	cam_obj->transform->SetPosition(glm::vec3(
+		glm::cos(GraphicsMain::GetInstance()->time * 0.0001)*8.5,
 		0.0, 
-		glm::sin(Game::GetInstance()->time * 0.0001)* 8.5
-	);
+		glm::sin(GraphicsMain::GetInstance()->time * 0.0001)* 8.5
+	));
 
-	if (Game::GetInstance()->time>=1000.0*60.0*60.0) {
-		Game::GetInstance()->Restart();
+	if (GraphicsMain::GetInstance()->time>=1000.0*60.0*60.0) {
+		GraphicsMain::GetInstance()->Restart();
 	}
 }
 

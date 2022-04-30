@@ -6,7 +6,7 @@
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
-#include "GraphicsEngine/Game/Game.h"
+#include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 
 CBoxInstancing::CBoxInstancing(Object* o)
 	: Component(o),
@@ -20,7 +20,7 @@ CBoxInstancing::~CBoxInstancing() {
 }
 
 void CBoxInstancing::Start() {
-	owner->transform->scale = glm::vec3(1.0);
+	owner->transform->SetScale(glm::vec3(1.0));
 	m_mesh = std::make_shared<Mesh>(PrimitiveType::CUBE);
 	m_material = std::make_shared<Material>(
 		"./Assets/Shader/Kura02/InstancedBox.vert",
@@ -55,9 +55,9 @@ void CBoxInstancing::Draw() {
 	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
 	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
-	m_material->SetFloatUniform("_time", Game::GetInstance()->time);
-	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
-	m_material->SetVec3Uniform("_CameraPosition", Game::GetInstance()->game_camera_instance->GetPosition());
+	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
+	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
+	m_material->SetVec3Uniform("_CameraPosition", GraphicsMain::GetInstance()->game_camera_instance->GetPosition());
 	m_material->SetIntUniform("_instancedCound", instanciedCound);
 	m_material->SetIntUniform("_sideCubeCount", sideCubeCount);
 	m_material->SetFloatUniform("_cubeWidth", 1.0);
@@ -68,6 +68,6 @@ void CBoxInstancing::Draw() {
 	
 }
 
-void CBoxInstancing::ProcessInput(const Uint8* state)const {
+void CBoxInstancing::ProcessInput(const SDL_Event& e) {
 
 }

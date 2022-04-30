@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Object/Object.h"
-#include "../Game/Game.h"
+#include "../GraphicsMain/GraphicsMain.h"
 #include <string>
 #include <memory>
 
@@ -13,11 +13,11 @@ public:
 	virtual void Start();
 	virtual void Update();
 	virtual void Dtaw();
-	virtual void ProcessInput(const Uint8* state)const = 0;
+	virtual void ProcessInput(const SDL_Event& e) = 0;
 	friend Object;
 protected:
 	class Object* owner;
-	class Game* game;
+	class GraphicsMain* game;
 	
 };
 

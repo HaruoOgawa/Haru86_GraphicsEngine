@@ -9,7 +9,7 @@ class RectTransformComponent :
 public:
     RectTransformComponent(class GameObject* o,float wRate,float hRate);
     ~RectTransformComponent();
-    void ProcessInput(const Uint8* state)const override;
+    void ProcessInput(const SDL_Event& e) override;
     glm::vec2 rectPosition;
     glm::vec2 rectScale;
     float maxLeftPointX;

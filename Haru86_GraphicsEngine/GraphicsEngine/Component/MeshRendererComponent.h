@@ -5,7 +5,7 @@
 #include "../Graphics/Material.h"
 #include <string>
 #include "../Graphics/Primitive.h"
-#include "../Game/Game.h"
+#include "../GraphicsMain/GraphicsMain.h"
 #include <functional>
 #include <memory>
 
@@ -24,13 +24,16 @@ public:
     void Update() override;
     void Draw();
     void DrawBoard();
-    void ProcessInput(const Uint8* state)const override;
+    void ProcessInput(const SDL_Event& e) override;
+
+    const std::shared_ptr<Mesh>& GetMesh()const;
+
     bool useZTest;
     std::vector<class TimelineAnimationClip*> animationClips;
     std::shared_ptr<class Material> material;
     friend class GraphicsRenderer;
 private:
-    std::unique_ptr<Mesh> mesh;
+    std::shared_ptr<Mesh> mesh;
     std::unique_ptr<class Texture> primTex;
     class Object* myowner;
 };

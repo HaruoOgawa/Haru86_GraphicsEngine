@@ -1,6 +1,6 @@
 #include "TimelineComponent.h"
 #include "../Object/Object.h"
-#include "../Game/Game.h"
+#include "../GraphicsMain/GraphicsMain.h"
 #include "../Object/GameObject.h"
 #include <iostream>
 #include <vector>
@@ -149,7 +149,7 @@ void TimelineComponent::ComputeAnimationTrack(float time) {
 	}
 
 	for (auto clip : runningAnimationClip) {
-		clip->lifeTime += Game::GetInstance()->deltaTime;
+		clip->lifeTime += GraphicsMain::GetInstance()->deltaTime;
 		clip->lifeTimeRate = clip->lifeTime / (clip->endTime*0.001f - clip->startTime * 0.001f);
 		if (time > clip->endTime) {
 			auto iter = std::find(clip->gameObject->meshComp->animationClips.begin(), clip->gameObject->meshComp->animationClips.end(), clip);
@@ -217,6 +217,6 @@ void TimelineComponent::ClearTimeline() {
 
 }
 
-void TimelineComponent::ProcessInput(const Uint8* state)const {
+void TimelineComponent::ProcessInput(const SDL_Event& e) {
 
 }

@@ -12,7 +12,7 @@ public:
     ~AudioObject();
     bool Initialize();
     void PlayAudio();
-    friend class Game;
+    friend class GraphicsMain;
     friend class BaseApp;
     friend class UIComponent;
     std::shared_ptr<class AudioSourceComponent> audioSource;

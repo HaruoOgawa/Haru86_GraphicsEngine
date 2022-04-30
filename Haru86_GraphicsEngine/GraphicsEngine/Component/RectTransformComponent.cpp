@@ -23,7 +23,7 @@ RectTransformComponent::RectTransformComponent(GameObject* o, float wRate, float
 	pos = glm::vec2(modelPos.x/ modelPos.w, modelPos.y/ modelPos.w);
 	owner->SetPosition(glm::vec3(pos.x, pos.y, modelPos.z / modelPos.w));
 
-	glm::vec4 uiScreenScale =  owner->transform->GetVMatrix() * glm::vec4(owner->transform->scale, 1.0f);
+	glm::vec4 uiScreenScale =  owner->transform->GetVMatrix() * glm::vec4(owner->transform->GetScale(), 1.0f);
 	rectScale = glm::vec2(glm::abs(uiScreenScale.x)*size.x*0.5, glm::abs(uiScreenScale.y) * size.y*0.5);
 
 	float val = 0.05f;
@@ -35,6 +35,6 @@ RectTransformComponent::~RectTransformComponent() {
 
 }
 
-void RectTransformComponent::ProcessInput(const Uint8* state)const {
+void RectTransformComponent::ProcessInput(const SDL_Event& e) {
 
 }

@@ -1,7 +1,7 @@
 #include "RaymarchingObject.h"
 #include "GraphicsEngine/Graphics/Material.h"
 #include "GraphicsEngine/Graphics/Mesh.h"
-#include "GraphicsEngine/Game/Game.h"
+#include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
@@ -31,17 +31,17 @@ void RaymarchingObject::Draw() {
 	m_material->SetMatrixUniform("MMatrix", transform->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", transform->GetVMatrix());
 	m_material->SetMatrixUniform("PMatrix", transform->GetPMatrix());
-	m_material->SetFloatUniform("_time", Game::GetInstance()->time*0.001);
-	m_material->SetFloatUniform("_deltaTime", Game::GetInstance()->deltaTime);
+	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time*0.001);
+	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
 	m_material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 	m_material->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
-	if (Game::GetInstance()->renderingTarget==ERerderingTarget::COLOR) {
+	if (GraphicsMain::GetInstance()->renderingTarget==ERerderingTarget::COLOR) {
 		m_material->SetFloatUniform("_RenderingTarget", 1.0);
 	}
-	else if (Game::GetInstance()->renderingTarget == ERerderingTarget::DEPTH) {
+	else if (GraphicsMain::GetInstance()->renderingTarget == ERerderingTarget::DEPTH) {
 		m_material->SetFloatUniform("_RenderingTarget", 2.0);
 	}
-	m_material->SetVec3Uniform("_camerePosition", Game::GetInstance()->game_camera_instance->transform->position);
+	m_material->SetVec3Uniform("_camerePosition", GraphicsMain::GetInstance()->game_camera_instance->transform->GetPosition());
 
 	m_mesh->Draw();
 }

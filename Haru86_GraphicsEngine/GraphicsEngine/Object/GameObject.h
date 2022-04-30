@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Game/Game.h"
+#include "../GraphicsMain/GraphicsMain.h"
 #include "./Object.h"
 #include "../Graphics/Mesh.h"
 
@@ -10,6 +10,12 @@
 #include <GL/glew.h>
 #include <typeinfo>
 #include <memory>
+#include "GraphicsEngine/Physics/EColliderType.h"
+#include "GraphicsEngine/Physics/EObjectType.h"
+
+namespace physics {
+	class CPhysicsEngine;
+}
 
 enum RenderQueue
 {
@@ -28,6 +34,7 @@ enum class RenderType {
 class GameObject
 	: public Object
 {
+	PrimitiveType m_PrimitiveType;
 public:
 	GameObject(PrimitiveType primType);
 	GameObject(PrimitiveType primType, std::map<GLenum, std::string> shaders);
@@ -39,14 +46,14 @@ public:
 	~GameObject();
 	void UseZTest(bool use);
 	void SetRenderOlder(int order);
-	void ProcessInput(const Uint8* state);
+	void ProcessInput(const SDL_Event& e) override;
+	void AddCollider(physics::EColliderType ColliderType,physics::EObjectType ObjectType);
 	std::shared_ptr<class MeshRendererComponent> meshComp;
 	float animTime = 0.0f;
 	friend class GraphicsRenderer;
 	friend class TimelineComponent;
 	int renderOrder;
 private:
-	
 	RenderType renderType;
 };
 

@@ -2,7 +2,7 @@
 #include "Texture.h"
 #include "Material.h"
 #include "Mesh.h"
-#include "GraphicsEngine/Game/Game.h"
+#include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 #include "GraphicsEngine/Graphics/GraphicsRenderer.h"
 #include "GraphicsEngine/Graphics/PostProcess.h"
 
@@ -56,7 +56,7 @@ void CBloom::Initialize() {
 
 void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int& DestBuffer) {
 	// Illuminance
-	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+	GraphicsMain::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 	glBindFramebuffer(GL_FRAMEBUFFER, m_IlluminanceBuffer);
 	glViewport(0, 0, static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().x * GraphicsRenderer::GetInstance()->frameResolusion), static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().y * GraphicsRenderer::GetInstance()->frameResolusion));
 
@@ -66,7 +66,7 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 	glEnable(GL_DEPTH_TEST);
 
 	m_IlluminanceMaterial->SetActive();
-	m_IlluminanceMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
+	m_IlluminanceMaterial->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
 	m_IlluminanceMaterial->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 	m_IlluminanceMaterial->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 	SrcTexture->SetActive();
@@ -78,7 +78,7 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 	m_mesh->Draw();
 
 	// BlurX
-	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+	GraphicsMain::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 	glBindFramebuffer(GL_FRAMEBUFFER, m_BlurBufferX);
 	glViewport(0, 0, static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().x * GraphicsRenderer::GetInstance()->frameResolusion), static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().y * GraphicsRenderer::GetInstance()->frameResolusion));
 
@@ -88,7 +88,7 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 	glEnable(GL_DEPTH_TEST);
 
 	m_BlurMaterial->SetActive();
-	m_BlurMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
+	m_BlurMaterial->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
 	m_BlurMaterial->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 	m_BlurMaterial->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 	if (m_IlluminanceMap) {
@@ -101,7 +101,7 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 	m_mesh->Draw();
 	
 	// BlurY
-	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+	GraphicsMain::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 	glBindFramebuffer(GL_FRAMEBUFFER, m_BlurBufferY);
 	glViewport(0, 0, static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().x * GraphicsRenderer::GetInstance()->frameResolusion), static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().y * GraphicsRenderer::GetInstance()->frameResolusion));
 
@@ -111,7 +111,7 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 	glEnable(GL_DEPTH_TEST);
 
 	m_BlurMaterial->SetActive();
-	m_BlurMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
+	m_BlurMaterial->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
 	m_BlurMaterial->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 	m_BlurMaterial->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 	if (m_BlurMapX) {
@@ -124,7 +124,7 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 	m_mesh->Draw();
 
 	// Result
-	Game::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
+	GraphicsMain::GetInstance()->renderingTarget = ERerderingTarget::COLOR;
 	glBindFramebuffer(GL_FRAMEBUFFER, DestBuffer);
 	glViewport(0, 0, static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().x * GraphicsRenderer::GetInstance()->frameResolusion), static_cast<int>(GraphicsRenderer::GetInstance()->GetScreenSize().y * GraphicsRenderer::GetInstance()->frameResolusion));
 
@@ -134,7 +134,7 @@ void CBloom::Draw(const std::shared_ptr<Texture> SrcTexture, const unsigned int&
 	glEnable(GL_DEPTH_TEST);
 
 	m_BloomResultMaterial->SetActive();
-	m_BloomResultMaterial->SetFloatUniform("_time", Game::GetInstance()->time);
+	m_BloomResultMaterial->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
 	m_BloomResultMaterial->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 	m_BloomResultMaterial->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 	if (m_BlurMapY) {

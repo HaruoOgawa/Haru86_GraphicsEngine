@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "GraphicsMain.h"
 #include <string>
 #include "../Object/GameObject.h"
 #include "../Graphics/Mesh.h"
@@ -10,30 +10,32 @@
 #include <vector>
 #include <algorithm>
 #include "../App/BaseApp/BaseApp.h"
-#include "../../Assets/App/Kura02/Kura02.h"
+#include "../../Assets/App/CollisionArt/CollisionArt.h"
 //#include "../../Assets/App/KuraArtApp/KuraArtApp.h"
 //#include "../../Assets/App/DemoApp/DemoApp.h"
 #include <exception>
 #include <stdexcept>
 #include "GraphicsEngine/Object/RaymarchingObject.h"
+#include "GraphicsEngine/Object/CameraObject.h"
+#include "GraphicsEngine/Physics/CPhysicsEngine.h"
 
-Game* Game::s_pInstance = nullptr;
+GraphicsMain* GraphicsMain::s_pInstance = nullptr;
 
-void Game::Create()
+void GraphicsMain::Create()
 {
 	if (!s_pInstance)
 	{
-		s_pInstance = new Game;
+		s_pInstance = new GraphicsMain;
 	}
 }
 
-void Game::Destroy()
+void GraphicsMain::Destroy()
 {
 	delete s_pInstance;
 	s_pInstance = nullptr;
 }
 
-Game::Game()
+GraphicsMain::GraphicsMain()
 	: 
 	isRunning(true),
 	time(0.0f),
@@ -43,7 +45,8 @@ Game::Game()
 	animTime(0.0f),
 	isRestart(false),
 	renderingTarget(ERerderingTarget::COLOR),
-	m_RaymarchingObject(nullptr)
+	m_RaymarchingObject(nullptr),
+	m_PhysicsEngine(std::make_unique<physics::CPhysicsEngine>())
 {
 	
 	for (int i = 0; i < 20;i++) {
@@ -115,11 +118,11 @@ Game::Game()
 	}
 }
 
-Game::~Game() {
+GraphicsMain::~GraphicsMain() {
 	
 }
 
-bool Game::Initialize() {
+bool GraphicsMain::Initialize() {
 	if (SDL_Init(SDL_INIT_VIDEO||SDL_INIT_AUDIO)!=0) {
 		SDL_Log("SDL Init is failure: %s", SDL_GetError());
 		return false;
@@ -136,8 +139,8 @@ bool Game::Initialize() {
 	return true;
 }
 
-void Game::LoadData() {
-	app = std::make_unique<Kura02>();
+void GraphicsMain::LoadData() {
+	app = std::make_unique<CollisionArt>();
 	timeObj = std::make_unique<Time>(60.0f);
 	app->Start();
 
@@ -149,9 +152,12 @@ void Game::LoadData() {
 	timelineObj = std::make_unique<TimelineObject>();
 	app->Timeline(timelineObj.get());
 	timelineObj->Initialize();
+
+
+	m_PhysicsEngine->Initialize();
 }
 
-void Game::RunLoop() {
+void GraphicsMain::RunLoop() {
 	while (isRunning)
 	{
 		if (isRestart) {
@@ -160,13 +166,14 @@ void Game::RunLoop() {
 		else {
 			UpdateTimeline();
 			InputProcess();
-			UpdateGame();
-			GenerateOutput();
+			Update();
+			m_PhysicsEngine->UpdatePhysics();
+			Draw();
 		}
 	}
 }
 
-void Game::UpdateTimeline() {
+void GraphicsMain::UpdateTimeline() {
 	static_cast<std::shared_ptr<class TimelineComponent>>(timelineObj->timelineComponent)->Update();
 
 	std::sort(gameObjectList.begin(), gameObjectList.end(), [](GameObject* a, GameObject* b) {
@@ -174,7 +181,7 @@ void Game::UpdateTimeline() {
 	});
 }
 
-void Game::InputProcess() {
+void GraphicsMain::InputProcess() {
 	SDL_Event e;
 	while (SDL_PollEvent(&e))
 	{
@@ -197,12 +204,14 @@ void Game::InputProcess() {
 	const Uint8* state = SDL_GetKeyboardState(NULL);
 
 	for (auto obj : gameObjectList) {
-		obj->ProcessInput(state);
+		obj->ProcessInput(e);
 	}
+
+	game_camera_instance->ProcessInput(e);
 
 }
 
-void Game::UpdateGame() {
+void GraphicsMain::Update() {
 	while (!(timeObj->GetTime() > previousTime + 16.0f)) { timeObj->UpdateTime(); };
 	deltaTime = (timeObj->GetTime() - previousTime) / 1000.0f;
 	if (deltaTime > 0.05f) {
@@ -218,13 +227,15 @@ void Game::UpdateGame() {
 	if (app) {
 		app->Update();
 	}
+
+	game_camera_instance->Update();
 	
 }
-void Game::GenerateOutput() {
+void GraphicsMain::Draw() {
 	GraphicsRenderer::GetInstance()->Draw();
 }
 
-void Game::Reflesh() {
+void GraphicsMain::Reflesh() {
 	//Listを解放
 	gameObjectList.clear();
 	boardGameObjectList.clear();
@@ -250,16 +261,19 @@ void Game::Reflesh() {
 		app.reset();
 	}
 	m_RaymarchingObject = nullptr;
-	
+	if (m_PhysicsEngine) {
+		m_PhysicsEngine->Release();
+	}
+
 	//再度リソースをロードする
 	LoadData();
 }
 
-void Game::Restart() {
+void GraphicsMain::Restart() {
 	isRestart = true;
 }
 
-void Game::ShutDown() {
+void GraphicsMain::ShutDown() {
 	GraphicsRenderer::GetInstance()->ShutDown();
 	GraphicsRenderer::Destroy();
 
@@ -267,4 +281,8 @@ void Game::ShutDown() {
 	boardGameObjectList.clear();
 	postProcessGameObjectList.clear();
 	uiObjectList.clear();
+}
+
+physics::CPhysicsEngine* GraphicsMain::GetPhysicsEngine(){
+	return m_PhysicsEngine.get();
 }

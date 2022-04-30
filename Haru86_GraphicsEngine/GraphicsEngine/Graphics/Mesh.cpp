@@ -43,8 +43,8 @@ void Mesh::CreateMesh(PrimitiveType primType) {
 		break;
 	}
 	
-	std::unique_ptr<Primitive> prim = std::make_unique<Primitive>(vertices, dimention, indices);
-	m_primitives.push_back(std::move(prim));
+	std::shared_ptr<Primitive> prim = std::make_shared<Primitive>(vertices, dimention, indices);
+	m_primitives.push_back(prim);
 
 }
 
@@ -60,6 +60,10 @@ void Mesh::Draw(GLDrawType drawType) {
 		m_primitives[i]->Draw("tessellation");
 	}
 
+}
+
+const std::vector<std::shared_ptr<Primitive>>& Mesh::GetPrimitiveList()const {
+	return m_primitives;
 }
 
 void Mesh::UnLoadData() {

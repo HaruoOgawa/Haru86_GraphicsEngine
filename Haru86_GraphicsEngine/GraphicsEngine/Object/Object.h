@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Game/Game.h"
+#include "../GraphicsMain/GraphicsMain.h"
 #include "../Component/Component.h"
 #include <vector>
 #include <unordered_map>
@@ -37,6 +37,8 @@ public:
 	void SetRotation(glm::quat rot);
 	void SetScale(glm::vec3 s);
 	virtual void Update();
+	virtual void ProcessInput(const SDL_Event& e);
+	
 	glm::vec3 GetPosition();
 	glm::quat GetRotation();
 	glm::vec3 GetScale();
@@ -46,7 +48,7 @@ public:
 	friend class UIComponent;
 	friend class RectTransformComponent;
 private:
-	class Game* game;
+	class GraphicsMain* game;
 protected:
 	std::unordered_map<std::type_index, std::shared_ptr<Component>> myComponent;
 };

@@ -15,7 +15,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 	: Component(o), myowner(o), primTex(nullptr)
 {
 	useZTest = true;
-	mesh = std::make_unique<Mesh>((primType));
+	mesh = std::make_shared<Mesh>((primType));
 	mesh->glDrawType = GLDrawType::NONE;
 	material = std::make_shared<Material>();
 }
@@ -24,7 +24,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 	: Component(o), myowner(o), primTex(nullptr)
 {
 	useZTest = true;
-	mesh = std::make_unique<Mesh>((primType));
+	mesh = std::make_shared<Mesh>((primType));
 	if (shaders.find(GL_TESS_CONTROL_SHADER)!=shaders.end()) {
 		mesh->glDrawType = GLDrawType::TESSELLATION;
 	}
@@ -47,7 +47,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 	: Component(o),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
-	mesh = std::make_unique<Mesh>((primType));
+	mesh = std::make_shared<Mesh>((primType));
 	mesh->glDrawType = GLDrawType::NONE;
 	material = std::make_shared<Material>(vertexShaderName,fragmentShaderName);
 }
@@ -56,7 +56,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 	: Component(o),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
-	mesh = std::make_unique<Mesh>((primType));
+	mesh = std::make_shared<Mesh>((primType));
 	mesh->glDrawType = GLDrawType::TESSELLATION;
 	material = std::make_shared<Material>(vertexShaderName,tessellationShaderName,fragmentShaderName);
 }
@@ -65,7 +65,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 	: Component(o),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
-	mesh = std::make_unique<Mesh>((primType));
+	mesh = std::make_shared<Mesh>((primType));
 	mesh->glDrawType = GLDrawType::NONE;
 	material = std::make_shared<Material>(vertexShaderName,fragmentShaderName);
 	if (GraphicsRenderer::GetInstance()->font!=nullptr) {
@@ -177,6 +177,10 @@ void MeshRendererComponent::DrawBoard() {
 
 
 
-void MeshRendererComponent::ProcessInput(const Uint8* state)const {
+void MeshRendererComponent::ProcessInput(const SDL_Event& e) {
 
+}
+
+const std::shared_ptr<Mesh>& MeshRendererComponent::GetMesh()const {
+	return mesh;
 }

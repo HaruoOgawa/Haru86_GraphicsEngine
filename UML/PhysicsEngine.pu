@@ -1,0 +1,47 @@
+@startuml PhysicsEngine
+class CPhysicsEngine{
+    + void Initialize()
+    + void UpdatePhysics()
+    - m_ColliderList
+    - m_DynamicObjectList
+}
+
+class CColliderTree{
+
+}
+
+CPhysicsEngine <--  CColliderTree
+
+interface ICollider{
+    - void AddCollider()
+    - TransformComponent m_Transform
+}
+
+CColliderTree <--  ICollider
+
+abstract ACollider{
+    - EObjectType m_ObjectType
+}
+
+ICollider <-- ACollider
+
+class CBoxCollider{
+
+}
+
+ACollider <-- CBoxCollider
+
+class CSphereCollider{
+
+}
+
+ACollider <-- CSphereCollider
+
+
+abstract AGPUCollider{
+
+}
+
+ICollider <-- AGPUCollider
+
+@enduml

@@ -6,7 +6,7 @@
 #include "../../../GraphicsEngine/Component/RectTransformComponent.h"
 #include "../../../GraphicsEngine/Component/MeshRendererComponent.h"
 #include "../../../GraphicsEngine/Graphics/Material.h"
-#include "GraphicsEngine/Game/Game.h"
+#include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 #include <memory>
 #include "GraphicsEngine/Object/AudioObject.h"
 
@@ -37,7 +37,7 @@ void DemoApp::Start()  {
 	TitleText = std::make_shared<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Labyrinth");
 
 	//Load PostProcess
-	Game::GetInstance()->renderBoard = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/VedaStructuredShader/BoardRender.frag", RenderType::FrameBuffer);
+	GraphicsMain::GetInstance()->renderBoard = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/VedaStructuredShader/BoardRender.frag", RenderType::FrameBuffer);
 
 	DemoAudioObj = std::make_shared<AudioObject>("./Assets/Resources/MusicData/lug00ber_they_are_feeding.mp3");
 	if (DemoAudioObj->Initialize()) {
@@ -71,7 +71,7 @@ void DemoApp::Timeline(class TimelineObject* timeline)  {
 	float endTime = 0.0f;
 	endTime += timeVal;
 
-	Game* gamept = Game::GetInstance();
+	GraphicsMain* gamept = GraphicsMain::GetInstance();
 
 	timeline->AddAnimationClip(Scene1_Frag.get(), 0.0f,0.5f, [this](float val) {Scene1_Frag->meshComp->material->SetFloatUniform("_isWhiteOut", 0.0); });
 	timeline->AddAnimationClip(Scene1_Frag.get(), 0.0f, 0.5f, [this](float val) {Scene1_Frag->meshComp->material->SetFloatUniform("_isBlackOut", 0.0); });
@@ -350,33 +350,33 @@ void DemoApp::Timeline(class TimelineObject* timeline)  {
 	
 
 	//PostProcess
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 0.0f, 38.0f, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 38.0, 42.0f, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",1); });
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 42.0f, 42.3f, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 0.0f, 38.0f, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 38.0, 42.0f, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",1); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 42.0f, 42.3f, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
 	
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 42.0f, 62.0f, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 62.0f,65.0f, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",2); });
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 65.0f, 66.0f, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 42.0f, 62.0f, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 62.0f,65.0f, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",2); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 65.0f, 66.0f, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
 	
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 84.0f, 84.5f, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 84.5f,85.5f, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",2); });
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 85.5f, 86.0f, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 84.0f, 84.5f, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 84.5f,85.5f, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",2); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 85.5f, 86.0f, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
 	
 	float adjustGlitch = 0.25f;
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 102.0 - adjustTime, 102.5 - adjustTime, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 102.0 - adjustTime, 102.5 - adjustTime, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessVal", 0.0); });
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 102.5 - adjustTime, 105.5 - adjustTime, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 5); });
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 102.5 - adjustTime, 105.5 - adjustTime, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessVal", val); });
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 105.5 - adjustTime, 106.5 - adjustTime, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 102.0 - adjustTime, 102.5 - adjustTime, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 102.0 - adjustTime, 102.5 - adjustTime, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessVal", 0.0); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 102.5 - adjustTime, 105.5 - adjustTime, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 5); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 102.5 - adjustTime, 105.5 - adjustTime, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessVal", val); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 105.5 - adjustTime, 106.5 - adjustTime, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 0); });
 
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 106.5 - adjustTime - 1.0f, 128.0f - 12.0f - adjustTime, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",4); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 106.5 - adjustTime - 1.0f, 128.0f - 12.0f - adjustTime, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",4); });
 	
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 128.0f - 12.0f - adjustTime, 126.0f + 1.0f - adjustTime, [this](float val) {
-		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 6);
-		Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessVal", val);
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 128.0f - 12.0f - adjustTime, 126.0f + 1.0f - adjustTime, [this](float val) {
+		GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag", 6);
+		GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessVal", val);
 	});
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 126.0f + 1.0f - adjustTime, 157.0f + 1.0f - adjustTime, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",3); });
-	timeline->AddAnimationClip(Game::GetInstance()->renderBoard.get(), 157.0f + 1.0f - adjustTime, 157.5f + 1.0f - adjustTime, [this](float val) {Game::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 126.0f + 1.0f - adjustTime, 157.0f + 1.0f - adjustTime, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",3); });
+	timeline->AddAnimationClip(GraphicsMain::GetInstance()->renderBoard.get(), 157.0f + 1.0f - adjustTime, 157.5f + 1.0f - adjustTime, [this](float val) {GraphicsMain::GetInstance()->renderBoard->meshComp->material->SetFloatUniform("_postProcessFlag",0); });
 		
 }
 

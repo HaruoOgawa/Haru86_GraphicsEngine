@@ -1,20 +1,20 @@
 #include "Main.h"
 #include <iostream>
-#include "../../Game/Game.h"
+#include "../../GraphicsMain/GraphicsMain.h"
 
 int main(int argc, char** argv) {
-	Game::Create();
+	GraphicsMain::Create();
 	
-	if (Game::GetInstance()->Initialize()) {
-		Game::GetInstance()->RunLoop();
+	if (GraphicsMain::GetInstance()->Initialize()) {
+		GraphicsMain::GetInstance()->RunLoop();
 	}
 
-	//printf("Game is Finished\n");
+	//printf("GraphicsMain is Finished\n");
 
-	Game::GetInstance()->ShutDown();
-	Game::Destroy();
+	GraphicsMain::GetInstance()->ShutDown();
+	GraphicsMain::Destroy();
 
-	//printf("Game is Destroyed\n");
+	//printf("GraphicsMain is Destroyed\n");
 
 	return 0;
 }

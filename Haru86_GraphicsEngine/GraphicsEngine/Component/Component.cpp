@@ -1,8 +1,8 @@
 #include "Component.h"
-#include "../Game/Game.h"
+#include "../GraphicsMain/GraphicsMain.h"
 
 Component::Component(Object* o)
-	: owner(o),game(Game::GetInstance())
+	: owner(o),game(GraphicsMain::GetInstance())
 {
 	Start();
 }
