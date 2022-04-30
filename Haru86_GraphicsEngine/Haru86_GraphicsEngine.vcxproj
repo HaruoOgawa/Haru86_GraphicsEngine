@@ -313,6 +313,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <None Include="Assets\Shader\CollisionArt\GPUTrail_Force.comp" />
     <None Include="Assets\Shader\CollisionArt\InstancedBox.frag" />
     <None Include="Assets\Shader\CollisionArt\InstancedBox.vert" />
+    <None Include="Assets\Shader\CollisionArt\PlaneMarker.frag" />
     <None Include="Assets\Shader\CollisionArt\veda\CubeFieldRaymarching_VEDA.frag" />
     <None Include="Assets\Shader\BloomBlur.frag" />
     <None Include="Assets\Shader\BloomDemo.frag" />

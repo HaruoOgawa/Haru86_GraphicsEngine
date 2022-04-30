@@ -18,7 +18,6 @@ namespace physics {
 	{
 		int SideCellNum = glm::pow(2.0f, static_cast<float>(MAXCELLLEVEL));
 		m_CellSize = (m_TreeMax - m_TreeMin) / SideCellNum;
-		Console::Log("m_CellSize: %f\n", m_CellSize);
 	}
 
 	CColliderTree::~CColliderTree() {
@@ -65,8 +64,8 @@ namespace physics {
 		// セルを作成
 		int CellNum = 0;
 		for (int n = 0; n < MAXCELLLEVEL+1;n++) {
-			CellNum += glm::pow(8.0f, n);
 			m_CellNumPerLayer.push_back(CellNum);
+			CellNum += glm::pow(8.0f, n);
 		}
 
 		m_CellList.resize(CellNum);
@@ -93,8 +92,6 @@ namespace physics {
 	}
 
 	bool CColliderTree::RegistCellContents2Cell(const std::shared_ptr<CCellContents>& CellContents) {
-		Console::Log("________________________________________\n");
-		
 		//
 		const auto& Collider = CellContents->GetCollider();
 		const auto& Bounds = Collider->GetBounds();
@@ -105,14 +102,6 @@ namespace physics {
 		// モートン番号からコライダーを格納するセルのインデックスを取得する
 		unsigned int CellIndex = GetCellIndexFromMortonNumber(WorldMinPos, WorldMaxPos);
 		
-		Console::Log("Collider->GetColliderType(): %d / CellIndex: %d / m_CellSize: %f / Collider: %p / ColliderType: %d\n"
-			, static_cast<int>(Collider->GetColliderType()),CellIndex, m_CellSize, Collider.get(),static_cast<int>(Collider->GetColliderType()));
-		
-		Console::Log("WorldMinPos=> x:%f, y:%f, z:%f\n", WorldMinPos.x, WorldMinPos.y, WorldMinPos.z);
-		Console::Log("WorldMaxPos=> x:%f, y:%f, z:%f\n", WorldMaxPos.x, WorldMaxPos.y, WorldMaxPos.z);
-		const auto& Size = Collider->GetTransform()->GetScale();
-		Console::Log("Size=> x:%f, y:%f, z:%f\n", Size.x, Size.y, Size.z);
-
 		if (CellIndex < m_CellList.size()) {
 			// もしセルがまだ空なら生成する
 			if (!m_CellList[CellIndex]) {
@@ -147,7 +136,7 @@ namespace physics {
 		unsigned int ParentMorton = (MinMortonNum!= MaxMortonNum)? MinMortonNum ^ MaxMortonNum: MinMortonNum;
 		
 		unsigned int CellIndex = ParentMorton;
-		int L = 1;
+		int L = 0;
 
 		// 親階層までのビットシフト数を計算する
 		for (int n = 0; n < MAXCELLLEVEL; n++) {
@@ -162,8 +151,6 @@ namespace physics {
 
 		// 
 		if (CellIndex > static_cast<unsigned int>(m_CellNum))CellIndex = 0;
-
-		Console::Log("MinMortonNum: %d / MaxMortonNum: %d / ParentMorton: %d / CellIndex: %d\n", MinMortonNum, MaxMortonNum, ParentMorton, CellIndex);
 
 		return CellIndex;
 	}
@@ -207,9 +194,7 @@ namespace physics {
 	}
 
 	bool CColliderTree::GetCollisionMap(unsigned int CellIndex, std::unordered_map<ACollider*, ACollider*>& CollisionList, std::vector<ACollider*>& ColliderStack) {
-		//Console::Log("________\n");
-		//Console::Log("CellIndex IN GetCollisionMap: %d\n", CellIndex);
-		
+		//
 		if (!m_CellList[CellIndex]) {
 			if (!CreateCell(CellIndex))return false;
 		}
@@ -221,23 +206,17 @@ namespace physics {
 		//
 		while (CellContents1 != nullptr)
 		{
-			//Console::Log("CellContents1 ColliderType: %d\n"
-			//	,static_cast<int>(CellContents1->GetCollider()->GetColliderType()));
-
 			// 動的オブジェクトでないのなら外す
-			if (CellContents1->GetCollider()->GetObjectType() != EObjectType::DYNAMIC) {
+			/*if (CellContents1->GetCollider()->GetObjectType() != EObjectType::DYNAMIC) {
 				CellContents1 = CellContents1->GetNextCellContents();
 				continue;
-			}
+			}*/
 
 			//
 			CCellContents* CellContents2 = CellContents1->GetNextCellContents();
 
 			// まず同じセルのコライダーとの衝突リストを作成する
 			while (CellContents2 != nullptr) {
-				//Console::Log("CellContents2 ColliderType: %d\n"
-				//	, static_cast<int>(CellContents2->GetCollider()->GetColliderType()));
-
 				// 衝突リスト => 衝突する側 | 衝突される側
 				CollisionList.emplace(std::make_pair(CellContents1->GetCollider().get(), CellContents2->GetCollider().get()));
 
@@ -248,10 +227,6 @@ namespace physics {
 			// 次に上位レベルのセルのコライダーとの衝突リストを作成する
 			for (int i = 0; i < static_cast<int>(ColliderStack.size()); i++) {
 				// 衝突リスト => 衝突する側 | 衝突される側
-				//Console::Log("StackList Collision=> CellContents1 ColliderType:%d / ColliderStack[i] ColliderType(): %d\n",
-				//	static_cast<int>(CellContents1->GetCollider()->GetColliderType()),
-				//	static_cast<int>(ColliderStack[i]->GetColliderType()));
-
 				CollisionList.emplace(std::make_pair(CellContents1->GetCollider().get(), ColliderStack[i]));
 			}
 
@@ -275,7 +250,6 @@ namespace physics {
 		
 		// スタックのオブジェクトを後ろから削除する
 		if (IsHaveChild) {
-			//Console::Log("ColliderStack.size(): %d\n", ColliderStack.size());
 			for (int i = 0; i < StackObjNum;i++) {
 				ColliderStack.pop_back();
 			}
