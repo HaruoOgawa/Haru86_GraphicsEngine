@@ -174,8 +174,8 @@ void GraphicsRenderer::Draw() {
 		obj->meshComp->Draw();
 	}
 
-	if (mgame->app) {
-		mgame->app->Draw();
+	if (mgame->m_App) {
+		mgame->m_App->Draw();
 	}
 
 	//ポリゴンオブジェクトをデプスマップをレンダリング
@@ -193,8 +193,8 @@ void GraphicsRenderer::Draw() {
 		obj->meshComp->Draw();
 	}
 
-	if (mgame->app) {
-		mgame->app->Draw();
+	if (mgame->m_App) {
+		mgame->m_App->Draw();
 	}
 
 	// ポリゴンオブジェクトのポストプロセス

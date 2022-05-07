@@ -10,9 +10,6 @@
 #include <vector>
 #include <algorithm>
 #include "../App/BaseApp/BaseApp.h"
-#include "../../Assets/App/CollisionArt/CollisionArt.h"
-//#include "../../Assets/App/KuraArtApp/KuraArtApp.h"
-//#include "../../Assets/App/DemoApp/DemoApp.h"
 #include <exception>
 #include <stdexcept>
 #include "GraphicsEngine/Object/RaymarchingObject.h"
@@ -122,27 +119,35 @@ GraphicsMain::~GraphicsMain() {
 	
 }
 
-bool GraphicsMain::Initialize() {
-	if (SDL_Init(SDL_INIT_VIDEO||SDL_INIT_AUDIO)!=0) {
+bool GraphicsMain::CreateApp() {
+	if (SDL_Init(SDL_INIT_VIDEO || SDL_INIT_AUDIO) != 0) {
 		SDL_Log("SDL Init is failure: %s", SDL_GetError());
 		return false;
 	}
 
 	GraphicsRenderer::Create();
-	if (!GraphicsRenderer::GetInstance()->Initialize(500,500)) {
+	if (!GraphicsRenderer::GetInstance()->Initialize(500, 500)) {
 		SDL_Log("Can not Initialize");
 		return false;
 	}
 
+	return true;
+}
+
+bool GraphicsMain::Initialize(BaseApp* app) {
+	//
+	m_App = app;
+	isRestart = false;
+	
+	//
 	LoadData();
 	
 	return true;
 }
 
 void GraphicsMain::LoadData() {
-	app = std::make_unique<CollisionArt>();
 	timeObj = std::make_unique<Time>(60.0f);
-	app->Start();
+	m_App->Start();
 
 	//renderBoardがユーザーに指定されていないのであれば、デフォルトのものをセットする
 	if (renderBoard==nullptr) {
@@ -150,18 +155,18 @@ void GraphicsMain::LoadData() {
 	}
 
 	timelineObj = std::make_unique<TimelineObject>();
-	app->Timeline(timelineObj.get());
+	m_App->Timeline(timelineObj.get());
 	timelineObj->Initialize();
 
 
 	m_PhysicsEngine->Initialize();
 }
 
-void GraphicsMain::RunLoop() {
+bool GraphicsMain::RunLoop() {
 	while (isRunning)
 	{
 		if (isRestart) {
-			Reflesh();
+			if (Reflesh())return true;
 		}
 		else {
 			UpdateTimeline();
@@ -171,6 +176,8 @@ void GraphicsMain::RunLoop() {
 			Draw();
 		}
 	}
+
+	return false;
 }
 
 void GraphicsMain::UpdateTimeline() {
@@ -224,8 +231,8 @@ void GraphicsMain::Update() {
 		obj->Update();
 	}
 	
-	if (app) {
-		app->Update();
+	if (m_App) {
+		m_App->Update();
 	}
 
 	game_camera_instance->Update();
@@ -235,7 +242,7 @@ void GraphicsMain::Draw() {
 	GraphicsRenderer::GetInstance()->Draw();
 }
 
-void GraphicsMain::Reflesh() {
+bool GraphicsMain::Reflesh() {
 	//Listを解放
 	gameObjectList.clear();
 	boardGameObjectList.clear();
@@ -249,7 +256,6 @@ void GraphicsMain::Reflesh() {
 	previousTime = 0.0f;
 	mouseStateBool = false;
 	animTime = 0.0f;
-	isRestart = false;
 	renderingTarget = ERerderingTarget::COLOR;
 
 	//メモリを解放
@@ -257,16 +263,15 @@ void GraphicsMain::Reflesh() {
 	timelineObj.reset();
 	timeObj.reset();
 	renderBoard.reset();
-	if (app) {
-		app.reset();
+	if (m_App) {
+		delete m_App;
 	}
 	m_RaymarchingObject = nullptr;
 	if (m_PhysicsEngine) {
 		m_PhysicsEngine->Release();
 	}
 
-	//再度リソースをロードする
-	LoadData();
+	return true;
 }
 
 void GraphicsMain::Restart() {

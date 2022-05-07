@@ -233,7 +233,6 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\GraphicsMain\GraphicsMain.h" />
     <ClInclude Include="GraphicsEngine\Object\GameObject.h" />
     <ClInclude Include="GraphicsEngine\Graphics\GraphicsRenderer.h" />
-    <ClInclude Include="GraphicsEngine\App\BaseApp\Main.h" />
     <ClInclude Include="Assets\App\KuraArtApp\KuraArtApp.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Material.h" />
     <ClInclude Include="GraphicsEngine\Component\MeshRendererComponent.h" />

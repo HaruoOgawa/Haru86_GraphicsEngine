@@ -1,20 +1,23 @@
-#include "Main.h"
 #include <iostream>
 #include "../../GraphicsMain/GraphicsMain.h"
+
+#include "Assets/App/CollisionArt/CollisionArt.h"
+//#include "Assets/App/KuraArtApp/KuraArtApp.h"
+//#include "Assets/App/DemoApp/DemoApp.h"
 
 int main(int argc, char** argv) {
 	GraphicsMain::Create();
 	
-	if (GraphicsMain::GetInstance()->Initialize()) {
-		GraphicsMain::GetInstance()->RunLoop();
+	if (GraphicsMain::GetInstance()->CreateApp()) {
+		do
+		{
+			if (!GraphicsMain::GetInstance()->Initialize(new CollisionArt()))return 0;
+			if (!GraphicsMain::GetInstance()->RunLoop())return 0;
+		} while (GraphicsMain::GetInstance()->isRestart);
 	}
-
-	//printf("GraphicsMain is Finished\n");
 
 	GraphicsMain::GetInstance()->ShutDown();
 	GraphicsMain::Destroy();
-
-	//printf("GraphicsMain is Destroyed\n");
 
 	return 0;
 }

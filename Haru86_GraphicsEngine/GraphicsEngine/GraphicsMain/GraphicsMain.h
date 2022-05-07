@@ -16,8 +16,21 @@ enum ERerderingTarget
 	DEPTH
 };
 
+class BaseApp;
+
 class GraphicsMain
 {
+	bool isRunning;
+	float previousTime;
+	std::vector<class GameObject*> gameObjectList;
+	std::vector<class GameObject*> boardGameObjectList;
+	std::vector<class GameObject*> postProcessGameObjectList;
+	std::vector<class UIObject*> uiObjectList;
+
+	bool mouseStateBool;
+	
+	ERerderingTarget renderingTarget;
+
 public:
 	static GraphicsMain* GetInstance()
 	{
@@ -29,8 +42,9 @@ public:
 
 	GraphicsMain();
 	~GraphicsMain();
-	bool Initialize();
-	void RunLoop();
+	bool CreateApp();
+	bool Initialize(BaseApp* app);
+	bool RunLoop();
 	void ShutDown();
 	void Restart();
 	physics::CPhysicsEngine* GetPhysicsEngine();
@@ -41,15 +55,20 @@ public:
 	std::unique_ptr<class TimelineObject> timelineObj;
 	float animTime;
 
-	std::unique_ptr<class BaseApp> app;
 	//frame board
 	std::unique_ptr<class GameObject> renderBoard;
 	class CameraObject* game_camera_instance;
 	std::map<int, GLenum> texSlots;
 	class RaymarchingObject* m_RaymarchingObject;
 	
+	//
+	BaseApp* m_App;
+
 	// ï®óùÉGÉìÉWÉì
 	std::unique_ptr<physics::CPhysicsEngine> m_PhysicsEngine;
+
+	//
+	bool isRestart;
 
 	friend class Main;
 	friend class GameObject;
@@ -68,18 +87,7 @@ private :
 	void Update();
 	void Draw();
 	void LoadData();
-	void Reflesh();
-	bool isRunning;
-	float previousTime;
-	std::vector<class GameObject*> gameObjectList;
-	std::vector<class GameObject*> boardGameObjectList;
-	std::vector<class GameObject*> postProcessGameObjectList;
-	std::vector<class UIObject*> uiObjectList;
-	
-	bool mouseStateBool;
-	bool isRestart;
-	ERerderingTarget renderingTarget;
-	
+	bool Reflesh();
 protected:
 	static GraphicsMain* s_pInstance;
 };
