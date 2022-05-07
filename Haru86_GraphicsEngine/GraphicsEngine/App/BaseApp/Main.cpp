@@ -1,9 +1,10 @@
 #include <iostream>
-#include "../../GraphicsMain/GraphicsMain.h"
+#include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 
 //#include "Assets/App/CollisionArt/CollisionArt.h"
 //#include "Assets/App/KuraArtApp/KuraArtApp.h"
 //#include "Assets/App/DemoApp/DemoApp.h"
+//#include "Assets/App/Kura02/Kura02.h"
 #include "Assets/App/AnimationLearning/AnimationLearning.h"
 
 int main(int argc, char** argv) {

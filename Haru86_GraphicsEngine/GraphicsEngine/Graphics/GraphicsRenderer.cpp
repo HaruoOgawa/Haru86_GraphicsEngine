@@ -38,7 +38,8 @@ GraphicsRenderer::GraphicsRenderer(GraphicsMain* game)
 	raymarching_depthTexture(std::make_shared<Texture>()),
 	p_r_BlendingTexture(std::make_shared<Texture>()),
 	m_PolygonPostProcess_FrameTexture(std::make_shared<Texture>()),
-	m_LatePostProcess_FrameTexture(std::make_shared<Texture>())
+	m_LatePostProcess_FrameTexture(std::make_shared<Texture>()),
+	m_BackgroudColor(glm::vec4(0.0f,0.0f,0.0f,1.0f))
 {
 }
 
@@ -135,6 +136,11 @@ glm::ivec2 GraphicsRenderer::GetScreenSize() {
 	return glm::ivec2(sWindowWidth, sWindowHeight);
 }
 
+// îwåiêF
+void GraphicsRenderer::SetBackgroudColor(glm::vec4 BackgroudColor) {
+	m_BackgroudColor = BackgroudColor;
+}
+
 bool GraphicsRenderer::CreateFrameBuffer(std::shared_ptr<Texture> fTex, unsigned int& fBuffer, GLint internalformat, GLint format, GLenum type) {
 	int width = static_cast<int>(GetScreenSize().x) ;
 	int height = static_cast<int>(GetScreenSize().y );
@@ -164,7 +170,7 @@ void GraphicsRenderer::Draw() {
 	glBindFramebuffer(GL_FRAMEBUFFER, polygon_frameBuffer);
 	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(m_BackgroudColor.r, m_BackgroudColor.g, m_BackgroudColor.b, m_BackgroudColor.a);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glEnable(GL_DEPTH_TEST);

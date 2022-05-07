@@ -3,6 +3,9 @@
 #include "GraphicsEngine/Object/GameObject.h"
 
 void AnimationLearning::Start() {
+	// ”wŒiF
+	GraphicsRenderer::GetInstance()->SetBackgroudColor(glm::vec4(glm::vec3(0.85f),1.0));
+	
 	//
 	m_AnimObj = std::make_shared<GameObject>("Assets/Resources/glTFData/Hakka/Hakka_v1.2.gltf");
 	
