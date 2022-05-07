@@ -43,7 +43,7 @@ GraphicsMain::GraphicsMain()
 	isRestart(false),
 	renderingTarget(ERerderingTarget::COLOR),
 	m_RaymarchingObject(nullptr),
-	m_PhysicsEngine(std::make_unique<physics::CPhysicsEngine>())
+	m_PhysicsEngine(nullptr)
 {
 	
 	for (int i = 0; i < 20;i++) {
@@ -135,8 +135,13 @@ bool GraphicsMain::CreateApp() {
 }
 
 bool GraphicsMain::Initialize(BaseApp* app) {
-	//
+	// メモリ確保
+	timeObj = std::make_unique<Time>(60.0f);
+	m_PhysicsEngine = std::make_unique<physics::CPhysicsEngine>();
+	timelineObj = std::make_unique<TimelineObject>();
 	m_App = app;
+
+	// 初期化が必要なパラメーターを初期化
 	isRestart = false;
 	
 	//
@@ -146,7 +151,7 @@ bool GraphicsMain::Initialize(BaseApp* app) {
 }
 
 void GraphicsMain::LoadData() {
-	timeObj = std::make_unique<Time>(60.0f);
+	//
 	m_App->Start();
 
 	//renderBoardがユーザーに指定されていないのであれば、デフォルトのものをセットする
@@ -154,11 +159,11 @@ void GraphicsMain::LoadData() {
 		renderBoard = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/StandardRenderBoard.vert", "./Assets/Shader/StandardRenderBoard.frag", RenderType::FrameBuffer);
 	}
 
-	timelineObj = std::make_unique<TimelineObject>();
+	//
 	m_App->Timeline(timelineObj.get());
 	timelineObj->Initialize();
 
-
+	//
 	m_PhysicsEngine->Initialize();
 }
 
@@ -265,6 +270,7 @@ bool GraphicsMain::Reflesh() {
 	renderBoard.reset();
 	if (m_App) {
 		delete m_App;
+		m_App = nullptr; 
 	}
 	m_RaymarchingObject = nullptr;
 	if (m_PhysicsEngine) {
