@@ -15,6 +15,7 @@
 #include "GraphicsEngine/Object/RaymarchingObject.h"
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Physics/CPhysicsEngine.h"
+#include "GraphicsEngine/Message/Console.h"
 
 GraphicsMain* GraphicsMain::s_pInstance = nullptr;
 
@@ -45,7 +46,6 @@ GraphicsMain::GraphicsMain()
 	m_RaymarchingObject(nullptr),
 	m_PhysicsEngine(nullptr)
 {
-	
 	for (int i = 0; i < 20;i++) {
 		switch (i)
 		{
@@ -161,6 +161,7 @@ void GraphicsMain::LoadData() {
 
 	if (!game_camera_instance) {
 		game_camera_instance= std::make_shared<CameraObject>(CameraType::FIXED_CAMERA);
+		game_camera_instance->SetPosition(glm::vec3(0.0f,0.0f,3.0f));
 	}
 
 	//
