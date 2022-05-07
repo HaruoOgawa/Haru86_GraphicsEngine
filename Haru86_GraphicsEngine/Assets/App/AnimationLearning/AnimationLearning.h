@@ -8,6 +8,7 @@ class AnimationLearning :
     public BaseApp
 {
 	std::shared_ptr<GameObject> m_AnimObj;
+	std::shared_ptr<GameObject> m_GridPlane;
 public:
 	AnimationLearning() = default;
 	~AnimationLearning() = default;

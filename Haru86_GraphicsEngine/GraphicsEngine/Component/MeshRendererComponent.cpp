@@ -10,6 +10,7 @@
 #include "../Graphics/Font.h"
 #include "GraphicsEngine/Graphics/glTFLoader.h"
 #include "GraphicsEngine/Graphics/glTFLoader.h"
+#include "GraphicsEngine/Object/CameraObject.h"
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 	: Component(o), myowner(o), primTex(nullptr)
@@ -109,6 +110,7 @@ void MeshRendererComponent::Draw() {
 	material->SetFloatUniform("_time", game->time);
 	material->SetFloatUniform("_deltaTime", game->deltaTime);
 	material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
+	material->SetVec3Uniform("_CameraPos", GraphicsMain::GetInstance()->game_camera_instance->GetPosition());
 
 	if (primTex != nullptr) {
 		glEnable(GL_BLEND);

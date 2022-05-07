@@ -29,6 +29,14 @@ GameObject::GameObject(std::string objPath)
 	AddComponent<MeshRendererComponent>(meshComp);
 }
 
+GameObject::GameObject(PrimitiveType primType, std::string fragmentShaderName)
+	: Object(), renderOrder(RenderQueue::Geometry), renderType(RenderType::DefaultBuffer), animTime(0.0f), m_PrimitiveType(primType)
+{
+	GraphicsMain::GetInstance()->gameObjectList.emplace_back(this);
+	meshComp = std::make_shared<MeshRendererComponent>(this, primType, "./Assets/Shader/Standard.vert",fragmentShaderName);
+	AddComponent<MeshRendererComponent>(meshComp);
+}
+
 GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
 	: Object(), renderOrder(RenderQueue::Geometry), renderType(RenderType::DefaultBuffer), animTime(0.0f), m_PrimitiveType(primType)
 {
