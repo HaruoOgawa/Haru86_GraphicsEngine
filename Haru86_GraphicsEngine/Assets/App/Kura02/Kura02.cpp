@@ -24,10 +24,10 @@ Kura02::~Kura02() {
 }
 
 void Kura02::Start() {
-	cam_obj = std::make_unique<CameraObject>(CameraType::FIXED_CAMERA);
+	cam_obj = std::make_shared<CameraObject>(CameraType::FIXED_CAMERA);
 	//cam_obj->SetPosition(glm::vec3(0.0, 0.0, -3.0));
 	cam_obj->m_cameraComponent->cameraCenter = glm::vec3(0.0,-1.0,0.0);
-	GraphicsMain::GetInstance()->game_camera_instance = cam_obj.get();
+	GraphicsMain::GetInstance()->game_camera_instance = cam_obj;
 	cam_obj->transform->SetPosition(glm::vec3(5.0,0.0,5.0));
 
 	ins_cubes = std::make_unique<Object>();

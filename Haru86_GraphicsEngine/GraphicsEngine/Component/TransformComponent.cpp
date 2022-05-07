@@ -45,7 +45,7 @@ void TransformComponent::ComputeModelMatrix() {
 
 void TransformComponent::ComputeViewMatrix() {
 	if (GraphicsMain::GetInstance()->game_camera_instance!=nullptr) {
-		CameraObject* cam = GraphicsMain::GetInstance()->game_camera_instance;
+		std::shared_ptr<CameraObject> cam = GraphicsMain::GetInstance()->game_camera_instance;
 		m_vMatrix = glm::lookAt(
 			cam->transform->m_position,
 			cam->m_cameraComponent->cameraCenter,

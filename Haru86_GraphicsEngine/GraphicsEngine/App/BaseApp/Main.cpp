@@ -1,9 +1,10 @@
 #include <iostream>
 #include "../../GraphicsMain/GraphicsMain.h"
 
-#include "Assets/App/CollisionArt/CollisionArt.h"
+//#include "Assets/App/CollisionArt/CollisionArt.h"
 //#include "Assets/App/KuraArtApp/KuraArtApp.h"
 //#include "Assets/App/DemoApp/DemoApp.h"
+#include "Assets/App/AnimationLearning/AnimationLearning.h"
 
 int main(int argc, char** argv) {
 	GraphicsMain::Create();
@@ -11,7 +12,7 @@ int main(int argc, char** argv) {
 	if (GraphicsMain::GetInstance()->CreateApp()) {
 		do
 		{
-			if (!GraphicsMain::GetInstance()->Initialize(new CollisionArt()))return 0;
+			if (!GraphicsMain::GetInstance()->Initialize(new AnimationLearning()))return 0;
 			if (!GraphicsMain::GetInstance()->RunLoop())return 0;
 		} while (GraphicsMain::GetInstance()->isRestart);
 	}

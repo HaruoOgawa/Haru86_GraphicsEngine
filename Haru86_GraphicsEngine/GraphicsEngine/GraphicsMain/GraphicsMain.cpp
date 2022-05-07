@@ -159,6 +159,10 @@ void GraphicsMain::LoadData() {
 		renderBoard = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/StandardRenderBoard.vert", "./Assets/Shader/StandardRenderBoard.frag", RenderType::FrameBuffer);
 	}
 
+	if (!game_camera_instance) {
+		game_camera_instance= std::make_shared<CameraObject>(CameraType::FIXED_CAMERA);
+	}
+
 	//
 	m_App->Timeline(timelineObj.get());
 	timelineObj->Initialize();

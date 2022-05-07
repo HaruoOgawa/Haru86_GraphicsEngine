@@ -197,6 +197,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Assets\App\AnimationLearning\AnimationLearning.h" />
     <ClInclude Include="GraphicsEngine\Physics\CCellContents.h" />
     <ClInclude Include="GraphicsEngine\Physics\CColliderCell.h" />
     <ClInclude Include="GraphicsEngine\Message\Console.h" />
@@ -256,6 +257,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Graphics\Mesh.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Assets\App\AnimationLearning\AnimationLearning.cpp" />
     <ClCompile Include="GraphicsEngine\Physics\CCellContents.cpp" />
     <ClCompile Include="GraphicsEngine\Physics\CColliderCell.cpp" />
     <ClCompile Include="GraphicsEngine\Physics\CColliderTree.cpp" />

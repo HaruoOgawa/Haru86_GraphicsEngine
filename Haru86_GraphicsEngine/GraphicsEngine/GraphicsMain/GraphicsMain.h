@@ -57,7 +57,7 @@ public:
 
 	//frame board
 	std::unique_ptr<class GameObject> renderBoard;
-	class CameraObject* game_camera_instance;
+	std::shared_ptr<class CameraObject> game_camera_instance;
 	std::map<int, GLenum> texSlots;
 	class RaymarchingObject* m_RaymarchingObject;
 	
