@@ -1,4 +1,4 @@
-#include "Curve.h"
+#include "CCurve.h"
 
 namespace animation {
 
