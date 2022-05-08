@@ -13,7 +13,7 @@ void main(){
 	vec2 st=fract(uv*domainSize)*2.0-1.0;
 	float t=clamp(length(WorldVertexPos-CameraPos)*0.05,0.0,1.0);
 	
-	float gridWidth=0.1;
+	float gridWidth=0.05;
 	col=vec3(
 		((abs(st.x) > (1.0-gridWidth))? 0.5 : 1.0) *
 		((abs(st.y) > (1.0-gridWidth))? 0.5 : 1.0) 
@@ -21,5 +21,5 @@ void main(){
 
 	col*=(1.0-t);
 
-	gl_FragColor=vec4(col,1.0);
+	gl_FragColor=vec4(col,1.0-t);
 }

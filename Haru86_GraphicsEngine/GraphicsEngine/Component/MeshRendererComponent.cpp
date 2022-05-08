@@ -102,6 +102,9 @@ void MeshRendererComponent::Draw() {
 		glDisable(GL_DEPTH_TEST);
 	}
 	
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	material->SetActive();
 	material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix());
 	material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
@@ -113,8 +116,6 @@ void MeshRendererComponent::Draw() {
 	material->SetVec3Uniform("_CameraPos", GraphicsMain::GetInstance()->game_camera_instance->GetPosition());
 
 	if (primTex != nullptr) {
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		primTex->SetActive();
 		material->SetTexUniform("_fontTexture", primTex->GetTextureID());
 	}

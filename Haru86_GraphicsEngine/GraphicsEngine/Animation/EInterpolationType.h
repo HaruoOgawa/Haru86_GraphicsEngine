@@ -1,7 +1,9 @@
 #pragma once
 
-enum EInterpolationType {
-	Constant,
-	Linear,
-	Cubic,
-};
+namespace animation {
+	enum EInterpolationType {
+		Constant,
+		Linear,
+		Cubic,
+	};
+}
