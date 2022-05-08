@@ -13,16 +13,12 @@ namespace animation {
 	
 	template<typename T>
 	inline T Interpolate(Bezier<T>& curve,float t) {
-		T A = glm::mix(curve.P1, curve.C1, t);
-		T B = glm::mix(curve.C2, curve.P2, t);
-		T C = glm::mix(curve.C1, curve.C2, t);
-
-		T D = glm::mix(A, C, t);
-		T E = glm::mix(C, B, t);
-
-		T R = glm::mix(D, E, t);
-
-		return R;
+		return (
+			curve.P1*((1.0f-t)*(1.0f-t)*(1.0f-t))+
+			curve.C1*(3.0f*((1.0f-t) * (1.0f - t))*t)+
+			curve.C2*(3.0f * (1.0f - t)*(t*t))+
+			curve.P2*(t*t*t)
+		);
 	}
 }
 
