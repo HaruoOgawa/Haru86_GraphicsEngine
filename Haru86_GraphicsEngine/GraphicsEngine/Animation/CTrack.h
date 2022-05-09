@@ -33,9 +33,9 @@ namespace animation {
 		EInterpolationType m_InterpolationType;
 
 		// function
-		T SampleConstant(float time, bool looping);
-		T SampleLinear(float time, bool looping);
-		T SampleCubic(float time, bool looping);
+		T SampleConstant(float t, bool loop);
+		T SampleLinear(float t, bool loop);
+		T SampleCubic(float t, bool loop);
 
 		int FrameIndex(float time, bool looping);
 		float AdjustTimeToFitTrack(float time,bool loop);
