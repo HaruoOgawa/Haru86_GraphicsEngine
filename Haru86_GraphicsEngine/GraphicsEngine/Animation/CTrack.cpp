@@ -121,7 +121,7 @@ namespace animation {
 			}
 
 			// 最後から1つ前の終了時間(最後はループなら繋がる)を超しているのならその最後の1つ前のフレームを返す
-			// out of range対策で1つ前
+			// Sample関数は現在のフレームとその次のフレームを計算に使用するため、最後から一つ前のフレームを指定しなければならない
 			if (time >= m_Frames[size-2].m_Time) {
 				return (int)size - 2;
 			}
@@ -133,6 +133,47 @@ namespace animation {
 				return i;
 			}
 		}
+	}
+
+	// アニメーション時間のなかにしっかり収めるための関数
+	template<typename T,int N>
+	float CTrack<T,N>::AdjustTimeToFitTrack(float t, bool loop) {
+		unsigned int size = (unsigned int)m_Frames.size();
+		
+		//
+		if (size <= 1) {
+			return 0.0f;
+		}
+
+		//
+		float startTime = m_Frames[0].m_Time;
+		float endTime = m_Frames[size - 1].m_Time;
+		float duration = endTime - startTime;
+		if (duration <=0.0f) {
+			return 0.0f;
+		}
+
+		//
+		if (loop) {
+			time = glm::modf(time - startTime, duration);
+
+			//
+			if (time < 0.0f) {
+				time += duration;
+			}
+			time = time + startTime;
+		}
+		else {
+			if (time<=m_Frames[0].m_Time) {
+				time = startTime;
+			}
+
+			if (time>=m_Frames[size-1].m_Time) {
+				time = endTime;
+			}
+		}
+
+		return time;
 	}
 }
 
