@@ -85,42 +85,92 @@ namespace animation {
 		m_InterpolationType = InterpolationType;
 	}
 
-	namespace TrackHelpers {
-		inline float Interpolate(float a, float b, float t) {
-			return a + (b - a) * t;
+	//
+	template<typename T,int N>
+	int CTrack<T,N>::FrameIndex(float time, bool looping) {
+		// 
+		unsigned int size = (unsigned int)m_Frames.size();
+		if (size<=1) {
+			return -1;
 		}
 
-		inline glm::vec3 Interpolate(const glm::vec3& a, const glm::vec3& b, float t) {
-			return glm::mix(a, b, t);
-		}
+		// ループアニメーション
+		if (looping) {
+			float startTime = m_Frames[0].m_Time;
+			float endTime = m_Frames[size-1].m_Time;
+			float duration = endTime - startTime;
 
-		inline glm::quat Interpolate(const glm::quat& a, const glm::quat& b, float t) {
-			glm::quat result = glm::mix(a, b, t);
-			if (glm::dot(a, b) < 0) {
-				result = glm::mix(a, -b, t);
+			// durationの幅で繰り返す
+			// 正しく繰り返すために一旦startTimeで調整する 5s～12s / t=3s =>> 0s～7s / t=-2s / duration 7s
+			time = glm::modf(time - startTime, duration);
+
+			// 負の値をmodの範囲内の数値に修正する
+			// t=5s
+			if (time < 0.0f) {
+				time += duration;
 			}
-			return glm::normalize(result);
+
+			// 0基準ではないもとの時間軸へ戻す(正しstartTimeとendTimeの間でいい感じに折り返している)
+			// 0s～7s / t=5s =>> 5s～12s / t=10s
+			time = time + startTime;
 		}
-
-		inline float AdjustHermiteResult(float f) {
-			return f;
-		}
-
-		inline glm::vec3 AdjustHermiteResult(const glm::vec3& v) {
-			return v;
-		}
-
-		inline glm::quat AdjustHermiteResult(const glm::quat& q) {
-			return glm::normalize(q);
-		}
-
-		inline void Neighborhood(const float& a,float& b){}
-		inline void Neighborhood(const glm::vec3& a, glm::vec3& b){}
-
-		inline void Neighborhood(const glm::quat& a, glm::quat& b){
-			if (glm::dot(a, b) < 0) {
-				b = -b;
+		else { // 繰り返さない
+			// スタート時間よりtimeが小さいならアニメーションはまだ始まってすらいないので最初のフレームを返す
+			if (time <= m_Frames[0].m_Time) {
+				return 0; 
 			}
+
+			// 最後から1つ前の終了時間(最後はループなら繋がる)を超しているのならその最後の1つ前のフレームを返す
+			// out of range対策で1つ前
+			if (time >= m_Frames[size-2].m_Time) {
+				return (int)size - 2;
+			}
+		}
+
+		// 単純に一番近い時間のフレームを探索する 上記↑↑↑の繰り返さない処理では端のフレームしか返さない
+		for (int i = size - 1; i > -1; --i) {
+			if (time>=m_Frames[i].m_Time) {
+				return i;
+			}
+		}
+	}
+}
+
+namespace TrackHelpers {
+	inline float Interpolate(float a, float b, float t) {
+		return a + (b - a) * t;
+	}
+
+	inline glm::vec3 Interpolate(const glm::vec3& a, const glm::vec3& b, float t) {
+		return glm::mix(a, b, t);
+	}
+
+	inline glm::quat Interpolate(const glm::quat& a, const glm::quat& b, float t) {
+		glm::quat result = glm::mix(a, b, t);
+		if (glm::dot(a, b) < 0) {
+			result = glm::mix(a, -b, t);
+		}
+		return glm::normalize(result);
+	}
+
+	inline float AdjustHermiteResult(float f) {
+		return f;
+	}
+
+	inline glm::vec3 AdjustHermiteResult(const glm::vec3& v) {
+		return v;
+	}
+
+	inline glm::quat AdjustHermiteResult(const glm::quat& q) {
+		return glm::normalize(q);
+	}
+
+	inline void Neighborhood(const float& a, float& b) {}
+	inline void Neighborhood(const glm::vec3& a, glm::vec3& b) {}
+
+	inline void Neighborhood(const glm::quat& a, glm::quat& b) {
+		if (glm::dot(a, b) < 0) {
+			b = -b;
 		}
 	}
 }

@@ -32,13 +32,13 @@ namespace animation {
 		std::vector<CFrame<N>> m_Frames;
 		EInterpolationType m_InterpolationType;
 
-		// helper function
+		// function
 		T SampleConstant(float time, bool looping);
 		T SampleLinear(float time, bool looping);
 		T SampleCubic(float time, bool looping);
 
 		int FrameIndex(float time, bool looping);
-		float AdjustTimeFitTrack(float t,bool loop);
+		float AdjustTimeToFitTrack(float t,bool loop);
 
 		T Cast(float* value);
 	};
