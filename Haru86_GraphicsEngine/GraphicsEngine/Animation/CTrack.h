@@ -1,0 +1,52 @@
+#pragma once
+#include <vector>
+#include <glm/glm.hpp>
+#include "EInterpolationType.h"
+#include "CFrame.h"
+
+namespace animation {
+	template<typename T,int N>
+	class CTrack
+	{
+	public:
+		CTrack(EInterpolationType InterpolationType):
+			m_InterpolationType(InterpolationType)
+		{
+		}
+
+		virtual ~CTrack();
+
+		void Resize(unsigned int size);
+		unsigned int GetSize()const;
+
+		EInterpolationType GetInterpolationType()const;
+		void SetInterpolationType(EInterpolationType InterpolationType)const;
+
+		float GetStartTime()const;
+		float GetEndTime()const;
+
+		//
+		T Sample(float time, bool looping);
+		CFrame<N>& operator[](unsigned int index);
+			
+	protected:
+		std::vector<CFrame<N>> m_Frames;
+		EInterpolationType m_InterpolationType;
+
+		// helper function
+		T SampleConstant(float time, bool looping);
+		T SampleLinear(float time, bool looping);
+		T SampleCubic(float time, bool looping);
+
+		int FrameIndex(float time, bool looping);
+		float AdjustTimeFitTrack(float t,bool loop);
+
+		T Cast(float* value);
+	};
+
+	typedef CTrack<float, 1> ScalarTrack;
+	typedef CTrack<glm::vec3, 3> VectorTrack;
+	typedef CTrack<glm::quat, 4> QuaternionTrack;
+}
+
+

@@ -22,7 +22,7 @@ namespace animation {
 	}
 
 	template<typename T>
-	T Hermite(float t,T& p1,T& s1,T& p2,T& s2) {
+	T Hermite(float t,const T& p1, const T& s1, const T& p2, const T& s2) {
 		return (
 			p1*((1.0f+2.0f*t)*((1.0f-t)*(1.0f-t)))+
 			s1*(t*((1.0f - t)* (1.0f - t)))+
