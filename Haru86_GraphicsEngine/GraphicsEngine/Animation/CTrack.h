@@ -9,12 +9,8 @@ namespace animation {
 	class CTrack
 	{
 	public:
-		CTrack(EInterpolationType InterpolationType):
-			m_InterpolationType(InterpolationType)
-		{
-		}
-
-		virtual ~CTrack();
+		CTrack() = default;
+		virtual ~CTrack() = default;
 
 		void Resize(unsigned int size);
 		unsigned int GetSize()const;
@@ -43,6 +39,10 @@ namespace animation {
 
 		T Cast(float* value);
 	};
+
+	namespace TrackHelpers {
+
+	}
 
 	typedef CTrack<float, 1> ScalarTrack;
 	typedef CTrack<glm::vec3, 3> VectorTrack;
