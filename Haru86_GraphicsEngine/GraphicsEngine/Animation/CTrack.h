@@ -38,7 +38,7 @@ namespace animation {
 		T SampleCubic(float time, bool looping);
 
 		int FrameIndex(float time, bool looping);
-		float AdjustTimeToFitTrack(float t,bool loop);
+		float AdjustTimeToFitTrack(float time,bool loop);
 
 		T Cast(float* value);
 	};

@@ -137,7 +137,7 @@ namespace animation {
 
 	// アニメーション時間のなかにしっかり収めるための関数
 	template<typename T,int N>
-	float CTrack<T,N>::AdjustTimeToFitTrack(float t, bool loop) {
+	float CTrack<T,N>::AdjustTimeToFitTrack(float time, bool loop) {
 		unsigned int size = (unsigned int)m_Frames.size();
 		
 		//
@@ -174,6 +174,22 @@ namespace animation {
 		}
 
 		return time;
+	}
+
+	template<>
+	float CTrack<float, 1>::Cast(float* value) {
+		return value[0];
+	}
+
+	template<>
+	glm::vec3 CTrack<glm::vec3,3>::Cast(float* value) {
+		return glm::vec3(value[0],value[1],value[2]);
+	}
+
+	template<>
+	glm::quat CTrack<glm::quat,4>::Cast(float* value) {
+		glm::quat r = glm::quat(value[0], value[1], value[2], value[3]);
+		return glm::normalize(r);
 	}
 }
 
