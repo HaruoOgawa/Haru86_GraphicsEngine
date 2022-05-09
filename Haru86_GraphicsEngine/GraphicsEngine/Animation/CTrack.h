@@ -9,14 +9,14 @@ namespace animation {
 	class CTrack
 	{
 	public:
-		CTrack() = default;
-		virtual ~CTrack() = default;
+		CTrack(EInterpolationType InterpolationType);
+		virtual ~CTrack();
 
 		void Resize(unsigned int size);
 		unsigned int GetSize()const;
 
 		EInterpolationType GetInterpolationType()const;
-		void SetInterpolationType(EInterpolationType InterpolationType)const;
+		void SetInterpolationType(EInterpolationType InterpolationType);
 
 		float GetStartTime()const;
 		float GetEndTime()const;
@@ -25,7 +25,10 @@ namespace animation {
 		T Sample(float time, bool looping);
 		CFrame<N>& operator[](unsigned int index);
 			
+		//
+		T Hermite(float t, const T& p1, const T& s1, const T& _p2, const T& s2);
 	protected:
+		// variable
 		std::vector<CFrame<N>> m_Frames;
 		EInterpolationType m_InterpolationType;
 
@@ -39,10 +42,6 @@ namespace animation {
 
 		T Cast(float* value);
 	};
-
-	namespace TrackHelpers {
-
-	}
 
 	typedef CTrack<float, 1> ScalarTrack;
 	typedef CTrack<glm::vec3, 3> VectorTrack;
