@@ -233,8 +233,8 @@ namespace animation {
 
 	// sample func
 	template<typename T,int N>
-	T CTrack<T, N>::SampleConstant(float t, bool loop) {
-		int frame = FrameIndex(t, loop);
+	T CTrack<T, N>::SampleConstant(float time, bool looping) {
+		int frame = FrameIndex(time ,looping);
 		if (frame < 0 || frame>=(int)m_Frames.size()) {
 			return T();
 		}
@@ -243,12 +243,69 @@ namespace animation {
 	}
 	
 	template<typename T, int N>
-	T CTrack<T, N>::SampleLinear(float t, bool loop) {
-		return T();
+	T CTrack<T, N>::SampleLinear(float time, bool looping) {
+		//
+		int thisFrame = FrameIndex(time, looping);
+		if (thisFrame < 0 || thisFrame>=m_Frames.size()-1) {
+			return T();
+		}
+
+		int nextFrame = thisFrame + 1;
+
+		//
+		float trackTime = AdjustTimeToFitTrack(time, looping);
+		float thisTime = m_Frames[thisFrame].m_Time;
+		float frameDelta = m_Frames[nextFrame].m_Time - thisTime;
+
+		if (frameDelta<=0.0f) {
+			return T();
+		}
+
+		//
+		float t = (trackTime - thisTime) / frameDelta;
+
+		T start = Cast(&m_Frames[thisFrame].m_Value[0]);
+		T end = Cast(&m_Frames[nextFrame].m_Value[0]);
+
+		return TrackHelpers::Interpolate(start, end, t);
 	}
 	
 	template<typename T, int N>
-	T CTrack<T, N>::SampleCubic(float t, bool loop) {
-		return T();
+	T CTrack<T, N>::SampleCubic(float time, bool looping) {
+		//
+		int thisFrame = FrameIndex(time, looping);
+		if (thisFrame < 0 || thisFrame >= m_Frames.size() -1) {
+			return T();
+		}
+		
+		int nextFrame = thisFrame + 1;
+
+		//
+		float trackTime = AdjustTimeToFitTrack(time, looping);
+		float thisTime = m_Frames[thisFrame].m_Time;
+		float frameDelta = m_Frames[nextFrame].m_Time - thisTime;
+
+		if (frameDelta <= 0.0f) {
+			return T();
+		}
+
+		//
+		float t = (trackTime - thisTime) / frameDelta;
+		size_t fitSize = sizeof(float);
+
+		//
+		T point1 = Cast(&m_Frames[thisFrame].m_Value[0]);
+		T slope1;
+		memcpy(&slope1, m_Frames[thisFrame].m_Out, N * fitSize);
+		slope1 = slope1 * frameDelta;
+
+		//
+		T point2 = Cast(&m_Frames[nextFrame].m_Value[0]);
+		T slope2;
+		memcpy(&slope2, m_Frames[nextFrame].m_In, N * fitSize);
+		slope2 = slope2 * frameDelta;
+
+		//
+		return Hermite(t, point1, slope1, point2, slope2);
 	}
 }
