@@ -1,5 +1,6 @@
 #pragma once
 #include "CTrack.h"
+#include <memory>
 
 class TransformComponent;
 
@@ -7,7 +8,7 @@ namespace animation {
 	class TransformTrack
 	{
 	protected:
-		unsigned int mId;
+		unsigned int m_Id;
 		VectorTrack m_Position;
 		QuaternionTrack m_Rotation;
 		VectorTrack m_Scale;
@@ -27,6 +28,6 @@ namespace animation {
 
 		bool IsValid();
 
-		TransformComponent Sample(const TransformComponent& ref, float time, bool looping);
+		std::shared_ptr<TransformComponent> Sample(const std::shared_ptr<TransformComponent>& ref, float time, bool looping);
 	};
 }

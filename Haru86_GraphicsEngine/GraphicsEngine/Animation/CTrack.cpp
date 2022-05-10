@@ -47,8 +47,8 @@ namespace animation {
 	template CTrack<glm::quat, 4>;
 
 	template<typename T,int N>
-	CTrack<T,N>::CTrack(EInterpolationType InterpolationType) :
-		m_InterpolationType(InterpolationType)
+	CTrack<T,N>::CTrack() :
+		m_InterpolationType(EInterpolationType::Linear)
 	{
 	}
 

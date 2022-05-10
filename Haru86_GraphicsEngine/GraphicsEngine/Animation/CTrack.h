@@ -9,7 +9,7 @@ namespace animation {
 	class CTrack
 	{
 	public:
-		CTrack(EInterpolationType InterpolationType);
+		CTrack();
 		virtual ~CTrack();
 
 		void Resize(unsigned int size);
