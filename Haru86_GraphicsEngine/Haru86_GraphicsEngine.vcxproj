@@ -260,6 +260,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Component\TransformComponent.h" />
     <ClInclude Include="GraphicsEngine\Component\UIComponent.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Mesh.h" />
+    <ClInclude Include="GraphicsEngine\Animation\TransformTrack.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets\App\AnimationLearning\AnimationLearning.cpp" />
@@ -316,6 +317,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Object\RaymarchingObject.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\PolygonRaymarchingMixer.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\PostProcess.cpp" />
+    <ClCompile Include="GraphicsEngine\Animation\TransformTrack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shader\CollisionArt\CubeFieldRaymarching.frag" />
