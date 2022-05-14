@@ -252,6 +252,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Physics\EColliderType.h" />
     <ClInclude Include="GraphicsEngine\Physics\EObjectType.h" />
     <ClInclude Include="GraphicsEngine\Physics\ICollider.h" />
+    <ClInclude Include="GraphicsEngine\Animation\Pose.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Texture.h" />
     <ClInclude Include="GraphicsEngine\GraphicsMain\Time.h" />
@@ -318,6 +319,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Graphics\PolygonRaymarchingMixer.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\PostProcess.cpp" />
     <ClCompile Include="GraphicsEngine\Animation\TransformTrack.cpp" />
+    <ClCompile Include="GraphicsEngine\Animation\Pose.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shader\CollisionArt\CubeFieldRaymarching.frag" />
