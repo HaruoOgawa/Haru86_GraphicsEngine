@@ -198,6 +198,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Assets\App\AnimationLearning\AnimationLearning.h" />
+    <ClInclude Include="GraphicsEngine\Animation\Clip.h" />
     <ClInclude Include="GraphicsEngine\Animation\CTrack.h" />
     <ClInclude Include="GraphicsEngine\Animation\CFrame.h" />
     <ClInclude Include="GraphicsEngine\Animation\CCurve.h" />
@@ -265,6 +266,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets\App\AnimationLearning\AnimationLearning.cpp" />
+    <ClCompile Include="GraphicsEngine\Animation\Clip.cpp" />
     <ClCompile Include="GraphicsEngine\Animation\CTrack.cpp" />
     <ClCompile Include="GraphicsEngine\Animation\CFrame.cpp" />
     <ClCompile Include="GraphicsEngine\Animation\CCurve.cpp" />
