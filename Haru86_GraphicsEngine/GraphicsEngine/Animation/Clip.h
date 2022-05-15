@@ -15,8 +15,8 @@ namespace animation {
 		void SetIdAtIndex(unsigned int idx,unsigned int id);
 		unsigned int Size()const;
 
-		float Sample(Pose& outPose,float inTime);
-		TransformTrack& operator[](unsigned int index);
+		float Sample(Pose& outPose,float time);
+		TransformTrack& operator[](unsigned int joint);
 
 		void RecalculateDuration();
 
@@ -29,7 +29,7 @@ namespace animation {
 		void SetLooping(bool inLooping);
 	protected:
 		std::vector<TransformTrack> m_Tracks;
-		std::string m_name;
+		std::string m_Name;
 		float m_StartTime;
 		float m_EndTime;
 		bool m_Looping;
