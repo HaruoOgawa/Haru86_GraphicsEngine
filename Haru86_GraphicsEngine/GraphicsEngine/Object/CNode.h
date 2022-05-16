@@ -9,21 +9,21 @@ class Component;
 class TransformComponent;
 
 namespace obj {
-	class Node
+	class CNode
 	{
-		std::vector<std::shared_ptr<Node>> m_Nodes;
+		std::vector<std::shared_ptr<CNode>> m_Nodes;
 		std::shared_ptr<TransformComponent> m_transform;
 		std::unordered_map<std::type_index, std::shared_ptr<Component>> m_ComponentList;
 	public:
 		//
-		Node();
-		~Node();
+		CNode();
+		~CNode();
 
 		//
 		const std::shared_ptr<TransformComponent>& GetTransform()const;
-		void AddNode(const std::shared_ptr<Node>& node);
-		const std::vector<std::shared_ptr<Node>>& GetNodeList()const;
-		const std::shared_ptr<Node>& GetNode(int index)const;
+		void AddNode(const std::shared_ptr<CNode>& node);
+		const std::vector<std::shared_ptr<CNode>>& GetNodeList()const;
+		const std::shared_ptr<CNode>& GetNode(int index)const;
 
 		//
 		template<typename T>

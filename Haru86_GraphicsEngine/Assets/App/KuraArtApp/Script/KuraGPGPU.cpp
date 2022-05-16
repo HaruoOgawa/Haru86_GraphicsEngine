@@ -26,7 +26,7 @@ KuraGPGPU::KuraGPGPU(Object* o)
 	: Component(o),
 	num(1024)
 {
-	m_mesh = glTFLoader::Load("./Assets/Resources/glTFData/PhoenixWithVAT/Phoenix.gltf");
+	m_mesh = gltf::glTFLoader::Load("./Assets/Resources/glTFData/PhoenixWithVAT/Phoenix.gltf");
 	
 	m_material = std::make_shared<Material>(
 		"./Assets/Shader/KuraShader/BoidsResult.vert",

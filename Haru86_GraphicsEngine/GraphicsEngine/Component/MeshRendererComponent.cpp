@@ -39,7 +39,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, std::string objPath)
 	: Component(o), myowner(o), primTex(nullptr)
 {
 	useZTest = true;
-	mesh = glTFLoader::Load(objPath);
+	mesh = gltf::glTFLoader::Load(objPath);
 	mesh->glDrawType = GLDrawType::NONE;
 	material = std::make_shared<Material>();
 }
@@ -80,7 +80,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, std::string modelDataPat
 	: Component(o),myowner(o), primTex(nullptr)
 {
 	useZTest = true;
-	mesh = glTFLoader::Load(modelDataPath);
+	mesh = gltf::glTFLoader::Load(modelDataPath);
 	mesh->glDrawType = GLDrawType::NONE;
 	material = std::make_shared<Material>(vertexShaderName,fragmentShaderName);
 }
