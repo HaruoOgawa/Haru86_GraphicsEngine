@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <typeindex>
 #include <typeinfo>
+#include <SDL.h>
 
 class Component;
 class TransformComponent;
@@ -20,7 +21,16 @@ namespace obj {
 		~CNode();
 
 		//
+		bool Update();
+		bool Draw();
+		void ProcessInput(const SDL_Event& e);
+
+		//
+		const std::unordered_map<std::type_index, std::shared_ptr<Component>>& GetComponentList()const;
+
 		const std::shared_ptr<TransformComponent>& GetTransform()const;
+		std::shared_ptr<TransformComponent>& GetTransform();
+
 		void AddNode(const std::shared_ptr<CNode>& node);
 		const std::vector<std::shared_ptr<CNode>>& GetNodeList()const;
 		const std::shared_ptr<CNode>& GetNode(int index)const;

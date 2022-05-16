@@ -10,6 +10,7 @@
 #include "GraphicsEngine/Object/RaymarchingObject.h"
 #include "GraphicsEngine/Graphics/PolygonRaymarchingMixer.h"
 #include "GraphicsEngine/Graphics/PostProcess.h"
+#include "GraphicsEngine/Object/CNode.h"
 
 GraphicsRenderer* GraphicsRenderer::renderer_instance = nullptr;
 
@@ -176,8 +177,7 @@ void GraphicsRenderer::Draw() {
 	glEnable(GL_DEPTH_TEST);
 
 	for (auto obj : mgame->gameObjectList) {
-		obj->GetComponent<TransformComponent>()->CalMatrix();
-		obj->meshComp->Draw();
+		obj->GetRootNode()->Draw();
 	}
 
 	if (mgame->m_App) {
@@ -195,8 +195,7 @@ void GraphicsRenderer::Draw() {
 	glEnable(GL_DEPTH_TEST);
 
 	for (auto obj : mgame->gameObjectList) {
-		obj->GetComponent<TransformComponent>()->CalMatrix();
-		obj->meshComp->Draw();
+		obj->GetRootNode()->Draw();
 	}
 
 	if (mgame->m_App) {
@@ -216,8 +215,7 @@ void GraphicsRenderer::Draw() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
 
-		GraphicsMain::GetInstance()->m_RaymarchingObject->GetComponent<TransformComponent>()->CalMatrix();
-		GraphicsMain::GetInstance()->m_RaymarchingObject->Draw();
+		GraphicsMain::GetInstance()->m_RaymarchingObject->GetRootNode()->Draw();
 	}
 
 	//レイマーチングオブジェクトのデプスマップをレンダリング
@@ -230,8 +228,7 @@ void GraphicsRenderer::Draw() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
 
-		GraphicsMain::GetInstance()->m_RaymarchingObject->GetComponent<TransformComponent>()->CalMatrix();
-		GraphicsMain::GetInstance()->m_RaymarchingObject->Draw();
+		GraphicsMain::GetInstance()->m_RaymarchingObject->GetRootNode()->Draw();
 	}
 
 	//ポリゴンオブジェクトとレイマーチングオブジェクトをブレンドする
@@ -262,7 +259,6 @@ void GraphicsRenderer::Draw() {
 	glDisable(GL_BLEND);
 
 	for (auto obj : mgame->boardGameObjectList) {
-		obj->GetComponent<TransformComponent>()->CalMatrix();
 		obj->meshComp->DrawBoard();
 	}
 

@@ -1,6 +1,7 @@
 #include "CNode.h"
 #include "GraphicsEngine/Component/Component.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
+#include "GraphicsEngine/Component/MeshRendererComponent.h"
 
 namespace obj {
 	CNode::CNode() {
@@ -9,10 +10,53 @@ namespace obj {
 	}
 
 	CNode::~CNode() {
+		m_ComponentList.clear();
+	}
 
+	//
+	bool CNode::Update() {
+		for (auto comp : m_ComponentList) {
+			comp.second->Update();
+		}
+
+		for (auto node : m_Nodes) {
+			node->Update();
+		}
+
+		return true;
+	}
+
+	bool CNode::Draw() {
+		m_transform->CalMatrix();
+		auto MeshRenderer = GetComponent<MeshRendererComponent>();
+		if (MeshRenderer)MeshRenderer->Draw();
+
+		for (auto node : m_Nodes) {
+			node->Draw();
+		}
+
+		return true;
+	}
+
+	void CNode::ProcessInput(const SDL_Event& e) {
+		for (auto comp : m_ComponentList) {
+			comp.second->ProcessInput(e);
+		}
+
+		for (auto node : m_Nodes) {
+			node->ProcessInput(e);
+		}
+	}
+
+	const std::unordered_map<std::type_index, std::shared_ptr<Component>>& CNode::GetComponentList()const {
+		return m_ComponentList;
 	}
 
 	const std::shared_ptr<TransformComponent>& CNode::GetTransform()const {
+		return m_transform;
+	}
+	
+	std::shared_ptr<TransformComponent>& CNode::GetTransform(){
 		return m_transform;
 	}
 

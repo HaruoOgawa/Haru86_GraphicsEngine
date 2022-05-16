@@ -6,6 +6,7 @@
 #include "../Graphics/GraphicsRenderer.h"
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Component/CameraComponent.h"
+#include "GraphicsEngine/Object/CNode.h"
 
 TransformComponent::TransformComponent() :
 	Component(nullptr),
@@ -56,7 +57,7 @@ void TransformComponent::ComputeViewMatrix() {
 	if (GraphicsMain::GetInstance()->game_camera_instance!=nullptr) {
 		std::shared_ptr<CameraObject> cam = GraphicsMain::GetInstance()->game_camera_instance;
 		m_vMatrix = glm::lookAt(
-			cam->GetComponent<TransformComponent>()->m_position,
+			cam->GetRootNode()->GetComponent<TransformComponent>()->m_position,
 			cam->m_cameraComponent->cameraCenter,
 			cam->m_cameraComponent->cameraUp
 		);

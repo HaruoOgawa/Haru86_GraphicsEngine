@@ -1,19 +1,21 @@
 #include "../Object/AudioObject.h"
 #include "../Component/AudioSourceComponent.h"
 #include <iostream>
+#include "GraphicsEngine/Object/CNode.h"
+
 
 AudioObject::AudioObject() 
 	: Object()
 {
 	audioSource =  std::make_shared<AudioSourceComponent>(this);
-	AddComponent<AudioSourceComponent>(audioSource);
+	GetRootNode()->AddComponent<AudioSourceComponent>(audioSource);
 }
 
 AudioObject::AudioObject(std::string audioSourcePath)
 	: Object()
 {
 	audioSource = std::make_shared<AudioSourceComponent>(this, audioSourcePath);
-	AddComponent<AudioSourceComponent>(audioSource);
+	GetRootNode()->AddComponent<AudioSourceComponent>(audioSource);
 }
 
 AudioObject::~AudioObject() {

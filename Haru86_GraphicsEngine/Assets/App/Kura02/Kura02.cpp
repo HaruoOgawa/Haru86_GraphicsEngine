@@ -12,6 +12,7 @@
 #include "GraphicsEngine/Object/RaymarchingObject.h"
 #include "GraphicsEngine/Graphics/PostProcess.h"
 #include "Script/CKura3DGPUTrail.h"
+#include "GraphicsEngine/Object/CNode.h"
 
 Kura02::Kura02():
 	BaseApp()
@@ -28,11 +29,11 @@ void Kura02::Start() {
 	//cam_obj->SetPosition(glm::vec3(0.0, 0.0, -3.0));
 	cam_obj->m_cameraComponent->cameraCenter = glm::vec3(0.0,-1.0,0.0);
 	GraphicsMain::GetInstance()->game_camera_instance = cam_obj;
-	cam_obj->GetComponent<TransformComponent>()->SetPosition(glm::vec3(5.0,0.0,5.0));
+	cam_obj->GetRootNode()->GetComponent<TransformComponent>()->SetPosition(glm::vec3(5.0,0.0,5.0));
 
 	ins_cubes = std::make_unique<Object>();
-	ins_cubes->AddComponent<CBoxInstancing>(std::make_shared<CBoxInstancing>(ins_cubes.get()));
-	ins_cubes->AddComponent<CKura3DGPUTrail>(std::make_shared<CKura3DGPUTrail>(ins_cubes.get()));
+	ins_cubes->GetRootNode()->AddComponent<CBoxInstancing>(std::make_shared<CBoxInstancing>(ins_cubes.get()));
+	ins_cubes->GetRootNode()->AddComponent<CKura3DGPUTrail>(std::make_shared<CKura3DGPUTrail>(ins_cubes.get()));
 
 	raymarching_obj = std::make_unique<RaymarchingObject>("./Assets/Shader/Kura02/CubeFieldRaymarching.frag");
 	GraphicsMain::GetInstance()->m_RaymarchingObject = raymarching_obj.get();
@@ -44,7 +45,7 @@ void Kura02::Start() {
 
 void Kura02::Update() {
 	ins_cubes->Update();
-	cam_obj->GetComponent<TransformComponent>()->SetPosition(glm::vec3(
+	cam_obj->GetRootNode()->GetComponent<TransformComponent>()->SetPosition(glm::vec3(
 		glm::cos(GraphicsMain::GetInstance()->time * 0.0001)*8.5,
 		0.0, 
 		glm::sin(GraphicsMain::GetInstance()->time * 0.0001)* 8.5
@@ -56,8 +57,8 @@ void Kura02::Update() {
 }
 
 void Kura02::Draw() {
-	ins_cubes->GetComponent<CBoxInstancing>()->Draw();
-	ins_cubes->GetComponent<CKura3DGPUTrail>()->Draw();
+	ins_cubes->GetRootNode()->GetComponent<CBoxInstancing>()->Draw();
+	ins_cubes->GetRootNode()->GetComponent<CKura3DGPUTrail>()->Draw();
 }
 
 void Kura02::Timeline(class TimelineObject* timelineObj) {

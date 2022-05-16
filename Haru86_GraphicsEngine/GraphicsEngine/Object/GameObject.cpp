@@ -3,13 +3,14 @@
 #include "../Component/TransformComponent.h"
 #include "../Component/MeshRendererComponent.h"
 #include "GraphicsEngine/Physics/CPhysicsEngine.h"
+#include "CNode.h"
 
 GameObject::GameObject(PrimitiveType primType) 
 	: Object(), renderOrder(RenderQueue::Geometry), renderType(RenderType::DefaultBuffer), animTime(0.0f), m_PrimitiveType(primType)
 {
 	GraphicsMain::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp =  std::make_shared<MeshRendererComponent>(this, primType);
-	AddComponent<MeshRendererComponent>(meshComp);
+	GetRootNode()->AddComponent<MeshRendererComponent>(meshComp);
 }
 
 GameObject::GameObject(PrimitiveType primType, std::map<GLenum, std::string> shaders)
@@ -17,7 +18,7 @@ GameObject::GameObject(PrimitiveType primType, std::map<GLenum, std::string> sha
 {
 	GraphicsMain::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = std::make_shared<MeshRendererComponent>(this, primType,shaders);
-	AddComponent<MeshRendererComponent>(meshComp);
+	GetRootNode()->AddComponent<MeshRendererComponent>(meshComp);
 }
 
 
@@ -26,7 +27,7 @@ GameObject::GameObject(std::string objPath)
 {
 	GraphicsMain::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = std::make_shared<MeshRendererComponent>(this, objPath);
-	AddComponent<MeshRendererComponent>(meshComp);
+	GetRootNode()->AddComponent<MeshRendererComponent>(meshComp);
 }
 
 GameObject::GameObject(PrimitiveType primType, std::string fragmentShaderName)
@@ -34,7 +35,7 @@ GameObject::GameObject(PrimitiveType primType, std::string fragmentShaderName)
 {
 	GraphicsMain::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = std::make_shared<MeshRendererComponent>(this, primType, "./Assets/Shader/Standard.vert",fragmentShaderName);
-	AddComponent<MeshRendererComponent>(meshComp);
+	GetRootNode()->AddComponent<MeshRendererComponent>(meshComp);
 }
 
 GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
@@ -42,7 +43,7 @@ GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std
 {
 	GraphicsMain::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = std::make_shared<MeshRendererComponent>(this, primType,vertexShaderName,fragmentShaderName);
-	AddComponent<MeshRendererComponent>(meshComp);
+	GetRootNode()->AddComponent<MeshRendererComponent>(meshComp);
 }
 
 GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName)
@@ -50,7 +51,7 @@ GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std
 {
 	GraphicsMain::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = std::make_shared<MeshRendererComponent>(this, primType,vertexShaderName,tessellationShaderName,fragmentShaderName);
-	AddComponent<MeshRendererComponent>(meshComp);
+	GetRootNode()->AddComponent<MeshRendererComponent>(meshComp);
 }
 
 GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, std::string textureString)
@@ -58,7 +59,7 @@ GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std
 {
 	GraphicsMain::GetInstance()->gameObjectList.emplace_back(this);
 	meshComp = std::make_shared<MeshRendererComponent>(this, primType,vertexShaderName,fragmentShaderName, textureString);
-	AddComponent<MeshRendererComponent>(meshComp);
+	GetRootNode()->AddComponent<MeshRendererComponent>(meshComp);
 	UseZTest(false);
 	SetRenderOlder(RenderQueue::UI);
 }
@@ -74,7 +75,7 @@ GameObject::GameObject(PrimitiveType primType, std::string vertexShaderName, std
 	}
 	
 	meshComp = std::make_shared<MeshRendererComponent>(this, primType, vertexShaderName, fragmentShaderName);
-	AddComponent<MeshRendererComponent>(meshComp);
+	GetRootNode()->AddComponent<MeshRendererComponent>(meshComp);
 }
 
 GameObject::~GameObject() {
@@ -90,7 +91,7 @@ void GameObject::SetRenderOlder(int order) {
 }
 
 void GameObject::ProcessInput(const SDL_Event& e) {
-	for (auto comp : myComponent) {
+	for (auto comp : m_RootNode->GetComponentList()) {
 		comp.second->ProcessInput(e);
 	}
 }

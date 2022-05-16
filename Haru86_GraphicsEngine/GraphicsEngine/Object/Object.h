@@ -13,24 +13,15 @@
 
 class Component;
 
+namespace obj {
+	class CNode;
+}
+
 class Object
 {
 public:
 	Object();
 	virtual ~Object();
-
-	template<typename T>
-	void AddComponent(std::shared_ptr<Component> component) {
-		myComponent.insert({ typeid(T),component });
-	}
-
-	void RemoveComponent(std::shared_ptr<Component> component);
-	
-	template<typename T>
-	T* GetComponent()const {
-		auto item = myComponent.find(typeid(T));
-		return static_cast<T*>(item->second.get());
-	}
 
 	void SetTransform(glm::vec3 pos, glm::quat rot, glm::vec3 s);
 	void SetPosition(glm::vec3 pos);
@@ -43,6 +34,9 @@ public:
 	glm::quat GetRotation();
 	glm::vec3 GetScale();
 	
+	const std::shared_ptr<obj::CNode>& GetRootNode()const;
+	std::shared_ptr<obj::CNode>& GetRootNode();
+
 	friend class MeshRendererComponent;
 	friend class GraphicsRenderer;
 	friend class UIComponent;
@@ -50,8 +44,7 @@ public:
 private:
 	class GraphicsMain* game;
 protected:
-	std::shared_ptr<class TransformComponent> transform;
-	std::unordered_map<std::type_index, std::shared_ptr<Component>> myComponent;
+	std::shared_ptr<obj::CNode> m_RootNode;
 };
 
 

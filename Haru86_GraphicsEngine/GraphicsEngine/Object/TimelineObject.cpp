@@ -1,9 +1,11 @@
 #include "TimelineObject.h"
 #include "../Component/TimelineComponent.h"
+#include "GraphicsEngine/Object/CNode.h"
+
 
 TimelineObject::TimelineObject() {
 	timelineComponent =  std::make_shared<TimelineComponent>(this);
-	AddComponent<TimelineComponent>(timelineComponent);
+	GetRootNode()->AddComponent<TimelineComponent>(timelineComponent);
 }
 TimelineObject::~TimelineObject() {
 }

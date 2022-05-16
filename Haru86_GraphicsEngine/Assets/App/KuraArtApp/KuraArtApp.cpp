@@ -15,6 +15,7 @@
 #include "./Assets/App/KuraArtApp/Script/KuraTrail.h"
 #include "GraphicsEngine/Object/CameraObject.h"
 #include <GL/glew.h>
+#include "GraphicsEngine/Object/CNode.h"
 
 KuraArtApp::KuraArtApp()
 	: BaseApp()
@@ -62,9 +63,9 @@ void KuraArtApp::Start() {
 	KuraTerrain_obj->meshComp->material->LoadTextureList(texPath_KuraTerrain_obj, texUniformName_KuraTerrain_obj);
 
 	gpgpu_obj = std::make_unique<Object>();
-	gpgpu_obj->AddComponent<KuraGPGPU>(std::make_shared<KuraGPGPU>(gpgpu_obj.get()));
-	gpgpu_obj->AddComponent<KuraTrail>(std::make_shared<KuraTrail>(gpgpu_obj.get(),
-		gpgpu_obj->GetComponent<KuraGPGPU>())
+	gpgpu_obj->GetRootNode()->AddComponent<KuraGPGPU>(std::make_shared<KuraGPGPU>(gpgpu_obj.get()));
+	gpgpu_obj->GetRootNode()->AddComponent<KuraTrail>(std::make_shared<KuraTrail>(gpgpu_obj.get(),
+		gpgpu_obj->GetRootNode()->GetComponent<KuraGPGPU>())
 	);
 
 	GraphicsMain::GetInstance()->renderBoard = std::make_unique<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/VedaStructuredShader/BoardRender.vert", "./Assets/Shader/KuraShader/KuraPostProcess.frag", RenderType::FrameBuffer);
@@ -75,8 +76,8 @@ void KuraArtApp::Update() {
 }
 
 void KuraArtApp::Draw() {
-	gpgpu_obj->GetComponent<KuraGPGPU>()->Draw();
-	gpgpu_obj->GetComponent<KuraTrail>()->Draw();
+	gpgpu_obj->GetRootNode()->GetComponent<KuraGPGPU>()->Draw();
+	gpgpu_obj->GetRootNode()->GetComponent<KuraTrail>()->Draw();
 }
 
 void KuraArtApp::Timeline(class TimelineObject* timeline) {
