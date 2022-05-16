@@ -65,7 +65,7 @@ namespace animation {
 	const std::shared_ptr<TransformComponent>& Pose::GetGloabalTransform(unsigned int index)const {
 		std::shared_ptr<TransformComponent> result = m_Joints[index];
 		for (int p = m_Parents[index]; p >= 0;p=m_Parents[p]) {
-			// combine‚ðŒã‚Ù‚ÇŽÀ‘•‚·‚é /////////////////////////////////////////////////////////////////////////////
+			result = TransformComponent::Combine(m_Joints[p],result);
 		}
 
 		return result;
@@ -83,7 +83,8 @@ namespace animation {
 
 		for (unsigned int i= 0; i < size; ++i) {
 			const auto& t = GetGloabalTransform(i);
-			// transformToMat4 ‚ÌŽÀ‘• /////////////////////////////////////////////////////////////////////////////
+			// transformToMat4 => ƒ‚ƒfƒ‹s—ñ‚ÌŽæ“¾
+			out[i] = t->GetMMatrix();
 		}
 	}
 

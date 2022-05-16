@@ -7,6 +7,15 @@
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Component/CameraComponent.h"
 
+TransformComponent::TransformComponent() :
+	Component(nullptr),
+	m_position(glm::vec3(0.0)),
+	m_rotation(glm::quat(glm::vec3(0.0))),
+	m_scale(glm::vec3(1.0))
+{
+	CalMatrix();
+}
+
 TransformComponent::TransformComponent(Object* o, glm::vec3 pos,glm::quat rot,glm::vec3 s)
 	: Component(o), m_position(pos), m_rotation(rot), m_scale(s)
 {
@@ -75,6 +84,18 @@ void TransformComponent::ComputePerspectiveMatrix() {
 
 void TransformComponent::ProcessInput(const SDL_Event& e) {
 
+}
+
+std::shared_ptr<TransformComponent> TransformComponent::Combine(const std::shared_ptr<TransformComponent>& a, const std::shared_ptr<TransformComponent>& b) {
+	std::shared_ptr<TransformComponent> result = std::make_shared<TransformComponent>();
+
+	result->SetScale(a->GetScale()*b->GetScale());
+	result->SetRotation(b->GetRotation()*a->GetRotation());
+	
+	result->SetPosition(a->GetRotation() * (a->GetScale() * b->GetPosition()));
+	result->SetPosition(a->GetPosition()+result->GetPosition());
+
+	return result;
 }
 
 const glm::vec3& TransformComponent::GetPosition()const {

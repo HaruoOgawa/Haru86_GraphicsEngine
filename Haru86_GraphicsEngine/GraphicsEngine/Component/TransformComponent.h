@@ -15,6 +15,7 @@ class TransformComponent :
     glm::mat4 m_vMatrix;
     glm::mat4 m_pMatrix;
 public:
+    TransformComponent();
     TransformComponent(class Object* o, glm::vec3 pos, glm::quat rot, glm::vec3 s);
     ~TransformComponent();
     void Update() override;
@@ -40,7 +41,7 @@ public:
     void ComputePerspectiveMatrix();
     void ProcessInput(const SDL_Event& e) override;
 
-    
+    static std::shared_ptr<TransformComponent> Combine(const std::shared_ptr<TransformComponent>& a, const std::shared_ptr<TransformComponent>& b);
 private:
    
 };
