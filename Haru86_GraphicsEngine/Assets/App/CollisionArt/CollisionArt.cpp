@@ -27,7 +27,7 @@ void CollisionArt::Start() {
 	cam_obj = std::make_shared<CameraObject>(CameraType::FIXED_CAMERA);
 	cam_obj->m_cameraComponent->cameraCenter = glm::vec3(0.0,-1.0,0.0);
 	GraphicsMain::GetInstance()->game_camera_instance = cam_obj;
-	cam_obj->transform->SetPosition(glm::vec3(8.5,0.0, 8.5));
+	cam_obj->GetComponent<TransformComponent>()->SetPosition(glm::vec3(8.5,0.0, 8.5));
 
 	test_SphereObj = std::make_unique<GameObject>(PrimitiveType::SPHERE);
 	test_SphereObj->SetPosition(glm::vec3(-2.0f, 5.0f, -2.0f));

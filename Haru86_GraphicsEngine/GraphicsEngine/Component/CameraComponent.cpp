@@ -31,13 +31,13 @@ void CameraComponent::Start() {
 
 void CameraComponent::Update() {
 	if (m_IsRightClicked) {
-		owner->transform->Rotate(5.0f*m_YMove/ m_ScreenSize.y,-5.0f*m_XMove/ m_ScreenSize.x,0.0f);
+		owner->GetComponent<TransformComponent>()->Rotate(5.0f*m_YMove/ m_ScreenSize.y,-5.0f*m_XMove/ m_ScreenSize.x,0.0f);
 	}
 
 	if (m_IsMouseWheel) {
-		glm::vec3 viewDir = glm::normalize(cameraCenter - owner->transform->GetPosition());
+		glm::vec3 viewDir = glm::normalize(cameraCenter - owner->GetComponent<TransformComponent>()->GetPosition());
 		float zoomVal = ZoomPower*(float)m_WheelY;
-		owner->transform->Translate(zoomVal * viewDir);
+		owner->GetComponent<TransformComponent>()->Translate(zoomVal * viewDir);
 	}
 }
 

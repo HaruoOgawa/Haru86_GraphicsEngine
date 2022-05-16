@@ -56,11 +56,11 @@ void UIComponent::ProcessInput(const SDL_Event& e) {
 		
 		glm::vec2 pos = glm::vec2(xval, yval);
 		glm::vec4 modelPos =
-			glm::inverse(owner->transform->GetPMatrix() * owner->transform->GetVMatrix())
+			glm::inverse(owner->GetComponent<TransformComponent>()->GetPMatrix() * owner->GetComponent<TransformComponent>()->GetVMatrix())
 			* glm::vec4(pos.x, pos.y, 0.0f, 1.0f);
 		pos = glm::vec2(modelPos.x / modelPos.w, modelPos.y / modelPos.w);
 
-		owner->SetPosition(glm::vec3(pos.x, owner->transform->GetPosition().y, owner->transform->GetPosition().z));
+		owner->SetPosition(glm::vec3(pos.x, owner->GetComponent<TransformComponent>()->GetPosition().y, owner->GetComponent<TransformComponent>()->GetPosition().z));
 		owner->
 			GetComponent<RectTransformComponent>()->rectPosition.x = fx;
 

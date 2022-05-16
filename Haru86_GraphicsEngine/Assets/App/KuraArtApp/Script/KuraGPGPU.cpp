@@ -146,7 +146,7 @@ void KuraGPGPU::Update() {
 		targerBoidsData[targetIndex].position[0], targerBoidsData[targetIndex].position[1], targerBoidsData[targetIndex].position[2]
 	);
 	//camera postion
-	GraphicsMain::GetInstance()->game_camera_instance->transform->SetPosition(
+	GraphicsMain::GetInstance()->game_camera_instance->GetComponent<TransformComponent>()->SetPosition(
 		GraphicsMain::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter
 		+ glm::vec3(
 			glm::cos(GraphicsMain::GetInstance()->time* speed),
@@ -160,17 +160,17 @@ void KuraGPGPU::Update() {
 void KuraGPGPU::Draw() {
 	glMemoryBarrier(GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT);
 
-	owner->transform->CalMatrix();
+	owner->GetComponent<TransformComponent>()->CalMatrix();
 	m_material->SetActive();
 	
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDisable(GL_DEPTH_TEST);
 	
-	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix() * m_mesh->localMatrix); //
-	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
-	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
-	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
+	m_material->SetMatrixUniform("MVPMatrix", owner->GetComponent<TransformComponent>()->GetMVPMatrix() * m_mesh->localMatrix); //
+	m_material->SetMatrixUniform("MMatrix", owner->GetComponent<TransformComponent>()->GetMMatrix());
+	m_material->SetMatrixUniform("VMatrix", owner->GetComponent<TransformComponent>()->GetVMatrix());
+	m_material->SetMatrixUniform("PMatrix", owner->GetComponent<TransformComponent>()->GetPMatrix());
 	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
 	m_material->SetIntUniform("_boids_count", num);

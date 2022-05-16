@@ -20,7 +20,7 @@ CCollisionGPUBox::~CCollisionGPUBox() {
 }
 
 void CCollisionGPUBox::Start() {
-	owner->transform->SetScale(glm::vec3(1.0));
+	owner->GetComponent<TransformComponent>()->SetScale(glm::vec3(1.0));
 	m_mesh = std::make_shared<Mesh>(PrimitiveType::CUBE);
 	m_material = std::make_shared<Material>(
 		"./Assets/Shader/CollisionArt/InstancedBox.vert",
@@ -48,15 +48,15 @@ void CCollisionGPUBox::Update() {
 }
 
 void CCollisionGPUBox::Draw() {
-	owner->transform->CalMatrix();
+	owner->GetComponent<TransformComponent>()->CalMatrix();
 	m_material->SetActive();
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix() ); //
-	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
-	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
-	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
+	m_material->SetMatrixUniform("MVPMatrix", owner->GetComponent<TransformComponent>()->GetMVPMatrix() ); //
+	m_material->SetMatrixUniform("MMatrix", owner->GetComponent<TransformComponent>()->GetMMatrix());
+	m_material->SetMatrixUniform("VMatrix", owner->GetComponent<TransformComponent>()->GetVMatrix());
+	m_material->SetMatrixUniform("PMatrix", owner->GetComponent<TransformComponent>()->GetPMatrix());
 	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
 	m_material->SetVec3Uniform("_CameraPosition", GraphicsMain::GetInstance()->game_camera_instance->GetPosition());

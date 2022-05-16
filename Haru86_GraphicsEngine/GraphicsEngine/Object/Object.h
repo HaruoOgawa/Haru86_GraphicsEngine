@@ -42,7 +42,7 @@ public:
 	glm::vec3 GetPosition();
 	glm::quat GetRotation();
 	glm::vec3 GetScale();
-	std::shared_ptr<class TransformComponent> transform;
+	
 	friend class MeshRendererComponent;
 	friend class GraphicsRenderer;
 	friend class UIComponent;
@@ -50,6 +50,7 @@ public:
 private:
 	class GraphicsMain* game;
 protected:
+	std::shared_ptr<class TransformComponent> transform;
 	std::unordered_map<std::type_index, std::shared_ptr<Component>> myComponent;
 };
 

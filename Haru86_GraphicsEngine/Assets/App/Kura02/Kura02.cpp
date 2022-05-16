@@ -28,7 +28,7 @@ void Kura02::Start() {
 	//cam_obj->SetPosition(glm::vec3(0.0, 0.0, -3.0));
 	cam_obj->m_cameraComponent->cameraCenter = glm::vec3(0.0,-1.0,0.0);
 	GraphicsMain::GetInstance()->game_camera_instance = cam_obj;
-	cam_obj->transform->SetPosition(glm::vec3(5.0,0.0,5.0));
+	cam_obj->GetComponent<TransformComponent>()->SetPosition(glm::vec3(5.0,0.0,5.0));
 
 	ins_cubes = std::make_unique<Object>();
 	ins_cubes->AddComponent<CBoxInstancing>(std::make_shared<CBoxInstancing>(ins_cubes.get()));
@@ -44,7 +44,7 @@ void Kura02::Start() {
 
 void Kura02::Update() {
 	ins_cubes->Update();
-	cam_obj->transform->SetPosition(glm::vec3(
+	cam_obj->GetComponent<TransformComponent>()->SetPosition(glm::vec3(
 		glm::cos(GraphicsMain::GetInstance()->time * 0.0001)*8.5,
 		0.0, 
 		glm::sin(GraphicsMain::GetInstance()->time * 0.0001)* 8.5

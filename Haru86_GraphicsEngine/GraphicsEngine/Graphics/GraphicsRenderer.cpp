@@ -176,7 +176,7 @@ void GraphicsRenderer::Draw() {
 	glEnable(GL_DEPTH_TEST);
 
 	for (auto obj : mgame->gameObjectList) {
-		obj->transform->CalMatrix();
+		obj->GetComponent<TransformComponent>()->CalMatrix();
 		obj->meshComp->Draw();
 	}
 
@@ -195,7 +195,7 @@ void GraphicsRenderer::Draw() {
 	glEnable(GL_DEPTH_TEST);
 
 	for (auto obj : mgame->gameObjectList) {
-		obj->transform->CalMatrix();
+		obj->GetComponent<TransformComponent>()->CalMatrix();
 		obj->meshComp->Draw();
 	}
 
@@ -216,7 +216,7 @@ void GraphicsRenderer::Draw() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
 
-		GraphicsMain::GetInstance()->m_RaymarchingObject->transform->CalMatrix();
+		GraphicsMain::GetInstance()->m_RaymarchingObject->GetComponent<TransformComponent>()->CalMatrix();
 		GraphicsMain::GetInstance()->m_RaymarchingObject->Draw();
 	}
 
@@ -230,7 +230,7 @@ void GraphicsRenderer::Draw() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
 
-		GraphicsMain::GetInstance()->m_RaymarchingObject->transform->CalMatrix();
+		GraphicsMain::GetInstance()->m_RaymarchingObject->GetComponent<TransformComponent>()->CalMatrix();
 		GraphicsMain::GetInstance()->m_RaymarchingObject->Draw();
 	}
 
@@ -262,7 +262,7 @@ void GraphicsRenderer::Draw() {
 	glDisable(GL_BLEND);
 
 	for (auto obj : mgame->boardGameObjectList) {
-		obj->transform->CalMatrix();
+		obj->GetComponent<TransformComponent>()->CalMatrix();
 		obj->meshComp->DrawBoard();
 	}
 
