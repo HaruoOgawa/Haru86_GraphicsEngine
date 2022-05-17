@@ -5,17 +5,29 @@
 #include <vector>
 
 #include "tiny_gltf.h"
+#include "GraphicsEngine/Animation/Pose.h"
+#include "GraphicsEngine/Animation/CTrack.h"
+#include "GraphicsEngine/Animation/CFrame.h"
+#include "GraphicsEngine/Animation/EInterpolationType.h"
 
 class Mesh;
 class TransformComponent;
 
-namespace animation {
+/*namespace animation {
 	class Pose;
-}
+
+	template<typename T,int N>
+	class CTrack;
+
+	template<unsigned int N>
+	class CFrame;
+}*/
 
 namespace gltf {
 	class glTFData
 	{
+		tinygltf::Model m_Model;
+
 		std::shared_ptr<Mesh> m_mesh;
 		std::vector<animation::Pose> m_PoseList;
 	public:
@@ -28,13 +40,69 @@ namespace gltf {
 		//
 		std::shared_ptr<Mesh> GetMesh()const;
 	private:
-		bool LoadMesh(const tinygltf::Model& model);
+		bool LoadMesh();
+
+		bool LoadPose();
+		animation::Pose LoadRestPose();
+		std::vector<std::string> LoadJointNames()const;
 
 		std::shared_ptr<TransformComponent> GetLocalTransform(const tinygltf::Node& node);
+		void GetScalarValues(std::vector<float>& out, unsigned int compCount, const tinygltf::Accessor& inAccessor);
 
-		bool LoadPose(const tinygltf::Model& model);
-		animation::Pose LoadRestPose(const tinygltf::Model& model);
+		template<typename T, int N>
+		void TrackFromChannel(animation::CTrack<T, N>& result, const tinygltf::AnimationChannel& channel
+			, const std::vector<tinygltf::AnimationSampler>& SamplerList) {
+			//
+			const auto& sampler = SamplerList[channel.sampler];
 
-		std::vector<std::string> LoadJointNames(const tinygltf::Model& model)const;
+			// •âŠ®ƒ^ƒCƒv‚ðŽæ“¾
+			animation::EInterpolationType InterpolationType = animation::EInterpolationType::Constant;
+
+			if (sampler.interpolation == "LINEAR") {
+				InterpolationType = animation::EInterpolationType::Linear;
+			}
+			else if (sampler.interpolation == "CUBICSPLINE") {
+				InterpolationType = animation::EInterpolationType::Cubic;
+			}
+
+			bool isSamplerCubic = (InterpolationType == animation::EInterpolationType::Cubic);
+
+			//
+			result.SetInterpolationType(InterpolationType);
+
+			//
+			std::vector<float> time;
+			GetScalarValues(time, 1, m_Model.accessors[sampler.input]);
+
+			//
+			std::vector<float> val;
+			GetScalarValues(val, N, m_Model.accessors[sampler.output]);
+
+			//
+			unsigned int numFrames = m_Model.accessors[sampler.input].count;
+			unsigned int compCount = val.size() / time.size();
+			result.Resize(numFrames);
+
+			for (unsigned int i = 0; i < numFrames;i++) {
+				int baseIndex = i * compCount;
+				animation::CFrame<N>& frame = result[i];
+				int offset = 0;
+
+				//
+				frame.m_Time = time[i];
+
+				for (int comp = 0; comp < N;comp++) {
+					frame.m_In[comp] = (isSamplerCubic) ? val[baseIndex + offset++] : 0.0f;
+				}
+
+				for (int comp = 0; comp < N; comp++) {
+					frame.m_Value[comp] = val[baseIndex + offset++];
+				}
+
+				for (int comp = 0; comp < N; comp++) {
+					frame.m_Out[comp] = (isSamplerCubic) ? val[baseIndex + offset++] : 0.0f;
+				}
+			}
+		}
 	};
 }

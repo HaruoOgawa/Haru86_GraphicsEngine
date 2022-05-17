@@ -8,7 +8,6 @@
 #include <glm/gtc/quaternion.hpp>
 
 #include "glTFMesh.h"
-#include "GraphicsEngine/Animation/Pose.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
 
 #define TINYGLTF_IMPLEMENTATION
@@ -30,10 +29,10 @@ namespace gltf {
 	bool glTFData::Load(const std::string& gltfDataPath) {
 		// glTFÇÃÉçÅ[Éh 
 		tinygltf::TinyGLTF loader;
-		tinygltf::Model model;
+		
 		std::string err;
 		std::string warn;
-		bool result = loader.LoadASCIIFromFile(&model, &err, &warn, gltfDataPath);
+		bool result = loader.LoadASCIIFromFile(&m_Model, &err, &warn, gltfDataPath);
 
 		// 
 		if (!warn.empty()) {
@@ -53,16 +52,16 @@ namespace gltf {
 		}
 
 		// âêÕ
-		if (!LoadMesh(model))return false;
-		if (!LoadPose(model))return false;
+		if (!LoadMesh())return false;
+		if (!LoadPose())return false;
 
 		return true;
 	}
 
-	bool glTFData::LoadMesh(const tinygltf::Model& model) {
+	bool glTFData::LoadMesh() {
 		m_mesh = std::make_shared<Mesh>();
 
-		for (auto mesh : model.meshes) {
+		for (auto mesh : m_Model.meshes) {
 			auto index = 0;
 			for (auto prim : mesh.primitives) {
 
@@ -71,16 +70,16 @@ namespace gltf {
 
 				//vertex
 				auto AccessorsIndex = prim.attributes["POSITION"];
-				auto BufferViewIndex = model.accessors[AccessorsIndex].bufferView;
-				auto ByteLength = model.bufferViews[BufferViewIndex].byteLength;
-				auto ByteOffset = model.bufferViews[BufferViewIndex].byteOffset;
+				auto BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
+				auto ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
+				auto ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
 
 				reader->vertex = std::vector<float>(ByteLength / 4, 0.0);
 				reader->subDataVertex = std::vector<unsigned char>(ByteLength, 0);
 
 				std::copy(
-					model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
-					model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
+					m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
+					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
 					reader->subDataVertex.begin()
 				);
 				std::memcpy(reader->vertex.data(), reader->subDataVertex.data(), sizeof(float) * reader->vertex.size());
@@ -89,15 +88,15 @@ namespace gltf {
 
 				//normal
 				AccessorsIndex = prim.attributes["NORMAL"];
-				BufferViewIndex = model.accessors[AccessorsIndex].bufferView;
-				ByteLength = model.bufferViews[BufferViewIndex].byteLength;
-				ByteOffset = model.bufferViews[BufferViewIndex].byteOffset;
+				BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
+				ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
+				ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
 
 				reader->normal = std::vector<float>(ByteLength / 4, 0.0f);
 				reader->subDataNormal = std::vector<unsigned char>(ByteLength, 0);
 				std::copy(
-					model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
-					model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
+					m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
+					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
 					reader->subDataNormal.begin()
 				);
 				std::memcpy(reader->normal.data(), reader->subDataNormal.data(), sizeof(float) * reader->normal.size());
@@ -106,15 +105,15 @@ namespace gltf {
 
 				//texcoord
 				AccessorsIndex = prim.attributes["TEXCOORD_0"];
-				BufferViewIndex = model.accessors[AccessorsIndex].bufferView;
-				ByteLength = model.bufferViews[BufferViewIndex].byteLength;
-				ByteOffset = model.bufferViews[BufferViewIndex].byteOffset;
+				BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
+				ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
+				ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
 
 				reader->texcoord = std::vector<float>(ByteLength / 4, 0.0f);
 				reader->subDataTexcoord = std::vector<unsigned char>(ByteLength, 0);
 				std::copy(
-					model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
-					model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
+					m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
+					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
 					reader->subDataTexcoord.begin()
 				);
 				std::memcpy(reader->texcoord.data(), reader->subDataTexcoord.data(), sizeof(float) * reader->texcoord.size());
@@ -138,16 +137,16 @@ namespace gltf {
 				////get indices///////////////////////////////////
 
 				AccessorsIndex = prim.indices;
-				BufferViewIndex = model.accessors[AccessorsIndex].bufferView;
-				ByteLength = model.bufferViews[BufferViewIndex].byteLength;
-				ByteOffset = model.bufferViews[BufferViewIndex].byteOffset;
+				BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
+				ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
+				ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
 
 				reader->indices = std::vector<unsigned int>(ByteLength / 4, 0);
 				reader->subDataIndices = std::vector<unsigned char>(ByteLength, 0);
 
 				std::copy(
-					model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
-					model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
+					m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
+					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
 					reader->subDataIndices.begin()
 				);
 				std::memcpy(reader->indices.data(), reader->subDataIndices.data(), sizeof(unsigned int) * reader->indices.size());
@@ -171,6 +170,47 @@ namespace gltf {
 		}
 
 		return true;
+	}
+
+	bool glTFData::LoadPose() {
+		//const auto RestPose = LoadRestPose(m_Model);
+		return true;
+	}
+
+	animation::Pose glTFData::LoadRestPose() {
+		unsigned int boneCount = static_cast<unsigned int>(m_Model.nodes.size());
+		animation::Pose result(boneCount);
+
+		for (unsigned int i = 0; i < boneCount;i++) {
+			tinygltf::Node node = m_Model.nodes[i];
+			result.SetLocalTransform(i, GetLocalTransform(node));
+
+			int parent = i;
+			for (const auto& child : node.children) {
+				result.SetParent(child, parent);
+			}
+			
+		}
+
+		return result;
+	}
+
+	std::vector<std::string> glTFData::LoadJointNames()const {
+		unsigned int boneCount = static_cast<unsigned int>(m_Model.nodes.size());
+		std::vector<std::string> result(boneCount,"Not Set");
+
+		for (unsigned int i = 0; i < boneCount;i++) {
+			tinygltf::Node node = m_Model.nodes[i];
+
+			if (node.name.empty()) {
+				result[i] = "EMPTY NODE";
+			}
+			else {
+				result[i] = node.name;
+			}
+		}
+
+		return result;
 	}
 
 	std::shared_ptr<TransformComponent> glTFData::GetLocalTransform(const tinygltf::Node& node) {
@@ -207,45 +247,10 @@ namespace gltf {
 		return result;
 	}
 
-	bool glTFData::LoadPose(const tinygltf::Model& model) {
-		//const auto RestPose = LoadRestPose(model);
-		return true;
-	}
-
-	animation::Pose glTFData::LoadRestPose(const tinygltf::Model& model) {
-		unsigned int boneCount = static_cast<unsigned int>(model.nodes.size());
-		animation::Pose result(boneCount);
-
-		for (unsigned int i = 0; i < boneCount;i++) {
-			tinygltf::Node node = model.nodes[i];
-			result.SetLocalTransform(i,GetLocalTransform(node));
-
-			int parent = i;
-			for (const auto& child : node.children) {
-				result.SetParent(child, parent);
-			}
-			
-		}
-
-		return result;
-	}
-
-	std::vector<std::string> glTFData::LoadJointNames(const tinygltf::Model& model)const {
-		unsigned int boneCount = static_cast<unsigned int>(model.nodes.size());
-		std::vector<std::string> result(boneCount,"Not Set");
-
-		for (unsigned int i = 0; i < boneCount;i++) {
-			tinygltf::Node node = model.nodes[i];
-
-			if (node.name.empty()) {
-				result[i] = "EMPTY NODE";
-			}
-			else {
-				result[i] = node.name;
-			}
-		}
-
-		return result;
+	void glTFData::GetScalarValues(std::vector<float>& out, unsigned int compCount, const tinygltf::Accessor& inAccessor) {
+		out.resize(inAccessor.count * compCount);
+		int BufferIndex=m_Model.bufferViews[inAccessor.bufferView].buffer;
+		std::memcpy(&m_Model.buffers[BufferIndex].data[0], &out[0], sizeof(float) * inAccessor.count * compCount);
 	}
 
 	//
