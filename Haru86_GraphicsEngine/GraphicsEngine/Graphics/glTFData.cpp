@@ -7,6 +7,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 
+#include "GraphicsEngine/Animation/TransformTrack.h"
+
 #include "glTFMesh.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
 
@@ -253,6 +255,46 @@ namespace gltf {
 		std::memcpy(&m_Model.buffers[BufferIndex].data[0], &out[0], sizeof(float) * inAccessor.count * compCount);
 	}
 
+	std::vector<animation::Clip> glTFData::LoadAnimationClips() {
+		//
+		unsigned int numClips = m_Model.animations.size();
+		unsigned int numNodes = m_Model.nodes.size();
+
+		std::vector<animation::Clip> result;
+		result.resize(numClips);
+
+		//
+		for (unsigned int i = 0; i < numClips;i++) {
+			result[i].SetName(m_Model.animations[i].name);
+
+			unsigned int numChannels = m_Model.animations[i].channels.size();
+
+			for (unsigned int j = 0; j < numChannels;j++) {
+				tinygltf::AnimationChannel& channel = m_Model.animations[i].channels[j];
+
+				tinygltf::Node target = m_Model.nodes[channel.target_node];
+
+				int nodeId = channel.target_node;
+
+				if (channel.target_path=="translation") {
+					animation::VectorTrack& track = result[i][nodeId].GetPositionTrack();
+					TrackFromChannel<glm::vec3,3>(track, channel,m_Model.animations[i].samplers);
+				}else if (channel.target_path == "scale") {
+					animation::VectorTrack& track = result[i][nodeId].GetScaleTrack();
+					TrackFromChannel<glm::vec3, 3>(track, channel, m_Model.animations[i].samplers);
+				}else if (channel.target_path == "rotation") {
+					animation::QuaternionTrack& track = result[i][nodeId].GetRotationTrack();
+					TrackFromChannel<glm::quat, 4>(track, channel, m_Model.animations[i].samplers);
+				}
+			}
+
+			//
+			result[i].RecalculateDuration();
+		}
+
+		//
+		return result;
+	}
 	//
 	std::shared_ptr<Mesh> glTFData::GetMesh()const {
 		return m_mesh;

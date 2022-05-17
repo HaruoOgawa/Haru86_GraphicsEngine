@@ -8,6 +8,7 @@
 #include "GraphicsEngine/Animation/Pose.h"
 #include "GraphicsEngine/Animation/CTrack.h"
 #include "GraphicsEngine/Animation/CFrame.h"
+#include "GraphicsEngine/Animation/Clip.h"
 #include "GraphicsEngine/Animation/EInterpolationType.h"
 
 class Mesh;
@@ -50,8 +51,7 @@ namespace gltf {
 		void GetScalarValues(std::vector<float>& out, unsigned int compCount, const tinygltf::Accessor& inAccessor);
 
 		template<typename T, int N>
-		void TrackFromChannel(animation::CTrack<T, N>& result, const tinygltf::AnimationChannel& channel
-			, const std::vector<tinygltf::AnimationSampler>& SamplerList) {
+		void TrackFromChannel(animation::CTrack<T, N>& result, const tinygltf::AnimationChannel& channel,const std::vector<tinygltf::AnimationSampler>& SamplerList) {
 			//
 			const auto& sampler = SamplerList[channel.sampler];
 
@@ -104,5 +104,7 @@ namespace gltf {
 				}
 			}
 		}
+
+		std::vector<animation::Clip> LoadAnimationClips();
 	};
 }
