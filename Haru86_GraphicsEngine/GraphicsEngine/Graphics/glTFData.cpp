@@ -8,6 +8,8 @@
 #include <glm/gtc/quaternion.hpp>
 
 #include "glTFMesh.h"
+#include "GraphicsEngine/Animation/Pose.h"
+#include "GraphicsEngine/Component/TransformComponent.h"
 
 #define TINYGLTF_IMPLEMENTATION
 #define STB_IMAGE_IMPLEMENTATION
@@ -52,6 +54,7 @@ namespace gltf {
 
 		// âêÕ
 		if (!LoadMesh(model))return false;
+		if (!LoadPose(model))return false;
 
 		return true;
 	}
@@ -168,6 +171,63 @@ namespace gltf {
 		}
 
 		return true;
+	}
+
+	std::shared_ptr<TransformComponent> glTFData::GetLocalTransform(const tinygltf::Node& node) {
+		std::shared_ptr<TransformComponent> result = std::make_shared<TransformComponent>();
+
+		// mmatrix
+		/*if (node.matrix.size() == 16) {
+			glm::mat4 mmatrix = glm::mat4();
+			for (unsigned int n = 0; n < node.matrix.size();n++) {
+				const auto& val = node.matrix[n];
+				unsigned int firstIndex = static_cast<unsigned int>(n / 4.0); // 0 to 3
+				int secondIndex = static_cast<unsigned int>(n - firstIndex * 4.0);
+
+				mmatrix[firstIndex][secondIndex] = val;
+			}
+
+		}*/
+
+		// position
+		if (node.translation.size() > 0) {
+			result->SetPosition(glm::vec3(node.translation[0], node.translation[1], node.translation[2]));
+		}
+
+		// rotation
+		if (node.rotation.size() > 0) {
+			result->SetRotation(glm::quat(glm::vec3(node.rotation[0], node.rotation[1], node.rotation[2])));
+		}
+
+		// scale
+		if (node.scale.size() > 0) {
+			result->SetScale(glm::vec3(node.scale[0], node.scale[1], node.scale[2]));
+		}
+
+		return result;
+	}
+
+	bool glTFData::LoadPose(const tinygltf::Model& model) {
+		//const auto RestPose = LoadRestPose(model);
+		return true;
+	}
+
+	animation::Pose glTFData::LoadRestPose(const tinygltf::Model& model) {
+		unsigned int boneCount = static_cast<unsigned int>(model.nodes.size());
+		animation::Pose result(boneCount);
+
+		for (unsigned int i = 0; i < boneCount;i++) {
+			tinygltf::Node node = model.nodes[i];
+			result.SetLocalTransform(i,GetLocalTransform(node));
+
+			int parent = i;
+			for (const auto& child : node.children) {
+				result.SetParent(child, parent);
+			}
+			
+		}
+
+		return result;
 	}
 
 	//
