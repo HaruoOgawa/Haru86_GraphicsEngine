@@ -54,8 +54,9 @@ namespace gltf {
 		}
 
 		// ‰ğÍ
+		//if (!LoadNode())return false;
 		if (!LoadMesh())return false;
-		if (!LoadPose())return false;
+		if (!LoadAnimation())return false;
 
 		return true;
 	}
@@ -174,7 +175,8 @@ namespace gltf {
 		return true;
 	}
 
-	bool glTFData::LoadPose() {
+	bool glTFData::LoadAnimation() {
+		m_ClipList = LoadAnimationClips();
 		//const auto RestPose = LoadRestPose(m_Model);
 		return true;
 	}

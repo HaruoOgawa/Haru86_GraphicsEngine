@@ -30,6 +30,7 @@ namespace gltf {
 		tinygltf::Model m_Model;
 
 		std::shared_ptr<Mesh> m_mesh;
+		std::vector<animation::Clip> m_ClipList;
 		std::vector<animation::Pose> m_PoseList;
 	public:
 		glTFData();
@@ -43,7 +44,7 @@ namespace gltf {
 	private:
 		bool LoadMesh();
 
-		bool LoadPose();
+		bool LoadAnimation();
 		animation::Pose LoadRestPose();
 		std::vector<std::string> LoadJointNames()const;
 
