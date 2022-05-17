@@ -230,6 +230,24 @@ namespace gltf {
 		return result;
 	}
 
+	std::vector<std::string> glTFData::LoadJointNames(const tinygltf::Model& model)const {
+		unsigned int boneCount = static_cast<unsigned int>(model.nodes.size());
+		std::vector<std::string> result(boneCount,"Not Set");
+
+		for (unsigned int i = 0; i < boneCount;i++) {
+			tinygltf::Node node = model.nodes[i];
+
+			if (node.name.empty()) {
+				result[i] = "EMPTY NODE";
+			}
+			else {
+				result[i] = node.name;
+			}
+		}
+
+		return result;
+	}
+
 	//
 	std::shared_ptr<Mesh> glTFData::GetMesh()const {
 		return m_mesh;

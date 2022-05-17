@@ -34,5 +34,7 @@ namespace gltf {
 
 		bool LoadPose(const tinygltf::Model& model);
 		animation::Pose LoadRestPose(const tinygltf::Model& model);
+
+		std::vector<std::string> LoadJointNames(const tinygltf::Model& model)const;
 	};
 }
