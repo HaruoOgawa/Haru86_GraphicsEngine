@@ -370,6 +370,8 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <None Include="Assets\Shader\KuraShader\KuraTerrain.tese" />
     <None Include="Assets\Shader\KuraShader\KuraTerrain.vert" />
     <None Include="Assets\Shader\LatePostProcess.frag" />
+    <None Include="Assets\Shader\MToon.frag" />
+    <None Include="Assets\Shader\MToon.vert" />
     <None Include="Assets\Shader\PolygonRaymarchingMixer.frag" />
     <None Include="Assets\Shader\PolygonRaymarchingMixer.vert" />
     <None Include="Assets\Shader\PolygonPostProcess.frag" />

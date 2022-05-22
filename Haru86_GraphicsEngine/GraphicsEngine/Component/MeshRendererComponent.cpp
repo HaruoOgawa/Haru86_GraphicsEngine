@@ -42,7 +42,7 @@ MeshRendererComponent::MeshRendererComponent(Object* o, std::string objPath)
 	useZTest = true;
 	mesh = gltf::glTFLoader::Load(objPath);
 	mesh->glDrawType = GLDrawType::NONE;
-	material = std::make_shared<Material>();
+	material = std::make_shared<Material>("./Assets/Shader/MToon.vert", "./Assets/Shader/MToon.frag");
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
