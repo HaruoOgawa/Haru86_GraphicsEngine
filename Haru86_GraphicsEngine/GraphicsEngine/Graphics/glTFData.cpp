@@ -6,6 +6,7 @@
 #include <cstring>
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "GraphicsEngine/Animation/TransformTrack.h"
 
@@ -189,6 +190,8 @@ namespace gltf {
 			tinygltf::Node node = m_Model.nodes[i];
 			result.SetLocalTransform(i, GetLocalTransform(node));
 
+			//int parent = GetNodeIndex(node.,&m_Model.nodes[0],boneCount);
+			// tinygltfのNodeがparentメンバを持たないため直接Children側に潜って自身のインデックスを渡しに行く
 			int parent = i;
 			for (const auto& child : node.children) {
 				result.SetParent(child, parent);
@@ -197,6 +200,54 @@ namespace gltf {
 		}
 
 		return result;
+	}
+
+	animation::Pose glTFData::LoadBindPose() {
+		animation::Pose restPose = LoadRestPose();
+		unsigned int numBones = restPose.Size();
+		std::vector<std::shared_ptr<TransformComponent>> worldBindPose(numBones);
+		for (unsigned int i = 0; i < numBones;i++) {
+			worldBindPose[i] = restPose.GetGloabalTransform(i);
+		}
+
+		//
+		unsigned int numSkins = m_Model.skins.size();
+		for (unsigned int i = 0; i < numSkins;i++) {
+			tinygltf::Skin* skin = &m_Model.skins[i];
+			std::vector<float> invBindAccessor;
+			GetScalarValues(invBindAccessor, 16, m_Model.accessors[skin->inverseBindMatrices]);
+
+			//
+			unsigned int numJoints = skin->joints.size();
+			for (int j = 0; j < numJoints;j++) {
+				//
+				float* matrix = &(invBindAccessor[j * 16]);
+				glm::mat4 invBindMatrix = glm::make_mat4(matrix);
+
+				//
+				glm::mat4 bindMatrix = glm::inverse(invBindMatrix);
+				std::shared_ptr<TransformComponent> bindTransform = std::make_shared<TransformComponent>(nullptr,bindMatrix);
+
+				//
+				tinygltf::Node* jointNode=&m_Model.nodes[skin->joints[j]];
+				int jointIndex = GetNodeIndex(jointNode,&m_Model.nodes[0],numBones);
+				worldBindPose[jointIndex] = bindTransform;
+			}
+		}
+
+		//
+		animation::Pose bindPose = restPose;
+		for (unsigned int i = 0; i < numBones;i++) {
+			std::shared_ptr<TransformComponent> current = worldBindPose[i];
+			int p = bindPose.GetParent(i);
+			if (p>=0) {
+				std::shared_ptr<TransformComponent> parent = worldBindPose[p];
+				current = TransformComponent::Combine(TransformComponent::inverse(parent), current);
+			}
+			bindPose.SetLocalTransform(i, current);
+		}
+
+		return bindPose;
 	}
 
 	std::vector<std::string> glTFData::LoadJointNames()const {
@@ -215,6 +266,28 @@ namespace gltf {
 		}
 
 		return result;
+	}
+
+	animation::Skeleton glTFData::LoadSkeleton() {
+		return animation::Skeleton(
+			LoadRestPose(),
+			LoadBindPose(),
+			LoadJointNames()
+		);
+	}
+
+	int glTFData::GetNodeIndex(tinygltf::Node* target, tinygltf::Node* allNodes, unsigned int numNodes) {
+		if (target==0 || target==nullptr) {
+			return -1;
+		}
+
+		for (unsigned int i = 0; i < numNodes;i++) {
+			if (target==&allNodes[i]) {
+				return (int)i;
+			}
+		}
+
+		return -1;
 	}
 
 	std::shared_ptr<TransformComponent> glTFData::GetLocalTransform(const tinygltf::Node& node) {
@@ -274,9 +347,10 @@ namespace gltf {
 			for (unsigned int j = 0; j < numChannels;j++) {
 				tinygltf::AnimationChannel& channel = m_Model.animations[i].channels[j];
 
-				tinygltf::Node target = m_Model.nodes[channel.target_node];
+				tinygltf::Node* target = &m_Model.nodes[channel.target_node];
 
-				int nodeId = channel.target_node;
+				//int nodeId = channel.target_node;
+				int nodeId = GetNodeIndex(target,&m_Model.nodes[0],numNodes);
 
 				if (channel.target_path=="translation") {
 					animation::VectorTrack& track = result[i][nodeId].GetPositionTrack();

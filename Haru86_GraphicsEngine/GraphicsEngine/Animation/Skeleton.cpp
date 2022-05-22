@@ -11,7 +11,7 @@ namespace animation {
 	}
 
 	void Skeleton::Set(const Pose& rest, const Pose& bind, const std::vector<std::string>& names) {
-		m_ResetPose = rest;
+		m_RestPose = rest;
 		m_BindPose = bind;
 		m_JointNames = names;
 		UpdateInverseBindPose();
@@ -22,7 +22,7 @@ namespace animation {
 	}
 
 	Pose& Skeleton::GetRestPose() {
-		return m_ResetPose;
+		return m_RestPose;
 	}
 
 	std::vector<glm::mat4>& Skeleton::GetInvBindPose() {

@@ -20,8 +20,8 @@ namespace animation {
 		std::string& GetJointName(unsigned int index);
 	protected:
 		//
-		Pose m_ResetPose;
-		Pose m_BindPose;
+		Pose m_RestPose; // rest => 静止 => その瞬間でのアニメーションのポーズ(1コマ??)
+		Pose m_BindPose; // bindPose => T-Pose のこと
 		std::vector<glm::mat4> m_InvBindPose;
 		std::vector<std::string> m_JointNames;
 

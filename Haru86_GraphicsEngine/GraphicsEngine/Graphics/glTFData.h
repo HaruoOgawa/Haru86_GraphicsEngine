@@ -9,6 +9,7 @@
 #include "GraphicsEngine/Animation/CTrack.h"
 #include "GraphicsEngine/Animation/CFrame.h"
 #include "GraphicsEngine/Animation/Clip.h"
+#include "GraphicsEngine/Animation/Skeleton.h"
 #include "GraphicsEngine/Animation/EInterpolationType.h"
 
 class Mesh;
@@ -46,8 +47,13 @@ namespace gltf {
 
 		bool LoadAnimation();
 		animation::Pose LoadRestPose();
+		animation::Pose LoadBindPose();
 		std::vector<std::string> LoadJointNames()const;
 
+		animation::Skeleton LoadSkeleton();
+
+		//
+		int GetNodeIndex(tinygltf::Node* target, tinygltf::Node* allNodes, unsigned int numNodes);
 		std::shared_ptr<TransformComponent> GetLocalTransform(const tinygltf::Node& node);
 		void GetScalarValues(std::vector<float>& out, unsigned int compCount, const tinygltf::Accessor& inAccessor);
 

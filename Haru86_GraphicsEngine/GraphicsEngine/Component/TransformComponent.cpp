@@ -23,6 +23,48 @@ TransformComponent::TransformComponent(Object* o, glm::vec3 pos,glm::quat rot,gl
 	CalMatrix();
 }
 
+TransformComponent::TransformComponent(Object* o, const glm::mat4& WorldMatrix):
+	Component(o),
+	m_position(glm::vec3(0.0)),
+	m_rotation(glm::quat(glm::vec3(0.0))),
+	m_scale(glm::vec3(1.0))
+{
+	// mat4 to transform
+	//
+	m_position = glm::vec3(WorldMatrix[3][0], WorldMatrix[3][1], WorldMatrix[3][2]);
+	
+	//
+	float sx = glm::length(glm::vec3(WorldMatrix[0][0], WorldMatrix[0][1], WorldMatrix[0][2]));
+	float sy = glm::length(glm::vec3(WorldMatrix[1][0], WorldMatrix[1][1], WorldMatrix[1][2]));
+	float sz = glm::length(glm::vec3(WorldMatrix[2][0], WorldMatrix[2][1], WorldMatrix[2][2]));
+	m_scale = glm::vec3(sx,sy,sz);
+
+	//
+	glm::mat4 rot = glm::mat4(0.0);
+	
+	rot[0][0] = WorldMatrix[0][0] / sx;
+	rot[0][1] = WorldMatrix[0][1] / sx;
+	rot[0][2] = WorldMatrix[0][2] / sx;
+	rot[0][3] = 0.0f;
+	
+	rot[1][0] = WorldMatrix[1][0] / sy;
+	rot[1][1] = WorldMatrix[1][1] / sy;
+	rot[1][2] = WorldMatrix[1][2] / sy;
+	rot[1][3] = 0.0f;
+	
+	rot[2][0] = WorldMatrix[2][0] / sz;
+	rot[2][1] = WorldMatrix[2][1] / sz;
+	rot[2][2] = WorldMatrix[2][2] / sz;
+	rot[2][3] = 0.0f;
+	
+	rot[3][0] = 0.0f;
+	rot[3][1] = 0.0f;
+	rot[3][2] = 0.0f;
+	rot[3][3] = 1.0f;
+
+	m_rotation = glm::toQuat(rot);
+}
+
 TransformComponent::~TransformComponent() {
 }
 
@@ -97,6 +139,24 @@ std::shared_ptr<TransformComponent> TransformComponent::Combine(const std::share
 	result->SetPosition(a->GetPosition()+result->GetPosition());
 
 	return result;
+}
+
+std::shared_ptr<TransformComponent> TransformComponent::inverse(const std::shared_ptr<TransformComponent>& t) {
+	std::shared_ptr<TransformComponent> inv=std::make_shared<TransformComponent>();
+
+	inv->SetRotation(glm::inverse(t->GetRotation()));
+
+	inv->SetScale(glm::vec3(
+		(glm::abs(t->GetScale().x)< 0.000001f)? 0.0f : 1.0f / t->GetScale().x,
+		(glm::abs(t->GetScale().y)< 0.000001f)? 0.0f : 1.0f / t->GetScale().y,
+		(glm::abs(t->GetScale().z)< 0.000001f)? 0.0f : 1.0f / t->GetScale().z
+	));
+
+	inv->SetPosition(
+		inv->GetRotation()*(inv->GetScale()*(t->GetPosition()-1.0f))
+	);
+
+	return inv;
 }
 
 const glm::vec3& TransformComponent::GetPosition()const {
