@@ -340,6 +340,12 @@ void Material::SetMatrixUniform(std::string uniformName, glm::mat4 matrix) {
 	glUniformMatrix4fv(location, 1, GL_FALSE, reinterpret_cast<const float*>(&matrix[0][0]));
 }
 
+void Material::SetMatrixVectorUniform(std::string uniformName, const std::vector<glm::mat4>& matrixVector) {
+	auto prg = GetCurrentShaderPrg();
+	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
+	glUniformMatrix4fv(location, static_cast<unsigned int>(matrixVector.size()), GL_FALSE, reinterpret_cast<const float*>(&matrixVector[0][0]));
+}
+
 void Material::SetFloatUniform(std::string uniformName, float val) {
 	auto prg = GetCurrentShaderPrg();
 	GLuint location = glGetUniformLocation(prg, uniformName.c_str());

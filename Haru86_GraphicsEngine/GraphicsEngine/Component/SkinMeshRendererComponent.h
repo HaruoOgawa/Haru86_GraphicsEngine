@@ -1,9 +1,16 @@
 #pragma once
 #include "ARendererComponent.h"
+#include <glm/glm.hpp>
+
+namespace animation {
+	class Skeleton;
+}
 
 class SkinMeshRendererComponent :
 	public ARendererComponent
 {
+	std::shared_ptr<animation::Skeleton> m_Skeleton;
+	std::vector<glm::mat4> m_PoseMatrix;
 public:
 	SkinMeshRendererComponent(Object* o, std::string objPath, std::string vertexShaderName= "./Assets/Shader/MToon.vert", std::string fragmentShaderName= "./Assets/Shader/MToon.frag");
 	~SkinMeshRendererComponent();

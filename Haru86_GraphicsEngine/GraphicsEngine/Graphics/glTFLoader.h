@@ -9,7 +9,7 @@ namespace gltf {
 	static class glTFLoader
 	{
 	public:
-		static std::shared_ptr<Mesh> Load(std::string gltfDataPath);
+		static std::shared_ptr<glTFData> Load(std::string gltfDataPath);
 	};
 }
 

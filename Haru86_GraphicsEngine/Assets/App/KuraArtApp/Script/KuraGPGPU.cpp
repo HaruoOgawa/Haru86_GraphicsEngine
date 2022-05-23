@@ -11,6 +11,7 @@
 #include "GraphicsEngine/Graphics/ComputeShader.h"
 #include <vector>
 #include "GraphicsEngine/Graphics/glTFLoader.h"
+#include "GraphicsEngine/Graphics/glTFData.h"
 
 #include <GL/glew.h>
 #include <GL/glut.h>
@@ -27,7 +28,8 @@ KuraGPGPU::KuraGPGPU(Object* o)
 	: Component(o),
 	num(1024)
 {
-	m_mesh = gltf::glTFLoader::Load("./Assets/Resources/glTFData/PhoenixWithVAT/Phoenix.gltf");
+	std::shared_ptr<gltf::glTFData> data = gltf::glTFLoader::Load("./Assets/Resources/glTFData/PhoenixWithVAT/Phoenix.gltf");
+	m_mesh = data->GetMesh();
 	
 	m_material = std::make_shared<Material>(
 		"./Assets/Shader/KuraShader/BoidsResult.vert",

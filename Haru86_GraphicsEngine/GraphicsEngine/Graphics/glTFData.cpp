@@ -20,7 +20,9 @@
 #include "tiny_gltf.h"
 
 namespace gltf {
-	glTFData::glTFData() 
+	glTFData::glTFData() :
+		m_mesh(nullptr),
+		m_Skeleton(nullptr)
 	{
 	}
 
@@ -57,6 +59,7 @@ namespace gltf {
 		// âêÕ
 		//if (!LoadNode())return false;
 		if (!LoadMesh())return false;
+		if (!LoadSkeleton())return false;
 		if (!LoadAnimation())return false;
 
 		return true;
@@ -228,12 +231,14 @@ namespace gltf {
 		return true;
 	}
 
-	animation::Skeleton glTFData::LoadSkeleton() {
-		return animation::Skeleton(
+	bool glTFData::LoadSkeleton() {
+		m_Skeleton = std::make_shared<animation::Skeleton>(
 			LoadRestPose(),
 			LoadBindPose(),
 			LoadJointNames()
 		);
+
+		return true;
 	}
 
 	animation::Pose glTFData::LoadRestPose() {
@@ -420,5 +425,9 @@ namespace gltf {
 	//
 	std::shared_ptr<Mesh> glTFData::GetMesh()const {
 		return m_mesh;
+	}
+
+	std::shared_ptr<animation::Skeleton> glTFData::GetSkeleton()const {
+		return m_Skeleton;
 	}
 }

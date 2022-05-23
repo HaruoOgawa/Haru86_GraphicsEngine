@@ -31,6 +31,8 @@ namespace gltf {
 		tinygltf::Model m_Model;
 
 		std::shared_ptr<Mesh> m_mesh;
+		std::shared_ptr<animation::Skeleton> m_Skeleton;
+
 		std::vector<animation::Clip> m_ClipList;
 		std::vector<animation::Pose> m_PoseList;
 	public:
@@ -42,6 +44,7 @@ namespace gltf {
 		
 		//
 		std::shared_ptr<Mesh> GetMesh()const;
+		std::shared_ptr<animation::Skeleton> GetSkeleton()const;
 	private:
 		bool LoadMesh();
 
@@ -50,7 +53,7 @@ namespace gltf {
 		animation::Pose LoadBindPose();
 		std::vector<std::string> LoadJointNames()const;
 
-		animation::Skeleton LoadSkeleton();
+		bool LoadSkeleton();
 
 		//
 		int GetNodeIndex(tinygltf::Node* target, tinygltf::Node* allNodes, unsigned int numNodes);

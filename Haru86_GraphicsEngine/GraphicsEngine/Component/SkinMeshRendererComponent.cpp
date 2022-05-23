@@ -4,17 +4,22 @@
 #include "GraphicsEngine/Component/Component.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/Graphics/glTFLoader.h"
+#include "GraphicsEngine/Graphics/glTFData.h"
 #include "GraphicsEngine/Graphics/Mesh.h"
 #include "GraphicsEngine/Graphics/Material.h"
 #include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 #include "GraphicsEngine/Object/CameraObject.h"
+#include "GraphicsEngine/Animation/Skeleton.h"
+#include "GraphicsEngine/Message/Console.h"
 
 SkinMeshRendererComponent::SkinMeshRendererComponent(Object* o, std::string objPath, std::string vertexShaderName, std::string fragmentShaderName) :
 	ARendererComponent(o)
 {
 	useZTest = true;
-	mesh = gltf::glTFLoader::Load(objPath);
+	std::shared_ptr<gltf::glTFData> data = gltf::glTFLoader::Load(objPath);
+	mesh = data->GetMesh();
 	mesh->glDrawType = GLDrawType::NONE;
+	m_Skeleton = data->GetSkeleton();
 	material = std::make_shared<Material>(vertexShaderName, fragmentShaderName);
 }
 
@@ -23,7 +28,8 @@ SkinMeshRendererComponent::~SkinMeshRendererComponent() {
 }
 
 void SkinMeshRendererComponent::Update() {
-
+	//Console::Log("SkinMeshRendererComponent::Update\n");
+	// アニメーションの更新
 }
 
 void SkinMeshRendererComponent::Draw() {
@@ -45,6 +51,10 @@ void SkinMeshRendererComponent::Draw() {
 	material->SetFloatUniform("_deltaTime", game->deltaTime);
 	material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 	material->SetVec3Uniform("_CameraPos", GraphicsMain::GetInstance()->game_camera_instance->GetPosition());
+
+	// skin mesh uniform
+	//material->SetMatrixVectorUniform("pose", m_PoseMatrix);
+	//material->SetMatrixVectorUniform("invBindPose", m_Skeleton->GetInvBindPose());
 
 	//
 	mesh->Draw();
