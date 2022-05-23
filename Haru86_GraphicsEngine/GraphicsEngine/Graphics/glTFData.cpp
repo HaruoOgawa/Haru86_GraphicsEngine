@@ -70,7 +70,7 @@ namespace gltf {
 			for (auto prim : mesh.primitives) {
 
 				//get vertices
-				std::unique_ptr<glTFMesh> reader = std::make_unique<glTFMesh>();
+				std::unique_ptr<glTFMesh> MeshData = std::make_unique<glTFMesh>();
 
 				//vertex
 				auto AccessorsIndex = prim.attributes["POSITION"];
@@ -78,17 +78,17 @@ namespace gltf {
 				auto ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
 				auto ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
 
-				reader->vertex = std::vector<float>(ByteLength / 4, 0.0);
-				reader->subDataVertex = std::vector<unsigned char>(ByteLength, 0);
+				MeshData->vertex = std::vector<float>(ByteLength / 4, 0.0);
+				MeshData->subDataVertex = std::vector<unsigned char>(ByteLength, 0);
 
 				std::copy(
 					m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
 					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
-					reader->subDataVertex.begin()
+					MeshData->subDataVertex.begin()
 				);
-				std::memcpy(reader->vertex.data(), reader->subDataVertex.data(), sizeof(float) * reader->vertex.size());
+				std::memcpy(MeshData->vertex.data(), MeshData->subDataVertex.data(), sizeof(float) * MeshData->vertex.size());
 
-				reader->subDataVertex.clear();
+				MeshData->subDataVertex.clear();
 
 				//normal
 				AccessorsIndex = prim.attributes["NORMAL"];
@@ -96,16 +96,16 @@ namespace gltf {
 				ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
 				ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
 
-				reader->normal = std::vector<float>(ByteLength / 4, 0.0f);
-				reader->subDataNormal = std::vector<unsigned char>(ByteLength, 0);
+				MeshData->normal = std::vector<float>(ByteLength / 4, 0.0f);
+				MeshData->subDataNormal = std::vector<unsigned char>(ByteLength, 0);
 				std::copy(
 					m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
 					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
-					reader->subDataNormal.begin()
+					MeshData->subDataNormal.begin()
 				);
-				std::memcpy(reader->normal.data(), reader->subDataNormal.data(), sizeof(float) * reader->normal.size());
+				std::memcpy(MeshData->normal.data(), MeshData->subDataNormal.data(), sizeof(float) * MeshData->normal.size());
 
-				reader->subDataNormal.clear();
+				MeshData->subDataNormal.clear();
 
 				//texcoord
 				AccessorsIndex = prim.attributes["TEXCOORD_0"];
@@ -113,30 +113,76 @@ namespace gltf {
 				ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
 				ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
 
-				reader->texcoord = std::vector<float>(ByteLength / 4, 0.0f);
-				reader->subDataTexcoord = std::vector<unsigned char>(ByteLength, 0);
+				MeshData->texcoord = std::vector<float>(ByteLength / 4, 0.0f);
+				MeshData->subDataTexcoord = std::vector<unsigned char>(ByteLength, 0);
 				std::copy(
 					m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
 					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
-					reader->subDataTexcoord.begin()
+					MeshData->subDataTexcoord.begin()
 				);
-				std::memcpy(reader->texcoord.data(), reader->subDataTexcoord.data(), sizeof(float) * reader->texcoord.size());
+				std::memcpy(MeshData->texcoord.data(), MeshData->subDataTexcoord.data(), sizeof(float) * MeshData->texcoord.size());
 
-				reader->subDataTexcoord.clear();
+				MeshData->subDataTexcoord.clear();
+
+				// weight
+				AccessorsIndex = prim.attributes["WEIGHTS_0"];
+				BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
+				ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
+				ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
+
+				MeshData->weights= std::vector<float>(ByteLength / 4, 0.0f);
+				MeshData->subDataWeights= std::vector<unsigned char>(ByteLength, 0);
+				
+				std::copy(
+					m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
+					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
+					MeshData->subDataWeights.begin()
+				);
+				std::memcpy(MeshData->weights.data(), MeshData->subDataWeights.data(), sizeof(float) * MeshData->weights.size());
+
+				MeshData->subDataTexcoord.clear();
+
+				// joint
+				AccessorsIndex = prim.attributes["JOINTS_0"];
+				BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
+				ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
+				ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
+
+				MeshData->joints = std::vector<float>(ByteLength / 4, 0.0f);
+				MeshData->subDataJoints = std::vector<unsigned char>(ByteLength, 0);
+
+				std::copy(
+					m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
+					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
+					MeshData->subDataJoints.begin()
+				);
+				std::memcpy(MeshData->joints.data(), MeshData->subDataJoints.data(), sizeof(float) * MeshData->joints.size());
 
 				//set vertices data
 				std::vector<std::vector<float>> vertices;
-				vertices.push_back(reader->vertex);
-				reader->vertex.clear();
-				vertices.push_back(reader->normal);
-				reader->normal.clear();
-				vertices.push_back(reader->texcoord);
-				reader->texcoord.clear();
+				
+				vertices.push_back(MeshData->vertex);
+				MeshData->vertex.clear();
+				
+				vertices.push_back(MeshData->normal);
+				MeshData->normal.clear();
+				
+				vertices.push_back(MeshData->texcoord);
+				MeshData->texcoord.clear();
 
+				vertices.push_back(MeshData->weights);
+				MeshData->weights.clear();
+
+				vertices.push_back(MeshData->joints);
+				MeshData->joints.clear();
+
+				// 各要素の次元
 				std::vector<int> dimention;
 				dimention.push_back(3);
 				dimention.push_back(3);
 				dimention.push_back(2);
+				dimention.push_back(4);
+				dimention.push_back(4);
 
 				////get indices///////////////////////////////////
 
@@ -145,28 +191,28 @@ namespace gltf {
 				ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
 				ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
 
-				reader->indices = std::vector<unsigned int>(ByteLength / 4, 0);
-				reader->subDataIndices = std::vector<unsigned char>(ByteLength, 0);
+				MeshData->indices = std::vector<unsigned int>(ByteLength / 4, 0);
+				MeshData->subDataIndices = std::vector<unsigned char>(ByteLength, 0);
 
 				std::copy(
 					m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
 					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
-					reader->subDataIndices.begin()
+					MeshData->subDataIndices.begin()
 				);
-				std::memcpy(reader->indices.data(), reader->subDataIndices.data(), sizeof(unsigned int) * reader->indices.size());
-				reader->subDataIndices.clear();
+				std::memcpy(MeshData->indices.data(), MeshData->subDataIndices.data(), sizeof(unsigned int) * MeshData->indices.size());
+				MeshData->subDataIndices.clear();
 
-				reader->mainDataIndices = std::vector<unsigned short>(reader->indices.begin(), reader->indices.end());
+				MeshData->mainDataIndices = std::vector<unsigned short>(MeshData->indices.begin(), MeshData->indices.end());
 
 				//この辺でPrimitiveにデータを渡す
-				std::shared_ptr<Primitive> m_prim = std::make_shared<Primitive>(vertices, dimention, reader->mainDataIndices);
+				std::shared_ptr<Primitive> m_prim = std::make_shared<Primitive>(vertices, dimention, MeshData->mainDataIndices);
 				m_mesh->SetPrimitive(m_prim);
 
 				//すべてのメモリを一応解放
 				vertices.clear();
 				dimention.clear();
-				reader->indices.clear();
-				reader->mainDataIndices.clear();
+				MeshData->indices.clear();
+				MeshData->mainDataIndices.clear();
 
 				index++;
 			}
@@ -180,6 +226,14 @@ namespace gltf {
 		m_ClipList = LoadAnimationClips();
 		//const auto RestPose = LoadRestPose(m_Model);
 		return true;
+	}
+
+	animation::Skeleton glTFData::LoadSkeleton() {
+		return animation::Skeleton(
+			LoadRestPose(),
+			LoadBindPose(),
+			LoadJointNames()
+		);
 	}
 
 	animation::Pose glTFData::LoadRestPose() {
@@ -266,14 +320,6 @@ namespace gltf {
 		}
 
 		return result;
-	}
-
-	animation::Skeleton glTFData::LoadSkeleton() {
-		return animation::Skeleton(
-			LoadRestPose(),
-			LoadBindPose(),
-			LoadJointNames()
-		);
 	}
 
 	int glTFData::GetNodeIndex(tinygltf::Node* target, tinygltf::Node* allNodes, unsigned int numNodes) {

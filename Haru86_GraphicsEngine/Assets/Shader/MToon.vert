@@ -8,6 +8,9 @@ uniform float _time;
 uniform float _deltaTime;
 uniform vec3 _CameraPos;
 
+uniform mat4 pose[120];
+uniform mat4 invBindPose[120];
+
 layout(location=0)in vec3 vertex;
 layout(location=1)in vec3 normal;
 layout(location=2)in vec2 texcoord;
