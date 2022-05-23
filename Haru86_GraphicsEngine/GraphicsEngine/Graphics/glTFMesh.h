@@ -18,7 +18,7 @@ public:
 	std::vector<float> weights;
 	std::vector<unsigned char> subDataWeights;
 
-	std::vector<float> joints;
+	std::vector<int> joints;
 	std::vector<unsigned char> subDataJoints;
 
 	std::vector<unsigned int> indices;

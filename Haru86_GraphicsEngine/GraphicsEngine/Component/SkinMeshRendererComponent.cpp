@@ -10,6 +10,7 @@
 #include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Animation/Skeleton.h"
+#include "GraphicsEngine/Animation/Pose.h"
 #include "GraphicsEngine/Message/Console.h"
 
 SkinMeshRendererComponent::SkinMeshRendererComponent(Object* o, std::string objPath, std::string vertexShaderName, std::string fragmentShaderName) :
@@ -19,7 +20,11 @@ SkinMeshRendererComponent::SkinMeshRendererComponent(Object* o, std::string objP
 	std::shared_ptr<gltf::glTFData> data = gltf::glTFLoader::Load(objPath);
 	mesh = data->GetMesh();
 	mesh->glDrawType = GLDrawType::NONE;
+
 	m_Skeleton = data->GetSkeleton();
+	m_CurrentPose = m_Skeleton->GetRestPose();
+	m_CurrentPose.GetMatrixPalette(m_PoseMatrix);
+
 	material = std::make_shared<Material>(vertexShaderName, fragmentShaderName);
 }
 
@@ -30,6 +35,7 @@ SkinMeshRendererComponent::~SkinMeshRendererComponent() {
 void SkinMeshRendererComponent::Update() {
 	//Console::Log("SkinMeshRendererComponent::Update\n");
 	// アニメーションの更新
+
 }
 
 void SkinMeshRendererComponent::Draw() {
@@ -53,8 +59,8 @@ void SkinMeshRendererComponent::Draw() {
 	material->SetVec3Uniform("_CameraPos", GraphicsMain::GetInstance()->game_camera_instance->GetPosition());
 
 	// skin mesh uniform
-	//material->SetMatrixVectorUniform("pose", m_PoseMatrix);
-	//material->SetMatrixVectorUniform("invBindPose", m_Skeleton->GetInvBindPose());
+	material->SetMatrixVectorUniform("pose", m_PoseMatrix);
+	material->SetMatrixVectorUniform("invBindPose", m_Skeleton->GetInvBindPose());
 
 	//
 	mesh->Draw();

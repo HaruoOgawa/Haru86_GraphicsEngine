@@ -151,7 +151,7 @@ namespace gltf {
 				ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
 				ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
 
-				MeshData->joints = std::vector<float>(ByteLength / 4, 0.0f);
+				MeshData->joints = std::vector<int>(ByteLength / 4, 0.0f);
 				MeshData->subDataJoints = std::vector<unsigned char>(ByteLength, 0);
 
 				std::copy(
@@ -159,7 +159,10 @@ namespace gltf {
 					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
 					MeshData->subDataJoints.begin()
 				);
-				std::memcpy(MeshData->joints.data(), MeshData->subDataJoints.data(), sizeof(float) * MeshData->joints.size());
+				std::memcpy(MeshData->joints.data(), MeshData->subDataJoints.data(), sizeof(int) * MeshData->joints.size());
+
+				std::vector<float> joints_float(MeshData->joints.begin(), MeshData->joints.end());
+				MeshData->joints.clear();
 
 				//set vertices data
 				std::vector<std::vector<float>> vertices;
@@ -176,8 +179,8 @@ namespace gltf {
 				vertices.push_back(MeshData->weights);
 				MeshData->weights.clear();
 
-				vertices.push_back(MeshData->joints);
-				MeshData->joints.clear();
+				vertices.push_back(joints_float);
+				joints_float.clear();
 
 				// Še—v‘f‚ÌŽŸŒ³
 				std::vector<int> dimention;
