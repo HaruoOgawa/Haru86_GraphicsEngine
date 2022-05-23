@@ -1,18 +1,14 @@
 #pragma once
 #include "ARendererComponent.h"
 
-class Object* o;
+class SkinMeshRendererComponent :
+	public ARendererComponent
+{
+public:
+	SkinMeshRendererComponent(Object* o, std::string objPath, std::string vertexShaderName= "./Assets/Shader/MToon.vert", std::string fragmentShaderName= "./Assets/Shader/MToon.frag");
+	~SkinMeshRendererComponent();
 
-namespace component {
-	class SkinMeshRendererComponent :
-		public ARendererComponent
-	{
-	public:
-		SkinMeshRendererComponent(Object* o);
-		~SkinMeshRendererComponent();
-
-		virtual void Update() override;
-		virtual void Draw() override;
-		virtual void ProcessInput(const SDL_Event& e) override;
-	};
-}
+	virtual void Update() override;
+	virtual void Draw() override;
+	virtual void ProcessInput(const SDL_Event& e) override;
+};

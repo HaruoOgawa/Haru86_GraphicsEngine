@@ -50,7 +50,13 @@ namespace obj {
 		template<typename T>
 		T* GetComponent()const {
 			auto item = m_ComponentList.find(typeid(T));
-			return static_cast<T*>(item->second.get());
+			if (item != m_ComponentList.end()) {
+				return static_cast<T*>(item->second.get());
+			}
+			else {
+				T* val = nullptr;
+				return val;
+			}
 		}
 	private:
 	};

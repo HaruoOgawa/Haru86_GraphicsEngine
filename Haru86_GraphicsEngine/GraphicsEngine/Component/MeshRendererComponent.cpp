@@ -8,13 +8,11 @@
 #include "./TimelineComponent.h"
 #include "../Graphics/Texture.h"
 #include "../Graphics/Font.h"
-#include "GraphicsEngine/Graphics/glTFLoader.h"
-#include "GraphicsEngine/Graphics/glTFLoader.h"
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Object/CNode.h"
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
-	: Component(o), myowner(o), primTex(nullptr)
+	: ARendererComponent(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = std::make_shared<Mesh>((primType));
@@ -23,11 +21,11 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType)
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::map<GLenum, std::string> shaders)
-	: Component(o), myowner(o), primTex(nullptr)
+	: ARendererComponent(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = std::make_shared<Mesh>((primType));
-	if (shaders.find(GL_TESS_CONTROL_SHADER)!=shaders.end()) {
+	if (shaders.find(GL_TESS_CONTROL_SHADER) != shaders.end()) {
 		mesh->glDrawType = GLDrawType::TESSELLATION;
 	}
 	else {
@@ -36,54 +34,35 @@ MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, 
 	material = std::make_shared<Material>(shaders);
 }
 
-MeshRendererComponent::MeshRendererComponent(Object* o, std::string objPath)
-	: Component(o), myowner(o), primTex(nullptr)
-{
-	useZTest = true;
-	mesh = gltf::glTFLoader::Load(objPath);
-	mesh->glDrawType = GLDrawType::NONE;
-	material = std::make_shared<Material>("./Assets/Shader/MToon.vert", "./Assets/Shader/MToon.frag");
-}
-
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName)
-	: Component(o),myowner(o), primTex(nullptr)
+	: ARendererComponent(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = std::make_shared<Mesh>((primType));
 	mesh->glDrawType = GLDrawType::NONE;
-	material = std::make_shared<Material>(vertexShaderName,fragmentShaderName);
+	material = std::make_shared<Material>(vertexShaderName, fragmentShaderName);
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string tessellationShaderName[2], std::string fragmentShaderName)
-	: Component(o),myowner(o), primTex(nullptr)
+	: ARendererComponent(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = std::make_shared<Mesh>((primType));
 	mesh->glDrawType = GLDrawType::TESSELLATION;
-	material = std::make_shared<Material>(vertexShaderName,tessellationShaderName,fragmentShaderName);
+	material = std::make_shared<Material>(vertexShaderName, tessellationShaderName, fragmentShaderName);
 }
 
 MeshRendererComponent::MeshRendererComponent(Object* o, PrimitiveType primType, std::string vertexShaderName, std::string fragmentShaderName, std::string textureString)
-	: Component(o),myowner(o), primTex(nullptr)
+	: ARendererComponent(o), primTex(nullptr)
 {
 	useZTest = true;
 	mesh = std::make_shared<Mesh>((primType));
 	mesh->glDrawType = GLDrawType::NONE;
-	material = std::make_shared<Material>(vertexShaderName,fragmentShaderName);
-	if (GraphicsRenderer::GetInstance()->font!=nullptr) {
-		primTex = GraphicsRenderer::GetInstance()->font->GetFontTexture(textureString,glm::vec3(1.0,1.0,1.0), 30);
+	material = std::make_shared<Material>(vertexShaderName, fragmentShaderName);
+	if (GraphicsRenderer::GetInstance()->font != nullptr) {
+		primTex = GraphicsRenderer::GetInstance()->font->GetFontTexture(textureString, glm::vec3(1.0, 1.0, 1.0), 30);
 	}
-	
-}
 
-
-MeshRendererComponent::MeshRendererComponent(Object* o, std::string modelDataPath, std::string vertexShaderName, std::string fragmentShaderName)
-	: Component(o),myowner(o), primTex(nullptr)
-{
-	useZTest = true;
-	mesh = gltf::glTFLoader::Load(modelDataPath);
-	mesh->glDrawType = GLDrawType::NONE;
-	material = std::make_shared<Material>(vertexShaderName,fragmentShaderName);
 }
 
 MeshRendererComponent::~MeshRendererComponent() {
@@ -95,14 +74,14 @@ void MeshRendererComponent::Update() {
 }
 
 void MeshRendererComponent::Draw() {
-	
+
 	if (useZTest == true) {
 		glEnable(GL_DEPTH_TEST);
 	}
-	else if(useZTest==false){
+	else if (useZTest == false) {
 		glDisable(GL_DEPTH_TEST);
 	}
-	
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -144,10 +123,10 @@ void MeshRendererComponent::DrawBoard() {
 	if (useZTest == true) {
 		glEnable(GL_DEPTH_TEST);
 	}
-	else if(useZTest==false){
+	else if (useZTest == false) {
 		glDisable(GL_DEPTH_TEST);
 	}
-	
+
 	material->SetActive();
 	material->SetMatrixUniform("MVPMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetMVPMatrix());
 	material->SetMatrixUniform("MMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetMMatrix());
@@ -157,7 +136,7 @@ void MeshRendererComponent::DrawBoard() {
 	material->SetFloatUniform("_deltaTime", game->deltaTime);
 	material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 	material->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
-	
+
 	// PolygonPostProcess‚ÌƒeƒXƒg
 	/*if (GraphicsRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture != nullptr) {
 		GraphicsRenderer::GetInstance()->m_PolygonPostProcess_FrameTexture->SetActive();
@@ -183,8 +162,4 @@ void MeshRendererComponent::DrawBoard() {
 
 void MeshRendererComponent::ProcessInput(const SDL_Event& e) {
 
-}
-
-const std::shared_ptr<Mesh>& MeshRendererComponent::GetMesh()const {
-	return mesh;
 }

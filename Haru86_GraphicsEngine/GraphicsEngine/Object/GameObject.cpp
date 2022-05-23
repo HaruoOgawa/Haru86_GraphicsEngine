@@ -1,7 +1,9 @@
 #include "../Object/GameObject.h"
 #include "../GraphicsMain/GraphicsMain.h"
 #include "../Component/TransformComponent.h"
+#include "../Component/ARendererComponent.h"
 #include "../Component/MeshRendererComponent.h"
+#include "../Component/SkinMeshRendererComponent.h"
 #include "GraphicsEngine/Physics/CPhysicsEngine.h"
 #include "CNode.h"
 
@@ -26,8 +28,8 @@ GameObject::GameObject(std::string objPath)
 	: Object(), renderOrder(RenderQueue::Geometry), renderType(RenderType::DefaultBuffer), animTime(0.0f), m_PrimitiveType(PrimitiveType::CUSTOM)
 {
 	GraphicsMain::GetInstance()->gameObjectList.emplace_back(this);
-	meshComp = std::make_shared<MeshRendererComponent>(this, objPath);
-	GetRootNode()->AddComponent<MeshRendererComponent>(meshComp);
+	meshComp = std::make_shared<SkinMeshRendererComponent>(this, objPath);
+	GetRootNode()->AddComponent<SkinMeshRendererComponent>(meshComp);
 }
 
 GameObject::GameObject(PrimitiveType primType, std::string fragmentShaderName)
@@ -83,7 +85,7 @@ GameObject::~GameObject() {
 
 
 void GameObject::UseZTest(bool use) {
-	meshComp->useZTest = use; 
+	meshComp->SetUseZTest(use);
 }
 
 void GameObject::SetRenderOlder(int order) {

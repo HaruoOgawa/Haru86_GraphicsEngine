@@ -2,6 +2,7 @@
 #include "GraphicsEngine/Component/Component.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/Component/MeshRendererComponent.h"
+#include "GraphicsEngine/Component/SkinMeshRendererComponent.h"
 
 namespace obj {
 	CNode::CNode() {
@@ -28,8 +29,12 @@ namespace obj {
 
 	bool CNode::Draw() {
 		m_transform->CalMatrix();
+		
 		auto MeshRenderer = GetComponent<MeshRendererComponent>();
 		if (MeshRenderer)MeshRenderer->Draw();
+		
+		auto SkinMeshRenderer = GetComponent<SkinMeshRendererComponent>();
+		if (SkinMeshRenderer)SkinMeshRenderer->Draw();
 
 		for (auto node : m_Nodes) {
 			node->Draw();
