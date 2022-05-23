@@ -203,6 +203,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Animation\CFrame.h" />
     <ClInclude Include="GraphicsEngine\Animation\CCurve.h" />
     <ClInclude Include="GraphicsEngine\Animation\EInterpolationType.h" />
+    <ClInclude Include="GraphicsEngine\Component\ARendererComponent.h" />
     <ClInclude Include="GraphicsEngine\Graphics\glTFData.h" />
     <ClInclude Include="GraphicsEngine\Library\tinygltf\include\json.hpp" />
     <ClInclude Include="GraphicsEngine\Library\tinygltf\include\stb_image.h" />
@@ -269,6 +270,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Graphics\Mesh.h" />
     <ClInclude Include="GraphicsEngine\Animation\TransformTrack.h" />
     <ClInclude Include="GraphicsEngine\Animation\Skeleton.h" />
+    <ClInclude Include="GraphicsEngine\Component\SkinMeshRendererComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assets\App\AnimationLearning\AnimationLearning.cpp" />
@@ -276,6 +278,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Animation\CTrack.cpp" />
     <ClCompile Include="GraphicsEngine\Animation\CFrame.cpp" />
     <ClCompile Include="GraphicsEngine\Animation\CCurve.cpp" />
+    <ClCompile Include="GraphicsEngine\Component\ARendererComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\glTFData.cpp" />
     <ClCompile Include="GraphicsEngine\Physics\CCellContents.cpp" />
     <ClCompile Include="GraphicsEngine\Physics\CColliderCell.cpp" />
@@ -330,6 +333,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Animation\Pose.cpp" />
     <ClCompile Include="GraphicsEngine\Object\CNode.cpp" />
     <ClCompile Include="GraphicsEngine\Animation\Skeleton.cpp" />
+    <ClCompile Include="GraphicsEngine\Component\SkinMeshRendererComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shader\CollisionArt\CubeFieldRaymarching.frag" />
