@@ -3,8 +3,6 @@
 #include "GraphicsEngine/Object/CNode.h"
 #include "GraphicsEngine/Component/Component.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
-#include "GraphicsEngine/Graphics/glTFLoader.h"
-#include "GraphicsEngine/Graphics/glTFData.h"
 #include "GraphicsEngine/Graphics/Mesh.h"
 #include "GraphicsEngine/Graphics/Material.h"
 #include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
@@ -12,30 +10,25 @@
 #include "GraphicsEngine/Animation/Skeleton.h"
 #include "GraphicsEngine/Animation/Pose.h"
 #include "GraphicsEngine/Message/Console.h"
+#include "GraphicsEngine/Animation/AnimatorComponent.h"
 
-SkinMeshRendererComponent::SkinMeshRendererComponent(Object* o, std::string objPath, std::string vertexShaderName, std::string fragmentShaderName) :
+SkinMeshRendererComponent::SkinMeshRendererComponent(Object* o, std::string objPath, const std::shared_ptr<Mesh>& MeshData, const std::shared_ptr<animation::AnimatorComponent>& Animator,
+	std::string vertexShaderName, std::string fragmentShaderName) :
 	ARendererComponent(o)
 {
+	mesh = MeshData;
+	m_Animator = Animator;
 	useZTest = true;
-	std::shared_ptr<gltf::glTFData> data = gltf::glTFLoader::Load(objPath);
-	mesh = data->GetMesh();
 	mesh->glDrawType = GLDrawType::NONE;
-
-	m_Skeleton = data->GetSkeleton();
-	m_CurrentPose = m_Skeleton->GetRestPose();
-	m_CurrentPose->GetMatrixPalette(m_PoseMatrix);
-
 	material = std::make_shared<Material>(vertexShaderName, fragmentShaderName);
 }
 
-SkinMeshRendererComponent::~SkinMeshRendererComponent() {
-
+SkinMeshRendererComponent::~SkinMeshRendererComponent() 
+{
 }
 
-void SkinMeshRendererComponent::Update() {
-	//Console::Log("SkinMeshRendererComponent::Update\n");
-	// アニメーションの更新
-
+void SkinMeshRendererComponent::Update() 
+{
 }
 
 void SkinMeshRendererComponent::Draw() {
@@ -59,8 +52,10 @@ void SkinMeshRendererComponent::Draw() {
 	material->SetVec3Uniform("_CameraPos", GraphicsMain::GetInstance()->game_camera_instance->GetPosition());
 
 	// skin mesh uniform
-	material->SetMatrixVectorUniform("pose", m_PoseMatrix);
-	material->SetMatrixVectorUniform("invBindPose", m_Skeleton->GetInvBindPose());
+	if (m_Animator) {
+		material->SetMatrixVectorUniform("pose", m_Animator->GetPoseMatrix());
+		material->SetMatrixVectorUniform("invBindPose", m_Animator->GetSkeleton()->GetInvBindPose());
+	}
 
 	//
 	mesh->Draw();

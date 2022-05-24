@@ -6,6 +6,8 @@
 #include "../Component/SkinMeshRendererComponent.h"
 #include "GraphicsEngine/Physics/CPhysicsEngine.h"
 #include "CNode.h"
+#include "GraphicsEngine/Graphics/glTFLoader.h"
+#include "GraphicsEngine/Graphics/glTFData.h"
 
 GameObject::GameObject(PrimitiveType primType) 
 	: Object(), renderOrder(RenderQueue::Geometry), renderType(RenderType::DefaultBuffer), animTime(0.0f), m_PrimitiveType(primType)
@@ -23,13 +25,11 @@ GameObject::GameObject(PrimitiveType primType, std::map<GLenum, std::string> sha
 	GetRootNode()->AddComponent<MeshRendererComponent>(meshComp);
 }
 
-
 GameObject::GameObject(std::string objPath)
 	: Object(), renderOrder(RenderQueue::Geometry), renderType(RenderType::DefaultBuffer), animTime(0.0f), m_PrimitiveType(PrimitiveType::CUSTOM)
 {
 	GraphicsMain::GetInstance()->gameObjectList.emplace_back(this);
-	meshComp = std::make_shared<SkinMeshRendererComponent>(this, objPath);
-	GetRootNode()->AddComponent<SkinMeshRendererComponent>(meshComp);
+	auto data = gltf::glTFLoader::Load(this, objPath);
 }
 
 GameObject::GameObject(PrimitiveType primType, std::string fragmentShaderName)

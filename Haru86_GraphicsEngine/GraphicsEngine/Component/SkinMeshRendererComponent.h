@@ -2,20 +2,19 @@
 #include "ARendererComponent.h"
 #include <glm/glm.hpp>
 
+class Mesh;
+
 namespace animation {
-	class Skeleton;
-	class Pose;
+	class AnimatorComponent;
 }
 
 class SkinMeshRendererComponent :
 	public ARendererComponent
 {
-	std::shared_ptr<animation::Skeleton> m_Skeleton;
-	std::vector<glm::mat4> m_PoseMatrix;
-	std::shared_ptr<animation::Pose> m_CurrentPose;
-
+	std::shared_ptr<animation::AnimatorComponent> m_Animator;
 public:
-	SkinMeshRendererComponent(Object* o, std::string objPath, std::string vertexShaderName= "./Assets/Shader/MToon.vert", std::string fragmentShaderName= "./Assets/Shader/MToon.frag");
+	SkinMeshRendererComponent(Object* o, std::string objPath,const std::shared_ptr<Mesh>& MeshData,const std::shared_ptr<animation::AnimatorComponent>& Animator,
+		std::string vertexShaderName= "./Assets/Shader/MToon.vert", std::string fragmentShaderName= "./Assets/Shader/MToon.frag");
 	~SkinMeshRendererComponent();
 
 	virtual void Update() override;

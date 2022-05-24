@@ -12,6 +12,7 @@
 #include "GraphicsEngine/Animation/Skeleton.h"
 #include "GraphicsEngine/Animation/EInterpolationType.h"
 
+class Object;
 class Mesh;
 class TransformComponent;
 
@@ -40,22 +41,23 @@ namespace gltf {
 		~glTFData();
 
 		//
-		bool Load(const std::string& gltfDataPath);
+		bool Load(Object* obj, const std::string& gltfDataPath);
 		
 		//
 		std::shared_ptr<Mesh> GetMesh()const;
 		std::shared_ptr<animation::Skeleton> GetSkeleton()const;
 	private:
-		bool LoadMesh();
+		bool LoadNode(Object* obj);
+		bool LoadMesh(Object* obj);
 
-		bool LoadAnimation();
+		bool LoadAnimation(Object* obj);
+		bool LoadSkeleton(Object* obj);
 		std::shared_ptr<animation::Pose> LoadRestPose();
 		std::shared_ptr<animation::Pose> LoadBindPose();
 		std::vector<std::string> LoadJointNames()const;
-
-		bool LoadSkeleton();
-
-		//
+		bool LoadAnimationClips(Object* obj);
+		
+		// ÉwÉãÉpÅ[ä÷êîåQ
 		int GetNodeIndex(tinygltf::Node* target, tinygltf::Node* allNodes, unsigned int numNodes);
 		std::shared_ptr<TransformComponent> GetLocalTransform(const tinygltf::Node& node);
 		void GetScalarValues(std::vector<float>& out, unsigned int compCount, const tinygltf::Accessor& inAccessor);
@@ -114,7 +116,5 @@ namespace gltf {
 				}
 			}
 		}
-
-		std::vector<animation::Clip> LoadAnimationClips();
 	};
 }

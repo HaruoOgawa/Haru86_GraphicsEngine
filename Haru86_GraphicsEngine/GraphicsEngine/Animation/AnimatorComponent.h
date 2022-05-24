@@ -1,0 +1,28 @@
+#pragma once
+#include "GraphicsEngine/Component/Component.h"
+
+class Object;
+
+namespace animation {
+    class Skeleton;
+    class Pose;
+
+    class AnimatorComponent :
+        public Component
+    {
+        std::shared_ptr<Skeleton> m_Skeleton;
+        std::vector<glm::mat4> m_PoseMatrix;
+        std::shared_ptr<Pose> m_CurrentPose;
+    public:
+        AnimatorComponent(Object* o,const std::shared_ptr<Skeleton>& Skeleton);
+        virtual ~AnimatorComponent();
+
+        virtual void Update() override;
+        virtual void Draw();
+        virtual void ProcessInput(const SDL_Event& e) override;
+
+        const std::shared_ptr<Skeleton>& GetSkeleton()const;
+        const std::vector<glm::mat4>& GetPoseMatrix()const;
+        const std::shared_ptr<Pose>& GetCurrentPose()const;
+    };
+}

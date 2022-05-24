@@ -197,6 +197,8 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GraphicsEngine\Animation\AnimationController.h" />
+    <ClInclude Include="GraphicsEngine\Animation\AnimatorComponent.h" />
     <ClInclude Include="Assets\App\AnimationLearning\AnimationLearning.h" />
     <ClInclude Include="GraphicsEngine\Animation\Clip.h" />
     <ClInclude Include="GraphicsEngine\Animation\CTrack.h" />
@@ -273,6 +275,8 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Component\SkinMeshRendererComponent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GraphicsEngine\Animation\AnimationController.cpp" />
+    <ClCompile Include="GraphicsEngine\Animation\AnimatorComponent.cpp" />
     <ClCompile Include="Assets\App\AnimationLearning\AnimationLearning.cpp" />
     <ClCompile Include="GraphicsEngine\Animation\Clip.cpp" />
     <ClCompile Include="GraphicsEngine\Animation\CTrack.cpp" />

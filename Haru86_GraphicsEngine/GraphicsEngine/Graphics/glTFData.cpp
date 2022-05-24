@@ -1,5 +1,6 @@
 #include "glTFData.h"
 #include "GraphicsEngine/Message/Console.h"
+#include "GraphicsEngine/Object/Object.h"
 #include "GraphicsEngine/Graphics/Mesh.h"
 #include "GraphicsEngine/Graphics/Primitive.h"
 #include <memory>
@@ -31,7 +32,7 @@ namespace gltf {
 	}
 
 	//
-	bool glTFData::Load(const std::string& gltfDataPath) {
+	bool glTFData::Load(Object* obj, const std::string& gltfDataPath) {
 		// glTFのロード 
 		tinygltf::TinyGLTF loader;
 		
@@ -56,16 +57,19 @@ namespace gltf {
 			return false;
 		}
 
-		// 解析
-		//if (!LoadNode())return false;
-		if (!LoadMesh())return false;
-		if (!LoadSkeleton())return false;
-		//if (!LoadAnimation())return false;
-
+		// 各種データのロード
+		if (!LoadAnimation(obj))return false;
+		if (!LoadNode(obj))return false;
+		if (!LoadMesh(obj))return false;
+		
 		return true;
 	}
 
-	bool glTFData::LoadMesh() {
+	bool glTFData::LoadNode(Object* obj) {
+		return true;
+	}
+
+	bool glTFData::LoadMesh(Object* obj) {
 		m_mesh = std::make_shared<Mesh>();
 
 		for (auto mesh : m_Model.meshes) {
@@ -228,27 +232,21 @@ namespace gltf {
 		return true;
 	}
 
-	bool glTFData::LoadAnimation() {
-		m_ClipList = LoadAnimationClips();
-		//const auto RestPose = LoadRestPose(m_Model);
-		return true;
-	}
-
-	bool glTFData::LoadSkeleton() {
+	bool glTFData::LoadSkeleton(Object* obj) {
 		m_Skeleton = std::make_shared<animation::Skeleton>(
 			LoadRestPose(),
 			LoadBindPose(),
 			LoadJointNames()
-		);
+			);
 
 		return true;
 	}
 
 	std::shared_ptr<animation::Pose> glTFData::LoadRestPose() {
 		unsigned int boneCount = static_cast<unsigned int>(m_Model.nodes.size());
-		std::shared_ptr<animation::Pose> result=std::make_shared<animation::Pose>(boneCount);
-		
-		for (unsigned int i = 0; i < boneCount;i++) {
+		std::shared_ptr<animation::Pose> result = std::make_shared<animation::Pose>(boneCount);
+
+		for (unsigned int i = 0; i < boneCount; i++) {
 			tinygltf::Node node = m_Model.nodes[i];
 
 			result->SetLocalTransform(i, GetLocalTransform(node));
@@ -259,7 +257,7 @@ namespace gltf {
 			for (const auto& child : node.children) {
 				result->SetParent(child, parent);
 			}
-			
+
 		}
 
 		return result;
@@ -269,42 +267,42 @@ namespace gltf {
 		std::shared_ptr<animation::Pose> restPose = LoadRestPose();
 		unsigned int numBones = restPose->Size();
 		std::vector<std::shared_ptr<TransformComponent>> worldBindPose(numBones);
-		
-		for (unsigned int i = 0; i < numBones;i++) {
+
+		for (unsigned int i = 0; i < numBones; i++) {
 			worldBindPose[i] = restPose->GetGloabalTransform(i);
 		}
 
 		// 逆バインドポーズ行列の取得
 		unsigned int numSkins = m_Model.skins.size();
-		for (unsigned int i = 0; i < numSkins;i++) {
+		for (unsigned int i = 0; i < numSkins; i++) {
 			tinygltf::Skin* skin = &m_Model.skins[i];
 			std::vector<float> invBindAccessor;
 			GetScalarValues(invBindAccessor, 16, m_Model.accessors[skin->inverseBindMatrices]);
 
 			//
 			unsigned int numJoints = skin->joints.size();
-			for (int j = 0; j < numJoints;j++) {
+			for (int j = 0; j < numJoints; j++) {
 				//
 				float* matrix = &(invBindAccessor[j * 16]);
 				glm::mat4 invBindMatrix = glm::make_mat4(matrix);
 
 				//
 				glm::mat4 bindMatrix = glm::inverse(invBindMatrix);
-				std::shared_ptr<TransformComponent> bindTransform = std::make_shared<TransformComponent>(nullptr,bindMatrix);
+				std::shared_ptr<TransformComponent> bindTransform = std::make_shared<TransformComponent>(nullptr, bindMatrix);
 
 				//
-				tinygltf::Node* jointNode=&m_Model.nodes[skin->joints[j]];
-				int jointIndex = GetNodeIndex(jointNode,&m_Model.nodes[0],numBones);
+				tinygltf::Node* jointNode = &m_Model.nodes[skin->joints[j]];
+				int jointIndex = GetNodeIndex(jointNode, &m_Model.nodes[0], numBones);
 				worldBindPose[jointIndex] = bindTransform;
 			}
 		}
 
 		// スキンメッシュのための計算
 		std::shared_ptr<animation::Pose> bindPose = restPose;
-		for (unsigned int i = 0; i < numBones;i++) {
+		for (unsigned int i = 0; i < numBones; i++) {
 			std::shared_ptr<TransformComponent> current = worldBindPose[i];
 			int p = bindPose->GetParent(i);
-			if (p>=0) {
+			if (p >= 0) {
 				std::shared_ptr<TransformComponent> parent = worldBindPose[p];
 				current = TransformComponent::Combine(TransformComponent::inverse(parent), current);
 			}
@@ -316,9 +314,9 @@ namespace gltf {
 
 	std::vector<std::string> glTFData::LoadJointNames()const {
 		unsigned int boneCount = static_cast<unsigned int>(m_Model.nodes.size());
-		std::vector<std::string> result(boneCount,"Not Set");
+		std::vector<std::string> result(boneCount, "Not Set");
 
-		for (unsigned int i = 0; i < boneCount;i++) {
+		for (unsigned int i = 0; i < boneCount; i++) {
 			tinygltf::Node node = m_Model.nodes[i];
 
 			if (node.name.empty()) {
@@ -330,6 +328,14 @@ namespace gltf {
 		}
 
 		return result;
+	}
+
+	bool glTFData::LoadAnimation(Object* obj) {
+		// Animatorを生成する
+		// std::shaded_ptr<Animator>
+		if (!LoadSkeleton(obj))return false;
+		if (!LoadAnimationClips(obj))return false;
+		return true;
 	}
 
 	int glTFData::GetNodeIndex(tinygltf::Node* target, tinygltf::Node* allNodes, unsigned int numNodes) {
@@ -388,17 +394,16 @@ namespace gltf {
 		std::memcpy(&m_Model.buffers[BufferIndex].data[0], &out[0], sizeof(float) * inAccessor.count * compCount);
 	}
 
-	std::vector<animation::Clip> glTFData::LoadAnimationClips() {
+	bool glTFData::LoadAnimationClips(Object* obj) {
 		//
 		unsigned int numClips = m_Model.animations.size();
 		unsigned int numNodes = m_Model.nodes.size();
 
-		std::vector<animation::Clip> result;
-		result.resize(numClips);
+		m_ClipList.resize(numClips);
 
 		//
 		for (unsigned int i = 0; i < numClips;i++) {
-			result[i].SetName(m_Model.animations[i].name);
+			m_ClipList[i].SetName(m_Model.animations[i].name);
 
 			unsigned int numChannels = m_Model.animations[i].channels.size();
 
@@ -411,23 +416,23 @@ namespace gltf {
 				int nodeId = GetNodeIndex(target,&m_Model.nodes[0],numNodes);
 
 				if (channel.target_path=="translation") {
-					animation::VectorTrack& track = result[i][nodeId].GetPositionTrack();
+					animation::VectorTrack& track = m_ClipList[i][nodeId].GetPositionTrack();
 					TrackFromChannel<glm::vec3,3>(track, channel,m_Model.animations[i].samplers);
 				}else if (channel.target_path == "scale") {
-					animation::VectorTrack& track = result[i][nodeId].GetScaleTrack();
+					animation::VectorTrack& track = m_ClipList[i][nodeId].GetScaleTrack();
 					TrackFromChannel<glm::vec3, 3>(track, channel, m_Model.animations[i].samplers);
 				}else if (channel.target_path == "rotation") {
-					animation::QuaternionTrack& track = result[i][nodeId].GetRotationTrack();
+					animation::QuaternionTrack& track = m_ClipList[i][nodeId].GetRotationTrack();
 					TrackFromChannel<glm::quat, 4>(track, channel, m_Model.animations[i].samplers);
 				}
 			}
 
 			//
-			result[i].RecalculateDuration();
+			m_ClipList[i].RecalculateDuration();
 		}
 
 		//
-		return result;
+		return true;
 	}
 	//
 	std::shared_ptr<Mesh> glTFData::GetMesh()const {
