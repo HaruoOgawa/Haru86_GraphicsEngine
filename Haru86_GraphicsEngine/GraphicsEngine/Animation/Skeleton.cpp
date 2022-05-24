@@ -6,22 +6,22 @@ namespace animation {
 	{
 	}
 
-	Skeleton::Skeleton(const Pose& rest, const Pose& bind, const std::vector<std::string>& names) {
+	Skeleton::Skeleton(const std::shared_ptr<Pose>& rest, const std::shared_ptr<Pose>& bind, const std::vector<std::string>& names) {
 		Set(rest, bind, names);
 	}
 
-	void Skeleton::Set(const Pose& rest, const Pose& bind, const std::vector<std::string>& names) {
+	void Skeleton::Set(const std::shared_ptr<Pose>& rest, const std::shared_ptr<Pose>& bind, const std::vector<std::string>& names) {
 		m_RestPose = rest;
 		m_BindPose = bind;
 		m_JointNames = names;
 		UpdateInverseBindPose();
 	}
 
-	Pose& Skeleton::GetBindPose() {
+	std::shared_ptr<Pose>& Skeleton::GetBindPose() {
 		return m_BindPose;
 	}
 
-	Pose& Skeleton::GetRestPose() {
+	std::shared_ptr<Pose>& Skeleton::GetRestPose() {
 		return m_RestPose;
 	}
 
@@ -38,11 +38,11 @@ namespace animation {
 	}
 
 	void Skeleton::UpdateInverseBindPose() {
-		unsigned int size = m_BindPose.Size();
+		unsigned int size = m_BindPose->Size();
 		m_InvBindPose.resize(size);
 
 		for (unsigned int i = 0; i < size;i++) {
-			std::shared_ptr<TransformComponent> world = m_BindPose.GetGloabalTransform(i);
+			std::shared_ptr<TransformComponent> world = m_BindPose->GetGloabalTransform(i);
 			m_InvBindPose[i] = glm::inverse(world->GetMMatrix());
 		}
 	}

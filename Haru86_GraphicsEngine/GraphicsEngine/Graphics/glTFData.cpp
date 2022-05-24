@@ -244,19 +244,19 @@ namespace gltf {
 		return true;
 	}
 
-	animation::Pose glTFData::LoadRestPose() {
+	std::shared_ptr<animation::Pose> glTFData::LoadRestPose() {
 		unsigned int boneCount = static_cast<unsigned int>(m_Model.nodes.size());
-		animation::Pose result(boneCount);
+		std::shared_ptr<animation::Pose> result=std::make_shared<animation::Pose>(boneCount);
 
 		for (unsigned int i = 0; i < boneCount;i++) {
 			tinygltf::Node node = m_Model.nodes[i];
-			result.SetLocalTransform(i, GetLocalTransform(node));
+			result->SetLocalTransform(i, GetLocalTransform(node));
 
 			//int parent = GetNodeIndex(node.,&m_Model.nodes[0],boneCount);
 			// tinygltfのNodeがparentメンバを持たないため直接Children側に潜って自身のインデックスを渡しに行く
 			int parent = i;
 			for (const auto& child : node.children) {
-				result.SetParent(child, parent);
+				result->SetParent(child, parent);
 			}
 			
 		}
@@ -264,12 +264,13 @@ namespace gltf {
 		return result;
 	}
 
-	animation::Pose glTFData::LoadBindPose() {
-		animation::Pose restPose = LoadRestPose();
-		unsigned int numBones = restPose.Size();
+	std::shared_ptr<animation::Pose> glTFData::LoadBindPose() {
+		std::shared_ptr<animation::Pose> restPose = LoadRestPose();
+		unsigned int numBones = restPose->Size();
 		std::vector<std::shared_ptr<TransformComponent>> worldBindPose(numBones);
+		Console::Log("numBones: %d\n", numBones);
 		for (unsigned int i = 0; i < numBones;i++) {
-			worldBindPose[i] = restPose.GetGloabalTransform(i);
+			worldBindPose[i] = restPose->GetGloabalTransform(i);
 		}
 
 		//
@@ -298,15 +299,15 @@ namespace gltf {
 		}
 
 		//
-		animation::Pose bindPose = restPose;
+		std::shared_ptr<animation::Pose> bindPose = restPose;
 		for (unsigned int i = 0; i < numBones;i++) {
 			std::shared_ptr<TransformComponent> current = worldBindPose[i];
-			int p = bindPose.GetParent(i);
+			int p = bindPose->GetParent(i);
 			if (p>=0) {
 				std::shared_ptr<TransformComponent> parent = worldBindPose[p];
 				current = TransformComponent::Combine(TransformComponent::inverse(parent), current);
 			}
-			bindPose.SetLocalTransform(i, current);
+			bindPose->SetLocalTransform(i, current);
 		}
 
 		return bindPose;

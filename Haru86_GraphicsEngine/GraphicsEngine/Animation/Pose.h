@@ -24,7 +24,7 @@ namespace animation {
 		const std::shared_ptr<TransformComponent> GetLocalTransform(unsigned int index)const;
 		void SetLocalTransform(unsigned int index, const std::shared_ptr<TransformComponent>& transform);
 
-		const std::shared_ptr<TransformComponent>& GetGloabalTransform(unsigned int index)const;
+		std::shared_ptr<TransformComponent> GetGloabalTransform(unsigned int index)const;
 		const std::shared_ptr<TransformComponent>& operator[](unsigned int index)const;
 
 		void GetMatrixPalette(std::vector<glm::mat4>& out);

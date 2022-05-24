@@ -1,6 +1,5 @@
 #include "Pose.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
-
 namespace animation {
 	Pose::Pose() {
 	}
@@ -62,9 +61,9 @@ namespace animation {
 		m_Joints[index] = transform;
 	}
 
-	const std::shared_ptr<TransformComponent>& Pose::GetGloabalTransform(unsigned int index)const {
+	std::shared_ptr<TransformComponent> Pose::GetGloabalTransform(unsigned int index)const {
 		std::shared_ptr<TransformComponent> result = m_Joints[index];
-		for (int p = m_Parents[index]; p >= 0;p=m_Parents[p]) {
+		for (int p = m_Parents[index]; p > 0;p=m_Parents[p]) {
 			result = TransformComponent::Combine(m_Joints[p],result);
 		}
 

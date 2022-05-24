@@ -49,8 +49,8 @@ namespace gltf {
 		bool LoadMesh();
 
 		bool LoadAnimation();
-		animation::Pose LoadRestPose();
-		animation::Pose LoadBindPose();
+		std::shared_ptr<animation::Pose> LoadRestPose();
+		std::shared_ptr<animation::Pose> LoadBindPose();
 		std::vector<std::string> LoadJointNames()const;
 
 		bool LoadSkeleton();

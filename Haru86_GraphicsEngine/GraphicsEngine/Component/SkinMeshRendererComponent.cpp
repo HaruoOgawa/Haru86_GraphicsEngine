@@ -23,7 +23,7 @@ SkinMeshRendererComponent::SkinMeshRendererComponent(Object* o, std::string objP
 
 	m_Skeleton = data->GetSkeleton();
 	m_CurrentPose = m_Skeleton->GetRestPose();
-	m_CurrentPose.GetMatrixPalette(m_PoseMatrix);
+	m_CurrentPose->GetMatrixPalette(m_PoseMatrix);
 
 	material = std::make_shared<Material>(vertexShaderName, fragmentShaderName);
 }
