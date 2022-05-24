@@ -138,6 +138,7 @@ std::shared_ptr<TransformComponent> TransformComponent::Combine(const std::share
 	result->SetPosition(a->GetRotation() * (a->GetScale() * b->GetPosition()));
 	result->SetPosition(a->GetPosition()+result->GetPosition());
 
+	result->CalMatrix();
 	return result;
 }
 
@@ -155,7 +156,7 @@ std::shared_ptr<TransformComponent> TransformComponent::inverse(const std::share
 	inv->SetPosition(
 		inv->GetRotation()*(inv->GetScale()*(t->GetPosition()-1.0f))
 	);
-
+	inv->CalMatrix();
 	return inv;
 }
 

@@ -61,6 +61,7 @@ namespace animation {
 		m_Joints[index] = transform;
 	}
 
+	// ルートの親要素から処理対象のノード(子要素)までのモデル行列の積を求める
 	std::shared_ptr<TransformComponent> Pose::GetGloabalTransform(unsigned int index)const {
 		std::shared_ptr<TransformComponent> result = m_Joints[index];
 		for (int p = m_Parents[index]; p > 0;p=m_Parents[p]) {

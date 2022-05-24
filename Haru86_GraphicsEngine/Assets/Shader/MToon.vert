@@ -25,10 +25,14 @@ out vec3 WorldNormal;
 #define rot(a) mat2(cos(a),-sin(a),sin(a),cos(a))
 
 void main(){
-	mat4 skin=(pose[joints.x]*invBindPose[joints.x])*weights[joints.x];
-	skin+=(pose[joints.y]*invBindPose[joints.y])*weights[joints.y];
-	skin+=(pose[joints.z]*invBindPose[joints.z])*weights[joints.z];
-	skin+=(pose[joints.w]*invBindPose[joints.w])*weights[joints.w];
+
+	// 元の頂点のモデル座標系(グローバルポーズ) => Tポーズ型の親子関係を加味したジョイントの座標系(ローカルポーズ) => 次のポーズのモデル座標系(グローバルポーズ)
+	// といったように座標系を変換していく必要がある
+	// weightで影響の度合いを調整
+	mat4 skin=(pose[int(joints.x)]*invBindPose[int(joints.x)])*weights[int(joints.x)];
+	skin+=(pose[int(joints.y)]*invBindPose[int(joints.y)])*weights[int(joints.y)];
+	skin+=(pose[int(joints.z)]*invBindPose[int(joints.z)])*weights[int(joints.z)];
+	skin+=(pose[int(joints.w)]*invBindPose[int(joints.w)])*weights[int(joints.w)];
 
 	vec4 pos=vec4(vertex,1.0);
 	gl_Position=MVPMatrix*skin*pos;

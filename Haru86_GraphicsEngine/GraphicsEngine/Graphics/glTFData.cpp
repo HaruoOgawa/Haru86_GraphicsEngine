@@ -60,7 +60,7 @@ namespace gltf {
 		//if (!LoadNode())return false;
 		if (!LoadMesh())return false;
 		if (!LoadSkeleton())return false;
-		if (!LoadAnimation())return false;
+		//if (!LoadAnimation())return false;
 
 		return true;
 	}
@@ -247,9 +247,10 @@ namespace gltf {
 	std::shared_ptr<animation::Pose> glTFData::LoadRestPose() {
 		unsigned int boneCount = static_cast<unsigned int>(m_Model.nodes.size());
 		std::shared_ptr<animation::Pose> result=std::make_shared<animation::Pose>(boneCount);
-
+		
 		for (unsigned int i = 0; i < boneCount;i++) {
 			tinygltf::Node node = m_Model.nodes[i];
+
 			result->SetLocalTransform(i, GetLocalTransform(node));
 
 			//int parent = GetNodeIndex(node.,&m_Model.nodes[0],boneCount);
@@ -268,12 +269,12 @@ namespace gltf {
 		std::shared_ptr<animation::Pose> restPose = LoadRestPose();
 		unsigned int numBones = restPose->Size();
 		std::vector<std::shared_ptr<TransformComponent>> worldBindPose(numBones);
-		Console::Log("numBones: %d\n", numBones);
+		
 		for (unsigned int i = 0; i < numBones;i++) {
 			worldBindPose[i] = restPose->GetGloabalTransform(i);
 		}
 
-		//
+		// 逆バインドポーズ行列の取得
 		unsigned int numSkins = m_Model.skins.size();
 		for (unsigned int i = 0; i < numSkins;i++) {
 			tinygltf::Skin* skin = &m_Model.skins[i];
@@ -298,7 +299,7 @@ namespace gltf {
 			}
 		}
 
-		//
+		// スキンメッシュのための計算
 		std::shared_ptr<animation::Pose> bindPose = restPose;
 		for (unsigned int i = 0; i < numBones;i++) {
 			std::shared_ptr<TransformComponent> current = worldBindPose[i];
@@ -375,6 +376,8 @@ namespace gltf {
 		if (node.scale.size() > 0) {
 			result->SetScale(glm::vec3(node.scale[0], node.scale[1], node.scale[2]));
 		}
+
+		result->CalMatrix();
 
 		return result;
 	}
