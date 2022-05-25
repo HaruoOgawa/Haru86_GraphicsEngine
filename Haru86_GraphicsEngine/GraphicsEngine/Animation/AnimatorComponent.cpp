@@ -2,13 +2,16 @@
 #include "GraphicsEngine/Object/Object.h"
 #include "GraphicsEngine/Animation/Skeleton.h"
 #include "GraphicsEngine/Animation/Pose.h"
+#include "GraphicsEngine/Animation/Clip.h"
 #include "GraphicsEngine/Message/Console.h"
 #include "GraphicsEngine/Animation/AnimatorComponent.h"
 
 namespace animation {
     AnimatorComponent::AnimatorComponent(Object* o, const std::shared_ptr<Skeleton>& Skeleton):
+    //AnimatorComponent::AnimatorComponent(Object* o, const std::shared_ptr<Skeleton>& Skeleton, const std::vector<animation::Clip>& AnimationClipList):
         Component(o),
-        m_Skeleton(Skeleton)
+        m_Skeleton(Skeleton)//,
+        //m_AnimationClipList(AnimationClipList)
     {
         // ƒ|[ƒY‚Ì‰Šú‰»
         m_CurrentPose = m_Skeleton->GetRestPose();

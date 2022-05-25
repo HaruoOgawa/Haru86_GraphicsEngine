@@ -6,6 +6,7 @@ class Object;
 namespace animation {
     class Skeleton;
     class Pose;
+    class Clip;
 
     class AnimatorComponent :
         public Component
@@ -13,8 +14,11 @@ namespace animation {
         std::shared_ptr<Skeleton> m_Skeleton;
         std::vector<glm::mat4> m_PoseMatrix;
         std::shared_ptr<Pose> m_CurrentPose;
+
+       // std::vector<animation::Clip> m_AnimationClipList;
     public:
         AnimatorComponent(Object* o,const std::shared_ptr<Skeleton>& Skeleton);
+        //AnimatorComponent(Object* o,const std::shared_ptr<Skeleton>& Skeleton,const std::vector<animation::Clip>& AnimationClipList);
         virtual ~AnimatorComponent();
 
         virtual void Update() override;

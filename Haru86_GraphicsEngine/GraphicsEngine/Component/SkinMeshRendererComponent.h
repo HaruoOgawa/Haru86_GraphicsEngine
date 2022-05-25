@@ -11,7 +11,7 @@ namespace animation {
 class SkinMeshRendererComponent :
 	public ARendererComponent
 {
-	std::shared_ptr<animation::AnimatorComponent> m_Animator;
+	std::shared_ptr<animation::AnimatorComponent> m_Animator; // Updateはルートノードでしか呼ばないのでAddComponentしない
 public:
 	SkinMeshRendererComponent(Object* o, std::string objPath,const std::shared_ptr<Mesh>& MeshData,const std::shared_ptr<animation::AnimatorComponent>& Animator,
 		std::string vertexShaderName= "./Assets/Shader/MToon.vert", std::string fragmentShaderName= "./Assets/Shader/MToon.frag");

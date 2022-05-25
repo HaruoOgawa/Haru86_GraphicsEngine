@@ -1,6 +1,7 @@
 #include "glTFData.h"
 #include "GraphicsEngine/Message/Console.h"
 #include "GraphicsEngine/Object/Object.h"
+#include "GraphicsEngine/Object/CNode.h"
 #include "GraphicsEngine/Graphics/Mesh.h"
 #include "GraphicsEngine/Graphics/Primitive.h"
 #include <memory>
@@ -12,7 +13,9 @@
 #include "GraphicsEngine/Animation/TransformTrack.h"
 
 #include "glTFMesh.h"
+#include "GraphicsEngine/Component/SkinMeshRendererComponent.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
+#include "GraphicsEngine/Animation/AnimatorComponent.h"
 
 #define TINYGLTF_IMPLEMENTATION
 #define STB_IMAGE_IMPLEMENTATION
@@ -23,6 +26,7 @@
 namespace gltf {
 	glTFData::glTFData() :
 		m_mesh(nullptr),
+		m_Animator(nullptr),
 		m_Skeleton(nullptr)
 	{
 	}
@@ -60,174 +64,223 @@ namespace gltf {
 		// 各種データのロード
 		if (!LoadAnimation(obj))return false;
 		if (!LoadNode(obj))return false;
-		if (!LoadMesh(obj))return false;
 		
 		return true;
 	}
 
 	bool glTFData::LoadNode(Object* obj) {
+		unsigned int NodeNum = m_Model.nodes.size();
+
+		// GameObjectのノードを作成
+		std::vector<std::shared_ptr<obj::CNode>> NodeList;
+		for (unsigned int NodeIndex = 0; NodeIndex < NodeNum; NodeIndex++) {
+			NodeList.push_back(std::make_shared<obj::CNode>());
+		}
+
+		// 親子関係とMeshの登録
+		for (unsigned int NodeIndex = 0; NodeIndex < NodeNum;NodeIndex++) {
+			// glTFのノード
+			const auto& glTFNode = m_Model.nodes[NodeIndex];
+			
+			// GameObjectのノード
+			auto& GameObjNode = NodeList[NodeIndex];
+
+			// Meshの作成
+			int MeshIndex = glTFNode.mesh;
+			if (MeshIndex != -1) {
+				const auto Mesh = LoadMesh(MeshIndex);
+				std::shared_ptr<SkinMeshRendererComponent> SkinMeshRenderer = std::make_shared<SkinMeshRendererComponent>(obj,"",Mesh,m_Animator);
+				GameObjNode->AddComponent<SkinMeshRendererComponent>(SkinMeshRenderer);
+			}
+
+			// 親子関係の作成
+			 
+			// glTFのルートノードをGameObjectのルートノードに割り当てる
+			if (NodeIndex==0) {
+				obj->GetRootNode()->AddNode(GameObjNode);
+			}
+
+			// 各子要素を現在のノード(親要素)に割り当てる
+			for (const auto child : glTFNode.children) {
+				GameObjNode->AddNode(NodeList[child]);
+				
+				// 子要素のtransformを再構築(vectorを作成)
+
+			}
+		}
+
 		return true;
 	}
 
-	bool glTFData::LoadMesh(Object* obj) {
-		m_mesh = std::make_shared<Mesh>();
+	std::shared_ptr<Mesh> glTFData::LoadMesh(int MeshIndex) {
+		std::shared_ptr<Mesh> GameObjMesh = std::make_shared<Mesh>();
 
-		for (auto mesh : m_Model.meshes) {
-			auto index = 0;
-			for (auto prim : mesh.primitives) {
+		const auto& mesh = m_Model.meshes[MeshIndex];
+		auto index = 0;
+		for (auto prim : mesh.primitives) {
 
-				//get vertices
-				std::unique_ptr<glTFMesh> MeshData = std::make_unique<glTFMesh>();
+			//get vertices
+			std::unique_ptr<glTFMesh> MeshData = std::make_unique<glTFMesh>();
 
-				//vertex
-				auto AccessorsIndex = prim.attributes["POSITION"];
-				auto BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
-				auto ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
-				auto ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
+			//vertex
+			auto AccessorsIndex = prim.attributes["POSITION"];
+			auto BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
+			auto ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
+			auto ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
 
-				MeshData->vertex = std::vector<float>(ByteLength / 4, 0.0);
-				MeshData->subDataVertex = std::vector<unsigned char>(ByteLength, 0);
+			MeshData->vertex = std::vector<float>(ByteLength / 4, 0.0);
+			MeshData->subDataVertex = std::vector<unsigned char>(ByteLength, 0);
 
-				std::copy(
-					m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
-					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
-					MeshData->subDataVertex.begin()
-				);
-				std::memcpy(MeshData->vertex.data(), MeshData->subDataVertex.data(), sizeof(float) * MeshData->vertex.size());
+			std::copy(
+				m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
+				m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
+				MeshData->subDataVertex.begin()
+			);
+			std::memcpy(MeshData->vertex.data(), MeshData->subDataVertex.data(), sizeof(float) * MeshData->vertex.size());
 
-				MeshData->subDataVertex.clear();
+			MeshData->subDataVertex.clear();
 
-				//normal
-				AccessorsIndex = prim.attributes["NORMAL"];
-				BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
-				ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
-				ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
+			//normal
+			AccessorsIndex = prim.attributes["NORMAL"];
+			BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
+			ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
+			ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
 
-				MeshData->normal = std::vector<float>(ByteLength / 4, 0.0f);
-				MeshData->subDataNormal = std::vector<unsigned char>(ByteLength, 0);
-				std::copy(
-					m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
-					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
-					MeshData->subDataNormal.begin()
-				);
-				std::memcpy(MeshData->normal.data(), MeshData->subDataNormal.data(), sizeof(float) * MeshData->normal.size());
+			MeshData->normal = std::vector<float>(ByteLength / 4, 0.0f);
+			MeshData->subDataNormal = std::vector<unsigned char>(ByteLength, 0);
+			std::copy(
+				m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
+				m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
+				MeshData->subDataNormal.begin()
+			);
+			std::memcpy(MeshData->normal.data(), MeshData->subDataNormal.data(), sizeof(float) * MeshData->normal.size());
 
-				MeshData->subDataNormal.clear();
+			MeshData->subDataNormal.clear();
 
-				//texcoord
-				AccessorsIndex = prim.attributes["TEXCOORD_0"];
-				BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
-				ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
-				ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
+			//texcoord
+			AccessorsIndex = prim.attributes["TEXCOORD_0"];
+			BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
+			ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
+			ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
 
-				MeshData->texcoord = std::vector<float>(ByteLength / 4, 0.0f);
-				MeshData->subDataTexcoord = std::vector<unsigned char>(ByteLength, 0);
-				std::copy(
-					m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
-					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
-					MeshData->subDataTexcoord.begin()
-				);
-				std::memcpy(MeshData->texcoord.data(), MeshData->subDataTexcoord.data(), sizeof(float) * MeshData->texcoord.size());
+			MeshData->texcoord = std::vector<float>(ByteLength / 4, 0.0f);
+			MeshData->subDataTexcoord = std::vector<unsigned char>(ByteLength, 0);
+			std::copy(
+				m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
+				m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
+				MeshData->subDataTexcoord.begin()
+			);
+			std::memcpy(MeshData->texcoord.data(), MeshData->subDataTexcoord.data(), sizeof(float) * MeshData->texcoord.size());
 
-				MeshData->subDataTexcoord.clear();
+			MeshData->subDataTexcoord.clear();
 
-				// weight
-				AccessorsIndex = prim.attributes["WEIGHTS_0"];
-				BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
-				ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
-				ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
+			// weight
+			AccessorsIndex = prim.attributes["WEIGHTS_0"];
+			BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
+			ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
+			ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
 
-				MeshData->weights= std::vector<float>(ByteLength / 4, 0.0f);
-				MeshData->subDataWeights= std::vector<unsigned char>(ByteLength, 0);
-				
-				std::copy(
-					m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
-					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
-					MeshData->subDataWeights.begin()
-				);
-				std::memcpy(MeshData->weights.data(), MeshData->subDataWeights.data(), sizeof(float) * MeshData->weights.size());
+			MeshData->weights = std::vector<float>(ByteLength / 4, 0.0f);
+			MeshData->subDataWeights = std::vector<unsigned char>(ByteLength, 0);
 
-				MeshData->subDataTexcoord.clear();
+			std::copy(
+				m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
+				m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
+				MeshData->subDataWeights.begin()
+			);
+			std::memcpy(MeshData->weights.data(), MeshData->subDataWeights.data(), sizeof(float) * MeshData->weights.size());
 
-				// joint
-				AccessorsIndex = prim.attributes["JOINTS_0"];
-				BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
-				ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
-				ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
+			MeshData->subDataTexcoord.clear();
 
-				MeshData->joints = std::vector<int>(ByteLength / 4, 0.0f);
-				MeshData->subDataJoints = std::vector<unsigned char>(ByteLength, 0);
+			// joint
+			AccessorsIndex = prim.attributes["JOINTS_0"];
+			BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
+			ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
+			ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
 
-				std::copy(
-					m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
-					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
-					MeshData->subDataJoints.begin()
-				);
-				std::memcpy(MeshData->joints.data(), MeshData->subDataJoints.data(), sizeof(int) * MeshData->joints.size());
+			MeshData->joints = std::vector<int>(ByteLength / 4, 0.0f);
+			MeshData->subDataJoints = std::vector<unsigned char>(ByteLength, 0);
 
-				std::vector<float> joints_float(MeshData->joints.begin(), MeshData->joints.end());
-				MeshData->joints.clear();
+			std::copy(
+				m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
+				m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
+				MeshData->subDataJoints.begin()
+			);
+			std::memcpy(MeshData->joints.data(), MeshData->subDataJoints.data(), sizeof(int) * MeshData->joints.size());
 
-				//set vertices data
-				std::vector<std::vector<float>> vertices;
-				
-				vertices.push_back(MeshData->vertex);
-				MeshData->vertex.clear();
-				
-				vertices.push_back(MeshData->normal);
-				MeshData->normal.clear();
-				
-				vertices.push_back(MeshData->texcoord);
-				MeshData->texcoord.clear();
+			std::vector<float> joints_float(MeshData->joints.begin(), MeshData->joints.end());
+			MeshData->joints.clear();
 
-				vertices.push_back(MeshData->weights);
-				MeshData->weights.clear();
+			//set vertices data
+			std::vector<std::vector<float>> vertices;
 
-				vertices.push_back(joints_float);
-				joints_float.clear();
+			vertices.push_back(MeshData->vertex);
+			MeshData->vertex.clear();
 
-				// 各要素の次元
-				std::vector<int> dimention;
-				dimention.push_back(3);
-				dimention.push_back(3);
-				dimention.push_back(2);
-				dimention.push_back(4);
-				dimention.push_back(4);
+			vertices.push_back(MeshData->normal);
+			MeshData->normal.clear();
 
-				////get indices///////////////////////////////////
+			vertices.push_back(MeshData->texcoord);
+			MeshData->texcoord.clear();
 
-				AccessorsIndex = prim.indices;
-				BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
-				ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
-				ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
+			vertices.push_back(MeshData->weights);
+			MeshData->weights.clear();
 
-				MeshData->indices = std::vector<unsigned int>(ByteLength / 4, 0);
-				MeshData->subDataIndices = std::vector<unsigned char>(ByteLength, 0);
+			vertices.push_back(joints_float);
+			joints_float.clear();
 
-				std::copy(
-					m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
-					m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
-					MeshData->subDataIndices.begin()
-				);
-				std::memcpy(MeshData->indices.data(), MeshData->subDataIndices.data(), sizeof(unsigned int) * MeshData->indices.size());
-				MeshData->subDataIndices.clear();
+			// 各要素の次元
+			std::vector<int> dimention;
+			dimention.push_back(3);
+			dimention.push_back(3);
+			dimention.push_back(2);
+			dimention.push_back(4);
+			dimention.push_back(4);
 
-				MeshData->mainDataIndices = std::vector<unsigned short>(MeshData->indices.begin(), MeshData->indices.end());
+			////get indices///////////////////////////////////
 
-				//この辺でPrimitiveにデータを渡す
-				std::shared_ptr<Primitive> m_prim = std::make_shared<Primitive>(vertices, dimention, MeshData->mainDataIndices);
-				m_mesh->SetPrimitive(m_prim);
+			AccessorsIndex = prim.indices;
+			BufferViewIndex = m_Model.accessors[AccessorsIndex].bufferView;
+			ByteLength = m_Model.bufferViews[BufferViewIndex].byteLength;
+			ByteOffset = m_Model.bufferViews[BufferViewIndex].byteOffset;
 
-				//すべてのメモリを一応解放
-				vertices.clear();
-				dimention.clear();
-				MeshData->indices.clear();
-				MeshData->mainDataIndices.clear();
+			MeshData->indices = std::vector<unsigned int>(ByteLength / 4, 0);
+			MeshData->subDataIndices = std::vector<unsigned char>(ByteLength, 0);
 
-				index++;
-			}
+			std::copy(
+				m_Model.buffers[0].data.begin() + ByteLength * 0 + ByteOffset,
+				m_Model.buffers[0].data.begin() + ByteLength * 1 - 1 + ByteOffset,
+				MeshData->subDataIndices.begin()
+			);
+			std::memcpy(MeshData->indices.data(), MeshData->subDataIndices.data(), sizeof(unsigned int) * MeshData->indices.size());
+			MeshData->subDataIndices.clear();
 
+			MeshData->mainDataIndices = std::vector<unsigned short>(MeshData->indices.begin(), MeshData->indices.end());
+
+			//この辺でPrimitiveにデータを渡す
+			std::shared_ptr<Primitive> m_prim = std::make_shared<Primitive>(vertices, dimention, MeshData->mainDataIndices);
+			GameObjMesh->SetPrimitive(m_prim);
+
+			//すべてのメモリを一応解放
+			vertices.clear();
+			dimention.clear();
+			MeshData->indices.clear();
+			MeshData->mainDataIndices.clear();
+
+			index++;
 		}
+
+		return GameObjMesh;
+	}
+
+	bool glTFData::LoadAnimation(Object* obj) {
+		if (!LoadSkeleton(obj))return false;
+		//if (!LoadAnimationClips(obj))return false;
+
+		// Animatorを生成する
+		//m_Animator = std::make_shared<animation::AnimatorComponent>(obj, m_Skeleton, m_AnimationClipList);
+		m_Animator = std::make_shared<animation::AnimatorComponent>(obj, m_Skeleton);
+		obj->GetRootNode()->AddComponent<animation::AnimatorComponent>(m_Animator);
 
 		return true;
 	}
@@ -330,14 +383,6 @@ namespace gltf {
 		return result;
 	}
 
-	bool glTFData::LoadAnimation(Object* obj) {
-		// Animatorを生成する
-		// std::shaded_ptr<Animator>
-		if (!LoadSkeleton(obj))return false;
-		if (!LoadAnimationClips(obj))return false;
-		return true;
-	}
-
 	int glTFData::GetNodeIndex(tinygltf::Node* target, tinygltf::Node* allNodes, unsigned int numNodes) {
 		if (target==0 || target==nullptr) {
 			return -1;
@@ -399,11 +444,11 @@ namespace gltf {
 		unsigned int numClips = m_Model.animations.size();
 		unsigned int numNodes = m_Model.nodes.size();
 
-		m_ClipList.resize(numClips);
+		m_AnimationClipList.resize(numClips);
 
 		//
 		for (unsigned int i = 0; i < numClips;i++) {
-			m_ClipList[i].SetName(m_Model.animations[i].name);
+			m_AnimationClipList[i].SetName(m_Model.animations[i].name);
 
 			unsigned int numChannels = m_Model.animations[i].channels.size();
 
@@ -416,19 +461,19 @@ namespace gltf {
 				int nodeId = GetNodeIndex(target,&m_Model.nodes[0],numNodes);
 
 				if (channel.target_path=="translation") {
-					animation::VectorTrack& track = m_ClipList[i][nodeId].GetPositionTrack();
+					animation::VectorTrack& track = m_AnimationClipList[i][nodeId].GetPositionTrack();
 					TrackFromChannel<glm::vec3,3>(track, channel,m_Model.animations[i].samplers);
 				}else if (channel.target_path == "scale") {
-					animation::VectorTrack& track = m_ClipList[i][nodeId].GetScaleTrack();
+					animation::VectorTrack& track = m_AnimationClipList[i][nodeId].GetScaleTrack();
 					TrackFromChannel<glm::vec3, 3>(track, channel, m_Model.animations[i].samplers);
 				}else if (channel.target_path == "rotation") {
-					animation::QuaternionTrack& track = m_ClipList[i][nodeId].GetRotationTrack();
+					animation::QuaternionTrack& track = m_AnimationClipList[i][nodeId].GetRotationTrack();
 					TrackFromChannel<glm::quat, 4>(track, channel, m_Model.animations[i].samplers);
 				}
 			}
 
 			//
-			m_ClipList[i].RecalculateDuration();
+			m_AnimationClipList[i].RecalculateDuration();
 		}
 
 		//

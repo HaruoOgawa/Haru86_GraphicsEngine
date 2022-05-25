@@ -16,15 +16,9 @@ class Object;
 class Mesh;
 class TransformComponent;
 
-/*namespace animation {
-	class Pose;
-
-	template<typename T,int N>
-	class CTrack;
-
-	template<unsigned int N>
-	class CFrame;
-}*/
+namespace animation {
+	class AnimatorComponent;
+}
 
 namespace gltf {
 	class glTFData
@@ -32,10 +26,10 @@ namespace gltf {
 		tinygltf::Model m_Model;
 
 		std::shared_ptr<Mesh> m_mesh;
+		
+		std::shared_ptr<animation::AnimatorComponent> m_Animator;
 		std::shared_ptr<animation::Skeleton> m_Skeleton;
-
-		std::vector<animation::Clip> m_ClipList;
-		std::vector<animation::Pose> m_PoseList;
+		std::vector<animation::Clip> m_AnimationClipList;
 	public:
 		glTFData();
 		~glTFData();
@@ -48,7 +42,7 @@ namespace gltf {
 		std::shared_ptr<animation::Skeleton> GetSkeleton()const;
 	private:
 		bool LoadNode(Object* obj);
-		bool LoadMesh(Object* obj);
+		std::shared_ptr<Mesh> LoadMesh(int MeshIndex);
 
 		bool LoadAnimation(Object* obj);
 		bool LoadSkeleton(Object* obj);
