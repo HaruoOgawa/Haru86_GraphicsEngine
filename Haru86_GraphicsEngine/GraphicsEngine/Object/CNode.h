@@ -5,6 +5,7 @@
 #include <typeindex>
 #include <typeinfo>
 #include <SDL.h>
+#include <glm/glm.hpp>
 
 class Component;
 class TransformComponent;
@@ -14,6 +15,7 @@ namespace obj {
 	{
 		std::vector<std::shared_ptr<CNode>> m_Nodes;
 		std::shared_ptr<TransformComponent> m_transform;
+		std::vector<glm::mat4> m_ModelMatrixTree;
 		std::unordered_map<std::type_index, std::shared_ptr<Component>> m_ComponentList;
 	public:
 		//

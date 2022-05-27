@@ -29,16 +29,23 @@ namespace obj {
 
 	bool CNode::Draw() {
 		m_transform->CalMatrix();
-		
+
+		//
+		m_ModelMatrixTree.push_back(m_transform->GetMMatrix());
+
 		auto MeshRenderer = GetComponent<MeshRendererComponent>();
-		if (MeshRenderer)MeshRenderer->Draw();
+		if (MeshRenderer)MeshRenderer->Draw(); // m_ModelMatrixTree‚ð“n‚·
 		
 		auto SkinMeshRenderer = GetComponent<SkinMeshRendererComponent>();
-		if (SkinMeshRenderer)SkinMeshRenderer->Draw();
+		if (SkinMeshRenderer)SkinMeshRenderer->Draw(); // m_ModelMatrixTree‚ð“n‚·
 
 		for (auto node : m_Nodes) {
+			// m_ModelMatrixTree‚ðŽq—v‘f‚ÌDraw‚É“n‚·
 			node->Draw();
 		}
+
+		// m_ModelMatrixTree‚ÌƒŠƒZƒbƒg
+		m_ModelMatrixTree.clear();
 
 		return true;
 	}

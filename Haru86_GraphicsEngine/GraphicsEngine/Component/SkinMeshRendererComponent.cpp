@@ -13,8 +13,10 @@
 #include "GraphicsEngine/Animation/AnimatorComponent.h"
 
 SkinMeshRendererComponent::SkinMeshRendererComponent(Object* o, std::string objPath, const std::shared_ptr<Mesh>& MeshData, const std::shared_ptr<animation::AnimatorComponent>& Animator,
-	std::string vertexShaderName, std::string fragmentShaderName) :
-	ARendererComponent(o)
+	int MeshIndex, const std::string& NodeName, std::string vertexShaderName, std::string fragmentShaderName) :
+	ARendererComponent(o),
+	m_MeshIndex(MeshIndex),
+	m_NodeName(NodeName)
 {
 	mesh = MeshData;
 	m_Animator = Animator;

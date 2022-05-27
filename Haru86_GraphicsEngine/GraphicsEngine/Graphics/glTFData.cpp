@@ -89,14 +89,14 @@ namespace gltf {
 			int MeshIndex = glTFNode.mesh;
 			if (MeshIndex != -1) {
 				const auto Mesh = LoadMesh(MeshIndex);
-				std::shared_ptr<SkinMeshRendererComponent> SkinMeshRenderer = std::make_shared<SkinMeshRendererComponent>(obj,"",Mesh,m_Animator);
+				std::shared_ptr<SkinMeshRendererComponent> SkinMeshRenderer = std::make_shared<SkinMeshRendererComponent>(obj,"",Mesh,m_Animator, MeshIndex,glTFNode.name);
 				GameObjNode->AddComponent<SkinMeshRendererComponent>(SkinMeshRenderer);
 			}
 
 			// 親子関係の作成
 			 
 			// glTFのルートノードをGameObjectのルートノードに割り当てる
-			if (NodeIndex==0) {
+			if (NodeIndex!=-1) {
 				obj->GetRootNode()->AddNode(GameObjNode);
 			}
 
