@@ -38,8 +38,8 @@ void SkinMeshRendererComponent::Draw() {
 
 void SkinMeshRendererComponent::Draw(const std::vector<glm::mat4>& ModelMatrixTree) {
 	glm::mat4 MMatrix = glm::mat4(1.0);
-	//for (int MatIndex = 0; MatIndex < ModelMatrixTree.size(); MatIndex++) {
-	for (int MatIndex = ModelMatrixTree.size() - 1; MatIndex >= 0; MatIndex--) {
+	for (int MatIndex = 0; MatIndex < ModelMatrixTree.size(); MatIndex++) {
+	//for (int MatIndex = ModelMatrixTree.size() - 1; MatIndex >= 0; MatIndex--) {
 		const auto& mat = ModelMatrixTree[MatIndex];
 		MMatrix *= mat;
 	}
