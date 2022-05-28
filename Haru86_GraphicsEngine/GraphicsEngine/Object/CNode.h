@@ -25,6 +25,7 @@ namespace obj {
 		//
 		bool Update();
 		bool Draw();
+		bool Draw(const std::vector<glm::mat4>& ModelMatrixTree);
 		void ProcessInput(const SDL_Event& e);
 
 		//

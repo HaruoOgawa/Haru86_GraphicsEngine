@@ -34,6 +34,16 @@ void SkinMeshRendererComponent::Update()
 }
 
 void SkinMeshRendererComponent::Draw() {
+}
+
+void SkinMeshRendererComponent::Draw(const std::vector<glm::mat4>& ModelMatrixTree) {
+	glm::mat4 MMatrix = glm::mat4(1.0);
+	//for (int MatIndex = 0; MatIndex < ModelMatrixTree.size(); MatIndex++) {
+	for (int MatIndex = ModelMatrixTree.size() - 1; MatIndex >= 0; MatIndex--) {
+		const auto& mat = ModelMatrixTree[MatIndex];
+		MMatrix *= mat;
+	}
+	
 	if (useZTest == true) {
 		glEnable(GL_DEPTH_TEST);
 	}
@@ -45,7 +55,7 @@ void SkinMeshRendererComponent::Draw() {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	material->SetActive();
 	material->SetMatrixUniform("MVPMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetMVPMatrix());
-	material->SetMatrixUniform("MMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetMMatrix());
+	material->SetMatrixUniform("MMatrix", MMatrix);
 	material->SetMatrixUniform("VMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetVMatrix());
 	material->SetMatrixUniform("PMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetPMatrix());
 	material->SetFloatUniform("_time", game->time);

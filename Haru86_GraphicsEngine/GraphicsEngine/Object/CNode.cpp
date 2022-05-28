@@ -30,6 +30,23 @@ namespace obj {
 	bool CNode::Draw() {
 		m_transform->CalMatrix();
 
+		auto MeshRenderer = GetComponent<MeshRendererComponent>();
+		if (MeshRenderer)MeshRenderer->Draw(); // m_ModelMatrixTree‚ð“n‚·
+
+		for (auto node : m_Nodes) {
+			// m_ModelMatrixTree‚ðŽq—v‘f‚ÌDraw‚É“n‚·
+			node->Draw();
+		}
+
+		m_ModelMatrixTree.clear();
+
+		return true;
+	}
+
+	bool CNode::Draw(const std::vector<glm::mat4>& ModelMatrixTree) {
+		m_transform->CalMatrix();
+		m_ModelMatrixTree = ModelMatrixTree;
+
 		//
 		m_ModelMatrixTree.push_back(m_transform->GetMMatrix());
 
@@ -37,11 +54,11 @@ namespace obj {
 		if (MeshRenderer)MeshRenderer->Draw(); // m_ModelMatrixTree‚ð“n‚·
 		
 		auto SkinMeshRenderer = GetComponent<SkinMeshRendererComponent>();
-		if (SkinMeshRenderer)SkinMeshRenderer->Draw(); // m_ModelMatrixTree‚ð“n‚·
+		if (SkinMeshRenderer)SkinMeshRenderer->Draw(m_ModelMatrixTree); // m_ModelMatrixTree‚ð“n‚·
 
 		for (auto node : m_Nodes) {
 			// m_ModelMatrixTree‚ðŽq—v‘f‚ÌDraw‚É“n‚·
-			node->Draw();
+			node->Draw(m_ModelMatrixTree);
 		}
 
 		// m_ModelMatrixTree‚ÌƒŠƒZƒbƒg

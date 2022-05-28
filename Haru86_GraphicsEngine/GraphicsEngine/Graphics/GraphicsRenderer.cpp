@@ -177,7 +177,8 @@ void GraphicsRenderer::Draw() {
 	glEnable(GL_DEPTH_TEST);
 
 	for (auto obj : mgame->gameObjectList) {
-		obj->GetRootNode()->Draw();
+		std::vector<glm::mat4> ModelMatrixTree;
+		obj->GetRootNode()->Draw(ModelMatrixTree);
 	}
 
 	if (mgame->m_App) {
@@ -195,7 +196,9 @@ void GraphicsRenderer::Draw() {
 	glEnable(GL_DEPTH_TEST);
 
 	for (auto obj : mgame->gameObjectList) {
-		obj->GetRootNode()->Draw();
+		std::vector<glm::mat4> ModelMatrixTree;
+		obj->GetRootNode()->Draw(ModelMatrixTree);
+		ModelMatrixTree.clear();
 	}
 
 	if (mgame->m_App) {

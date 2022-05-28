@@ -36,7 +36,7 @@ void main(){
 
 	vec4 pos=vec4(vertex,1.0);
 	//pos=skin*pos;
-	gl_Position=MVPMatrix*pos;
+	gl_Position=PMatrix*VMatrix*MMatrix*pos;
 	uv=texcoord;
 	CameraPos=_CameraPos;
 	WorldVertexPos=(MMatrix*skin*pos).xyz;

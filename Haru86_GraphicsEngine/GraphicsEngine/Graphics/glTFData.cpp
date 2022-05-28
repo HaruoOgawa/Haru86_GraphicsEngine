@@ -85,6 +85,13 @@ namespace gltf {
 			// GameObjectのノード
 			auto& GameObjNode = NodeList[NodeIndex];
 
+			// TransformをNodeが持つものに変更
+			auto NodeTransform = GetLocalTransform(glTFNode);
+			GameObjNode->GetTransform()->SetPosition(NodeTransform->GetPosition());
+			GameObjNode->GetTransform()->SetRotation(NodeTransform->GetRotation());
+			GameObjNode->GetTransform()->SetScale(NodeTransform->GetScale());
+			GameObjNode->GetTransform()->CalMatrix();
+
 			// Meshの作成
 			int MeshIndex = glTFNode.mesh;
 			if (MeshIndex != -1) {
@@ -94,7 +101,7 @@ namespace gltf {
 			}
 
 			// 親子関係の作成
-			 
+			
 			// glTFのルートノードをGameObjectのルートノードに割り当てる
 			if (NodeIndex!=-1) {
 				obj->GetRootNode()->AddNode(GameObjNode);
@@ -103,9 +110,6 @@ namespace gltf {
 			// 各子要素を現在のノード(親要素)に割り当てる
 			for (const auto child : glTFNode.children) {
 				GameObjNode->AddNode(NodeList[child]);
-				
-				// 子要素のtransformを再構築(vectorを作成)
-
 			}
 		}
 

@@ -21,5 +21,6 @@ public:
 
 	virtual void Update() override;
 	virtual void Draw() override;
+	void Draw(const std::vector<glm::mat4>& ModelMatrixTree);
 	virtual void ProcessInput(const SDL_Event& e) override;
 };
