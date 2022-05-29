@@ -7,11 +7,11 @@
 #include "GraphicsEngine/Animation/AnimatorComponent.h"
 
 namespace animation {
-    AnimatorComponent::AnimatorComponent(Object* o, const std::shared_ptr<Skeleton>& Skeleton):
-    //AnimatorComponent::AnimatorComponent(Object* o, const std::shared_ptr<Skeleton>& Skeleton, const std::vector<animation::Clip>& AnimationClipList):
+    //AnimatorComponent::AnimatorComponent(Object* o, const std::shared_ptr<Skeleton>& Skeleton):
+    AnimatorComponent::AnimatorComponent(Object* o, const std::shared_ptr<Skeleton>& Skeleton, const std::vector<std::shared_ptr<animation::Clip>>& AnimationClipList):
         Component(o),
-        m_Skeleton(Skeleton)//,
-        //m_AnimationClipList(AnimationClipList)
+        m_Skeleton(Skeleton),
+        m_AnimationClipList(AnimationClipList)
     {
         // ƒ|[ƒY‚Ì‰Šú‰»
         m_CurrentPose = m_Skeleton->GetRestPose();

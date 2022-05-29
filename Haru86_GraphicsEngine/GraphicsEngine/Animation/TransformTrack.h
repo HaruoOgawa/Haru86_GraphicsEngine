@@ -9,9 +9,9 @@ namespace animation {
 	{
 	protected:
 		unsigned int m_Id;
-		VectorTrack m_Position;
-		QuaternionTrack m_Rotation;
-		VectorTrack m_Scale;
+		std::shared_ptr<VectorTrack> m_Position;
+		std::shared_ptr<QuaternionTrack> m_Rotation;
+		std::shared_ptr<VectorTrack> m_Scale;
 	public:
 		TransformTrack();
 		~TransformTrack() = default;
@@ -19,9 +19,9 @@ namespace animation {
 		unsigned int GetID()const;
 		void SetId(unsigned int id);
 
-		VectorTrack& GetPositionTrack();
-		QuaternionTrack& GetRotationTrack();
-		VectorTrack& GetScaleTrack();
+		std::shared_ptr<VectorTrack>& GetPositionTrack();
+		std::shared_ptr<QuaternionTrack>& GetRotationTrack();
+		std::shared_ptr<VectorTrack>& GetScaleTrack();
 
 		float GetStartTime();
 		float GetEndTime();

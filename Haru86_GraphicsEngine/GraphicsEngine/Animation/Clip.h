@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <memory>
 #include <string>
 
 namespace animation {
@@ -16,7 +17,8 @@ namespace animation {
 		unsigned int Size()const;
 
 		float Sample(Pose& outPose,float time);
-		TransformTrack& operator[](unsigned int joint);
+		std::shared_ptr<TransformTrack>& operator[](unsigned int joint);
+		std::shared_ptr<TransformTrack>& GetTrack(unsigned int joint);
 
 		void RecalculateDuration();
 
@@ -28,7 +30,7 @@ namespace animation {
 		bool GetLooping()const;
 		void SetLooping(bool inLooping);
 	protected:
-		std::vector<TransformTrack> m_Tracks;
+		std::vector<std::shared_ptr<TransformTrack>> m_Tracks;
 		std::string m_Name;
 		float m_StartTime;
 		float m_EndTime;

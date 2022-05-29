@@ -15,10 +15,10 @@ namespace animation {
         std::vector<glm::mat4> m_PoseMatrix;
         std::shared_ptr<Pose> m_CurrentPose;
 
-       // std::vector<animation::Clip> m_AnimationClipList;
+        std::vector<std::shared_ptr<animation::Clip>> m_AnimationClipList;
     public:
-        AnimatorComponent(Object* o,const std::shared_ptr<Skeleton>& Skeleton);
-        //AnimatorComponent(Object* o,const std::shared_ptr<Skeleton>& Skeleton,const std::vector<animation::Clip>& AnimationClipList);
+        //AnimatorComponent(Object* o,const std::shared_ptr<Skeleton>& Skeleton);
+        AnimatorComponent(Object* o,const std::shared_ptr<Skeleton>& Skeleton,const std::vector<std::shared_ptr<animation::Clip>>& AnimationClipList);
         virtual ~AnimatorComponent();
 
         virtual void Update() override;

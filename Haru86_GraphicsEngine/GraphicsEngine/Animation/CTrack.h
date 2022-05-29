@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <memory>
 #include <glm/glm.hpp>
 #include "EInterpolationType.h"
 #include "CFrame.h"
@@ -23,13 +24,14 @@ namespace animation {
 
 		//
 		T Sample(float time, bool looping);
-		CFrame<N>& operator[](unsigned int index);
+		std::shared_ptr<animation::CFrame<N>>& operator[](unsigned int index);
+		std::shared_ptr<animation::CFrame<N>>& GetFrame(unsigned int index);
 			
 		//
 		T Hermite(float t, const T& p1, const T& s1, const T& _p2, const T& s2);
 	protected:
 		// variable
-		std::vector<CFrame<N>> m_Frames;
+		std::vector<std::shared_ptr<CFrame<N>>> m_Frames;
 		EInterpolationType m_InterpolationType;
 
 		// function

@@ -4,7 +4,10 @@
 
 namespace animation {
 	TransformTrack::TransformTrack() :
-		m_Id(0)
+		m_Id(0),
+		m_Position(std::make_shared<VectorTrack>()),
+		m_Rotation(std::make_shared<QuaternionTrack>()),
+		m_Scale(std::make_shared<VectorTrack>())
 	{
 	}
 
@@ -15,15 +18,15 @@ namespace animation {
 		m_Id = id;
 	}
 
-	VectorTrack& TransformTrack::GetPositionTrack() {
+	std::shared_ptr<VectorTrack>& TransformTrack::GetPositionTrack() {
 		return m_Position;
 	}
 
-	QuaternionTrack& TransformTrack::GetRotationTrack() {
+	std::shared_ptr<QuaternionTrack>& TransformTrack::GetRotationTrack() {
 		return m_Rotation;
 	}
 
-	VectorTrack& TransformTrack::GetScaleTrack() {
+	std::shared_ptr<VectorTrack>& TransformTrack::GetScaleTrack() {
 		return m_Scale;
 	}
 
@@ -32,14 +35,14 @@ namespace animation {
 		bool isSet = false;
 
 		//
-		if (m_Position.GetSize() > 1) {
-			result = m_Position.GetStartTime();
+		if (m_Position->GetSize() > 1) {
+			result = m_Position->GetStartTime();
 			isSet = true;
 		}
 
 		//
-		if (m_Rotation.GetSize() > 1) {
-			float rotationStart = m_Rotation.GetStartTime();
+		if (m_Rotation->GetSize() > 1) {
+			float rotationStart = m_Rotation->GetStartTime();
 			if (rotationStart < result || !isSet) {
 				result = rotationStart;
 				isSet = true;
@@ -47,8 +50,8 @@ namespace animation {
 		}
 
 		//
-		if (m_Scale.GetSize() > 1) {
-			float scaleStart = m_Scale.GetStartTime();
+		if (m_Scale->GetSize() > 1) {
+			float scaleStart = m_Scale->GetStartTime();
 			if (scaleStart < result || !isSet) {
 				result = scaleStart;
 				isSet = true;
@@ -64,14 +67,14 @@ namespace animation {
 		bool isSet = false;
 
 		//
-		if (m_Position.GetSize() > 1) {
-			result = m_Position.GetEndTime();
+		if (m_Position->GetSize() > 1) {
+			result = m_Position->GetEndTime();
 			isSet = true;
 		}
 
 		//
-		if (m_Rotation.GetSize() > 1) {
-			float rotationEnd = m_Rotation.GetEndTime();
+		if (m_Rotation->GetSize() > 1) {
+			float rotationEnd = m_Rotation->GetEndTime();
 			if (rotationEnd > result || !isSet) {
 				result = rotationEnd;
 				isSet = true;
@@ -79,8 +82,8 @@ namespace animation {
 		}
 
 		//
-		if (m_Scale.GetSize() > 1) {
-			float scaleEnd = m_Scale.GetEndTime();
+		if (m_Scale->GetSize() > 1) {
+			float scaleEnd = m_Scale->GetEndTime();
 			if (scaleEnd > result || !isSet) {
 				result = scaleEnd;
 				isSet = true;
@@ -93,9 +96,9 @@ namespace animation {
 
 	bool TransformTrack::IsValid() {
 		return (
-			m_Position.GetSize() > 1 ||
-			m_Rotation.GetSize() > 1 ||
-			m_Scale.GetSize() > 1
+			m_Position->GetSize() > 1 ||
+			m_Rotation->GetSize() > 1 ||
+			m_Scale->GetSize() > 1
 		);
 	}
 
@@ -103,9 +106,9 @@ namespace animation {
 		std::shared_ptr<TransformComponent> result = ref;
 
 		//
-		if (m_Position.GetSize() > 1)result->SetPosition(m_Position.Sample(time, looping));
-		if (m_Rotation.GetSize() > 1)result->SetRotation(m_Rotation.Sample(time, looping));
-		if (m_Scale.GetSize() > 1)	 result->SetScale(m_Scale.Sample(time, looping));
+		if (m_Position->GetSize() > 1)result->SetPosition(m_Position->Sample(time, looping));
+		if (m_Rotation->GetSize() > 1)result->SetRotation(m_Rotation->Sample(time, looping));
+		if (m_Scale->GetSize() > 1)	 result->SetScale(m_Scale->Sample(time, looping));
 
 		return result;
 	}

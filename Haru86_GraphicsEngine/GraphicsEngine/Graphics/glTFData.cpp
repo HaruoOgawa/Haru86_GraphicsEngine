@@ -281,11 +281,11 @@ namespace gltf {
 
 	bool glTFData::LoadAnimation(Object* obj) {
 		if (!LoadSkeleton(obj))return false;
-		//if (!LoadAnimationClips(obj))return false;
+		if (!LoadAnimationClips(obj))return false;
 
 		// Animatorを生成する(ルートノードのみにアタッチ)
-		//m_Animator = std::make_shared<animation::AnimatorComponent>(obj, m_Skeleton, m_AnimationClipList);
-		m_Animator = std::make_shared<animation::AnimatorComponent>(obj, m_Skeleton);
+		m_Animator = std::make_shared<animation::AnimatorComponent>(obj, m_Skeleton, m_AnimationClipList);
+		//m_Animator = std::make_shared<animation::AnimatorComponent>(obj, m_Skeleton);
 		obj->GetRootNode()->AddComponent<animation::AnimatorComponent>(m_Animator);
 
 		return true;
@@ -454,7 +454,8 @@ namespace gltf {
 
 		//
 		for (unsigned int i = 0; i < numClips;i++) {
-			m_AnimationClipList[i].SetName(m_Model.animations[i].name);
+			m_AnimationClipList[i] = std::make_shared<animation::Clip>();
+			m_AnimationClipList[i]->SetName(m_Model.animations[i].name);
 
 			unsigned int numChannels = m_Model.animations[i].channels.size();
 
@@ -467,19 +468,19 @@ namespace gltf {
 				int nodeId = GetNodeIndex(target,&m_Model.nodes[0],numNodes);
 
 				if (channel.target_path=="translation") {
-					animation::VectorTrack& track = m_AnimationClipList[i][nodeId].GetPositionTrack();
+					std::shared_ptr<animation::VectorTrack> track = m_AnimationClipList[i]->GetTrack(nodeId)->GetPositionTrack();
 					TrackFromChannel<glm::vec3,3>(track, channel,m_Model.animations[i].samplers);
 				}else if (channel.target_path == "scale") {
-					animation::VectorTrack& track = m_AnimationClipList[i][nodeId].GetScaleTrack();
+					std::shared_ptr<animation::VectorTrack> track = m_AnimationClipList[i]->GetTrack(nodeId)->GetScaleTrack();
 					TrackFromChannel<glm::vec3, 3>(track, channel, m_Model.animations[i].samplers);
 				}else if (channel.target_path == "rotation") {
-					animation::QuaternionTrack& track = m_AnimationClipList[i][nodeId].GetRotationTrack();
+					std::shared_ptr<animation::QuaternionTrack> track = m_AnimationClipList[i]->GetTrack(nodeId)->GetRotationTrack();
 					TrackFromChannel<glm::quat, 4>(track, channel, m_Model.animations[i].samplers);
 				}
 			}
 
 			//
-			m_AnimationClipList[i].RecalculateDuration();
+			m_AnimationClipList[i]->RecalculateDuration();
 		}
 
 		//

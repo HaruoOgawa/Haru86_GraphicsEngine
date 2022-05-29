@@ -14,11 +14,11 @@ namespace animation {
 	}
 
 	unsigned int Clip::GetIdAtIndex(unsigned int index)const {
-		return m_Tracks[index].GetID();
+		return m_Tracks[index]->GetID();
 	}
 
 	void Clip::SetIdAtIndex(unsigned int idx, unsigned int id) {
-		return m_Tracks[idx].SetId(id);
+		return m_Tracks[idx]->SetId(id);
 	}
 
 	unsigned int Clip::Size()const {
@@ -33,24 +33,36 @@ namespace animation {
 
 		unsigned int size = m_Tracks.size();
 		for (unsigned int i = 0; i < size; i++) {
-			unsigned int j = m_Tracks[i].GetID();
+			unsigned int j = m_Tracks[i]->GetID();
 			const auto& local = outPose.GetLocalTransform(j);
-			const auto& animated = m_Tracks[i].Sample(local, time, m_Looping);
+			const auto& animated = m_Tracks[i]->Sample(local, time, m_Looping);
 
 			outPose.SetLocalTransform(j, animated);
 		}
 
 		return time;
 	}
-	TransformTrack& Clip::operator[](unsigned int joint) {
+	std::shared_ptr<TransformTrack>& Clip::operator[](unsigned int joint) {
 		for (int i = 0, s = m_Tracks.size(); i < s; ++i) {
-			if (m_Tracks[i].GetID()==joint) {
+			if (m_Tracks[i]->GetID()==joint) {
 				return m_Tracks[i];
 			}
 		}
 
-		m_Tracks.push_back(TransformTrack());
-		m_Tracks[m_Tracks.size() - 1].SetId(joint);
+		m_Tracks.push_back(std::make_shared<TransformTrack>());
+		m_Tracks[m_Tracks.size() - 1]->SetId(joint);
+		return m_Tracks[m_Tracks.size() - 1];
+	}
+
+	std::shared_ptr<TransformTrack>& Clip::GetTrack(unsigned int joint) {
+		for (int i = 0, s = m_Tracks.size(); i < s; ++i) {
+			if (m_Tracks[i]->GetID() == joint) {
+				return m_Tracks[i];
+			}
+		}
+
+		m_Tracks.push_back(std::make_shared<TransformTrack>());
+		m_Tracks[m_Tracks.size() - 1]->SetId(joint);
 		return m_Tracks[m_Tracks.size() - 1];
 	}
 
@@ -63,9 +75,9 @@ namespace animation {
 
 		unsigned int trackSize = m_Tracks.size();
 		for (unsigned int i = 0; i < trackSize;i++) {
-			if (m_Tracks[i].IsValid()) {
-				float startTime = m_Tracks[i].GetStartTime();
-				float endTime = m_Tracks[i].GetEndTime();
+			if (m_Tracks[i]->IsValid()) {
+				float startTime = m_Tracks[i]->GetStartTime();
+				float endTime = m_Tracks[i]->GetEndTime();
 
 				if (startTime<m_StartTime || !startSet) {
 					m_StartTime = startTime;

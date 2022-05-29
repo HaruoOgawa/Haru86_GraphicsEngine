@@ -59,12 +59,12 @@ namespace animation {
 
 	template<typename T, int N>
 	float CTrack<T, N>::GetStartTime()const {
-		return m_Frames[0].m_Time;
+		return m_Frames[0]->m_Time;
 	}
 
 	template<typename T, int N>
 	float CTrack<T, N>::GetEndTime()const {
-		return m_Frames[m_Frames.size() - 1].m_Time;
+		return m_Frames[m_Frames.size() - 1]->m_Time;
 	}
 
 	//
@@ -82,7 +82,12 @@ namespace animation {
 	}
 
 	template<typename T,int N>
-	CFrame<N>& CTrack<T, N>::operator[](unsigned int index) {
+	std::shared_ptr<animation::CFrame<N>>& CTrack<T, N>::operator[](unsigned int index) {
+		return m_Frames[index];
+	}
+
+	template<typename T, int N>
+	std::shared_ptr<animation::CFrame<N>>& CTrack<T, N>::GetFrame(unsigned int index){
 		return m_Frames[index];
 	}
 
@@ -107,6 +112,9 @@ namespace animation {
 	template<typename T,int N>
 	void CTrack<T, N>::Resize(unsigned int size) {
 		m_Frames.resize(size);
+		for (int i = 0; i < size;i++) {
+			m_Frames[i] = std::make_shared<CFrame<N>>();
+		}
 	}
 
 	template<typename T,int N>
@@ -135,8 +143,8 @@ namespace animation {
 
 		// ループアニメーション
 		if (looping) {
-			float startTime = m_Frames[0].m_Time;
-			float endTime = m_Frames[size-1].m_Time;
+			float startTime = m_Frames[0]->m_Time;
+			float endTime = m_Frames[size-1]->m_Time;
 			float duration = endTime - startTime;
 
 			// durationの幅で繰り返す
@@ -155,20 +163,20 @@ namespace animation {
 		}
 		else { // 繰り返さない
 			// スタート時間よりtimeが小さいならアニメーションはまだ始まってすらいないので最初のフレームを返す
-			if (time <= m_Frames[0].m_Time) {
+			if (time <= m_Frames[0]->m_Time) {
 				return 0; 
 			}
 
 			// 最後から1つ前の終了時間(最後はループなら繋がる)を超しているのならその最後の1つ前のフレームを返す
 			// Sample関数は現在のフレームとその次のフレームを計算に使用するため、最後から一つ前のフレームを指定しなければならない
-			if (time >= m_Frames[size-2].m_Time) {
+			if (time >= m_Frames[size-2]->m_Time) {
 				return (int)size - 2;
 			}
 		}
 
 		// 単純に一番近い時間のフレームを探索する 上記↑↑↑の繰り返さない処理では端のフレームしか返さない
 		for (int i = size - 1; i > -1; --i) {
-			if (time>=m_Frames[i].m_Time) {
+			if (time>=m_Frames[i]->m_Time) {
 				return i;
 			}
 		}
@@ -185,8 +193,8 @@ namespace animation {
 		}
 
 		//
-		float startTime = m_Frames[0].m_Time;
-		float endTime = m_Frames[size - 1].m_Time;
+		float startTime = m_Frames[0]->m_Time;
+		float endTime = m_Frames[size - 1]->m_Time;
 		float duration = endTime - startTime;
 		if (duration <=0.0f) {
 			return 0.0f;
@@ -203,11 +211,11 @@ namespace animation {
 			time = time + startTime;
 		}
 		else {
-			if (time<=m_Frames[0].m_Time) {
+			if (time<=m_Frames[0]->m_Time) {
 				time = startTime;
 			}
 
-			if (time>=m_Frames[size-1].m_Time) {
+			if (time>=m_Frames[size-1]->m_Time) {
 				time = endTime;
 			}
 		}
@@ -239,7 +247,7 @@ namespace animation {
 			return T();
 		}
 
-		return Cast(&m_Frames[frame].m_Value[0]);
+		return Cast(&m_Frames[frame]->m_Value[0]);
 	}
 	
 	template<typename T, int N>
@@ -254,8 +262,8 @@ namespace animation {
 
 		//
 		float trackTime = AdjustTimeToFitTrack(time, looping);
-		float thisTime = m_Frames[thisFrame].m_Time;
-		float frameDelta = m_Frames[nextFrame].m_Time - thisTime;
+		float thisTime = m_Frames[thisFrame]->m_Time;
+		float frameDelta = m_Frames[nextFrame]->m_Time - thisTime;
 
 		if (frameDelta<=0.0f) {
 			return T();
@@ -264,8 +272,8 @@ namespace animation {
 		//
 		float t = (trackTime - thisTime) / frameDelta;
 
-		T start = Cast(&m_Frames[thisFrame].m_Value[0]);
-		T end = Cast(&m_Frames[nextFrame].m_Value[0]);
+		T start = Cast(&m_Frames[thisFrame]->m_Value[0]);
+		T end = Cast(&m_Frames[nextFrame]->m_Value[0]);
 
 		return TrackHelpers::Interpolate(start, end, t);
 	}
@@ -282,8 +290,8 @@ namespace animation {
 
 		//
 		float trackTime = AdjustTimeToFitTrack(time, looping);
-		float thisTime = m_Frames[thisFrame].m_Time;
-		float frameDelta = m_Frames[nextFrame].m_Time - thisTime;
+		float thisTime = m_Frames[thisFrame]->m_Time;
+		float frameDelta = m_Frames[nextFrame]->m_Time - thisTime;
 
 		if (frameDelta <= 0.0f) {
 			return T();
@@ -294,15 +302,15 @@ namespace animation {
 		size_t fitSize = sizeof(float);
 
 		//
-		T point1 = Cast(&m_Frames[thisFrame].m_Value[0]);
+		T point1 = Cast(&m_Frames[thisFrame]->m_Value[0]);
 		T slope1;
-		memcpy(&slope1, m_Frames[thisFrame].m_Out, N * fitSize);
+		memcpy(&slope1, m_Frames[thisFrame]->m_Out, N * fitSize);
 		slope1 = slope1 * frameDelta;
 
 		//
-		T point2 = Cast(&m_Frames[nextFrame].m_Value[0]);
+		T point2 = Cast(&m_Frames[nextFrame]->m_Value[0]);
 		T slope2;
-		memcpy(&slope2, m_Frames[nextFrame].m_In, N * fitSize);
+		memcpy(&slope2, m_Frames[nextFrame]->m_In, N * fitSize);
 		slope2 = slope2 * frameDelta;
 
 		//
