@@ -16,7 +16,7 @@ namespace animation {
 		void SetIdAtIndex(unsigned int idx,unsigned int id);
 		unsigned int Size()const;
 
-		float Sample(Pose& outPose,float time);
+		float Sample(std::shared_ptr<Pose>& outPose,float time);
 		std::shared_ptr<TransformTrack>& operator[](unsigned int joint);
 		std::shared_ptr<TransformTrack>& GetTrack(unsigned int joint);
 

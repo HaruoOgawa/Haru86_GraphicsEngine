@@ -25,7 +25,7 @@ namespace animation {
 		return (unsigned int)m_Tracks.size();
 	}
 
-	float Clip::Sample(Pose& outPose, float time) {
+	float Clip::Sample(std::shared_ptr<Pose>& outPose, float time) {
 		if (GetDuration()==0.0f) {
 			return 0.0;
 		}
@@ -34,10 +34,10 @@ namespace animation {
 		unsigned int size = m_Tracks.size();
 		for (unsigned int i = 0; i < size; i++) {
 			unsigned int j = m_Tracks[i]->GetID();
-			const auto& local = outPose.GetLocalTransform(j);
+			const auto& local = outPose->GetLocalTransform(j);
 			const auto& animated = m_Tracks[i]->Sample(local, time, m_Looping);
 
-			outPose.SetLocalTransform(j, animated);
+			outPose->SetLocalTransform(j, animated);
 		}
 
 		return time;

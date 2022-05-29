@@ -16,6 +16,8 @@ namespace animation {
         std::shared_ptr<Pose> m_CurrentPose;
 
         std::vector<std::shared_ptr<animation::Clip>> m_AnimationClipList;
+
+        float m_PlaybackTime;
     public:
         //AnimatorComponent(Object* o,const std::shared_ptr<Skeleton>& Skeleton);
         AnimatorComponent(Object* o,const std::shared_ptr<Skeleton>& Skeleton,const std::vector<std::shared_ptr<animation::Clip>>& AnimationClipList);
