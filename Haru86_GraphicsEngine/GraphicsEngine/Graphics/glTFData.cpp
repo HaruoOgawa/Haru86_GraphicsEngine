@@ -109,8 +109,11 @@ namespace gltf {
 			// 上記の処理を経てもなおノードが親要素も持っていないのならglTFのルートノードをGameObjectのルートノードに割り当てる
 			if (GameObjNode->GetParentIndex() == -1) {
 				obj->GetRootNode()->AddNode(GameObjNode);
+				Console::Log("glTFNode.name: %s\n", glTFNode.name.c_str());
 			}
 		}
+
+		//Console::Log("obj->GetRootNode()->GetNodeList().size(): %d\n", obj->GetRootNode()->GetNodeList().size());
 
 		return true;
 	}
