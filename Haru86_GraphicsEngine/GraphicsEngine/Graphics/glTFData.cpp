@@ -101,15 +101,14 @@ namespace gltf {
 			}
 
 			// 親子関係の作成
-			
-			// glTFのルートノードをGameObjectのルートノードに割り当てる
-			if (NodeIndex!=-1) {
-				obj->GetRootNode()->AddNode(GameObjNode);
-			}
-
 			// 各子要素を現在のノード(親要素)に割り当てる
 			for (const auto child : glTFNode.children) {
 				GameObjNode->AddNode(NodeList[child]);
+				NodeList[child]->SetParentIndex(NodeIndex);
+			}
+			// 上記の処理を経てもなおノードが親要素も持っていないのならglTFのルートノードをGameObjectのルートノードに割り当てる
+			if (GameObjNode->GetParentIndex() == -1) {
+				obj->GetRootNode()->AddNode(GameObjNode);
 			}
 		}
 

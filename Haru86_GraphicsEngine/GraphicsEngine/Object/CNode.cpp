@@ -5,7 +5,9 @@
 #include "GraphicsEngine/Component/SkinMeshRendererComponent.h"
 
 namespace obj {
-	CNode::CNode() {
+	CNode::CNode():
+		m_ParentIndex(-1)
+	{
 		m_transform = std::make_shared<TransformComponent>(nullptr, glm::vec3(0, 0, 0), glm::quat(glm::vec3(0, 0, 0)), glm::vec3(1.0f, 1.0f, 1.0f));
 		AddComponent<TransformComponent>(m_transform);
 	}
@@ -99,5 +101,13 @@ namespace obj {
 
 	const std::shared_ptr<CNode>& CNode::GetNode(int index)const {
 		return m_Nodes[index];
+	}
+
+	void CNode::SetParentIndex(int ParentIndex) {
+		m_ParentIndex = ParentIndex;
+	}
+
+	int CNode::GetParentIndex()const {
+		return m_ParentIndex;
 	}
 }

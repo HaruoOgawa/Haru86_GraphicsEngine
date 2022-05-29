@@ -17,6 +17,7 @@ namespace obj {
 		std::shared_ptr<TransformComponent> m_transform;
 		std::vector<glm::mat4> m_ModelMatrixTree;
 		std::unordered_map<std::type_index, std::shared_ptr<Component>> m_ComponentList;
+		int m_ParentIndex;
 	public:
 		//
 		CNode();
@@ -61,6 +62,9 @@ namespace obj {
 				return val;
 			}
 		}
+
+		void SetParentIndex(int ParentIndex);
+		int GetParentIndex()const;
 	private:
 	};
 }
