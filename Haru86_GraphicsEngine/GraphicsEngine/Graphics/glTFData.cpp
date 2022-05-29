@@ -281,7 +281,7 @@ namespace gltf {
 		if (!LoadSkeleton(obj))return false;
 		//if (!LoadAnimationClips(obj))return false;
 
-		// Animatorを生成する
+		// Animatorを生成する(ルートノードのみにアタッチ)
 		//m_Animator = std::make_shared<animation::AnimatorComponent>(obj, m_Skeleton, m_AnimationClipList);
 		m_Animator = std::make_shared<animation::AnimatorComponent>(obj, m_Skeleton);
 		obj->GetRootNode()->AddComponent<animation::AnimatorComponent>(m_Animator);
@@ -359,7 +359,7 @@ namespace gltf {
 		for (unsigned int i = 0; i < numBones; i++) {
 			std::shared_ptr<TransformComponent> current = worldBindPose[i];
 			int p = bindPose->GetParent(i);
-			if (p >= 0) {
+			if (p > 0) {
 				std::shared_ptr<TransformComponent> parent = worldBindPose[p];
 				current = TransformComponent::Combine(TransformComponent::inverse(parent), current);
 			}

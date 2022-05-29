@@ -35,8 +35,8 @@ void main(){
 	skin+=(pose[int(joints.w)]*invBindPose[int(joints.w)])*weights[int(joints.w)];
 
 	vec4 pos=vec4(vertex,1.0);
-	//pos=skin*pos;
-	gl_Position=PMatrix*VMatrix*MMatrix*skin*pos;
+	pos=skin*pos;
+	gl_Position=PMatrix*VMatrix*MMatrix*pos;
 	uv=texcoord;
 	CameraPos=_CameraPos;
 	WorldVertexPos=(MMatrix*skin*pos).xyz;

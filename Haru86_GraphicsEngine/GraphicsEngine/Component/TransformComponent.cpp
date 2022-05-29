@@ -63,6 +63,8 @@ TransformComponent::TransformComponent(Object* o, const glm::mat4& WorldMatrix):
 	rot[3][3] = 1.0f;
 
 	m_rotation = glm::toQuat(rot);
+
+	CalMatrix();
 }
 
 TransformComponent::~TransformComponent() {
