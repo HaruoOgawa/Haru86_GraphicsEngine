@@ -8,19 +8,24 @@
 #include "GraphicsEngine/Animation/AnimatorComponent.h"
 
 namespace animation {
-    AnimatorComponent::AnimatorComponent(Object* o, const std::shared_ptr<Skeleton>& Skeleton, const std::vector<std::shared_ptr<animation::Clip>>& AnimationClipList):
+    AnimatorComponent::AnimatorComponent(Object* o):
         Component(o),
-        m_Skeleton(Skeleton),
-        m_AnimationClipList(AnimationClipList),
         m_PlaybackTime(0.0f)
     {
-        // ポーズの初期化
-        m_CurrentPose = m_Skeleton->GetRestPose();
-        m_CurrentPose->GetMatrixPalette(m_PoseMatrix);
     }
 
     AnimatorComponent::~AnimatorComponent() {
         m_PoseMatrix.clear();
+    }
+
+    void AnimatorComponent::Set(const std::shared_ptr<Skeleton>& Skeleton, const std::vector<std::shared_ptr<animation::Clip>>& AnimationClipList) {
+        //
+        m_Skeleton = Skeleton;
+        m_AnimationClipList = AnimationClipList;
+
+         // ポーズの初期化
+        m_CurrentPose = m_Skeleton->GetRestPose();
+        m_CurrentPose->GetMatrixPalette(m_PoseMatrix);
     }
 
     void AnimatorComponent::Update() {

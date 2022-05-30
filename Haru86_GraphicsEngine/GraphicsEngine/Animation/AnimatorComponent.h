@@ -19,12 +19,14 @@ namespace animation {
 
         float m_PlaybackTime;
     public:
-        AnimatorComponent(Object* o,const std::shared_ptr<Skeleton>& Skeleton,const std::vector<std::shared_ptr<animation::Clip>>& AnimationClipList);
+        AnimatorComponent(Object* o);
         virtual ~AnimatorComponent();
 
         virtual void Update() override;
         virtual void Draw();
         virtual void ProcessInput(const SDL_Event& e) override;
+
+        void Set(const std::shared_ptr<Skeleton>& Skeleton, const std::vector<std::shared_ptr<animation::Clip>>& AnimationClipList);
 
         const std::shared_ptr<Skeleton>& GetSkeleton()const;
         const std::vector<glm::mat4>& GetPoseMatrix()const;

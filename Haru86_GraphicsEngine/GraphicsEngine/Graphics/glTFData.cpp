@@ -61,9 +61,13 @@ namespace gltf {
 			return false;
 		}
 
+		// Animatorを生成する(ルートノードのみにアタッチ)
+		m_Animator = std::make_shared<animation::AnimatorComponent>(obj);
+		obj->GetRootNode()->AddComponent<animation::AnimatorComponent>(m_Animator);
+
 		// 各種データのロード
-		if (!LoadAnimation(obj))return false;
 		if (!LoadNode(obj))return false;
+		if (!LoadAnimation(obj))return false;
 		
 		return true;
 	}
@@ -280,9 +284,8 @@ namespace gltf {
 		if (!LoadSkeleton(obj))return false;
 		if (!LoadAnimationClips(obj))return false;
 
-		// Animatorを生成する(ルートノードのみにアタッチ)
-		m_Animator = std::make_shared<animation::AnimatorComponent>(obj, m_Skeleton, m_AnimationClipList);
-		obj->GetRootNode()->AddComponent<animation::AnimatorComponent>(m_Animator);
+		//
+		m_Animator->Set(m_Skeleton, m_AnimationClipList);
 
 		return true;
 	}
@@ -298,6 +301,7 @@ namespace gltf {
 	}
 
 	std::shared_ptr<animation::Pose> glTFData::LoadRestPose() {
+		unsigned int nodeCount = static_cast<unsigned int>(m_Model.nodes.size());
 		unsigned int boneCount = static_cast<unsigned int>(m_Model.nodes.size());
 		std::shared_ptr<animation::Pose> result = std::make_shared<animation::Pose>(boneCount);
 
