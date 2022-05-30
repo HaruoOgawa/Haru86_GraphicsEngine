@@ -109,11 +109,8 @@ namespace gltf {
 			// 上記の処理を経てもなおノードが親要素も持っていないのならglTFのルートノードをGameObjectのルートノードに割り当てる
 			if (GameObjNode->GetParentIndex() == -1) {
 				obj->GetRootNode()->AddNode(GameObjNode);
-				Console::Log("glTFNode.name: %s\n", glTFNode.name.c_str());
 			}
 		}
-
-		//Console::Log("obj->GetRootNode()->GetNodeList().size(): %d\n", obj->GetRootNode()->GetNodeList().size());
 
 		return true;
 	}
@@ -285,7 +282,6 @@ namespace gltf {
 
 		// Animatorを生成する(ルートノードのみにアタッチ)
 		m_Animator = std::make_shared<animation::AnimatorComponent>(obj, m_Skeleton, m_AnimationClipList);
-		//m_Animator = std::make_shared<animation::AnimatorComponent>(obj, m_Skeleton);
 		obj->GetRootNode()->AddComponent<animation::AnimatorComponent>(m_Animator);
 
 		return true;
@@ -441,8 +437,13 @@ namespace gltf {
 
 	void glTFData::GetScalarValues(std::vector<float>& out, unsigned int compCount, const tinygltf::Accessor& inAccessor) {
 		out.resize(inAccessor.count * compCount);
-		int BufferIndex=m_Model.bufferViews[inAccessor.bufferView].buffer;
-		std::memcpy(&m_Model.buffers[BufferIndex].data[0], &out[0], sizeof(float) * inAccessor.count * compCount);
+		
+		const auto& BufferView = m_Model.bufferViews[inAccessor.bufferView];
+		int BufferIndex= BufferView.buffer;
+		auto ByteOffset = BufferView.byteOffset;
+		auto ByteLength = BufferView.byteLength;
+
+		std::memcpy(&out[0], &m_Model.buffers[BufferIndex].data[0]+ ByteOffset,  ByteLength);
 	}
 
 	bool glTFData::LoadAnimationClips(Object* obj) {

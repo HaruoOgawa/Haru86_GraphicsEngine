@@ -15,7 +15,7 @@ layout(location=0)in vec3 vertex;
 layout(location=1)in vec3 normal;
 layout(location=2)in vec2 texcoord;
 layout(location=3)in vec4 weights;
-layout(location=4)in ivec4 joints;
+layout(location=4)in vec4 joints;
 
 out vec2 uv;
 out vec3 CameraPos;

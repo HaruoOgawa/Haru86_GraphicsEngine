@@ -19,7 +19,6 @@ namespace animation {
 
         float m_PlaybackTime;
     public:
-        //AnimatorComponent(Object* o,const std::shared_ptr<Skeleton>& Skeleton);
         AnimatorComponent(Object* o,const std::shared_ptr<Skeleton>& Skeleton,const std::vector<std::shared_ptr<animation::Clip>>& AnimationClipList);
         virtual ~AnimatorComponent();
 
