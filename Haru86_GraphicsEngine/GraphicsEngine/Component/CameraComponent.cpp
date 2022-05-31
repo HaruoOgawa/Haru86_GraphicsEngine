@@ -4,6 +4,7 @@
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "GraphicsEngine/Graphics/GraphicsRenderer.h"
 #include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
+#include "GraphicsEngine/Object/CNode.h"
 
 #define ZoomPower 2.0f
 
@@ -31,13 +32,13 @@ void CameraComponent::Start() {
 
 void CameraComponent::Update() {
 	if (m_IsRightClicked) {
-		owner->transform->Rotate(5.0f*m_YMove/ m_ScreenSize.y,-5.0f*m_XMove/ m_ScreenSize.x,0.0f);
+		owner->GetRootNode()->GetComponent<TransformComponent>()->Rotate(5.0f*m_YMove/ m_ScreenSize.y,-5.0f*m_XMove/ m_ScreenSize.x,0.0f);
 	}
 
 	if (m_IsMouseWheel) {
-		glm::vec3 viewDir = glm::normalize(cameraCenter - owner->transform->GetPosition());
+		glm::vec3 viewDir = glm::normalize(cameraCenter - owner->GetRootNode()->GetComponent<TransformComponent>()->GetPosition());
 		float zoomVal = ZoomPower*(float)m_WheelY;
-		owner->transform->Translate(zoomVal * viewDir);
+		owner->GetRootNode()->GetComponent<TransformComponent>()->Translate(zoomVal * viewDir);
 	}
 }
 

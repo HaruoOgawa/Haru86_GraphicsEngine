@@ -66,6 +66,10 @@ const std::vector<std::shared_ptr<Primitive>>& Mesh::GetPrimitiveList()const {
 	return m_primitives;
 }
 
+void Mesh::SetPrimitive(const std::shared_ptr<Primitive>& Primitive) {
+	m_primitives.push_back(Primitive);
+}
+
 void Mesh::UnLoadData() {
 	
 }

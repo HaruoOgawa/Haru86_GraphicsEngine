@@ -7,6 +7,7 @@
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
 #include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
+#include "GraphicsEngine/Object/CNode.h"
 
 CBoxInstancing::CBoxInstancing(Object* o)
 	: Component(o),
@@ -20,7 +21,7 @@ CBoxInstancing::~CBoxInstancing() {
 }
 
 void CBoxInstancing::Start() {
-	owner->transform->SetScale(glm::vec3(1.0));
+	owner->GetRootNode()->GetComponent<TransformComponent>()->SetScale(glm::vec3(1.0));
 	m_mesh = std::make_shared<Mesh>(PrimitiveType::CUBE);
 	m_material = std::make_shared<Material>(
 		"./Assets/Shader/Kura02/InstancedBox.vert",
@@ -46,15 +47,15 @@ void CBoxInstancing::Update() {
 }
 
 void CBoxInstancing::Draw() {
-	owner->transform->CalMatrix();
+	owner->GetRootNode()->GetComponent<TransformComponent>()->CalMatrix();
 	m_material->SetActive();
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix() ); //
-	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
-	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
-	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
+	m_material->SetMatrixUniform("MVPMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetMVPMatrix() ); //
+	m_material->SetMatrixUniform("MMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetMMatrix());
+	m_material->SetMatrixUniform("VMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetVMatrix());
+	m_material->SetMatrixUniform("PMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetPMatrix());
 	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
 	m_material->SetVec3Uniform("_CameraPosition", GraphicsMain::GetInstance()->game_camera_instance->GetPosition());

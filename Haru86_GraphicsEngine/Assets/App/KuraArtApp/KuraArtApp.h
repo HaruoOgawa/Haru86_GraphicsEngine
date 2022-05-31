@@ -19,6 +19,6 @@ private :
     std::unique_ptr<class GameObject> KuraTerrain_obj;
     std::unique_ptr<class AudioObject> audioObj;
     std::unique_ptr<class Object> gpgpu_obj;
-    std::unique_ptr<class CameraObject> camera_obj;
+    std::shared_ptr<class CameraObject> camera_obj;
 };
 

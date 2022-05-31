@@ -6,6 +6,7 @@
 #include "GraphicsEngine/Graphics/ComputeBuffer.h"
 #include "GraphicsEngine/Graphics/Texture.h"
 #include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
+#include "GraphicsEngine/Message/Console.h"
 
 Material::Material()
 	: vertShaderData(-1),
@@ -206,11 +207,11 @@ void Material::LoadShader(std::map<GLenum, std::string> shaders, GLuint& prg, GL
 		GLint status;
 		glGetProgramiv(prg, GL_LINK_STATUS, &status);
 		if (status != GL_TRUE) {
-			SDL_Log("Cannot Load Program Data");
+			Console::Log("Cannot Load Program Data");
 			char buffer[512];
 			memset(buffer, 0, 512);
 			glGetProgramInfoLog(prg, 511, nullptr, buffer);
-			SDL_Log("GLSL Link Status:\n%s", buffer);
+			Console::Log("GLSL Link Status:\n%s", buffer);
 		}
 	}
 }
@@ -226,15 +227,15 @@ void Material::LoadShader(std::string vertName, std::string fragName, GLuint& pr
 		GLint status;
 		glGetProgramiv(prg, GL_LINK_STATUS, &status);
 		if (status != GL_TRUE) {
-			SDL_Log("Cannot Load Program Data");
+			Console::Log("Cannot Load Program Data");
 			char buffer[512];
 			memset(buffer, 0, 512);
 			glGetProgramInfoLog(prg, 511, nullptr, buffer);
-			SDL_Log("GLSL Link Status:\n%s", buffer);
+			Console::Log("GLSL Link Status:\n%s", buffer);
 		}
 		else
 		{
-			//SDL_Log("Success!! Loaded All Shader file");
+			//Console::Log("Success!! Loaded All Shader file");
 		}
 	}
 }
@@ -255,15 +256,15 @@ void Material::LoadShader(std::string vertName, std::string tessellationShaderNa
 		GLint status;
 		glGetProgramiv(prg, GL_LINK_STATUS, &status);
 		if (status != GL_TRUE) {
-			SDL_Log("Cannot Load Program Data");
+			Console::Log("Cannot Load Program Data");
 			char buffer[512];
 			memset(buffer, 0, 512);
 			glGetProgramInfoLog(prg, 511, nullptr, buffer);
-			SDL_Log("GLSL Link Status:\n%s", buffer);
+			Console::Log("GLSL Link Status:\n%s", buffer);
 		}
 		else
 		{
-			//SDL_Log("Success!! Loaded All Shader file");
+			//Console::Log("Success!! Loaded All Shader file");
 		}
 	}
 }
@@ -282,15 +283,15 @@ void Material::LoadShader(std::string vertName, std::string geomName, std::strin
 		GLint status;
 		glGetProgramiv(prg, GL_LINK_STATUS, &status);
 		if (status != GL_TRUE) {
-			SDL_Log("Cannot Load Program Data");
+			Console::Log("Cannot Load Program Data");
 			char buffer[512];
 			memset(buffer, 0, 512);
 			glGetProgramInfoLog(prg, 511, nullptr, buffer);
-			SDL_Log("GLSL Link Status:\n%s", buffer);
+			Console::Log("GLSL Link Status:\n%s", buffer);
 		}
 		else
 		{
-			//SDL_Log("Success!! Loaded All Shader file");
+			//Console::Log("Success!! Loaded All Shader file");
 		}
 	}
 }
@@ -310,18 +311,18 @@ bool Material::CompileShader(std::string shadername, GLenum shaderType, GLuint& 
 		glCompileShader(outShader);
 	}
 	else {
-		SDL_Log("Failure!! cannot open shader file...");
+		Console::Log("Failure!! cannot open shader file...");
 	}
 
 	GLint status;
 	glGetShaderiv(outShader, GL_COMPILE_STATUS, &status);
 	if (status != GL_TRUE) {
-		SDL_Log("Cannnot Load Shader: %s",shadername.c_str());
+		Console::Log("Cannnot Load Shader: %s",shadername.c_str());
 		
 		char buffer[512];
 		memset(buffer, 0, 512);
 		glGetShaderInfoLog(outShader, 511, nullptr, buffer);
-		SDL_Log("GLSL Compile Failed: %s", buffer);
+		Console::Log("GLSL Compile Failed: %s", buffer);
 		return false;
 	}
 
@@ -337,6 +338,12 @@ void Material::SetMatrixUniform(std::string uniformName, glm::mat4 matrix) {
 	auto prg = GetCurrentShaderPrg();
 	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
 	glUniformMatrix4fv(location, 1, GL_FALSE, reinterpret_cast<const float*>(&matrix[0][0]));
+}
+
+void Material::SetMatrixVectorUniform(std::string uniformName, const std::vector<glm::mat4>& matrixVector) {
+	auto prg = GetCurrentShaderPrg();
+	GLuint location = glGetUniformLocation(prg, uniformName.c_str());
+	glUniformMatrix4fv(location, static_cast<unsigned int>(matrixVector.size()), GL_FALSE, reinterpret_cast<const float*>(&matrixVector[0][0]));
 }
 
 void Material::SetFloatUniform(std::string uniformName, float val) {

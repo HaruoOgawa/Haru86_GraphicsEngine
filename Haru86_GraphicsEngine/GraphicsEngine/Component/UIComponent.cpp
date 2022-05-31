@@ -11,6 +11,8 @@
 #include "./TimelineComponent.h"
 #include "../Component/AudioSourceComponent.h"
 #include <algorithm>
+#include "GraphicsEngine/Object/CNode.h"
+
 
 UIComponent::UIComponent(GameObject* o)
 	: Component(o)
@@ -31,9 +33,9 @@ void UIComponent::ProcessInput(const SDL_Event& e) {
 	float fy = static_cast<float>(GraphicsRenderer::GetInstance()->GetScreenSize().y) * 0.5f- static_cast<float>(y);
 
 	if (CheckInnnerBox(fx,fy)&& GraphicsMain::GetInstance()->mouseStateBool) {
-		float maxLeftPointX = owner->
+		float maxLeftPointX = owner->GetRootNode()->
 			GetComponent<RectTransformComponent>()->maxLeftPointX;
-		float maxRightPointX = owner->
+		float maxRightPointX = owner->GetRootNode()->
 			GetComponent<RectTransformComponent>()->maxRightPointX;
 
 		if (fx < maxLeftPointX) {
@@ -56,12 +58,12 @@ void UIComponent::ProcessInput(const SDL_Event& e) {
 		
 		glm::vec2 pos = glm::vec2(xval, yval);
 		glm::vec4 modelPos =
-			glm::inverse(owner->transform->GetPMatrix() * owner->transform->GetVMatrix())
+			glm::inverse(owner->GetRootNode()->GetComponent<TransformComponent>()->GetPMatrix() * owner->GetRootNode()->GetComponent<TransformComponent>()->GetVMatrix())
 			* glm::vec4(pos.x, pos.y, 0.0f, 1.0f);
 		pos = glm::vec2(modelPos.x / modelPos.w, modelPos.y / modelPos.w);
 
-		owner->SetPosition(glm::vec3(pos.x, owner->transform->GetPosition().y, owner->transform->GetPosition().z));
-		owner->
+		owner->SetPosition(glm::vec3(pos.x, owner->GetRootNode()->GetComponent<TransformComponent>()->GetPosition().y, owner->GetRootNode()->GetComponent<TransformComponent>()->GetPosition().z));
+		owner->GetRootNode()->
 			GetComponent<RectTransformComponent>()->rectPosition.x = fx;
 
 		GraphicsMain::GetInstance()->timelineObj->timelineComponent->ResetTimeline();
@@ -73,10 +75,10 @@ void UIComponent::ProcessInput(const SDL_Event& e) {
 }
 
 bool UIComponent::CheckInnnerBox( float x,  float y)const {
-	glm::vec2 rectScale = owner->
+	glm::vec2 rectScale = owner->GetRootNode()->
 		GetComponent<RectTransformComponent>()->rectScale;
 	
-	glm::vec2 rectPosition = owner->
+	glm::vec2 rectPosition = owner->GetRootNode()->
 		GetComponent<RectTransformComponent>()->rectPosition;
 
 	glm::vec2 minPos = rectPosition - rectScale;

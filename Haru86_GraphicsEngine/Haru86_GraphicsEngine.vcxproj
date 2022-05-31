@@ -197,6 +197,20 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GraphicsEngine\Animation\AnimationController.h" />
+    <ClInclude Include="GraphicsEngine\Animation\AnimatorComponent.h" />
+    <ClInclude Include="Assets\App\AnimationLearning\AnimationLearning.h" />
+    <ClInclude Include="GraphicsEngine\Animation\Clip.h" />
+    <ClInclude Include="GraphicsEngine\Animation\CTrack.h" />
+    <ClInclude Include="GraphicsEngine\Animation\CFrame.h" />
+    <ClInclude Include="GraphicsEngine\Animation\CCurve.h" />
+    <ClInclude Include="GraphicsEngine\Animation\EInterpolationType.h" />
+    <ClInclude Include="GraphicsEngine\Component\ARendererComponent.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\glTFData.h" />
+    <ClInclude Include="GraphicsEngine\Library\tinygltf\include\json.hpp" />
+    <ClInclude Include="GraphicsEngine\Library\tinygltf\include\stb_image.h" />
+    <ClInclude Include="GraphicsEngine\Library\tinygltf\include\stb_image_write.h" />
+    <ClInclude Include="GraphicsEngine\Library\tinygltf\include\tiny_gltf.h" />
     <ClInclude Include="GraphicsEngine\Physics\CCellContents.h" />
     <ClInclude Include="GraphicsEngine\Physics\CColliderCell.h" />
     <ClInclude Include="GraphicsEngine\Message\Console.h" />
@@ -216,7 +230,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Graphics\CBloom.h" />
     <ClInclude Include="GraphicsEngine\Component\CameraComponent.h" />
     <ClInclude Include="GraphicsEngine\Object\CameraObject.h" />
-    <ClInclude Include="GraphicsEngine\Graphics\glTFBinaryReader.h" />
+    <ClInclude Include="GraphicsEngine\Graphics\glTFMesh.h" />
     <ClInclude Include="GraphicsEngine\Graphics\glTFLoader.h" />
     <ClInclude Include="GraphicsEngine\Graphics\ComputeBuffer.h" />
     <ClInclude Include="GraphicsEngine\Graphics\ComputeShader.h" />
@@ -233,7 +247,6 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\GraphicsMain\GraphicsMain.h" />
     <ClInclude Include="GraphicsEngine\Object\GameObject.h" />
     <ClInclude Include="GraphicsEngine\Graphics\GraphicsRenderer.h" />
-    <ClInclude Include="GraphicsEngine\App\BaseApp\Main.h" />
     <ClInclude Include="Assets\App\KuraArtApp\KuraArtApp.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Material.h" />
     <ClInclude Include="GraphicsEngine\Component\MeshRendererComponent.h" />
@@ -247,6 +260,8 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Physics\EColliderType.h" />
     <ClInclude Include="GraphicsEngine\Physics\EObjectType.h" />
     <ClInclude Include="GraphicsEngine\Physics\ICollider.h" />
+    <ClInclude Include="GraphicsEngine\Animation\Pose.h" />
+    <ClInclude Include="GraphicsEngine\Object\CNode.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Texture.h" />
     <ClInclude Include="GraphicsEngine\GraphicsMain\Time.h" />
@@ -255,8 +270,20 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Component\TransformComponent.h" />
     <ClInclude Include="GraphicsEngine\Component\UIComponent.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Mesh.h" />
+    <ClInclude Include="GraphicsEngine\Animation\TransformTrack.h" />
+    <ClInclude Include="GraphicsEngine\Animation\Skeleton.h" />
+    <ClInclude Include="GraphicsEngine\Component\SkinMeshRendererComponent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GraphicsEngine\Animation\AnimationController.cpp" />
+    <ClCompile Include="GraphicsEngine\Animation\AnimatorComponent.cpp" />
+    <ClCompile Include="Assets\App\AnimationLearning\AnimationLearning.cpp" />
+    <ClCompile Include="GraphicsEngine\Animation\Clip.cpp" />
+    <ClCompile Include="GraphicsEngine\Animation\CTrack.cpp" />
+    <ClCompile Include="GraphicsEngine\Animation\CFrame.cpp" />
+    <ClCompile Include="GraphicsEngine\Animation\CCurve.cpp" />
+    <ClCompile Include="GraphicsEngine\Component\ARendererComponent.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\glTFData.cpp" />
     <ClCompile Include="GraphicsEngine\Physics\CCellContents.cpp" />
     <ClCompile Include="GraphicsEngine\Physics\CColliderCell.cpp" />
     <ClCompile Include="GraphicsEngine\Physics\CColliderTree.cpp" />
@@ -276,7 +303,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\App\BaseApp\BaseApp.cpp" />
     <ClCompile Include="GraphicsEngine\Component\CameraComponent.cpp" />
     <ClCompile Include="GraphicsEngine\Object\CameraObject.cpp" />
-    <ClCompile Include="GraphicsEngine\Graphics\glTFBinaryReader.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics\glTFMesh.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\glTFLoader.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\ComputeBuffer.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\ComputeShader.cpp" />
@@ -306,6 +333,11 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Object\RaymarchingObject.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\PolygonRaymarchingMixer.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics\PostProcess.cpp" />
+    <ClCompile Include="GraphicsEngine\Animation\TransformTrack.cpp" />
+    <ClCompile Include="GraphicsEngine\Animation\Pose.cpp" />
+    <ClCompile Include="GraphicsEngine\Object\CNode.cpp" />
+    <ClCompile Include="GraphicsEngine\Animation\Skeleton.cpp" />
+    <ClCompile Include="GraphicsEngine\Component\SkinMeshRendererComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shader\CollisionArt\CubeFieldRaymarching.frag" />
@@ -320,6 +352,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <None Include="Assets\Shader\BloomIlluminance.frag" />
     <None Include="Assets\Shader\BloomResult.frag" />
     <None Include="Assets\Shader\DepthColor.frag" />
+    <None Include="Assets\Shader\GridPlane.frag" />
     <None Include="Assets\Shader\Kura02\CubeFieldRaymarching.frag" />
     <None Include="Assets\Shader\Kura02\GPUTrail_Data.comp" />
     <None Include="Assets\Shader\Kura02\GPUTrail_Force.comp" />
@@ -345,6 +378,8 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <None Include="Assets\Shader\KuraShader\KuraTerrain.tese" />
     <None Include="Assets\Shader\KuraShader\KuraTerrain.vert" />
     <None Include="Assets\Shader\LatePostProcess.frag" />
+    <None Include="Assets\Shader\MToon.frag" />
+    <None Include="Assets\Shader\MToon.vert" />
     <None Include="Assets\Shader\PolygonRaymarchingMixer.frag" />
     <None Include="Assets\Shader\PolygonRaymarchingMixer.vert" />
     <None Include="Assets\Shader\PolygonPostProcess.frag" />

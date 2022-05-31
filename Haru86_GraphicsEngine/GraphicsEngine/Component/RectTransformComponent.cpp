@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <glm/glm.hpp>
+#include "GraphicsEngine/Object/CNode.h"
 
 RectTransformComponent::RectTransformComponent(GameObject* o, float wRate, float hRate)
 	:Component(o)
@@ -18,12 +19,12 @@ RectTransformComponent::RectTransformComponent(GameObject* o, float wRate, float
 	pos = pos / (size * 0.5f);
 
 	glm::vec4 modelPos = 
-		glm::inverse(owner->transform->GetPMatrix() *owner->transform->GetVMatrix())
+		glm::inverse(owner->GetRootNode()->GetComponent<TransformComponent>()->GetPMatrix() *owner->GetRootNode()->GetComponent<TransformComponent>()->GetVMatrix())
 		* glm::vec4(pos.x, pos.y, 0.0f, 1.0f);
 	pos = glm::vec2(modelPos.x/ modelPos.w, modelPos.y/ modelPos.w);
 	owner->SetPosition(glm::vec3(pos.x, pos.y, modelPos.z / modelPos.w));
 
-	glm::vec4 uiScreenScale =  owner->transform->GetVMatrix() * glm::vec4(owner->transform->GetScale(), 1.0f);
+	glm::vec4 uiScreenScale =  owner->GetRootNode()->GetComponent<TransformComponent>()->GetVMatrix() * glm::vec4(owner->GetRootNode()->GetComponent<TransformComponent>()->GetScale(), 1.0f);
 	rectScale = glm::vec2(glm::abs(uiScreenScale.x)*size.x*0.5, glm::abs(uiScreenScale.y) * size.y*0.5);
 
 	float val = 0.05f;

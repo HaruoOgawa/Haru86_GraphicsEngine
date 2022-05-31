@@ -1,10 +1,16 @@
 #pragma once
 #include <string>
 #include <memory>
+#include "glTFData.h"
 
-static class glTFLoader
-{
-public:
-	static std::unique_ptr<class Mesh> Load(std::string gltfDataPath);
-};
+class Object;
+class Mesh;
+
+namespace gltf {
+	static class glTFLoader
+	{
+	public:
+		static std::shared_ptr<glTFData> Load(Object* obj,std::string gltfDataPath);
+	};
+}
 

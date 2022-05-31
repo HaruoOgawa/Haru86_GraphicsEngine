@@ -8,6 +8,7 @@
 #include "GraphicsEngine/Component/MeshRendererComponent.h"
 #include "GraphicsEngine/Component/TransformComponent.h"
 #include "../Message/Console.h"
+#include "GraphicsEngine/Object/CNode.h"
 
 namespace physics {
 	CColliderTree::CColliderTree():
@@ -25,7 +26,7 @@ namespace physics {
 	}
 
 	bool CColliderTree::AddCollider(EColliderType ColliderType, EObjectType ObjectType, GameObject* Obj) {
-		const auto& PrimList = Obj->GetComponent<MeshRendererComponent>()->GetMesh()->GetPrimitiveList();
+		const auto& PrimList = Obj->GetRootNode()->GetComponent<MeshRendererComponent>()->GetMesh()->GetPrimitiveList();
 		
 		switch (ColliderType)
 		{
@@ -284,7 +285,7 @@ namespace physics {
 		}
 
 		//
-		m_ColliderList.push_back(std::make_shared<CSphereCollider>(ObjectType, Obj->GetComponent<TransformComponent>(), CenterPos, Radius));
+		m_ColliderList.push_back(std::make_shared<CSphereCollider>(ObjectType, Obj->GetRootNode()->GetComponent<TransformComponent>(), CenterPos, Radius));
 		m_CellContentsList.push_back(std::make_shared<CCellContents>(m_ColliderList[m_ColliderList.size()-1]));
 
 		return true;
@@ -301,7 +302,7 @@ namespace physics {
 
 		glm::vec3 LocalAxisSize = glm::vec3(1.0f, 1.0f, 1.0f)*0.5f;
 
-		m_ColliderList.push_back(std::make_shared<CBoxCollider>(ObjectType, Obj->GetComponent<TransformComponent>(), CenterPos, LocalAxis, LocalAxisSize));
+		m_ColliderList.push_back(std::make_shared<CBoxCollider>(ObjectType, Obj->GetRootNode()->GetComponent<TransformComponent>(), CenterPos, LocalAxis, LocalAxisSize));
 		m_CellContentsList.push_back(std::make_shared<CCellContents>(m_ColliderList[m_ColliderList.size() - 1]));
 
 		return true;

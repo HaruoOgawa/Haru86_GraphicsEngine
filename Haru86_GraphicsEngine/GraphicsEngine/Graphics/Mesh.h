@@ -30,9 +30,10 @@ public:
 	void Draw(GLDrawType drawType);
 
 	const std::vector<std::shared_ptr<Primitive>>& GetPrimitiveList()const;
+	void SetPrimitive(const std::shared_ptr<Primitive>& Primitive);
 
 	friend class Graphics;
-	friend class glTFLoader;
+	friend class glTFData;
 	glm::mat4 localMatrix;
 	GLDrawType glDrawType;
 private:

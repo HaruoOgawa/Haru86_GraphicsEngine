@@ -10,6 +10,7 @@
 #include "GraphicsEngine/Object/RaymarchingObject.h"
 #include "GraphicsEngine/Graphics/PolygonRaymarchingMixer.h"
 #include "GraphicsEngine/Graphics/PostProcess.h"
+#include "GraphicsEngine/Object/CNode.h"
 
 GraphicsRenderer* GraphicsRenderer::renderer_instance = nullptr;
 
@@ -38,7 +39,8 @@ GraphicsRenderer::GraphicsRenderer(GraphicsMain* game)
 	raymarching_depthTexture(std::make_shared<Texture>()),
 	p_r_BlendingTexture(std::make_shared<Texture>()),
 	m_PolygonPostProcess_FrameTexture(std::make_shared<Texture>()),
-	m_LatePostProcess_FrameTexture(std::make_shared<Texture>())
+	m_LatePostProcess_FrameTexture(std::make_shared<Texture>()),
+	m_BackgroudColor(glm::vec4(0.0f,0.0f,0.0f,1.0f))
 {
 }
 
@@ -135,6 +137,11 @@ glm::ivec2 GraphicsRenderer::GetScreenSize() {
 	return glm::ivec2(sWindowWidth, sWindowHeight);
 }
 
+// 背景色
+void GraphicsRenderer::SetBackgroudColor(glm::vec4 BackgroudColor) {
+	m_BackgroudColor = BackgroudColor;
+}
+
 bool GraphicsRenderer::CreateFrameBuffer(std::shared_ptr<Texture> fTex, unsigned int& fBuffer, GLint internalformat, GLint format, GLenum type) {
 	int width = static_cast<int>(GetScreenSize().x) ;
 	int height = static_cast<int>(GetScreenSize().y );
@@ -164,18 +171,18 @@ void GraphicsRenderer::Draw() {
 	glBindFramebuffer(GL_FRAMEBUFFER, polygon_frameBuffer);
 	glViewport(0, 0, static_cast<int>(GetScreenSize().x * frameResolusion), static_cast<int>(GetScreenSize().y * frameResolusion));
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(m_BackgroudColor.r, m_BackgroudColor.g, m_BackgroudColor.b, m_BackgroudColor.a);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glEnable(GL_DEPTH_TEST);
 
 	for (auto obj : mgame->gameObjectList) {
-		obj->transform->CalMatrix();
-		obj->meshComp->Draw();
+		std::vector<glm::mat4> ModelMatrixTree;
+		obj->GetRootNode()->Draw(ModelMatrixTree);
 	}
 
-	if (mgame->app) {
-		mgame->app->Draw();
+	if (mgame->m_App) {
+		mgame->m_App->Draw();
 	}
 
 	//ポリゴンオブジェクトをデプスマップをレンダリング
@@ -189,12 +196,13 @@ void GraphicsRenderer::Draw() {
 	glEnable(GL_DEPTH_TEST);
 
 	for (auto obj : mgame->gameObjectList) {
-		obj->transform->CalMatrix();
-		obj->meshComp->Draw();
+		std::vector<glm::mat4> ModelMatrixTree;
+		obj->GetRootNode()->Draw(ModelMatrixTree);
+		ModelMatrixTree.clear();
 	}
 
-	if (mgame->app) {
-		mgame->app->Draw();
+	if (mgame->m_App) {
+		mgame->m_App->Draw();
 	}
 
 	// ポリゴンオブジェクトのポストプロセス
@@ -210,8 +218,7 @@ void GraphicsRenderer::Draw() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
 
-		GraphicsMain::GetInstance()->m_RaymarchingObject->transform->CalMatrix();
-		GraphicsMain::GetInstance()->m_RaymarchingObject->Draw();
+		GraphicsMain::GetInstance()->m_RaymarchingObject->GetRootNode()->Draw();
 	}
 
 	//レイマーチングオブジェクトのデプスマップをレンダリング
@@ -224,8 +231,7 @@ void GraphicsRenderer::Draw() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
 
-		GraphicsMain::GetInstance()->m_RaymarchingObject->transform->CalMatrix();
-		GraphicsMain::GetInstance()->m_RaymarchingObject->Draw();
+		GraphicsMain::GetInstance()->m_RaymarchingObject->GetRootNode()->Draw();
 	}
 
 	//ポリゴンオブジェクトとレイマーチングオブジェクトをブレンドする
@@ -256,7 +262,6 @@ void GraphicsRenderer::Draw() {
 	glDisable(GL_BLEND);
 
 	for (auto obj : mgame->boardGameObjectList) {
-		obj->transform->CalMatrix();
 		obj->meshComp->DrawBoard();
 	}
 

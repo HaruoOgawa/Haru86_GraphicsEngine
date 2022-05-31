@@ -20,6 +20,7 @@
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Component/CameraComponent.h"
 #include "GraphicsEngine/Graphics/Texture.h"
+#include "GraphicsEngine/Object/CNode.h"
 
 KuraTrail::KuraTrail(Object* o, KuraGPGPU* kuraGPGPU)
 	: Component(o),
@@ -123,21 +124,21 @@ void KuraTrail::ProcessInput(const SDL_Event& e) {
 
 void KuraTrail::Draw() {
 	
-	owner->transform->CalMatrix();
+	owner->GetRootNode()->GetComponent<TransformComponent>()->CalMatrix();
 	m_material->SetActive();
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_DEPTH_TEST);
 
-	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix()); 
-	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
-	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
-	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
+	m_material->SetMatrixUniform("MVPMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetMVPMatrix()); 
+	m_material->SetMatrixUniform("MMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetMMatrix());
+	m_material->SetMatrixUniform("VMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetVMatrix());
+	m_material->SetMatrixUniform("PMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetPMatrix());
 	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
 
 	//GPU Trail Uniform
-	m_material->SetVec3Uniform("_WorldSpaceCameraPos",GraphicsMain::GetInstance()->game_camera_instance->transform->GetPosition());
+	m_material->SetVec3Uniform("_WorldSpaceCameraPos",GraphicsMain::GetInstance()->game_camera_instance->GetRootNode()->GetComponent<TransformComponent>()->GetPosition());
 	m_material->SetFloatUniform("_initNodeLife", 5);
 	m_material->SetFloatUniform("_nodeSegment",nodeSegment );
 	m_material->SetFloatUniform("_TrailWidth", 0.4*7.0);

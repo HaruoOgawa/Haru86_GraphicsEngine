@@ -31,6 +31,7 @@ public:
     void SetActive();
     void UnLoadData();
     void SetMatrixUniform(std::string uniformName,glm::mat4 matrix);
+    void SetMatrixVectorUniform(std::string uniformName, const std::vector<glm::mat4>& matrixVector);
     void SetFloatUniform(std::string uniformName,float val);
     void SetIntUniform(std::string uniformName,int val);
     void SetVec2Uniform(std::string uniformName, glm::vec2 val);

@@ -7,6 +7,27 @@
 
 class GraphicsRenderer
 {
+	SDL_Window* sWindow;
+	int sWindowWidth;
+	int sWindowHeight;
+	class GraphicsMain* mgame;
+	SDL_GLContext context;
+
+	//FrameBuffer
+	unsigned int polygon_frameBuffer;
+	unsigned int polygon_depthBuffer;
+	unsigned int raymarching_frameBuffer;
+	unsigned int raymarching_depthBuffer;
+	unsigned int p_r_BlendingBuffer;
+	//PostProcess FrameBuffer
+	unsigned int m_PolygonPostProcess_FrameBuffer;
+	unsigned int m_LatePostProcess_FrameBuffer;
+
+	//ポリゴンとレイマーチングのミックス
+	std::unique_ptr<class PolygonRaymarchingMixer> m_Mixer;
+
+	// 背景色
+	glm::vec4 m_BackgroudColor;
 public:
 	static GraphicsRenderer* GetInstance() {
 		return renderer_instance;
@@ -35,27 +56,12 @@ public:
 	std::shared_ptr<class Texture> m_PolygonPostProcess_FrameTexture;
 	std::shared_ptr<class Texture> m_LatePostProcess_FrameTexture;
 
+	// 背景色
+	void SetBackgroudColor(glm::vec4 BackgroudColor);
+
 	friend class PolygonRaymarchingMixer;
 private:
-	SDL_Window* sWindow;
-	int sWindowWidth;
-	int sWindowHeight;
-	class GraphicsMain* mgame;
-	SDL_GLContext context;
-	
-	//FrameBuffer
-	unsigned int polygon_frameBuffer;
-	unsigned int polygon_depthBuffer;
-	unsigned int raymarching_frameBuffer;
-	unsigned int raymarching_depthBuffer;
-	unsigned int p_r_BlendingBuffer;
-	//PostProcess FrameBuffer
-	unsigned int m_PolygonPostProcess_FrameBuffer;
-	unsigned int m_LatePostProcess_FrameBuffer;
 
-	//ポリゴンとレイマーチングのミックス
-	std::unique_ptr<class PolygonRaymarchingMixer> m_Mixer;
-	
 protected:
 	static GraphicsRenderer* renderer_instance;
 };

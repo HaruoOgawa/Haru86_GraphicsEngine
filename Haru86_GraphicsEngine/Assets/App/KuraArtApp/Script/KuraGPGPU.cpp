@@ -11,6 +11,7 @@
 #include "GraphicsEngine/Graphics/ComputeShader.h"
 #include <vector>
 #include "GraphicsEngine/Graphics/glTFLoader.h"
+#include "GraphicsEngine/Graphics/glTFData.h"
 
 #include <GL/glew.h>
 #include <GL/glut.h>
@@ -21,13 +22,16 @@
 #include "GraphicsEngine/Graphics/Texture.h"
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Component/CameraComponent.h"
+#include "GraphicsEngine/Object/CNode.h"
 
 KuraGPGPU::KuraGPGPU(Object* o)
 	: Component(o),
 	num(1024)
 {
-	m_mesh = glTFLoader::Load("./Assets/Resources/glTFData/PhoenixWithVAT/Phoenix.gltf");
-	
+	std::shared_ptr<Object> obj = std::make_shared<Object>();
+	std::shared_ptr<gltf::glTFData> data = gltf::glTFLoader::Load(obj.get(),"./Assets/Resources/glTFData/PhoenixWithVAT/Phoenix.gltf");
+	m_mesh = data->GetMesh();
+		
 	m_material = std::make_shared<Material>(
 		"./Assets/Shader/KuraShader/BoidsResult.vert",
 		"./Assets/Shader/KuraShader/BoidsResult.geom",
@@ -146,7 +150,7 @@ void KuraGPGPU::Update() {
 		targerBoidsData[targetIndex].position[0], targerBoidsData[targetIndex].position[1], targerBoidsData[targetIndex].position[2]
 	);
 	//camera postion
-	GraphicsMain::GetInstance()->game_camera_instance->transform->SetPosition(
+	GraphicsMain::GetInstance()->game_camera_instance->GetRootNode()->GetComponent<TransformComponent>()->SetPosition(
 		GraphicsMain::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter
 		+ glm::vec3(
 			glm::cos(GraphicsMain::GetInstance()->time* speed),
@@ -160,17 +164,17 @@ void KuraGPGPU::Update() {
 void KuraGPGPU::Draw() {
 	glMemoryBarrier(GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT);
 
-	owner->transform->CalMatrix();
+	owner->GetRootNode()->GetComponent<TransformComponent>()->CalMatrix();
 	m_material->SetActive();
 	
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDisable(GL_DEPTH_TEST);
 	
-	m_material->SetMatrixUniform("MVPMatrix", owner->transform->GetMVPMatrix() * m_mesh->localMatrix); //
-	m_material->SetMatrixUniform("MMatrix", owner->transform->GetMMatrix());
-	m_material->SetMatrixUniform("VMatrix", owner->transform->GetVMatrix());
-	m_material->SetMatrixUniform("PMatrix", owner->transform->GetPMatrix());
+	m_material->SetMatrixUniform("MVPMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetMVPMatrix() * m_mesh->localMatrix); //
+	m_material->SetMatrixUniform("MMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetMMatrix());
+	m_material->SetMatrixUniform("VMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetVMatrix());
+	m_material->SetMatrixUniform("PMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetPMatrix());
 	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
 	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
 	m_material->SetIntUniform("_boids_count", num);
