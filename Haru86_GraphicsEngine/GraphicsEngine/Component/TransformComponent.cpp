@@ -31,8 +31,8 @@ TransformComponent::TransformComponent(Object* o, const glm::mat4& WorldMatrix):
 {
 	// mat4 to transform
 	//
-	m_position = glm::vec3(WorldMatrix[3][0], WorldMatrix[3][1], WorldMatrix[3][2]);
-	
+	/*m_position = glm::vec3(WorldMatrix[3][0], WorldMatrix[3][1], WorldMatrix[3][2]);
+
 	//
 	float sx = glm::length(glm::vec3(WorldMatrix[0][0], WorldMatrix[0][1], WorldMatrix[0][2]));
 	float sy = glm::length(glm::vec3(WorldMatrix[1][0], WorldMatrix[1][1], WorldMatrix[1][2]));
@@ -41,28 +41,46 @@ TransformComponent::TransformComponent(Object* o, const glm::mat4& WorldMatrix):
 
 	//
 	glm::mat4 rot = glm::mat4(0.0);
-	
+
 	rot[0][0] = WorldMatrix[0][0] / sx;
 	rot[0][1] = WorldMatrix[0][1] / sx;
 	rot[0][2] = WorldMatrix[0][2] / sx;
 	rot[0][3] = 0.0f;
-	
+
 	rot[1][0] = WorldMatrix[1][0] / sy;
 	rot[1][1] = WorldMatrix[1][1] / sy;
 	rot[1][2] = WorldMatrix[1][2] / sy;
 	rot[1][3] = 0.0f;
-	
+
 	rot[2][0] = WorldMatrix[2][0] / sz;
 	rot[2][1] = WorldMatrix[2][1] / sz;
 	rot[2][2] = WorldMatrix[2][2] / sz;
 	rot[2][3] = 0.0f;
-	
+
 	rot[3][0] = 0.0f;
 	rot[3][1] = 0.0f;
 	rot[3][2] = 0.0f;
 	rot[3][3] = 1.0f;
 
-	m_rotation = glm::toQuat(rot);
+	m_rotation = glm::quat_cast(rot);*/
+
+	m_position = glm::vec3(WorldMatrix[3][0], WorldMatrix[3][1], WorldMatrix[3][2]);
+	m_rotation = glm::quat_cast(WorldMatrix);
+
+	glm::mat4 rotScaleMat(
+		WorldMatrix[0][0], WorldMatrix[1][0], WorldMatrix[2][0], 0,
+		WorldMatrix[0][1], WorldMatrix[1][1], WorldMatrix[2][1], 0,
+		WorldMatrix[0][2], WorldMatrix[1][2], WorldMatrix[2][2], 0,
+		0, 0, 0, 1
+	);
+	glm::mat4 invRotMat = glm::mat4_cast(glm::inverse(m_rotation));
+	glm::mat4 scaleSkewMat = rotScaleMat * invRotMat;
+
+	m_scale = glm::vec3(
+		scaleSkewMat[0][0],
+		scaleSkewMat[1][1],
+		scaleSkewMat[2][2]
+	);
 
 	CalMatrix();
 }
