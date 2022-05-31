@@ -67,9 +67,7 @@ void SkinMeshRendererComponent::Draw(const std::vector<glm::mat4>& ModelMatrixTr
 	if (m_Animator) {
 		material->SetMatrixVectorUniform("pose", m_Animator->GetPoseMatrix());
 		material->SetMatrixVectorUniform("invBindPose", m_Animator->GetSkeleton()->GetInvBindPose());
-
-		//Console::Log("m_Animator->GetPoseMatrix().size(): %d\n", m_Animator->GetPoseMatrix().size());
-		//Console::Log("m_Animator->GetSkeleton()->GetInvBindPose().size(): %d\n", m_Animator->GetSkeleton()->GetInvBindPose().size());
+		material->SetFloatUniform("_MaxBoneNum", static_cast<unsigned int>(m_Animator->GetPoseMatrix().size()));
 	}
 
 	//

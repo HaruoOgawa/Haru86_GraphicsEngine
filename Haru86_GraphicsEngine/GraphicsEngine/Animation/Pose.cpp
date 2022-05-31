@@ -18,7 +18,7 @@ namespace animation {
 		}
 
 		if (m_Parents.size() != p.m_Parents.size()) {
-			m_Parents.resize(p.m_Parents.size());
+			m_Parents.resize(p.m_Parents.size(),-1);
 		}
 
 		if (m_Joints.size() != p.m_Joints.size()) {
@@ -37,7 +37,7 @@ namespace animation {
 	}
 
 	void Pose::Resize(unsigned int size) {
-		m_Parents.resize(size);
+		m_Parents.resize(size, -1);
 		m_Joints.resize(size);
 	}
 
@@ -64,7 +64,7 @@ namespace animation {
 	// ルートの親要素から処理対象のノード(子要素)までのモデル行列の積を求める
 	std::shared_ptr<TransformComponent> Pose::GetGloabalTransform(unsigned int index)const {
 		std::shared_ptr<TransformComponent> result = m_Joints[index];
-		for (int p = m_Parents[index]; p > 0;p=m_Parents[p]) {
+		for (int p = m_Parents[index]; p >= 0;p=m_Parents[p]) {
 			result = TransformComponent::Combine(m_Joints[p],result);
 		}
 

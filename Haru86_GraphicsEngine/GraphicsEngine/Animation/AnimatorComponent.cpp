@@ -24,20 +24,18 @@ namespace animation {
         m_AnimationClipList = AnimationClipList;
 
          // ポーズの初期化
-        m_CurrentPose = m_Skeleton->GetRestPose();
+        m_CurrentPose = m_Skeleton->GetBindPose();
+        //m_CurrentPose = m_Skeleton->GetRestPose();
         m_CurrentPose->GetMatrixPalette(m_PoseMatrix);
     }
 
     void AnimatorComponent::Update() {
         // アニメーションの更新
-        if (m_AnimationClipList.size()>0) {
+        /*if (m_AnimationClipList.size()>0) {
             m_PlaybackTime = m_AnimationClipList[1]->Sample(m_CurrentPose, m_PlaybackTime + GraphicsMain::GetInstance()->deltaTime);
             m_PoseMatrix.clear();
             m_CurrentPose->GetMatrixPalette(m_PoseMatrix);
-
-            //Console::Log("m_PlaybackTime: %f / m_PoseMatrix.size(): %d / GraphicsMain::GetInstance()->deltaTime: %f\n"
-            //, m_PlaybackTime, m_PoseMatrix.size(), GraphicsMain::GetInstance()->deltaTime);
-        }
+        }*/
     }
 
     void AnimatorComponent::Draw() {

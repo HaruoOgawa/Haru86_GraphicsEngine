@@ -10,6 +10,7 @@ uniform vec3 _CameraPos;
 
 uniform mat4 pose[120];
 uniform mat4 invBindPose[120];
+uniform float _MaxBoneNum;
 
 layout(location=0)in vec3 vertex;
 layout(location=1)in vec3 normal;
@@ -29,16 +30,31 @@ void main(){
 	// 元の頂点のモデル座標系(グローバルポーズ) => Tポーズ型の親子関係を加味したジョイントの座標系(ローカルポーズ) => 次のポーズのモデル座標系(グローバルポーズ)
 	// といったように座標系を変換していく必要がある
 	// weightで影響の度合いを調整
-	mat4 skin=(pose[int(joints.x)]*invBindPose[int(joints.x)])*weights[int(joints.x)];
-	skin+=(pose[int(joints.y)]*invBindPose[int(joints.y)])*weights[int(joints.y)];
-	skin+=(pose[int(joints.z)]*invBindPose[int(joints.z)])*weights[int(joints.z)];
-	skin+=(pose[int(joints.w)]*invBindPose[int(joints.w)])*weights[int(joints.w)];
+	mat4 skin=mat4(
+		vec4(0.0,0.0,0.0,0.0),
+		vec4(0.0,0.0,0.0,0.0),
+		vec4(0.0,0.0,0.0,0.0),
+		vec4(0.0,0.0,0.0,0.0)
+	);
+
+	vec4 jointIndex=vec4(
+		clamp(joints.x,0.0,_MaxBoneNum-1.0),
+		clamp(joints.y,0.0,_MaxBoneNum-1.0),
+		clamp(joints.z,0.0,_MaxBoneNum-1.0),
+		clamp(joints.w,0.0,_MaxBoneNum-1.0)
+	);
+
+	skin+=(pose[int(jointIndex.x)]*invBindPose[int(jointIndex.x)])*weights.x;
+	skin+=(pose[int(jointIndex.y)]*invBindPose[int(jointIndex.y)])*weights.y;
+	skin+=(pose[int(jointIndex.z)]*invBindPose[int(jointIndex.z)])*weights.z;
+	skin+=(pose[int(jointIndex.w)]*invBindPose[int(jointIndex.w)])*weights.w;
+	skin[3][3]=1.0;
 
 	vec4 pos=vec4(vertex,1.0);
 	pos=skin*pos;
 	gl_Position=PMatrix*VMatrix*MMatrix*pos;
 	uv=texcoord;
 	CameraPos=_CameraPos;
-	WorldVertexPos=(MMatrix*skin*pos).xyz;
+	WorldVertexPos=(MMatrix*pos).xyz;
 	WorldNormal=(MMatrix*skin*vec4(normal,0.0)).xyz;
 }

@@ -85,7 +85,7 @@ namespace gltf {
 		for (unsigned int NodeIndex = 0; NodeIndex < NodeNum;NodeIndex++) {
 			// glTF‚Ìƒm[ƒh
 			const auto& glTFNode = m_Model.nodes[NodeIndex];
-			
+			Console::Log("NodeIndex: %d/ glTFNode.name: %s\n", NodeIndex, glTFNode.name.c_str());
 			// GameObject‚Ìƒm[ƒh
 			auto& GameObjNode = NodeList[NodeIndex];
 
@@ -351,7 +351,8 @@ namespace gltf {
 
 				//
 				tinygltf::Node* jointNode = &m_Model.nodes[skin->joints[j]];
-				int jointIndex = GetNodeIndex(jointNode, &m_Model.nodes[0], numBones);
+				//int jointIndex = GetNodeIndex(jointNode, &m_Model.nodes[0], numBones);
+				int jointIndex = skin->joints[j];
 				worldBindPose[jointIndex] = bindTransform;
 			}
 		}
@@ -361,7 +362,7 @@ namespace gltf {
 		for (unsigned int i = 0; i < numBones; i++) {
 			std::shared_ptr<TransformComponent> current = worldBindPose[i];
 			int p = bindPose->GetParent(i);
-			if (p > 0) {
+			if (p >= 0) {
 				std::shared_ptr<TransformComponent> parent = worldBindPose[p];
 				current = TransformComponent::Combine(TransformComponent::inverse(parent), current);
 			}
