@@ -51,10 +51,10 @@ void main(){
 	skin[3][3]=1.0;
 
 	vec4 pos=vec4(vertex,1.0);
-	pos=skin*pos;
+	//pos=skin*pos;
 	gl_Position=PMatrix*VMatrix*MMatrix*pos;
 	uv=texcoord;
 	CameraPos=_CameraPos;
 	WorldVertexPos=(MMatrix*pos).xyz;
-	WorldNormal=(MMatrix*skin*vec4(normal,0.0)).xyz;
+	WorldNormal=(MMatrix*vec4(normal,0.0)).xyz;
 }

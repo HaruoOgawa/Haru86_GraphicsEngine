@@ -262,6 +262,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClInclude Include="GraphicsEngine\Physics\ICollider.h" />
     <ClInclude Include="GraphicsEngine\Animation\Pose.h" />
     <ClInclude Include="GraphicsEngine\Object\CNode.h" />
+    <ClInclude Include="Assets\App\GraphicsLearning\GraphicsLearning.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="GraphicsEngine\Graphics\Texture.h" />
     <ClInclude Include="GraphicsEngine\GraphicsMain\Time.h" />
@@ -338,6 +339,7 @@ xcopy "C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowle
     <ClCompile Include="GraphicsEngine\Object\CNode.cpp" />
     <ClCompile Include="GraphicsEngine\Animation\Skeleton.cpp" />
     <ClCompile Include="GraphicsEngine\Component\SkinMeshRendererComponent.cpp" />
+    <ClCompile Include="Assets\App\GraphicsLearning\GraphicsLearning.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shader\CollisionArt\CubeFieldRaymarching.frag" />
