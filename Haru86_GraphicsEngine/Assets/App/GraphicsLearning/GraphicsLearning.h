@@ -17,6 +17,7 @@ public:
     void Timeline(class TimelineObject* timelineObj)  override;
 private:
     std::shared_ptr<GameObject> m_GraphObj;
+    std::shared_ptr<GameObject> m_CubeMapObj;
     std::shared_ptr<class CameraObject> cam_obj;
 };
 
