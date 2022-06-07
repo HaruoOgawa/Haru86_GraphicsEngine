@@ -21,18 +21,18 @@ void GraphicsLearning::Start() {
 	cam_obj->GetRootNode()->GetComponent<TransformComponent>()->SetPosition(glm::vec3(8.5, 2.0, 8.5));
 
 	//
-	GraphicsRenderer::GetInstance()->SetBackgroudColor(glm::vec4(glm::vec3(0.85f), 1.0));
+	GraphicsRenderer::GetInstance()->SetBackgroudColor(glm::vec4(glm::vec3(1.0f), 1.0));
 	m_GraphObj = std::make_shared<GameObject>("Assets/Resources/glTFData/Dragon_1/Dragon_1.gltf");
 	m_GraphObj->SetScale(glm::vec3(0.5f));
 
 	//
-	m_CubeMapObj = std::make_shared<GameObject>(PrimitiveType::CUBE,
+	/*m_CubeMapObj = std::make_shared<GameObject>(PrimitiveType::CUBE,
 		"./Assets/Shader/KuraShader/Background.vert",
 		"./Assets/Shader/KuraShader/Background.frag");
 	m_CubeMapObj->SetScale(glm::vec3(1000.0f));
 	std::vector<std::string> texPath = { "./Assets/Resources/TextureData/InkBackground.png" };
 	std::vector<std::string> texUniformName = { "_backgroundTex" };
-	m_CubeMapObj->meshComp->GetMaterial()->LoadTextureList(texPath, texUniformName);
+	m_CubeMapObj->meshComp->GetMaterial()->LoadTextureList(texPath, texUniformName);*/
 }
 
 void GraphicsLearning::Update() {

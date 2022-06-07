@@ -23,6 +23,8 @@ out vec3 CameraPos;
 out vec3 WorldVertexPos;
 out vec3 WorldNormal;
 
+out float nv_vert;
+
 #define rot(a) mat2(cos(a),-sin(a),sin(a),cos(a))
 
 void main(){
@@ -57,4 +59,8 @@ void main(){
 	CameraPos=_CameraPos;
 	WorldVertexPos=(MMatrix*pos).xyz;
 	WorldNormal=(MMatrix*vec4(normal,0.0)).xyz;
+
+	vec3 v=-normalize(WorldVertexPos-CameraPos);
+	vec3 n=normalize(WorldNormal);
+	nv_vert=dot(v,n);
 }
