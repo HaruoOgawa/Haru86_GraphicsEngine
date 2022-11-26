@@ -123,7 +123,7 @@ bool GraphicsRenderer::Initialize(float width,float height) {
 	}
 
 	font =  std::make_shared<Font>();
-	if (!(font->Load("./Assets/Resources/FontData/FRSCRIPT.TTF"))) {
+	if (!(font->Load("./Assets/Resources/FontData/georgiai.TTF"))) {
 		font.reset();
 		font == nullptr;
 	}
