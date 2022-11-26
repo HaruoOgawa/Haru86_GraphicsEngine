@@ -12,7 +12,7 @@ uniform float _ColorIndex;
 
 void main(){
 	vec4 col=vec4(uv.x,uv.y,0.0,1.0);
-	col=texture(_fontTexture,1.0-uv);
+	col=texture(_fontTexture, vec2(uv.x, 1.0 - uv.y));
 
 	if(_ColorIndex==1.0){
 		col.rgb=1.0-col.rgb;
