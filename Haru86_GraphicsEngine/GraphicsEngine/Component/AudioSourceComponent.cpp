@@ -204,7 +204,8 @@ FMOD_RESULT F_CALLBACK AudioSourceComponent::EndOfSong(FMOD_CHANNELCONTROL* chan
 	FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType, void* commanData1, void* commanData2)
 {
 	if (controlType == FMOD_CHANNELCONTROL_CHANNEL && callbackType == FMOD_CHANNELCONTROL_CALLBACK_END) {
-		GraphicsMain::GetInstance()->Restart();
+		//GraphicsMain::GetInstance()->Restart();
+		GraphicsMain::GetInstance()->isRunning = false;
 	}
 
 	return FMOD_OK;
