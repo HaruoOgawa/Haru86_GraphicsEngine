@@ -207,6 +207,13 @@ void GraphicsMain::InputProcess() {
 		case SDL_QUIT:
 			isRunning = false;
 			break;
+		case SDL_KEYDOWN:
+			if (e.key.keysym.sym == SDLK_ESCAPE)
+			{
+				isRunning = false;
+			}
+			
+			break;
 		case SDL_MOUSEBUTTONDOWN:
 			mouseStateBool = true;
 			break;

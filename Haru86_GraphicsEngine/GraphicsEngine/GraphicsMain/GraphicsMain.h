@@ -20,7 +20,7 @@ class BaseApp;
 
 class GraphicsMain
 {
-	bool isRunning;
+	
 	float previousTime;
 	std::vector<class GameObject*> gameObjectList;
 	std::vector<class GameObject*> boardGameObjectList;
@@ -68,6 +68,7 @@ public:
 	std::unique_ptr<physics::CPhysicsEngine> m_PhysicsEngine;
 
 	//
+	bool isRunning;
 	bool isRestart;
 
 	friend class Main;

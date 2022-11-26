@@ -32,8 +32,8 @@ void DemoApp::Start()  {
 	uiButton->AddComponent(new RectTransformComponent(uiButton,0.1f,0.1f));*/
 
 	DemoText = std::make_shared<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Demo Scene");
-	MusicText = std::make_shared<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Music: lug00ber");
-	MyCreditText= std::make_shared<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Mouvie: Haru86_");
+	MusicText = std::make_shared<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","CG Engineer: Haru86_");
+	MyCreditText= std::make_shared<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Music: lug00ber");
 	TitleText = std::make_shared<GameObject>(PrimitiveType::BOARD, "./Assets/Shader/FontText.vert", "./Assets/Shader/FontText.frag","Labyrinth");
 
 	//Load PostProcess
