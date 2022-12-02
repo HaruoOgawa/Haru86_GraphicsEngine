@@ -10,7 +10,7 @@
 TimelineComponent::TimelineComponent(Object* o)
 	:Component(o)
 {
-	timeVal = game->time;
+	timeVal = game->m_MilliSecondsTime;
 	animTime = 0.0f;
 }
 TimelineComponent::~TimelineComponent() {
@@ -18,7 +18,7 @@ TimelineComponent::~TimelineComponent() {
 }
 
 void TimelineComponent::Update() {
-	timeVal = game->time;
+	timeVal = game->m_MilliSecondsTime;
 	ComputeTimeline(timeVal);
 }
 
@@ -149,7 +149,7 @@ void TimelineComponent::ComputeAnimationTrack(float time) {
 	}
 
 	for (auto clip : runningAnimationClip) {
-		clip->lifeTime += GraphicsMain::GetInstance()->deltaTime;
+		clip->lifeTime += GraphicsMain::GetInstance()->m_DeltaTime;
 		clip->lifeTimeRate = clip->lifeTime / (clip->endTime*0.001f - clip->startTime * 0.001f);
 		if (time > clip->endTime) {
 			auto iter = std::find(clip->gameObject->meshComp->animationClips.begin(), clip->gameObject->meshComp->animationClips.end(), clip);

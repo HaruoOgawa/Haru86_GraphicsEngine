@@ -112,7 +112,7 @@ void KuraTrail::Update() {
 	m_computeShader_NodeInfo->SetActive();
 	m_computeShader_NodeInfo->SetIntUniform("_nodeSegment", nodeSegment);
 	m_computeShader_NodeInfo->SetFloatUniform("_nodeDistanceMin", 1);
-	m_computeShader_NodeInfo->SetFloatUniform("_time",GraphicsMain::GetInstance()->time );
+	m_computeShader_NodeInfo->SetFloatUniform("_time",GraphicsMain::GetInstance()->m_MilliSecondsTime );
 	m_computeShader_NodeInfo->SetFloatUniform("_initNodeLife", 5.0);
 	m_computeShader_NodeInfo->Dispatch(trailNum / 256, 1, 1);
 
@@ -134,8 +134,8 @@ void KuraTrail::Draw() {
 	m_material->SetMatrixUniform("MMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetVMatrix());
 	m_material->SetMatrixUniform("PMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetPMatrix());
-	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
-	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
+	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->m_MilliSecondsTime);
+	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->m_DeltaTime);
 
 	//GPU Trail Uniform
 	m_material->SetVec3Uniform("_WorldSpaceCameraPos",GraphicsMain::GetInstance()->game_camera_instance->GetRootNode()->GetComponent<TransformComponent>()->GetPosition());

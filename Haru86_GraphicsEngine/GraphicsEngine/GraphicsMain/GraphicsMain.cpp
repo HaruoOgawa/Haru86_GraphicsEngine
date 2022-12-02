@@ -36,8 +36,10 @@ void GraphicsMain::Destroy()
 GraphicsMain::GraphicsMain()
 	: 
 	isRunning(true),
-	time(0.0f),
-	deltaTime(0.0f),
+	m_SecondsTime(0.0f),
+	m_SecondsTimeOffset(0.0f),
+	m_MilliSecondsTime(0.0f),
+	m_DeltaTime(0.0f),
 	previousTime(0.0f),
 	mouseStateBool(false),
 	animTime(0.0f),
@@ -236,14 +238,21 @@ void GraphicsMain::InputProcess() {
 }
 
 void GraphicsMain::Update() {
-	while (!(timeObj->GetTime() > previousTime + 16.0f)) { timeObj->UpdateTime(); };
-	deltaTime = (timeObj->GetTime() - previousTime) / 1000.0f;
-	if (deltaTime > 0.05f) {
-		deltaTime = 0.05f;
+	//
+	m_MilliSecondsTime = static_cast<float>(clock()) + m_SecondsTimeOffset * 1000.0f;
+	m_SecondsTime = m_MilliSecondsTime * 0.001f;
+	m_DeltaTime = (m_MilliSecondsTime - previousTime) * 0.001f;
+	previousTime = m_MilliSecondsTime;
+
+	/*while (!(timeObj->GetTime() > previousTime + 16.0f)) { timeObj->UpdateTime(); };
+	m_DeltaTime = (timeObj->GetTime() - previousTime) / 1000.0f;
+	if (m_DeltaTime > 0.05f) {
+		m_DeltaTime = 0.05f;
 	}
 	previousTime = static_cast<float>(timeObj->GetTime());
-	time = previousTime;
+	time = previousTime;*/
 
+	//
 	for (auto obj : gameObjectList) {
 		obj->Update();
 	}
@@ -268,8 +277,8 @@ bool GraphicsMain::Reflesh() {
 
 	//ƒƒ“ƒo•Ï”‚ğ‰Šú‰»
 	isRunning = true;
-	time = 0.0f;
-	deltaTime = 0.0f;
+	/*time = 0.0f;
+	m_DeltaTime = 0.0f;*/
 	previousTime = 0.0f;
 	mouseStateBool = false;
 	animTime = 0.0f;
