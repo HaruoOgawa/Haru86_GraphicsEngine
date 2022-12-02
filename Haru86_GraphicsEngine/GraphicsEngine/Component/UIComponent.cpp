@@ -51,7 +51,7 @@ void UIComponent::ProcessInput(const SDL_Event& e) {
 		
 		GraphicsMain::GetInstance()->timeObj->time = t;
 		GraphicsMain::GetInstance()->previousTime = t;
-		GraphicsMain::GetInstance()->time = t;
+		GraphicsMain::GetInstance()->m_MilliSecondsTime = t;
 		
 		float xval = fx / (static_cast<float>(GraphicsRenderer::GetInstance()->GetScreenSize().x) * 0.5f);
 		float yval = fy / (static_cast<float>(GraphicsRenderer::GetInstance()->GetScreenSize().y) * 0.5f);

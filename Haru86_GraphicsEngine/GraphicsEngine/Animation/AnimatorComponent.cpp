@@ -32,7 +32,7 @@ namespace animation {
     void AnimatorComponent::Update() {
         // アニメーションの更新
         /*if (m_AnimationClipList.size()>0) {
-            m_PlaybackTime = m_AnimationClipList[1]->Sample(m_CurrentPose, m_PlaybackTime + GraphicsMain::GetInstance()->deltaTime);
+            m_PlaybackTime = m_AnimationClipList[1]->Sample(m_CurrentPose, m_PlaybackTime + GraphicsMain::GetInstance()->m_DeltaTime);
             m_PoseMatrix.clear();
             m_CurrentPose->GetMatrixPalette(m_PoseMatrix);
         }*/

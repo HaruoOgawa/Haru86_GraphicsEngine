@@ -46,12 +46,12 @@ void Kura02::Start() {
 void Kura02::Update() {
 	ins_cubes->Update();
 	cam_obj->GetRootNode()->GetComponent<TransformComponent>()->SetPosition(glm::vec3(
-		glm::cos(GraphicsMain::GetInstance()->time * 0.0001)*8.5,
+		glm::cos(GraphicsMain::GetInstance()->m_MilliSecondsTime * 0.0001)*8.5,
 		0.0, 
-		glm::sin(GraphicsMain::GetInstance()->time * 0.0001)* 8.5
+		glm::sin(GraphicsMain::GetInstance()->m_MilliSecondsTime * 0.0001)* 8.5
 	));
 
-	if (GraphicsMain::GetInstance()->time>=1000.0*60.0*60.0) {
+	if (GraphicsMain::GetInstance()->m_MilliSecondsTime>=1000.0*60.0*60.0) {
 		GraphicsMain::GetInstance()->Restart();
 	}
 }

@@ -90,8 +90,8 @@ void MeshRendererComponent::Draw() {
 	material->SetMatrixUniform("MMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetMMatrix());
 	material->SetMatrixUniform("VMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetVMatrix());
 	material->SetMatrixUniform("PMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetPMatrix());
-	material->SetFloatUniform("_time", game->time);
-	material->SetFloatUniform("_deltaTime", game->deltaTime);
+	material->SetFloatUniform("_time", game->m_MilliSecondsTime);
+	material->SetFloatUniform("_deltaTime", game->m_DeltaTime);
 	material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 	material->SetVec3Uniform("_CameraPos", GraphicsMain::GetInstance()->game_camera_instance->GetPosition());
 
@@ -132,8 +132,8 @@ void MeshRendererComponent::DrawBoard() {
 	material->SetMatrixUniform("MMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetMMatrix());
 	material->SetMatrixUniform("VMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetVMatrix());
 	material->SetMatrixUniform("PMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetPMatrix());
-	material->SetFloatUniform("_time", game->time);
-	material->SetFloatUniform("_deltaTime", game->deltaTime);
+	material->SetFloatUniform("_time", game->m_MilliSecondsTime);
+	material->SetFloatUniform("_deltaTime", game->m_DeltaTime);
 	material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 	material->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 

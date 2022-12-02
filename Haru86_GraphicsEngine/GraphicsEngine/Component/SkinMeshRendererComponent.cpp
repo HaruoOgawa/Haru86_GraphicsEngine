@@ -58,8 +58,8 @@ void SkinMeshRendererComponent::Draw(const std::vector<glm::mat4>& ModelMatrixTr
 	material->SetMatrixUniform("MMatrix", MMatrix);
 	material->SetMatrixUniform("VMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetVMatrix());
 	material->SetMatrixUniform("PMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetPMatrix());
-	material->SetFloatUniform("_time", game->time);
-	material->SetFloatUniform("_deltaTime", game->deltaTime);
+	material->SetFloatUniform("_time", game->m_MilliSecondsTime);
+	material->SetFloatUniform("_deltaTime", game->m_DeltaTime);
 	material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 	material->SetVec3Uniform("_CameraPos", GraphicsMain::GetInstance()->game_camera_instance->GetPosition());
 

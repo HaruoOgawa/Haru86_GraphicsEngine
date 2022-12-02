@@ -49,7 +49,7 @@ void CollisionArt::Start() {
 }
 
 void CollisionArt::Update() {
-	if (GraphicsMain::GetInstance()->time >= 1000.0f * 5.0f) {
+	if (GraphicsMain::GetInstance()->m_MilliSecondsTime >= 1000.0f * 5.0f) {
 		GraphicsMain::GetInstance()->Restart();
 	}
 }

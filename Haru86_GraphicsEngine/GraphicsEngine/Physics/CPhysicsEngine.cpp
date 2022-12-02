@@ -79,7 +79,7 @@ namespace physics {
 		Collider->SetForce(force);
 
 		// ‘¬“x
-		velocity += (Collider->GetForce() / Collider->GetMass()) * GraphicsMain::GetInstance()->deltaTime;
+		velocity += (Collider->GetForce() / Collider->GetMass()) * GraphicsMain::GetInstance()->m_DeltaTime;
 		Collider->SetVelocity(velocity);
 
 		return true;
@@ -129,7 +129,7 @@ namespace physics {
 
 				// ”½”­ŒW”
 				//float e = -1.0f * ((0.0f - k * Info.second->m_depth) / (glm::dot(vab, Info.second->m_normal)));
-				//e = glm::max(0.0f, glm::min(1.0f/GraphicsMain::GetInstance()->deltaTime, e));
+				//e = glm::max(0.0f, glm::min(1.0f/GraphicsMain::GetInstance()->m_DeltaTime, e));
 				float e = 1.0f;
 
 				// Œ‚—ÍŒW”‚ÌZo
@@ -154,7 +154,7 @@ namespace physics {
 	//
 	bool CPhysicsEngine::UpdatePosition(std::shared_ptr<ACollider> Collider) {
 		glm::vec3 UpdatePos = Collider->GetTransform()->GetPosition();
-		UpdatePos += Collider->GetVelocity()* GraphicsMain::GetInstance()->deltaTime;
+		UpdatePos += Collider->GetVelocity()* GraphicsMain::GetInstance()->m_DeltaTime;
 
 		Collider->GetTransform()->SetPosition(UpdatePos);
 		return true;
@@ -163,7 +163,7 @@ namespace physics {
 	//
 	bool CPhysicsEngine::UpdatePosition(ACollider* Collider) {
 		glm::vec3 UpdatePos = Collider->GetTransform()->GetPosition();
-		UpdatePos += Collider->GetVelocity()* GraphicsMain::GetInstance()->deltaTime;
+		UpdatePos += Collider->GetVelocity()* GraphicsMain::GetInstance()->m_DeltaTime;
 
 		Collider->GetTransform()->SetPosition(UpdatePos);
 		return true;

@@ -32,8 +32,8 @@ void RaymarchingObject::Draw() {
 	m_material->SetMatrixUniform("MMatrix", GetRootNode()->GetTransform()->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", GetRootNode()->GetTransform()->GetVMatrix());
 	m_material->SetMatrixUniform("PMatrix", GetRootNode()->GetTransform()->GetPMatrix());
-	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time*0.001);
-	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
+	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->m_MilliSecondsTime*0.001);
+	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->m_DeltaTime);
 	m_material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 	m_material->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 	if (GraphicsMain::GetInstance()->renderingTarget==ERerderingTarget::COLOR) {

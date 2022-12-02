@@ -110,8 +110,8 @@ void KuraGPGPU::Start() {
 void KuraGPGPU::Update() {
 	//Dispatch force///////////////////////////
 	m_computeShader_force->SetActive();
-	m_computeShader_force->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
-	m_computeShader_force->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
+	m_computeShader_force->SetFloatUniform("_time", GraphicsMain::GetInstance()->m_MilliSecondsTime);
+	m_computeShader_force->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->m_DeltaTime);
 	//boid uniform
 	m_computeShader_force->SetFloatUniform("_centerPosPower", 1000000.0);
 	m_computeShader_force->SetFloatUniform("_maxBoidsDist", 50);
@@ -130,8 +130,8 @@ void KuraGPGPU::Update() {
 
 	//Dispatch Data///////////////
 	m_computeShader_data->SetActive();
-	m_computeShader_data->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
-	m_computeShader_data->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
+	m_computeShader_data->SetFloatUniform("_time", GraphicsMain::GetInstance()->m_MilliSecondsTime);
+	m_computeShader_data->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->m_DeltaTime);
 	//boid uniform
 	m_computeShader_data->Dispatch(num/256,1,1);
 
@@ -153,9 +153,9 @@ void KuraGPGPU::Update() {
 	GraphicsMain::GetInstance()->game_camera_instance->GetRootNode()->GetComponent<TransformComponent>()->SetPosition(
 		GraphicsMain::GetInstance()->game_camera_instance->m_cameraComponent->cameraCenter
 		+ glm::vec3(
-			glm::cos(GraphicsMain::GetInstance()->time* speed),
-			glm::sin(GraphicsMain::GetInstance()->time * speed),
-			glm::sin(GraphicsMain::GetInstance()->time * speed))* radius);
+			glm::cos(GraphicsMain::GetInstance()->m_MilliSecondsTime* speed),
+			glm::sin(GraphicsMain::GetInstance()->m_MilliSecondsTime * speed),
+			glm::sin(GraphicsMain::GetInstance()->m_MilliSecondsTime * speed))* radius);
 
 	targerBoidsData.clear();
 
@@ -175,8 +175,8 @@ void KuraGPGPU::Draw() {
 	m_material->SetMatrixUniform("MMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetMMatrix());
 	m_material->SetMatrixUniform("VMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetVMatrix());
 	m_material->SetMatrixUniform("PMatrix", owner->GetRootNode()->GetComponent<TransformComponent>()->GetPMatrix());
-	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
-	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->deltaTime);
+	m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->m_MilliSecondsTime);
+	m_material->SetFloatUniform("_deltaTime", GraphicsMain::GetInstance()->m_DeltaTime);
 	m_material->SetIntUniform("_boids_count", num);
 	Graphics::DrawInstancedWithMesh(m_mesh, num,m_material,GL_TRIANGLES);
 

@@ -49,8 +49,11 @@ public:
 	void Restart();
 	physics::CPhysicsEngine* GetPhysicsEngine();
 
-	float time;
-	float deltaTime;
+	float m_SecondsTime;
+	float m_MilliSecondsTime;
+	float m_SecondsTimeOffset;
+	float m_DeltaTime;
+
 	std::unique_ptr<class Time> timeObj;
 	std::unique_ptr<class TimelineObject> timelineObj;
 	float animTime;

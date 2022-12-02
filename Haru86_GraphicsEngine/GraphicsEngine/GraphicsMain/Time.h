@@ -7,7 +7,7 @@ public:
 	void UpdateTime();
 	float GetTime();
 	float fps;
-	float deltaTime;
+	float m_DeltaTime;
 	friend class UIComponent;
 private:
 	float time;

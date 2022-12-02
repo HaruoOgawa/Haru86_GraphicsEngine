@@ -30,7 +30,7 @@ GraphicsRenderer::GraphicsRenderer(GraphicsMain* game)
 	sWindow(nullptr),
 	sWindowWidth(500),
 	sWindowHeight(500),
-	deltaTime(0.0f),
+	m_DeltaTime(0.0f),
 	frameResolusion(0.7),
 	font(nullptr),
 	polygon_frameTexture(std::make_shared<Texture>()),

@@ -82,7 +82,7 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 
 		// draw PostProcess Board
 		m_material->SetActive();
-		m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
+		m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->m_MilliSecondsTime);
 		m_material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 		m_material->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 
@@ -117,7 +117,7 @@ void PostProcess::DrawPolygonPostProcess(const std::shared_ptr<Texture> SrcTextu
 
 		// draw PostProcess Board
 		m_material->SetActive();
-		m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
+		m_material->SetFloatUniform("_time", GraphicsMain::GetInstance()->m_MilliSecondsTime);
 		m_material->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 		m_material->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 
@@ -146,7 +146,7 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 		glEnable(GL_DEPTH_TEST);
 
 		m_LateMaterial->SetActive();
-		m_LateMaterial->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
+		m_LateMaterial->SetFloatUniform("_time", GraphicsMain::GetInstance()->m_MilliSecondsTime);
 		m_LateMaterial->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 		m_LateMaterial->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 		SrcTexture->SetActive();
@@ -165,7 +165,7 @@ void PostProcess::DrawLatePostProcess(const std::shared_ptr<Texture> SrcTexture,
 		glEnable(GL_DEPTH_TEST);
 
 		m_LateMaterial->SetActive();
-		m_LateMaterial->SetFloatUniform("_time", GraphicsMain::GetInstance()->time);
+		m_LateMaterial->SetFloatUniform("_time", GraphicsMain::GetInstance()->m_MilliSecondsTime);
 		m_LateMaterial->SetVec2Uniform("_resolution", GraphicsRenderer::GetInstance()->GetScreenSize());
 		m_LateMaterial->SetFloatUniform("_frameResolusion", GraphicsRenderer::GetInstance()->frameResolusion);
 		SrcTexture->SetActive();
