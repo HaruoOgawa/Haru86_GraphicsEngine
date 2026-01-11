@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <typeindex>
 #include <typeinfo>
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #include <glm/glm.hpp>
 
 class Component;

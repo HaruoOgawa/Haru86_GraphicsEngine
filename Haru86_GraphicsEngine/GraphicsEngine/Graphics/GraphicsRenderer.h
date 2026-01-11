@@ -1,5 +1,5 @@
 #pragma once
-#include "SDL.h"
+#include <SDL3/SDL.h>
 #include "../GraphicsMain/GraphicsMain.h"
 #include <glm/glm.hpp>
 #include <GL/glew.h>

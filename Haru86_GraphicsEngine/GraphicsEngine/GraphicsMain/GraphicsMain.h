@@ -1,12 +1,13 @@
 #pragma once
 
-#include "SDL.h"
+#include <SDL3/SDL.h>
 #include "../Graphics/GraphicsRenderer.h"
 #include <vector>
 
 #include <memory>
 #include <map>
 #include <GL/glew.h>
+#include <glm/glm.hpp>
 
 namespace physics { class CPhysicsEngine; }
 
