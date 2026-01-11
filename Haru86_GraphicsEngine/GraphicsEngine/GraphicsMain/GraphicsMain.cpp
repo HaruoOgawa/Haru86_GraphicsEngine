@@ -16,7 +16,6 @@
 #include "GraphicsEngine/Object/CameraObject.h"
 #include "GraphicsEngine/Physics/CPhysicsEngine.h"
 #include "GraphicsEngine/Message/Console.h"
-
 GraphicsMain* GraphicsMain::s_pInstance = nullptr;
 
 void GraphicsMain::Create()
@@ -204,20 +203,22 @@ void GraphicsMain::InputProcess() {
 	{
 		switch (e.type)
 		{
-		case SDL_QUIT:
+		case SDL_EVENT_QUIT:
 			isRunning = false;
 			break;
-		case SDL_KEYDOWN:
+			
+		case SDL_EVENT_KEY_DOWN:
 			if (e.key.keysym.sym == SDLK_ESCAPE)
 			{
 				isRunning = false;
 			}
 			
 			break;
-		case SDL_MOUSEBUTTONDOWN:
+			
+		case SDL_EVENT_MOUSE_BUTTON_DOWN:
 			mouseStateBool = true;
 			break;
-		case SDL_MOUSEBUTTONUP:
+		case SDL_EVENT_MOUSE_BUTTON_UP:
 			mouseStateBool = false;
 			break;
 		default:

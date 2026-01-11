@@ -7,8 +7,8 @@
 class CameraComponent :
     public Component
 {
-    int m_XMove;
-    int m_YMove;
+    float m_XMove;
+    float m_YMove;
     int m_WheelX;
     int m_WheelY;
 

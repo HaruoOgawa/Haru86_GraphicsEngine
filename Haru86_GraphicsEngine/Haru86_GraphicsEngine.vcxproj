@@ -152,12 +152,12 @@ xcopy "$(ProjectDir)Assets\Resources" "$(OutDir)Assets\Resources" /i /s /y</Comm
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\SDL2-2.0.16\include;C:\SDL2_image-2.0.5\include;C:\SDL2_ttf-2.0.15\include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\inc;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Library\SDL\include;$(ProjectDir)Library\glew\include;$(ProjectDir)Library\glm;$(ProjectDir)Library\SDL_image\include;$(ProjectDir)Library\SDL_ttf\include;$(ProjectDir)Library\FMOD\api\core\inc;$(ProjectDir)Library\FMOD\api\fsbank\inc;$(ProjectDir)Library\FMOD\api\studio\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\SDL2-2.0.16\lib\x86;C:\SDL2_image-2.0.5\lib\x86;C:\SDL2_ttf-2.0.15\lib\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir);$(ProjectDir)Library\SDL\bin\Release;$(ProjectDir)Library\glew\bin\Release;$(ProjectDir)Library\SDL_image\bin;$(ProjectDir)Library\SDL_ttf\bin;$(ProjectDir)Library\FMOD\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;opengl32.lib;fmodL_vc.lib;fmodstudioL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>

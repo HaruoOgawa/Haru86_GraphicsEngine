@@ -2,7 +2,7 @@
 #include <fmod_studio.hpp>
 #include <fmod_errors.h>
 #include <vector>
-#include "./SDL.h"
+#include <SDL3/SDL.h>
 #include <iostream>
 #include "GraphicsEngine/GraphicsMain/GraphicsMain.h"
 
